@@ -1,10 +1,11 @@
-<!-- CLAUDE_V1 -->
+<!-- CLAUDE_V1_1 -->
 # Codex Handoff — Code Audit: GeoGebra + Eclipse Equinox Integration
 
 **Date:** 2026-10-28
 **From:** Claude Opus 4.6
 **To:** Codex
 **Purpose:** Audit the GeoGebra source and Eclipse installation to determine the integration path for GeoGebraPlus RCP.
+**Status:** **COMPLETED** — All 5 tasks delivered. See `Audit_{A,B,C,D,E}_*_CODEX_V1.md` and `osgi-manifest-drafts/`.
 
 ---
 
