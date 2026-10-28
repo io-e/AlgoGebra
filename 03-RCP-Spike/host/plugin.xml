@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension id="geogebraplus"
+              point="org.eclipse.core.runtime.products">
+      <product name="GeoGebraPlus RCP Spike"
+               application="org.geogebra.plus.host.geogebraplusApp">
+         <property name="appName" value="GeoGebraPlus"/>
+      </product>
+   </extension>
+   <extension id="geogebraplusApp"
+              point="org.eclipse.core.runtime.applications">
+      <application>
+         <run class="org.geogebra.plus.host.GeoGebraPlusApplication"/>
+      </application>
+   </extension>
+</plugin>

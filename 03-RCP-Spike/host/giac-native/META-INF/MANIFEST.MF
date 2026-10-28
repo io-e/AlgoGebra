@@ -1,0 +1,7 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-SymbolicName: org.geogebra.plus.giac.native
+Bundle-Version: 0.1.0
+Bundle-Name: GeoGebraPlus GIAC JNI Loader Fragment
+Fragment-Host: org.geogebra.migration.shared.giac.jni;bundle-version="[5.4.934,5.4.935)"
+

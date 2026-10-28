@@ -1,0 +1,23 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-SymbolicName: org.geogebra.plus.host;singleton:=true
+Bundle-Version: 0.1.0
+Bundle-Name: GeoGebraPlus RCP Spike Host
+Bundle-Activator: org.geogebra.plus.host.Activator
+Bundle-RequiredExecutionEnvironment: JavaSE-21
+Bundle-ActivationPolicy: lazy
+Import-Package: org.eclipse.equinox.app;version="[1.1,2.0)",
+ org.eclipse.swt,
+ org.eclipse.swt.awt,
+ org.eclipse.swt.custom,
+ org.eclipse.swt.graphics,
+ org.eclipse.swt.layout,
+ org.eclipse.swt.widgets,
+ org.geogebra.common.main,
+ org.geogebra.desktop,
+ org.geogebra.desktop.geogebra3D,
+ org.geogebra.desktop.main,
+ org.geogebra.desktop.plugin,
+ org.osgi.framework;version="[1.10,2.0)",
+ org.osgi.framework.wiring;version="[1.2,2.0)"
+

@@ -1,0 +1,7 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-SymbolicName: org.geogebra.plus.desktop.resources
+Bundle-Version: 0.1.0
+Bundle-Name: GeoGebraPlus Desktop Resource Fragment
+Fragment-Host: org.geogebra.migration.desktop;bundle-version="[5.4.934,5.4.935)"
+

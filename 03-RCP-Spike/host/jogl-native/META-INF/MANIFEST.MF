@@ -1,0 +1,7 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-SymbolicName: org.geogebra.plus.jogl.native
+Bundle-Version: 0.1.0
+Bundle-Name: GeoGebraPlus JOGL Native Loader Fragment
+Fragment-Host: org.geogebra.migration.external.org.jogamp.jogl.jogl-all;bundle-version="[2.6.0,2.6.1)"
+

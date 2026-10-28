@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?pde version="3.5"?>
+<product name="GeoGebraPlus RCP Spike" uid="org.geogebra.plus.product"
+         id="org.geogebra.plus.host.geogebraplus"
+         application="org.geogebra.plus.host.geogebraplusApp"
+         version="0.1.0" useFeatures="false" includeLaunchers="false">
+  <configIni use="default"/>
+  <launcherArgs><vmArgsList>
+    --add-exports java.base/java.lang=ALL-UNNAMED
+    --add-exports java.desktop/sun.awt=ALL-UNNAMED
+    --add-exports java.desktop/sun.java2d=ALL-UNNAMED
+    --enable-native-access=ALL-UNNAMED
+    --add-modules=ALL-SYSTEM
+  </vmArgsList></launcherArgs>
+  <plugins>
+    <plugin id="com.sun.jna"/>
+    <plugin id="org.apache.felix.scr"/>
+    <plugin id="org.eclipse.core.commands"/>
+    <plugin id="org.eclipse.core.contenttype"/>
+    <plugin id="org.eclipse.core.jobs"/>
+    <plugin id="org.eclipse.core.runtime"/>
+    <plugin id="org.eclipse.equinox.app"/>
+    <plugin id="org.eclipse.equinox.common"/>
+    <plugin id="org.eclipse.equinox.preferences"/>
+    <plugin id="org.eclipse.equinox.registry"/>
+    <plugin id="org.eclipse.equinox.simpleconfigurator"/>
+    <plugin id="org.eclipse.osgi"/>
+    <plugin id="org.eclipse.swt"/>
+    <plugin id="org.eclipse.swt.win32.win32.x86_64"/>
+    <plugin id="org.geogebra.migration.desktop"/>
+    <plugin id="org.geogebra.migration.desktop.canvas"/>
+    <plugin id="org.geogebra.migration.desktop.editor"/>
+    <plugin id="org.geogebra.migration.desktop.jogl2"/>
+    <plugin id="org.geogebra.migration.desktop.renderer"/>
+    <plugin id="org.geogebra.migration.external.antlr.antlr"/>
+    <plugin id="org.geogebra.migration.external.com.formdev.flatlaf"/>
+    <plugin id="org.geogebra.migration.external.com.google.j2objc.annotations"/>
+    <plugin id="org.geogebra.migration.external.com.ogprover.OpenGeoProver"/>
+    <plugin id="org.geogebra.migration.external.io.sf.carte.carte-util"/>
+    <plugin id="org.geogebra.migration.external.io.sf.carte.css4j"/>
+    <plugin id="org.geogebra.migration.external.io.sf.carte.echosvg-anim"/>
+    <plugin id="org.geogebra.migration.external.io.sf.carte.echosvg-awt-util"/>
+    <plugin id="org.geogebra.migration.external.io.sf.carte.echosvg-bridge"/>
+    <plugin id="org.geogebra.migration.external.io.sf.carte.echosvg-constants"/>
+    <plugin id="org.geogebra.migration.external.io.sf.carte.echosvg-css"/>
+    <plugin id="org.geogebra.migration.external.io.sf.carte.echosvg-dom"/>
+    <plugin id="org.geogebra.migration.external.io.sf.carte.echosvg-ext"/>
+    <plugin id="org.geogebra.migration.external.io.sf.carte.echosvg-gvt"/>
+    <plugin id="org.geogebra.migration.external.io.sf.carte.echosvg-i18n"/>
+    <plugin id="org.geogebra.migration.external.io.sf.carte.echosvg-parser"/>
+    <plugin id="org.geogebra.migration.external.io.sf.carte.echosvg-script"/>
+    <plugin id="org.geogebra.migration.external.io.sf.carte.echosvg-svg-dom"/>
+    <plugin id="org.geogebra.migration.external.io.sf.carte.echosvg-util"/>
+    <plugin id="org.geogebra.migration.external.io.sf.carte.echosvg-xml"/>
+    <plugin id="org.geogebra.migration.external.io.sf.carte.smil-api"/>
+    <plugin id="org.geogebra.migration.external.io.sf.carte.svgom-api"/>
+    <plugin id="org.geogebra.migration.external.io.sf.carte.tokenproducer"/>
+    <plugin id="org.geogebra.migration.external.io.sf.carte.xml-dtd"/>
+    <plugin id="org.geogebra.migration.external.io.sf.jclf.jclf-linear3"/>
+    <plugin id="org.geogebra.migration.external.io.sf.jclf.jclf-text"/>
+    <plugin id="org.geogebra.migration.external.io.sf.w3.cssom-api"/>
+    <plugin id="org.geogebra.migration.external.io.sf.w3.domview-api"/>
+    <plugin id="org.geogebra.migration.external.netscape.javascript.jsobject"/>
+    <plugin id="org.geogebra.migration.external.org.apache.math-cross-platform"/>
+    <plugin id="org.geogebra.migration.external.org.jogamp.gluegen.gluegen-rt"/>
+    <plugin id="org.geogebra.migration.external.org.jogamp.jogl.jogl-all"/>
+    <plugin id="org.geogebra.migration.external.org.mozilla.rhino"/>
+    <plugin id="org.geogebra.migration.external.org.mozilla.rhino-engine"/>
+    <plugin id="org.geogebra.migration.shared.canvas.base"/>
+    <plugin id="org.geogebra.migration.shared.common"/>
+    <plugin id="org.geogebra.migration.shared.common.jre"/>
+    <plugin id="org.geogebra.migration.shared.editor.base"/>
+    <plugin id="org.geogebra.migration.shared.giac.jni"/>
+    <plugin id="org.geogebra.migration.shared.keyboard.base"/>
+    <plugin id="org.geogebra.migration.shared.renderer.base"/>
+    <plugin id="org.geogebra.plus.desktop.resources"/>
+    <plugin id="org.geogebra.plus.giac.native"/>
+    <plugin id="org.geogebra.plus.gluegen.native"/>
+    <plugin id="org.geogebra.plus.host"/>
+    <plugin id="org.geogebra.plus.jogl.native"/>
+    <plugin id="org.jspecify.jspecify"/>
+    <plugin id="org.jsr-305"/>
+    <plugin id="org.osgi.service.component"/>
+    <plugin id="org.osgi.service.prefs"/>
+    <plugin id="org.osgi.util.function"/>
+    <plugin id="org.osgi.util.promise"/>
+    <plugin id="spotbugs-annotations"/>
+  </plugins>
+</product>

@@ -1,0 +1,15 @@
+# Regenerable RCP spike outputs; source/config/evidence are tracked.
+host/build/
+classes/
+natives/extract-*/
+configuration/runtime-*/
+framework-storage*/
+workspace*/
+logs/*.log
+logs/*.out
+logs/*.err
+*.jar
+# Retain these early captures locally, but do not publish them as evidence:
+# the RCP process was behind an unrelated foreground window when Robot ran.
+evidence/rcp-20261028-234616-37212-6a47ee6c.png
+evidence/rcp-20261028-234928-22368-f5f609ee.png
