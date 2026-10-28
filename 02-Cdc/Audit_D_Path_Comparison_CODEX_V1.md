@@ -10,7 +10,7 @@
 
 Path A is the only option consistent with the closed owner decision: “Shipped desktop product is RCP/Equinox.” Its practical cost is real—Bnd metadata, package wiring, Swing/SWT embedding, and preserving JOGL/GIAC's application-loader arrangement. But those costs are on the product’s required path, so choosing Path B would create a technically easier prototype that still fails the shipping requirement. Keep the GeoGebra Gradle build as the canonical upstream build, put RCP/Bnd integration in a separate adapter/product workspace, expose a small GeoGebraPlus host API rather than exporting the whole kernel as an extension API, and validate D-02 through D-05 before committing to deeper bundle segmentation.
 
-**This is a scored architecture recommendation, not a performance test.** Startup scores and bundle complexity are estimates; no RCP product launch, Equinox resolution or startup benchmark has yet passed. Task E is the only execution evidence so far: common-jre passes; desktop has one locale-sensitive failure on the captured local environment.
+**This is a scored architecture recommendation, not a performance test.** Startup remains an estimate; no RCP product launch or startup benchmark has passed. However, the 12 production GeoGebra bundles plus the selected external Java dependency bundles have since been generated with Bnd and successfully resolved by the installed Equinox 3.24.300 framework (`allResolved=true`, 0 unresolved). This is package-level evidence, not an RCP/native launch. Task E remains the test baseline: common-jre passes; desktop has one locale-sensitive failure on the captured local environment.
 
 ## Evidence used
 
@@ -21,6 +21,7 @@ Path A is the only option consistent with the closed owner decision: “Shipped 
 - `GeoGebraPanel` is a public `JPanel` with a public no-argument constructor. Eclipse’s `SWT_AWT.new_Frame` API provides the bridge, but the Composite must use `SWT.EMBEDDED` and the API documents event/cursor caveats. No embedding test has run.
 - Installed Eclipse at `D:\ALF_ZGit\G2_Eclipse\01_src\eclipse` contains Equinox `3.24.300`, SWT `3.135.0`, launcher `1.8.0`; its `eclipse.ini` requires Java 25. GeoGebra compiles under Java 17 conventions; `:desktop:run` selects Java 25.
 - The runtime graph and package evidence are in `Audit_A_Package_Ownership_CODEX_V1.md`, `Audit_B_Module_Dependencies_CODEX_V1.md`, and `Audit_C_OSGi_Wrapping_CODEX_V1.md`. Baseline results are in `Audit_E_Test_Baseline_CODEX_V1.md`.
+- Bnd 7.4.0 generated all 12 production module bundles. The Windows Equinox harness resolved 50 bundles (12 GeoGebra + 34 wrapped external Java jars + 4 existing OSGi jars) with zero unresolved bundles. Nine platform-native classifier jars stayed outside the resolver set as required by V2. See the Bnd/Equinox addendum in Task C and `Bnd_Equinox_Resolution_Win64\equinox-resolution.log`.
 
 ## Weighted score
 
@@ -28,14 +29,14 @@ Scale: **1 = poor / high friction, 5 = strong / low friction**. Scores are exper
 
 | Criterion | Weight | Path A: Eclipse → GeoGebra | Path B: GeoGebra → Equinox | Evidence / rationale |
 |---|---:|---:|---:|---|
-| Build/integration complexity | 15% | 2 | 4 | A needs bundle recipes/target platform/RCP launch; 14 GeoGebra jar recipes plus external dependencies. B can begin as a Gradle launcher and keep the existing app runtime, but if it modifies `GeoGebra3D.main()` it creates an upstream touch point. |
+| Build/integration complexity | 15% | 3 | 4 | The 12 production module bundles and selected external Java wrappers now build and resolve in Equinox, reducing A's manifest/resolver uncertainty. A still needs the RCP host/target platform/native/UI work. B can begin as a Gradle launcher and keep the existing app runtime, but if it modifies `GeoGebra3D.main()` it creates an upstream touch point. |
 | Native-loading feasibility | 15% | 2 | 4 | B is closer to the current Gradle classpath and native-copy layout. A must prove that native classifier jars remain visible through the Eclipse/application loader boundary exactly as V2 requires; neither Equinox nor `Bundle-NativeCode` has been demonstrated here. |
 | Swing/SWT coexistence | 10% | 2 | 5 | A must embed `GeoGebraPanel` in SWT with `SWT_AWT`, `SWT.EMBEDDED`, cross-toolkit event handling, focus and lifecycle. B keeps Swing and does not need SWT. |
 | Upstream compatibility | 10% | 4 | 3 | A can keep wrappers, RCP host and adapters outside the GeoGebra checkout; regenerate/verify package metadata on each pin. B’s proposed change to `GeoGebra3D.main()` is closer to upstream code and the Gradle graph. A separate B launcher would improve B’s score but would not make it RCP. |
 | Extension/service integration | 15% | 5 | 3 | A has the Eclipse RCP application/workbench model and OSGi service/extension integration at the host. B can start an Equinox framework and register services, but Swing remains the application shell and host-to-plugin API/classloader sharing must be designed explicitly. |
 | Startup-time outlook | 5% | 2 | 4 | A likely starts more Eclipse platform/workbench bundles; B likely starts fewer pieces. There is no measurement, and lazy activation / bundle set could change this result. Low weight until benchmarked. |
 | Mandatory RCP product fit | 30% | 5 | 1 | V2 makes RCP/Equinox the shipped desktop architecture. A directly satisfies it. B is an OSGi-enabled Swing program, not the required Eclipse RCP product. |
-| **Weighted total** | **100%** | **3.55 / 5** | **2.95 / 5** | Calculation = sum(weight × score) / 100. |
+| **Weighted total** | **100%** | **3.70 / 5** | **2.95 / 5** | Calculation = sum(weight × score) / 100. |
 
 ### Sensitivity
 
@@ -115,18 +116,22 @@ GeoGebra Gradle desktop runtime / Swing main
 | P-02/P-03 test baseline | Executed by Task E, with one locale-sensitive desktop failure; detailed result in `Audit_E_Test_Baseline_CODEX_V1.md`. |
 | D-01 import Gradle composite in Eclipse | NOT RUN. |
 | D-02 start RCP on complete pinned jar set | NOT RUN. |
-| D-03 package ownership | Package scan completed; one actual split found. OSGi resolver result is still NOT RUN. |
+| D-03 package ownership / bundle resolution | Package scan found one split; Bnd fragment metadata plus the complete 12-module package set resolved in Equinox, with zero unresolved bundles. The repository still needs the eventual host/product integration set. |
 | D-04 Swing GeoGebra inside RCP | NOT RUN. |
 | D-05 GIAC/JOGL under RCP | NOT RUN. |
 | D-06 through D-10 | NOT RUN. |
 
-## Next decision gate / questions for architecture owner
+## Decisions recorded and next technical gates
 
-1. Confirm the first supported product target: Windows x86_64 only for D-02/D-05, or Windows/Linux/macOS immediately?
-2. Confirm whether `desktop+jogl2` may be emitted as a merged OSGi bundle for the first spike, or whether preserving `jogl2` as a separate Gradle-derived fragment is mandatory.
-3. Confirm the intended product/API version policy: mirror GeoGebra `5.4.934.0` for wrapper bundle/package versions, or maintain semantic OSGi API versions separately.
-4. Confirm whether a small aggregate GeoGebra core bundle is acceptable if Bnd reveals unmanageable package constraints, provided the RCP host and external service boundary remain modular and `common` source is unchanged.
-5. Confirm the first RCP proof criterion: a panel opens, or the full V2 D-02/D-04/D-05 acceptance slice (UI + CAS + 3D + native load-once + logs) before proceeding to extension development.
+The architecture-owner decisions are recorded as follows:
+
+1. **Initial platform:** Windows x86_64 for D-02/D-05; Linux/macOS are later validation targets.
+2. **`desktop` + `jogl2`:** fragment first to preserve the Gradle boundary; merge only if runtime fragment resolution/visibility fails. Package-level fragment resolution has passed.
+3. **Versioning:** mirror GeoGebra `5.4.934.0` for initial bundle wrapping.
+4. **Granularity fallback:** an aggregate core is acceptable if individual bundles create unmanageable constraints, while the RCP host and extension boundary remain modular.
+5. **Acceptance criterion:** full D-02/D-04/D-05 slice—panel + CAS + 3D, including native-load evidence—not a panel-only demonstration.
+
+**Next technical gate:** implement the isolated RCP host/product and run that full Windows acceptance slice. The current Equinox result is package resolution only; it does not close D-02, D-04, or D-05. Keep `common` unchanged. After Windows passes, scope the Linux/macOS native matrix.
 
 ## Sources
 

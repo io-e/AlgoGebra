@@ -1,4 +1,4 @@
-# CLAUDE_V1
+# CLAUDE_V1_1
 # GeoGebraPlus architecture study — .gitignore
 
 # OS
@@ -19,4 +19,12 @@ desktop.ini
 
 # Build / temp
 *.log
+# Exception: force-tracked evidence logs (equinox-resolution.log)
 __pycache__/
+
+# Generated binary artifacts (regenerable via scripts)
+*.jar
+02-Cdc/Bnd_Equinox_Resolution_Win64/bundles/
+02-Cdc/Bnd_Equinox_Resolution_Win64/classes/
+02-Cdc/Bnd_Equinox_Resolution_Win64/framework-storage*/
+02-Cdc/osgi-manifest-drafts/*.jar

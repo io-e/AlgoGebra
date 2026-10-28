@@ -70,7 +70,10 @@ Export-Package: org.geogebra.desktop;version=5.4.934.0,\
 # Included but not exported; includes vendored/implementation-only packages.
 Private-Package: geogebra,org.freehep.graphics2d,org.freehep.graphics2d.font,org.freehep.graphicsio,org.freehep.graphicsio.emf,org.freehep.graphicsio.emf.gdi,org.freehep.graphicsio.emf.gdiplus,org.freehep.graphicsio.font,org.freehep.graphicsio.font.truetype,org.freehep.graphicsio.pdf,org.freehep.graphicsio.raw,org.freehep.graphicsio.svg,org.freehep.util,org.freehep.util.images,org.freehep.util.io,org.freehep.xml.util,org.jfugue
 # Bnd calculates bytecode imports; generated Import-Package must be reviewed, not hand-guessed.
-Import-Package: *
+# Legacy Apple fallback in BrowserLauncher is reached only on macOS; keep it optional for Win64.
+Import-Package: \
+  com.apple.eio;resolution:=optional,\
+  *
 # RCP launch does not use Main-Class; keep/verify manifest attributes separately.
 # JOGL/GIAC classifier jars stay on the application loader per Architecture V2.
 # Do not add Bundle-NativeCode until native payload layout and loader behavior are tested.

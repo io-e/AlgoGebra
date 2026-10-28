@@ -89,10 +89,16 @@ for module, module_path, bsn in MODULES:
                 "# Included but not exported; includes vendored/implementation-only packages.",
                 "Private-Package: " + ",".join(private),
             ]
-        lines += [
-            "# Bnd calculates bytecode imports; generated Import-Package must be reviewed, not hand-guessed.",
-            "Import-Package: *",
-        ]
+        lines.append("# Bnd calculates bytecode imports; generated Import-Package must be reviewed, not hand-guessed.")
+        if module == "desktop":
+            lines += [
+                "# Legacy Apple fallback in BrowserLauncher is reached only on macOS; keep it optional for Win64.",
+                "Import-Package: \\",
+                "  com.apple.eio;resolution:=optional,\\",
+                "  *",
+            ]
+        else:
+            lines.append("Import-Package: *")
         if module == "desktop":
             lines += [
                 "# RCP launch does not use Main-Class; keep/verify manifest attributes separately.",
@@ -110,7 +116,7 @@ The GeoGebra source version is `{version}`. The descriptors are broad bootstrap 
 
 `jogl2.bnd` is drafted as a fragment hosted by `org.geogebra.migration.desktop` to keep the only observed split package in one host class space. The V2 architecture says native JOGL/GIAC classifier jars remain on the application loader; no native-code manifest is asserted here. The two test-only built modules (`keyboard-scientific`, `ggbjdk`) are included in this recipe set but are not production desktop runtime dependencies. `xr-base` is deliberately excluded: no built jar was in the reviewed inventory, and it is not in `:desktop:runtimeClasspath`.
 
-No source or Eclipse installation files were modified. Bundle generation/resolution has not yet been run.
+The 12 production recipes have since been processed by Bnd 7.4.0 and the resulting bundles resolved in the installed Equinox 3.24.300 framework on Java 25. See `02-Cdc\Audit_C_OSGi_Wrapping_CODEX_V1.md` addendum and `02-Cdc\Bnd_Equinox_Resolution_Win64\` for manifests, resolver evidence and limitations. The two nonproduction recipes remain drafts only. No source or Eclipse installation files were modified.
 """
 (OUT / "README.md").write_text(readme, encoding="utf-8")
 print(f"Generated {len(MODULES)} Bnd recipe drafts in {OUT}")

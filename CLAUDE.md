@@ -1,4 +1,4 @@
-<!-- CLAUDE_V2 -->
+<!-- CLAUDE_V3 -->
 # CLAUDE.md
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
@@ -55,21 +55,26 @@ Host owns policy. Kernel owns constructions. WIMS owns the grade.
 
 ## Current phase and audit status
 
-**Phase 0 — baseline partially established.** Codex completed a 5-task audit (2026-10-28):
+**Phase 0 → Phase 1 transition.** Codex completed a 5-task audit and Bnd/Equinox resolution:
 
 | Task | Result | File |
 |---|---|---|
 | E — Test baseline | common-jre: 6526 PASS. Desktop: 1089 PASS + 1 locale failure (English rerun PASS) | `Audit_E_Test_Baseline_CODEX_V1.md` |
 | A — Package ownership | 5406 files, 385 packages, **1 split** (`desktop`+`jogl2` opengl, 8 classes) | `Audit_A_Package_Ownership_CODEX_V1.md` + `.tsv` |
 | B — Dependencies | 12 production modules, 39 external coords (only 4 have OSGi BSN) | `Audit_B_Module_Dependencies_CODEX_V1.md` |
-| C — OSGi wrapping | 14 Bnd recipe drafts (inputs, not validated bundles) | `Audit_C_OSGi_Wrapping_CODEX_V1.md` + `osgi-manifest-drafts/` |
+| C — OSGi wrapping | 14 Bnd recipe drafts → **50 bundles built and RESOLVED** in Equinox 3.24.300 | `Audit_C_OSGi_Wrapping_CODEX_V1.md` + `Bnd_Equinox_Resolution_Win64/` |
 | D — Path comparison | **Path A (Eclipse RCP) recommended** at 3.55/5 vs Path B at 2.95/5 | `Audit_D_Path_Comparison_CODEX_V1.md` |
+| Bnd + Equinox resolution | **50/50 RESOLVED** (12 GeoGebra + 34 wrapped + 4 existing OSGi). jogl2 fragment OK. 9 native jars on app-loader. `com.apple.eio` marked optional. | `Bnd_Equinox_Resolution_Win64/` |
 
 **Correction:** The `org.geogebra.common` split package originally claimed does NOT exist. Only 2 classes declare that root package (both in `common`). The real split is `org.geogebra.desktop.geogebra3D.euclidian3D.opengl` across `desktop` and `jogl2` — fixable via OSGi fragment.
 
-**Scenario status update:** P-08 PARTIAL. D-03 (package ownership) has source-level evidence but no OSGi resolver result. All other D/W/X/S/O scenarios remain NOT RUN.
+**Scenario status update:**
+- P-08 PARTIAL (pin known).
+- D-03 **package resolution PASS** — 50 bundles resolve, zero unresolved, jogl2 fragment wired to desktop host.
+- D-02, D-04, D-05 remain **NOT RUN** — resolution is not a started RCP.
+- All W/X/S/O scenarios remain NOT RUN.
 
-**Next steps:** Run Bnd on 12 production jars → Equinox resolution test → D-02 (RCP starts) → D-04 (Swing in SWT) → D-05 (GIAC + JOGL under Equinox). Windows x86_64 first.
+**Next steps:** D-02 (RCP product + `IApplication` starts) → D-04 (`GeoGebraPanel` in SWT via `SWT_AWT`) → D-05 (GIAC + JOGL native loading under Equinox). Windows x86_64.
 
 ## Agent roles
 

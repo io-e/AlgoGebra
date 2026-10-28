@@ -1,0 +1,18 @@
+# Diagnostic resolver set for the pinned Win x86_64 desktop runtime.
+# Package-level resolution only; native classifier jars remain on the app loader.
+-standalone: index.xml;name=GeoGebraPlus-Windows-x86_64
+-runfw: org.eclipse.osgi;version='[3.24.300,3.24.301)'
+-runee: JavaSE-25
+-runrequires: \
+    osgi.identity;filter:='(&(osgi.identity=org.geogebra.migration.shared.common)(version=5.4.934.0))',\
+    osgi.identity;filter:='(&(osgi.identity=org.geogebra.migration.shared.common.jre)(version=5.4.934.0))',\
+    osgi.identity;filter:='(&(osgi.identity=org.geogebra.migration.shared.renderer.base)(version=5.4.934.0))',\
+    osgi.identity;filter:='(&(osgi.identity=org.geogebra.migration.shared.editor.base)(version=5.4.934.0))',\
+    osgi.identity;filter:='(&(osgi.identity=org.geogebra.migration.shared.canvas.base)(version=5.4.934.0))',\
+    osgi.identity;filter:='(&(osgi.identity=org.geogebra.migration.shared.keyboard.base)(version=5.4.934.0))',\
+    osgi.identity;filter:='(&(osgi.identity=org.geogebra.migration.shared.giac.jni)(version=5.4.934.0))',\
+    osgi.identity;filter:='(&(osgi.identity=org.geogebra.migration.desktop.canvas)(version=5.4.934.0))',\
+    osgi.identity;filter:='(&(osgi.identity=org.geogebra.migration.desktop.editor)(version=5.4.934.0))',\
+    osgi.identity;filter:='(&(osgi.identity=org.geogebra.migration.desktop.renderer)(version=5.4.934.0))',\
+    osgi.identity;filter:='(&(osgi.identity=org.geogebra.migration.desktop.jogl2)(version=5.4.934.0))',\
+    osgi.identity;filter:='(&(osgi.identity=org.geogebra.migration.desktop)(version=5.4.934.0))'

@@ -1,0 +1,13 @@
+module	bsn	bundle_version	export_package_count	import_package_count	fragment_host	bundle_native_code	bundle_jar
+common	org.geogebra.migration.shared.common	5.4.934.0	228	261		no	org.geogebra.migration.shared.common-5.4.934.0.jar
+common-jre	org.geogebra.migration.shared.common.jre	5.4.934.0	12	69		no	org.geogebra.migration.shared.common.jre-5.4.934.0.jar
+renderer-base	org.geogebra.migration.shared.renderer.base	5.4.934.0	15	21		no	org.geogebra.migration.shared.renderer.base-5.4.934.0.jar
+editor-base	org.geogebra.migration.shared.editor.base	5.4.934.0	13	28		no	org.geogebra.migration.shared.editor.base-5.4.934.0.jar
+canvas-base	org.geogebra.migration.shared.canvas.base	5.4.934.0	3	7		no	org.geogebra.migration.shared.canvas.base-5.4.934.0.jar
+keyboard-base	org.geogebra.migration.shared.keyboard.base	5.4.934.0	6	10		no	org.geogebra.migration.shared.keyboard.base-5.4.934.0.jar
+giac-jni	org.geogebra.migration.shared.giac.jni	5.4.934.0	1	4		no	org.geogebra.migration.shared.giac.jni-5.4.934.0.jar
+desktop	org.geogebra.migration.desktop	5.4.934.0	61	245		no	org.geogebra.migration.desktop-5.4.934.0.jar
+canvas-desktop	org.geogebra.migration.desktop.canvas	5.4.934.0	1	14		no	org.geogebra.migration.desktop.canvas-5.4.934.0.jar
+editor-desktop	org.geogebra.migration.desktop.editor	5.4.934.0	2	15		no	org.geogebra.migration.desktop.editor-5.4.934.0.jar
+renderer-desktop	org.geogebra.migration.desktop.renderer	5.4.934.0	3	23		no	org.geogebra.migration.desktop.renderer-5.4.934.0.jar
+jogl2	org.geogebra.migration.desktop.jogl2	5.4.934.0	0	7	org.geogebra.migration.desktop;bundle-version="[5.4.934,5.4.935)"	no	org.geogebra.migration.desktop.jogl2-5.4.934.0.jar
