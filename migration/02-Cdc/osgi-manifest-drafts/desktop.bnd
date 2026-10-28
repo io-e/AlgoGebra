@@ -1,0 +1,79 @@
+# DRAFT Bnd recipe for desktop; generated from commit 375db7faf54 package scan.
+# Not a final/validated bundle. Run Bnd, inspect imports/uses and resolve in Equinox.
+-classpath: D:/ALF_ZGit/G1_Geogebra_Migration/source/desktop/desktop/build/libs/desktop.jar
+-output: D:/ALF_Agents/G1_Geogebra_Migration/02-Cdc/osgi-manifest-drafts/org.geogebra.migration.desktop-5.4.934.0.jar
+Bundle-ManifestVersion: 2
+Bundle-SymbolicName: org.geogebra.migration.desktop
+Bundle-Version: 5.4.934.0
+# Broad initial export set only; narrow after API and Bnd package-use review.
+Export-Package: org.geogebra.desktop;version=5.4.934.0,\
+	org.geogebra.desktop.cas.giac;version=5.4.934.0,\
+	org.geogebra.desktop.cas.view;version=5.4.934.0,\
+	org.geogebra.desktop.euclidian;version=5.4.934.0,\
+	org.geogebra.desktop.euclidian.event;version=5.4.934.0,\
+	org.geogebra.desktop.euclidianND;version=5.4.934.0,\
+	org.geogebra.desktop.export;version=5.4.934.0,\
+	org.geogebra.desktop.export.pstricks;version=5.4.934.0,\
+	org.geogebra.desktop.factories;version=5.4.934.0,\
+	org.geogebra.desktop.geogebra3D;version=5.4.934.0,\
+	org.geogebra.desktop.geogebra3D.euclidian3D;version=5.4.934.0,\
+	org.geogebra.desktop.geogebra3D.euclidian3D.opengl;version=5.4.934.0,\
+	org.geogebra.desktop.geogebra3D.euclidianFor3D;version=5.4.934.0,\
+	org.geogebra.desktop.geogebra3D.euclidianForPlane;version=5.4.934.0,\
+	org.geogebra.desktop.geogebra3D.euclidianInput3D;version=5.4.934.0,\
+	org.geogebra.desktop.geogebra3D.gui;version=5.4.934.0,\
+	org.geogebra.desktop.geogebra3D.gui.dialogs;version=5.4.934.0,\
+	org.geogebra.desktop.geogebra3D.gui.dialogs.options;version=5.4.934.0,\
+	org.geogebra.desktop.geogebra3D.gui.layout.panels;version=5.4.934.0,\
+	org.geogebra.desktop.geogebra3D.gui.view.properties;version=5.4.934.0,\
+	org.geogebra.desktop.geogebra3D.util;version=5.4.934.0,\
+	org.geogebra.desktop.gui;version=5.4.934.0,\
+	org.geogebra.desktop.gui.app;version=5.4.934.0,\
+	org.geogebra.desktop.gui.autocompletion;version=5.4.934.0,\
+	org.geogebra.desktop.gui.color;version=5.4.934.0,\
+	org.geogebra.desktop.gui.dialog;version=5.4.934.0,\
+	org.geogebra.desktop.gui.dialog.options;version=5.4.934.0,\
+	org.geogebra.desktop.gui.editor;version=5.4.934.0,\
+	org.geogebra.desktop.gui.inputbar;version=5.4.934.0,\
+	org.geogebra.desktop.gui.inputfield;version=5.4.934.0,\
+	org.geogebra.desktop.gui.layout;version=5.4.934.0,\
+	org.geogebra.desktop.gui.layout.panels;version=5.4.934.0,\
+	org.geogebra.desktop.gui.menubar;version=5.4.934.0,\
+	org.geogebra.desktop.gui.nssavepanel;version=5.4.934.0,\
+	org.geogebra.desktop.gui.properties;version=5.4.934.0,\
+	org.geogebra.desktop.gui.spreadsheet;version=5.4.934.0,\
+	org.geogebra.desktop.gui.toolbar;version=5.4.934.0,\
+	org.geogebra.desktop.gui.util;version=5.4.934.0,\
+	org.geogebra.desktop.gui.view;version=5.4.934.0,\
+	org.geogebra.desktop.gui.view.algebra;version=5.4.934.0,\
+	org.geogebra.desktop.gui.view.consprotocol;version=5.4.934.0,\
+	org.geogebra.desktop.gui.view.data;version=5.4.934.0,\
+	org.geogebra.desktop.gui.view.functioninspector;version=5.4.934.0,\
+	org.geogebra.desktop.gui.view.probcalculator;version=5.4.934.0,\
+	org.geogebra.desktop.gui.view.properties;version=5.4.934.0,\
+	org.geogebra.desktop.gui.view.spreadsheet;version=5.4.934.0,\
+	org.geogebra.desktop.gui.virtualkeyboard;version=5.4.934.0,\
+	org.geogebra.desktop.headless;version=5.4.934.0,\
+	org.geogebra.desktop.io;version=5.4.934.0,\
+	org.geogebra.desktop.javax.swing;version=5.4.934.0,\
+	org.geogebra.desktop.kernel.geos;version=5.4.934.0,\
+	org.geogebra.desktop.kernel.prover;version=5.4.934.0,\
+	org.geogebra.desktop.main;version=5.4.934.0,\
+	org.geogebra.desktop.main.settings;version=5.4.934.0,\
+	org.geogebra.desktop.main.undo;version=5.4.934.0,\
+	org.geogebra.desktop.move.ggtapi.models;version=5.4.934.0,\
+	org.geogebra.desktop.plugin;version=5.4.934.0,\
+	org.geogebra.desktop.sound;version=5.4.934.0,\
+	org.geogebra.desktop.sound.mp3transform;version=5.4.934.0,\
+	org.geogebra.desktop.spreadsheet;version=5.4.934.0,\
+	org.geogebra.desktop.util;version=5.4.934.0
+# Included but not exported; includes vendored/implementation-only packages.
+Private-Package: geogebra,org.freehep.graphics2d,org.freehep.graphics2d.font,org.freehep.graphicsio,org.freehep.graphicsio.emf,org.freehep.graphicsio.emf.gdi,org.freehep.graphicsio.emf.gdiplus,org.freehep.graphicsio.font,org.freehep.graphicsio.font.truetype,org.freehep.graphicsio.pdf,org.freehep.graphicsio.raw,org.freehep.graphicsio.svg,org.freehep.util,org.freehep.util.images,org.freehep.util.io,org.freehep.xml.util,org.jfugue
+# Bnd calculates bytecode imports; generated Import-Package must be reviewed, not hand-guessed.
+# Legacy Apple fallback in BrowserLauncher is reached only on macOS; keep it optional for Win64.
+Import-Package: \
+  com.apple.eio;resolution:=optional,\
+  *
+# RCP launch does not use Main-Class; keep/verify manifest attributes separately.
+# JOGL/GIAC classifier jars stay on the application loader per Architecture V2.
+# Do not add Bundle-NativeCode until native payload layout and loader behavior are tested.

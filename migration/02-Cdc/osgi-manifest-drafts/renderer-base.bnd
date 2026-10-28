@@ -1,0 +1,25 @@
+# DRAFT Bnd recipe for renderer-base; generated from commit 375db7faf54 package scan.
+# Not a final/validated bundle. Run Bnd, inspect imports/uses and resolve in Equinox.
+-classpath: D:/ALF_ZGit/G1_Geogebra_Migration/source/shared/renderer-base/build/libs/renderer-base-0.1.jar
+-output: D:/ALF_Agents/G1_Geogebra_Migration/02-Cdc/osgi-manifest-drafts/org.geogebra.migration.shared.renderer.base-5.4.934.0.jar
+Bundle-ManifestVersion: 2
+Bundle-SymbolicName: org.geogebra.migration.shared.renderer.base
+Bundle-Version: 5.4.934.0
+# Broad initial export set only; narrow after API and Bnd package-use review.
+Export-Package: com.himamis.retex.renderer.share;version=5.4.934.0,\
+	com.himamis.retex.renderer.share.cache;version=5.4.934.0,\
+	com.himamis.retex.renderer.share.commands;version=5.4.934.0,\
+	com.himamis.retex.renderer.share.exception;version=5.4.934.0,\
+	com.himamis.retex.renderer.share.fonts;version=5.4.934.0,\
+	com.himamis.retex.renderer.share.mhchem;version=5.4.934.0,\
+	com.himamis.retex.renderer.share.platform;version=5.4.934.0,\
+	com.himamis.retex.renderer.share.platform.box;version=5.4.934.0,\
+	com.himamis.retex.renderer.share.platform.font;version=5.4.934.0,\
+	com.himamis.retex.renderer.share.platform.graphics;version=5.4.934.0,\
+	com.himamis.retex.renderer.share.platform.graphics.stubs;version=5.4.934.0,\
+	com.himamis.retex.renderer.share.platform.resources;version=5.4.934.0,\
+	com.himamis.retex.renderer.share.regex;version=5.4.934.0,\
+	com.himamis.retex.renderer.share.serialize;version=5.4.934.0,\
+	com.himamis.retex.renderer.share.xarrows;version=5.4.934.0
+# Bnd calculates bytecode imports; generated Import-Package must be reviewed, not hand-guessed.
+Import-Package: *

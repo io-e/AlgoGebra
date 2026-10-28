@@ -1,0 +1,16 @@
+# GeoGebra / Gradle generated output
+**/.gradle/
+**/build/
+
+# Generated resolver/runtime artifacts (retain tracked logs and textual evidence)
+migration/02-Cdc/Bnd_Equinox_Resolution_Win64/bundles/
+migration/02-Cdc/Bnd_Equinox_Resolution_Win64/classes/
+migration/02-Cdc/Bnd_Equinox_Resolution_Win64/framework-storage*/
+migration/02-Cdc/osgi-manifest-drafts/*.jar
+
+# Local editor / OS files
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+desktop.ini

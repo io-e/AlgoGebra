@@ -1,0 +1,3 @@
+# Publication note
+
+This directory is the tracked documentation/tooling snapshot from commit 949558ade6458779acc42a5bbe017fb3e563f3f4 (`feat/init-claude-md`). Two unrelated `.grok` scratch/session notes were intentionally omitted because they contain personal session identifiers and references to external private workspace paths. Generated JARs, bundles, classes, and framework-storage directories are excluded by `.gitignore`; textual reports and resolution logs are retained.

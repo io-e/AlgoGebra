@@ -1,0 +1,11 @@
+allprojects {
+    if (name == "desktop") {
+        tasks.register("dumpRuntimeArtifacts") {
+            doLast {
+                configurations.getByName("runtimeClasspath").resolvedConfiguration.resolvedArtifacts
+                    .sort { a, b -> a.moduleVersion.id.toString() <=> b.moduleVersion.id.toString() }
+                    .each { artifact -> println("RUNTIME_ARTIFACT|${artifact.moduleVersion.id}|${artifact.file.absolutePath}") }
+            }
+        }
+    }
+}

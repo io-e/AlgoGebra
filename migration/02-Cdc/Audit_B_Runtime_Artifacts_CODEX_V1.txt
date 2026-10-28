@@ -1,0 +1,78 @@
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/9.4.1/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build 
+> Task :build-logic:convention:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :build-logic:convention:generateExternalPluginSpecBuilders UP-TO-DATE
+> Task :build-logic:convention:extractPrecompiledScriptPluginPlugins UP-TO-DATE
+> Task :build-logic:convention:compilePluginsBlocks UP-TO-DATE
+> Task :build-logic:convention:generatePrecompiledScriptPluginAccessors UP-TO-DATE
+> Task :build-logic:convention:generateScriptPluginAdapters UP-TO-DATE
+> Task :build-logic:convention:compileKotlin UP-TO-DATE
+> Task :build-logic:convention:compileJava NO-SOURCE
+> Task :build-logic:convention:pluginDescriptors UP-TO-DATE
+> Task :build-logic:convention:processResources UP-TO-DATE
+> Task :build-logic:convention:classes UP-TO-DATE
+> Task :build-logic:convention:jar UP-TO-DATE
+
+> Task :desktop:dumpRuntimeArtifacts
+RUNTIME_ARTIFACT|antlr:antlr:2.7.7|C:\Users\Shadow\.gradle\caches\modules-2\files-2.1\antlr\antlr\2.7.7\83cd2cd674a217ade95a4bb83a8a14f351f48bd0\antlr-2.7.7.jar
+RUNTIME_ARTIFACT|com.formdev:flatlaf:3.7|C:\Users\Shadow\.gradle\caches\modules-2\files-2.1\com.formdev\flatlaf\3.7\2075e33a20115d89ef20d1cb21179991c4f122d6\flatlaf-3.7.jar
+RUNTIME_ARTIFACT|com.github.spotbugs:spotbugs-annotations:4.10.2|C:\Users\Shadow\.gradle\caches\modules-2\files-2.1\com.github.spotbugs\spotbugs-annotations\4.10.2\13f9ddf33804e6f69e7aa37b0bfd071b1bf397da\spotbugs-annotations-4.10.2.jar
+RUNTIME_ARTIFACT|com.google.code.findbugs:jsr305:3.0.2|C:\Users\Shadow\.gradle\caches\modules-2\files-2.1\com.google.code.findbugs\jsr305\3.0.2\25ea2e8b0c338a877313bd4672d3fe056ea78f0d\jsr305-3.0.2.jar
+RUNTIME_ARTIFACT|com.google.j2objc:annotations:7e76bfd|C:\Users\Shadow\.gradle\caches\modules-2\files-2.1\com.google.j2objc\annotations\7e76bfd\c24e926d0aa5f710a13e3fc80101688aef8f0755\annotations-7e76bfd.jar
+RUNTIME_ARTIFACT|com.himamis.retex:renderer-base:0.1|D:\ALF_ZGit\G1_Geogebra_Migration\source\shared\renderer-base\build\libs\renderer-base-0.1.jar
+RUNTIME_ARTIFACT|com.ogprover:OpenGeoProver:20120725|C:\Users\Shadow\.gradle\caches\modules-2\files-2.1\com.ogprover\OpenGeoProver\20120725\cf9ff12c89d124704edc2a8c91e7367a0762297b\OpenGeoProver-20120725.jar
+RUNTIME_ARTIFACT|desktop:canvas-desktop:unspecified|D:\ALF_ZGit\G1_Geogebra_Migration\source\desktop\canvas-desktop\build\libs\canvas-desktop.jar
+RUNTIME_ARTIFACT|desktop:editor-desktop:unspecified|D:\ALF_ZGit\G1_Geogebra_Migration\source\desktop\editor-desktop\build\libs\editor-desktop.jar
+RUNTIME_ARTIFACT|desktop:jogl2:unspecified|D:\ALF_ZGit\G1_Geogebra_Migration\source\desktop\jogl2\build\libs\jogl2.jar
+RUNTIME_ARTIFACT|desktop:renderer-desktop:unspecified|D:\ALF_ZGit\G1_Geogebra_Migration\source\desktop\renderer-desktop\build\libs\renderer-desktop.jar
+RUNTIME_ARTIFACT|fr.ujf-grenoble:javagiac:70501|C:\Users\Shadow\.gradle\caches\modules-2\files-2.1\fr.ujf-grenoble\javagiac\70501\10b6679fa647cdae89c157376b6beb12e21d2ce6\javagiac-70501-natives-linux-amd64.jar
+RUNTIME_ARTIFACT|fr.ujf-grenoble:javagiac:70501|C:\Users\Shadow\.gradle\caches\modules-2\files-2.1\fr.ujf-grenoble\javagiac\70501\46e37926541ca25dab6821740589492bc316af2f\javagiac-70501-natives-windows-amd64.jar
+RUNTIME_ARTIFACT|fr.ujf-grenoble:javagiac:70501|C:\Users\Shadow\.gradle\caches\modules-2\files-2.1\fr.ujf-grenoble\javagiac\70501\4ea899b6b0ae4c69f50f45c34ffe7188d484d240\javagiac-70501-natives-macosx-universal.jar
+RUNTIME_ARTIFACT|io.sf.carte:carte-util:3.7|C:\Users\Shadow\.gradle\caches\modules-2\files-2.1\io.sf.carte\carte-util\3.7\651f6198ee50d23ad7c1348f459d6b443ca7dc9a\carte-util-3.7.jar
+RUNTIME_ARTIFACT|io.sf.carte:css4j:6.1.1|C:\Users\Shadow\.gradle\caches\modules-2\files-2.1\io.sf.carte\css4j\6.1.1\96389fc799aafbb4b034425a017270b5a175d5cd\css4j-6.1.1.jar
+RUNTIME_ARTIFACT|io.sf.carte:echosvg-anim:2.2.1|C:\Users\Shadow\.gradle\caches\modules-2\files-2.1\io.sf.carte\echosvg-anim\2.2.1\8b57b54bb873a27ce1c974f872c15b6182fc8616\echosvg-anim-2.2.1.jar
+RUNTIME_ARTIFACT|io.sf.carte:echosvg-awt-util:2.2.1|C:\Users\Shadow\.gradle\caches\modules-2\files-2.1\io.sf.carte\echosvg-awt-util\2.2.1\6cfe6aa51ef23b91aa3adfd03bb98a963276c574\echosvg-awt-util-2.2.1.jar
+RUNTIME_ARTIFACT|io.sf.carte:echosvg-bridge:2.2.1|C:\Users\Shadow\.gradle\caches\modules-2\files-2.1\io.sf.carte\echosvg-bridge\2.2.1\ab296f836d30072a661211b8c88a4eba11451fad\echosvg-bridge-2.2.1.jar
+RUNTIME_ARTIFACT|io.sf.carte:echosvg-constants:2.2.1|C:\Users\Shadow\.gradle\caches\modules-2\files-2.1\io.sf.carte\echosvg-constants\2.2.1\e17e5f44c74c03b5f35332ecacf89a3e8999a2dd\echosvg-constants-2.2.1.jar
+RUNTIME_ARTIFACT|io.sf.carte:echosvg-css:2.2.1|C:\Users\Shadow\.gradle\caches\modules-2\files-2.1\io.sf.carte\echosvg-css\2.2.1\622fe008820fae2169c1e1d302b85d78af0b2731\echosvg-css-2.2.1.jar
+RUNTIME_ARTIFACT|io.sf.carte:echosvg-dom:2.2.1|C:\Users\Shadow\.gradle\caches\modules-2\files-2.1\io.sf.carte\echosvg-dom\2.2.1\61bc933926d1bcf4fb04c201aac7af48702f5b48\echosvg-dom-2.2.1.jar
+RUNTIME_ARTIFACT|io.sf.carte:echosvg-ext:2.2.1|C:\Users\Shadow\.gradle\caches\modules-2\files-2.1\io.sf.carte\echosvg-ext\2.2.1\2bd29ef50b1582f96c61613872309a25a7c8de17\echosvg-ext-2.2.1.jar
+RUNTIME_ARTIFACT|io.sf.carte:echosvg-gvt:2.2.1|C:\Users\Shadow\.gradle\caches\modules-2\files-2.1\io.sf.carte\echosvg-gvt\2.2.1\6ab864ecf87c2492bf0a80e53566eb765fb1eec6\echosvg-gvt-2.2.1.jar
+RUNTIME_ARTIFACT|io.sf.carte:echosvg-i18n:2.2.1|C:\Users\Shadow\.gradle\caches\modules-2\files-2.1\io.sf.carte\echosvg-i18n\2.2.1\7eeea847d14fb49a797ae3e089592831e04386d6\echosvg-i18n-2.2.1.jar
+RUNTIME_ARTIFACT|io.sf.carte:echosvg-parser:2.2.1|C:\Users\Shadow\.gradle\caches\modules-2\files-2.1\io.sf.carte\echosvg-parser\2.2.1\e67fe267671a799359cd728381e13e1c0c1b59e5\echosvg-parser-2.2.1.jar
+RUNTIME_ARTIFACT|io.sf.carte:echosvg-script:2.2.1|C:\Users\Shadow\.gradle\caches\modules-2\files-2.1\io.sf.carte\echosvg-script\2.2.1\9a8281a3c5fd83fb9152a8a707dadd83d8d46ab8\echosvg-script-2.2.1.jar
+RUNTIME_ARTIFACT|io.sf.carte:echosvg-svg-dom:2.2.1|C:\Users\Shadow\.gradle\caches\modules-2\files-2.1\io.sf.carte\echosvg-svg-dom\2.2.1\96354335aa2e76eca082a2f51f5056ddc4de901d\echosvg-svg-dom-2.2.1.jar
+RUNTIME_ARTIFACT|io.sf.carte:echosvg-util:2.2.1|C:\Users\Shadow\.gradle\caches\modules-2\files-2.1\io.sf.carte\echosvg-util\2.2.1\b86f659391913f22b5c3a3b8fb934d4c4bd6daaa\echosvg-util-2.2.1.jar
+RUNTIME_ARTIFACT|io.sf.carte:echosvg-xml:2.2.1|C:\Users\Shadow\.gradle\caches\modules-2\files-2.1\io.sf.carte\echosvg-xml\2.2.1\3daf31acbae860939c73c777bb6566135ae957fe\echosvg-xml-2.2.1.jar
+RUNTIME_ARTIFACT|io.sf.carte:smil-api:1.0.1|C:\Users\Shadow\.gradle\caches\modules-2\files-2.1\io.sf.carte\smil-api\1.0.1\2295bda7ea83df3914cb6541f6364e03a093317a\smil-api-1.0.1.jar
+RUNTIME_ARTIFACT|io.sf.carte:svgom-api:1.1.4|C:\Users\Shadow\.gradle\caches\modules-2\files-2.1\io.sf.carte\svgom-api\1.1.4\967c096b5650f4d48caa94ad008f128ba792a6dd\svgom-api-1.1.4.jar
+RUNTIME_ARTIFACT|io.sf.carte:tokenproducer:3.3|C:\Users\Shadow\.gradle\caches\modules-2\files-2.1\io.sf.carte\tokenproducer\3.3\9d1a08940a80fdc8743a6703b8d50eacf44fd5cb\tokenproducer-3.3.jar
+RUNTIME_ARTIFACT|io.sf.carte:xml-dtd:4.3|C:\Users\Shadow\.gradle\caches\modules-2\files-2.1\io.sf.carte\xml-dtd\4.3\851f494a08022bb38a4f882d153a3aab25fdd6c3\xml-dtd-4.3.jar
+RUNTIME_ARTIFACT|io.sf.jclf:jclf-linear3:1.0.0|C:\Users\Shadow\.gradle\caches\modules-2\files-2.1\io.sf.jclf\jclf-linear3\1.0.0\f6a18b1c63071e27ea3dd3f38b42452cfb6ca411\jclf-linear3-1.0.0.jar
+RUNTIME_ARTIFACT|io.sf.jclf:jclf-text:5.0.3|C:\Users\Shadow\.gradle\caches\modules-2\files-2.1\io.sf.jclf\jclf-text\5.0.3\11b60097688163280af48962069654b7aa4aaf07\jclf-text-5.0.3.jar
+RUNTIME_ARTIFACT|io.sf.w3:cssom-api:0.3|C:\Users\Shadow\.gradle\caches\modules-2\files-2.1\io.sf.w3\cssom-api\0.3\8ec351a38eeb8f0f9ab880e8bff1dd559f407877\cssom-api-0.3.jar
+RUNTIME_ARTIFACT|io.sf.w3:domview-api:1.0|C:\Users\Shadow\.gradle\caches\modules-2\files-2.1\io.sf.w3\domview-api\1.0\2fee53c604fd9ef5112cffa1b600620101452154\domview-api-1.0.jar
+RUNTIME_ARTIFACT|net.java.dev.jna:jna:5.18.1|C:\Users\Shadow\.gradle\caches\modules-2\files-2.1\net.java.dev.jna\jna\5.18.1\b27ba04287cc4abe769642fe8318d39fc89bf937\jna-5.18.1.jar
+RUNTIME_ARTIFACT|netscape.javascript:jsobject:1|C:\Users\Shadow\.gradle\caches\modules-2\files-2.1\netscape.javascript\jsobject\1\480b9d365d89922bcf96b7b314bffdf08fe7a22e\jsobject-1.jar
+RUNTIME_ARTIFACT|org.apache:math-cross-platform:3.6.3|C:\Users\Shadow\.gradle\caches\modules-2\files-2.1\org.apache\math-cross-platform\3.6.3\954313706c0b2c23dbc249430be4d0b8a5c3645\math-cross-platform-3.6.3.jar
+RUNTIME_ARTIFACT|org.geogebra:canvas-base:unspecified|D:\ALF_ZGit\G1_Geogebra_Migration\source\shared\canvas-base\build\libs\canvas-base.jar
+RUNTIME_ARTIFACT|org.geogebra:common-jre:unspecified|D:\ALF_ZGit\G1_Geogebra_Migration\source\shared\common-jre\build\libs\common-jre.jar
+RUNTIME_ARTIFACT|org.geogebra:common:unspecified|D:\ALF_ZGit\G1_Geogebra_Migration\source\shared\common\build\libs\common.jar
+RUNTIME_ARTIFACT|org.geogebra:editor-base:1.0|D:\ALF_ZGit\G1_Geogebra_Migration\source\shared\editor-base\build\libs\editor-base-1.0.jar
+RUNTIME_ARTIFACT|org.geogebra:giac-jni:unspecified|D:\ALF_ZGit\G1_Geogebra_Migration\source\shared\giac-jni\build\libs\giac-jni.jar
+RUNTIME_ARTIFACT|org.geogebra:keyboard-base:unspecified|D:\ALF_ZGit\G1_Geogebra_Migration\source\shared\keyboard-base\build\libs\keyboard-base.jar
+RUNTIME_ARTIFACT|org.jogamp.gluegen:gluegen-rt:2.6.0|C:\Users\Shadow\.gradle\caches\modules-2\files-2.1\org.jogamp.gluegen\gluegen-rt\2.6.0\7a99a746281a6ac3e97134b589c2d8d13dc0378e\gluegen-rt-2.6.0-natives-linux-amd64.jar
+RUNTIME_ARTIFACT|org.jogamp.gluegen:gluegen-rt:2.6.0|C:\Users\Shadow\.gradle\caches\modules-2\files-2.1\org.jogamp.gluegen\gluegen-rt\2.6.0\110296ba2cd56a540ac2ce6317b4338b436b22f2\gluegen-rt-2.6.0-natives-windows-amd64.jar
+RUNTIME_ARTIFACT|org.jogamp.gluegen:gluegen-rt:2.6.0|C:\Users\Shadow\.gradle\caches\modules-2\files-2.1\org.jogamp.gluegen\gluegen-rt\2.6.0\4bf2501aaa5cf4fad1cb76c725b0960208b12178\gluegen-rt-2.6.0-natives-macosx-universal.jar
+RUNTIME_ARTIFACT|org.jogamp.gluegen:gluegen-rt:2.6.0|C:\Users\Shadow\.gradle\caches\modules-2\files-2.1\org.jogamp.gluegen\gluegen-rt\2.6.0\524e9cc0f1939e201ae548229c66bafca0e1ed24\gluegen-rt-2.6.0.jar
+RUNTIME_ARTIFACT|org.jogamp.jogl:jogl-all:2.6.0|C:\Users\Shadow\.gradle\caches\modules-2\files-2.1\org.jogamp.jogl\jogl-all\2.6.0\9c5dcf644b3f8a32fc41e341381cf1a4a8684d48\jogl-all-2.6.0-natives-linux-amd64.jar
+RUNTIME_ARTIFACT|org.jogamp.jogl:jogl-all:2.6.0|C:\Users\Shadow\.gradle\caches\modules-2\files-2.1\org.jogamp.jogl\jogl-all\2.6.0\e70929e872e5a6bd86ff6dd11134b43483a57fd1\jogl-all-2.6.0-natives-windows-amd64.jar
+RUNTIME_ARTIFACT|org.jogamp.jogl:jogl-all:2.6.0|C:\Users\Shadow\.gradle\caches\modules-2\files-2.1\org.jogamp.jogl\jogl-all\2.6.0\380dbba3613c1a3dafc18389074ca7fc6720076c\jogl-all-2.6.0-natives-macosx-universal.jar
+RUNTIME_ARTIFACT|org.jogamp.jogl:jogl-all:2.6.0|C:\Users\Shadow\.gradle\caches\modules-2\files-2.1\org.jogamp.jogl\jogl-all\2.6.0\dc0dd5ce77cf31ea1dd8fc2c2c27592be76feb7c\jogl-all-2.6.0.jar
+RUNTIME_ARTIFACT|org.jspecify:jspecify:1.0.0|C:\Users\Shadow\.gradle\caches\modules-2\files-2.1\org.jspecify\jspecify\1.0.0\7425a601c1c7ec76645a78d22b8c6a627edee507\jspecify-1.0.0.jar
+RUNTIME_ARTIFACT|org.mozilla:rhino-engine:1.8.1|C:\Users\Shadow\.gradle\caches\modules-2\files-2.1\org.mozilla\rhino-engine\1.8.1\c25f7e0f699892f56e34c6c59c1bd783c8580d37\rhino-engine-1.8.1.jar
+RUNTIME_ARTIFACT|org.mozilla:rhino:1.8.1|C:\Users\Shadow\.gradle\caches\modules-2\files-2.1\org.mozilla\rhino\1.8.1\40e5d3db3e4b2ed85e9f02e29680ec21fe14d3a8\rhino-1.8.1.jar
+
+BUILD SUCCESSFUL in 25s
+10 actionable tasks: 1 executed, 9 up-to-date
+Consider enabling configuration cache to speed up this build: https://docs.gradle.org/9.4.1/userguide/configuration_cache_enabling.html
