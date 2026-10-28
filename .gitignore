@@ -1,0 +1,22 @@
+# CLAUDE_V1
+# GeoGebraPlus architecture study — .gitignore
+
+# OS
+Thumbs.db
+desktop.ini
+.DS_Store
+
+# IDE / editors
+.idea/
+*.iml
+.vscode/
+*.swp
+*.swo
+*~
+
+# Grok session data
+.grok/sessions/
+
+# Build / temp
+*.log
+__pycache__/

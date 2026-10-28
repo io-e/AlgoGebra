@@ -1,0 +1,2 @@
+Claude	215e75db-b6e4-41e9-a040-b554497ade81	
+17 September 2026, folder D:\00_CHATGPT\01-Autres_Sites. It compares GeoGebra and Xcas/Giac with the Eleda engine, then writes an architecture guide on using an older open-source GeoGebra for a new Eleda engine. The note on disk is D:\00_CHATGPT\01-Autres_Sites\41-eleda_education\Architecture_GeoGebra_Algebre_Lean4_CLAUDE_V1.md.
