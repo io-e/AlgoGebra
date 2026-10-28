@@ -1,12 +1,12 @@
 # GeoGebraPlus RCP Spike — D-02 / D-04 / D-05 Validation
 
-**Validation date:** 2026-10-28 (Europe/Paris)  
-**Code commit:** `a821e589ca8a` on `feat/rcp-product-spike`  
-**GeoGebra source pin:** `375db7faf540`  
-**GeoGebra version string:** `5.4.934.0` (source tree; dated `20 October 2026`)  
-**Host:** Windows 11 / amd64  
-**Runtime:** Eclipse 2026-09 / Equinox 3.24.300, Java `25.0.4.1+1-LTS`  
-**Compiler:** JDK `21.0.12.101`, `javac --release 21`  
+**Validation date:** 2026-10-28 (Europe/Paris)<br>
+**Code commit:** `a821e589ca8a` on `feat/rcp-product-spike`<br>
+**GeoGebra source pin:** `375db7faf540`<br>
+**GeoGebra version string:** `5.4.934.0` (source tree; dated `20 October 2026`)<br>
+**Host:** Windows 11 / amd64<br>
+**Runtime:** Eclipse 2026-09 / Equinox 3.24.300, Java `25.0.4.1+1-LTS`<br>
+**Compiler:** JDK `21.0.12.101`, `javac --release 21`<br>
 **D-03 input set:** 50 installable bundles, SHA-256 `f5113da0e22d00c08c596793aacfb05aa1af05436e18f8b6ee62e3cf8a1750f4` (excludes the system `org.eclipse.osgi` framework bundle)
 
 ## Executive result
@@ -49,7 +49,7 @@ The GUI run repeated the same 50/50 resolution result. `com.sun.jna` briefly app
 
 The startup code requests maximization so that the full GeoGebra UI, including the input rows, is initially available. The validated run displayed the input rows; the shell remains resizable.
 
-**Screenshot:** `evidence/rcp-20261028-235656-23884-34151d6a.png`  
+**Screenshot:** `evidence/rcp-20261028-235656-23884-34151d6a.png`<br>
 **GUI log:** `logs/rcp-20261028-235656-23884-34151d6a.log`
 
 Two earlier Robot screenshots (`rcp-20261028-234616-37212-6a47ee6c.png` and `rcp-20261028-234928-22368-f5f609ee.png`) were retained locally but marked invalid: File Explorer obscured the RCP app at capture time. They are ignored by Git and are not cited as evidence. The valid screenshot above was captured after explicitly raising the RCP window and visually checked.
