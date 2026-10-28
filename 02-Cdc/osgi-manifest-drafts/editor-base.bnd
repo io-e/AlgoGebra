@@ -1,0 +1,23 @@
+# DRAFT Bnd recipe for editor-base; generated from commit 375db7faf54 package scan.
+# Not a final/validated bundle. Run Bnd, inspect imports/uses and resolve in Equinox.
+-classpath: D:/ALF_ZGit/G1_Geogebra_Migration/source/shared/editor-base/build/libs/editor-base-1.0.jar
+-output: D:/ALF_Agents/G1_Geogebra_Migration/02-Cdc/osgi-manifest-drafts/org.geogebra.migration.shared.editor.base-5.4.934.0.jar
+Bundle-ManifestVersion: 2
+Bundle-SymbolicName: org.geogebra.migration.shared.editor.base
+Bundle-Version: 5.4.934.0
+# Broad initial export set only; narrow after API and Bnd package-use review.
+Export-Package: org.geogebra.editor.share.catalog;version=5.4.934.0,\
+	org.geogebra.editor.share.controller;version=5.4.934.0,\
+	org.geogebra.editor.share.editor;version=5.4.934.0,\
+	org.geogebra.editor.share.event;version=5.4.934.0,\
+	org.geogebra.editor.share.input;version=5.4.934.0,\
+	org.geogebra.editor.share.input.adapter;version=5.4.934.0,\
+	org.geogebra.editor.share.io.latex;version=5.4.934.0,\
+	org.geogebra.editor.share.serializer;version=5.4.934.0,\
+	org.geogebra.editor.share.syntax;version=5.4.934.0,\
+	org.geogebra.editor.share.tree;version=5.4.934.0,\
+	org.geogebra.editor.share.tree.inspect;version=5.4.934.0,\
+	org.geogebra.editor.share.tree.traverse;version=5.4.934.0,\
+	org.geogebra.editor.share.util;version=5.4.934.0
+# Bnd calculates bytecode imports; generated Import-Package must be reviewed, not hand-guessed.
+Import-Package: *

@@ -1,0 +1,115 @@
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/9.4.1/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build 
+> Task :build-logic:convention:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :build-logic:convention:generateExternalPluginSpecBuilders UP-TO-DATE
+> Task :build-logic:convention:extractPrecompiledScriptPluginPlugins UP-TO-DATE
+> Task :build-logic:convention:compilePluginsBlocks UP-TO-DATE
+> Task :build-logic:convention:generatePrecompiledScriptPluginAccessors UP-TO-DATE
+> Task :build-logic:convention:generateScriptPluginAdapters UP-TO-DATE
+> Task :build-logic:convention:compileKotlin UP-TO-DATE
+> Task :build-logic:convention:compileJava NO-SOURCE
+> Task :build-logic:convention:pluginDescriptors UP-TO-DATE
+> Task :build-logic:convention:processResources UP-TO-DATE
+> Task :build-logic:convention:classes UP-TO-DATE
+> Task :build-logic:convention:jar UP-TO-DATE
+
+> Task :desktop:dependencies
+
+------------------------------------------------------------
+Project ':desktop'
+------------------------------------------------------------
+
+runtimeClasspath - Runtime classpath of source set 'main'.
++--- org.geogebra:common -> project :shared:common
+|    +--- project :shared:editor-base
+|    |    +--- project :shared:renderer-base
+|    |    |    +--- project :shared:canvas-base
+|    |    |    |    +--- com.github.spotbugs:spotbugs-annotations:4.10.2
+|    |    |    |    |    +--- org.junit:junit-bom:6.1.0
+|    |    |    |    |    \--- com.google.code.findbugs:jsr305:3.0.2
+|    |    |    |    \--- org.jspecify:jspecify:1.0.0
+|    |    |    +--- org.jspecify:jspecify:1.0.0
+|    |    |    \--- com.google.j2objc:annotations:7e76bfd
+|    |    \--- com.google.j2objc:annotations:7e76bfd
+|    +--- project :shared:renderer-base (*)
+|    +--- project :shared:canvas-base (*)
+|    +--- org.apache:math-cross-platform:3.6.3
+|    +--- com.github.spotbugs:spotbugs-annotations:4.10.2 (*)
+|    +--- org.jspecify:jspecify:1.0.0
+|    +--- project :shared:keyboard-base
+|    \--- com.google.j2objc:annotations:7e76bfd
++--- org.geogebra:common-jre -> project :shared:common-jre
+|    +--- project :shared:common (*)
+|    +--- org.mozilla:rhino:1.8.1
+|    +--- project :shared:giac-jni
+|    +--- project :shared:renderer-base (*)
+|    \--- project :shared:editor-base (*)
++--- project :canvas-desktop
+|    \--- org.geogebra:canvas-base -> project :shared:canvas-base (*)
++--- project :editor-desktop
+|    +--- project :renderer-desktop
+|    |    +--- com.himamis.retex:renderer-base -> project :shared:renderer-base (*)
+|    |    \--- project :canvas-desktop (*)
+|    \--- org.geogebra:editor-base -> project :shared:editor-base (*)
++--- project :jogl2
+|    +--- org.jogamp.gluegen:gluegen-rt:2.6.0
+|    |    \--- antlr:antlr:2.7.7
+|    \--- org.jogamp.jogl:jogl-all:2.6.0
++--- org.geogebra:giac-jni -> project :shared:giac-jni
++--- com.formdev:flatlaf:3.7
++--- netscape.javascript:jsobject:1
++--- com.ogprover:OpenGeoProver:20120725
++--- net.java.dev.jna:jna:5.18.1
++--- io.sf.carte:echosvg-bridge:2.2.1
+|    +--- io.sf.carte:echosvg-anim:2.2.1
+|    |    \--- io.sf.carte:echosvg-svg-dom:2.2.1
+|    |         +--- io.sf.carte:echosvg-dom:2.2.1
+|    |         |    +--- io.sf.carte:echosvg-i18n:2.2.1
+|    |         |    +--- io.sf.carte:xml-dtd:4.3
+|    |         |    |    \--- io.sf.carte:carte-util:{strictly [3.4.0,); prefer 3.6.0} -> 3.7
+|    |         |    +--- io.sf.carte:echosvg-css:2.2.1
+|    |         |    |    +--- io.sf.carte:echosvg-i18n:2.2.1
+|    |         |    |    +--- io.sf.carte:echosvg-util:2.2.1
+|    |         |    |    |    +--- io.sf.carte:echosvg-i18n:2.2.1
+|    |         |    |    |    \--- io.sf.carte:echosvg-constants:2.2.1
+|    |         |    |    +--- io.sf.w3:domview-api:1.0
+|    |         |    |    |    \--- io.sf.w3:cssom-api:0.1 -> 0.3
+|    |         |    |    +--- io.sf.w3:cssom-api:0.3
+|    |         |    |    +--- io.sf.carte:svgom-api:1.1.4
+|    |         |    |    |    +--- io.sf.carte:smil-api:1.0.1
+|    |         |    |    |    \--- io.sf.w3:cssom-api:0.1 -> 0.3
+|    |         |    |    \--- io.sf.carte:css4j:6.1.1
+|    |         |    |         +--- io.sf.carte:tokenproducer:3.3
+|    |         |    |         +--- io.sf.jclf:jclf-text:5.0.3
+|    |         |    |         +--- io.sf.jclf:jclf-linear3:[1.0.0,) -> 1.0.0
+|    |         |    |         \--- io.sf.carte:carte-util:3.7
+|    |         |    +--- io.sf.carte:echosvg-ext:2.2.1
+|    |         |    \--- io.sf.carte:echosvg-xml:2.2.1
+|    |         |         +--- io.sf.carte:echosvg-util:2.2.1 (*)
+|    |         |         \--- io.sf.carte:echosvg-i18n:2.2.1
+|    |         \--- io.sf.carte:echosvg-parser:2.2.1
+|    |              +--- io.sf.carte:echosvg-awt-util:2.2.1
+|    |              |    +--- io.sf.carte:echosvg-i18n:2.2.1
+|    |              |    \--- io.sf.carte:echosvg-util:2.2.1 (*)
+|    |              +--- io.sf.carte:echosvg-xml:2.2.1 (*)
+|    |              +--- io.sf.carte:echosvg-i18n:2.2.1
+|    |              +--- io.sf.carte:svgom-api:1.1.4 (*)
+|    |              \--- io.sf.carte:css4j:6.1.1 (*)
+|    +--- io.sf.carte:echosvg-gvt:2.2.1
+|    |    \--- io.sf.carte:echosvg-awt-util:2.2.1 (*)
+|    \--- io.sf.carte:echosvg-script:2.2.1
+|         +--- io.sf.carte:echosvg-anim:2.2.1 (*)
+|         \--- org.mozilla:rhino:1.7.15 -> 1.8.1
++--- org.mozilla:rhino-engine:1.8.1
+|    \--- org.mozilla:rhino:1.8.1
++--- org.jogamp.jogl:jogl-all:2.6.0
++--- org.jogamp.gluegen:gluegen-rt:2.6.0 (*)
+\--- fr.ujf-grenoble:javagiac:70501
+
+(*) - Indicates repeated occurrences of a transitive dependency subtree. Gradle expands transitive dependency subtrees only once per project; repeat occurrences only display the root of the subtree, followed by this annotation.
+
+A web-based, searchable dependency report is available by adding the --scan option.
+
+BUILD SUCCESSFUL in 15s
+10 actionable tasks: 1 executed, 9 up-to-date
+Consider enabling configuration cache to speed up this build: https://docs.gradle.org/9.4.1/userguide/configuration_cache_enabling.html

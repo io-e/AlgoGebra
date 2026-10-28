@@ -1,0 +1,13 @@
+# DRAFT Bnd recipe for jogl2; generated from commit 375db7faf54 package scan.
+# Not a final/validated bundle. Run Bnd, inspect imports/uses and resolve in Equinox.
+-classpath: D:/ALF_ZGit/G1_Geogebra_Migration/source/desktop/jogl2/build/libs/jogl2.jar
+-output: D:/ALF_Agents/G1_Geogebra_Migration/02-Cdc/osgi-manifest-drafts/org.geogebra.migration.desktop.jogl2-5.4.934.0.jar
+Bundle-ManifestVersion: 2
+Bundle-SymbolicName: org.geogebra.migration.desktop.jogl2
+Bundle-Version: 5.4.934.0
+# Fixes the one source split: this module attaches to desktop; do not install as a peer exporter.
+Fragment-Host: org.geogebra.migration.desktop;bundle-version="[5.4.934,5.4.935)"
+# The host desktop bundle exports org.geogebra.desktop.geogebra3D.euclidian3D.opengl.
+# Include the fragment classes privately; the host owns the package export.
+Private-Package: org.geogebra.desktop.geogebra3D.euclidian3D.opengl
+Import-Package: *

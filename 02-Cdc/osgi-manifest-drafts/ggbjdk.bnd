@@ -1,0 +1,15 @@
+# DRAFT Bnd recipe for ggbjdk; generated from commit 375db7faf54 package scan.
+# Not a final/validated bundle. Run Bnd, inspect imports/uses and resolve in Equinox.
+-classpath: D:/ALF_ZGit/G1_Geogebra_Migration/source/shared/ggbjdk/build/libs/ggbjdk.jar
+-output: D:/ALF_Agents/G1_Geogebra_Migration/02-Cdc/osgi-manifest-drafts/org.geogebra.migration.shared.ggbjdk-5.4.934.0.jar
+Bundle-ManifestVersion: 2
+Bundle-SymbolicName: org.geogebra.migration.shared.ggbjdk
+Bundle-Version: 5.4.934.0
+# Broad initial export set only; narrow after API and Bnd package-use review.
+Export-Package: org.geogebra.ggbjdk.factories;version=5.4.934.0,\
+	org.geogebra.ggbjdk.java.awt;version=5.4.934.0,\
+	org.geogebra.ggbjdk.java.awt.geom;version=5.4.934.0,\
+	org.geogebra.ggbjdk.java.awt.geom.utils;version=5.4.934.0,\
+	org.geogebra.ggbjdk.sun.awt.geom;version=5.4.934.0
+# Bnd calculates bytecode imports; generated Import-Package must be reviewed, not hand-guessed.
+Import-Package: *

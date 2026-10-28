@@ -1,0 +1,13 @@
+# DRAFT Bnd recipe for renderer-desktop; generated from commit 375db7faf54 package scan.
+# Not a final/validated bundle. Run Bnd, inspect imports/uses and resolve in Equinox.
+-classpath: D:/ALF_ZGit/G1_Geogebra_Migration/source/desktop/renderer-desktop/build/libs/renderer-desktop.jar
+-output: D:/ALF_Agents/G1_Geogebra_Migration/02-Cdc/osgi-manifest-drafts/org.geogebra.migration.desktop.renderer-5.4.934.0.jar
+Bundle-ManifestVersion: 2
+Bundle-SymbolicName: org.geogebra.migration.desktop.renderer
+Bundle-Version: 5.4.934.0
+# Broad initial export set only; narrow after API and Bnd package-use review.
+Export-Package: com.himamis.retex.renderer.desktop;version=5.4.934.0,\
+	com.himamis.retex.renderer.desktop.font;version=5.4.934.0,\
+	com.himamis.retex.renderer.desktop.graphics;version=5.4.934.0
+# Bnd calculates bytecode imports; generated Import-Package must be reviewed, not hand-guessed.
+Import-Package: *

@@ -1,0 +1,22 @@
+# DRAFT Bnd recipe for common-jre; generated from commit 375db7faf54 package scan.
+# Not a final/validated bundle. Run Bnd, inspect imports/uses and resolve in Equinox.
+-classpath: D:/ALF_ZGit/G1_Geogebra_Migration/source/shared/common-jre/build/libs/common-jre.jar
+-output: D:/ALF_Agents/G1_Geogebra_Migration/02-Cdc/osgi-manifest-drafts/org.geogebra.migration.shared.common.jre-5.4.934.0.jar
+Bundle-ManifestVersion: 2
+Bundle-SymbolicName: org.geogebra.migration.shared.common.jre
+Bundle-Version: 5.4.934.0
+# Broad initial export set only; narrow after API and Bnd package-use review.
+Export-Package: org.geogebra.common.jre.cas.giac;version=5.4.934.0,\
+	org.geogebra.common.jre.cas.giac.binding;version=5.4.934.0,\
+	org.geogebra.common.jre.factory;version=5.4.934.0,\
+	org.geogebra.common.jre.headless;version=5.4.934.0,\
+	org.geogebra.common.jre.io;version=5.4.934.0,\
+	org.geogebra.common.jre.io.file;version=5.4.934.0,\
+	org.geogebra.common.jre.io.transformer;version=5.4.934.0,\
+	org.geogebra.common.jre.kernel.commands;version=5.4.934.0,\
+	org.geogebra.common.jre.main;version=5.4.934.0,\
+	org.geogebra.common.jre.openGL;version=5.4.934.0,\
+	org.geogebra.common.jre.plugin;version=5.4.934.0,\
+	org.geogebra.common.jre.util;version=5.4.934.0
+# Bnd calculates bytecode imports; generated Import-Package must be reviewed, not hand-guessed.
+Import-Package: *
