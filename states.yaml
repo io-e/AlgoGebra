@@ -89,3 +89,39 @@ open_items:
   - "GPL boundaries in combined image / licence policy before distribution"
   - "Choose P-08 acceptance tag"
   - "Delete temp archives %TEMP%\\r8.zip and r8-nojre.zip"
+test_packs:
+  - id: TP-ENG-RCP-GROK_V1
+    path: 03-RCP-Spike/tests (branch feat/debian-integration, commit 88dbea3)
+    model: "Claude WIMS4win tests-win_ALF *_CLAUDE_V1.ps1 + TestFramework/Run_All, run_equiv_pc.ps1, WA-OEF2IPYNB maxima tier, test_unicode_E2.ps1"
+    runner: "Run_All_GROK_V1.sh (Debian, RUN) / Run_All_GROK_V1.ps1 (Windows, NOT_RUN)"
+    run: {date: "2026-10-29T14:21+01:00", os: "Debian 13.7", java: "Temurin 21.0.13 / 25.0.5", gp: 2.17.2, maxima: 5.47.0, gnuplot: "6.0.2"}
+    totals: {pass: 66, fail: 25, skip: 3, gate: NOT_MET}
+    suites:
+      01_Engine_Discovery: {pass: 10, fail: 0, skip: 0}
+      02_PARI: {pass: 5, fail: 5, skip: 0, note: "fails = BUG-001"}
+      03_Maxima: {pass: 7, fail: 7, skip: 0, note: "fails = BUG-002"}
+      04_Gnuplot: {pass: 8, fail: 0, skip: 0}
+      05_Sandbox: {pass: 16, fail: 0, skip: 0}
+      06_Encoding: {pass: 7, fail: 4, skip: 0, note: "fails = BUG-001/BUG-002"}
+      07_CAS_Equivalence: {pass: 6, fail: 9, skip: 3, note: "GIAC all PASS; PARI/Maxima fails = BUG-001/BUG-002"}
+      08_RCP_Image: {pass: 7, fail: 0, skip: 0}
+
+wims_root_cause_BUG-001_BUG-002:
+  source: "WIMS src/Interfaces/common.c (prepare1, putparm, readresult), pari.c, maxima.c"
+  wims: "random 'Start line <prog> r1..r4' / 'End line ...' markers printed via stringprinter (PARI print(\"%s\"), Maxima \"%s\";) around the command; readresult keeps only text after the LAST start marker up to the end marker, then output()"
+  port: "PariGPEngine/MaximaEngine.prepareRequest send header+command with no markers; parseOutput keeps all header results"
+  headers: "identical to WIMS (not the cause)"
+  other_diffs: "PARI port adds setrand + \\e1; WIMS sets GPRC=../.gprc; WIMS Maxima lowercases input/output and appends ';'"
+  fix_proposal: "port putparm/readresult marker logic into SubprocessEngine; keep existing parsers on the extracted slice (not applied)"
+
+bugs_added_2026-10-29:
+  - id: BUG-006
+    title: "PARI filter does not reject system()/extern(); protection relies only on gp default(secure,1)"
+    component: bundle pari (external engines)
+    severity: low
+    status: OPEN
+    found: 2026-10-29
+    env: "Debian 13, gp 2.17.2"
+    repro: "tests/05_Test_Sandbox_GROK_V1.sh SBX-02 system(\"id\")"
+    actual: "not rejected by the engine; gp secure mode prevents execution (no uid= output) - same behaviour as WIMS (illegal[] empty)"
+    fix_proposal: "optional: add system/extern/externstr/install to WIMS_ILLEGAL as defence in depth (deviation from WIMS, needs decision)"
