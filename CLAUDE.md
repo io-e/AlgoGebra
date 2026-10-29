@@ -1,4 +1,4 @@
-<!-- CLAUDE_V4 -->
+<!-- CLAUDE_V5 -->
 # CLAUDE.md
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
@@ -70,20 +70,26 @@ Host owns policy. Kernel owns constructions. WIMS owns the grade.
 
 **Correction:** The `org.geogebra.common` split package originally claimed does NOT exist. Only 2 classes declare that root package (both in `common`). The real split is `org.geogebra.desktop.geogebra3D.euclidian3D.opengl` across `desktop` and `jogl2` — fixable via OSGi fragment.
 
-### Phase 1a RCP spike results (2026-10-29)
+### Phase 1a RCP spike results (2026-10-28/29)
 
-Evidence: `03-RCP-Spike/D-02-D-04-D-05-VALIDATION-REPORT.md`, commit `a821e589ca8a`.
+Evidence: `03-RCP-Spike/D-02-D-04-D-05-VALIDATION-REPORT.md`.
 Gate decision: `03-RCP-Spike/Gate_Decision_D-04_D-05_GROK_V1.md` (reviewed by Grok Bot).
+Installed image: `D:\ALF_ZGit\G1_Geogebra_Migration\bin\GeoGebraPlus-RCP-0.1.0-win32-x86_64-r3`.
 
 | Scenario | Status | Key findings |
 |---|---|---|
 | D-02 | **PASS** | `IApplication.start()` runs; 50/50 bundles RESOLVED; headless and GUI confirmed. |
 | D-03 | **PASS** | (unchanged from Phase 0) 50 bundles resolve, jogl2 fragment wired. |
 | D-04 | **PARTIAL** | Core embedding PASS: SWT shell hosts `GeoGebraPanel`, Algebra View + toolbars visible, resize/redraw works, `C=5` accepted. Input/focus PARTIAL: "Please check your input" warning on Enter; clipboard and high-DPI not tested. |
-| D-05 | **PARTIAL** | CAS `Expand[(x+1)^2]` → `x^2+2x+1` works. 3D point `A=(1,2,3)` renders. But: GIAC loaded via spike fragment (`System.loadLibrary`), not upstream `NativeLibClassPathLoader`. JOGL required manual DLL extraction + `java.library.path` + boot delegation (`com.jogamp.*,jogamp.*`) + `osgi.parentClassloader=app`. Default JogAmp extractor failed under Java 25/Equinox. |
+| D-05 | **PARTIAL** | **Strict installed-image run (r3):** GIAC, GlueGen, and all 5 JOGL DLLs load from product classpath JARs — **no boot delegation, no `java.library.path`, no manual extraction.** CAS and 3D initialization pass. Remaining open: owner review of the product-local GIAC loader replacement; strict-mode 3D visual screenshot not captured. |
 | P-08 | PARTIAL | Pin known (`375db7faf54`, `5.4.934.0`), acceptance tag not chosen. |
 
-**Critical finding from D-05:** Boot delegation for JogAmp classes breaks OSGi classloader isolation. This is a spike workaround, **not** an approved product configuration. Owner decision required before treating it as architecture.
+**D-05 native loading architecture (r3):** Three OSGi fragment bootstraps extract DLLs from classifier-JAR resources in the owning bundle's classloader and call `System.load` with absolute paths. This replaces the initial boot-delegation workaround:
+- `GiacNativeBootstrap` (fragment of `giac.jni` bundle) — replaces upstream `NativeLibClassPathLoader`
+- `GeoGebraPlusGlueGenNativeBootstrap` (fragment of GlueGen bundle) — loads `gluegen_rt.dll`
+- `GeoGebraPlusJoglNativeBootstrap` (fragment of JOGL bundle) — loads 5 DLLs (nativewindow_awt, nativewindow_win32, newt_head, jogl_desktop, jogl_mobile)
+
+**Owner review pending:** The GIAC loader is a product-local replacement, not the upstream `NativeLibClassPathLoader`. Accept as architecture or require upstream-path proof.
 
 ### Scenario status summary (45 total)
 
@@ -103,7 +109,7 @@ Gate decision: `03-RCP-Spike/Gate_Decision_D-04_D-05_GROK_V1.md` (reviewed by Gr
 
 ### Next steps
 
-1. **D-05 native loading resolution:** GIAC via upstream `NativeLibClassPathLoader` under Equinox (or written replacement). JOGL without boot delegation (JogAmp sibling-bundle classloader route, or explicit fragment packaging decision).
+1. **D-05 owner review:** Accept or reject the product-local fragment bootstrap approach as architecture for GIAC native loading (replaces upstream `NativeLibClassPathLoader`). If accepted, capture strict-mode 3D screenshot and close D-05.
 2. **D-04 input/focus investigation:** Record exact keystrokes and command that triggered "Please check your input". Test clean SWT↔AWT focus transfer, clipboard, high-DPI.
 3. **D-06:** Extension bundle management (depends on D-02–D-05 closure).
 4. **Parallel work (Claude):** W-01 (web technology scored study), 5 contract specs (activity, capability, compute, state, submission).
@@ -178,6 +184,6 @@ $env:Path="$env:JAVA_HOME\bin;$env:Path"
 
 1. **RCP + Swing:** `GeoGebraPanel` embedding **works** (D-04 core PASS). `SWT_AWT.new_Frame(SWT.EMBEDDED)` hosted it. **Still open:** focus transfer (Enter triggered a GeoGebra warning), clipboard, high-DPI, menus.
 2. **OSGi wrapping:** 50/50 bundles **RESOLVED** (D-03 PASS). The jogl2 fragment approach works. **Closed for resolution; open for runtime activation.**
-3. **JOGL/GIAC natives — HIGHEST RISK:** JogAmp's default native-JAR extractor **failed** under Java 25/Equinox (`JVMUtil.initialize` crash). Success required manual DLL extraction + `java.library.path` + boot delegation (breaks OSGi isolation). GIAC loaded via spike fragment's `System.loadLibrary`, not via upstream `NativeLibClassPathLoader`. **Owner decision needed** on whether boot delegation is acceptable or a proper OSGi-compatible native loading path must be found.
+3. **JOGL/GIAC natives — RISK REDUCED (r3):** Boot delegation is **eliminated**. Three product-local OSGi fragment bootstraps load all natives from classifier-JAR resources within their owning bundle classloaders. JogAmp's default extractor still doesn't work under Java 25/Equinox, but the fragment approach is a viable product architecture. **Remaining risk:** GIAC loader is a product-local replacement for upstream `NativeLibClassPathLoader` — needs owner acceptance as architecture. Windows x86_64 only; Linux/macOS untested.
 4. **Dropping GWT:** JS wrapper is not a replacement for four GWT modules. Full web parity is a release gate (Gate C). **Unchanged.**
 5. **External algorithm semantics:** writing a result via API does not make it a native dependent construction object (X-04). **Unchanged.**
