@@ -23,7 +23,12 @@ function Initialize-TestSuite([string]$Name) {
     Write-Host "# Host: $([Environment]::MachineName) / $([Runtime.InteropServices.RuntimeInformation]::OSDescription) / pwsh $($PSVersionTable.PSVersion)"; Write-Host ''
 }
 function Add-Row($id, $st, $pr, $d) { "$script:Suite,$script:TestNumber,$id,$st,$pr,`"$($d -replace '"','""')`",$(Get-Date -Format o)" | Add-Content $script:Csv -Encoding UTF8 }
+# BLOCKED = the check could not run safely (e.g. foreground-window guard refused input/capture). Counted in SKIP for the
+# summary line, written as '# SKIP BLOCKED <reason>' in TAP and status BLOCKED in the CSV. Never PASS/FAIL from a wrong window.
+$script:UiGuardBlocked = $null
+function Block-Test([string]$Id, [string]$Reason, [string]$Pr = 'P1') { $script:TestNumber++; $script:TestSkipCount++; Write-Host "ok $script:TestNumber - [$Pr] $Id # SKIP BLOCKED $Reason" -ForegroundColor Magenta; Add-Row $Id BLOCKED $Pr $Reason }
 function Test-Ok([string]$Id, [bool]$Cond, [string]$Detail = '', [string]$Pr = 'P1') {
+    if ($script:UiGuardBlocked) { Block-Test $Id $script:UiGuardBlocked $Pr; return }
     $script:TestNumber++
     if ($Cond) { $script:TestPassCount++; Write-Host "ok $script:TestNumber - [$Pr] $Id :: $Detail" -ForegroundColor Green; Add-Row $Id PASS $Pr $Detail }
     else { $script:TestFailCount++; Write-Host "not ok $script:TestNumber - [$Pr] $Id :: $Detail" -ForegroundColor Red; Add-Row $Id FAIL $Pr $Detail }

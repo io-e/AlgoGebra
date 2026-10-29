@@ -3,7 +3,8 @@
 # delayed scenario hook reads the object list through GgbAPI, so typed input is verified by the model, not by pixels.
 # Second session: HiDPI start (GDK_SCALE=2). Known: BUG-010 (input dialog, lost keystrokes) -> keyboard check FAILs until fixed.
 . (Join-Path $PSScriptRoot 'lib/Scenario_GROK_V1.ps1'); Initialize-TestSuite 'S_P-07'; Write-ScenarioHeader 'P-07' 'Screens and input' '-' 'desktop (narrow browser deferred)'; Test-ImagePresent
-if ($IsWindows) { Skip-Blocked 'P07-all' 'UI suites are not run on the shared Windows PC (syntax check only); run on a Windows test VM' 'P0'; Complete-TestSuite; exit 0 }
+# Every click/keystroke/screenshot below goes through Assert-GgbForeground (lib/UiDriver_GROK_V1.ps1); a wrong foreground window => BLOCKED, no input.
+if ($IsWindows) { Skip-Blocked 'P07-all' 'Windows P-07 uses xdotool window resize (Linux only); Windows keyboard input is covered by suite 09 with Run_All -AllowForegroundInput' 'P0'; Complete-TestSuite; exit 0 }
 $why = Test-UiPrerequisites; if ($why) { Exit-Bail $why }
 $tsv = Join-Path $script:Res 'S_P-07_ui.directives.tsv'; Set-Content $tsv "NAMES`tN-after-ui`nVAL`tV-K`tK" -Encoding UTF8
 $script:UiDisplay = ':91'; Start-UiDisplay

@@ -6,12 +6,17 @@
 # scenarios; -Only 'P-02','D-06' keeps the listed ids. Each scenario gets a verdict: FAIL (any failed check), NOT RUN (a P0
 # check is blocked and nothing passed), PARTIAL (a P0 check is blocked), PASS (all P0 checks ran and passed). See
 # SCENARIOS_TRACKING_GROK_V1.md.
-param([switch]$SkipRcp, [switch]$SkipUi, [switch]$WithBuild, [switch]$WithBaseline, [string]$ExportEvidence,
+# -AllowForegroundInput: explicit opt-in for input/capture-driven UI (suites 09/10, P-01 screenshot, P-07) on a REAL desktop
+# (Windows, or Linux with your own DISPLAY). Without it the foreground guard records those checks as BLOCKED and sends no input.
+# Close browsers/editors with unsaved work first. On Linux the private Xvfb started by the suites is safe and needs no opt-in.
+param([switch]$AllowForegroundInput, [switch]$SkipRcp, [switch]$SkipUi, [switch]$WithBuild, [switch]$WithBaseline, [string]$ExportEvidence,
       [switch]$Scenarios, [ValidateSet('A', 'B', 'C', 'D', 'E')][string]$Gate, [string[]]$Only)
 $gates = @{ A = 'P-02', 'P-03', 'P-04', 'P-05'; B = 'D-02', 'D-03', 'D-04', 'D-05', 'D-06'; C = 'W-01', 'W-02'
             D = 'X-01', 'X-02', 'X-03', 'X-04', 'X-05', 'X-06', 'S-01', 'S-02', 'S-03', 'S-04', 'S-05'; E = 'O-02', 'O-03', 'D-09', 'W-04' }
 # D-02..D-05 are covered by suites 08/09/10/11 (no duplicate scenario script); a -Gate B run adds them.
 $scnSuites = @{ 'D-02' = '08_'; 'D-03' = '11_'; 'D-04' = '09_'; 'D-05' = '10_' }
+if ($AllowForegroundInput) { $env:GGB_UI_ALLOW_FOREGROUND = '1'; Write-Warning 'foreground input ENABLED: the UI suites will click/type into the GeoGebraPlus window (guarded). Do not use the desktop during the run.' }
+else { $env:GGB_UI_ALLOW_FOREGROUND = $null }
 $here = $PSScriptRoot; $ts = Get-Date -Format 'yyyyMMdd_HHmmss'; $runId = "$ts-$([Environment]::MachineName)"
 $res = Join-Path (Join-Path $here 'results') $runId; New-Item -ItemType Directory -Force $res | Out-Null; $env:RESULTS_DIR = $res; Write-Host "# run id: $runId -> $res"
  $rows = @(); $tp = 0; $tf = 0; $tk = 0; $tb = 0
@@ -31,10 +36,11 @@ foreach ($s in $suites) {
     if ($rc -ne 0 -and $rc -ne 2 -and $f -eq 0) { $f = 1 }
     if ($rc -eq 2) { $st = 'BAIL'; $tb++ } elseif ($rc -ne 0 -or $f -gt 0) { $st = 'FAIL' } else { $st = 'PASS' }
     $tp += $p; $tf += $f; $tk += $k
+    $blk = ([regex]::Matches($summary, '(?m)^ok \d+ - \[P\d\] .*# SKIP BLOCKED')).Count
     $p0skip = ([regex]::Matches($summary, '(?m)^ok \d+ - \[P0\] .*# SKIP')).Count
     $verdict = if ($f -gt 0 -or $st -eq 'FAIL') { 'FAIL' } elseif ($st -eq 'BAIL') { 'NOT RUN' } elseif ($p0skip -gt 0 -and $p -eq 0) { 'NOT RUN' } elseif ($p0skip -gt 0) { 'PARTIAL' } else { 'PASS' }
-    $rows += [pscustomobject]@{ suite = $n; pass = $p; fail = $f; skip = $k; rc = $rc; status = $st; scenario_verdict = $verdict; p0_blocked = $p0skip; log = (Split-Path $log -Leaf) }
-    Write-Host ("  [{0}] {1,-34} {2,3} pass {3,3} fail {4,3} skip (rc={5}) verdict={6}" -f $st, $n, $p, $f, $k, $rc, $verdict) }
+    $rows += [pscustomobject]@{ suite = $n; pass = $p; fail = $f; skip = $k; rc = $rc; status = $st; scenario_verdict = $verdict; p0_blocked = $p0skip; guard_blocked = $blk; log = (Split-Path $log -Leaf) }
+    Write-Host ("  [{0}] {1,-34} {2,3} pass {3,3} fail {4,3} skip (rc={5}) verdict={6}{7}" -f $st, $n, $p, $f, $k, $rc, $verdict, $(if ($blk) { " guard-BLOCKED=$blk" } else { '' })) }
 $rows | Export-Csv (Join-Path $res "Run_All_${ts}_GROK_V1.csv") -NoTypeInformation -Encoding UTF8
 $gateResult = if ($tf -eq 0 -and $tb -eq 0) { 'MET' } else { 'NOT MET' }; Write-Host "TOTAL: $tp pass, $tf fail, $tk skip, $tb bail"; Write-Host "GATE: $gateResult"
 if ($ExportEvidence) {

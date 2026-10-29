@@ -21,6 +21,7 @@ Test-Ok 'P01-05-cas-available' ($t -match 'D-05 CAS ASSERTION PASS') (([regex]::
 Test-Ok 'P01-06-ui-api-reachable' ($r.Scn['P01-names3d'].St -eq 'OK' -and $r.Scn['P01-tools'].St -eq 'OK') "3D objects=[$($r.Scn['P01-names3d'].Val)] toolbar chars=$("$($r.Scn['P01-tools'].Val)".Length) env=$($r.Scn['P01-env'].Val)" 'P0'
 $miss = [regex]::Matches($t, '(ClassNotFoundException|NoClassDefFoundError|MissingResourceException)[^\r\n]*') | ForEach-Object Value | Select-Object -Unique
 Test-Ok 'P01-07-no-missing-class-or-resource' ($miss.Count -eq 0) "[$($miss -join ' | ')] log=$($r.Log)" 'P1'
-Save-UiShot 'S_P-01_views' | Out-Null; Stop-UiDisplay; Remove-Item $clean -Recurse -Force -ErrorAction SilentlyContinue
+# Screenshot is guarded (GeoGebraPlus foreground + window rect only); Codex r11 run 20261029_174320 captured the browser editor -> invalid.
+$shot = Save-UiShot 'S_P-01_views'; if ($script:UiGuardBlocked) { Block-Test 'P01-08-screenshot-of-geogebra' $script:UiGuardBlocked 'P1'; $script:UiGuardBlocked = $null } else { Test-Ok 'P01-08-screenshot-of-geogebra' (Test-Path $shot) "shot=$shot (GeoGebraPlus window rect)" 'P1' }; Stop-UiDisplay; Remove-Item $clean -Recurse -Force -ErrorAction SilentlyContinue
 Skip-Blocked 'P01-W-web-client' 'deferred: web phase (Gate C, W-01/W-02)'
 Complete-TestSuite
