@@ -1,8 +1,8 @@
 suite,num,id,status,priority,detail,ts
-08_RCP_Image,1,RCP-01-d02-50-resolved,PASS,P0,"found=50, ACTIVE=0, RESOLVED=50, unresolved/other=0, resolveBundles=true",2026-10-29T14:31:41+01:00
-08_RCP_Image,2,RCP-02-pari-available,PASS,P0,"pari; available=true",2026-10-29T14:31:41+01:00
-08_RCP_Image,3,RCP-02-maxima-available,PASS,P0,"maxima; available=true",2026-10-29T14:31:41+01:00
-08_RCP_Image,4,RCP-02-gnuplot-available,PASS,P0,"gnuplot; available=true",2026-10-29T14:31:41+01:00
-08_RCP_Image,5,RCP-03-giac-native,PASS,P0,"libjavagiac64.so",2026-10-29T14:31:45+01:00
-08_RCP_Image,6,RCP-04-giac-expand,PASS,P0,"x² + 2x + 1",2026-10-29T14:31:45+01:00
-08_RCP_Image,7,RCP-05-jogl-3d,PASS,P1,"3D point command accepted=true; 3D view initialized=true",2026-10-29T14:31:45+01:00
+08_RCP_Image,1,RCP-01-d02-50-resolved,PASS,P0,"50/50",2026-10-29T15:03:30.3058543+01:00
+08_RCP_Image,2,RCP-02-pari-available,PASS,P0,"external engine pari; available=true",2026-10-29T15:03:30.3377933+01:00
+08_RCP_Image,3,RCP-02-maxima-available,PASS,P0,"external engine maxima; available=true",2026-10-29T15:03:30.3389401+01:00
+08_RCP_Image,4,RCP-02-gnuplot-available,PASS,P0,"external engine gnuplot; available=true",2026-10-29T15:03:30.3398695+01:00
+08_RCP_Image,5,RCP-03-giac-native,PASS,P0,"",2026-10-29T15:03:38.3865568+01:00
+08_RCP_Image,6,RCP-04-giac-expand,PASS,P0,"D-05 CAS result: x² + 2x + 1",2026-10-29T15:03:38.3884319+01:00
+08_RCP_Image,7,RCP-05-jogl-3d,PASS,P1,"",2026-10-29T15:03:38.3894747+01:00

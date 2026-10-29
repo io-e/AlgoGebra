@@ -81,3 +81,4 @@ function Get-PaneLayout {
         $f | Add-Member -Force Av @($f.X, ($f.Y + 60), ($f.X + 200), ($f.Y + $f.H - 60)); $f | Add-Member -Force Bar @(($f.X + 60), ($f.Y + $f.H - 28), ($f.X + $f.W - 60), ($f.Y + $f.H - 8)) }
     return @($f2, $f3)
 }
+function Get-RegionOf([int[]]$R) { Get-UiRegion $R[0] $R[1] $R[2] $R[3] }

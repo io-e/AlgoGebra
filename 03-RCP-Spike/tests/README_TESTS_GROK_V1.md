@@ -6,8 +6,10 @@ Modelled on Claude's WIMS4win pack (`tests-win_ALF/*_CLAUDE_V1.ps1`, `lib/TestFr
 `Run_All_Tests_CLAUDE_V1.ps1`, `tests-win/run_equiv_pc.ps1`), the WA-OEF2IPYNB Maxima tier and `test_unicode_E2.ps1`.
 
 ## Layout
-- `NN_Test_<Area>_GROK_V1.sh` (Debian) and `NN_Test_<Area>_GROK_V1.ps1` (Windows, PowerShell 7) — same IDs, same fixtures.
-- `lib/tf_GROK_V1.sh`, `lib/TestFramework_GROK_V1.ps1` — framework + engine driver + WIMS-style direct references.
+- **Single runner: PowerShell 7 (`pwsh`) on Windows and Linux.** `NN_Test_<Area>_GROK_V1.ps1` suites 01-13 are cross-platform (`$IsWindows`/`$IsLinux`).
+- `lib/TestFramework_GROK_V1.ps1` — framework, engine driver, WIMS-style direct references (OS-aware paths, `Get-JavaTool`, natives).
+- `lib/UiDriver_GROK_V1.ps1` — UI driver for 08-10. Linux: Xvfb + xdotool + python3-PIL screenshots. Windows: user32 SetCursorPos/mouse_event, WinForms SendKeys/Clipboard, System.Drawing CopyFromScreen (Windows UI path syntax-checked only, NOT RUN).
+- The former bash twins of suites 01-08 (`*.sh`, `lib/tf_GROK_V1.sh`, `Run_All_GROK_V1.sh`) moved to `03-RCP-Spike/linux-tests/`, next to the project scripts (`build.sh`, `launch.sh`, `test-engines.sh` stay in `03-RCP-Spike/` beside their `.ps1` twins). They are kept for reference/cross-check only; `tests/` holds only `.ps1`, tools and fixtures. No new suites are written in bash.
 - `tools/EngineCli_GROK_V1.java` (drives an engine bundle), `tools/GiacCli_GROK_V1.java` (javagiac JNI from the image).
 - `fixtures/*.tsv` — UTF-8, tab-separated, shared. Expected values were produced by real CLI runs (never invented).
 - `results/` — per-suite CSV + logs, `Run_All_<ts>_GROK_V1.csv/.md`.
@@ -23,7 +25,16 @@ Modelled on Claude's WIMS4win pack (`tests-win_ALF/*_CLAUDE_V1.ps1`, `lib/TestFr
 | Maxima | `maxima.bat` on PATH (e.g. `C:\maxima-5.49.0\bin`, sourceforge installer). |
 | Gnuplot | `gnuplot.exe` on PATH (gnuplot.info Windows installer, pngcairo terminal). |
 | RCP image | `IMAGE` = installed image, default `D:\ALF_ZGit\G1_Geogebra_Migration\bin\GeoGebraPlus-RCP-0.1.0-win32-x86_64-r8`. **r8 predates the BUG-001/002 fix**: rebuild with build.ps1 + install-product.ps1 (r9+) before expecting engine results from the image. |
-| Env vars | `JAVA_HOME`, `IMAGE`, optional `RESULTS_DIR`. Debian also: `ALGOGEBRA_BASE` (default `/workspace/AlgoGebra`). |
+| Env vars | `JAVA_HOME`, `IMAGE`, optional `RESULTS_DIR`; suites 11/13: `GGB_SOURCE`, `BND_JAR`, `REF_BUNDLES`, `GGB_ASSEMBLE=1`, `GGB_SKIP_GRADLE=1`; UI: `UI_DISPLAY` (Linux). |
+| Linux | pwsh 7.6.9 (Microsoft tarball, `/usr/local/bin/pwsh`), Temurin 21, Xvfb, xdotool, python3-PIL; optional xclip (clipboard read-back). |
+
+### Windows PATH example (Codex run of 689d4b4, 2026-10-29)
+```powershell
+$env:JAVA_HOME = 'C:\Program Files\Eclipse Adoptium\jdk-21.0.12.101-hotspot'
+$env:PATH = 'C:\Program Files (x86)\Pari64-2-19-0;C:\maxima-5.49.0\bin;C:\maxima-5.49.0\gnuplot\bin;' + $env:PATH   # session only
+$env:IMAGE = 'D:\ALF_ZGit\G1_Geogebra_Migration\bin\GeoGebraPlus-RCP-0.1.0-win32-x86_64-r9'   # after the r9 rebuild (BUG-008)
+pwsh -File 03-RCP-Spike\tests\Run_All_GROK_V1.ps1 -SkipRcp -SkipUi
+```
 
 D-ENG-02: do not download/install engines without the user's approval. A missing binary gives `BAIL OUT` + exit 2 (clean SKIP), never a crash.
 
@@ -31,9 +42,10 @@ D-ENG-02: do not download/install engines without the user's approval. A missing
 ```powershell
 cd 03-RCP-Spike\tests
 pwsh -File 01_Test_Engine_Discovery_GROK_V1.ps1      # one suite
-pwsh -File Run_All_GROK_V1.ps1 [-SkipRcp]            # all suites -> results\Run_All_<ts>_GROK_V1.csv
+pwsh -File Run_All_GROK_V1.ps1 [-SkipRcp] [-SkipUi] [-WithBuild] [-WithBaseline]   # -> results\Run_All_<ts>_GROK_V1.csv
 ```
-Debian: `./Run_All_GROK_V1.sh [--skip-rcp]`, `./08_Test_RCP_Image_GROK_V1.sh` needs `xvfb-run` and the Linux image from `../build.sh`.
+Same command on Debian (`pwsh -File Run_All_GROK_V1.ps1 -WithBuild -WithBaseline`). Run_All refuses an empty suite list (exit 2), counts a suite
+without summary as FAIL, and reports BAIL separately (Codex 689d4b4). 09/10 drive the desktop: on Windows run them only in an attended session.
 
 ## Suites and expected status
 | # | Suite | Covers | Expected |
@@ -46,6 +58,11 @@ Debian: `./Run_All_GROK_V1.sh [--skip-rcp]`, `./08_Test_RCP_Image_GROK_V1.sh` ne
 | 06 | Encoding | é à ü € in/out, accented gnuplot title, accented temp dir (sh) | PASS |
 | 07 | CAS_Equivalence | GIAC JNI vs PARI vs Maxima | PASS, 3 SKIP (no PARI equivalent) |
 | 08 | RCP_Image | D-02 50/50 resolved, 3 engines available, GIAC `Expand[(x+1)^2]`, 3D view | PASS on Debian; on Windows image engines are available only if binaries are on PATH |
+| 09 | D04_UI | D-04: input bar keystrokes (`fixtures/d04_inputs_GROK_V1.tsv`), error dialog, lost keystrokes, 2D<->3D focus, clipboard, ctrl+a NPE, ReTeX fonts, HiDPI; screenshots `results/screenshots/09_*.png` | FAIL expected (BUG-004, BUG-009..012) |
+| 10 | D05_Strict3D | strict (no boot delegation) 3D: init, no JOGL link errors, non-blank canvas pixels, redraw after `A=(1,2,3)` | PASS on Debian (Mesa llvmpipe) |
+| 11 | Bundle_Build (opt-in `-WithBuild`) | bnd 7.1.0 rebuild of the 02-Cdc recipes, BSN/version/exports/imports/class list vs r8, Equinox resolution with r8 externals | PASS on Debian |
+| 12 | Engine_Robustness | 8 parallel calls PARI/Maxima, long outputs, timeout/crash recovery, no orphan processes, fake-marker payloads | PASS |
+| 13 | GeoGebra_Baseline (opt-in `-WithBaseline`) | upstream Gradle `:common-jre:test`, `:desktop:test` at the pin, JUnit XML counts | PASS on Debian |
 
 ## Result format
 TAP lines `ok N - [P0|P1] ID :: detail`, `not ok …`, `ok N - … # SKIP reason`; last line `PASS: n FAIL: n SKIP: n`.
@@ -60,3 +77,11 @@ expected vs actual, log path (`results/…`). A Gradle/javac build success is no
 |---|---|---|---|---|---|---|---|---|---|
 | 14:21 before fix (83887ca+pack) | 10/0/0 | 5/5/0 | 7/7/0 | 8/0/0 | 16/0/0 | 7/4/0 | 6/9/3 | 7/0/0 | 66/25/3 |
 | 14:31 after fix (merge of 093b302) | 10/0/0 | 10/0/0 | 14/0/0 | 8/0/0 | 16/0/0 | 11/0/0 | 15/0/3 | 7/0/0 | **91/0/3 GATE MET** |
+
+## PowerShell pack results (2026-10-29)
+| Run | 01 | 02 | 03 | 04 | 05 | 06 | 07 | 08 | 09 | 10 | 11 | 12 | 13 |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| Windows, Codex 689d4b4 (temporary PATH) | 75/0/3 total for 01-07 ||||||| SKIP | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN |
+| Debian, pwsh 7.6.9, 15:03-15:45 | 7/0/0 | 10/0/0 | 14/0/0 | 6/0/0 | 14/0/0 | 9/0/0 | 15/0/3 | 7/0/0 | 7/17/0 (D-04) | 5/0/0 | 62/0/2 | 13/0/0 | 5/0/0 |
+
+ps1 vs former sh (14:31, 0 FAIL both): 01 7 vs 10 (no version checks), 04 6 vs 8, 05 14 vs 16, 06 9 vs 11; 02, 03, 07, 08 equal.

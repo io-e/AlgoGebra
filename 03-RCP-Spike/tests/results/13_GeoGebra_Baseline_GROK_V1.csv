@@ -1,0 +1,6 @@
+suite,num,id,status,priority,detail,ts
+13_GeoGebra_Baseline,1,GGB-00-pinned-commit,PASS,P0,"HEAD=375db7faf5407390bb322165f2414415da8faeda pin=375db7faf5407390bb322165f2414415da8faeda",2026-10-29T15:05:49.5994889+01:00
+13_GeoGebra_Baseline,2,GGB-common-jre-ran,PASS,P0,"gradle rc=0 tests=6526 log=/workspace/AlgoGebra/repo/03-RCP-Spike/tests/results/13_common-jre_gradle.log",2026-10-29T15:05:50.1014204+01:00
+13_GeoGebra_Baseline,3,GGB-common-jre-no-failures,PASS,P0,"passed=6514 failures=0 errors=0 skipped=12 failed=[] windows Audit_E: n/a",2026-10-29T15:05:50.1068145+01:00
+13_GeoGebra_Baseline,4,GGB-desktop-ran,PASS,P0,"gradle rc=0 tests=1090 log=/workspace/AlgoGebra/repo/03-RCP-Spike/tests/results/13_desktop_gradle.log",2026-10-29T15:05:50.1920869+01:00
+13_GeoGebra_Baseline,5,GGB-desktop-no-failures,PASS,P0,"passed=1088 failures=0 errors=0 skipped=2 failed=[] windows Audit_E: 1090 tests, 1 locale failure (CallJavaScriptTest.testEval), 1 skipped",2026-10-29T15:05:50.1926944+01:00

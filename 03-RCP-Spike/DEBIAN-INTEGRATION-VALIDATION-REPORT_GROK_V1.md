@@ -75,3 +75,21 @@ the header is not quiet in WIMS either — it is simply discarded by the markers
 concatenate header + command without markers, so `parseOutput` returns every header result. Other differences: PARI port adds
 `setrand`/`\e1`; WIMS sets `GPRC=../.gprc`; Maxima WIMS lowercases input/output and appends `;`.
 **Faithful fix (not applied):** port `putparm`/`readresult` into `SubprocessEngine` (random markers, extract last-start..end) and keep the existing parsers on the extracted slice.
+
+## Addendum GROK_V1 (15:45 Europe/Paris) — cross-platform PowerShell pack, suites 09-13
+
+Runner `pwsh 7.6.9` on Debian 13.7 (Temurin 21.0.13 tests / 25.0.5 image), fixtures sha256 prefix `058fe5027ff68fd3`,
+command `pwsh -NoProfile -File 03-RCP-Spike/tests/Run_All_GROK_V1.ps1 -WithBuild -WithBaseline`, logs `03-RCP-Spike/tests/results/`.
+
+| Suite | Result | Note |
+|---|---|---|
+| 01-07 | 75/0/3 | identical to Codex Windows run (689d4b4) |
+| 08 RCP_Image | 7/0/0 | Xvfb, launch.sh |
+| 09 D04_UI | 7/17/0 | BUG-004, BUG-010..013; screenshots `tests/results/screenshots/09_*.png` |
+| 10 D05_Strict3D | 5/0/0 | strict mode, non-blank 3D pixels, redraw after A=(1,2,3); Mesa llvmpipe; `10_strict3d_*.png` |
+| 11 Bundle_Build | 62/0/2 | bnd 7.1.0 Linux rebuild = r8 (BSN, version, exports, imports, class list); Equinox allResolved=true (51 jars) |
+| 12 Engine_Robustness | 13/0/0 | 8 parallel PARI/Maxima, 2^200000, timeout/crash recovery, no orphans, fake markers |
+| 13 GeoGebra_Baseline | 5/0/0 | common-jre 6526 tests 0 fail 12 skip; desktop 1090 tests 0 fail 2 skip (Windows Audit_E: 1 locale failure) |
+
+The pre-existing bash suites were moved to `03-RCP-Spike/linux-tests/` (reference only); `tests/` is PowerShell-only.
+NOT RUN: all suites 08-13 on Windows; Windows UI driver path; real GPU 3D (only software GL).

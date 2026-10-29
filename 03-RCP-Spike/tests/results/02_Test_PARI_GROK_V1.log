@@ -1,6 +1,6 @@
 # Suite: 02_PARI
-# Started: 2026-10-29T14:31:23+01:00
-# Host: grok-bot-vm-419969949 / Debian GNU/Linux 13 (trixie) / x86_64
+# Started: 2026-10-29T15:03:06.4806185+01:00
+# Host: grok-bot-vm-419969949 / Debian GNU/Linux 13 (trixie) / pwsh 7.6.9
 
 ok 1 - [P1] PARI-01-direct :: got=[3,1;5,1;17,1;257,1;641,1;65537,1;6700417,1]
 ok 2 - [P0] PARI-01-engine :: got=3,1;5,1;17,1;257,1;641,1;65537,1;6700417,1

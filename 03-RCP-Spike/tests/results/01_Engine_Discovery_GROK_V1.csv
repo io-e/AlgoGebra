@@ -1,11 +1,8 @@
 suite,num,id,status,priority,detail,ts
-01_Engine_Discovery,1,DISC-gp-path,PASS,P0,"path=/usr/bin/gp",2026-10-29T14:31:22+01:00
-01_Engine_Discovery,2,DISC-maxima-path,PASS,P0,"path=/usr/bin/maxima",2026-10-29T14:31:22+01:00
-01_Engine_Discovery,3,DISC-gnuplot-path,PASS,P0,"path=/usr/bin/gnuplot",2026-10-29T14:31:22+01:00
-01_Engine_Discovery,4,DISC-gp-version,PASS,P1,"gp version()=[2, 17, 2] / 2.17.2",2026-10-29T14:31:22+01:00
-01_Engine_Discovery,5,DISC-maxima-version,PASS,P1,"Maxima 5.47.0",2026-10-29T14:31:22+01:00
-01_Engine_Discovery,6,DISC-gnuplot-version,PASS,P1,"gnuplot 6.0 patchlevel 2",2026-10-29T14:31:22+01:00
-01_Engine_Discovery,7,DISC-java-21,PASS,P0,"openjdk version ""21.0.13"" 2026-10-20 LTS",2026-10-29T14:31:22+01:00
-01_Engine_Discovery,8,DISC-engine-pari-spawn,PASS,P0,"kind=OK 113ms",2026-10-29T14:31:23+01:00
-01_Engine_Discovery,9,DISC-engine-maxima-spawn,PASS,P0,"kind=OK 133ms",2026-10-29T14:31:23+01:00
-01_Engine_Discovery,10,DISC-engine-gnuplot-spawn,PASS,P0,"kind=ART 163ms",2026-10-29T14:31:23+01:00
+01_Engine_Discovery,1,DISC-pari-path,PASS,P0,"path=/usr/bin/gp",2026-10-29T15:03:05.7439367+01:00
+01_Engine_Discovery,2,DISC-maxima-path,PASS,P0,"path=/usr/bin/maxima",2026-10-29T15:03:05.7503725+01:00
+01_Engine_Discovery,3,DISC-gnuplot-path,PASS,P0,"path=/usr/bin/gnuplot",2026-10-29T15:03:05.7545679+01:00
+01_Engine_Discovery,4,DISC-java-21,PASS,P0,"openjdk version "21.0.13" 2026-10-20 LTS",2026-10-29T15:03:05.7835403+01:00
+01_Engine_Discovery,5,DISC-engine-pari-spawn,PASS,P0,"kind=OK 125ms",2026-10-29T15:03:05.9251967+01:00
+01_Engine_Discovery,6,DISC-engine-maxima-spawn,PASS,P0,"kind=OK 148ms",2026-10-29T15:03:06.0750533+01:00
+01_Engine_Discovery,7,DISC-engine-gnuplot-spawn,PASS,P0,"kind=ART 153ms",2026-10-29T15:03:06.2298271+01:00

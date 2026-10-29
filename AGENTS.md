@@ -168,7 +168,8 @@ $env:Path="$env:JAVA_HOME\bin;$env:Path"
 ## Testing
 
 Engine + RCP test pack (GROK_V1): `03-RCP-Spike/tests/` — read `03-RCP-Spike/tests/README_TESTS_GROK_V1.md` first.
-Windows/Codex: `pwsh -File 03-RCP-Spike\tests\Run_All_GROK_V1.ps1`; Debian: `./Run_All_GROK_V1.sh`. Shared fixtures,
+Single runner on Windows and Linux: `pwsh -File 03-RCP-Spike/tests/Run_All_GROK_V1.ps1` (suites 01-13; bash twins of 01-08 are
+reference only in `03-RCP-Spike/linux-tests/`). Codex handoff: `Handoff_Codex_from_GrokBot_GROK_V1.md` (repo root). Shared fixtures,
 TAP + `PASS: n FAIL: n SKIP: n`, exit 0/1/2. Evidence rule below still applies (build success is not evidence).
 
 ## Working conventions

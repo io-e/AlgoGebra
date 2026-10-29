@@ -1,0 +1,65 @@
+suite,num,id,status,priority,detail,ts
+11_Bundle_Build,1,BLD-canvas-base-build,PASS,P0,"bnd rc=0 warnings=0 out=/tmp/grok11-2625020/bundles/org.geogebra.migration.shared.canvas.base-5.4.934.0.jar",2026-10-29T15:05:26.8428754+01:00
+11_Bundle_Build,2,BLD-canvas-base-bsn-version,PASS,P0,"org.geogebra.migration.shared.canvas.base 5.4.934.0 vs r8 org.geogebra.migration.shared.canvas.base 5.4.934.0",2026-10-29T15:05:26.8710525+01:00
+11_Bundle_Build,3,BLD-canvas-base-exports-eq-r8,PASS,P0,"exports new=4 r8=4 diff=",2026-10-29T15:05:26.8872186+01:00
+11_Bundle_Build,4,BLD-canvas-base-imports-eq-r8,PASS,P1,"imports new=7 r8=7 diff=",2026-10-29T15:05:26.8898686+01:00
+11_Bundle_Build,5,BLD-canvas-base-class-list-eq-r8,PASS,P1,"classes new=36 r8=36 diff=0 (bytecode differs by toolchain; entry list compared, hash not expected equal)",2026-10-29T15:05:26.9006568+01:00
+11_Bundle_Build,6,BLD-canvas-desktop-build,PASS,P0,"bnd rc=0 warnings=0 out=/tmp/grok11-2625020/bundles/org.geogebra.migration.desktop.canvas-5.4.934.0.jar",2026-10-29T15:05:27.3134546+01:00
+11_Bundle_Build,7,BLD-canvas-desktop-bsn-version,PASS,P0,"org.geogebra.migration.desktop.canvas 5.4.934.0 vs r8 org.geogebra.migration.desktop.canvas 5.4.934.0",2026-10-29T15:05:27.3166198+01:00
+11_Bundle_Build,8,BLD-canvas-desktop-exports-eq-r8,PASS,P0,"exports new=3 r8=3 diff=",2026-10-29T15:05:27.3210310+01:00
+11_Bundle_Build,9,BLD-canvas-desktop-imports-eq-r8,PASS,P1,"imports new=14 r8=14 diff=",2026-10-29T15:05:27.3252148+01:00
+11_Bundle_Build,10,BLD-canvas-desktop-class-list-eq-r8,PASS,P1,"classes new=30 r8=30 diff=0 (bytecode differs by toolchain; entry list compared, hash not expected equal)",2026-10-29T15:05:27.3296994+01:00
+11_Bundle_Build,11,BLD-common-jre-build,PASS,P0,"bnd rc=0 warnings=0 out=/tmp/grok11-2625020/bundles/org.geogebra.migration.shared.common.jre-5.4.934.0.jar",2026-10-29T15:05:27.8140602+01:00
+11_Bundle_Build,12,BLD-common-jre-bsn-version,PASS,P0,"org.geogebra.migration.shared.common.jre 5.4.934.0 vs r8 org.geogebra.migration.shared.common.jre 5.4.934.0",2026-10-29T15:05:27.8177240+01:00
+11_Bundle_Build,13,BLD-common-jre-exports-eq-r8,PASS,P0,"exports new=40 r8=40 diff=",2026-10-29T15:05:27.8249652+01:00
+11_Bundle_Build,14,BLD-common-jre-imports-eq-r8,PASS,P1,"imports new=69 r8=69 diff=",2026-10-29T15:05:27.8347342+01:00
+11_Bundle_Build,15,BLD-common-jre-class-list-eq-r8,PASS,P1,"classes new=64 r8=64 diff=0 (bytecode differs by toolchain; entry list compared, hash not expected equal)",2026-10-29T15:05:27.8424924+01:00
+11_Bundle_Build,16,BLD-common-build,PASS,P0,"bnd rc=0 warnings=0 out=/tmp/grok11-2625020/bundles/org.geogebra.migration.shared.common-5.4.934.0.jar",2026-10-29T15:05:30.4911805+01:00
+11_Bundle_Build,17,BLD-common-bsn-version,PASS,P0,"org.geogebra.migration.shared.common 5.4.934.0 vs r8 org.geogebra.migration.shared.common 5.4.934.0",2026-10-29T15:05:30.5892894+01:00
+11_Bundle_Build,18,BLD-common-exports-eq-r8,PASS,P0,"exports new=246 r8=246 diff=",2026-10-29T15:05:30.6406436+01:00
+11_Bundle_Build,19,BLD-common-imports-eq-r8,PASS,P1,"imports new=261 r8=261 diff=",2026-10-29T15:05:30.6634329+01:00
+11_Bundle_Build,20,BLD-common-class-list-eq-r8,PASS,P1,"classes new=4932 r8=4932 diff=0 (bytecode differs by toolchain; entry list compared, hash not expected equal)",2026-10-29T15:05:30.9073483+01:00
+11_Bundle_Build,21,BLD-desktop-build,PASS,P0,"bnd rc=0 warnings=1 out=/tmp/grok11-2625020/bundles/org.geogebra.migration.desktop-5.4.934.0.jar",2026-10-29T15:05:32.9938052+01:00
+11_Bundle_Build,22,BLD-desktop-bsn-version,PASS,P0,"org.geogebra.migration.desktop 5.4.934.0 vs r8 org.geogebra.migration.desktop 5.4.934.0",2026-10-29T15:05:32.9995099+01:00
+11_Bundle_Build,23,BLD-desktop-exports-eq-r8,PASS,P0,"exports new=148 r8=148 diff=",2026-10-29T15:05:33.0089556+01:00
+11_Bundle_Build,24,BLD-desktop-imports-eq-r8,PASS,P1,"imports new=245 r8=245 diff=",2026-10-29T15:05:33.0204183+01:00
+11_Bundle_Build,25,BLD-desktop-class-list-eq-r8,PASS,P1,"classes new=1258 r8=1258 diff=0 (bytecode differs by toolchain; entry list compared, hash not expected equal)",2026-10-29T15:05:33.0696661+01:00
+11_Bundle_Build,26,BLD-editor-base-build,PASS,P0,"bnd rc=0 warnings=0 out=/tmp/grok11-2625020/bundles/org.geogebra.migration.shared.editor.base-5.4.934.0.jar",2026-10-29T15:05:33.5715870+01:00
+11_Bundle_Build,27,BLD-editor-base-bsn-version,PASS,P0,"org.geogebra.migration.shared.editor.base 5.4.934.0 vs r8 org.geogebra.migration.shared.editor.base 5.4.934.0",2026-10-29T15:05:33.5726404+01:00
+11_Bundle_Build,28,BLD-editor-base-exports-eq-r8,PASS,P0,"exports new=16 r8=16 diff=",2026-10-29T15:05:33.5741462+01:00
+11_Bundle_Build,29,BLD-editor-base-imports-eq-r8,PASS,P1,"imports new=28 r8=28 diff=",2026-10-29T15:05:33.5753405+01:00
+11_Bundle_Build,30,BLD-editor-base-class-list-eq-r8,PASS,P1,"classes new=136 r8=136 diff=0 (bytecode differs by toolchain; entry list compared, hash not expected equal)",2026-10-29T15:05:33.5781874+01:00
+11_Bundle_Build,31,BLD-editor-desktop-build,PASS,P0,"bnd rc=0 warnings=0 out=/tmp/grok11-2625020/bundles/org.geogebra.migration.desktop.editor-5.4.934.0.jar",2026-10-29T15:05:33.9425976+01:00
+11_Bundle_Build,32,BLD-editor-desktop-bsn-version,PASS,P0,"org.geogebra.migration.desktop.editor 5.4.934.0 vs r8 org.geogebra.migration.desktop.editor 5.4.934.0",2026-10-29T15:05:33.9434701+01:00
+11_Bundle_Build,33,BLD-editor-desktop-exports-eq-r8,PASS,P0,"exports new=6 r8=6 diff=",2026-10-29T15:05:33.9443141+01:00
+11_Bundle_Build,34,BLD-editor-desktop-imports-eq-r8,PASS,P1,"imports new=15 r8=15 diff=",2026-10-29T15:05:33.9451968+01:00
+11_Bundle_Build,35,BLD-editor-desktop-class-list-eq-r8,PASS,P1,"classes new=4 r8=4 diff=0 (bytecode differs by toolchain; entry list compared, hash not expected equal)",2026-10-29T15:05:33.9458275+01:00
+11_Bundle_Build,36,BLD-ggbjdk-build,PASS,P0,"bnd rc=0 warnings=0 out=/tmp/grok11-2625020/bundles/org.geogebra.migration.shared.ggbjdk-5.4.934.0.jar",2026-10-29T15:05:34.3964404+01:00
+11_Bundle_Build,37,BLD-ggbjdk-vs-r8,SKIP,P1,"no reference bundle org.geogebra.migration.shared.ggbjdk-5.4.934.0.jar in /workspace/AlgoGebra/image/GeoGebraPlus-RCP-0.1.0-linux-gtk-x86_64/bundles (not part of r8)",2026-10-29T15:05:34.3995770+01:00
+11_Bundle_Build,38,BLD-giac-jni-build,PASS,P0,"bnd rc=0 warnings=0 out=/tmp/grok11-2625020/bundles/org.geogebra.migration.shared.giac.jni-5.4.934.0.jar",2026-10-29T15:05:34.7455666+01:00
+11_Bundle_Build,39,BLD-giac-jni-bsn-version,PASS,P0,"org.geogebra.migration.shared.giac.jni 5.4.934.0 vs r8 org.geogebra.migration.shared.giac.jni 5.4.934.0",2026-10-29T15:05:34.7462483+01:00
+11_Bundle_Build,40,BLD-giac-jni-exports-eq-r8,PASS,P0,"exports new=1 r8=1 diff=",2026-10-29T15:05:34.7483858+01:00
+11_Bundle_Build,41,BLD-giac-jni-imports-eq-r8,PASS,P1,"imports new=4 r8=4 diff=",2026-10-29T15:05:34.7493219+01:00
+11_Bundle_Build,42,BLD-giac-jni-class-list-eq-r8,PASS,P1,"classes new=6 r8=6 diff=0 (bytecode differs by toolchain; entry list compared, hash not expected equal)",2026-10-29T15:05:34.7500309+01:00
+11_Bundle_Build,43,BLD-jogl2-build,PASS,P0,"bnd rc=0 warnings=1 out=/tmp/grok11-2625020/bundles/org.geogebra.migration.desktop.jogl2-5.4.934.0.jar",2026-10-29T15:05:36.1374270+01:00
+11_Bundle_Build,44,BLD-jogl2-bsn-version,PASS,P0,"org.geogebra.migration.desktop.jogl2 5.4.934.0 vs r8 org.geogebra.migration.desktop.jogl2 5.4.934.0",2026-10-29T15:05:36.1385245+01:00
+11_Bundle_Build,45,BLD-jogl2-exports-eq-r8,PASS,P0,"exports new=0 r8=0 diff=",2026-10-29T15:05:36.1412744+01:00
+11_Bundle_Build,46,BLD-jogl2-imports-eq-r8,PASS,P1,"imports new=7 r8=7 diff=",2026-10-29T15:05:36.1424594+01:00
+11_Bundle_Build,47,BLD-jogl2-class-list-eq-r8,PASS,P1,"classes new=9 r8=9 diff=0 (bytecode differs by toolchain; entry list compared, hash not expected equal)",2026-10-29T15:05:36.1436045+01:00
+11_Bundle_Build,48,BLD-keyboard-base-build,PASS,P0,"bnd rc=0 warnings=0 out=/tmp/grok11-2625020/bundles/org.geogebra.migration.shared.keyboard.base-5.4.934.0.jar",2026-10-29T15:05:36.5864597+01:00
+11_Bundle_Build,49,BLD-keyboard-base-bsn-version,PASS,P0,"org.geogebra.migration.shared.keyboard.base 5.4.934.0 vs r8 org.geogebra.migration.shared.keyboard.base 5.4.934.0",2026-10-29T15:05:36.5872943+01:00
+11_Bundle_Build,50,BLD-keyboard-base-exports-eq-r8,PASS,P0,"exports new=6 r8=6 diff=",2026-10-29T15:05:36.5882554+01:00
+11_Bundle_Build,51,BLD-keyboard-base-imports-eq-r8,PASS,P1,"imports new=10 r8=10 diff=",2026-10-29T15:05:36.5889936+01:00
+11_Bundle_Build,52,BLD-keyboard-base-class-list-eq-r8,PASS,P1,"classes new=39 r8=39 diff=0 (bytecode differs by toolchain; entry list compared, hash not expected equal)",2026-10-29T15:05:36.5903523+01:00
+11_Bundle_Build,53,BLD-keyboard-scientific-build,SKIP,P1,"input jar not built: /workspace/AlgoGebra/geogebra/source/shared/keyboard-scientific/build/libs/keyboard-scientific.jar",2026-10-29T15:05:36.5912340+01:00
+11_Bundle_Build,54,BLD-renderer-base-build,PASS,P0,"bnd rc=0 warnings=0 out=/tmp/grok11-2625020/bundles/org.geogebra.migration.shared.renderer.base-5.4.934.0.jar",2026-10-29T15:05:37.2298507+01:00
+11_Bundle_Build,55,BLD-renderer-base-bsn-version,PASS,P0,"org.geogebra.migration.shared.renderer.base 5.4.934.0 vs r8 org.geogebra.migration.shared.renderer.base 5.4.934.0",2026-10-29T15:05:37.2313415+01:00
+11_Bundle_Build,56,BLD-renderer-base-exports-eq-r8,PASS,P0,"exports new=17 r8=17 diff=",2026-10-29T15:05:37.2323899+01:00
+11_Bundle_Build,57,BLD-renderer-base-imports-eq-r8,PASS,P1,"imports new=21 r8=21 diff=",2026-10-29T15:05:37.2332720+01:00
+11_Bundle_Build,58,BLD-renderer-base-class-list-eq-r8,PASS,P1,"classes new=707 r8=707 diff=0 (bytecode differs by toolchain; entry list compared, hash not expected equal)",2026-10-29T15:05:37.2435277+01:00
+11_Bundle_Build,59,BLD-renderer-desktop-build,PASS,P0,"bnd rc=0 warnings=0 out=/tmp/grok11-2625020/bundles/org.geogebra.migration.desktop.renderer-5.4.934.0.jar",2026-10-29T15:05:37.6277313+01:00
+11_Bundle_Build,60,BLD-renderer-desktop-bsn-version,PASS,P0,"org.geogebra.migration.desktop.renderer 5.4.934.0 vs r8 org.geogebra.migration.desktop.renderer 5.4.934.0",2026-10-29T15:05:37.6287583+01:00
+11_Bundle_Build,61,BLD-renderer-desktop-exports-eq-r8,PASS,P0,"exports new=9 r8=9 diff=",2026-10-29T15:05:37.6300473+01:00
+11_Bundle_Build,62,BLD-renderer-desktop-imports-eq-r8,PASS,P1,"imports new=23 r8=23 diff=",2026-10-29T15:05:37.6313747+01:00
+11_Bundle_Build,63,BLD-renderer-desktop-class-list-eq-r8,PASS,P1,"classes new=15 r8=15 diff=0 (bytecode differs by toolchain; entry list compared, hash not expected equal)",2026-10-29T15:05:37.6321086+01:00
+11_Bundle_Build,64,BLD-RES-01-equinox-resolution,PASS,P0,"Equinox=3.24.300.v20260721-1251; installed=51; allResolved=true staged=51 (rebuilt=13 + r8 externals) log=/workspace/AlgoGebra/repo/03-RCP-Spike/tests/results/11_equinox_resolution.log",2026-10-29T15:05:38.7779535+01:00
