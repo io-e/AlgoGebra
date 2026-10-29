@@ -23,6 +23,9 @@ import org.geogebra.plus.compute.runtime.SubprocessEngine;
 public final class PariGPEngine extends SubprocessEngine {
 
     // Verbatim command header from WIMS src/Interfaces/pari.c (GPL-2.0-or-later).
+    /** WIMS stringprinter for this interface. */
+    static final String WIMS_STRINGPRINTER = "print(\"%s\")\n";
+
     static final String WIMS_HEADER = """
             default(output,0)
             default(secure,1)
@@ -126,17 +129,27 @@ public final class PariGPEngine extends SubprocessEngine {
     @Override
     protected Request prepareRequest(Path executable, String validatedCommand,
             ComputeContext context) {
+        // Kept deviations from WIMS pari.c (GROK_V1 review): setrand() makes runs reproducible from
+        // ComputeContext.randomSeed (WIMS seeds through its own environment); \\e1 is required because gp
+        // prints no "? " prompts on a non-TTY pipe and parseOutput splits results on echoed prompts; "-f"
+        // skips any gprc, so WIMS's GPRC=../.gprc (a WIMS-runtime file) is intentionally not reproduced.
+        // WIMS putparm(): header, then start marker / command / end marker (BUG-001 fix, GROK_V1).
+        WimsMarkers markers = newMarkers("pari");
         String script = "setrand(" + context.randomSeed() + ");\n"
                 + "\\p " + context.precision() + "\n"
                 + "\\ps " + context.seriesLength() + "\n"
                 + "\\e1\n"
-                + WIMS_HEADER + validatedCommand + "\n" + WIMS_QUIT;
-        return request(executable, executableArguments(), script, null, null);
+                + WIMS_HEADER
+                + wrapWithMarkers(validatedCommand, markers, WIMS_STRINGPRINTER) + WIMS_QUIT;
+        return request(executable, executableArguments(), script, markers);
     }
 
     @Override
-    protected ComputeResult createResult(Request request, ProcessOutput output, Duration elapsed) {
-        return ComputeResult.text(getEngineId(), parseOutput(output.stdout()), elapsed);
+    protected ComputeResult createResult(Request request, ProcessOutput output, Duration elapsed)
+            throws ExternalComputeException {
+        // WIMS readresult(): parse only the slice between the last start marker and the end marker.
+        return ComputeResult.text(getEngineId(),
+                parseOutput(extractOrFail(output.stdout(), request.markers())), elapsed);
     }
 
     static String parseOutput(String stdout) {
