@@ -15,22 +15,22 @@ if (-not $env:JAVA_HOME) { $env:JAVA_HOME = if ($IsWindows) { 'C:\Program Files\
 function Get-JavaTool([string]$Name) { Join-Path (Join-Path $env:JAVA_HOME 'bin') ($Name + $script:Exe) }
 $script:Image = if ($env:IMAGE) { $env:IMAGE } elseif ($IsWindows) { 'D:\ALF_ZGit\G1_Geogebra_Migration\bin\GeoGebraPlus-RCP-0.1.0-win32-x86_64-r8' } else { '/workspace/AlgoGebra/image/GeoGebraPlus-RCP-0.1.0-linux-gtk-x86_64' }
 $script:ToolsOut = [IO.Path]::Combine($script:SpikeDir, 'host', 'build', 'test-tools-ps1')
-$script:TF_Pass = 0; $script:TF_Fail = 0; $script:TF_Skip = 0; $script:TF_Num = 0
+$script:TestPassCount = 0; $script:TestFailCount = 0; $script:TestSkipCount = 0; $script:TestNumber = 0
 function Initialize-TestSuite([string]$Name) {
     $script:Suite = $Name; $script:Csv = Join-Path $script:Res "${Name}_GROK_V1.csv"
     'suite,num,id,status,priority,detail,ts' | Set-Content $script:Csv -Encoding UTF8
     Write-Host "# Suite: $Name"; Write-Host "# Started: $(Get-Date -Format o)"
     Write-Host "# Host: $([Environment]::MachineName) / $([Runtime.InteropServices.RuntimeInformation]::OSDescription) / pwsh $($PSVersionTable.PSVersion)"; Write-Host ''
 }
-function Add-Row($id, $st, $pr, $d) { "$script:Suite,$script:TF_Num,$id,$st,$pr,`"$($d -replace '"','""')`",$(Get-Date -Format o)" | Add-Content $script:Csv -Encoding UTF8 }
+function Add-Row($id, $st, $pr, $d) { "$script:Suite,$script:TestNumber,$id,$st,$pr,`"$($d -replace '"','""')`",$(Get-Date -Format o)" | Add-Content $script:Csv -Encoding UTF8 }
 function Test-Ok([string]$Id, [bool]$Cond, [string]$Detail = '', [string]$Pr = 'P1') {
-    $script:TF_Num++
-    if ($Cond) { $script:TF_Pass++; Write-Host "ok $script:TF_Num - [$Pr] $Id :: $Detail" -ForegroundColor Green; Add-Row $Id PASS $Pr $Detail }
-    else { $script:TF_Fail++; Write-Host "not ok $script:TF_Num - [$Pr] $Id :: $Detail" -ForegroundColor Red; Add-Row $Id FAIL $Pr $Detail }
+    $script:TestNumber++
+    if ($Cond) { $script:TestPassCount++; Write-Host "ok $script:TestNumber - [$Pr] $Id :: $Detail" -ForegroundColor Green; Add-Row $Id PASS $Pr $Detail }
+    else { $script:TestFailCount++; Write-Host "not ok $script:TestNumber - [$Pr] $Id :: $Detail" -ForegroundColor Red; Add-Row $Id FAIL $Pr $Detail }
 }
-function Skip-Test([string]$Id, [string]$Reason, [string]$Pr = 'P1') { $script:TF_Num++; $script:TF_Skip++; Write-Host "ok $script:TF_Num - [$Pr] $Id # SKIP $Reason" -ForegroundColor Yellow; Add-Row $Id SKIP $Pr $Reason }
-function Exit-Bail([string]$Why) { Write-Host "BAIL OUT - $Why"; Write-Host "PASS: $script:TF_Pass FAIL: $script:TF_Fail SKIP: $script:TF_Skip"; exit 2 }
-function Complete-TestSuite { Write-Host ''; Write-Host "PASS: $script:TF_Pass FAIL: $script:TF_Fail SKIP: $script:TF_Skip"; Write-Host "# CSV: $script:Csv"; exit $(if ($script:TF_Fail -gt 0) { 1 } else { 0 }) }
+function Skip-Test([string]$Id, [string]$Reason, [string]$Pr = 'P1') { $script:TestNumber++; $script:TestSkipCount++; Write-Host "ok $script:TestNumber - [$Pr] $Id # SKIP $Reason" -ForegroundColor Yellow; Add-Row $Id SKIP $Pr $Reason }
+function Exit-Bail([string]$Why) { Write-Host "BAIL OUT - $Why"; Write-Host "PASS: $script:TestPassCount FAIL: $script:TestFailCount SKIP: $script:TestSkipCount"; exit 2 }
+function Complete-TestSuite { Write-Host ''; Write-Host "PASS: $script:TestPassCount FAIL: $script:TestFailCount SKIP: $script:TestSkipCount"; Write-Host "# CSV: $script:Csv"; exit $(if ($script:TestFailCount -gt 0) { 1 } else { 0 }) }
 function Norm([string]$s) { if ($null -eq $s) { return '' }; $o = $s -replace '\s', ''; if ($s.StartsWith('Mat(') -and $o.EndsWith(')')) { $o = $o.Substring(4, $o.Length - 5) }
     if ($o.StartsWith('[') -and $o.EndsWith(']')) { $o = $o.Substring(1, $o.Length - 2) }; return $o }
 function Test-Eq([string]$Id, [string]$Got, [string]$Exp, [string]$Pr = 'P1') {
@@ -66,7 +66,7 @@ function Get-WimsHeader([string]$Rel) { $t = Get-Content ([IO.Path]::Combine($sc
     $m = [regex]::Match($t, 'WIMS_HEADER = [^\r\n]*"""\r?\n(.*?)""";', 'Singleline'); return ($m.Groups[1].Value -split "`r?`n" | ForEach-Object { $_ -replace '^ {12}', '' }) -join "`n" }
 function Get-Between([string]$Out, [string]$Start, [string]$End) {
     $lines = $Out -split "`r?`n"; $acc = $null; $res = ''
-    foreach ($l in $lines) { $k = $l.Replace('"', ''); if ($k -eq $Start) { $acc = @(); continue }; if ($k -eq $End) { $res = ($acc | Where-Object { $_ -ne '' }) -join ' '; $acc = $null; continue }; if ($null -ne $acc) { $acc += $l.Trim() } }
+    foreach ($l in $lines) { $markerLine = $l.Replace('"', '').Trim(); if ($markerLine -eq $Start) { $acc = @(); continue }; if ($markerLine -eq $End) { $res = ($acc | Where-Object { $_ -ne '' }) -join ' '; $acc = $null; continue }; if ($null -ne $acc) { $acc += $l.Trim() } }
     return $res.Trim() }
 function Invoke-RefPari([string]$Cmd) { $gp = (Get-Command $script:EngineBinaries['pari'] -CommandType Application -ErrorAction SilentlyContinue | Select-Object -First 1).Source; if (-not $gp) { return $null }
     $m = "Start line pari $PID $(Get-Random)"; $e = "End line pari $PID $(Get-Random)"

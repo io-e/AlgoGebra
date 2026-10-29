@@ -3,7 +3,7 @@ project: GeoGebraPlus / AlgoGebra RCP
 geogebra_pin: 375db7faf5407390bb322165f2414415da8faeda
 geogebra_version: 5.4.934.0
 repo: https://github.com/io-e/AlgoGebra
-updated: 2026-10-29T13:50+01:00
+updated: 2026-10-29T14:40+01:00
 
 branches:
   feat/external-engines: {head: 8054109, note: "AGENTS.md + Decisions_External_Engines_GROK_V1.md committed"}
@@ -32,7 +32,9 @@ bugs:
     title: "PARI engine output parser returns WIMS header values before the result"
     component: bundle pari (external engines)
     severity: high
-    status: OPEN
+    status: FIXED
+    fixed: "2026-10-29, feat/external-engines 093b302 (WIMS common.c start/end markers ported into SubprocessEngine), merged into feat/debian-integration 90e5064"
+    evidence: "Debian Run_All 14:21 66/25/3 -> 14:31 91/0/3; 02_PARI 0 fail; logs 03-RCP-Spike/tests/results/ on feat/debian-integration 101067c; SubprocessEngineTests marker unit tests PASS"
     found: 2026-10-29
     env: "Debian 13, gp 2.17.2, Temurin 25.0.5"
     repro: "test-engines.sh -> factor(2^64-1)"
@@ -45,7 +47,9 @@ bugs:
     title: "Maxima engine output parser returns each WIMS header line result before the result"
     component: bundle maxima (external engines)
     severity: high
-    status: OPEN
+    status: FIXED
+    fixed: "2026-10-29, feat/external-engines 093b302 (WIMS common.c start/end markers ported into SubprocessEngine), merged into feat/debian-integration 90e5064"
+    evidence: "Debian Run_All 14:21 66/25/3 -> 14:31 91/0/3; 03_Maxima 0 fail; logs 03-RCP-Spike/tests/results/ on feat/debian-integration 101067c; SubprocessEngineTests marker unit tests PASS"
     found: 2026-10-29
     env: "Debian 13, Maxima 5.47.0, Temurin 25.0.5"
     repro: "test-engines.sh -> diff(sin(x^2),x)"
@@ -95,16 +99,20 @@ test_packs:
     model: "Claude WIMS4win tests-win_ALF *_CLAUDE_V1.ps1 + TestFramework/Run_All, run_equiv_pc.ps1, WA-OEF2IPYNB maxima tier, test_unicode_E2.ps1"
     runner: "Run_All_GROK_V1.sh (Debian, RUN) / Run_All_GROK_V1.ps1 (Windows, NOT_RUN)"
     run: {date: "2026-10-29T14:21+01:00", os: "Debian 13.7", java: "Temurin 21.0.13 / 25.0.5", gp: 2.17.2, maxima: 5.47.0, gnuplot: "6.0.2"}
-    totals: {pass: 66, fail: 25, skip: 3, gate: NOT_MET}
-    suites:
+    readme: 03-RCP-Spike/tests/README_TESTS_GROK_V1.md (Codex/Windows usage; pack also on feat/external-engines)
+    runs:
+      - {date: "2026-10-29T14:21+01:00", commit: "83887ca+pack 88dbea3", totals: {pass: 66, fail: 25, skip: 3}, gate: NOT_MET, note: "all fails = BUG-001/BUG-002"}
+      - {date: "2026-10-29T14:31+01:00", commit: "101067c (merge 90e5064 of 093b302)", totals: {pass: 91, fail: 0, skip: 3}, gate: MET}
+    suites_latest:
       01_Engine_Discovery: {pass: 10, fail: 0, skip: 0}
-      02_PARI: {pass: 5, fail: 5, skip: 0, note: "fails = BUG-001"}
-      03_Maxima: {pass: 7, fail: 7, skip: 0, note: "fails = BUG-002"}
+      02_PARI: {pass: 10, fail: 0, skip: 0}
+      03_Maxima: {pass: 14, fail: 0, skip: 0}
       04_Gnuplot: {pass: 8, fail: 0, skip: 0}
       05_Sandbox: {pass: 16, fail: 0, skip: 0}
-      06_Encoding: {pass: 7, fail: 4, skip: 0, note: "fails = BUG-001/BUG-002"}
-      07_CAS_Equivalence: {pass: 6, fail: 9, skip: 3, note: "GIAC all PASS; PARI/Maxima fails = BUG-001/BUG-002"}
+      06_Encoding: {pass: 11, fail: 0, skip: 0}
+      07_CAS_Equivalence: {pass: 15, fail: 0, skip: 3, note: "3 SKIP = no PARI equivalent"}
       08_RCP_Image: {pass: 7, fail: 0, skip: 0}
+    windows_ps1: NOT_RUN_FULL (see windows_check)
 
 wims_root_cause_BUG-001_BUG-002:
   source: "WIMS src/Interfaces/common.c (prepare1, putparm, readresult), pari.c, maxima.c"
@@ -125,3 +133,17 @@ bugs_added_2026-10-29:
     repro: "tests/05_Test_Sandbox_GROK_V1.sh SBX-02 system(\"id\")"
     actual: "not rejected by the engine; gp secure mode prevents execution (no uid= output) - same behaviour as WIMS (illegal[] empty)"
     fix_proposal: "optional: add system/extern/externstr/install to WIMS_ILLEGAL as defence in depth (deviation from WIMS, needs decision)"
+  - id: BUG-007
+    title: "Test-pack Maxima direct reference ran without the WIMS header (header extraction regex missed '\"\\n\" + \"\"\"')"
+    component: 03-RCP-Spike/tests/lib (test harness, not product code)
+    severity: medium
+    status: FIXED
+    found: 2026-10-29
+    effect: "MAX-06 expected log(x) instead of log(abs(x)) (WIMS header sets logabs:true); engine was right"
+    fix: "feat/debian-integration 101067c - regex fixed in tf_GROK_V1.sh and TestFramework_GROK_V1.ps1, fixture re-derived"
+  - id: BUG-008
+    title: "Windows image r8 ships engine bundles without the BUG-001/002 fix"
+    component: Windows RCP image (bin\\...-r8)
+    severity: medium
+    status: OPEN
+    action: "rebuild with 03-RCP-Spike\\build.ps1 + install-product.ps1 (r9) on Windows"
