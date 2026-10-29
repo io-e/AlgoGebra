@@ -6,10 +6,10 @@ repo: https://github.com/io-e/AlgoGebra
 updated: 2026-10-29T15:52+01:00
 
 branches:
-  feat/external-engines: {head: e3e8a82, note: "Last Windows-tested code revision; baseline suite hardened after Codex run"}
+  feat/external-engines: {last_tested_code: e3e8a82, note: "Evidence/docs commits follow this Windows-tested code revision; see git log for current branch tip"}
   feat/rcp-product-spike: {head: 1280012}
   feat/init-claude-md: {head: 949558a}
-  feat/debian-integration: {note: "bash ports, Debian report, Linux native loader fix (83887ca, BUG-003), cross-platform ps1 pack 01-13; merged into feat/external-engines 2026-10-29 (no force)"}
+  feat/debian-integration: {synchronized_with: feat/external-engines, note: "Bash ports, Debian report, Linux native loader fix (83887ca, BUG-003), and cross-platform ps1 pack 01-13; kept synchronized with the Windows evidence branch by fast-forward (no force)"}
   feat/external-engines_codex: {commit: 689d4b4, author: Codex, note: "Run_All empty-run guard, counter rename TestPassCount..., Get-Between quote handling; merged into feat/debian-integration 820f0b7"}
 
 gates:
