@@ -3,7 +3,7 @@ project: GeoGebraPlus / AlgoGebra RCP
 geogebra_pin: 375db7faf5407390bb322165f2414415da8faeda
 geogebra_version: 5.4.934.0
 repo: https://github.com/io-e/AlgoGebra
-updated: 2026-10-29T16:30+01:00
+updated: 2026-10-29T17:40+01:00
 
 branches:
   feat/external-engines: {last_tested_code: e3e8a82, note: "Evidence/docs commits follow this Windows-tested code revision; see git log for current branch tip"}
@@ -18,9 +18,57 @@ gates:
   C: NOT_REACHED
   D: NOT_REACHED
   E: NOT_REACHED
-  scenarios: {total: 45, not_run: 40}
+  scenarios: {total: 45, PASS: 3, PARTIAL: 13, FAIL: 5, NOT_RUN: 24, tracking: 03-RCP-Spike/tests/SCENARIOS_TRACKING_GROK_V1.md}
 
 scenarios:
+  # GROK_V1 2026-10-29: all 45 spec scenarios. status = spec-level (reviewed); debian_desktop = script result in evidence run.
+  _run: {evidence: 03-RCP-Spike/evidence/20261029-linux-scenarios-20261029_171259-grok-bot-vm-419969949, tracking: 03-RCP-Spike/tests/SCENARIOS_TRACKING_GROK_V1.md, counts: {'PARTIAL': 13, 'FAIL': 5, 'NOT RUN': 24, 'PASS': 3}}
+  P-01: {status: "PARTIAL", client: both, gate: "-", debian_desktop: "PASS", script: "03-RCP-Spike/tests/scenarios/S_P-01_CleanProduct_GROK_V1.ps1", blockers: "web: deferred: web phase"}
+  P-02: {status: "FAIL", client: both, gate: "A", debian_desktop: "FAIL", script: "03-RCP-Spike/tests/scenarios/S_P-02_CoreFeatures_GROK_V1.ps1", blockers: "BUG-014 (3 divergences: f(x)=x^2-2x, m={{1,2},{3,4}}, 3D Plane(A,B,(1,0,0)): evalCommand false + error dialog in product, true in baseline); web deferred"}
+  P-03: {status: "PARTIAL", client: both, gate: "A", debian_desktop: "PARTIAL", script: "03-RCP-Spike/tests/scenarios/S_P-03_StandardTools_GROK_V1.ps1", blockers: "3D toolbar not compared (needs a 3D GuiManager directive); web deferred"}
+  P-04: {status: "FAIL", client: both, gate: "A", debian_desktop: "FAIL", script: "03-RCP-Spike/tests/scenarios/S_P-04_SaveReopen_GROK_V1.ps1", blockers: "BUG-014: f(x) = a x^2 - 1 not created by evalCommand in the product (so it is absent from the saved file); all other values identical, baseline reads the product file"}
+  P-05: {status: "PARTIAL", client: both, gate: "A", debian_desktop: "PARTIAL", script: "03-RCP-Spike/tests/scenarios/S_P-05_ScriptsMacrosExport_GROK_V1.ps1", blockers: "listed gaps: JavaScript ggbOnInit, user macro tool, image object, PDF/animated GIF/print; web deferred"}
+  P-06: {status: "PARTIAL", client: desktop, gate: "-", debian_desktop: "PASS", script: "03-RCP-Spike/tests/scenarios/S_P-06_Offline_GROK_V1.ps1", blockers: "Windows: needs admin firewall rule or disconnected VM"}
+  P-07: {status: "FAIL", client: both, gate: "-", debian_desktop: "FAIL", script: "03-RCP-Spike/tests/scenarios/S_P-07_ScreensInput_GROK_V1.ps1", blockers: "BUG-010: K=(4,4) is created but the 'Please check your input' dialog opens; touch: no device; narrow browser: web"}
+  P-08: {status: "PARTIAL", client: both, gate: "-", debian_desktop: "PARTIAL", script: "03-RCP-Spike/tests/scenarios/S_P-08_PinTraceability_GROK_V1.ps1", blockers: "acceptance tag not chosen (owner); 3 older evidence folders do not cite the pin"}
+  D-01: {status: "NOT RUN", client: desktop, gate: "-", debian_desktop: "NOT RUN", script: "03-RCP-Spike/tests/scenarios/S_D-01_EclipseImport_GROK_V1.ps1", blockers: "Eclipse + Buildship not installed (owner approval needed)"}
+  D-02: {status: "PASS", client: desktop, gate: "B", debian_desktop: "PASS", script: "08_Test_RCP_Image_GROK_V1.ps1 (suite)", blockers: "-"}
+  D-03: {status: "PASS", client: desktop, gate: "B", debian_desktop: "PASS", script: "11_Test_Bundle_Build_GROK_V1.ps1 (suite)", blockers: "-"}
+  D-04: {status: "PARTIAL", client: desktop, gate: "B", debian_desktop: "FAIL", script: "09_Test_D04_UI_GROK_V1.ps1 (suite)", blockers: "BUG-004, BUG-010..013; Windows suite 09 NOT RUN (attended)"}
+  D-05: {status: "PASS", client: desktop, gate: "B", debian_desktop: "PASS", script: "10_Test_D05_Strict3D_GROK_V1.ps1 (suite)", blockers: "-"}
+  D-06: {status: "PARTIAL", client: desktop, gate: "B", debian_desktop: "PARTIAL", script: "03-RCP-Spike/tests/scenarios/S_D-06_ExtensionRegistry_GROK_V1.ps1", blockers: "product extension registry not implemented"}
+  D-07: {status: "PARTIAL", client: desktop, gate: "B", debian_desktop: "PARTIAL", script: "03-RCP-Spike/tests/scenarios/S_D-07_EnableDisable_GROK_V1.ps1", blockers: "no extension manager / persisted state"}
+  D-08: {status: "PARTIAL", client: desktop, gate: "B", debian_desktop: "PARTIAL", script: "03-RCP-Spike/tests/scenarios/S_D-08_IncompatibleExtension_GROK_V1.ps1", blockers: "user-facing refusal message not implemented"}
+  D-09: {status: "NOT RUN", client: desktop, gate: "E", debian_desktop: "NOT RUN", script: "03-RCP-Spike/tests/scenarios/S_D-09_SignatureChannel_GROK_V1.ps1", blockers: "no signing key, channel or policy (owner decision)"}
+  D-10: {status: "NOT RUN", client: desktop, gate: "-", debian_desktop: "FAIL", script: "03-RCP-Spike/tests/scenarios/S_D-10_InstallUpgrade_GROK_V1.ps1", blockers: "BUG-017 (Linux image has no bundled Java; launch.sh hard-codes /workspace/AlgoGebra/jdk); no installer; no clean Windows VM"}
+  W-01: {status: "NOT RUN", client: web, gate: "C", debian_desktop: "-", script: "-", blockers: "deferred: web phase (no script yet)"}
+  W-02: {status: "NOT RUN", client: web, gate: "C", debian_desktop: "-", script: "-", blockers: "deferred: web phase (no script yet)"}
+  W-03: {status: "NOT RUN", client: web, gate: "-", debian_desktop: "-", script: "-", blockers: "deferred: web phase (no script yet)"}
+  W-04: {status: "NOT RUN", client: web, gate: "E", debian_desktop: "-", script: "-", blockers: "deferred: web phase (no script yet)"}
+  W-05: {status: "NOT RUN", client: web, gate: "-", debian_desktop: "-", script: "-", blockers: "deferred: web phase (no script yet)"}
+  W-06: {status: "NOT RUN", client: web, gate: "-", debian_desktop: "-", script: "-", blockers: "deferred: web phase (no script yet)"}
+  W-07: {status: "NOT RUN", client: web, gate: "-", debian_desktop: "-", script: "-", blockers: "deferred: web phase (no script yet)"}
+  W-08: {status: "NOT RUN", client: web, gate: "-", debian_desktop: "-", script: "-", blockers: "deferred: web phase (no script yet)"}
+  X-01: {status: "PARTIAL", client: both, gate: "D", debian_desktop: "FAIL", script: "03-RCP-Spike/tests/scenarios/S_X-01_ComputeContract_GROK_V1.ps1", blockers: "no result-kind enum in compute.api (typed contract gap); web deferred"}
+  X-02: {status: "NOT RUN", client: both, gate: "D", debian_desktop: "FAIL", script: "03-RCP-Spike/tests/scenarios/S_X-02_StaleResult_GROK_V1.ps1", blockers: "compute API has no revision (API change needed)"}
+  X-03: {status: "NOT RUN", client: both, gate: "D", debian_desktop: "PASS (precheck)", script: "03-RCP-Spike/tests/scenarios/S_X-03_WriteBack_GROK_V1.ps1", blockers: "state adapter / allow-list not implemented"}
+  X-04: {status: "NOT RUN", client: both, gate: "D", debian_desktop: "PASS (precheck)", script: "03-RCP-Spike/tests/scenarios/S_X-04_SaveUndo_GROK_V1.ps1", blockers: "no path writes engine output into the construction"}
+  X-05: {status: "PARTIAL", client: both, gate: "D", debian_desktop: "PASS (desktop half)", script: "03-RCP-Spike/tests/scenarios/S_X-05_CapabilityArtifacts_GROK_V1.ps1", blockers: "web module does not exist"}
+  X-06: {status: "FAIL", client: both, gate: "D", debian_desktop: "FAIL", script: "03-RCP-Spike/tests/scenarios/S_X-06_TimeoutBadOutput_GROK_V1.ps1", blockers: "BUG-015 (malformed PARI input returns OK with empty text); construction path not integrated"}
+  X-07: {status: "PARTIAL", client: desktop, gate: "-", debian_desktop: "PASS", script: "03-RCP-Spike/tests/scenarios/S_X-07_LeanAbsent_GROK_V1.ps1", blockers: "Windows run pending"}
+  S-01: {status: "NOT RUN", client: both, gate: "D", debian_desktop: "NOT RUN", script: "03-RCP-Spike/tests/scenarios/S_S-01_SchemaCapability_GROK_V1.ps1", blockers: "no Wims activity/submission contract, client or test server"}
+  S-02: {status: "NOT RUN", client: both, gate: "D", debian_desktop: "NOT RUN", script: "03-RCP-Spike/tests/scenarios/S_S-02_SubmitOnce_GROK_V1.ps1", blockers: "no Wims activity/submission contract, client or test server"}
+  S-03: {status: "NOT RUN", client: both, gate: "D", debian_desktop: "NOT RUN", script: "03-RCP-Spike/tests/scenarios/S_S-03_Idempotency_GROK_V1.ps1", blockers: "no Wims activity/submission contract, client or test server"}
+  S-04: {status: "NOT RUN", client: both, gate: "D", debian_desktop: "NOT RUN", script: "03-RCP-Spike/tests/scenarios/S_S-04_OfflineDraftSync_GROK_V1.ps1", blockers: "no Wims activity/submission contract, client or test server"}
+  S-05: {status: "NOT RUN", client: both, gate: "D", debian_desktop: "NOT RUN", script: "03-RCP-Spike/tests/scenarios/S_S-05_BadSchema_GROK_V1.ps1", blockers: "no Wims activity/submission contract, client or test server"}
+  S-06: {status: "NOT RUN", client: both, gate: "-", debian_desktop: "NOT RUN", script: "03-RCP-Spike/tests/scenarios/S_S-06_TokenHidden_GROK_V1.ps1", blockers: "no Wims activity/submission contract, client or test server"}
+  S-07: {status: "NOT RUN", client: both, gate: "-", debian_desktop: "NOT RUN", script: "03-RCP-Spike/tests/scenarios/S_S-07_OefToXWims_GROK_V1.ps1", blockers: "no Wims activity/submission contract, client or test server"}
+  O-01: {status: "NOT RUN", client: infra, gate: "-", debian_desktop: "PASS (precheck)", script: "03-RCP-Spike/tests/scenarios/S_O-01_UpstreamUpdate_GROK_V1.ps1", blockers: "no newer upstream commit selected"}
+  O-02: {status: "NOT RUN", client: desktop, gate: "E", debian_desktop: "FAIL", script: "03-RCP-Spike/tests/scenarios/S_O-02_LicenseInventory_GROK_V1.ps1", blockers: "46 jars without license metadata; human/legal review not recorded"}
+  O-03: {status: "FAIL", client: desktop, gate: "E", debian_desktop: "FAIL", script: "03-RCP-Spike/tests/scenarios/S_O-03_CleanRebuildSbom_GROK_V1.ps1", blockers: "BUG-016 (rebuild not byte-identical: product jars and config.ini differ); no CycloneDX/SPDX"}
+  O-04: {status: "PARTIAL", client: desktop, gate: "-", debian_desktop: "PARTIAL", script: "03-RCP-Spike/tests/scenarios/S_O-04_FailureMessages_GROK_V1.ps1", blockers: "Wims down: no client; user-facing message not designed"}
+  O-05: {status: "NOT RUN", client: desktop, gate: "-", debian_desktop: "PASS (precheck)", script: "03-RCP-Spike/tests/scenarios/S_O-05_ActivityUpgrade_GROK_V1.ps1", blockers: "no activity manifest / versioned activity format"}
+scenario_runs:  # earlier per-run records (kept)
   D-02: {status: PASS, os: Windows}
   D-03: {status: PASS, os: Windows}
   D-04: {status: PARTIAL, os: Windows, note: "panel renders in SWT; keyboard input/focus issues; suite 09 on Windows NOT_RUN"}
@@ -91,6 +139,30 @@ bugs:
     severity: low
     status: OPEN
 
+  - id: BUG-014
+    title: "evalCommand false + error dialog for f(x)=x^2-2x, {{1,2},{3,4}}, f(x)=a x^2-1, 3D Plane(A,B,(1,0,0)) in the RCP product; pinned upstream desktop returns true"
+    component: RCP host / OSGi image (suspected localisation or command resources, see BUG-010/013)
+    severity: high
+    status: OPEN
+    evidence: "03-RCP-Spike/evidence/20261029-linux-scenarios-20261029_171259-grok-bot-vm-419969949/S_P-02_CoreFeatures_GROK_V1.log (P02-ALG-03, ALG-05, G3-03, _DIALOG)"
+  - id: BUG-015
+    title: "PARI engine returns OK with empty text for malformed input factor(( instead of a typed error"
+    component: engines/pari
+    severity: medium
+    status: OPEN
+    evidence: "same run, S_X-06_TimeoutBadOutput_GROK_V1.log X06-04"
+  - id: BUG-016
+    title: "Clean rebuild not byte-identical (11 files: product jars, config.ini)"
+    component: build.sh (jar timestamps)
+    severity: medium
+    status: OPEN
+    evidence: "same run, S_O-03_CleanRebuildSbom_GROK_V1.log O03-03"
+  - id: BUG-017
+    title: "Linux image has no bundled Java; launch.sh falls back to /workspace/AlgoGebra/jdk and a hard-coded image path"
+    component: build.sh / launch.sh
+    severity: medium
+    status: OPEN
+    evidence: "same run, S_D-10_InstallUpgrade_GROK_V1.log D10-01/03"
 open_items:
   - "Linux image still staged from r8 bundles; suite 11 shows the Linux bnd rebuild matches r8 (manifests/class lists) but build.sh does not use it yet"
   - "Run attended Windows suite 09 (D-04 input/focus/clipboard) and suite 10 (strict 3D visual screenshot); do not drive the user's desktop unattended"

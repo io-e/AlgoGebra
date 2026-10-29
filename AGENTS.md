@@ -95,7 +95,7 @@ Installed image: `D:\ALF_ZGit\G1_Geogebra_Migration\bin\GeoGebraPlus-RCP-0.1.0-w
 
 - **PASS:** D-02, D-03, D-05 (3)
 - **PARTIAL:** D-04, P-08 (2)
-- **NOT RUN:** All remaining P (01–07, 09), D (01, 06–10), W (01–08), X (01–07), S (01–07), O (01–05) — 40 scenarios
+- **Scenario pack (2026-10-29, Debian desktop run):** 45 scenarios = 3 PASS, 13 PARTIAL, 5 FAIL, 24 NOT RUN (the former 40 NOT RUN of P 01–07, D 01/06–10, W, X, S, O). Details and evidence: `03-RCP-Spike/tests/SCENARIOS_TRACKING_GROK_V1.md`, `states.yaml` `scenarios:`.
 
 ### Gates
 

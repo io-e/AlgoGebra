@@ -15,6 +15,9 @@ Modelled on Claude's WIMS4win pack (`tests-win_ALF/*_CLAUDE_V1.ps1`, `lib/TestFr
 - `results/` — **git-ignored** local output. Run_All writes `results/<yyyyMMdd_HHmmss>-<host>/`; single suites write `results/` (or `RESULTS_DIR`).
 - `../evidence/<date>-<os>-<who>-<runid>/` — versioned, immutable evidence of reviewed runs with `MANIFEST_GROK_V1.tsv` (sha256). Export with `-ExportEvidence <name>`. Archive routine full logs as CI artifacts or keep them locally by run ID.
 
+## Scenario pack (spec section 5)
+`scenarios/S_<ID>_<Short>_GROK_V1.ps1` (33 scripts) + `scenarios/lib/Scenario_GROK_V1.ps1` + `scenarios/fixtures/`. One script per spec scenario of the desktop client and shared core; D-02..D-05 map to suites 08/11/09/10; W-01..W-08 are listed only (deferred: web phase). `Run_All_GROK_V1.ps1 -Scenarios | -Gate A..E | -Only <ids>`. Full list, statuses, blockers and evidence: **`SCENARIOS_TRACKING_GROK_V1.md`**. Product-side test hook: `-Dggbplus.scenario=<file>` only (off by default).
+
 ## Prerequisites (Windows)
 | Item | Requirement / hint |
 |---|---|
@@ -44,6 +47,7 @@ D-ENG-02: do not download/install engines without the user's approval. A missing
 cd 03-RCP-Spike\tests
 pwsh -File 01_Test_Engine_Discovery_GROK_V1.ps1      # one suite
 pwsh -File Run_All_GROK_V1.ps1 [-SkipRcp] [-SkipUi] [-WithBuild] [-WithBaseline] [-ExportEvidence <name>]   # -> results\<runid>\
+pwsh -File Run_All_GROK_V1.ps1 -Scenarios | -Gate A | -Only P-02,D-06   # scenario scripts
 ```
 Same command on Debian (`pwsh -File Run_All_GROK_V1.ps1 -WithBuild -WithBaseline`). Run_All refuses an empty suite list (exit 2), counts a suite
 without summary as FAIL, and reports BAIL separately (Codex 689d4b4). 09/10 drive the desktop: on Windows run them only in an attended session.

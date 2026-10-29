@@ -29,3 +29,5 @@ Mutable run output goes to `tests/results/<runid>/` (git-ignored); export a revi
 | `20261029-linux-debian-grokbot-bug006-20261029_160937-grok-bot-vm-419969949` | Debian Run_All -SkipUi after the BUG-006 fix, 101/0/3 |
 
 Files here are stored byte-exact (`.gitattributes`: `-text`), so the manifest hashes hold on Windows checkouts.
+
+- `20261029-linux-scenarios-20261029_171259-grok-bot-vm-419969949/` — Debian 13 / Xvfb, `Run_All_GROK_V1.ps1 -Scenarios`, 33 scenario scripts: 144 pass / 14 fail / 38 skip (see `tests/SCENARIOS_TRACKING_GROK_V1.md`).

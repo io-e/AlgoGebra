@@ -24,6 +24,8 @@
 6. **BUG-006 FIXED (user decision):** PARI rejects `system`, `extern`, `externstr`, `fileextern`, `install`, `eval` before gp starts (`02-Cdc/Decisions_PARI_Forbidden_GROK_V1.md`). **The r9 image predates this filter: rebuild (r10) with build.ps1 + install-product.ps1**, then rerun suites 05 and 08 and export them with `-ExportEvidence codex-r10`. Pending user confirmation of the `eval` block.
 7. **BUG-008 is FIXED:** r9 was rebuilt and suite 08 passed. The image now changes (BUG-006), so a new rebuild is needed (item 6).
 8. **Results tracking:** `03-RCP-Spike/tests/results/` is no longer tracked; runs go to `results/<runid>/`. Your earlier Windows results are preserved byte-exact in `03-RCP-Spike/evidence/20261029-windows-codex-689d4b4/` and `.../20261029-windows-codex-r9-e3e8a82/` (sha256 manifests). Export reviewed runs with `-ExportEvidence <name>` and commit the folder.
+9. **Scenario pack (new, 2f4a352):** 33 scripts in `03-RCP-Spike/tests/scenarios/` (`S_<ID>_*_GROK_V1.ps1`), tracking in `03-RCP-Spike/tests/SCENARIOS_TRACKING_GROK_V1.md`. Needs an image rebuilt from this commit (**r10**: opt-in scenario hook + BUG-006 filter) and the pinned upstream `desktop.tar` extracted (`GGB_BASELINE_LIB`). Headless-safe first: `Run_All_GROK_V1.ps1 -Only D-06,D-07,D-08,D-09,D-10,O-01,O-02,O-03,X-02,X-05,X-06,S-01,P-08`; UI scenarios (P-01..P-07, X-01/03/04/07, O-04/05) only in an attended session or a test VM. P-06 on Windows is SKIP (needs a firewall rule). Export with `-ExportEvidence windows-codex-scenarios`.
+10. **Eval:** the owner confirmed the eval block on 2026-10-29 ("Keep eval blocked").
 
 ## How to run the pack (Windows)
 ```powershell
