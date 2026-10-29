@@ -1,13 +1,13 @@
 # Suite: 04_Gnuplot
-# Started: 2026-10-29T15:03:09.8584392+01:00
-# Host: grok-bot-vm-419969949 / Debian GNU/Linux 13 (trixie) / pwsh 7.6.9
+# Started: 2026-10-29T15:37:05.8678708+01:00
+# Host: SHADOW-TB64BO9R / Microsoft Windows 10.0.26100 / pwsh 7.6.9
 
-ok 1 - [P0] GNU-engine-[plot sin(x)] :: kind=ART size=28230 dim=800x600
-ok 2 - [P1] GNU-cleanup-[plot sin(x)] :: deletedAfterClose=true path=/tmp/algogebra-gnuplot-1678793741521532589/plot.png
-ok 3 - [P0] GNU-engine-[plot sin(x), cos(x)] :: kind=ART size=44643 dim=800x600
-ok 4 - [P1] GNU-cleanup-[plot sin(x), cos(x)] :: deletedAfterClose=true path=/tmp/algogebra-gnuplot-5464742397203739277/plot.png
-ok 5 - [P0] GNU-engine-[splot x*y] :: kind=ART size=30459 dim=800x600
-ok 6 - [P1] GNU-cleanup-[splot x*y] :: deletedAfterClose=true path=/tmp/algogebra-gnuplot-8847707560700920635/plot.png
+ok 1 - [P0] GNU-engine-[plot sin(x)] :: kind=ART size=27119 dim=800x600
+ok 2 - [P1] GNU-cleanup-[plot sin(x)] :: deletedAfterClose=true path=C:\Users\Shadow\AppData\Local\Temp\algogebra-gnuplot-4813433076687233653\plot.png
+ok 3 - [P0] GNU-engine-[plot sin(x), cos(x)] :: kind=ART size=43434 dim=800x600
+ok 4 - [P1] GNU-cleanup-[plot sin(x), cos(x)] :: deletedAfterClose=true path=C:\Users\Shadow\AppData\Local\Temp\algogebra-gnuplot-7025928779662377186\plot.png
+ok 5 - [P0] GNU-engine-[splot x*y] :: kind=ART size=29584 dim=800x600
+ok 6 - [P1] GNU-cleanup-[splot x*y] :: deletedAfterClose=true path=C:\Users\Shadow\AppData\Local\Temp\algogebra-gnuplot-17464827572088858359\plot.png
 
 PASS: 6 FAIL: 0 SKIP: 0
-# CSV: /workspace/AlgoGebra/repo/03-RCP-Spike/tests/results/04_Gnuplot_GROK_V1.csv
+# CSV: D:\ALF_Agents\G1_Geogebra_Migration\03-RCP-Spike\tests\results\04_Gnuplot_GROK_V1.csv

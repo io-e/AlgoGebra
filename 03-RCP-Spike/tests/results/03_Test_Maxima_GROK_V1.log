@@ -1,6 +1,6 @@
 # Suite: 03_Maxima
-# Started: 2026-10-29T15:03:07.9088977+01:00
-# Host: grok-bot-vm-419969949 / Debian GNU/Linux 13 (trixie) / pwsh 7.6.9
+# Started: 2026-10-29T15:36:58.1613895+01:00
+# Host: SHADOW-TB64BO9R / Microsoft Windows 10.0.26100 / pwsh 7.6.9
 
 ok 1 - [P1] MAX-01-direct :: got=2*x*cos(x^2)
 ok 2 - [P0] MAX-01-engine :: got=2*x*cos(x^2)
@@ -18,4 +18,4 @@ ok 13 - [P1] MAX-07-direct :: got=3*5*17*257*641*65537*6700417
 ok 14 - [P0] MAX-07-engine :: got=3*5*17*257*641*65537*6700417
 
 PASS: 14 FAIL: 0 SKIP: 0
-# CSV: /workspace/AlgoGebra/repo/03-RCP-Spike/tests/results/03_Maxima_GROK_V1.csv
+# CSV: D:\ALF_Agents\G1_Geogebra_Migration\03-RCP-Spike\tests\results\03_Maxima_GROK_V1.csv

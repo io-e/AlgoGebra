@@ -1,8 +1,8 @@
 suite,num,id,status,priority,detail,ts
-01_Engine_Discovery,1,DISC-pari-path,PASS,P0,"path=/usr/bin/gp",2026-10-29T15:03:05.7439367+01:00
-01_Engine_Discovery,2,DISC-maxima-path,PASS,P0,"path=/usr/bin/maxima",2026-10-29T15:03:05.7503725+01:00
-01_Engine_Discovery,3,DISC-gnuplot-path,PASS,P0,"path=/usr/bin/gnuplot",2026-10-29T15:03:05.7545679+01:00
-01_Engine_Discovery,4,DISC-java-21,PASS,P0,"openjdk version "21.0.13" 2026-10-20 LTS",2026-10-29T15:03:05.7835403+01:00
-01_Engine_Discovery,5,DISC-engine-pari-spawn,PASS,P0,"kind=OK 125ms",2026-10-29T15:03:05.9251967+01:00
-01_Engine_Discovery,6,DISC-engine-maxima-spawn,PASS,P0,"kind=OK 148ms",2026-10-29T15:03:06.0750533+01:00
-01_Engine_Discovery,7,DISC-engine-gnuplot-spawn,PASS,P0,"kind=ART 153ms",2026-10-29T15:03:06.2298271+01:00
+01_Engine_Discovery,1,DISC-pari-path,PASS,P0,"path=C:\Program Files (x86)\Pari64-2-19-0\gp.exe",2026-10-29T15:36:52.4235741+01:00
+01_Engine_Discovery,2,DISC-maxima-path,PASS,P0,"path=C:\maxima-5.49.0\bin\maxima.bat",2026-10-29T15:36:52.6668970+01:00
+01_Engine_Discovery,3,DISC-gnuplot-path,PASS,P0,"path=C:\maxima-5.49.0\gnuplot\bin\gnuplot.exe",2026-10-29T15:36:52.6871859+01:00
+01_Engine_Discovery,4,DISC-java-21,PASS,P0,"openjdk version "21.0.12.1" 2026-08-18 LTS",2026-10-29T15:36:52.7777805+01:00
+01_Engine_Discovery,5,DISC-engine-pari-spawn,PASS,P0,"kind=OK 342ms",2026-10-29T15:36:53.1458450+01:00
+01_Engine_Discovery,6,DISC-engine-maxima-spawn,PASS,P0,"kind=OK 484ms",2026-10-29T15:36:53.6331361+01:00
+01_Engine_Discovery,7,DISC-engine-gnuplot-spawn,PASS,P0,"kind=ART 485ms",2026-10-29T15:36:54.1211711+01:00

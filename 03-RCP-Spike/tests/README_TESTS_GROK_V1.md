@@ -81,7 +81,9 @@ expected vs actual, log path (`results/…`). A Gradle/javac build success is no
 ## PowerShell pack results (2026-10-29)
 | Run | 01 | 02 | 03 | 04 | 05 | 06 | 07 | 08 | 09 | 10 | 11 | 12 | 13 |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| Windows, Codex 689d4b4 (temporary PATH) | 75/0/3 total for 01-07 ||||||| SKIP | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN |
+| Windows, Codex e3e8a82 (r9, temporary PATH) | 7/0/0 | 10/0/0 | 14/0/0 | 6/0/0 | 14/0/0 | 9/0/0 | 15/0/3 | 7/0/0 | NOT RUN (attended UI) | NOT RUN (attended UI) | NOT RUN (Bnd CLI absent) | 13/0/0 | 3/2/0 (known desktop locale failure) |
 | Debian, pwsh 7.6.9, 15:03-15:45 | 7/0/0 | 10/0/0 | 14/0/0 | 6/0/0 | 14/0/0 | 9/0/0 | 15/0/3 | 7/0/0 | 7/17/0 (D-04) | 5/0/0 | 62/0/2 | 13/0/0 | 5/0/0 |
+
+Windows evidence (2026-10-29): R9 was rebuilt and installed at `D:\ALF_ZGit\G1_Geogebra_Migration\bin\GeoGebraPlus-RCP-0.1.0-win32-x86_64-r9`. `Run_All_GROK_V1.ps1 -SkipUi` returned **95 PASS, 0 FAIL, 3 SKIP** for suites 01-08 and 12; suite 08 confirmed 50/50 resolution, all three engines available, GIAC CAS, and JOGL 3D initialization. `test-engines.ps1` also passed the PARI factorization, Maxima derivative, and Gnuplot PNG checks. Suite 13 was run separately: common-jre had 6,526 existing test results (6,514 pass, 12 skipped; Gradle task `UP-TO-DATE`), while desktop executed 1,090 tests and failed only the known locale-sensitive `CallJavaScriptTest.testEval` (1,088 pass, 1 fail, 1 skipped). Suites 09/10 were not run because they drive the attended desktop; suite 11 was not run because no Bnd CLI JAR is installed. Run summary: `results/Run_All_20261029_153650_GROK_V1.csv`; suite 13 summary: `results/13_GeoGebra_Baseline_GROK_V1.csv`.
 
 ps1 vs former sh (14:31, 0 FAIL both): 01 7 vs 10 (no version checks), 04 6 vs 8, 05 14 vs 16, 06 9 vs 11; 02, 03, 07, 08 equal.

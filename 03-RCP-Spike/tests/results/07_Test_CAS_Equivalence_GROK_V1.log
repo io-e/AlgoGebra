@@ -1,6 +1,6 @@
 # Suite: 07_CAS_Equivalence
-# Started: 2026-10-29T15:03:21.0029783+01:00
-# Host: grok-bot-vm-419969949 / Debian GNU/Linux 13 (trixie) / pwsh 7.6.9
+# Started: 2026-10-29T15:37:29.2194780+01:00
+# Host: SHADOW-TB64BO9R / Microsoft Windows 10.0.26100 / pwsh 7.6.9
 
 ok 1 - [P1] EQ-01-giac :: got=x^2+2*x+1
 ok 2 - [P1] EQ-01-pari :: got=x^2+2*x+1
@@ -22,4 +22,4 @@ ok 17 - [P1] EQ-06-pari # SKIP not applicable
 ok 18 - [P1] EQ-06-maxima :: got=x+1
 
 PASS: 15 FAIL: 0 SKIP: 3
-# CSV: /workspace/AlgoGebra/repo/03-RCP-Spike/tests/results/07_CAS_Equivalence_GROK_V1.csv
+# CSV: D:\ALF_Agents\G1_Geogebra_Migration\03-RCP-Spike\tests\results\07_CAS_Equivalence_GROK_V1.csv

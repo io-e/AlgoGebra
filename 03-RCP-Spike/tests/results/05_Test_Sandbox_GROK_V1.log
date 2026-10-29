@@ -1,21 +1,21 @@
 # Suite: 05_Sandbox
-# Started: 2026-10-29T15:03:11.1020912+01:00
-# Host: grok-bot-vm-419969949 / Debian GNU/Linux 13 (trixie) / pwsh 7.6.9
+# Started: 2026-10-29T15:37:08.8585986+01:00
+# Host: SHADOW-TB64BO9R / Microsoft Windows 10.0.26100 / pwsh 7.6.9
 
-ok 1 - [P0] SBX-01-pari-reject :: cmd=write("/tmp/algogebra_sbx_pari",1) -> ERR ExternalComputeException: PARI/GP command contains a WIMS-blocked term: write
+ok 1 - [P0] SBX-01-pari-reject :: cmd=write("C:/Users/Shadow/AppData/Local/Temp/algogebra_sbx_pari",1) -> ERR ExternalComputeException: PARI/GP command contains a WIMS-blocked term: write
 ok 2 - [P0] SBX-02-pari-noexec :: cmd=system("id") -> OK
 ok 3 - [P0] SBX-03-pari-reject :: cmd=plot(x=0,1,x) -> ERR ExternalComputeException: PARI/GP command contains a WIMS-blocked term: plot
 ok 4 - [P0] SBX-04-maxima-reject :: cmd=system("id") -> ERR ExternalComputeException: Maxima command contains a WIMS-blocked command: system
-ok 5 - [P0] SBX-05-maxima-reject :: cmd=load("/tmp/x.mac") -> ERR ExternalComputeException: Maxima command contains a WIMS-blocked term: load
-ok 6 - [P0] SBX-06-maxima-reject :: cmd=with_stdout("/tmp/algogebra_sbx_max",print(1)) -> ERR ExternalComputeException: Maxima command contains a WIMS-blocked command: with_stdout
+ok 5 - [P0] SBX-05-maxima-reject :: cmd=load("C:/Users/Shadow/AppData/Local/Temp/x.mac") -> ERR ExternalComputeException: Maxima command contains a WIMS-blocked term: load
+ok 6 - [P0] SBX-06-maxima-reject :: cmd=with_stdout("C:/Users/Shadow/AppData/Local/Temp/algogebra_sbx_max",print(1)) -> ERR ExternalComputeException: Maxima command contains a WIMS-blocked command: with_stdout
 ok 7 - [P0] SBX-07-maxima-noexec :: cmd=:lisp (run-program "id" nil) -> OK
 ok 8 - [P0] SBX-08-gnuplot-reject :: cmd=system "id" -> ERR ExternalComputeException: Gnuplot system and shell commands are blocked
-ok 9 - [P0] SBX-09-gnuplot-reject :: cmd=set output "/tmp/algogebra_sbx_gp.png" -> ERR ExternalComputeException: Gnuplot file, terminal, and output redirection commands are blocked
+ok 9 - [P0] SBX-09-gnuplot-reject :: cmd=set output "C:/Users/Shadow/AppData/Local/Temp/algogebra_sbx_gp.png" -> ERR ExternalComputeException: Gnuplot file, terminal, and output redirection commands are blocked
 ok 10 - [P0] SBX-10-gnuplot-reject :: cmd=!id -> ERR ExternalComputeException: Gnuplot shell escape commands beginning with ! are blocked
-ok 11 - [P0] SBX-11-pari-timeout :: budget=3s elapsed=3104ms -> ExternalComputeException: pari exceeded timeout 3000 ms; process tree was killed; partial stdout was captured
-ok 12 - [P0] SBX-12-maxima-timeout :: budget=3s elapsed=3136ms -> ExternalComputeException: maxima exceeded timeout 3000 ms; process tree was killed; partial stdout was captured
-ok 13 - [P0] SBX-13-maxima-noexec :: cmd=:lisp (let ((s (open "/tmp/algogebra_sbx_lisp" :direction :output :if-exists :supersede))) (princ 1 s) (close s)) -> OK
+ok 11 - [P0] SBX-11-pari-timeout :: budget=3s elapsed=3344ms -> ExternalComputeException: pari exceeded timeout 3000 ms; process tree was killed; partial stdout was captured
+ok 12 - [P0] SBX-12-maxima-timeout :: budget=3s elapsed=3284ms -> ExternalComputeException: maxima exceeded timeout 3000 ms; process tree was killed; partial stdout was captured
+ok 13 - [P0] SBX-13-maxima-noexec :: cmd=:lisp (let ((s (open "C:/Users/Shadow/AppData/Local/Temp/algogebra_sbx_lisp" :direction :output :if-exists :supersede))) (princ 1 s) (close s)) -> OK
 ok 14 - [P0] SBX-99-no-files-written :: 
 
 PASS: 14 FAIL: 0 SKIP: 0
-# CSV: /workspace/AlgoGebra/repo/03-RCP-Spike/tests/results/05_Sandbox_GROK_V1.csv
+# CSV: D:\ALF_Agents\G1_Geogebra_Migration\03-RCP-Spike\tests\results\05_Sandbox_GROK_V1.csv
