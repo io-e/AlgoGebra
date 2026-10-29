@@ -12,11 +12,22 @@ function Get-JUnit([string]$Dir) { $t = 0; $f = 0; $e = 0; $s = 0; $failed = @()
         $t += [int]$ts.tests; $f += [int]$ts.failures; $e += [int]$ts.errors; $s += [int]$ts.skipped
         foreach ($c in $ts.testcase) { if ($c.failure -or $c.error) { $failed += "$($c.classname).$($c.name)" } } }
     return [pscustomobject]@{ Tests = $t; Fail = $f; Err = $e; Skip = $s; Pass = $t - $f - $e - $s; Failed = $failed } }
-$gw = if ($IsWindows) { Join-Path $src 'gradlew.bat' } else { Join-Path $src 'gradlew' }
+$repo = Split-Path $src -Parent
+$gwName = if ($IsWindows) { 'gradlew.bat' } else { 'gradlew' }
+$gw = Join-Path $src $gwName
+if (-not (Test-Path $gw)) { $gw = Join-Path $repo $gwName }
+if (-not (Test-Path $gw)) { Exit-Bail "Gradle wrapper not found under source or repository root: $gw" }
 foreach ($m in @(@{ id = 'common-jre'; proj = 'shared'; task = ':common-jre:test'; dir = 'shared/common-jre'; win = 'n/a' }, @{ id = 'desktop'; proj = 'desktop'; task = ':desktop:test'; dir = 'desktop/desktop'; win = '1090 tests, 1 locale failure (CallJavaScriptTest.testEval), 1 skipped' })) {
     $log = Join-Path $script:Res "13_$($m.id)_gradle.log"
-    if ($env:GGB_SKIP_GRADLE -ne '1') { Push-Location (Join-Path $src $m.proj); & $gw $m.task --continue --console=plain *> $log; $rc = $LASTEXITCODE; Pop-Location } else { $rc = 'skipped' }
+    $project = Join-Path $src $m.proj
+    if (-not (Test-Path $project)) { Exit-Bail "Gradle project directory not found: $project" }
+    if ($env:GGB_SKIP_GRADLE -ne '1') {
+        Push-Location $repo
+        try { & $gw -p $project $m.task --continue --console=plain *> $log; $rc = $LASTEXITCODE }
+        finally { Pop-Location }
+    } else { $rc = $null; Skip-Test "GGB-$($m.id)-gradle-execution" 'GGB_SKIP_GRADLE=1; counting existing XML only, not a fresh run' 'P0' }
     $j = Get-JUnit (Join-Path $src "$($m.dir)/build/test-results")
-    Test-Ok "GGB-$($m.id)-ran" ($j.Tests -gt 0) "gradle rc=$rc tests=$($j.Tests) log=$log" 'P0'
-    Test-Ok "GGB-$($m.id)-no-failures" ($j.Tests -gt 0 -and $j.Fail + $j.Err -eq 0) "passed=$($j.Pass) failures=$($j.Fail) errors=$($j.Err) skipped=$($j.Skip) failed=[$($j.Failed -join ', ')] windows Audit_E: $($m.win)" 'P0' }
+    if ($null -ne $rc) { Test-Ok "GGB-$($m.id)-ran" ($rc -eq 0 -and $j.Tests -gt 0) "gradle rc=$rc tests=$($j.Tests) log=$log" 'P0' }
+    $testRunOk = ($null -eq $rc -or $rc -eq 0)
+    Test-Ok "GGB-$($m.id)-no-failures" ($testRunOk -and $j.Tests -gt 0 -and $j.Fail + $j.Err -eq 0) "gradle rc=$rc passed=$($j.Pass) failures=$($j.Fail) errors=$($j.Err) skipped=$($j.Skip) failed=[$($j.Failed -join ', ')] windows Audit_E: $($m.win)" 'P0' }
 Complete-TestSuite
