@@ -22,6 +22,8 @@ public final class MaximaEngineTests {
                 "Maxima parser should preserve multiple output prompts in one request");
         assertTrue(MaximaEngine.parseOutput("(%i1) x;\n(%o1) 1.23b-4\n(%i2) quit();\n")
                 .equals("1.23E-4"), "Maxima parser should normalize b-exponents");
+        assertTrue(MaximaEngine.parseOutput("(%i1) [X, x];\n(%o1) [X, x]\n(%i2) quit();\n")
+                .equals("X, x"), "Maxima parser must preserve case-sensitive symbol names");
         assertRejected(new MaximaEngine(), "system(\"calc\")", "system filter");
         assertRejected(new MaximaEngine(), "plot2d(sin(x),[x,-1,1])", "plot filter");
 

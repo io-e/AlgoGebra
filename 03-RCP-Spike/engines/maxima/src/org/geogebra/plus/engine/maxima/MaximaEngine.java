@@ -144,7 +144,7 @@ public final class MaximaEngine extends SubprocessEngine {
 
     private static String normalizeOutput(String output) {
         String value = output.replace('%', ' ').replace('\n', ' ').replace('\t', ' ')
-                .toLowerCase(Locale.ROOT).replaceAll("\\s+", " ").strip();
+                .replaceAll("\\s+", " ").strip();
         value = removeOuterBrackets(value);
         Matcher exponent = Pattern.compile("(?i)(?<=\\d)b(?=-|\\d)").matcher(value);
         value = exponent.replaceAll("E");
