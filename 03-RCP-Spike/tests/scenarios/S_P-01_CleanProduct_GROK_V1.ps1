@@ -12,7 +12,10 @@ $left = @(Get-Content (Join-Path $clean 'configuration/org.eclipse.equinox.simpl
 Test-Ok 'P01-01-clean-profile-has-no-optional-extension' ($left.Count -eq 0) "clean profile copy=$clean; removed=[$($opt -join ', ')]; left=[$($left -join '; ')]" 'P0'
 $why = Test-UiPrerequisites; if ($why) { Exit-Bail $why }
 $script:UiDisplay = ':91'; Start-UiDisplay
-$r = Invoke-ProductScenario 'S_P-01_ui' "NAMES`tP01-names2d`nNAMES3`tP01-names3d`nTOOLS`tP01-tools`nJAVA`tP01-env"
+# P01-08: guarded screenshot taken while the product is still running (scenario hook delayed 20 s so the window stays up).
+$script:P01Shot = $null; $script:P01Block = $null
+$onRun = { $script:P01Shot = Save-UiShot 'S_P-01_views'; $script:P01Rect = Get-GgbShellRect; if ($script:UiGuardBlocked) { $script:P01Block = $script:UiGuardBlocked; $script:UiGuardBlocked = $null } }
+$r = Invoke-ProductScenario 'S_P-01_ui' "NAMES`tP01-names2d`nNAMES3`tP01-names3d`nTOOLS`tP01-tools`nJAVA`tP01-env" 180 @{ 'JAVA_TOOL_OPTIONS' = '-Dggbplus.scenarioDelayMs=20000' } -OnRunning $onRun
 $t = $r.Text
 Test-Ok 'P01-02-d02-all-mandatory-resolved' ($t -match 'found=50, ACTIVE=0, RESOLVED=50, unresolved/other=0' -and $t -match 'D-02 PASS' -and $t -notmatch 'UNRESOLVED ') (([regex]::Match($t, 'D-02 D-03-set check:[^\r\n]*')).Value) 'P0'
 Test-Ok 'P01-03-2d-view-open' ($t -match 'D-04 GeoGebraPanel embedded in SWT_AWT shell' -and $t -notmatch 'EMBEDDING FAILED') 'GeoGebraPanel (algebra + graphics + input) embedded' 'P0'
@@ -22,6 +25,9 @@ Test-Ok 'P01-06-ui-api-reachable' ($r.Scn['P01-names3d'].St -eq 'OK' -and $r.Scn
 $miss = [regex]::Matches($t, '(ClassNotFoundException|NoClassDefFoundError|MissingResourceException)[^\r\n]*') | ForEach-Object Value | Select-Object -Unique
 Test-Ok 'P01-07-no-missing-class-or-resource' ($miss.Count -eq 0) "[$($miss -join ' | ')] log=$($r.Log)" 'P1'
 # Screenshot is guarded (GeoGebraPlus foreground + window rect only); Codex r11 run 20261029_174320 captured the browser editor -> invalid.
-$shot = Save-UiShot 'S_P-01_views'; if ($script:UiGuardBlocked) { Block-Test 'P01-08-screenshot-of-geogebra' $script:UiGuardBlocked 'P1'; $script:UiGuardBlocked = $null } else { Test-Ok 'P01-08-screenshot-of-geogebra' (Test-Path $shot) "shot=$shot (GeoGebraPlus window rect)" 'P1' }; Stop-UiDisplay; Remove-Item $clean -Recurse -Force -ErrorAction SilentlyContinue
+if ($script:P01Block) { Block-Test 'P01-08-screenshot-of-geogebra' $script:P01Block 'P1' }
+elseif (-not $script:P01Shot) { Test-Ok 'P01-08-screenshot-of-geogebra' $false 'product never reported 3D view initialized; no screenshot taken' 'P1' }
+else { Test-Ok 'P01-08-screenshot-of-geogebra' (Test-Path $script:P01Shot) "shot=$($script:P01Shot) window=$($script:P01Rect.W)x$($script:P01Rect.H) (GeoGebraPlus window rect, taken while running)" 'P1' }
+Stop-UiDisplay; Remove-Item $clean -Recurse -Force -ErrorAction SilentlyContinue
 Skip-Blocked 'P01-W-web-client' 'deferred: web phase (Gate C, W-01/W-02)'
 Complete-TestSuite

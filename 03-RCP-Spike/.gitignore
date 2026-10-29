@@ -13,3 +13,5 @@ logs/*.err
 # the RCP process was behind an unrelated foreground window when Robot ran.
 evidence/rcp-20261028-234616-37212-6a47ee6c.png
 evidence/rcp-20261028-234928-22368-f5f609ee.png
+# Bnd CLI cache for suite 11 (downloaded + SHA-256 verified by 11_Test_Bundle_Build_GROK_V1.ps1)
+tests/tools/bnd/

@@ -63,6 +63,12 @@ Screenshots are cropped to the GeoGebraPlus window rect, never the full desktop.
 - Linux: the private Xvfb started by the suites counts as opt-in.
 - Guard self-test: `14_Test_UiGuard_GROK_V1.ps1` (safe anywhere; negative cases must be BLOCKED with 0 inputs).
 
+### Windows follow-up (branch `feat/ui-guard-windows`, 2026-10-29)
+- Suite 14 now has Windows G-04 (own WinForms window "GROK guard foreign window <pid>" + fake `ggbplus.runId` java; must be BLOCKED, 0 inputs) and G-05/G-06 (launches `$env:IMAGE`/`-Image`, only with `-AllowForegroundInput`; no keys typed). Every SKIP prints its reason; only processes started by the test are killed.
+- P-01: P01-08 screenshot taken while the product runs.
+- Suite 11: Bnd cached in `tests/tools/bnd/` (git-ignored), SHA-256 `d68703e9...210d` pinned; `BND_NO_DOWNLOAD=1` to forbid download.
+- Suite 13: locked-file pre-flight (BUG-020) -> BLOCKED with the list, nothing killed; `GGB_RERUN_TASKS=1` = `--rerun` on the test task only.
+
 ## Suites and expected status
 | # | Suite | Covers | Expected |
 |---|---|---|---|
