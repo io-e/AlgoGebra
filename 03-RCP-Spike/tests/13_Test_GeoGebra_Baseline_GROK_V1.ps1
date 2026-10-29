@@ -1,6 +1,7 @@
 # GROK_V1 - suite 13 (heavy, opt-in via Run_All -WithBaseline): upstream GeoGebra test baseline at the pinned commit
 # (Gradle :common-jre:test and :desktop:test), JUnit XML counted here and compared with Audit_E (Windows) numbers.
-# Upstream code is never modified. Env: GGB_SOURCE, GGB_SKIP_GRADLE=1 to only count existing XML reports.
+# Upstream code is never modified. Env: GGB_SOURCE, GGB_SKIP_GRADLE=1 to only count existing XML reports,
+# GGB_RERUN_TASKS=1 to force Gradle tasks to execute instead of accepting UP-TO-DATE results.
 . (Join-Path $PSScriptRoot 'lib/TestFramework_GROK_V1.ps1')
 Initialize-TestSuite '13_GeoGebra_Baseline'
 $src = if ($env:GGB_SOURCE) { $env:GGB_SOURCE } elseif ($IsWindows) { 'D:\ALF_ZGit\G1_Geogebra_Migration\source' } else { '/workspace/AlgoGebra/geogebra/source' }
@@ -22,8 +23,10 @@ foreach ($m in @(@{ id = 'common-jre'; proj = 'shared'; task = ':common-jre:test
     $project = Join-Path $src $m.proj
     if (-not (Test-Path $project)) { Exit-Bail "Gradle project directory not found: $project" }
     if ($env:GGB_SKIP_GRADLE -ne '1') {
+        $gradleArgs = @()
+        if ($env:GGB_RERUN_TASKS -eq '1') { $gradleArgs += '--rerun-tasks' }
         Push-Location $repo
-        try { & $gw -p $project $m.task --continue --console=plain *> $log; $rc = $LASTEXITCODE }
+        try { & $gw -p $project $m.task @gradleArgs --continue --console=plain *> $log; $rc = $LASTEXITCODE }
         finally { Pop-Location }
     } else { $rc = $null; Skip-Test "GGB-$($m.id)-gradle-execution" 'GGB_SKIP_GRADLE=1; counting existing XML only, not a fresh run' 'P0' }
     $j = Get-JUnit (Join-Path $src "$($m.dir)/build/test-results")
