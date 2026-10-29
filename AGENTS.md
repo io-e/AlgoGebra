@@ -165,6 +165,12 @@ $env:Path="$env:JAVA_HOME\bin;$env:Path"
 ./gradlew -p source/desktop :desktop:test --no-daemon
 ```
 
+## Testing
+
+Engine + RCP test pack (GROK_V1): `03-RCP-Spike/tests/` — read `03-RCP-Spike/tests/README_TESTS_GROK_V1.md` first.
+Windows/Codex: `pwsh -File 03-RCP-Spike\tests\Run_All_GROK_V1.ps1`; Debian: `./Run_All_GROK_V1.sh`. Shared fixtures,
+TAP + `PASS: n FAIL: n SKIP: n`, exit 0/1/2. Evidence rule below still applies (build success is not evidence).
+
 ## Working conventions
 
 - New study/spec documents go under `02-Cdc/`. Make supersession and status explicit in the document header.

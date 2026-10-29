@@ -1,0 +1,6 @@
+# GROK_V1 id<TAB>command<TAB>expected (expected = direct gp run with the WIMS header + WIMS start/end markers, Debian gp 2.17.2, 2026-10-29)
+PARI-01	factor(2^64-1)	[3,1;5,1;17,1;257,1;641,1;65537,1;6700417,1]
+PARI-02	2^64-1	18446744073709551615
+PARI-03	gcd(12,18)	6
+PARI-04	isprime(2^61-1)	1
+PARI-05	(x+1)^2	x^2+2*x+1
