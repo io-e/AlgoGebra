@@ -3,7 +3,7 @@ project: GeoGebraPlus / AlgoGebra RCP
 geogebra_pin: 375db7faf5407390bb322165f2414415da8faeda
 geogebra_version: 5.4.934.0
 repo: https://github.com/io-e/AlgoGebra
-updated: 2026-10-29T17:40+01:00
+updated: 2026-10-29T19:10+01:00
 
 branches:
   feat/external-engines: {last_tested_code: e3e8a82, note: "Evidence/docs commits follow this Windows-tested code revision; see git log for current branch tip"}
@@ -23,7 +23,7 @@ gates:
 scenarios:
   # GROK_V1 2026-10-29: all 45 spec scenarios. status = spec-level (reviewed); debian_desktop = script result in evidence run.
   _run: {evidence: 03-RCP-Spike/evidence/20261029-linux-scenarios-20261029_171259-grok-bot-vm-419969949, tracking: 03-RCP-Spike/tests/SCENARIOS_TRACKING_GROK_V1.md, counts: {'PARTIAL': 13, 'FAIL': 5, 'NOT RUN': 24, 'PASS': 3}}
-  P-01: {status: "PARTIAL", client: both, gate: "-", debian_desktop: "PASS", script: "03-RCP-Spike/tests/scenarios/S_P-01_CleanProduct_GROK_V1.ps1", blockers: "web: deferred: web phase"}
+  P-01: {status: "PARTIAL", client: both, gate: "-", debian_desktop: "PASS", windows_r11: "INVALID", script: "03-RCP-Spike/tests/scenarios/S_P-01_CleanProduct_GROK_V1.ps1", blockers: "web: deferred: web phase; Windows r11 result INVALID (Codex run 20261029_174320-SHADOW-TB64BO9R: screenshot captured the user's browser editor, not GeoGebra) - re-run with the foreground guard (branch feat/ui-foreground-guard)"}
   P-02: {status: "FAIL", client: both, gate: "A", debian_desktop: "FAIL", script: "03-RCP-Spike/tests/scenarios/S_P-02_CoreFeatures_GROK_V1.ps1", blockers: "BUG-014 (3 divergences: f(x)=x^2-2x, m={{1,2},{3,4}}, 3D Plane(A,B,(1,0,0)): evalCommand false + error dialog in product, true in baseline); web deferred"}
   P-03: {status: "PARTIAL", client: both, gate: "A", debian_desktop: "PARTIAL", script: "03-RCP-Spike/tests/scenarios/S_P-03_StandardTools_GROK_V1.ps1", blockers: "3D toolbar not compared (needs a 3D GuiManager directive); web deferred"}
   P-04: {status: "FAIL", client: both, gate: "A", debian_desktop: "FAIL", script: "03-RCP-Spike/tests/scenarios/S_P-04_SaveReopen_GROK_V1.ps1", blockers: "BUG-014: f(x) = a x^2 - 1 not created by evalCommand in the product (so it is absent from the saved file); all other values identical, baseline reads the product file"}
@@ -69,6 +69,19 @@ scenarios:
   O-04: {status: "PARTIAL", client: desktop, gate: "-", debian_desktop: "PARTIAL", script: "03-RCP-Spike/tests/scenarios/S_O-04_FailureMessages_GROK_V1.ps1", blockers: "Wims down: no client; user-facing message not designed"}
   O-05: {status: "NOT RUN", client: desktop, gate: "-", debian_desktop: "PASS (precheck)", script: "03-RCP-Spike/tests/scenarios/S_O-05_ActivityUpgrade_GROK_V1.ps1", blockers: "no activity manifest / versioned activity format"}
 scenario_runs:  # earlier per-run records (kept)
+  windows-codex-r11:
+    date: "2026-10-29T17:43+01:00"
+    by: Codex
+    os: Windows
+    image: "bin/GeoGebraPlus-RCP-0.1.0-win32-x86_64-r11 (fresh build from afa9d1f; r10 lacked ScenarioScript and is preserved)"
+    results_local: "03-RCP-Spike/tests/results/20261029_174320-SHADOW-TB64BO9R/ (not exported, not pushed)"
+    scenarios: {scripts_run: "32/33", pass: 137, fail: 10, skip: 38, excluded: "P-07 (sends mouse/keyboard input; paused until foreground guard)"}
+    non_ui_pack: {pass: 101, fail: 0, skip: 3, gate: MET}
+    suite_08: "7/7 (50/50 bundles resolved, GIAC/JOGL checks)"
+    baseline_13: {common_jre: "6514 pass, 12 skipped", desktop: "1088 pass, 1 fail (CallJavaScriptTest.testEval, BUG-018), 1 skipped"}
+    failures: {P-02: BUG-014, P-04: BUG-014, O-02: "47 JARs lack license metadata", P-08: "older evidence lacks the pin", X-01: BUG-015, X-02: BUG-015, X-06: "BUG-015 (malformed PARI input returns empty success)"}
+    invalid: {P-01: "screenshot captured the user's browser editor (foreground capture) - INVALID, re-run with guard"}
+    paused: "P-07 and suite 09 (D-04) UI input until feat/ui-foreground-guard is merged; re-run only with Run_All -AllowForegroundInput after closing browsers/editors with unsaved work"
   D-02: {status: PASS, os: Windows}
   D-03: {status: PASS, os: Windows}
   D-04: {status: PARTIAL, os: Windows, note: "panel renders in SWT; keyboard input/focus issues; suite 09 on Windows NOT_RUN"}
@@ -163,6 +176,19 @@ bugs:
     severity: medium
     status: OPEN
     evidence: "same run, S_D-10_InstallUpgrade_GROK_V1.log D10-01/03"
+  - id: BUG-018
+    title: "Upstream desktop test CallJavaScriptTest.testEval fails (locale-sensitive) on Windows"
+    component: GeoGebra upstream desktop tests (suite 13 baseline)
+    severity: low
+    status: OPEN
+    evidence: "Codex r11 Windows baseline 2026-10-29: desktop 1088 pass, 1 fail, 1 skipped (local results 20261029_174320-SHADOW-TB64BO9R)"
+  - id: BUG-019
+    title: "UI driver captured/typed into whatever window was foreground (P-01 Windows screenshot = browser editor)"
+    component: 03-RCP-Spike/tests/lib/UiDriver_GROK_V1.ps1
+    severity: high
+    status: FIXED_PENDING_MERGE
+    fix: "branch feat/ui-foreground-guard: Assert-GgbForeground before every click/key/paste/screenshot/pixel read; BLOCKED status; window-rect screenshots; Run_All -AllowForegroundInput opt-in; suite 14_Test_UiGuard"
+    evidence: "Codex r11 run 20261029_174320-SHADOW-TB64BO9R P-01 screenshot; Debian suite 14 6/0/1"
 open_items:
   - "Linux image still staged from r8 bundles; suite 11 shows the Linux bnd rebuild matches r8 (manifests/class lists) but build.sh does not use it yet"
   - "Run attended Windows suite 09 (D-04 input/focus/clipboard) and suite 10 (strict 3D visual screenshot); do not drive the user's desktop unattended"

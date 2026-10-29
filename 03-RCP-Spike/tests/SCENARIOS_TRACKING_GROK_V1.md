@@ -39,10 +39,15 @@ Env: `IMAGE`, `JAVA_HOME` (JDK 21), `GGB_SOURCE` (upstream checkout at the pin),
 
 The former "40 NOT RUN" are now: 24 NOT RUN, 11 PARTIAL, 5 FAIL (D-02/03/05 PASS, D-04 and P-08 PARTIAL unchanged).
 
+## Codex Windows r11 run (2026-10-29 17:43, image r11 built from afa9d1f; r10 preserved)
+32/33 scenario scripts: 137 PASS / 10 FAIL / 38 SKIP; P-07 excluded (input-driven). Non-UI pack 101/0/3 Gate MET; suite 08 7/7.
+Failures: P-02/P-04 (BUG-014), O-02 (47 JARs lack license metadata), P-08 (older evidence lacks pin), X-01/X-02/X-06 (BUG-015).
+**P-01 INVALID** (screenshot = browser editor). P-07 and D-04 paused until the foreground guard is merged. Results local only (not exported).
+
 ## Table
 | ID | Gate | Scenario | Client | Status | Debian desktop | Script | Priority |
 |---|---|---|---|---|---|---|---|
-| P-01 | - | Clean product, no optional extension | both | **PARTIAL** | PASS | `S_P-01_CleanProduct_GROK_V1.ps1` | P0 |
+| P-01 | - | Clean product, no optional extension | both | **PARTIAL** (Windows r11: INVALID) | PASS | `S_P-01_CleanProduct_GROK_V1.ps1` | P0 |
 | P-02 | A | Algebra, CAS, spreadsheet, 2D, 3D | both | **FAIL** | FAIL | `S_P-02_CoreFeatures_GROK_V1.ps1` | P0 |
 | P-03 | A | Standard tools | both | **PARTIAL** | PARTIAL | `S_P-03_StandardTools_GROK_V1.ps1` | P0 |
 | P-04 | A | Open, save, reopen .ggb | both | **FAIL** | FAIL | `S_P-04_SaveReopen_GROK_V1.ps1` | P0 |
@@ -94,6 +99,7 @@ The former "40 NOT RUN" are now: 24 NOT RUN, 11 PARTIAL, 5 FAIL (D-02/03/05 PASS
 - Acceptance (spec): Views open, no missing mandatory bundle.
 - Automation: Image copy with engine/compute.runtime bundles removed from bundles.info; D-02 50/50; 2D+3D views; CAS; no ClassNotFound/MissingResource.
 - Blockers / findings: web: deferred: web phase.
+- **Windows r11 result INVALID** (Codex run `20261029_174320-SHADOW-TB64BO9R`, image r11 from afa9d1f): the screenshot captured the user's browser editor, not GeoGebra (unguarded foreground capture, BUG-019). Must be re-run with the foreground guard (`feat/ui-foreground-guard`); the screenshot is now check P01-08, BLOCKED when GeoGebraPlus is not foreground.
 - Script: `03-RCP-Spike/tests/scenarios/S_P-01_CleanProduct_GROK_V1.ps1`; log: `03-RCP-Spike/evidence/20261029-linux-scenarios-20261029_171259-grok-bot-vm-419969949/S_P-01_CleanProduct_GROK_V1.log`.
 
 ### P-02 — Algebra, CAS, spreadsheet, 2D, 3D

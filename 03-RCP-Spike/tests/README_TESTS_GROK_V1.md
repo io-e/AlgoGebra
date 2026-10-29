@@ -52,6 +52,17 @@ pwsh -File Run_All_GROK_V1.ps1 -Scenarios | -Gate A | -Only P-02,D-06   # scenar
 Same command on Debian (`pwsh -File Run_All_GROK_V1.ps1 -WithBuild -WithBaseline`). Run_All refuses an empty suite list (exit 2), counts a suite
 without summary as FAIL, and reports BAIL separately (Codex 689d4b4). 09/10 drive the desktop: on Windows run them only in an attended session.
 
+## Foreground-window guard (BUG-019, branch `feat/ui-foreground-guard`)
+Every UI driver action (click, keystroke, paste, screenshot, pixel read) calls `Assert-GgbForeground` (lib/UiDriver_GROK_V1.ps1):
+the foreground window must belong to the GeoGebraPlus java/javaw process (`ggbplus.runId`) and have a GeoGebra title. One
+activation attempt is made; otherwise **no input is sent** and the check (and all later checks of that suite) are recorded as
+`BLOCKED` (CSV status BLOCKED, TAP `# SKIP BLOCKED foreground guard: <title/pid>`, counted in SKIP; Run_All shows `guard-BLOCKED=n`).
+Screenshots are cropped to the GeoGebraPlus window rect, never the full desktop.
+- Real desktop (Windows): input-driven UI (suites 09/10, P-01 screenshot) only with `pwsh Run_All_GROK_V1.ps1 -AllowForegroundInput ...`
+  (sets `GGB_UI_ALLOW_FOREGROUND=1`). Without it those checks are BLOCKED. Close browsers/editors with unsaved work first and do not use the PC during the run.
+- Linux: the private Xvfb started by the suites counts as opt-in.
+- Guard self-test: `14_Test_UiGuard_GROK_V1.ps1` (safe anywhere; negative cases must be BLOCKED with 0 inputs).
+
 ## Suites and expected status
 | # | Suite | Covers | Expected |
 |---|---|---|---|

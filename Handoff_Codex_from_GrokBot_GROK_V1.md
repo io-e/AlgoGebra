@@ -15,6 +15,16 @@
 - Windows suite 13: **3 PASS / 2 FAIL** at scenario level. common-jre had 6,526 existing XML results (6,514 passed, 12 skipped; Gradle `UP-TO-DATE`, not freshly executed). Desktop ran 1,090 tests: 1,088 passed, 1 skipped, and the known locale-sensitive `CallJavaScriptTest.testEval` failed. The suite was hardened so a Gradle nonzero exit cannot be reported as a pass.
 - Windows suites 09/10 were not run because they control the attended desktop; suite 11 was not run because the Bnd CLI JAR was unavailable. No Windows suite 13 rerun was counted in the 95/0/3 total.
 
+## Foreground guard — merge first (2026-10-29)
+- Branch **`feat/ui-foreground-guard`** (based on `feat/external-engines` afa9d1f); PR into `feat/external-engines`. Merge it (no conflicts expected), rebuild nothing (test-only change).
+- Contents: `Assert-GgbForeground` in `tests/lib/UiDriver_GROK_V1.ps1`, `BLOCKED` status in `TestFramework`, `Run_All -AllowForegroundInput`, suite `14_Test_UiGuard_GROK_V1.ps1`, P-01 screenshot as guarded check P01-08; P-01 r11 result marked INVALID.
+- Safe re-run of P-01 / D-04 (suite 09) / suite 10 on Windows:
+  1. Close the browser editor and any app with unsaved work; leave the desktop alone during the run.
+  2. `pwsh -File 03-RCP-Spike/tests/14_Test_UiGuard_GROK_V1.ps1` (expect 0 FAIL; Windows-only cases never send input).
+  3. `pwsh -Command "./Run_All_GROK_V1.ps1 -AllowForegroundInput -Only 'P-01','D-04','D-05'"` (pass ids via -Command; -File passes one string).
+  4. Any `guard-BLOCKED` row means GeoGebraPlus was not foreground: no input was sent; fix focus and re-run, do not count it.
+- P-07 stays Linux-only (uses xdotool resize); its Windows keyboard part is covered by suite 09.
+
 ## Next Codex tasks
 1. **D-04 / suite 09:** run on Windows in an attended session to check input/focus, valid function creation, clipboard, and localization/font findings (BUG-004, BUG-009..013). Suite 09 drives the desktop; do not use the PC while it runs.
 2. **Strict 3D / suite 10:** run on Windows in an attended session and capture the visual screenshot. Debian 13's software-OpenGL screenshot passed, but no real-GPU claim is made.
