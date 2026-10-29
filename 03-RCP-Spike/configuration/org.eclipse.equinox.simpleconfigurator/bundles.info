@@ -70,3 +70,8 @@ org.geogebra.plus.desktop.resources,0.1.0,host/build/org.geogebra.plus.desktop.r
 org.geogebra.plus.giac.native,0.1.0,host/build/org.geogebra.plus.giac.native_0.1.0.jar,4,false
 org.geogebra.plus.gluegen.native,0.1.0,host/build/org.geogebra.plus.gluegen.native_0.1.0.jar,4,false
 org.geogebra.plus.jogl.native,0.1.0,host/build/org.geogebra.plus.jogl.native_0.1.0.jar,4,false
+org.geogebra.plus.compute.api,0.1.0,host/build/org.geogebra.plus.compute.api_0.1.0.jar,4,false
+org.geogebra.plus.compute.runtime,0.1.0,host/build/org.geogebra.plus.compute.runtime_0.1.0.jar,4,false
+org.geogebra.plus.engine.pari,0.1.0,host/build/org.geogebra.plus.engine.pari_0.1.0.jar,4,true
+org.geogebra.plus.engine.maxima,0.1.0,host/build/org.geogebra.plus.engine.maxima_0.1.0.jar,4,true
+org.geogebra.plus.engine.gnuplot,0.1.0,host/build/org.geogebra.plus.engine.gnuplot_0.1.0.jar,4,true

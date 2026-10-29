@@ -1,7 +1,7 @@
 [CmdletBinding()]
 param(
     [string]$DestinationRoot = 'D:\ALF_ZGit\G1_Geogebra_Migration\bin',
-    [string]$ProductDirectoryName = 'GeoGebraPlus-RCP-0.1.0-win32-x86_64',
+    [string]$ProductDirectoryName = 'GeoGebraPlus-RCP-0.1.0-win32-x86_64-r8',
     [string]$JavaPluginPattern = 'org.eclipse.justj.openjdk.hotspot.jre.full.win32.x86_64_25.0.4*'
 )
 
@@ -44,6 +44,13 @@ foreach ($relative in $RequiredDirectories) {
     New-Item -ItemType Directory -Path (Join-Path $Target $relative) -Force | Out-Null
 }
 New-Item -ItemType Directory -Path (Join-Path $Target 'configuration') -Force | Out-Null
+$LicenseTarget = Join-Path $Target 'licenses'
+New-Item -ItemType Directory -Path $LicenseTarget -Force | Out-Null
+foreach ($licenseFile in @('WIMS-INTERFACES.md', 'GPL-2.0.txt')) {
+    $licenseSource = Join-Path $SourceRoot ("engines\licenses\" + $licenseFile)
+    if (-not (Test-Path -LiteralPath $licenseSource)) { throw "Missing engine license notice: $licenseSource" }
+    Copy-Item -LiteralPath $licenseSource -Destination $LicenseTarget
+}
 $ProductJre = Join-Path $Target 'jre'
 New-Item -ItemType Directory -Path $ProductJre -Force | Out-Null
 
@@ -121,12 +128,14 @@ Run logs, per-run Equinox configurations/workspaces, and the diagnostic workarou
 
 - GeoGebra version: `5.4.934.0`; source pin: `375db7faf540`.
 - D-03 inputs: $BundleJarCount bundle JARs including the system framework; D-03 installable set is 50 bundles.
-- Eclipse platform JARs: $PlatformJarCount; launcher JARs: $LauncherJarCount; host/fragment JARs: $HostJarCount.
+- Eclipse platform JARs: $PlatformJarCount; launcher JARs: $LauncherJarCount; host/native-fragment/external-engine JARs: $HostJarCount.
 - Native classifier/API JARs: $NativeJarCount (Windows x86_64 payload).
 - Local Java: $($JrePlugin.Name).
 - D-03 installable-bundle SHA-256: $((Get-Content (Join-Path $Target 'bnd-input-set.sha256') -Raw).Trim()).
+- Pari/Maxima/Gnuplot executables are not bundled; each is discovered on PATH. Missing executables raise an explicit unavailable-engine error (no CAS fallback).
+- WIMS-derived Pari/Maxima material is GPL-2.0-or-later; see ``licenses/WIMS-INTERFACES.md`` and ``licenses/GPL-2.0.txt``.
 
-The latest strict-mode run loaded GIAC, GlueGen, and JOGL natives without manual extraction flags or boot delegation; CAS and 3D initialization assertions passed. D-05 remains PARTIAL pending owner review of the GIAC product-local loader replacement and any required strict-mode visual 3D evidence. See the validation report in the study project.
+The latest strict-mode run loaded GIAC, GlueGen, and JOGL natives without manual extraction flags or boot delegation; CAS and 3D initialization assertions passed. D-05 remains PARTIAL pending owner review of the GIAC product-local loader replacement and any required strict-mode visual 3D evidence. See the validation report in the study project. External-engine runtime acceptance needs the corresponding executable installed on PATH.
 "@
 [IO.File]::WriteAllText((Join-Path $Target 'INSTALLATION.md'), $Readme, [Text.UTF8Encoding]::new($false))
 
@@ -146,6 +155,6 @@ $ManifestRows = foreach ($file in $ManifestFiles) {
 Set-Content -LiteralPath (Join-Path $Target 'install-manifest.sha256') -Value ($ManifestRows -join "`r`n") -Encoding UTF8
 
 Write-Host "Installed prebuilt GeoGebraPlus image: $Target" -ForegroundColor Green
-Write-Host "JAR counts: bundles=$BundleJarCount platform=$PlatformJarCount launcher=$LauncherJarCount host=$HostJarCount natives=$NativeJarCount"
+Write-Host "JAR counts: bundles=$BundleJarCount platform=$PlatformJarCount launcher=$LauncherJarCount host/native-fragment/engine=$HostJarCount natives=$NativeJarCount"
 Write-Host "Bundled runtime: $((Join-Path $Target 'jre\bin\java.exe'))"
 Write-Host 'No pre-existing destination files were overwritten or deleted.'

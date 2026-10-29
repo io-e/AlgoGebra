@@ -31,6 +31,12 @@ $JoglFragmentSource = Join-Path $HostDir 'jogl-native'
 $JoglFragmentClasses = Join-Path $OutputDir 'jogl-native-classes'
 $JoglFragmentJar = Join-Path $OutputDir 'org.geogebra.plus.jogl.native_0.1.0.jar'
 $JoglFragmentManifest = Join-Path $JoglFragmentSource 'META-INF\MANIFEST.MF'
+$EngineRoot = Join-Path $Root 'engines'
+$EngineApiJar = Join-Path $OutputDir 'org.geogebra.plus.compute.api_0.1.0.jar'
+$EngineRuntimeJar = Join-Path $OutputDir 'org.geogebra.plus.compute.runtime_0.1.0.jar'
+$PariEngineJar = Join-Path $OutputDir 'org.geogebra.plus.engine.pari_0.1.0.jar'
+$MaximaEngineJar = Join-Path $OutputDir 'org.geogebra.plus.engine.maxima_0.1.0.jar'
+$GnuplotEngineJar = Join-Path $OutputDir 'org.geogebra.plus.engine.gnuplot_0.1.0.jar'
 
 if (-not $JavaHome) {
     if ($env:JAVA_HOME -and (Test-Path (Join-Path $env:JAVA_HOME 'bin\javac.exe'))) {
@@ -125,6 +131,39 @@ foreach ($nativeFragment in @(
     if ($LASTEXITCODE -ne 0) { throw "$($nativeFragment.Label) fragment jar failed with exit code $LASTEXITCODE" }
 }
 
+function Build-EngineBundle([string]$Label, [string]$RelativeSource, [string]$RelativeManifest,
+        [string]$OutputJar, [string[]]$ClasspathFiles) {
+    $sourceDir = Join-Path $EngineRoot $RelativeSource
+    $manifest = Join-Path $EngineRoot $RelativeManifest
+    $classes = Join-Path $OutputDir ($Label + '-classes')
+    if (-not (Test-Path -LiteralPath $manifest)) { throw "Missing $Label bundle manifest: $manifest" }
+    $sources = @(Get-ChildItem -LiteralPath $sourceDir -Filter '*.java' -Recurse -File |
+        ForEach-Object FullName)
+    if ($sources.Count -eq 0) { throw "No $Label Java sources found under $sourceDir" }
+    New-Item -ItemType Directory -Path $classes -Force | Out-Null
+    $javacArgs = @('-encoding', 'UTF-8', '--release', '21')
+    if ($ClasspathFiles.Count -gt 0) {
+        $javacArgs += @('-cp', ($ClasspathFiles -join ';'))
+    }
+    $javacArgs += @('-d', $classes)
+    $javacArgs += $sources
+    & $Javac @javacArgs
+    if ($LASTEXITCODE -ne 0) { throw "$Label javac failed with exit code $LASTEXITCODE" }
+    & $JarTool cfm $OutputJar $manifest -C $classes .
+    if ($LASTEXITCODE -ne 0) { throw "$Label bundle jar failed with exit code $LASTEXITCODE" }
+    Write-Host "Built $OutputJar" -ForegroundColor Green
+}
+
+# The API and shared process runtime are independent OSGi bundles. PARI and
+# Maxima remain separately packaged because their WIMS-derived filters/parsers
+# carry GPL-2.0-or-later provenance. Gnuplot does not use a WIMS C interface.
+Build-EngineBundle 'compute-api' 'api\src' 'api\META-INF\MANIFEST.MF' $EngineApiJar @()
+Build-EngineBundle 'compute-runtime' 'runtime\src' 'runtime\META-INF\MANIFEST.MF' $EngineRuntimeJar @($EngineApiJar)
+$EngineCompileClasspath = @($EngineApiJar, $EngineRuntimeJar) + @($CompileJars.FullName)
+Build-EngineBundle 'engine-pari' 'pari\src' 'pari\META-INF\MANIFEST.MF' $PariEngineJar $EngineCompileClasspath
+Build-EngineBundle 'engine-maxima' 'maxima\src' 'maxima\META-INF\MANIFEST.MF' $MaximaEngineJar $EngineCompileClasspath
+Build-EngineBundle 'engine-gnuplot' 'gnuplot\src' 'gnuplot\META-INF\MANIFEST.MF' $GnuplotEngineJar $EngineCompileClasspath
+
 # Preserve the 50 D-03 inputs as-is. The Equinox framework jar is the system
 # bundle and the new host jar is a separate spike output, not one of the inputs.
 $Installables = @(
@@ -178,6 +217,12 @@ foreach ($nativeFragmentJar in @($GlueGenFragmentJar, $JoglFragmentJar)) {
     $nativeMeta = Read-BundleMetadata $nativeFragmentJar
     $Rows.Add("$($nativeMeta.Bsn),$($nativeMeta.Version),host/build/$([IO.Path]::GetFileName($nativeFragmentJar)),4,false")
     $ProductIds.Add($nativeMeta.Bsn)
+}
+foreach ($engineJar in @($EngineApiJar, $EngineRuntimeJar, $PariEngineJar, $MaximaEngineJar, $GnuplotEngineJar)) {
+    $engineMeta = Read-BundleMetadata $engineJar
+    $autoStart = if ($engineMeta.Bsn -match '\.engine\.(pari|maxima|gnuplot)$') { 'true' } else { 'false' }
+    $Rows.Add("$($engineMeta.Bsn),$($engineMeta.Version),host/build/$([IO.Path]::GetFileName($engineJar)),4,$autoStart")
+    $ProductIds.Add($engineMeta.Bsn)
 }
 
 $SimpleMeta = Read-BundleMetadata $SimpleConfigurator.FullName
@@ -235,5 +280,5 @@ try {
 Set-Content -Path (Join-Path $Root 'bnd-input-set.sha256') -Value "$SetHash  50 D-03 installable bundle inputs (excluding system framework)" -Encoding UTF8
 
 Write-Host "Built $HostJar" -ForegroundColor Green
-Write-Host "Generated bundles.info with 50 unchanged D-03 inputs, $($PlatformJars.Count) platform jars, host bundle, and 4 spike-only fragments."
+Write-Host "Generated bundles.info with 50 unchanged D-03 inputs, $($PlatformJars.Count) platform jars, host/native fragments, and 5 external-engine bundles."
 Write-Host "D-03 input-set SHA-256: $SetHash"

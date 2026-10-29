@@ -73,7 +73,12 @@
     <plugin id="org.geogebra.migration.shared.giac.jni"/>
     <plugin id="org.geogebra.migration.shared.keyboard.base"/>
     <plugin id="org.geogebra.migration.shared.renderer.base"/>
+    <plugin id="org.geogebra.plus.compute.api"/>
+    <plugin id="org.geogebra.plus.compute.runtime"/>
     <plugin id="org.geogebra.plus.desktop.resources"/>
+    <plugin id="org.geogebra.plus.engine.gnuplot"/>
+    <plugin id="org.geogebra.plus.engine.maxima"/>
+    <plugin id="org.geogebra.plus.engine.pari"/>
     <plugin id="org.geogebra.plus.giac.native"/>
     <plugin id="org.geogebra.plus.gluegen.native"/>
     <plugin id="org.geogebra.plus.host"/>

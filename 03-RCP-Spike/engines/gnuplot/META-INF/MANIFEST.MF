@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-SymbolicName: org.geogebra.plus.engine.gnuplot
+Bundle-Version: 0.1.0
+Bundle-Name: GeoGebraPlus Gnuplot Engine
+Bundle-Activator: org.geogebra.plus.engine.gnuplot.Activator
+Bundle-RequiredExecutionEnvironment: JavaSE-21
+Import-Package: org.geogebra.plus.compute.api;version="[0.1.0,0.2.0)",
+ org.geogebra.plus.compute.runtime;version="[0.1.0,0.2.0)",
+ org.osgi.framework;version="[1.10,2.0)"
+
