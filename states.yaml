@@ -1,0 +1,127 @@
+# GROK_V1 - project state and bug tracker (created 2026-10-29 by Grok Bot)
+project: GeoGebraPlus / AlgoGebra RCP
+geogebra_pin: 375db7faf5407390bb322165f2414415da8faeda
+geogebra_version: 5.4.934.0
+repo: https://github.com/io-e/AlgoGebra
+updated: 2026-10-29T13:50+01:00
+
+branches:
+  feat/external-engines: {head: 8054109, note: "AGENTS.md + Decisions_External_Engines_GROK_V1.md committed"}
+  feat/rcp-product-spike: {head: 1280012}
+  feat/init-claude-md: {head: 949558a}
+  feat/debian-integration: {head: 83887ca, merged: false, note: "bash ports build.sh/launch.sh/test-engines.sh, Debian report, Linux native loader fix"}
+
+gates:
+  B: IN_PROGRESS
+  A: NOT_REACHED
+  C: NOT_REACHED
+  D: NOT_REACHED
+  E: NOT_REACHED
+  scenarios: {total: 45, not_run: 40}
+
+scenarios:
+  D-02: {status: PASS, os: Windows}
+  D-03: {status: PASS, os: Windows}
+  D-04: {status: PARTIAL, os: Windows, note: "panel renders in SWT; keyboard input/focus issues"}
+  D-04-linux: {status: NOT_RUN}
+  D-05: {status: PASS, os: [Windows, Debian 13], note: "GIAC Expand[(x+1)^2] OK, JOGL loaded; strict 3D screenshot NOT_RUN"}
+  engines-linux: {status: PARTIAL, report: 03-RCP-Spike/DEBIAN-INTEGRATION-VALIDATION-REPORT_GROK_V1.md}
+
+bugs:
+  - id: BUG-001
+    title: "PARI engine output parser returns WIMS header values before the result"
+    component: bundle pari (external engines)
+    severity: high
+    status: OPEN
+    found: 2026-10-29
+    env: "Debian 13, gp 2.17.2, Temurin 25.0.5"
+    repro: "test-engines.sh -> factor(2^64-1)"
+    expected: "factor matrix only"
+    actual: "output starts with I, 2.7182818284590452354 (twice) before the matrix"
+    cause: "without a TTY gp echoes header assignments despite default(output,0)"
+    fix_proposal: "terminate header lines with ';' or emit a start marker right before the user command and parse after it"
+    note: "first real run (SKIP on Windows: no binaries) - likely not Linux-specific"
+  - id: BUG-002
+    title: "Maxima engine output parser returns each WIMS header line result before the result"
+    component: bundle maxima (external engines)
+    severity: high
+    status: OPEN
+    found: 2026-10-29
+    env: "Debian 13, Maxima 5.47.0, Temurin 25.0.5"
+    repro: "test-engines.sh -> diff(sin(x^2),x)"
+    expected: "2*x*cos(x^2)"
+    actual: "20, false, true, ..., done printed before 2*x*cos(x^2)"
+    cause: "header lines terminated with ';' so Maxima displays each result"
+    fix_proposal: "terminate header lines with '$' or use a start marker before the user command"
+    note: "first real run (SKIP on Windows) - likely not Linux-specific"
+  - id: BUG-003
+    title: "Native loader fragments (GIAC, GlueGen, JOGL) always pick Windows DLLs"
+    component: native loader fragments
+    severity: high
+    status: FIXED_PENDING_REVIEW
+    found: 2026-10-29
+    fix: "feat/debian-integration 83887ca - select linux-amd64 .so on Linux, Windows unchanged"
+    action: "user review before merge"
+  - id: BUG-004
+    title: "GeoGebra panel in SWT_AWT: keyboard input triggers 'Please check your input' / focus problems"
+    component: RCP host (SWT_AWT bridge)
+    severity: medium
+    status: OPEN
+    scenario: D-04
+    next: "record exact keystrokes, test SWT_AWT focus, clipboard, high-DPI (Windows and Linux)"
+  - id: BUG-005
+    title: "1 locale-dependent failing test in desktop baseline (1089 pass / 1 fail)"
+    component: upstream desktop tests (baseline, not project code)
+    severity: low
+    status: KNOWN
+    ref: 02-Cdc/Audit_E_Test_Baseline_CODEX_V1.md
+  - id: DOC-001
+    title: "AGENTS.md outdated: D-05 still 'review pending'/PARTIAL; Codex listed for two roles"
+    component: docs
+    severity: low
+    status: OPEN
+
+open_items:
+  - "Linux Gradle/bnd bundle build not ported (Debian reuses r8 bundles, byte-identical)"
+  - "Strict 3D screenshot for D-05"
+  - "GIAC activator CASFactory.setPrototype + DLL cache with fallback to dummy CAS"
+  - "Confirm separate compute.api bundle (deviation from Cdc)"
+  - "GPL boundaries in combined image / licence policy before distribution"
+  - "Choose P-08 acceptance tag"
+  - "Delete temp archives %TEMP%\\r8.zip and r8-nojre.zip"
+test_packs:
+  - id: TP-ENG-RCP-GROK_V1
+    path: 03-RCP-Spike/tests (branch feat/debian-integration, commit 88dbea3)
+    model: "Claude WIMS4win tests-win_ALF *_CLAUDE_V1.ps1 + TestFramework/Run_All, run_equiv_pc.ps1, WA-OEF2IPYNB maxima tier, test_unicode_E2.ps1"
+    runner: "Run_All_GROK_V1.sh (Debian, RUN) / Run_All_GROK_V1.ps1 (Windows, NOT_RUN)"
+    run: {date: "2026-10-29T14:21+01:00", os: "Debian 13.7", java: "Temurin 21.0.13 / 25.0.5", gp: 2.17.2, maxima: 5.47.0, gnuplot: "6.0.2"}
+    totals: {pass: 66, fail: 25, skip: 3, gate: NOT_MET}
+    suites:
+      01_Engine_Discovery: {pass: 10, fail: 0, skip: 0}
+      02_PARI: {pass: 5, fail: 5, skip: 0, note: "fails = BUG-001"}
+      03_Maxima: {pass: 7, fail: 7, skip: 0, note: "fails = BUG-002"}
+      04_Gnuplot: {pass: 8, fail: 0, skip: 0}
+      05_Sandbox: {pass: 16, fail: 0, skip: 0}
+      06_Encoding: {pass: 7, fail: 4, skip: 0, note: "fails = BUG-001/BUG-002"}
+      07_CAS_Equivalence: {pass: 6, fail: 9, skip: 3, note: "GIAC all PASS; PARI/Maxima fails = BUG-001/BUG-002"}
+      08_RCP_Image: {pass: 7, fail: 0, skip: 0}
+
+wims_root_cause_BUG-001_BUG-002:
+  source: "WIMS src/Interfaces/common.c (prepare1, putparm, readresult), pari.c, maxima.c"
+  wims: "random 'Start line <prog> r1..r4' / 'End line ...' markers printed via stringprinter (PARI print(\"%s\"), Maxima \"%s\";) around the command; readresult keeps only text after the LAST start marker up to the end marker, then output()"
+  port: "PariGPEngine/MaximaEngine.prepareRequest send header+command with no markers; parseOutput keeps all header results"
+  headers: "identical to WIMS (not the cause)"
+  other_diffs: "PARI port adds setrand + \\e1; WIMS sets GPRC=../.gprc; WIMS Maxima lowercases input/output and appends ';'"
+  fix_proposal: "port putparm/readresult marker logic into SubprocessEngine; keep existing parsers on the extracted slice (not applied)"
+
+bugs_added_2026-10-29:
+  - id: BUG-006
+    title: "PARI filter does not reject system()/extern(); protection relies only on gp default(secure,1)"
+    component: bundle pari (external engines)
+    severity: low
+    status: OPEN
+    found: 2026-10-29
+    env: "Debian 13, gp 2.17.2"
+    repro: "tests/05_Test_Sandbox_GROK_V1.sh SBX-02 system(\"id\")"
+    actual: "not rejected by the engine; gp secure mode prevents execution (no uid= output) - same behaviour as WIMS (illegal[] empty)"
+    fix_proposal: "optional: add system/extern/externstr/install to WIMS_ILLEGAL as defence in depth (deviation from WIMS, needs decision)"

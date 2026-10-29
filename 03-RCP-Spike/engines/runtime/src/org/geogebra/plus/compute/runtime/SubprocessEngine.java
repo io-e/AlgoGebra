@@ -108,6 +108,88 @@ public abstract class SubprocessEngine implements ExternalComputeService {
         }
     }
 
+    // ---- WIMS src/Interfaces/common.c port (prepare1/putparm/readresult), BUG-001/BUG-002 fix, GROK_V1 ----
+    private static final java.security.SecureRandom MARKER_RANDOM = new java.security.SecureRandom();
+
+    /** Per-call random marker pair, as WIMS prepare1(): "Start line <prog> r1 r2 r3 r4" / "End line ...". */
+    public record WimsMarkers(String start, String end) {
+    }
+
+    public static WimsMarkers newMarkers(String progname) {
+        StringBuilder r = new StringBuilder();
+        for (int i = 0; i < 4; i++) {
+            r.append(' ').append(Integer.toUnsignedString(MARKER_RANDOM.nextInt() & 0x7fffffff));
+        }
+        return new WimsMarkers("Start line " + progname + r, "End line " + progname + r);
+    }
+
+    /**
+     * WIMS putparm(): start marker, command, newline if missing, end marker, each marker printed with the
+     * engine's stringprinter (PARI {@code print("%s")\n}, Maxima {@code "%s";\n}).
+     */
+    public static String wrapWithMarkers(String command, WimsMarkers markers, String stringPrinter) {
+        StringBuilder b = new StringBuilder();
+        b.append(String.format(Locale.ROOT, stringPrinter, markers.start()));
+        b.append(command);
+        if (!command.endsWith("\n")) {
+            b.append('\n');
+        }
+        b.append(String.format(Locale.ROOT, stringPrinter, markers.end()));
+        return b.toString();
+    }
+
+    /**
+     * WIMS readresult(): locate the first start marker, then the end marker after it; move the end back to the
+     * preceding newline when it is within 64 chars (drops the prompt/echo that carries the end marker); then skip
+     * to the text after the LAST start marker in that slice. Returns null when either marker is missing
+     * (WIMS: "execution error or time out").
+     */
+    public static String extractBetweenMarkers(String stdout, WimsMarkers markers) {
+        if (stdout == null) {
+            return null;
+        }
+        String out = stdout.replace("\r", "");
+        int p = out.indexOf(markers.start());
+        if (p < 0) {
+            return null;
+        }
+        p += markers.start().length();
+        int pe = out.indexOf(markers.end(), p);
+        if (pe < 0) {
+            return null;
+        }
+        int pp = pe - 1;
+        while (pp >= p && pp > pe - 64 && out.charAt(pp) != '\n') {
+            pp--;
+        }
+        if (pp >= p && out.charAt(pp) == '\n') {
+            pe = pp;
+        }
+        String slice = out.substring(p, pe);
+        int last;
+        while ((last = slice.indexOf(markers.start())) >= 0) {
+            slice = slice.substring(last + markers.start().length());
+        }
+        return slice;
+    }
+
+    /** Extraction that fails like WIMS when the end marker never arrived. */
+    protected final String extractOrFail(String stdout, WimsMarkers markers) throws ExternalComputeException {
+        String slice = extractBetweenMarkers(stdout, markers);
+        if (slice == null) {
+            throw new ExternalComputeException(Code.INVALID_OUTPUT,
+                    getEngineId() + ": execution error or time out (WIMS start/end markers not found in output)");
+        }
+        return slice;
+    }
+
+    protected final Request request(Path executable, List<String> arguments, String stdin,
+            WimsMarkers markers) {
+        List<String> processCommand = ExecutableResolver.command(executable, arguments,
+                isWindows(), System.getenv());
+        return new Request(processCommand, stdin, null, null, markers);
+    }
+
     protected final Request request(Path executable, List<String> arguments, String stdin,
             Path artifact, Path artifactDirectory) {
         List<String> processCommand = ExecutableResolver.command(executable, arguments,
@@ -295,8 +377,15 @@ public abstract class SubprocessEngine implements ExternalComputeService {
         private final String stdin;
         private final Path artifact;
         private final Path artifactDirectory;
+        private final WimsMarkers markers;
 
         protected Request(List<String> processCommand, String stdin, Path artifact, Path artifactDirectory) {
+            this(processCommand, stdin, artifact, artifactDirectory, null);
+        }
+
+        protected Request(List<String> processCommand, String stdin, Path artifact, Path artifactDirectory,
+                WimsMarkers markers) {
+            this.markers = markers;
             this.processCommand = List.copyOf(processCommand);
             this.stdin = stdin;
             this.artifact = artifact;
@@ -305,6 +394,10 @@ public abstract class SubprocessEngine implements ExternalComputeService {
 
         public List<String> processCommand() {
             return processCommand;
+        }
+
+        public WimsMarkers markers() {
+            return markers;
         }
 
         public String stdin() {

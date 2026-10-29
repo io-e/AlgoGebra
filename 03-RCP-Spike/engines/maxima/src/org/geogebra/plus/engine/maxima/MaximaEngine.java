@@ -26,6 +26,9 @@ import org.geogebra.plus.compute.runtime.SubprocessEngine;
 public final class MaximaEngine extends SubprocessEngine {
 
     // Verbatim command header from WIMS src/Interfaces/maxima.c (GPL-2.0-or-later).
+    /** WIMS stringprinter for this interface. */
+    static final String WIMS_STRINGPRINTER = "\"%s\";\n";
+
     static final String WIMS_HEADER = "\n" + """
             display2d:false;
             letrat:true;
@@ -107,14 +110,23 @@ public final class MaximaEngine extends SubprocessEngine {
     @Override
     protected Request prepareRequest(Path executable, String validatedCommand,
             ComputeContext context) {
+        // Input is lowercased and ';'-terminated in validateCommand() exactly as WIMS maxima.c check_parm().
+        // Output case is preserved on purpose (commit e6eadfe): since input is already lowercased, only
+        // string literals can differ, and WIMS's output lowercasing would corrupt them.
+        // WIMS putparm(): header, then start marker / command / end marker (BUG-002 fix, GROK_V1).
+        WimsMarkers markers = newMarkers("maxima");
         String script = "fpprec:" + context.precision() + ";\n"
-                + WIMS_HEADER + validatedCommand + "\n" + WIMS_QUIT;
-        return request(executable, executableArguments(), script, null, null);
+                + WIMS_HEADER
+                + wrapWithMarkers(validatedCommand, markers, WIMS_STRINGPRINTER) + WIMS_QUIT;
+        return request(executable, executableArguments(), script, markers);
     }
 
     @Override
-    protected ComputeResult createResult(Request request, ProcessOutput output, Duration elapsed) {
-        return ComputeResult.text(getEngineId(), parseOutput(output.stdout()), elapsed);
+    protected ComputeResult createResult(Request request, ProcessOutput output, Duration elapsed)
+            throws ExternalComputeException {
+        // WIMS readresult(): parse only the slice between the last start marker and the end marker.
+        return ComputeResult.text(getEngineId(),
+                parseOutput(extractOrFail(output.stdout(), request.markers())), elapsed);
     }
 
     static String parseOutput(String stdout) {
