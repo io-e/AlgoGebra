@@ -1,0 +1,42 @@
+SUITE FAIL org.geogebra.plus.engine.maxima.MaximaEngineTests: java.lang.AssertionError: Unexpected Maxima derivative: 20
+false
+true
+true
+5
+1.0E-6
+13
+true
+true
+true
+e
+pi
+pi
+pi
+i
+i
+log
+sinh
+cosh
+tanh
+atan
+asin
+acos
+tan
+atan
+asinh
+acosh
+atanh
+asinh
+acosh
+atanh
+cot
+cot
+log10(x):=block([],return(log(x)/log(10)))
+log2(x):=block([],return(log(x)/log(2)))
+lg(x):=log10(x)
+sign
+true
+done
+2*x*cos(x^2)
+PASS: Gnuplot produced a valid 800x600 PNG
+SUITE PASS org.geogebra.plus.engine.gnuplot.GnuplotEngineTests

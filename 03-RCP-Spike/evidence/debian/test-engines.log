@@ -1,0 +1,15 @@
+Built /workspace/AlgoGebra/repo/03-RCP-Spike/host/build/org.geogebra.plus.compute.api_0.1.0.jar
+Built /workspace/AlgoGebra/repo/03-RCP-Spike/host/build/org.geogebra.plus.compute.runtime_0.1.0.jar
+Built /workspace/AlgoGebra/repo/03-RCP-Spike/host/build/org.geogebra.plus.engine.pari_0.1.0.jar
+Built /workspace/AlgoGebra/repo/03-RCP-Spike/host/build/org.geogebra.plus.engine.maxima_0.1.0.jar
+Built /workspace/AlgoGebra/repo/03-RCP-Spike/host/build/org.geogebra.plus.engine.gnuplot_0.1.0.jar
+PASS: PATH discovery (including Windows PATHEXT)
+PASS: ProcessBuilder pipes and timeout/process-tree kill
+Exception in thread "main" java.lang.AssertionError: Incorrect PARI factorization rows: I
+2.7182818284590452354
+2.7182818284590452354
+3,1;5,1;17,1;257,1;641,1;65537,1;6700417,1 -> {7182818284590452354=3, 1=6700417}
+	at org.geogebra.plus.engine.pari.PariEngineTests.assertTrue(PariEngineTests.java:75)
+	at org.geogebra.plus.engine.pari.PariEngineTests.assertFactorization(PariEngineTests.java:52)
+	at org.geogebra.plus.engine.pari.PariEngineTests.run(PariEngineTests.java:37)
+	at org.geogebra.plus.engine.tests.EngineAcceptanceTest.main(EngineAcceptanceTest.java:16)

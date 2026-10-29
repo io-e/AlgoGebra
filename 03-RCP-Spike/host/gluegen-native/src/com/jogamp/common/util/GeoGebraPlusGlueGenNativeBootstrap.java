@@ -15,7 +15,11 @@ public final class GeoGebraPlusGlueGenNativeBootstrap {
 
     public static synchronized boolean loadFromClasspath() throws Exception {
         if (!loaded) {
-            loadResource("natives/windows-amd64/gluegen_rt.dll", "gluegen_rt.dll");
+            if (System.getProperty("os.name","").toLowerCase(java.util.Locale.ROOT).startsWith("windows")) {
+                loadResource("natives/windows-amd64/gluegen_rt.dll", "gluegen_rt.dll");
+            } else { // Linux port (GROK_V1)
+                loadResource("natives/linux-amd64/libgluegen_rt.so", "libgluegen_rt.so");
+            }
             loaded = true;
         }
         return loaded;
