@@ -1,4 +1,4 @@
-<!-- CLAUDE_V3 -->
+<!-- CLAUDE_V4 -->
 # CLAUDE.md
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
@@ -55,7 +55,9 @@ Host owns policy. Kernel owns constructions. WIMS owns the grade.
 
 ## Current phase and audit status
 
-**Phase 0 → Phase 1 transition.** Codex completed a 5-task audit and Bnd/Equinox resolution:
+**Phase 1a — RCP spike completed (2026-10-28/29).** The D-02/D-04/D-05 spike ran on Windows x86_64, Java 25, Equinox 3.24.300.
+
+### Phase 0 audit (completed)
 
 | Task | Result | File |
 |---|---|---|
@@ -68,13 +70,43 @@ Host owns policy. Kernel owns constructions. WIMS owns the grade.
 
 **Correction:** The `org.geogebra.common` split package originally claimed does NOT exist. Only 2 classes declare that root package (both in `common`). The real split is `org.geogebra.desktop.geogebra3D.euclidian3D.opengl` across `desktop` and `jogl2` — fixable via OSGi fragment.
 
-**Scenario status update:**
-- P-08 PARTIAL (pin known).
-- D-03 **package resolution PASS** — 50 bundles resolve, zero unresolved, jogl2 fragment wired to desktop host.
-- D-02, D-04, D-05 remain **NOT RUN** — resolution is not a started RCP.
-- All W/X/S/O scenarios remain NOT RUN.
+### Phase 1a RCP spike results (2026-10-29)
 
-**Next steps:** D-02 (RCP product + `IApplication` starts) → D-04 (`GeoGebraPanel` in SWT via `SWT_AWT`) → D-05 (GIAC + JOGL native loading under Equinox). Windows x86_64.
+Evidence: `03-RCP-Spike/D-02-D-04-D-05-VALIDATION-REPORT.md`, commit `a821e589ca8a`.
+Gate decision: `03-RCP-Spike/Gate_Decision_D-04_D-05_GROK_V1.md` (reviewed by Grok Bot).
+
+| Scenario | Status | Key findings |
+|---|---|---|
+| D-02 | **PASS** | `IApplication.start()` runs; 50/50 bundles RESOLVED; headless and GUI confirmed. |
+| D-03 | **PASS** | (unchanged from Phase 0) 50 bundles resolve, jogl2 fragment wired. |
+| D-04 | **PARTIAL** | Core embedding PASS: SWT shell hosts `GeoGebraPanel`, Algebra View + toolbars visible, resize/redraw works, `C=5` accepted. Input/focus PARTIAL: "Please check your input" warning on Enter; clipboard and high-DPI not tested. |
+| D-05 | **PARTIAL** | CAS `Expand[(x+1)^2]` → `x^2+2x+1` works. 3D point `A=(1,2,3)` renders. But: GIAC loaded via spike fragment (`System.loadLibrary`), not upstream `NativeLibClassPathLoader`. JOGL required manual DLL extraction + `java.library.path` + boot delegation (`com.jogamp.*,jogamp.*`) + `osgi.parentClassloader=app`. Default JogAmp extractor failed under Java 25/Equinox. |
+| P-08 | PARTIAL | Pin known (`375db7faf54`, `5.4.934.0`), acceptance tag not chosen. |
+
+**Critical finding from D-05:** Boot delegation for JogAmp classes breaks OSGi classloader isolation. This is a spike workaround, **not** an approved product configuration. Owner decision required before treating it as architecture.
+
+### Scenario status summary (45 total)
+
+- **PASS:** D-02, D-03 (2)
+- **PARTIAL:** D-04, D-05, P-08 (3)
+- **NOT RUN:** All remaining P (01–07, 09), D (01, 06–10), W (01–08), X (01–07), S (01–07), O (01–05) — 40 scenarios
+
+### Gates
+
+| Gate | Requirement | Status |
+|---|---|---|
+| A | P-02–P-05 exist for desktop build and GWT war | NOT MET |
+| B | D-02–D-06 pass, natives load, no `common` diff | **IN PROGRESS** (D-02 + D-03 PASS; D-04/D-05 PARTIAL; D-06 NOT RUN) |
+| C | W-01 scored, GWT stays until W-02 passes | NOT STARTED |
+| D | X-01–06 + S-01–05 on both hosts for 1 schema + 1 algorithm | NOT STARTED |
+| E | O-02, O-03, D-09, W-04 pass (security, license, SBOM) | NOT STARTED |
+
+### Next steps
+
+1. **D-05 native loading resolution:** GIAC via upstream `NativeLibClassPathLoader` under Equinox (or written replacement). JOGL without boot delegation (JogAmp sibling-bundle classloader route, or explicit fragment packaging decision).
+2. **D-04 input/focus investigation:** Record exact keystrokes and command that triggered "Please check your input". Test clean SWT↔AWT focus transfer, clipboard, high-DPI.
+3. **D-06:** Extension bundle management (depends on D-02–D-05 closure).
+4. **Parallel work (Claude):** W-01 (web technology scored study), 5 contract specs (activity, capability, compute, state, submission).
 
 ## Agent roles
 
@@ -93,6 +125,8 @@ Host owns policy. Kernel owns constructions. WIMS owns the grade.
 | Desktop build output | `source/desktop/desktop/build/distributions` |
 | GWT web output | `source/web/web/war` (`web3d`, `webSimple`, `web`, `tablet3d`) |
 | Desktop launcher | `Launch_GeoGebra_GROK_V1.ps1` (in the source checkout) |
+| RCP spike directory | `03-RCP-Spike/` (bundles, host, natives, logs, evidence) |
+| RCP spike launcher | `03-RCP-Spike/launch.ps1` (flags: `-Headless`, `-NoBuild`, `-ManualNativeFallback`, `-BootDelegateJogAmp`) |
 | wims4win repo | `D:\ALF_ZGit\02-wims4win` (private `io-e/wims4win`, 24/24 tests pass) |
 | WIMS OEF toolchain | `D:\ALF_Scripts\43-wims-paris-saclay_fr` |
 | OEF interpreter workspace | `D:\ALF_ZGit\WA-OEF2IPYNB` (conda `quiz_env`) |
@@ -140,10 +174,10 @@ $env:Path="$env:JAVA_HOME\bin;$env:Path"
 5. **Aggregate core bundle:** Acceptable fallback if 12 individual bundles create unmanageable `uses` constraints, provided RCP host and extension boundary remain modular.
 6. **First RCP proof:** Full D-02/D-04/D-05 slice (panel + CAS + 3D + native load), not just panel alone.
 
-## High-risk assumptions to verify
+## High-risk assumptions — status after spike
 
-1. **RCP + Swing:** `GeoGebraPanel` (public `JPanel`, no-arg constructor) exists. `SWT_AWT.new_Frame` with `SWT.EMBEDDED` is the documented bridge. Focus, menus, clipboard, DPI untested (D-04).
-2. **OSGi wrapping:** No existing OSGi metadata. 14 Bnd recipe drafts exist but are unvalidated. 35/39 external deps need wrapping. The 1 real split (desktop+jogl2) is fixable via fragment (D-02, D-03).
-3. **JOGL/GIAC natives:** JogAmp has its own native-JAR extractor (doesn't need `java.library.path`), but Equinox classloader compatibility is unproven. GIAC uses `ClassLoader.getSystemResourceAsStream` — must stay on application loader (D-05).
-4. **Dropping GWT:** JS wrapper is not a replacement for four GWT modules. Full web parity is a release gate (Gate C).
-5. **External algorithm semantics:** writing a result via API does not make it a native dependent construction object (X-04).
+1. **RCP + Swing:** `GeoGebraPanel` embedding **works** (D-04 core PASS). `SWT_AWT.new_Frame(SWT.EMBEDDED)` hosted it. **Still open:** focus transfer (Enter triggered a GeoGebra warning), clipboard, high-DPI, menus.
+2. **OSGi wrapping:** 50/50 bundles **RESOLVED** (D-03 PASS). The jogl2 fragment approach works. **Closed for resolution; open for runtime activation.**
+3. **JOGL/GIAC natives — HIGHEST RISK:** JogAmp's default native-JAR extractor **failed** under Java 25/Equinox (`JVMUtil.initialize` crash). Success required manual DLL extraction + `java.library.path` + boot delegation (breaks OSGi isolation). GIAC loaded via spike fragment's `System.loadLibrary`, not via upstream `NativeLibClassPathLoader`. **Owner decision needed** on whether boot delegation is acceptable or a proper OSGi-compatible native loading path must be found.
+4. **Dropping GWT:** JS wrapper is not a replacement for four GWT modules. Full web parity is a release gate (Gate C). **Unchanged.**
+5. **External algorithm semantics:** writing a result via API does not make it a native dependent construction object (X-04). **Unchanged.**
