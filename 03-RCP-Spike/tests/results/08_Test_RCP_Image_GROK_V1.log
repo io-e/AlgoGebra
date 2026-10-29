@@ -1,0 +1,14 @@
+# Suite: 08_RCP_Image
+# Started: 2026-10-29T14:21:42+01:00
+# Host: grok-bot-vm-419969949 / Debian GNU/Linux 13 (trixie) / x86_64
+
+ok 1 - [P0] RCP-01-d02-50-resolved :: found=50, ACTIVE=0, RESOLVED=50, unresolved/other=0, resolveBundles=true
+ok 2 - [P0] RCP-02-pari-available :: pari; available=true
+ok 3 - [P0] RCP-02-maxima-available :: maxima; available=true
+ok 4 - [P0] RCP-02-gnuplot-available :: gnuplot; available=true
+ok 5 - [P0] RCP-03-giac-native :: libjavagiac64.so
+ok 6 - [P0] RCP-04-giac-expand :: x² + 2x + 1
+ok 7 - [P1] RCP-05-jogl-3d :: 3D point command accepted=true; 3D view initialized=true
+
+PASS: 7 FAIL: 0 SKIP: 0
+# CSV: /workspace/AlgoGebra/repo/03-RCP-Spike/tests/results/08_RCP_Image_GROK_V1.csv

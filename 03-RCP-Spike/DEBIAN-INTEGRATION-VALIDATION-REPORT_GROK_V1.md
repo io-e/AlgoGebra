@@ -59,3 +59,19 @@
 b5bb67e551f471dd175528d245e99021047eecdbe9b313aaabcac4da38129678  maxima-gnuplot-suites.log
 37ac1fe288c9aad73205ec3ecab938f072ea41eda89149ed68bf42276a3fdd95  test-engines.log
 ```
+
+## Addendum GROK_V1 (14:21 Europe/Paris) — test pack `tests/`
+
+Full pack `tests/Run_All_GROK_V1.sh` RUN on Debian: **66 PASS / 25 FAIL / 3 SKIP** (gate NOT MET). Per-suite: 01 10/0/0, 02 5/5/0,
+03 7/7/0, 04 8/0/0, 05 16/0/0, 06 7/4/0, 07 6/9/3, 08 7/0/0. All FAILs = BUG-001/BUG-002 (engine parsers), direct references PASS.
+Logs and CSV: `tests/results/`. Windows `.ps1` twins: NOT RUN. See `tests/README_TESTS_GROK_V1.md`.
+
+### WIMS vs AlgoGebra port (root cause of BUG-001/BUG-002)
+WIMS `src/Interfaces/common.c` (`prepare1`, `putparm`, `readresult`) generates per call a random `Start line <prog> r1 r2 r3 r4` /
+`End line …` pair, sends header, then `stringprinter(start)`, the command, `stringprinter(end)` (PARI: `print("%s")`, Maxima: `"%s";`),
+and parses **only the text after the last start marker up to the end marker** before the per-CAS `output()` (prompt splitting,
+Mat()/[] stripping, one-line join; Maxima also lowercases). Headers in `pari.c`/`maxima.c` are byte-identical to our `WIMS_HEADER`s:
+the header is not quiet in WIMS either — it is simply discarded by the markers. Our `PariGPEngine`/`MaximaEngine.prepareRequest`
+concatenate header + command without markers, so `parseOutput` returns every header result. Other differences: PARI port adds
+`setrand`/`\e1`; WIMS sets `GPRC=../.gprc`; Maxima WIMS lowercases input/output and appends `;`.
+**Faithful fix (not applied):** port `putparm`/`readresult` into `SubprocessEngine` (random markers, extract last-start..end) and keep the existing parsers on the extracted slice.

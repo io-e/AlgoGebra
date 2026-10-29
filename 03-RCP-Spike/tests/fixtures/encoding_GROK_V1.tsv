@@ -1,0 +1,5 @@
+# GROK_V1 id<TAB>engine<TAB>command<TAB>expected (UTF-8; expected from direct CLI reference)
+ENC-01	pari	#"é"	2
+ENC-02	pari	"éàü€"	"éàü€"
+ENC-03	maxima	slength("é")	1
+ENC-04	maxima	"éàü€"	"éàü€"
