@@ -1,0 +1,56 @@
+No build script is present; using the prebuilt installed product image.
+Launching GeoGebraPlus RCP spike; Java: D:\ALF_ZGit\G1_Geogebra_Migration\bin\GeoGebraPlus-RCP-0.1.0-win32-x86_64-r9\jre\bin\java.exe
+Run id: 20261029-153746-26212-91b3875d
+Log: D:\ALF_ZGit\G1_Geogebra_Migration\bin\GeoGebraPlus-RCP-0.1.0-win32-x86_64-r9\logs\rcp-20261029-153746-26212-91b3875d.log
+Unique, persistent Equinox configuration/storage: D:\ALF_ZGit\G1_Geogebra_Migration\bin\GeoGebraPlus-RCP-0.1.0-win32-x86_64-r9\configuration\runtime-20261029-153746-26212-91b3875d
+Native mode: product classpath loaders / no native-path override
+Existing framework storage and build outputs will not be removed.
+[GeoGebraPlus] Host bundle ACTIVE; id=67
+[GeoGebraPlus] Registered external engine pari; available=true
+[GeoGebraPlus] Registered external engine maxima; available=true
+[GeoGebraPlus] Registered external engine gnuplot; available=true
+[GeoGebraPlus] IApplication.start() — D-02 entry
+[GeoGebraPlus] Runtime: 25.0.4.1+1-LTS; OS=Windows 11/amd64
+[GeoGebraPlus] JogAmp boot delegation=null
+[GeoGebraPlus] Normalized lazy bundle to RESOLVED for D-02: com.sun.jna
+[GeoGebraPlus] D-02 D-03-set check: expected=50, found=50, ACTIVE=0, RESOLVED=50, unresolved/other=0, resolveBundles=true
+[GeoGebraPlus] D-02 PASS
+[GeoGebraPlus] GIAC DLL loaded from product classpath: C:\Users\Shadow\AppData\Local\Temp\geogebraplus-giac-7146799408647532961\javagiac64.dll
+[GeoGebraPlus] D-05 GIAC natives preloaded in owning bundle class loader: org.eclipse.osgi.internal.loader.EquinoxClassLoader@465a6b4e[org.geogebra.migration.shared.giac.jni:5.4.934.0(id=48)]
+[GeoGebraPlus] GlueGen native loaded from product classpath: C:\Users\Shadow\AppData\Local\Temp\geogebraplus-gluegen-15006679069666684240\gluegen_rt.dll
+[GeoGebraPlus] D-05 GlueGen natives preloaded in owning bundle class loader: org.eclipse.osgi.internal.loader.EquinoxClassLoader@3dc21221[org.geogebra.migration.external.org.jogamp.gluegen.gluegen-rt:2.6.0(id=40)]
+[GeoGebraPlus] JOGL native loaded from product classpath: C:\Users\Shadow\AppData\Local\Temp\geogebraplus-jogl-572030744309221123\nativewindow_awt.dll
+[GeoGebraPlus] JOGL native loaded from product classpath: C:\Users\Shadow\AppData\Local\Temp\geogebraplus-jogl-1881500398929912640\nativewindow_win32.dll
+[GeoGebraPlus] JOGL native loaded from product classpath: C:\Users\Shadow\AppData\Local\Temp\geogebraplus-jogl-8197072721848496902\newt_head.dll
+[GeoGebraPlus] JOGL native loaded from product classpath: C:\Users\Shadow\AppData\Local\Temp\geogebraplus-jogl-1953325643271406494\jogl_desktop.dll
+[GeoGebraPlus] JOGL native loaded from product classpath: C:\Users\Shadow\AppData\Local\Temp\geogebraplus-jogl-9456802557211714019\jogl_mobile.dll
+[GeoGebraPlus] D-05 JOGL natives preloaded in owning bundle class loader: org.eclipse.osgi.internal.loader.EquinoxClassLoader@5c956c3d[org.geogebra.migration.external.org.jogamp.jogl.jogl-all:2.6.0(id=41)]
+[GeoGebraPlus] CAS factory prototype installed: org.geogebra.desktop.factories.CASFactoryD
+[GeoGebraPlus] System-loader GIAC DLL resource=jar:file:/D:/ALF_ZGit/G1_Geogebra_Migration/bin/GeoGebraPlus-RCP-0.1.0-win32-x86_64-r9/natives/javagiac-70501-natives-windows-amd64.jar!/javagiac64.dll
+GeoGebra 5.4.934.0 20 October 2026 Java 25.0.4.1-64bit
+
+oct. 29, 2026 3:37:50 PM java.util.prefs.WindowsPreferences <init>
+WARNING: Could not open/create prefs root node Software\JavaSoft\Prefs at root 0xffffffff80000002. Windows RegCreateKeyEx(...) returned error code 5.
+oct. 29, 2026 3:37:50 PM java.util.prefs.WindowsPreferences WindowsRegOpenKey1
+WARNING: Trying to recreate Windows registry node Software\JavaSoft\Prefs at root 0xffffffff80000002.
+oct. 29, 2026 3:37:50 PM java.util.prefs.WindowsPreferences openKey
+WARNING: Could not open windows registry node Software\JavaSoft\Prefs at root 0xffffffff80000002. Windows RegOpenKey(...) returned error code 2.
+[GeoGebraPlus] D-04 embedded AppD full-GUI mode=true (spike adapter; GeoGebraPanel constructs AppD with minimal-GUI mode)
+[GeoGebraPlus] D-04 GeoGebraPanel embedded in SWT_AWT shell
+[GeoGebraPlus] D-05 CAS enabled=true; factory=org.geogebra.desktop.factories.CASFactoryD (test adapter uses reflection; not a proposed public API)
+[GeoGebraPlus] D-05 GIAC JNI host-loader native loaded=true
+============== restarted ===============
+[GeoGebraPlus] D-05 GIAC native loaded=true
+[GeoGebraPlus] D-05 CAS result: x² + 2x + 1
+============== restarted ===============
+[GeoGebraPlus] D-05 CAS smoke 1+1: 2
+============== restarted ===============
+[GeoGebraPlus] D-05 CAS smoke x+1: x + 1
+============== restarted ===============
+[GeoGebraPlus] D-05 direct GIAC smoke: org.geogebra.desktop.cas.giac.CASgiacD(1+1) -> 2
+[GeoGebraPlus] D-05 CAS ASSERTION PASS: normalized=x^2+2x+1
+GeoGebra 5.4.934.0 20 October 2026 Java 25.0.4.1-64bit
+
+[GeoGebraPlus] D-05 3D point command accepted=true; 3D view initialized=true
+[GeoGebraPlus] D-05 3D note: GeoGebraPanel constructs the 2D AppD; the 3D proof uses an upstream App3D instance in the second SWT_AWT pane
+Equinox exit code: -1

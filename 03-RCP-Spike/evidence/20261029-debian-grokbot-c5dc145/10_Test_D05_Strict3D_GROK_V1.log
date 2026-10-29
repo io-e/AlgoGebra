@@ -1,0 +1,13 @@
+# Suite: 10_D05_Strict3D
+# Started: 2026-10-29T15:05:10.6989830+01:00
+# Host: grok-bot-vm-419969949 / Debian GNU/Linux 13 (trixie) / pwsh 7.6.9
+
+ok 1 - [P0] D05-01-strict-no-boot-delegation :: launched without --boot-delegate-jogamp
+ok 2 - [P0] D05-02-3d-initialized :: 3D view initialized=true
+ok 3 - [P0] D05-03-no-jogl-linkage-error :: 
+ok 4 - [P0] D05-04-3d-not-blank :: empty 3D scene: colours=1636 nonDominant=0.1904 region=1129,90,1534,851 shot=/workspace/AlgoGebra/repo/03-RCP-Spike/tests/results/screenshots/10_strict3d_empty.png
+ok 5 - [P0] D05-05-3d-redraw-after-point :: after A=(1,2,3): colours=1649 nonDominant=0.1919 shot=/workspace/AlgoGebra/repo/03-RCP-Spike/tests/results/screenshots/10_strict3d_A123.png
+# GL: Xvfb GLX (Mesa llvmpipe software rendering), not a hardware GPU
+
+PASS: 5 FAIL: 0 SKIP: 0
+# CSV: /workspace/AlgoGebra/repo/03-RCP-Spike/tests/results/10_D05_Strict3D_GROK_V1.csv

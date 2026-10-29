@@ -1,0 +1,28 @@
+# Suite: 13_GeoGebra_Baseline
+# Started: 2026-10-29T15:05:49.5795282+01:00
+# Host: grok-bot-vm-419969949 / Debian GNU/Linux 13 (trixie) / pwsh 7.6.9
+
+ok 1 - [P0] GGB-00-pinned-commit :: HEAD=375db7faf5407390bb322165f2414415da8faeda pin=375db7faf5407390bb322165f2414415da8faeda
+&: /workspace/AlgoGebra/repo/03-RCP-Spike/tests/13_Test_GeoGebra_Baseline_GROK_V1.ps1:18
+Line |
+  18 |  … ADLE -ne '1') { Push-Location (Join-Path $src $m.proj); & $gw $m.task …
+     |                                                              ~~~
+     | The term '/workspace/AlgoGebra/geogebra/source/gradlew' is not
+     | recognized as a name of a cmdlet, function, script file, or executable
+     | program. Check the spelling of the name, or if a path was included,
+     | verify that the path is correct and try again.
+ok 2 - [P0] GGB-common-jre-ran :: gradle rc=0 tests=6526 log=/workspace/AlgoGebra/repo/03-RCP-Spike/tests/results/13_common-jre_gradle.log
+ok 3 - [P0] GGB-common-jre-no-failures :: passed=6514 failures=0 errors=0 skipped=12 failed=[] windows Audit_E: n/a
+&: /workspace/AlgoGebra/repo/03-RCP-Spike/tests/13_Test_GeoGebra_Baseline_GROK_V1.ps1:18
+Line |
+  18 |  … ADLE -ne '1') { Push-Location (Join-Path $src $m.proj); & $gw $m.task …
+     |                                                              ~~~
+     | The term '/workspace/AlgoGebra/geogebra/source/gradlew' is not
+     | recognized as a name of a cmdlet, function, script file, or executable
+     | program. Check the spelling of the name, or if a path was included,
+     | verify that the path is correct and try again.
+ok 4 - [P0] GGB-desktop-ran :: gradle rc=0 tests=1090 log=/workspace/AlgoGebra/repo/03-RCP-Spike/tests/results/13_desktop_gradle.log
+ok 5 - [P0] GGB-desktop-no-failures :: passed=1088 failures=0 errors=0 skipped=2 failed=[] windows Audit_E: 1090 tests, 1 locale failure (CallJavaScriptTest.testEval), 1 skipped
+
+PASS: 5 FAIL: 0 SKIP: 0
+# CSV: /workspace/AlgoGebra/repo/03-RCP-Spike/tests/results/13_GeoGebra_Baseline_GROK_V1.csv

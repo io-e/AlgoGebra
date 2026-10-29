@@ -3,7 +3,7 @@ project: GeoGebraPlus / AlgoGebra RCP
 geogebra_pin: 375db7faf5407390bb322165f2414415da8faeda
 geogebra_version: 5.4.934.0
 repo: https://github.com/io-e/AlgoGebra
-updated: 2026-10-29T15:52+01:00
+updated: 2026-10-29T16:30+01:00
 
 branches:
   feat/external-engines: {last_tested_code: e3e8a82, note: "Evidence/docs commits follow this Windows-tested code revision; see git log for current branch tip"}
@@ -24,10 +24,10 @@ scenarios:
   D-02: {status: PASS, os: Windows}
   D-03: {status: PASS, os: Windows}
   D-04: {status: PARTIAL, os: Windows, note: "panel renders in SWT; keyboard input/focus issues; suite 09 on Windows NOT_RUN"}
-  D-04-linux: {status: FAIL, date: "2026-10-29T15:40+01:00", os: "Debian 13.7 / Xvfb", suite: 03-RCP-Spike/tests/09_Test_D04_UI_GROK_V1.ps1, log: 03-RCP-Spike/tests/results/09_Test_D04_UI_GROK_V1.log, screenshots: 03-RCP-Spike/tests/results/screenshots/09_*.png, bugs: [BUG-004, BUG-010, BUG-011, BUG-012, BUG-013]}
+  D-04-linux: {status: FAIL, date: "2026-10-29T15:40+01:00", os: "Debian 13.7 / Xvfb", suite: 03-RCP-Spike/tests/09_Test_D04_UI_GROK_V1.ps1, log: 03-RCP-Spike/evidence/20261029-debian-grokbot-c5dc145/09_Test_D04_UI_GROK_V1.log, screenshots: 03-RCP-Spike/evidence/20261029-debian-grokbot-c5dc145/screenshots/09_*.png, bugs: [BUG-004, BUG-010, BUG-011, BUG-012, BUG-013]}
   D-05: {status: PASS, os: [Windows, Debian 13], note: "GIAC Expand[(x+1)^2] OK, JOGL loaded"}
   engines-windows-r9: {status: PASS, os: Windows, image: "bin/GeoGebraPlus-RCP-0.1.0-win32-x86_64-r9", suite: 03-RCP-Spike/tests/08_Test_RCP_Image_GROK_V1.ps1, note: "50/50 bundles resolved; PARI/GP, Maxima, Gnuplot available; GIAC CAS and JOGL 3D initialization passed"}
-  D-05-strict-3d-screenshot: {status: PASS, os: "Debian 13.7 / Xvfb GLX Mesa llvmpipe (software)", suite: 03-RCP-Spike/tests/10_Test_D05_Strict3D_GROK_V1.ps1, screenshots: [03-RCP-Spike/tests/results/screenshots/10_strict3d_empty.png, 03-RCP-Spike/tests/results/screenshots/10_strict3d_A123.png], windows: NOT_RUN}
+  D-05-strict-3d-screenshot: {status: PASS, os: "Debian 13.7 / Xvfb GLX Mesa llvmpipe (software)", suite: 03-RCP-Spike/tests/10_Test_D05_Strict3D_GROK_V1.ps1, screenshots: [03-RCP-Spike/evidence/20261029-debian-grokbot-c5dc145/screenshots/10_strict3d_empty.png, 03-RCP-Spike/evidence/20261029-debian-grokbot-c5dc145/screenshots/10_strict3d_A123.png], windows: NOT_RUN}
   linux-bundle-build: {status: PASS, suite: 11_Test_Bundle_Build_GROK_V1.ps1, note: "bnd 7.1.0 rebuilt 13 production bundles on Linux, BSN/version/exports/imports/class list = r8; Equinox 3.24.300 allResolved=true with 51 jars (13 rebuilt incl. ggbjdk not in r8 + r8 externals); keyboard-scientific recipe SKIP (jar not built by :desktop:assemble); externals not rebuilt (no wrap recipes in repo)"}
   engines-linux: {status: PARTIAL, report: 03-RCP-Spike/DEBIAN-INTEGRATION-VALIDATION-REPORT_GROK_V1.md}
 
@@ -38,7 +38,7 @@ bugs:
     severity: high
     status: FIXED
     fixed: "2026-10-29, feat/external-engines 093b302 (WIMS common.c start/end markers ported into SubprocessEngine), merged into feat/debian-integration 90e5064"
-    evidence: "Debian Run_All 14:21 66/25/3 -> 14:31 91/0/3; 02_PARI 0 fail; logs 03-RCP-Spike/tests/results/ on feat/debian-integration 101067c; SubprocessEngineTests marker unit tests PASS"
+    evidence: "Debian Run_All 14:21 66/25/3 -> 14:31 91/0/3; 02_PARI 0 fail; logs 03-RCP-Spike/evidence/20261029-debian-grokbot-c5dc145/ on feat/debian-integration 101067c; SubprocessEngineTests marker unit tests PASS"
     found: 2026-10-29
     env: "Debian 13, gp 2.17.2, Temurin 25.0.5"
     repro: "test-engines.sh -> factor(2^64-1)"
@@ -53,7 +53,7 @@ bugs:
     severity: high
     status: FIXED
     fixed: "2026-10-29, feat/external-engines 093b302 (WIMS common.c start/end markers ported into SubprocessEngine), merged into feat/debian-integration 90e5064"
-    evidence: "Debian Run_All 14:21 66/25/3 -> 14:31 91/0/3; 03_Maxima 0 fail; logs 03-RCP-Spike/tests/results/ on feat/debian-integration 101067c; SubprocessEngineTests marker unit tests PASS"
+    evidence: "Debian Run_All 14:21 66/25/3 -> 14:31 91/0/3; 03_Maxima 0 fail; logs 03-RCP-Spike/evidence/20261029-debian-grokbot-c5dc145/ on feat/debian-integration 101067c; SubprocessEngineTests marker unit tests PASS"
     found: 2026-10-29
     env: "Debian 13, Maxima 5.47.0, Temurin 25.0.5"
     repro: "test-engines.sh -> diff(sin(x^2),x)"
@@ -96,12 +96,19 @@ open_items:
   - "Run attended Windows suite 09 (D-04 input/focus/clipboard) and suite 10 (strict 3D visual screenshot); do not drive the user's desktop unattended"
   - "Windows suite 11 remains NOT RUN: locate or install the Bnd CLI, then compare rebuilt bundles with r9"
   - "Re-run suite 13 with common-jre forced to execute; desktop has the known locale-dependent CallJavaScriptTest.testEval failure"
-  - "BUG-006 decision pending (user)"
   - "GIAC activator CASFactory.setPrototype + DLL cache with fallback to dummy CAS"
   - "Confirm separate compute.api bundle (deviation from Cdc)"
   - "GPL boundaries in combined image / licence policy before distribution"
   - "Choose P-08 acceptance tag"
   - "Delete temp archives %TEMP%\\r8.zip and r8-nojre.zip"
+results_tracking:
+  decision: "2026-10-29 user: stop tracking mutable 03-RCP-Spike/tests/results/ (git rm --cached, .gitignore, README kept); Run_All writes results/<runid>/ and -ExportEvidence <name> copies a reviewed run to 03-RCP-Spike/evidence/<date>-<os>-<name>-<runid>/ with MANIFEST_GROK_V1.tsv (sha256); routine full logs = CI artifacts or local by run id"
+  evidence_folders:
+    - {path: 03-RCP-Spike/evidence/20261029-debian-grokbot-c5dc145/, what: "Debian sh + pwsh runs 14:21-15:50, suites 01-13, D-04/D-05 screenshots", verified: "52 files = git blobs of c5dc145 + 10 ignored logs"}
+    - {path: 03-RCP-Spike/evidence/20261029-windows-codex-689d4b4/, what: "Codex Windows 01-07 75/0/3 (689d4b4)", verified: "18/18 sha256 = Get-FileHash on PC (source kept: D:\\ALF_Agents\\_backup_codex_results_20261029)"}
+    - {path: 03-RCP-Spike/evidence/20261029-windows-codex-r9-e3e8a82/, what: "Codex Windows r9 run 15:36-15:57 (e3e8a82), 01-08+12 95/0/3, 13", verified: "25/25 sha256 = Get-FileHash on PC; 23 committed copies identical modulo CRLF"}
+    - {path: 03-RCP-Spike/evidence/20261029-linux-debian-grokbot-bug006-20261029_160937-grok-bot-vm-419969949/, what: "Debian Run_All -SkipUi after BUG-006 fix, 101/0/3", verified: "exported by Run_All, manifest re-checked"}
+  gitattributes: "03-RCP-Spike/evidence/** -text (byte-exact, hashes stay valid on Windows checkouts)"
 test_packs:
   - id: TP-ENG-RCP-GROK_V1
     path: 03-RCP-Spike/tests (ps1 only, cross-platform; bash twins in 03-RCP-Spike/linux-tests)
@@ -124,8 +131,8 @@ test_packs:
       08_RCP_Image: {pass: 7, fail: 0, skip: 0}
     windows_ps1: "PARTIAL (latest Windows evidence below; attended UI suites 09/10 and Bnd CLI suite 11 not run; suite 13 has one known locale failure)"
     windows:
-      - {date: "2026-10-29", by: Codex, commit: 689d4b4, base: e6f4bbc, os: Windows, runner: "Run_All_GROK_V1.ps1", engines_path_temporary: {pari: "C:\\Program Files (x86)\\Pari64-2-19-0\\gp.exe", maxima: "C:\\maxima-5.49.0\\bin\\maxima.bat", gnuplot: "C:\\maxima-5.49.0\\gnuplot\\bin\\gnuplot.exe"}, test_engines_ps1: PASS, suites_01_07: {pass: 75, fail: 0, skip: 3}, suite_08: "SKIPPED (opens UI; r9 not rebuilt, BUG-008)", suites_09_13: NOT_RUN, logs: "local on Codex PC 03-RCP-Spike\\tests\\results\\ (not pushed)"}
-      - {date: "2026-10-29", run_window: "15:36-15:46 Europe/Paris", by: Codex, tested_commit: e3e8a82, branch_base: ffb3ff2, os: "Windows 10.0.26100", pwsh: "7.6.9", java: "JDK 21.0.12.101-hotspot (build/tests); product runtime Java 25", fixtures_sha256_concat_prefix: 058fe5027ff68fd3, image: "D:\\ALF_ZGit\\G1_Geogebra_Migration\\bin\\GeoGebraPlus-RCP-0.1.0-win32-x86_64-r9", engines_path_temporary: {pari: "C:\\Program Files (x86)\\Pari64-2-19-0\\gp.exe", maxima: "C:\\maxima-5.49.0\\bin\\maxima.bat", gnuplot: "C:\\maxima-5.49.0\\gnuplot\\bin\\gnuplot.exe"}, command: "pwsh -File 03-RCP-Spike/tests/Run_All_GROK_V1.ps1 -SkipUi", suites_01_08_12: {pass: 95, fail: 0, skip: 3, gate: MET}, suite_08: "7/0/0; 50/50 bundles; all 3 external engines available; GIAC CAS and JOGL 3D initialization passed", suite_13: {pass: 3, fail: 2, skip: 0, note: "common-jre 6,526 existing XML results (6,514 pass, 12 skipped), Gradle UP-TO-DATE; desktop executed 1,090 tests (1,088 pass, 1 locale failure, 1 skipped)"}, suites_09_10: "NOT RUN (attended UI)", suite_11: "NOT RUN (Bnd CLI unavailable)", test_engines_ps1: PASS, run_summary: 03-RCP-Spike/tests/results/Run_All_20261029_153650_GROK_V1.csv, suite_13_summary: 03-RCP-Spike/tests/results/13_GeoGebra_Baseline_GROK_V1.csv, logs: "tracked under 03-RCP-Spike/tests/results/"}
+      - {date: "2026-10-29", by: Codex, commit: 689d4b4, base: e6f4bbc, os: Windows, runner: "Run_All_GROK_V1.ps1", engines_path_temporary: {pari: "C:\\Program Files (x86)\\Pari64-2-19-0\\gp.exe", maxima: "C:\\maxima-5.49.0\\bin\\maxima.bat", gnuplot: "C:\\maxima-5.49.0\\gnuplot\\bin\\gnuplot.exe"}, test_engines_ps1: PASS, suites_01_07: {pass: 75, fail: 0, skip: 3}, suite_08: "SKIPPED (opens UI; r9 not rebuilt, BUG-008)", suites_09_13: NOT_RUN, logs: "03-RCP-Spike/evidence/20261029-windows-codex-689d4b4/"}
+      - {date: "2026-10-29", run_window: "15:36-15:46 Europe/Paris", by: Codex, tested_commit: e3e8a82, branch_base: ffb3ff2, os: "Windows 10.0.26100", pwsh: "7.6.9", java: "JDK 21.0.12.101-hotspot (build/tests); product runtime Java 25", fixtures_sha256_concat_prefix: 058fe5027ff68fd3, image: "D:\\ALF_ZGit\\G1_Geogebra_Migration\\bin\\GeoGebraPlus-RCP-0.1.0-win32-x86_64-r9", engines_path_temporary: {pari: "C:\\Program Files (x86)\\Pari64-2-19-0\\gp.exe", maxima: "C:\\maxima-5.49.0\\bin\\maxima.bat", gnuplot: "C:\\maxima-5.49.0\\gnuplot\\bin\\gnuplot.exe"}, command: "pwsh -File 03-RCP-Spike/tests/Run_All_GROK_V1.ps1 -SkipUi", suites_01_08_12: {pass: 95, fail: 0, skip: 3, gate: MET}, suite_08: "7/0/0; 50/50 bundles; all 3 external engines available; GIAC CAS and JOGL 3D initialization passed", suite_13: {pass: 3, fail: 2, skip: 0, note: "common-jre 6,526 existing XML results (6,514 pass, 12 skipped), Gradle UP-TO-DATE; desktop executed 1,090 tests (1,088 pass, 1 locale failure, 1 skipped)"}, suites_09_10: "NOT RUN (attended UI)", suite_11: "NOT RUN (Bnd CLI unavailable)", test_engines_ps1: PASS, run_summary: 03-RCP-Spike/evidence/20261029-windows-codex-r9-e3e8a82/Run_All_20261029_153650_GROK_V1.csv, suite_13_summary: 03-RCP-Spike/evidence/20261029-windows-codex-r9-e3e8a82/13_GeoGebra_Baseline_GROK_V1.csv, logs: "tracked under 03-RCP-Spike/evidence/20261029-windows-codex-r9-e3e8a82/"}
     ps1_pack_debian:
       date: "2026-10-29T15:03-15:45+01:00"
       os: "Debian 13.7"
@@ -153,7 +160,12 @@ bugs_added_2026-10-29:
     title: "PARI filter does not reject system()/extern(); protection relies only on gp default(secure,1)"
     component: bundle pari (external engines)
     severity: low
-    status: OPEN
+    status: FIXED
+    fixed: "2026-10-29, user decision; PariGPEngine.AGB_ILLEGAL = system, extern, externstr, fileextern, install, eval (whole word, before gp is resolved); default(secure,1) kept; commit: see BUG-006 commit on feat/external-engines"
+    decision: 02-Cdc/Decisions_PARI_Forbidden_GROK_V1.md (deliberate deviation from WIMS empty illegal[]; not a sandbox claim, D-ENG-03)
+    finding: "secure mode only prompts before install(); piped stdin confirms it -> eval(Str(\"ins\",\"tall(..)\")) loaded native getpid through the engine before the fix; hence eval blocked (user confirmation requested)"
+    evidence: "03-RCP-Spike/evidence/20261029-linux-debian-grokbot-bug006-20261029_160937-grok-bot-vm-419969949/ (05_Sandbox 20/0/0: SBX-02 + SBX-14..19 REJECT; Run_All -SkipUi 101/0/3); unit PariEngineTests via test-engines.sh PASS"
+    windows: "r9 image predates the filter: rebuild needed (r10) before Windows evidence counts"
     found: 2026-10-29
     env: "Debian 13, gp 2.17.2"
     repro: "tests/05_Test_Sandbox_GROK_V1.sh SBX-02 system(\"id\")"
@@ -173,7 +185,7 @@ bugs_added_2026-10-29:
     severity: medium
     status: FIXED
     fixed: "2026-10-29: rebuilt and installed r9; Windows suite 08 passed against the image"
-    evidence: "D:\\ALF_ZGit\\G1_Geogebra_Migration\\bin\\GeoGebraPlus-RCP-0.1.0-win32-x86_64-r9; 03-RCP-Spike/tests/results/08_RCP_Image_GROK_V1.csv (7 PASS, 0 FAIL); includes all 3 external engines, GIAC CAS, JOGL 3D initialization"
+    evidence: "D:\\ALF_ZGit\\G1_Geogebra_Migration\\bin\\GeoGebraPlus-RCP-0.1.0-win32-x86_64-r9; 03-RCP-Spike/evidence/20261029-windows-codex-r9-e3e8a82/08_RCP_Image_GROK_V1.csv (7 PASS, 0 FAIL); includes all 3 external engines, GIAC CAS, JOGL 3D initialization"
   - id: BUG-009
     title: "NullPointerException 'Log.logger is null' in Log.read via ScreenReaderAdapterD.readText on ctrl+a (embedded GeoGebraPanel never calls Log.setLogger)"
     component: RCP host (GeoGebraPanel embedding; upstream Log.read not null-safe)
@@ -205,4 +217,4 @@ bugs_added_2026-10-29:
     component: RCP host (localization resources not loaded)
     severity: low
     status: OPEN
-    evidence: "screenshots 03-RCP-Spike/tests/results/screenshots/09_00_start.png"
+    evidence: "screenshots 03-RCP-Spike/evidence/20261029-debian-grokbot-c5dc145/screenshots/09_00_start.png"

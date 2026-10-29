@@ -1,0 +1,33 @@
+# Suite: 09_D04_UI
+# Started: 2026-10-29T15:20:57.3632509+01:00
+# Host: grok-bot-vm-419969949 / Debian GNU/Linux 13 (trixie) / pwsh 7.6.9
+
+ok 1 - [P0] D04-00-ui-started :: log=/workspace/AlgoGebra/repo/03-RCP-Spike/tests/results/09_ui_session1.log
+# 2D pane 50,50 863x871 input=(482,903); 3D pane 919,50 625x871
+not ok 2 - [P0] KBD-01-[A=(1,2)] :: lostFirstBurst=False dialog=True algebraViewChanged=True keystrokes: click bar; End,shift+Home,BackSpace; type 'A=(1,2)'; Return; shot=/workspace/AlgoGebra/repo/03-RCP-Spike/tests/results/screenshots/09_KBD-01.png
+not ok 3 - [P0] KBD-02-[B=(3,4)] :: lostFirstBurst=True dialog=False algebraViewChanged=False keystrokes: click bar; End,shift+Home,BackSpace; type 'B=(3,4)'; Return; shot=/workspace/AlgoGebra/repo/03-RCP-Spike/tests/results/screenshots/09_KBD-02.png
+not ok 4 - [P1] KBD-02-keys-reach-input :: first click+keystrokes after the previous Return/dialog did not reach the AWT input bar; retyped after a 2nd click
+not ok 5 - [P0] KBD-03-[f(x)=x^2] :: lostFirstBurst=False dialog=True algebraViewChanged=False keystrokes: click bar; End,shift+Home,BackSpace; type 'f(x)=x^2'; Return; shot=/workspace/AlgoGebra/repo/03-RCP-Spike/tests/results/screenshots/09_KBD-03.png
+not ok 6 - [P0] KBD-04-[C=5] :: lostFirstBurst=True dialog=False algebraViewChanged=False keystrokes: click bar; End,shift+Home,BackSpace; type 'C=5'; Return; shot=/workspace/AlgoGebra/repo/03-RCP-Spike/tests/results/screenshots/09_KBD-04.png
+not ok 7 - [P1] KBD-04-keys-reach-input :: first click+keystrokes after the previous Return/dialog did not reach the AWT input bar; retyped after a 2nd click
+not ok 8 - [P0] KBD-05-[g(x)=2x+1] :: lostFirstBurst=False dialog=True algebraViewChanged=False keystrokes: click bar; End,shift+Home,BackSpace; type 'g(x)=2x+1'; Return; shot=/workspace/AlgoGebra/repo/03-RCP-Spike/tests/results/screenshots/09_KBD-05.png
+not ok 9 - [P0] KBD-06-[Segment(A,B)] :: lostFirstBurst=True dialog=False algebraViewChanged=False keystrokes: click bar; End,shift+Home,BackSpace; type 'Segment(A,B)'; Return; shot=/workspace/AlgoGebra/repo/03-RCP-Spike/tests/results/screenshots/09_KBD-06.png
+not ok 10 - [P1] KBD-06-keys-reach-input :: first click+keystrokes after the previous Return/dialog did not reach the AWT input bar; retyped after a 2nd click
+not ok 11 - [P0] KBD-07-[t="éàü€"] :: lostFirstBurst=False dialog=True algebraViewChanged=True keystrokes: click bar; End,shift+Home,BackSpace; type 't="éàü€"'; Return; shot=/workspace/AlgoGebra/repo/03-RCP-Spike/tests/results/screenshots/09_KBD-07.png
+not ok 12 - [P1] KBD-08-[((((]-error-dialog :: dialog=False (invalid input must be reported) shot=/workspace/AlgoGebra/repo/03-RCP-Spike/tests/results/screenshots/09_KBD-08.png
+not ok 13 - [P1] KBD-08-keys-reach-input :: first click+keystrokes after the previous Return/dialog did not reach the AWT input bar; retyped after a 2nd click
+# D-04 session-1 sequence: [A=(1,2) => lostFirstBurst=False dialog=True algebraChanged=True] [B=(3,4) => lostFirstBurst=True dialog=False algebraChanged=False] [f(x)=x^2 => lostFirstBurst=False dialog=True algebraChanged=False] [C=5 => lostFirstBurst=True dialog=False algebraChanged=False] [g(x)=2x+1 => lostFirstBurst=False dialog=True algebraChanged=False] [Segment(A,B) => lostFirstBurst=True dialog=False algebraChanged=False] [t="éàü€" => lostFirstBurst=False dialog=True algebraChanged=True] [(((( => lostFirstBurst=True dialog=False algebraChanged=False]
+ok 14 - [P1] D04-CTRLA-01-no-npe :: ctrl+a in 2D input bar: NPE 'Log.logger is null' (ScreenReaderAdapterD.readText -> Log.read) count 0 -> 0
+not ok 15 - [P1] D04-FONT-01-latex-fonts :: ReTeX FontLoaderD fonts/latin/jlm_cmr10.ttf 'Problem reading font data': 2 occurrence(s)
+ok 16 - [P0] D04-FOCUS-01-2d-to-3d :: 3D bar E=(1,1,1): lost=True dialog=False algebra3DChanged=True shot=/workspace/AlgoGebra/repo/03-RCP-Spike/tests/results/screenshots/09_focus_3d.png
+not ok 17 - [P0] D04-FOCUS-02-3d-to-2d :: back to 2D bar P=(2,3): lost=True dialog=True algebra2DChanged=True shot=/workspace/AlgoGebra/repo/03-RCP-Spike/tests/results/screenshots/09_focus_back_2d.png
+not ok 18 - [P1] D04-CLIP-01-copy-2d-paste-3d :: ctrl+c in 2D bar (system clipboard='(xclip not installed)'), ctrl+v in 3D bar, Return: dialog=False algebra3DChanged=False shots=/workspace/AlgoGebra/repo/03-RCP-Spike/tests/results/screenshots/09_clip_pasted.png,/workspace/AlgoGebra/repo/03-RCP-Spike/tests/results/screenshots/09_clip_after_enter.png
+not ok 19 - [P0] D04-ORDER-01-fx-first-input :: fresh session, first input f(x)=x^2: dialog=True shot=/workspace/AlgoGebra/repo/03-RCP-Spike/tests/results/screenshots/09_session2_fx_first.png
+ok 20 - [P0] D04-ORDER-02-point-second-input :: second input A=(1,2): lost=True dialog=False changed=False shot=/workspace/AlgoGebra/repo/03-RCP-Spike/tests/results/screenshots/09_session2_A_second.png
+not ok 21 - [P1] D04-ORDER-03-function-in-3d-pane :: 3D input h(x)=x^2: lost=False dialog=True shot=/workspace/AlgoGebra/repo/03-RCP-Spike/tests/results/screenshots/09_session2_fx_3d.png
+ok 22 - [P1] D04-ORDER-04-function-2d-after-3d :: 2D input k(x)=x+1 after 3D: lost=True dialog=False shot=/workspace/AlgoGebra/repo/03-RCP-Spike/tests/results/screenshots/09_session2_fx_2d_after_3d.png
+ok 23 - [P1] D04-HIDPI-01-startup :: GDK_SCALE=2 swt.autoScale=200 uiScale=2 shot=/workspace/AlgoGebra/repo/03-RCP-Spike/tests/results/screenshots/09_hidpi_start.png
+ok 24 - [P1] D04-HIDPI-02-window-scaled :: shell geometry 2988x1742 on 3200x2000
+
+PASS: 7 FAIL: 17 SKIP: 0
+# CSV: /workspace/AlgoGebra/repo/03-RCP-Spike/tests/results/09_D04_UI_GROK_V1.csv

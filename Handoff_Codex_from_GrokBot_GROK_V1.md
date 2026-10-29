@@ -21,8 +21,9 @@
 3. **Suite 11:** locate an existing Bnd CLI JAR or get owner approval before installing one; then set `GGB_SOURCE` and `BND_JAR`, run the bundle rebuild/resolution comparison, and record evidence.
 4. **Suite 13:** rerun common-jre with Gradle forced to execute (current XML results were up-to-date). The desktop locale-dependent failure is known from the audit; preserve it as a baseline finding unless separately resolved.
 5. **BUG-003:** Codex reviewed 83887ca; Linux selects `.so` resources and Windows DLL paths remain unchanged. Windows suite 08 passes on r9. Owner review is still pending, so keep status `FIXED_PENDING_REVIEW` until accepted.
-6. **BUG-006** (PARI `system()`/`extern()` not in the deny list): **decision pending from the user** — do not change.
-7. **BUG-008 is FIXED:** r9 was rebuilt and suite 08 passed. Do not repeat the rebuild unless the image changes.
+6. **BUG-006 FIXED (user decision):** PARI rejects `system`, `extern`, `externstr`, `fileextern`, `install`, `eval` before gp starts (`02-Cdc/Decisions_PARI_Forbidden_GROK_V1.md`). **The r9 image predates this filter: rebuild (r10) with build.ps1 + install-product.ps1**, then rerun suites 05 and 08 and export them with `-ExportEvidence codex-r10`. Pending user confirmation of the `eval` block.
+7. **BUG-008 is FIXED:** r9 was rebuilt and suite 08 passed. The image now changes (BUG-006), so a new rebuild is needed (item 6).
+8. **Results tracking:** `03-RCP-Spike/tests/results/` is no longer tracked; runs go to `results/<runid>/`. Your earlier Windows results are preserved byte-exact in `03-RCP-Spike/evidence/20261029-windows-codex-689d4b4/` and `.../20261029-windows-codex-r9-e3e8a82/` (sha256 manifests). Export reviewed runs with `-ExportEvidence <name>` and commit the folder.
 
 ## How to run the pack (Windows)
 ```powershell

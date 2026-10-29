@@ -1,0 +1,14 @@
+# Suite: 01_Engine_Discovery
+# Started: 2026-10-29T16:09:38.0366020+01:00
+# Host: grok-bot-vm-419969949 / Debian GNU/Linux 13 (trixie) / pwsh 7.6.9
+
+ok 1 - [P0] DISC-pari-path :: path=/usr/bin/gp
+ok 2 - [P0] DISC-maxima-path :: path=/usr/bin/maxima
+ok 3 - [P0] DISC-gnuplot-path :: path=/usr/bin/gnuplot
+ok 4 - [P0] DISC-java-21 :: openjdk version "21.0.13" 2026-10-20 LTS
+ok 5 - [P0] DISC-engine-pari-spawn :: kind=OK 147ms
+ok 6 - [P0] DISC-engine-maxima-spawn :: kind=OK 162ms
+ok 7 - [P0] DISC-engine-gnuplot-spawn :: kind=ART 208ms
+
+PASS: 7 FAIL: 0 SKIP: 0
+# CSV: /workspace/AlgoGebra/wt-ext/03-RCP-Spike/tests/results/20261029_160937-grok-bot-vm-419969949/01_Engine_Discovery_GROK_V1.csv

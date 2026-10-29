@@ -1,0 +1,17 @@
+# Suite: 02_PARI
+# Started: 2026-10-29T14:49:54.9501247+01:00
+# Host: SHADOW-TB64BO9R / Microsoft Windows NT 10.0.26100.0
+
+ok 1 - [P1] PARI-01-direct :: got=[3,1;5,1;17,1;257,1;641,1;65537,1;6700417,1]
+ok 2 - [P0] PARI-01-engine :: got=3,1;5,1;17,1;257,1;641,1;65537,1;6700417,1
+ok 3 - [P1] PARI-02-direct :: got=18446744073709551615
+ok 4 - [P0] PARI-02-engine :: got=18446744073709551615
+ok 5 - [P1] PARI-03-direct :: got=6
+ok 6 - [P0] PARI-03-engine :: got=6
+ok 7 - [P1] PARI-04-direct :: got=1
+ok 8 - [P0] PARI-04-engine :: got=1
+ok 9 - [P1] PARI-05-direct :: got=x^2+2*x+1
+ok 10 - [P0] PARI-05-engine :: got=x^2+2*x+1
+
+PASS: 10 FAIL: 0 SKIP: 0
+# CSV: D:\ALF_Agents\G1_Geogebra_Migration\03-RCP-Spike\tests\results\02_PARI_GROK_V1.csv

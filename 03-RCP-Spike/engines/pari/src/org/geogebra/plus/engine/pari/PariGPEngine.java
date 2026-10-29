@@ -69,6 +69,13 @@ public final class PariGPEngine extends SubprocessEngine {
     static final String[] WIMS_ILLEGAL = {};
     static final String[] WIMS_ILLPART = { "plot", "write", "help" };
     static final String WIMS_QUIT = "\nquit\n";
+    // BUG-006 (user decision 2026-10-29, 02-Cdc/Decisions_PARI_Forbidden_GROK_V1.md): deliberate deviation from WIMS
+    // (illegal[] empty). Defence in depth on top of default(secure,1), which stays in the header: gp functions that run
+    // shell commands or load native code. Verified with '?name' in gp 2.17.2 (systemstr does not exist).
+    // Matched as whole words, so alias(s,system) is also rejected. "eval" is blocked too: eval(Str("ins","tall(..)"))
+    // rebuilds a blocked name at run time, and in secure mode gp only *asks* before install(), the next stdin line
+    // confirms it (reproduced 2026-10-29 with gp 2.17.2 through the engine: native getpid loaded). Not a sandbox claim (D-ENG-03).
+    static final String[] AGB_ILLEGAL = { "system", "extern", "externstr", "fileextern", "install", "eval" };
 
     @Override
     public String getEngineId() {
@@ -104,6 +111,12 @@ public final class PariGPEngine extends SubprocessEngine {
             if (containsWord(lower, forbidden)) {
                 throw new ExternalComputeException(Code.COMMAND_REJECTED,
                         "PARI/GP command contains a WIMS-blocked command: " + forbidden);
+            }
+        }
+        for (String forbidden : AGB_ILLEGAL) {
+            if (containsWord(lower, forbidden)) {
+                throw new ExternalComputeException(Code.COMMAND_REJECTED,
+                        "PARI/GP command contains a blocked command (AlgoGebra defence in depth, BUG-006): " + forbidden);
             }
         }
         for (int index = 0; index < normalized.length(); index++) {

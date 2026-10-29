@@ -1,6 +1,6 @@
 # GROK_V1 id<TAB>engine<TAB>command<TAB>policy  (REJECT = engine must refuse before spawning; NOEXEC = may run but must not execute a shell / write files; TIMEOUT = must be killed within the budget)
 SBX-01	pari	write("/tmp/algogebra_sbx_pari",1)	REJECT
-SBX-02	pari	system("id")	NOEXEC
+SBX-02	pari	system("id")	REJECT
 SBX-03	pari	plot(x=0,1,x)	REJECT
 SBX-04	maxima	system("id")	REJECT
 SBX-05	maxima	load("/tmp/x.mac")	REJECT
@@ -12,3 +12,9 @@ SBX-10	gnuplot	!id	REJECT
 SBX-11	pari	while(1,)	TIMEOUT
 SBX-12	maxima	for i:1 do i	TIMEOUT
 SBX-13	maxima	:lisp (let ((s (open "/tmp/algogebra_sbx_lisp" :direction :output :if-exists :supersede))) (princ 1 s) (close s))	NOEXEC
+SBX-14	pari	extern("id")	REJECT
+SBX-15	pari	externstr("id")	REJECT
+SBX-16	pari	fileextern("id")	REJECT
+SBX-17	pari	install("getpid","l")	REJECT
+SBX-18	pari	alias(s,system); s("id")	REJECT
+SBX-19	pari	eval(Str("ins","tall(\"getpid\",\"l\")"))	REJECT

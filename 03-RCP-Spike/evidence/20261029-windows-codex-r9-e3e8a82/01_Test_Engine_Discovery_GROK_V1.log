@@ -1,0 +1,14 @@
+# Suite: 01_Engine_Discovery
+# Started: 2026-10-29T15:36:51.3854082+01:00
+# Host: SHADOW-TB64BO9R / Microsoft Windows 10.0.26100 / pwsh 7.6.9
+
+ok 1 - [P0] DISC-pari-path :: path=C:\Program Files (x86)\Pari64-2-19-0\gp.exe
+ok 2 - [P0] DISC-maxima-path :: path=C:\maxima-5.49.0\bin\maxima.bat
+ok 3 - [P0] DISC-gnuplot-path :: path=C:\maxima-5.49.0\gnuplot\bin\gnuplot.exe
+ok 4 - [P0] DISC-java-21 :: openjdk version "21.0.12.1" 2026-08-18 LTS
+ok 5 - [P0] DISC-engine-pari-spawn :: kind=OK 342ms
+ok 6 - [P0] DISC-engine-maxima-spawn :: kind=OK 484ms
+ok 7 - [P0] DISC-engine-gnuplot-spawn :: kind=ART 485ms
+
+PASS: 7 FAIL: 0 SKIP: 0
+# CSV: D:\ALF_Agents\G1_Geogebra_Migration\03-RCP-Spike\tests\results\01_Engine_Discovery_GROK_V1.csv
