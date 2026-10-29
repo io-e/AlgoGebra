@@ -66,11 +66,11 @@ function Get-Between([string]$Out, [string]$Start, [string]$End) {
     $lines = $Out -split "`r?`n" | ForEach-Object { $_.Replace('"', '') }; $acc = $null; $res = ''
     foreach ($l in $lines) { if ($l -eq $Start) { $acc = @(); continue }; if ($l -eq $End) { $res = ($acc | Where-Object { $_ -ne '' }) -join ' '; $acc = $null; continue }; if ($null -ne $acc) { $acc += $l.Trim() } }
     return $res.Trim() }
-function Invoke-RefPari([string]$Cmd) { $gp = (Get-Command gp.exe, gp -ErrorAction SilentlyContinue | Select-Object -First 1).Source; if (-not $gp) { return $null }
+function Invoke-RefPari([string]$Cmd) { $gp = (Get-Command gp.exe, gp -CommandType Application -ErrorAction SilentlyContinue | Select-Object -First 1).Source; if (-not $gp) { return $null }
     $m = "Start line pari $PID $(Get-Random)"; $e = "End line pari $PID $(Get-Random)"
     $in = "\p 20`n" + (Get-WimsHeader 'pari\src\org\geogebra\plus\engine\pari\PariGPEngine.java') + "`nprint(`"$m`")`n$Cmd`nprint(`"$e`")`nquit`n"
     return Get-Between (Invoke-Process $gp @('-f', '-q') $in 30000).out $m $e }
-function Invoke-RefMaxima([string]$Cmd) { $mx = (Get-Command maxima.bat, maxima -ErrorAction SilentlyContinue | Select-Object -First 1).Source; if (-not $mx) { return $null }
+function Invoke-RefMaxima([string]$Cmd) { $mx = (Get-Command maxima.bat, maxima -CommandType Application -ErrorAction SilentlyContinue | Select-Object -First 1).Source; if (-not $mx) { return $null }
     $m = "start line maxima $PID $(Get-Random)"; $e = "end line maxima $PID $(Get-Random)"
     $in = "fpprec:20;`n" + (Get-WimsHeader 'maxima\src\org\geogebra\plus\engine\maxima\MaximaEngine.java') + "`ndisplay2d:false`$`n`"$m`";`n$Cmd`n`"$e`";`nquit();`n"
     return Get-Between (Invoke-Process $mx @('--very-quiet') $in 60000).out $m $e }
@@ -83,5 +83,5 @@ function Invoke-RefGiac([string]$Expr) { $gj = Get-ChildItem (Join-Path $script:
 
 # Missing CAS binary => clean BAIL OUT (exit 2), never a crash or a false FAIL.
 $script:EngineBinaries = @{ pari = @('gp.exe', 'gp'); maxima = @('maxima.bat', 'maxima.exe', 'maxima'); gnuplot = @('gnuplot.exe', 'gnuplot') }
-function Find-EngineBinary([string]$Engine) { Get-Command $script:EngineBinaries[$Engine] -ErrorAction SilentlyContinue | Select-Object -First 1 }
+function Find-EngineBinary([string]$Engine) { Get-Command $script:EngineBinaries[$Engine] -CommandType Application -ErrorAction SilentlyContinue | Select-Object -First 1 }
 function Require-Engines([string[]]$Engines) { foreach ($e in $Engines) { if (-not (Find-EngineBinary $e)) { Exit-Bail "$e binary not on PATH ($($script:EngineBinaries[$e] -join ', ')); install it or extend PATH" } } }
