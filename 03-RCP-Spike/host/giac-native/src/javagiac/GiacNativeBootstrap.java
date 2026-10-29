@@ -14,6 +14,9 @@ import java.nio.file.Path;
  */
 public final class GiacNativeBootstrap {
 
+    // Linux port (GROK_V1): javagiac natives-linux-amd64 ships libjavagiac64.so.
+    private static final String LIB = System.getProperty("os.name","").toLowerCase(java.util.Locale.ROOT).startsWith("windows") ? "javagiac64.dll" : "libjavagiac64.so";
+
     private static volatile boolean loaded;
 
     private GiacNativeBootstrap() {
@@ -21,15 +24,15 @@ public final class GiacNativeBootstrap {
 
     public static synchronized boolean loadFromClasspath() throws Exception {
         if (!loaded) {
-            URL dllResource = ClassLoader.getSystemResource("javagiac64.dll");
+            URL dllResource = ClassLoader.getSystemResource(LIB);
             if (dllResource == null) {
-                dllResource = GiacNativeBootstrap.class.getClassLoader().getResource("javagiac64.dll");
+                dllResource = GiacNativeBootstrap.class.getClassLoader().getResource(LIB);
             }
             if (dllResource == null) {
-                throw new UnsatisfiedLinkError("javagiac64.dll is absent from the product class path");
+                throw new UnsatisfiedLinkError(LIB + " is absent from the product class path");
             }
             Path extractionDirectory = Files.createTempDirectory("geogebraplus-giac-");
-            Path extractedDll = extractionDirectory.resolve("javagiac64.dll");
+            Path extractedDll = extractionDirectory.resolve(LIB);
             try (InputStream input = dllResource.openStream()) {
                 Files.copy(input, extractedDll);
             }

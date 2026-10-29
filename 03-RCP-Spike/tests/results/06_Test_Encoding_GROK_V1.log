@@ -1,0 +1,16 @@
+# Suite: 06_Encoding
+# Started: 2026-10-29T15:03:19.2445042+01:00
+# Host: grok-bot-vm-419969949 / Debian GNU/Linux 13 (trixie) / pwsh 7.6.9
+
+ok 1 - [P1] ENC-01-pari-direct :: got=2
+ok 2 - [P0] ENC-01-pari-engine :: got=2
+ok 3 - [P1] ENC-02-pari-direct :: got="éàü€"
+ok 4 - [P0] ENC-02-pari-engine :: got="éàü€"
+ok 5 - [P1] ENC-03-maxima-direct :: got=1
+ok 6 - [P0] ENC-03-maxima-engine :: got=1
+ok 7 - [P1] ENC-04-maxima-direct :: got="éàü€"
+ok 8 - [P0] ENC-04-maxima-engine :: got="éàü€"
+ok 9 - [P1] ENC-10-gnuplot-accented-title :: kind=ART dim=800x600
+
+PASS: 9 FAIL: 0 SKIP: 0
+# CSV: /workspace/AlgoGebra/repo/03-RCP-Spike/tests/results/06_Encoding_GROK_V1.csv

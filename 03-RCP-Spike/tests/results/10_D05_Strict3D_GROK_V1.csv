@@ -1,0 +1,6 @@
+suite,num,id,status,priority,detail,ts
+10_D05_Strict3D,1,D05-01-strict-no-boot-delegation,PASS,P0,"launched without --boot-delegate-jogamp",2026-10-29T15:05:18.8143480+01:00
+10_D05_Strict3D,2,D05-02-3d-initialized,PASS,P0,"3D view initialized=true",2026-10-29T15:05:18.8208678+01:00
+10_D05_Strict3D,3,D05-03-no-jogl-linkage-error,PASS,P0,"",2026-10-29T15:05:18.8218912+01:00
+10_D05_Strict3D,4,D05-04-3d-not-blank,PASS,P0,"empty 3D scene: colours=1636 nonDominant=0.1904 region=1129,90,1534,851 shot=/workspace/AlgoGebra/repo/03-RCP-Spike/tests/results/screenshots/10_strict3d_empty.png",2026-10-29T15:05:24.0759542+01:00
+10_D05_Strict3D,5,D05-05-3d-redraw-after-point,PASS,P0,"after A=(1,2,3): colours=1649 nonDominant=0.1919 shot=/workspace/AlgoGebra/repo/03-RCP-Spike/tests/results/screenshots/10_strict3d_A123.png",2026-10-29T15:05:24.0787754+01:00

@@ -1,0 +1,39 @@
+2026-10-29T13:28:25+01:00
+
+[      3 1]
+
+[      5 1]
+
+[     17 1]
+
+[    257 1]
+
+[    641 1]
+
+[  65537 1]
+
+[6700417 1]
+
+SIMPLE-WARNING: Maxima is unable to set up the help system.
+(Details: CL-INFO::LOAD-PRIMARY-INDEX: Condition in CL-INFO::LOAD-PRIMARY-INDEX [or a callee]: INTERNAL-SIMPLE-FILE-ERROR: File error on #P"/usr/share/doc/maxima/info/./maxima-index.lisp": File does not exist.)
+
+SIMPLE-WARNING: Maxima is unable to set up the help system.
+(Details: CL-INFO::LOAD-PRIMARY-INDEX: Condition in CL-INFO::LOAD-PRIMARY-INDEX [or a callee]: INTERNAL-SIMPLE-FILE-ERROR: File error on #P"/usr/share/info/./maxima-index-html.lisp": File does not exist.)
+
+
+2*x*cos(x^2)
+/tmp/sinx.png: PNG image data, 800 x 600, 8-bit/color RGB, non-interlaced
+dfe541e8275605e54dedfda45be98e612da8fb9dc87b2b47ee76d5a8d16f760a  /tmp/sinx.png
+ls: cannot access '/tmp/sinx.png': No such file or directory
+2.17.2
+SIMPLE-WARNING: Maxima is unable to set up the help system.
+(Details: CL-INFO::LOAD-PRIMARY-INDEX: Condition in CL-INFO::LOAD-PRIMARY-INDEX [or a callee]: INTERNAL-SIMPLE-FILE-ERROR: File error on #P"/usr/share/doc/maxima/info/./maxima-index.lisp": File does not exist.)
+
+SIMPLE-WARNING: Maxima is unable to set up the help system.
+(Details: CL-INFO::LOAD-PRIMARY-INDEX: Condition in CL-INFO::LOAD-PRIMARY-INDEX [or a callee]: INTERNAL-SIMPLE-FILE-ERROR: File error on #P"/usr/share/info/./maxima-index-html.lisp": File does not exist.)
+
+Maxima 5.47.0
+gnuplot 6.0 patchlevel 2
+openjdk version "21.0.13" 2026-10-20 LTS
+13.7
+6.12.94+

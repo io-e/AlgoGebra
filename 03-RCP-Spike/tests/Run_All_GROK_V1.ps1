@@ -1,11 +1,12 @@
-# GROK_V1 - Run_All aggregator (Windows twin of Run_All_GROK_V1.sh; cf. Claude Run_All_Tests_CLAUDE_V1.ps1).
-param([switch]$SkipRcp)
+# GROK_V1 - Run_All aggregator, single cross-platform runner (pwsh 7 on Windows and Linux; cf. Claude Run_All_Tests_CLAUDE_V1.ps1).
+# Suites 01-13. -SkipRcp skips 08; -SkipUi skips 09/10 (they drive the desktop); 11 (bnd build) and 13 (GeoGebra Gradle baseline) are heavy: opt-in -WithBuild / -WithBaseline.
+param([switch]$SkipRcp, [switch]$SkipUi, [switch]$WithBuild, [switch]$WithBaseline)
 $here = $PSScriptRoot; $res = Join-Path $here 'results'; New-Item -ItemType Directory -Force $res | Out-Null
 $ts = Get-Date -Format 'yyyyMMdd_HHmmss'; $rows = @(); $tp = 0; $tf = 0; $tk = 0; $tb = 0
-$suites = @(Get-ChildItem $here -File | Where-Object { $_.Name -match '^0[1-8]_Test_.*_GROK_V1\.ps1$' } | Sort-Object Name)
+$suites = @(Get-ChildItem $here -File | Where-Object { $_.Name -match '^\d\d_Test_.*_GROK_V1\.ps1$' } | Sort-Object Name)
 if ($suites.Count -eq 0) { Write-Error 'No GROK_V1 test suites found; refusing to report an empty run as passing.'; exit 2 }
 foreach ($s in $suites) {
-    $n = $s.BaseName -replace '_GROK_V1$', ''; if ($SkipRcp -and $n -like '08_*') { Write-Host "SKIP $n"; continue }
+    $n = $s.BaseName -replace '_GROK_V1$', ''; if (($SkipRcp -and $n -like '08_*') -or ($SkipUi -and $n -match '^(09|10)_') -or (-not $WithBuild -and $n -like '11_*') -or (-not $WithBaseline -and $n -like '13_*')) { Write-Host "SKIP $n (not selected)"; continue }
     $log = Join-Path $res "${n}_GROK_V1.log"; & pwsh -NoProfile -ExecutionPolicy Bypass -File $s.FullName *> $log; $rc = $LASTEXITCODE
     $p = 0; $f = 0; $k = 0; $summary = Get-Content $log -Raw
     if ($summary -match 'PASS:\s*(\d+)\s+FAIL:\s*(\d+)\s+SKIP:\s*(\d+)') { $p = [int]$Matches[1]; $f = [int]$Matches[2]; $k = [int]$Matches[3] }

@@ -3,13 +3,14 @@ project: GeoGebraPlus / AlgoGebra RCP
 geogebra_pin: 375db7faf5407390bb322165f2414415da8faeda
 geogebra_version: 5.4.934.0
 repo: https://github.com/io-e/AlgoGebra
-updated: 2026-10-29T14:40+01:00
+updated: 2026-10-29T15:40+01:00
 
 branches:
   feat/external-engines: {head: 8054109, note: "AGENTS.md + Decisions_External_Engines_GROK_V1.md committed"}
   feat/rcp-product-spike: {head: 1280012}
   feat/init-claude-md: {head: 949558a}
-  feat/debian-integration: {head: 83887ca, merged: false, note: "bash ports build.sh/launch.sh/test-engines.sh, Debian report, Linux native loader fix"}
+  feat/debian-integration: {note: "bash ports, Debian report, Linux native loader fix (83887ca, BUG-003), cross-platform ps1 pack 01-13; merged into feat/external-engines 2026-10-29 (no force)"}
+  feat/external-engines_codex: {commit: 689d4b4, author: Codex, note: "Run_All empty-run guard, counter rename TestPassCount..., Get-Between quote handling; merged into feat/debian-integration 820f0b7"}
 
 gates:
   B: IN_PROGRESS
@@ -22,9 +23,11 @@ gates:
 scenarios:
   D-02: {status: PASS, os: Windows}
   D-03: {status: PASS, os: Windows}
-  D-04: {status: PARTIAL, os: Windows, note: "panel renders in SWT; keyboard input/focus issues"}
-  D-04-linux: {status: NOT_RUN}
-  D-05: {status: PASS, os: [Windows, Debian 13], note: "GIAC Expand[(x+1)^2] OK, JOGL loaded; strict 3D screenshot NOT_RUN"}
+  D-04: {status: PARTIAL, os: Windows, note: "panel renders in SWT; keyboard input/focus issues; suite 09 on Windows NOT_RUN"}
+  D-04-linux: {status: FAIL, date: "2026-10-29T15:40+01:00", os: "Debian 13.7 / Xvfb", suite: 03-RCP-Spike/tests/09_Test_D04_UI_GROK_V1.ps1, log: 03-RCP-Spike/tests/results/09_Test_D04_UI_GROK_V1.log, screenshots: 03-RCP-Spike/tests/results/screenshots/09_*.png, bugs: [BUG-004, BUG-010, BUG-011, BUG-012, BUG-013]}
+  D-05: {status: PASS, os: [Windows, Debian 13], note: "GIAC Expand[(x+1)^2] OK, JOGL loaded"}
+  D-05-strict-3d-screenshot: {status: PASS, os: "Debian 13.7 / Xvfb GLX Mesa llvmpipe (software)", suite: 03-RCP-Spike/tests/10_Test_D05_Strict3D_GROK_V1.ps1, screenshots: [03-RCP-Spike/tests/results/screenshots/10_strict3d_empty.png, 03-RCP-Spike/tests/results/screenshots/10_strict3d_A123.png], windows: NOT_RUN}
+  linux-bundle-build: {status: PASS, suite: 11_Test_Bundle_Build_GROK_V1.ps1, note: "bnd 7.1.0 rebuilt 13 production bundles on Linux, BSN/version/exports/imports/class list = r8; Equinox 3.24.300 allResolved=true with 51 jars (13 rebuilt incl. ggbjdk not in r8 + r8 externals); keyboard-scientific recipe SKIP (jar not built by :desktop:assemble); externals not rebuilt (no wrap recipes in repo)"}
   engines-linux: {status: PARTIAL, report: 03-RCP-Spike/DEBIAN-INTEGRATION-VALIDATION-REPORT_GROK_V1.md}
 
 bugs:
@@ -72,7 +75,8 @@ bugs:
     severity: medium
     status: OPEN
     scenario: D-04
-    next: "record exact keystrokes, test SWT_AWT focus, clipboard, high-DPI (Windows and Linux)"
+    linux_findings_2026-10-29: "Suite 09 (Xvfb, xdotool): Return in the 2D input bar raises 'GeoGebra - Error' (Please check your input) even when the object is created (A=(1,2), t=\"éàü€\"); f(x)=x^2 and g(x)=2x+1 are NOT created and raise the dialog; after the dialog is closed the next click+keystrokes are lost (alternating pattern, see BUG-010); fresh session: f(x)=x^2 as first input -> dialog; 3D pane: E=(1,1,1) OK, h(x)=x^2 -> dialog; invalid '((((' gives no dialog (keys lost); HiDPI 200 % starts (shell 2988x1742 on 3200x2000)."
+    next: "run suite 09 on Windows (attended); inspect AlgebraInputD / SWT_AWT key event routing (KEY_TYPED duplicated or Return delivered twice?)"
   - id: BUG-005
     title: "1 locale-dependent failing test in desktop baseline (1089 pass / 1 fail)"
     component: upstream desktop tests (baseline, not project code)
@@ -86,8 +90,9 @@ bugs:
     status: OPEN
 
 open_items:
-  - "Linux Gradle/bnd bundle build not ported (Debian reuses r8 bundles, byte-identical)"
-  - "Strict 3D screenshot for D-05"
+  - "Linux image still staged from r8 bundles; suite 11 shows the Linux bnd rebuild matches r8 (manifests/class lists) but build.sh does not use it yet"
+  - "Run suites 08-13 on Windows (Codex), rebuild r9 (BUG-008)"
+  - "BUG-006 decision pending (user)"
   - "GIAC activator CASFactory.setPrototype + DLL cache with fallback to dummy CAS"
   - "Confirm separate compute.api bundle (deviation from Cdc)"
   - "GPL boundaries in combined image / licence policy before distribution"
@@ -95,9 +100,10 @@ open_items:
   - "Delete temp archives %TEMP%\\r8.zip and r8-nojre.zip"
 test_packs:
   - id: TP-ENG-RCP-GROK_V1
-    path: 03-RCP-Spike/tests (branch feat/debian-integration, commit 88dbea3)
+    path: 03-RCP-Spike/tests (ps1 only, cross-platform; bash twins in 03-RCP-Spike/linux-tests)
+    handoff: Handoff_Codex_from_GrokBot_GROK_V1.md
     model: "Claude WIMS4win tests-win_ALF *_CLAUDE_V1.ps1 + TestFramework/Run_All, run_equiv_pc.ps1, WA-OEF2IPYNB maxima tier, test_unicode_E2.ps1"
-    runner: "Run_All_GROK_V1.sh (Debian, RUN) / Run_All_GROK_V1.ps1 (Windows, NOT_RUN)"
+    runner: "pwsh Run_All_GROK_V1.ps1 (single runner, Windows + Linux)"
     run: {date: "2026-10-29T14:21+01:00", os: "Debian 13.7", java: "Temurin 21.0.13 / 25.0.5", gp: 2.17.2, maxima: 5.47.0, gnuplot: "6.0.2"}
     readme: 03-RCP-Spike/tests/README_TESTS_GROK_V1.md (Codex/Windows usage; pack also on feat/external-engines)
     runs:
@@ -113,6 +119,21 @@ test_packs:
       07_CAS_Equivalence: {pass: 15, fail: 0, skip: 3, note: "3 SKIP = no PARI equivalent"}
       08_RCP_Image: {pass: 7, fail: 0, skip: 0}
     windows_ps1: NOT_RUN_FULL (see windows_check)
+    windows:
+      - {date: "2026-10-29", by: Codex, commit: 689d4b4, base: e6f4bbc, os: Windows, runner: "Run_All_GROK_V1.ps1", engines_path_temporary: {pari: "C:\\Program Files (x86)\\Pari64-2-19-0\\gp.exe", maxima: "C:\\maxima-5.49.0\\bin\\maxima.bat", gnuplot: "C:\\maxima-5.49.0\\gnuplot\\bin\\gnuplot.exe"}, test_engines_ps1: PASS, suites_01_07: {pass: 75, fail: 0, skip: 3}, suite_08: "SKIPPED (opens UI; r9 not rebuilt, BUG-008)", suites_09_13: NOT_RUN, logs: "local on Codex PC 03-RCP-Spike\\tests\\results\\ (not pushed)"}
+    ps1_pack_debian:
+      date: "2026-10-29T15:03-15:45+01:00"
+      os: "Debian 13.7"
+      pwsh: "7.6.9"
+      java: "Temurin 21.0.13 (tests) / 25.0.5 (image)"
+      fixtures_sha256_concat_prefix: 058fe5027ff68fd3
+      command: "pwsh -NoProfile -File 03-RCP-Spike/tests/Run_All_GROK_V1.ps1 -WithBuild -WithBaseline (09 and 12 re-run after test fixes)"
+      suites: {01: 7/0/0, 02: 10/0/0, 03: 14/0/0, 04: 6/0/0, 05: 14/0/0, 06: 9/0/0, 07: 15/0/3, 08: 7/0/0, 09: "7/17/0 (D-04 FAIL)", 10: 5/0/0, 11: 62/0/2, 12: 13/0/0, 13: 5/0/0}
+      note: "01-07 ps1 = 75/0/3, identical to Codex Windows result; 13 counts JUnit XML (common-jre 6526 tests 0 fail 12 skip; desktop 1090 tests 0 fail 2 skip), Gradle tasks were up-to-date from the 14:xx Debian run"
+    ps1_vs_sh:
+      note: "bash twins moved to 03-RCP-Spike/linux-tests/ (reference only); counts from the 14:31 .sh run vs 15:03 ps1 run, both 0 FAIL"
+      table: {01: "sh 10 / ps1 7 (ps1 has no version checks)", 02: "10 / 10", 03: "14 / 14", 04: "8 / 6 (ps1 no direct gnuplot checks)", 05: "16 / 14 (ps1 no process-killed checks)", 06: "11 / 9 (ps1 no accented tmpdir check)", 07: "15+3 skip / 15+3 skip", 08: "7 / 7", 09: "sh 10/14 (exploration) / ps1 same findings"}
+      ps1_bugs_fixed: ["counter variables clobbered by suite variables (case-insensitive $p vs $script:P) - same fix as Codex 689d4b4, Codex names kept", "Get-Between stripped quotes from string results - Codex variant kept", "Windows-only paths/separators/natives -> OS-aware", "08 Windows-only launch/Win32_Process -> launch.sh + pkill on Linux"]
 
 wims_root_cause_BUG-001_BUG-002:
   source: "WIMS src/Interfaces/common.c (prepare1, putparm, readresult), pari.c, maxima.c"
@@ -147,3 +168,36 @@ bugs_added_2026-10-29:
     severity: medium
     status: OPEN
     action: "rebuild with 03-RCP-Spike\\build.ps1 + install-product.ps1 (r9) on Windows"
+    status_2026-10-29: "still OPEN - Codex ran suites 01-07 on Windows without the image; suite 08 skipped"
+  - id: BUG-009
+    title: "NullPointerException 'Log.logger is null' in Log.read via ScreenReaderAdapterD.readText on ctrl+a (embedded GeoGebraPanel never calls Log.setLogger)"
+    component: RCP host (GeoGebraPanel embedding; upstream Log.read not null-safe)
+    severity: low
+    status: OPEN_INTERMITTENT
+    found: "2026-10-29 exploratory Xvfb session (Debian)"
+    evidence: "exploration log only; suite 09 D04-CTRLA-01 did not reproduce it (count 0 -> 0) in the 15:40 run"
+    fix_proposal: "host calls Log.setLogger(new LoggerD()) before creating GeoGebraPanel (project code, no upstream change)"
+  - id: BUG-010
+    title: "D-04: keystrokes lost after the 'Please check your input' dialog is closed (next click + typing do not reach the AWT input bar)"
+    component: RCP host (SWT_AWT focus)
+    severity: high
+    status: OPEN
+    evidence: "09 log KBD-02/04/06/08 lostFirstBurst=True; FOCUS-01/02 lost=True"
+  - id: BUG-011
+    title: "ReTeX FontLoaderD cannot read fonts/latin/jlm_cmr10.ttf in the OSGi image ('Problem reading font data')"
+    component: bundle packaging (renderer resources / classloader)
+    severity: medium
+    status: OPEN
+    evidence: "09 D04-FONT-01: 2 occurrences in results/09_ui_session1.log"
+  - id: BUG-012
+    title: "Clipboard copy from the 2D input bar and paste into the 3D input bar has no effect"
+    component: RCP host (SWT_AWT clipboard / focus)
+    severity: medium
+    status: OPEN
+    evidence: "09 D04-CLIP-01 algebra3DChanged=False (xclip not installed: system clipboard content not read back)"
+  - id: BUG-013
+    title: "Untranslated labels in the embedded panel (InputLabel, AlgebraWindow, DrawingPad)"
+    component: RCP host (localization resources not loaded)
+    severity: low
+    status: OPEN
+    evidence: "screenshots 03-RCP-Spike/tests/results/screenshots/09_00_start.png"
