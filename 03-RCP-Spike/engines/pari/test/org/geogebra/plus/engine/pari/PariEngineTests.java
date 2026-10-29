@@ -24,6 +24,14 @@ public final class PariEngineTests {
         assertRejected(new PariGPEngine(), "plot(sin(x))", "WIMS plot filter");
         assertRejected(new PariGPEngine(), "2+2\n\\quit", "GP escape-command filter");
         assertRejected(new PariGPEngine(), "\\quit", "leading GP escape-command filter");
+        // BUG-006: validateCommand runs before the gp executable is resolved, so COMMAND_REJECTED proves gp is never reached.
+        for (String blocked : new String[] { "system(\"id\")", "extern(\"id\")", "externstr(\"id\")",
+                "fileextern(\"id\")", "install(\"getpid\",\"l\")", "alias(s,system); s(\"id\")", "SYSTEM(\"id\")",
+                "1+1\nsystem (\"id\")", "eval(Str(\"ins\",\"tall(\\\"getpid\\\",\\\"l\\\")\"))" }) {
+            assertRejected(new PariGPEngine(), blocked, "BUG-006 filter: " + blocked);
+        }
+        assertTrue(new PariGPEngine().validateCommand("systematic=1; installed=2; externality=3; evaluate=4").contains("systematic"),
+                "BUG-006 filter must match whole words only");
 
         PariGPEngine engine = new PariGPEngine();
         if (!engine.isAvailable()) {

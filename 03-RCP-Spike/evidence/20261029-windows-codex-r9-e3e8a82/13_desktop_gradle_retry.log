@@ -1,0 +1,90 @@
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/9.4.1/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build 
+> Task :build-logic:convention:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :build-logic:convention:generateExternalPluginSpecBuilders UP-TO-DATE
+> Task :build-logic:convention:extractPrecompiledScriptPluginPlugins UP-TO-DATE
+> Task :build-logic:convention:compilePluginsBlocks UP-TO-DATE
+> Task :build-logic:convention:generatePrecompiledScriptPluginAccessors UP-TO-DATE
+> Task :build-logic:convention:generateScriptPluginAdapters UP-TO-DATE
+> Task :build-logic:convention:compileKotlin UP-TO-DATE
+> Task :build-logic:convention:compileJava NO-SOURCE
+> Task :build-logic:convention:pluginDescriptors UP-TO-DATE
+> Task :build-logic:convention:processResources UP-TO-DATE
+> Task :build-logic:convention:classes UP-TO-DATE
+> Task :build-logic:convention:jar UP-TO-DATE
+> Task :shared:common-jre:processTestFixturesResources NO-SOURCE
+> Task :shared:renderer-base:processResources NO-SOURCE
+> Task :canvas-desktop:processResources NO-SOURCE
+> Task :shared:common:compileJavacc UP-TO-DATE
+> Task :shared:editor-base:compileJavacc UP-TO-DATE
+> Task :editor-desktop:processResources NO-SOURCE
+> Task :shared:giac-jni:compileJava UP-TO-DATE
+> Task :jogl2:compileJava UP-TO-DATE
+> Task :shared:canvas-base:compileJava UP-TO-DATE
+> Task :shared:keyboard-base:compileJava UP-TO-DATE
+> Task :jogl2:processResources NO-SOURCE
+> Task :shared:canvas-base:processResources NO-SOURCE
+> Task :shared:canvas-base:classes UP-TO-DATE
+> Task :jogl2:classes UP-TO-DATE
+> Task :shared:ggbjdk:processResources UP-TO-DATE
+> Task :renderer-desktop:processResources UP-TO-DATE
+> Task :canvas-desktop:compileJava UP-TO-DATE
+> Task :canvas-desktop:classes UP-TO-DATE
+> Task :jogl2:jar UP-TO-DATE
+> Task :canvas-desktop:jar UP-TO-DATE
+> Task :shared:editor-base:processResources NO-SOURCE
+> Task :shared:giac-jni:processResources NO-SOURCE
+> Task :shared:giac-jni:classes UP-TO-DATE
+> Task :shared:giac-jni:jar UP-TO-DATE
+> Task :shared:canvas-base:jar UP-TO-DATE
+> Task :shared:ggbjdk:compileJava UP-TO-DATE
+> Task :shared:ggbjdk:classes UP-TO-DATE
+> Task :shared:ggbjdk:jar UP-TO-DATE
+> Task :desktop:processResources UP-TO-DATE
+> Task :desktop:processTestResources UP-TO-DATE
+> Task :shared:renderer-base:compileJava UP-TO-DATE
+> Task :shared:renderer-base:classes UP-TO-DATE
+> Task :shared:renderer-base:jar UP-TO-DATE
+> Task :renderer-desktop:compileJava UP-TO-DATE
+> Task :renderer-desktop:classes UP-TO-DATE
+> Task :shared:keyboard-base:processResources NO-SOURCE
+> Task :shared:keyboard-base:classes UP-TO-DATE
+> Task :renderer-desktop:jar UP-TO-DATE
+> Task :shared:keyboard-base:jar UP-TO-DATE
+> Task :shared:common-jre:processResources UP-TO-DATE
+> Task :shared:editor-base:compileJava UP-TO-DATE
+> Task :shared:editor-base:classes UP-TO-DATE
+> Task :shared:editor-base:jar UP-TO-DATE
+> Task :editor-desktop:compileJava UP-TO-DATE
+> Task :editor-desktop:classes UP-TO-DATE
+> Task :editor-desktop:jar UP-TO-DATE
+> Task :shared:common:processResources UP-TO-DATE
+> Task :shared:common:compileJava UP-TO-DATE
+> Task :shared:common:classes UP-TO-DATE
+> Task :shared:common:jar UP-TO-DATE
+> Task :shared:common-jre:compileJava UP-TO-DATE
+> Task :shared:common-jre:compileTestFixturesJava UP-TO-DATE
+> Task :shared:common-jre:testFixturesClasses UP-TO-DATE
+> Task :shared:common-jre:testFixturesJar UP-TO-DATE
+> Task :shared:common-jre:classes UP-TO-DATE
+> Task :shared:common-jre:jar UP-TO-DATE
+> Task :desktop:compileJava UP-TO-DATE
+> Task :desktop:classes UP-TO-DATE
+> Task :desktop:compileTestJava UP-TO-DATE
+> Task :desktop:testClasses UP-TO-DATE
+> Task :desktop:test FAILED
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':desktop:test'.
+> java.io.IOException: Unable to delete directory 'D:\ALF_ZGit\G1_Geogebra_Migration\source\desktop\desktop\build\test-results\test\binary'
+
+* Try:
+> Run with --stacktrace option to get the stack trace.
+> Run with --info or --debug option to get more log output.
+> Run with --scan to get full insights from a Build Scan (powered by Develocity).
+> Get more help at https://help.gradle.org.
+
+BUILD FAILED in 19s
+46 actionable tasks: 1 executed, 45 up-to-date

@@ -80,8 +80,8 @@ Installed image: `D:\ALF_ZGit\G1_Geogebra_Migration\bin\GeoGebraPlus-RCP-0.1.0-w
 |---|---|---|
 | D-02 | **PASS** | `IApplication.start()` runs; 50/50 bundles RESOLVED; headless and GUI confirmed. |
 | D-03 | **PASS** | (unchanged from Phase 0) 50 bundles resolve, jogl2 fragment wired. |
-| D-04 | **PARTIAL** | Core embedding PASS: SWT shell hosts `GeoGebraPanel`, Algebra View + toolbars visible, resize/redraw works, `C=5` accepted. Input/focus PARTIAL: "Please check your input" warning on Enter; clipboard and high-DPI not tested. |
-| D-05 | **PASS** (architecture accepted: `Gate_Decision_D-04_D-05_GROK_V1_1.md`, D-GIAC-01) | **Strict installed-image run (r3):** GIAC, GlueGen, and all 5 JOGL DLLs load from product classpath JARs — **no boot delegation, no `java.library.path`, no manual extraction.** CAS and 3D initialization pass. Also verified on Debian 13 (linux-gtk-x86_64 image, 2026-10-29). Remaining open: strict-mode 3D visual screenshot not captured. |
+| D-04 | **PARTIAL** | Core embedding PASS: SWT shell hosts `GeoGebraPanel`, Algebra View + toolbars visible, resize/redraw works, `C=5` accepted. Debian suite 09 found valid-input/focus and function-creation failures; clipboard copy/paste did not work. HiDPI at 200% starts. Windows suite 09 remains NOT RUN (attended UI). |
+| D-05 | **PASS** (architecture accepted: `Gate_Decision_D-04_D-05_GROK_V1_1.md`, D-GIAC-01) | **Strict installed-image run (r3):** GIAC, GlueGen, and all 5 JOGL DLLs load from product classpath JARs — **no boot delegation, no `java.library.path`, no manual extraction.** CAS and 3D initialization pass. Also verified on Debian 13 (linux-gtk-x86_64 image, 2026-10-29); strict 3D screenshot captured under software OpenGL. Windows r9 suite 08 confirms GIAC CAS and JOGL 3D initialization. Real-GPU visual validation remains open. |
 | P-08 | PARTIAL | Pin known (`375db7faf54`, `5.4.934.0`), acceptance tag not chosen. |
 
 **D-05 native loading architecture (r3):** Three OSGi fragment bootstraps extract DLLs from classifier-JAR resources in the owning bundle's classloader and call `System.load` with absolute paths. This replaces the initial boot-delegation workaround:
@@ -93,7 +93,7 @@ Installed image: `D:\ALF_ZGit\G1_Geogebra_Migration\bin\GeoGebraPlus-RCP-0.1.0-w
 
 ### Scenario status summary (45 total)
 
-- **PASS:** D-02, D-03 (2)
+- **PASS:** D-02, D-03, D-05 (3)
 - **PARTIAL:** D-04, P-08 (2)
 - **NOT RUN:** All remaining P (01–07, 09), D (01, 06–10), W (01–08), X (01–07), S (01–07), O (01–05) — 40 scenarios
 
@@ -109,10 +109,11 @@ Installed image: `D:\ALF_ZGit\G1_Geogebra_Migration\bin\GeoGebraPlus-RCP-0.1.0-w
 
 ### Next steps
 
-1. **D-05 closure:** fragment bootstrap accepted (D-GIAC-01); capture strict-mode 3D screenshot. **Fix BUG-001/BUG-002** (PARI/Maxima output parsers) and rerun Debian engine tests - see `states.yaml` and `03-RCP-Spike/DEBIAN-INTEGRATION-VALIDATION-REPORT_GROK_V1.md` (branch `feat/debian-integration`).
-2. **D-04 input/focus investigation:** Record exact keystrokes and command that triggered "Please check your input". Test clean SWT↔AWT focus transfer, clipboard, high-DPI.
-3. **D-06:** Extension bundle management (depends on D-02–D-05 closure).
-4. **Parallel work (Codex):** W-01 (web technology scored study), 5 contract specs (activity, capability, compute, state, submission).
+1. **D-04 on Windows:** run attended suite 09 to investigate SWT↔AWT focus, valid input/function creation, clipboard, and localization/font findings (BUG-004, BUG-009..013). Do not interact with the PC during the run.
+2. **D-05 visual closure:** run attended Windows suite 10 and capture strict-mode 3D output; Debian's software-OpenGL screenshot is not real-GPU evidence.
+3. **Windows bundle/baseline checks:** suite 11 awaits a local/approved Bnd CLI; rerun suite 13 with common-jre forced to execute. Windows desktop baseline has the known locale-sensitive `CallJavaScriptTest.testEval` failure.
+4. **D-06:** Extension bundle management (depends on D-02–D-05 closure).
+5. **Parallel work (Codex):** W-01 (web technology scored study), 5 contract specs (activity, capability, compute, state, submission).
 
 ## Agent roles
 
@@ -193,6 +194,6 @@ TAP + `PASS: n FAIL: n SKIP: n`, exit 0/1/2. Evidence rule below still applies (
 
 1. **RCP + Swing:** `GeoGebraPanel` embedding **works** (D-04 core PASS). `SWT_AWT.new_Frame(SWT.EMBEDDED)` hosted it. **Still open:** focus transfer (Enter triggered a GeoGebra warning), clipboard, high-DPI, menus.
 2. **OSGi wrapping:** 50/50 bundles **RESOLVED** (D-03 PASS). The jogl2 fragment approach works. **Closed for resolution; open for runtime activation.**
-3. **JOGL/GIAC natives — RISK REDUCED (r3):** Boot delegation is **eliminated**. Three product-local OSGi fragment bootstraps load all natives from classifier-JAR resources within their owning bundle classloaders. JogAmp's default extractor still doesn't work under Java 25/Equinox, but the fragment approach is a viable product architecture. **Remaining risk:** GIAC loader is a product-local replacement for upstream `NativeLibClassPathLoader` — needs owner acceptance as architecture. Windows x86_64 only; Linux/macOS untested.
+3. **JOGL/GIAC natives — RISK REDUCED (r3):** Boot delegation is **eliminated**. Three product-local OSGi fragment bootstraps load OS-specific natives from classifier-JAR resources within their owning bundle classloaders. The fragment approach works on Windows x86_64 and Debian 13; strict 3D screenshot is software-OpenGL only. **Remaining risk:** real-GPU visual confirmation and macOS are untested. The product-local GIAC loader replacement is accepted as architecture (D-GIAC-01).
 4. **Dropping GWT:** JS wrapper is not a replacement for four GWT modules. Full web parity is a release gate (Gate C). **Unchanged.**
 5. **External algorithm semantics:** writing a result via API does not make it a native dependent construction object (X-04). **Unchanged.**

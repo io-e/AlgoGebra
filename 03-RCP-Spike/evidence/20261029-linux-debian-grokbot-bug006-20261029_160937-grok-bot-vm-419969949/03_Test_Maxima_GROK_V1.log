@@ -1,0 +1,21 @@
+# Suite: 03_Maxima
+# Started: 2026-10-29T16:09:41.2107807+01:00
+# Host: grok-bot-vm-419969949 / Debian GNU/Linux 13 (trixie) / pwsh 7.6.9
+
+ok 1 - [P1] MAX-01-direct :: got=2*x*cos(x^2)
+ok 2 - [P0] MAX-01-engine :: got=2*x*cos(x^2)
+ok 3 - [P1] MAX-02-direct :: got=x^3/3
+ok 4 - [P0] MAX-02-engine :: got=x^3/3
+ok 5 - [P1] MAX-03-direct :: got=x+1
+ok 6 - [P0] MAX-03-engine :: got=x+1
+ok 7 - [P1] MAX-04-direct :: got=(x-1)*(x+1)
+ok 8 - [P0] MAX-04-engine :: got=(x-1)*(x+1)
+ok 9 - [P1] MAX-05-direct :: got=x^2+2*x+1
+ok 10 - [P0] MAX-05-engine :: got=x^2+2*x+1
+ok 11 - [P1] MAX-06-direct :: got=log(abs(x))
+ok 12 - [P0] MAX-06-engine :: got=log(abs(x))
+ok 13 - [P1] MAX-07-direct :: got=3*5*17*257*641*65537*6700417
+ok 14 - [P0] MAX-07-engine :: got=3*5*17*257*641*65537*6700417
+
+PASS: 14 FAIL: 0 SKIP: 0
+# CSV: /workspace/AlgoGebra/wt-ext/03-RCP-Spike/tests/results/20261029_160937-grok-bot-vm-419969949/03_Maxima_GROK_V1.csv

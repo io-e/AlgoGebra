@@ -1,0 +1,20 @@
+# Suite: 12_Engine_Robustness
+# Started: 2026-10-29T15:38:05.4996863+01:00
+# Host: SHADOW-TB64BO9R / Microsoft Windows 10.0.26100 / pwsh 7.6.9
+
+ok 1 - [P0] ROB-01-pari-8-parallel :: 8 parallel n^20+n: wrong=0 ms=984,980,987,978,994,1009,1077,505
+ok 2 - [P0] ROB-02-maxima-8-parallel :: 8 parallel expand((x+n)^2): wrong=0 sample='x^2+6*x+9'
+ok 3 - [P0] ROB-03-pari-long-output :: 2^200000 digits=60206 (expected 60206) ms=331
+ok 4 - [P1] ROB-04-maxima-long-output :: makelist 1..3000 -> 3000 items, length=14092
+ok 5 - [P0] ROB-05-pari-timeout-reported :: infinite loop, 2 s timeout -> ERR 'ExternalComputeException: pari exceeded timeout 2000 ms; process tree was killed; partial stdout was captured' ms=2284
+ok 6 - [P0] ROB-06-pari-after-timeout :: next call -> '42'
+ok 7 - [P0] ROB-07-pari-crash-reported :: engine exits mid-request (quit()) -> ERR 'ExternalComputeException: pari: execution error or time out (WIMS start/end markers not found in output)'
+ok 8 - [P0] ROB-08-pari-after-crash :: next call -> '42'
+ok 9 - [P0] ROB-09-maxima-timeout-reported :: infinite loop, 3 s -> ERR 'ExternalComputeException: maxima exceeded timeout 3000 ms; process tree was killed; partial stdout was captured' ms=3331
+ok 10 - [P0] ROB-10-maxima-after-timeout :: next call -> '42'
+ok 11 - [P0] ROB-11-no-orphan-processes :: engine processes before=0 after=0
+ok 12 - [P0] ROB-12-marker-spoof-pari :: payload prints fake WIMS markers -> 'End line pari 1 2 Start line pari 3 4 5' (expected: printed text kept verbatim + result 5; real markers are per-request random, so the spoof does not truncate the result)
+ok 13 - [P1] ROB-13-marker-spoof-maxima :: payload prints fake markers -> '5'
+
+PASS: 13 FAIL: 0 SKIP: 0
+# CSV: D:\ALF_Agents\G1_Geogebra_Migration\03-RCP-Spike\tests\results\12_Engine_Robustness_GROK_V1.csv

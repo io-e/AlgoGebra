@@ -64,7 +64,7 @@ b5bb67e551f471dd175528d245e99021047eecdbe9b313aaabcac4da38129678  maxima-gnuplot
 
 Full pack `tests/Run_All_GROK_V1.sh` RUN on Debian: **66 PASS / 25 FAIL / 3 SKIP** (gate NOT MET). Per-suite: 01 10/0/0, 02 5/5/0,
 03 7/7/0, 04 8/0/0, 05 16/0/0, 06 7/4/0, 07 6/9/3, 08 7/0/0. All FAILs = BUG-001/BUG-002 (engine parsers), direct references PASS.
-Logs and CSV: `tests/results/`. Windows `.ps1` twins: NOT RUN. See `tests/README_TESTS_GROK_V1.md`.
+Logs and CSV: `evidence/20261029-debian-grokbot-c5dc145/` (formerly `tests/results/`). Windows `.ps1` twins: NOT RUN. See `tests/README_TESTS_GROK_V1.md`.
 
 ### WIMS vs AlgoGebra port (root cause of BUG-001/BUG-002)
 WIMS `src/Interfaces/common.c` (`prepare1`, `putparm`, `readresult`) generates per call a random `Start line <prog> r1 r2 r3 r4` /
@@ -79,13 +79,13 @@ concatenate header + command without markers, so `parseOutput` returns every hea
 ## Addendum GROK_V1 (15:45 Europe/Paris) — cross-platform PowerShell pack, suites 09-13
 
 Runner `pwsh 7.6.9` on Debian 13.7 (Temurin 21.0.13 tests / 25.0.5 image), fixtures sha256 prefix `058fe5027ff68fd3`,
-command `pwsh -NoProfile -File 03-RCP-Spike/tests/Run_All_GROK_V1.ps1 -WithBuild -WithBaseline`, logs `03-RCP-Spike/tests/results/`.
+command `pwsh -NoProfile -File 03-RCP-Spike/tests/Run_All_GROK_V1.ps1 -WithBuild -WithBaseline`, logs now in `03-RCP-Spike/evidence/20261029-debian-grokbot-c5dc145/`.
 
 | Suite | Result | Note |
 |---|---|---|
 | 01-07 | 75/0/3 | identical to Codex Windows run (689d4b4) |
 | 08 RCP_Image | 7/0/0 | Xvfb, launch.sh |
-| 09 D04_UI | 7/17/0 | BUG-004, BUG-010..013; screenshots `tests/results/screenshots/09_*.png` |
+| 09 D04_UI | 7/17/0 | BUG-004, BUG-010..013; screenshots `evidence/20261029-debian-grokbot-c5dc145/screenshots/09_*.png` |
 | 10 D05_Strict3D | 5/0/0 | strict mode, non-blank 3D pixels, redraw after A=(1,2,3); Mesa llvmpipe; `10_strict3d_*.png` |
 | 11 Bundle_Build | 62/0/2 | bnd 7.1.0 Linux rebuild = r8 (BSN, version, exports, imports, class list); Equinox allResolved=true (51 jars) |
 | 12 Engine_Robustness | 13/0/0 | 8 parallel PARI/Maxima, 2^200000, timeout/crash recovery, no orphans, fake markers |
@@ -93,3 +93,7 @@ command `pwsh -NoProfile -File 03-RCP-Spike/tests/Run_All_GROK_V1.ps1 -WithBuild
 
 The pre-existing bash suites were moved to `03-RCP-Spike/linux-tests/` (reference only); `tests/` is PowerShell-only.
 NOT RUN: all suites 08-13 on Windows; Windows UI driver path; real GPU 3D (only software GL).
+
+## Addendum GROK_V1 (16:30 Europe/Paris) — BUG-006 fix and evidence retention
+PARI filter now rejects system/extern/externstr/fileextern/install/eval (decision `02-Cdc/Decisions_PARI_Forbidden_GROK_V1.md`). Linux image rebuilt with `build.sh`;
+`Run_All -SkipUi` = 101/0/3, evidence `evidence/20261029-linux-debian-grokbot-bug006-20261029_160937-grok-bot-vm-419969949/`. `tests/results/` is no longer tracked.

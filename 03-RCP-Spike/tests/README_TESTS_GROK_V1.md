@@ -12,7 +12,8 @@ Modelled on Claude's WIMS4win pack (`tests-win_ALF/*_CLAUDE_V1.ps1`, `lib/TestFr
 - The former bash twins of suites 01-08 (`*.sh`, `lib/tf_GROK_V1.sh`, `Run_All_GROK_V1.sh`) moved to `03-RCP-Spike/linux-tests/`, next to the project scripts (`build.sh`, `launch.sh`, `test-engines.sh` stay in `03-RCP-Spike/` beside their `.ps1` twins). They are kept for reference/cross-check only; `tests/` holds only `.ps1`, tools and fixtures. No new suites are written in bash.
 - `tools/EngineCli_GROK_V1.java` (drives an engine bundle), `tools/GiacCli_GROK_V1.java` (javagiac JNI from the image).
 - `fixtures/*.tsv` — UTF-8, tab-separated, shared. Expected values were produced by real CLI runs (never invented).
-- `results/` — per-suite CSV + logs, `Run_All_<ts>_GROK_V1.csv/.md`.
+- `results/` — **git-ignored** local output. Run_All writes `results/<yyyyMMdd_HHmmss>-<host>/`; single suites write `results/` (or `RESULTS_DIR`).
+- `../evidence/<date>-<os>-<who>-<runid>/` — versioned, immutable evidence of reviewed runs with `MANIFEST_GROK_V1.tsv` (sha256). Export with `-ExportEvidence <name>`. Archive routine full logs as CI artifacts or keep them locally by run ID.
 
 ## Prerequisites (Windows)
 | Item | Requirement / hint |
@@ -42,7 +43,7 @@ D-ENG-02: do not download/install engines without the user's approval. A missing
 ```powershell
 cd 03-RCP-Spike\tests
 pwsh -File 01_Test_Engine_Discovery_GROK_V1.ps1      # one suite
-pwsh -File Run_All_GROK_V1.ps1 [-SkipRcp] [-SkipUi] [-WithBuild] [-WithBaseline]   # -> results\Run_All_<ts>_GROK_V1.csv
+pwsh -File Run_All_GROK_V1.ps1 [-SkipRcp] [-SkipUi] [-WithBuild] [-WithBaseline] [-ExportEvidence <name>]   # -> results\<runid>\
 ```
 Same command on Debian (`pwsh -File Run_All_GROK_V1.ps1 -WithBuild -WithBaseline`). Run_All refuses an empty suite list (exit 2), counts a suite
 without summary as FAIL, and reports BAIL separately (Codex 689d4b4). 09/10 drive the desktop: on Windows run them only in an attended session.
@@ -54,7 +55,7 @@ without summary as FAIL, and reports BAIL separately (Codex 689d4b4). 09/10 driv
 | 02 | PARI | WIMS-style direct gp vs engine; `factor(2^64-1)` etc. | PASS since BUG-001 fix (093b302) |
 | 03 | Maxima | diff / integrate (incl. `logabs:true` → `log(abs(x))`) / ratsimp / factor / expand | PASS since BUG-002 fix |
 | 04 | Gnuplot | PNG 800x600, artefact deleted after close | PASS |
-| 05 | Sandbox | WIMS deny lists, `:lisp`, no file written, 3 s timeout + process-tree kill | PASS (BUG-006 open: PARI `system()` relies on gp secure mode) |
+| 05 | Sandbox | WIMS deny lists, `:lisp`, no file written, 3 s timeout + process-tree kill | PASS (BUG-006 FIXED: PARI system/extern/externstr/fileextern/install/eval rejected before gp; SBX-14..19) |
 | 06 | Encoding | é à ü € in/out, accented gnuplot title, accented temp dir (sh) | PASS |
 | 07 | CAS_Equivalence | GIAC JNI vs PARI vs Maxima | PASS, 3 SKIP (no PARI equivalent) |
 | 08 | RCP_Image | D-02 50/50 resolved, 3 engines available, GIAC `Expand[(x+1)^2]`, 3D view | PASS on Debian; on Windows image engines are available only if binaries are on PATH |
@@ -70,7 +71,7 @@ Exit codes: 0 all pass, 1 any FAIL, 2 BAIL OUT (environment missing), 124 timeou
 
 ## Evidence rule (AGENTS.md)
 A scenario counts as RUN only with: date, commit, OS, Java, fixture hash (`sha256sum fixtures/*.tsv` / `Get-FileHash`), command,
-expected vs actual, log path (`results/…`). A Gradle/javac build success is not evidence. Anything not executed is reported **NOT RUN**.
+expected vs actual, log path (`../evidence/<run>/…` for reviewed runs). A Gradle/javac build success is not evidence. Anything not executed is reported **NOT RUN**.
 
 ## Debian results (2026-10-29, Debian 13.7, Temurin 21.0.13/25.0.5, gp 2.17.2, Maxima 5.47.0, gnuplot 6.0.2)
 | Run | 01 | 02 | 03 | 04 | 05 | 06 | 07 | 08 | Total |
@@ -81,7 +82,13 @@ expected vs actual, log path (`results/…`). A Gradle/javac build success is no
 ## PowerShell pack results (2026-10-29)
 | Run | 01 | 02 | 03 | 04 | 05 | 06 | 07 | 08 | 09 | 10 | 11 | 12 | 13 |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| Windows, Codex 689d4b4 (temporary PATH) | 75/0/3 total for 01-07 ||||||| SKIP | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN |
+| Windows, Codex e3e8a82 (r9, temporary PATH) | 7/0/0 | 10/0/0 | 14/0/0 | 6/0/0 | 14/0/0 | 9/0/0 | 15/0/3 | 7/0/0 | NOT RUN (attended UI) | NOT RUN (attended UI) | NOT RUN (Bnd CLI absent) | 13/0/0 | 3/2/0 (known desktop locale failure) |
 | Debian, pwsh 7.6.9, 15:03-15:45 | 7/0/0 | 10/0/0 | 14/0/0 | 6/0/0 | 14/0/0 | 9/0/0 | 15/0/3 | 7/0/0 | 7/17/0 (D-04) | 5/0/0 | 62/0/2 | 13/0/0 | 5/0/0 |
 
+Windows evidence (2026-10-29): R9 was rebuilt and installed at `D:\ALF_ZGit\G1_Geogebra_Migration\bin\GeoGebraPlus-RCP-0.1.0-win32-x86_64-r9`. `Run_All_GROK_V1.ps1 -SkipUi` returned **95 PASS, 0 FAIL, 3 SKIP** for suites 01-08 and 12; suite 08 confirmed 50/50 resolution, all three engines available, GIAC CAS, and JOGL 3D initialization. `test-engines.ps1` also passed the PARI factorization, Maxima derivative, and Gnuplot PNG checks. Suite 13 was run separately: common-jre had 6,526 existing test results (6,514 pass, 12 skipped; Gradle task `UP-TO-DATE`), while desktop executed 1,090 tests and failed only the known locale-sensitive `CallJavaScriptTest.testEval` (1,088 pass, 1 fail, 1 skipped). Suites 09/10 were not run because they drive the attended desktop; suite 11 was not run because no Bnd CLI JAR is installed. Run summary: `results/Run_All_20261029_153650_GROK_V1.csv`; suite 13 summary: `results/13_GeoGebra_Baseline_GROK_V1.csv`.
+
 ps1 vs former sh (14:31, 0 FAIL both): 01 7 vs 10 (no version checks), 04 6 vs 8, 05 14 vs 16, 06 9 vs 11; 02, 03, 07, 08 equal.
+
+## After BUG-006 fix (2026-10-29 16:09, Debian, pwsh 7.6.9)
+`Run_All_GROK_V1.ps1 -SkipUi -ExportEvidence debian-grokbot-bug006`: 01 7, 02 10, 03 14, 04 6, **05 20** (SBX-02 + SBX-14..19 REJECT), 06 9, 07 15/0/3, 08 7, 12 13 → **101/0/3 GATE MET**.
+Evidence: `03-RCP-Spike/evidence/20261029-linux-debian-grokbot-bug006-20261029_160937-grok-bot-vm-419969949/`. Earlier runs: see `03-RCP-Spike/evidence/README.md`.

@@ -1,0 +1,25 @@
+# GROK_V1 evidence MANIFEST - immutable: do not edit files in this folder; add a new run folder instead
+# run: Codex, Windows PC SHADOW-TB64BO9R, 2026-10-29 14:44-14:50 Europe/Paris, commit 689d4b4 (base e6f4bbc)
+# command: pwsh -File 03-RCP-Spike\tests\Run_All_GROK_V1.ps1 (suites 01-07; 08 skipped, opens UI)
+# engines (temporary PATH): C:\Program Files (x86)\Pari64-2-19-0\gp.exe; C:\maxima-5.49.0\bin\maxima.bat; C:\maxima-5.49.0\gnuplot\bin\gnuplot.exe
+# totals: 75 PASS / 0 FAIL / 3 SKIP (Run_All_20261029_144951); earlier Run_All csv files are partial/aborted runs (144444 is empty)
+# source: untracked D:\ALF_Agents\G1_Geogebra_Migration\03-RCP-Spike\tests\results, backup D:\ALF_Agents\_backup_codex_results_20261029 (kept); zip sha256 5139c611...279b; per-file hashes verified against Get-FileHash on Windows
+# columns: path<TAB>bytes<TAB>sha256
+01_Engine_Discovery_GROK_V1.csv	864	2c14c17cb433a53af2eae6c4e977608eb5bcad355968b26dea14c6066ebfaaae
+01_Test_Engine_Discovery_GROK_V1.log	736	7705a382d55a11d89687726aa66d7d1492217adabc996900a657cb2b5cb6960e
+02_PARI_GROK_V1.csv	939	69cb115299a4e5b2dc81ef366d2f2e6528f5c7f16f2a8a0cc398909e70780f2f
+02_Test_PARI_GROK_V1.log	755	cf30da9cb8aa5ebcf1653efda1d9c3b56429556d4bfac3ed6fa5625fa6d48470
+03_Maxima_GROK_V1.csv	1267	43efcc23c0aa5094901d25410a529ade158e3711cf2ebc1bd21c4d21a633dff8
+03_Test_Maxima_GROK_V1.log	903	9733576f5d9439f47f34536e446a741fda58feadad51ffdd914eeb34b6425396
+04_Gnuplot_GROK_V1.csv	981	564df2174f418657887c6f54772a4be7cdb886aa621909e4d44d51fee7f5e8be
+04_Test_Gnuplot_GROK_V1.log	940	db81f4c528a1f5180288b3278f03b8e5f2e1ddf7984c405178b2ca67bf8d987e
+05_Sandbox_GROK_V1.csv	2686	aec491108065afe0e29c84f5556046f29349f7978b87bbe7b048abc57e06db9e
+05_Test_Sandbox_GROK_V1.log	2310	a357197d53cae260e2e49a98ed8ed71f6c81677cf8155a1873365079c79c4e2d
+06_Encoding_GROK_V1.csv	870	21b4a648f7586181abf57f71c5d4ef3c7a8502f285f5a12d6517179d371649fe
+06_Test_Encoding_GROK_V1.log	696	6d8fd17b451e094bb86a53330d5ced3107ff0bfa4662775dab90b4192a1d1f4a
+07_CAS_Equivalence_GROK_V1.csv	1743	c8f187f23acffcbb7ea328117e2b965c9c1741a48066f83e2bfc60e6ffbbb977
+07_Test_CAS_Equivalence_GROK_V1.log	1083	e7a0395d8c6bf52e918bcf57d69d5817050de09f21b7e47efd0c94a56ae61667
+Run_All_20261029_144444_GROK_V1.csv	0	e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+Run_All_20261029_144605_GROK_V1.csv	583	f1b5d0a225b26c1bbb090340f90eea2ae7e675a678cac7aa8a21143687227772
+Run_All_20261029_144802_GROK_V1.csv	585	531cdf23fd9191d1ca286ea7a9f70abff6b618d92792a65f6ef356f4149496d8
+Run_All_20261029_144951_GROK_V1.csv	586	be1cd26dee3db6baaa2a1a44adf5dbfbe09dbcc11dd01486a5c8086fc6d3d3c3

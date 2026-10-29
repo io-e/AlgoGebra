@@ -1,0 +1,8 @@
+suite,num,id,status,priority,detail,ts
+08_RCP_Image,1,RCP-01-d02-50-resolved,PASS,P0,"50/50",2026-10-29T16:10:05.2793234+01:00
+08_RCP_Image,2,RCP-02-pari-available,PASS,P0,"external engine pari; available=true",2026-10-29T16:10:05.2880401+01:00
+08_RCP_Image,3,RCP-02-maxima-available,PASS,P0,"external engine maxima; available=true",2026-10-29T16:10:05.2892073+01:00
+08_RCP_Image,4,RCP-02-gnuplot-available,PASS,P0,"external engine gnuplot; available=true",2026-10-29T16:10:05.2900503+01:00
+08_RCP_Image,5,RCP-03-giac-native,PASS,P0,"",2026-10-29T16:10:14.3421268+01:00
+08_RCP_Image,6,RCP-04-giac-expand,PASS,P0,"D-05 CAS result: x² + 2x + 1",2026-10-29T16:10:14.3442290+01:00
+08_RCP_Image,7,RCP-05-jogl-3d,PASS,P1,"",2026-10-29T16:10:14.3456779+01:00

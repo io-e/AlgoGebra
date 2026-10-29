@@ -1,0 +1,30 @@
+# GROK_V1 evidence MANIFEST - immutable: do not edit files in this folder; add a new run folder instead
+# run: Codex, Windows 10.0.26100 PC SHADOW-TB64BO9R, 2026-10-29 15:36-15:57 Europe/Paris, tested commit e3e8a82 (base ffb3ff2), image ...-win32-x86_64-r9, pwsh 7.6.9, JDK 21.0.12 / Java 25 runtime
+# totals: Run_All_20261029_153650 01-08 + 12 = 95 PASS / 0 FAIL / 3 SKIP; suite 13 separate (see 13_*; one known locale failure per states.yaml)
+# source: byte-exact copy (zip sha256 483dd7b3...270e) of files modified >= 15:29 in D:\ALF_Agents\G1_Geogebra_Migration\03-RCP-Spike\tests\results; per-file sha256 verified against Get-FileHash on Windows (25/25); the 23 files Codex committed in e3e8a82/805814f are identical modulo CRLF (git normalised them)
+# columns: path<TAB>bytes<TAB>sha256
+01_Engine_Discovery_GROK_V1.csv	864	0bd2968089ffbbef82af6d0c491542da7e28a61893884db606097386a953879f
+01_Test_Engine_Discovery_GROK_V1.log	744	9dabb09d6f9e5706bf949c8d6210d51aa2d3a414a52a7a1865a0116fc0688129
+02_PARI_GROK_V1.csv	939	99c83a2b769401d9d167fd4d946f85ac98bc8b943deca12a301a19206e634ee6
+02_Test_PARI_GROK_V1.log	763	fe54bc5236cc5526be76e117aa80ad4ac9df371b7ee3f63c6c5d9754c72b772d
+03_Maxima_GROK_V1.csv	1267	da1bbec12f6e1f92bd084bb7adebfa2f66b78336c0cbb9f113735fafe5d5939f
+03_Test_Maxima_GROK_V1.log	911	4d531c813b79dc3a15f6945257cce4cb5df79196097cfa77d5bb58e89420bff9
+04_Gnuplot_GROK_V1.csv	980	a5077d80547b55e2e9f8e91c736f35f14f2c191613ecafb29e9f2a6aaf4b35aa
+04_Test_Gnuplot_GROK_V1.log	947	5d9a878e41915dd66bfa38abecd36641e0fa00b28d83cd2c26e2c7ad6ab6f231
+05_Sandbox_GROK_V1.csv	2686	7cb2b9ce274e856109a402d81ac830ff4aa7c55f8359054d8a503c3e9acbe2a5
+05_Test_Sandbox_GROK_V1.log	2318	d0bd5c2bf6a442f7770d10b507d10745f8961cfc9c960ecb39e5c00d52089673
+06_Encoding_GROK_V1.csv	870	a91b75b4dae96ca307b9f432ecf4e5cf6991ef9b95934918fa08083184f7b486
+06_Test_Encoding_GROK_V1.log	704	ced2ae1f5e23f1780d633b24ec5a9bb751386c2da2da6fd9aa7412def14f54f8
+07_CAS_Equivalence_GROK_V1.csv	1743	fcfc81cbce24b26edfc91e7b65be6ec8965a255aa1bf1d88faabda9ff94dd9f4
+07_Test_CAS_Equivalence_GROK_V1.log	1091	cd61e3d34bc68ae3ba12ece70ef2b0089826f2d9fd980d33a3c7edf41d35ec0c
+08_RCP_Image_GROK_V1.csv	756	182c4160977f548738ba081c4e2b11ff10623b3baa83d4149253df27f1196a04
+08_Test_RCP_Image_GROK_V1.log	679	9e94951c697dddda7c95e97ebb90ce143e2596274ec906c9f07a3b48ff681d50
+08_headless.log	1435	d5c606a61f7323d4516f2b0b5e1fddbbe505181d502f35543b764e7a1c388c7f
+08_ui.log	5115	c5707ed86607142c98028f37bde067803ea15936035089ce8936126668432e50
+12_Engine_Robustness_GROK_V1.csv	2261	4231957e5094232c38ac9d937103a9236256867fbe04ea030463047f30947fd8
+12_Test_Engine_Robustness_GROK_V1.log	1825	2cfa14294301829a66c0f03e30097ead2cb0026815fc9adfe4093953a6d38396
+13_GeoGebra_Baseline_GROK_V1.csv	1099	69d17062cfb8ae55c5ac5cd50826e62cceec672a1453da23ce51902a3cfed688
+13_common-jre_gradle.log	2775	8eb6bacfaecc90ec6f48e4a6c4153b9a67eadd6871f46744169fa6d2efdc827c
+13_desktop_gradle.log	366185	a16ec39d43da1c52f9355af2104cd9e232e48260069c6bec99e7f46505a4d4ef
+13_desktop_gradle_retry.log	4500	6d3e852a18a67349107ab8bfffde65c4ab88eb5ae42bf8a089f753007a2e3e22
+Run_All_20261029_153650_GROK_V1.csv	755	c2336a31c6a92b96664f4f7ada3237d5731c69332bd018f1dba3c27f06de7e5e

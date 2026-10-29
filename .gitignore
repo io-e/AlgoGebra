@@ -28,3 +28,9 @@ __pycache__/
 02-Cdc/Bnd_Equinox_Resolution_Win64/classes/
 02-Cdc/Bnd_Equinox_Resolution_Win64/framework-storage*/
 02-Cdc/osgi-manifest-drafts/*.jar
+
+# GROK_V1: mutable test output (evidence lives in 03-RCP-Spike/evidence/)
+03-RCP-Spike/tests/results/*
+!03-RCP-Spike/tests/results/README.md
+!03-RCP-Spike/evidence/2*/**/*.log
+!03-RCP-Spike/evidence/2*/*.log

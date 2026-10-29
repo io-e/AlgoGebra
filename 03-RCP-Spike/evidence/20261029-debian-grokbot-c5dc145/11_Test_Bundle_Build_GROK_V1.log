@@ -1,0 +1,71 @@
+# Suite: 11_Bundle_Build
+# Started: 2026-10-29T15:05:26.3802424+01:00
+# Host: grok-bot-vm-419969949 / Debian GNU/Linux 13 (trixie) / pwsh 7.6.9
+
+ok 1 - [P0] BLD-canvas-base-build :: bnd rc=0 warnings=0 out=/tmp/grok11-2625020/bundles/org.geogebra.migration.shared.canvas.base-5.4.934.0.jar
+ok 2 - [P0] BLD-canvas-base-bsn-version :: org.geogebra.migration.shared.canvas.base 5.4.934.0 vs r8 org.geogebra.migration.shared.canvas.base 5.4.934.0
+ok 3 - [P0] BLD-canvas-base-exports-eq-r8 :: exports new=4 r8=4 diff=
+ok 4 - [P1] BLD-canvas-base-imports-eq-r8 :: imports new=7 r8=7 diff=
+ok 5 - [P1] BLD-canvas-base-class-list-eq-r8 :: classes new=36 r8=36 diff=0 (bytecode differs by toolchain; entry list compared, hash not expected equal)
+ok 6 - [P0] BLD-canvas-desktop-build :: bnd rc=0 warnings=0 out=/tmp/grok11-2625020/bundles/org.geogebra.migration.desktop.canvas-5.4.934.0.jar
+ok 7 - [P0] BLD-canvas-desktop-bsn-version :: org.geogebra.migration.desktop.canvas 5.4.934.0 vs r8 org.geogebra.migration.desktop.canvas 5.4.934.0
+ok 8 - [P0] BLD-canvas-desktop-exports-eq-r8 :: exports new=3 r8=3 diff=
+ok 9 - [P1] BLD-canvas-desktop-imports-eq-r8 :: imports new=14 r8=14 diff=
+ok 10 - [P1] BLD-canvas-desktop-class-list-eq-r8 :: classes new=30 r8=30 diff=0 (bytecode differs by toolchain; entry list compared, hash not expected equal)
+ok 11 - [P0] BLD-common-jre-build :: bnd rc=0 warnings=0 out=/tmp/grok11-2625020/bundles/org.geogebra.migration.shared.common.jre-5.4.934.0.jar
+ok 12 - [P0] BLD-common-jre-bsn-version :: org.geogebra.migration.shared.common.jre 5.4.934.0 vs r8 org.geogebra.migration.shared.common.jre 5.4.934.0
+ok 13 - [P0] BLD-common-jre-exports-eq-r8 :: exports new=40 r8=40 diff=
+ok 14 - [P1] BLD-common-jre-imports-eq-r8 :: imports new=69 r8=69 diff=
+ok 15 - [P1] BLD-common-jre-class-list-eq-r8 :: classes new=64 r8=64 diff=0 (bytecode differs by toolchain; entry list compared, hash not expected equal)
+ok 16 - [P0] BLD-common-build :: bnd rc=0 warnings=0 out=/tmp/grok11-2625020/bundles/org.geogebra.migration.shared.common-5.4.934.0.jar
+ok 17 - [P0] BLD-common-bsn-version :: org.geogebra.migration.shared.common 5.4.934.0 vs r8 org.geogebra.migration.shared.common 5.4.934.0
+ok 18 - [P0] BLD-common-exports-eq-r8 :: exports new=246 r8=246 diff=
+ok 19 - [P1] BLD-common-imports-eq-r8 :: imports new=261 r8=261 diff=
+ok 20 - [P1] BLD-common-class-list-eq-r8 :: classes new=4932 r8=4932 diff=0 (bytecode differs by toolchain; entry list compared, hash not expected equal)
+ok 21 - [P0] BLD-desktop-build :: bnd rc=0 warnings=1 out=/tmp/grok11-2625020/bundles/org.geogebra.migration.desktop-5.4.934.0.jar
+ok 22 - [P0] BLD-desktop-bsn-version :: org.geogebra.migration.desktop 5.4.934.0 vs r8 org.geogebra.migration.desktop 5.4.934.0
+ok 23 - [P0] BLD-desktop-exports-eq-r8 :: exports new=148 r8=148 diff=
+ok 24 - [P1] BLD-desktop-imports-eq-r8 :: imports new=245 r8=245 diff=
+ok 25 - [P1] BLD-desktop-class-list-eq-r8 :: classes new=1258 r8=1258 diff=0 (bytecode differs by toolchain; entry list compared, hash not expected equal)
+ok 26 - [P0] BLD-editor-base-build :: bnd rc=0 warnings=0 out=/tmp/grok11-2625020/bundles/org.geogebra.migration.shared.editor.base-5.4.934.0.jar
+ok 27 - [P0] BLD-editor-base-bsn-version :: org.geogebra.migration.shared.editor.base 5.4.934.0 vs r8 org.geogebra.migration.shared.editor.base 5.4.934.0
+ok 28 - [P0] BLD-editor-base-exports-eq-r8 :: exports new=16 r8=16 diff=
+ok 29 - [P1] BLD-editor-base-imports-eq-r8 :: imports new=28 r8=28 diff=
+ok 30 - [P1] BLD-editor-base-class-list-eq-r8 :: classes new=136 r8=136 diff=0 (bytecode differs by toolchain; entry list compared, hash not expected equal)
+ok 31 - [P0] BLD-editor-desktop-build :: bnd rc=0 warnings=0 out=/tmp/grok11-2625020/bundles/org.geogebra.migration.desktop.editor-5.4.934.0.jar
+ok 32 - [P0] BLD-editor-desktop-bsn-version :: org.geogebra.migration.desktop.editor 5.4.934.0 vs r8 org.geogebra.migration.desktop.editor 5.4.934.0
+ok 33 - [P0] BLD-editor-desktop-exports-eq-r8 :: exports new=6 r8=6 diff=
+ok 34 - [P1] BLD-editor-desktop-imports-eq-r8 :: imports new=15 r8=15 diff=
+ok 35 - [P1] BLD-editor-desktop-class-list-eq-r8 :: classes new=4 r8=4 diff=0 (bytecode differs by toolchain; entry list compared, hash not expected equal)
+ok 36 - [P0] BLD-ggbjdk-build :: bnd rc=0 warnings=0 out=/tmp/grok11-2625020/bundles/org.geogebra.migration.shared.ggbjdk-5.4.934.0.jar
+ok 37 - [P1] BLD-ggbjdk-vs-r8 # SKIP no reference bundle org.geogebra.migration.shared.ggbjdk-5.4.934.0.jar in /workspace/AlgoGebra/image/GeoGebraPlus-RCP-0.1.0-linux-gtk-x86_64/bundles (not part of r8)
+ok 38 - [P0] BLD-giac-jni-build :: bnd rc=0 warnings=0 out=/tmp/grok11-2625020/bundles/org.geogebra.migration.shared.giac.jni-5.4.934.0.jar
+ok 39 - [P0] BLD-giac-jni-bsn-version :: org.geogebra.migration.shared.giac.jni 5.4.934.0 vs r8 org.geogebra.migration.shared.giac.jni 5.4.934.0
+ok 40 - [P0] BLD-giac-jni-exports-eq-r8 :: exports new=1 r8=1 diff=
+ok 41 - [P1] BLD-giac-jni-imports-eq-r8 :: imports new=4 r8=4 diff=
+ok 42 - [P1] BLD-giac-jni-class-list-eq-r8 :: classes new=6 r8=6 diff=0 (bytecode differs by toolchain; entry list compared, hash not expected equal)
+ok 43 - [P0] BLD-jogl2-build :: bnd rc=0 warnings=1 out=/tmp/grok11-2625020/bundles/org.geogebra.migration.desktop.jogl2-5.4.934.0.jar
+ok 44 - [P0] BLD-jogl2-bsn-version :: org.geogebra.migration.desktop.jogl2 5.4.934.0 vs r8 org.geogebra.migration.desktop.jogl2 5.4.934.0
+ok 45 - [P0] BLD-jogl2-exports-eq-r8 :: exports new=0 r8=0 diff=
+ok 46 - [P1] BLD-jogl2-imports-eq-r8 :: imports new=7 r8=7 diff=
+ok 47 - [P1] BLD-jogl2-class-list-eq-r8 :: classes new=9 r8=9 diff=0 (bytecode differs by toolchain; entry list compared, hash not expected equal)
+ok 48 - [P0] BLD-keyboard-base-build :: bnd rc=0 warnings=0 out=/tmp/grok11-2625020/bundles/org.geogebra.migration.shared.keyboard.base-5.4.934.0.jar
+ok 49 - [P0] BLD-keyboard-base-bsn-version :: org.geogebra.migration.shared.keyboard.base 5.4.934.0 vs r8 org.geogebra.migration.shared.keyboard.base 5.4.934.0
+ok 50 - [P0] BLD-keyboard-base-exports-eq-r8 :: exports new=6 r8=6 diff=
+ok 51 - [P1] BLD-keyboard-base-imports-eq-r8 :: imports new=10 r8=10 diff=
+ok 52 - [P1] BLD-keyboard-base-class-list-eq-r8 :: classes new=39 r8=39 diff=0 (bytecode differs by toolchain; entry list compared, hash not expected equal)
+ok 53 - [P1] BLD-keyboard-scientific-build # SKIP input jar not built: /workspace/AlgoGebra/geogebra/source/shared/keyboard-scientific/build/libs/keyboard-scientific.jar
+ok 54 - [P0] BLD-renderer-base-build :: bnd rc=0 warnings=0 out=/tmp/grok11-2625020/bundles/org.geogebra.migration.shared.renderer.base-5.4.934.0.jar
+ok 55 - [P0] BLD-renderer-base-bsn-version :: org.geogebra.migration.shared.renderer.base 5.4.934.0 vs r8 org.geogebra.migration.shared.renderer.base 5.4.934.0
+ok 56 - [P0] BLD-renderer-base-exports-eq-r8 :: exports new=17 r8=17 diff=
+ok 57 - [P1] BLD-renderer-base-imports-eq-r8 :: imports new=21 r8=21 diff=
+ok 58 - [P1] BLD-renderer-base-class-list-eq-r8 :: classes new=707 r8=707 diff=0 (bytecode differs by toolchain; entry list compared, hash not expected equal)
+ok 59 - [P0] BLD-renderer-desktop-build :: bnd rc=0 warnings=0 out=/tmp/grok11-2625020/bundles/org.geogebra.migration.desktop.renderer-5.4.934.0.jar
+ok 60 - [P0] BLD-renderer-desktop-bsn-version :: org.geogebra.migration.desktop.renderer 5.4.934.0 vs r8 org.geogebra.migration.desktop.renderer 5.4.934.0
+ok 61 - [P0] BLD-renderer-desktop-exports-eq-r8 :: exports new=9 r8=9 diff=
+ok 62 - [P1] BLD-renderer-desktop-imports-eq-r8 :: imports new=23 r8=23 diff=
+ok 63 - [P1] BLD-renderer-desktop-class-list-eq-r8 :: classes new=15 r8=15 diff=0 (bytecode differs by toolchain; entry list compared, hash not expected equal)
+ok 64 - [P0] BLD-RES-01-equinox-resolution :: Equinox=3.24.300.v20260721-1251; installed=51; allResolved=true staged=51 (rebuilt=13 + r8 externals) log=/workspace/AlgoGebra/repo/03-RCP-Spike/tests/results/11_equinox_resolution.log
+
+PASS: 62 FAIL: 0 SKIP: 2
+# CSV: /workspace/AlgoGebra/repo/03-RCP-Spike/tests/results/11_Bundle_Build_GROK_V1.csv
