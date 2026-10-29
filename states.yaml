@@ -161,7 +161,7 @@ bugs_added_2026-10-29:
     component: bundle pari (external engines)
     severity: low
     status: FIXED
-    fixed: "2026-10-29, user decision; PariGPEngine.AGB_ILLEGAL = system, extern, externstr, fileextern, install, eval (whole word, before gp is resolved); default(secure,1) kept; commit: see BUG-006 commit on feat/external-engines"
+    fixed: "2026-10-29, user decision; PariGPEngine.AGB_ILLEGAL = system, extern, externstr, fileextern, install, eval (whole word, before gp is resolved); default(secure,1) kept; commit ebe8023 on feat/external-engines, merged into feat/debian-integration"
     decision: 02-Cdc/Decisions_PARI_Forbidden_GROK_V1.md (deliberate deviation from WIMS empty illegal[]; not a sandbox claim, D-ENG-03)
     finding: "secure mode only prompts before install(); piped stdin confirms it -> eval(Str(\"ins\",\"tall(..)\")) loaded native getpid through the engine before the fix; hence eval blocked (user confirmation requested)"
     evidence: "03-RCP-Spike/evidence/20261029-linux-debian-grokbot-bug006-20261029_160937-grok-bot-vm-419969949/ (05_Sandbox 20/0/0: SBX-02 + SBX-14..19 REJECT; Run_All -SkipUi 101/0/3); unit PariEngineTests via test-engines.sh PASS"
