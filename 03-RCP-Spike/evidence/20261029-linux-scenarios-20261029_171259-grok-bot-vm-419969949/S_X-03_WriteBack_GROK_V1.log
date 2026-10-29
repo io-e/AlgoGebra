@@ -1,0 +1,13 @@
+# Suite: S_X-03
+# Started: 2026-10-29T17:17:55.7610914+01:00
+# Host: grok-bot-vm-419969949 / Debian GNU/Linux 13 (trixie) / pwsh 7.6.9
+
+# Scenario: X-03 - Write an allowlisted number back | gate D | client desktop
+# Evidence: commit=7e2f02e image=/workspace/AlgoGebra/image/GeoGebraPlus-RCP-0.1.0-linux-gtk-x86_64 pin=375db7faf5407390bb322165f2414415da8faeda version=5.4.934.0 os=Unix 6.12.94.0 pwsh=7.6.9
+ok 1 - [P0] X03-01-free-object-updated :: a='a = 4' b='b = 8'
+ok 2 - [P0] X03-02-dependent-object-refused :: setValue on dependent b ignored
+ok 3 - [P0] X03-03-same-as-baseline :: product c='c = 9' baseline c='c = 9'
+ok 4 - [P0] X03-04-adapter-allow-list # SKIP NOT RUN - blocked by: state adapter (allow-list of what an external engine may change) not implemented yet
+
+PASS: 3 FAIL: 0 SKIP: 1
+# CSV: /workspace/AlgoGebra/wt-ext/03-RCP-Spike/tests/results/20261029_171259-grok-bot-vm-419969949/S_X-03_GROK_V1.csv

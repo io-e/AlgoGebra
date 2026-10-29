@@ -1,0 +1,5 @@
+suite,num,id,status,priority,detail,ts
+S_D-07,1,D07-01-enabled-set-resolves,PASS,P1,"on: ext=RESOLVED core=50",2026-10-29T17:13:04.2923677+01:00
+S_D-07,2,D07-02-disabled-set-resolves,PASS,P1,"off: core=50",2026-10-29T17:13:04.2968659+01:00
+S_D-07,3,D07-03-work-kept-across-restart,PASS,P1,"after restart d='d = 5'",2026-10-29T17:13:25.4649364+01:00
+S_D-07,4,D07-04-product-enable-disable,SKIP,P0,"NOT RUN - blocked by: product extension manager (enable/disable UI, persisted state, restart prompt, autosave of open work) not implemented yet",2026-10-29T17:13:25.4691320+01:00

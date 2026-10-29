@@ -1,0 +1,5 @@
+suite,num,id,status,priority,detail,ts
+S_O-02,1,O02-01-inventory-written,PASS,P0,"rows=88 file=/workspace/AlgoGebra/wt-ext/03-RCP-Spike/tests/results/20261029_171259-grok-bot-vm-419969949/S_O-02_license_inventory.tsv",2026-10-29T17:13:29.4616316+01:00
+S_O-02,2,O02-02-every-jar-has-license-info,FAIL,P1,"jars with neither Bundle-License nor LICENSE/NOTICE file: 46 (each needs a manual source in the review)",2026-10-29T17:13:29.4648806+01:00
+S_O-02,3,O02-03-fonts-and-translations-listed,PASS,P1,"font files (ttf/otf or ReTeX font classes)=52 translation files=297",2026-10-29T17:13:29.4663514+01:00
+S_O-02,4,O02-04-deployment-review,SKIP,P0,"NOT RUN - blocked by: human/legal review of EUPL 1.2, GeoGebra non-commercial license, natives, fonts and translations not recorded (owner)",2026-10-29T17:13:29.4693633+01:00

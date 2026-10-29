@@ -1,0 +1,12 @@
+# Suite: S_D-01
+# Started: 2026-10-29T17:13:00.1048776+01:00
+# Host: grok-bot-vm-419969949 / Debian GNU/Linux 13 (trixie) / pwsh 7.6.9
+
+# Scenario: D-01 - Eclipse import | gate - | client desktop (dev tooling)
+# Evidence: commit=7e2f02e image=/workspace/AlgoGebra/image/GeoGebraPlus-RCP-0.1.0-linux-gtk-x86_64 pin=375db7faf5407390bb322165f2414415da8faeda version=5.4.934.0 os=Unix 6.12.94.0 pwsh=7.6.9
+ok 1 - [P1] D01-01-gradle-settings-present :: settings=/workspace/AlgoGebra/geogebra/source/desktop/settings.gradle.kts
+# note: gradle wrapper in the pinned source: none (Buildship then needs a configured local Gradle installation)
+ok 2 - [P0] D01-03-eclipse-buildship-import # SKIP NOT RUN - blocked by: Eclipse 2026-06 + Buildship not installed on the test host (needs owner approval to install, D-ENG-02 on Windows); manual import checklist in SCENARIOS_TRACKING_GROK_V1.md
+
+PASS: 1 FAIL: 0 SKIP: 1
+# CSV: /workspace/AlgoGebra/wt-ext/03-RCP-Spike/tests/results/20261029_171259-grok-bot-vm-419969949/S_D-01_GROK_V1.csv

@@ -1,0 +1,9 @@
+suite,num,id,status,priority,detail,ts
+S_P-01,1,P01-01-clean-profile-has-no-optional-extension,PASS,P0,"clean profile copy=/tmp/grok-img-P01-clean-2731776; removed=[org.geogebra.plus.compute.runtime, org.geogebra.plus.engine.pari, org.geogebra.plus.engine.maxima, org.geogebra.plus.engine.gnuplot]; left=[]",2026-10-29T17:14:17.4253498+01:00
+S_P-01,2,P01-02-d02-all-mandatory-resolved,PASS,P0,"D-02 D-03-set check: expected=50, found=50, ACTIVE=0, RESOLVED=50, unresolved/other=0, resolveBundles=true",2026-10-29T17:14:25.5556263+01:00
+S_P-01,3,P01-03-2d-view-open,PASS,P0,"GeoGebraPanel (algebra + graphics + input) embedded",2026-10-29T17:14:25.5569223+01:00
+S_P-01,4,P01-04-3d-view-open,PASS,P0,"3D view initialized=true",2026-10-29T17:14:25.5576565+01:00
+S_P-01,5,P01-05-cas-available,PASS,P0,"D-05 CAS result: x² + 2x + 1",2026-10-29T17:14:25.5582429+01:00
+S_P-01,6,P01-06-ui-api-reachable,PASS,P0,"3D objects=[A] toolbar chars=257 env=25.0.5+8-LTS; ggb=5.4.934.0",2026-10-29T17:14:25.5637215+01:00
+S_P-01,7,P01-07-no-missing-class-or-resource,PASS,P1,"[] log=/workspace/AlgoGebra/wt-ext/03-RCP-Spike/tests/results/20261029_171259-grok-bot-vm-419969949/S_P-01_ui.log",2026-10-29T17:14:25.5696258+01:00
+S_P-01,8,P01-W-web-client,SKIP,P1,"NOT RUN - blocked by: deferred: web phase (Gate C, W-01/W-02)",2026-10-29T17:14:31.7149706+01:00

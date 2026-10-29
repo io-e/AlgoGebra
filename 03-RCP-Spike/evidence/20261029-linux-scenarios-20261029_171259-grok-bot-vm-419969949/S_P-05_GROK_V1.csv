@@ -1,0 +1,13 @@
+suite,num,id,status,priority,detail,ts
+S_P-05,1,P05-script-SC-02,PASS,P0,"product='false' baseline='false'",2026-10-29T17:16:06.8596778+01:00
+S_P-05,2,P05-script-SC-02v,PASS,P0,"product='m = 7' baseline='m = 7'",2026-10-29T17:16:06.8619188+01:00
+S_P-05,3,P05-script-SC-03v,PASS,P0,"product='n = 9' baseline='n = 9'",2026-10-29T17:16:06.8625595+01:00
+S_P-05,4,P05-script-SC-05,PASS,P0,"product='false' baseline='false'",2026-10-29T17:16:06.8630908+01:00
+S_P-05,5,P05-script-SC-06v,PASS,P0,"product='m = 11' baseline='m = 11'",2026-10-29T17:16:06.8635451+01:00
+S_P-05,6,P05-export-png,PASS,P0,"product PNG bytes=35851 baseline=48569",2026-10-29T17:16:06.8671936+01:00
+S_P-05,7,P05-export-svg,PASS,P1,"product: 110087 chars; starts=<?xml; baseline: 110010 chars; starts=<?xml",2026-10-29T17:16:06.8679547+01:00
+S_P-05,8,P05-gap-javascript-ggbOnInit,SKIP,P1,"NOT RUN - blocked by: gap: JavaScript object scripts need a .ggb with ggbOnInit and the Rhino engine path; not automated yet (listed)",2026-10-29T17:16:06.8701054+01:00
+S_P-05,9,P05-gap-user-macro-tool,SKIP,P1,"NOT RUN - blocked by: gap: user-defined tool (macro) creation needs the Tool Creation dialog or a macro .ggt fixture; not automated yet (listed)",2026-10-29T17:16:06.8707520+01:00
+S_P-05,10,P05-gap-image-object,SKIP,P1,"NOT RUN - blocked by: gap: image GeoImage needs a .ggb fixture with an embedded PNG; not automated yet (listed)",2026-10-29T17:16:06.8713154+01:00
+S_P-05,11,P05-gap-export-pdf-animgif,SKIP,P1,"NOT RUN - blocked by: gap: PDF / animated GIF / print export are dialog-driven; not automated (listed)",2026-10-29T17:16:06.8718120+01:00
+S_P-05,12,P05-W-web,SKIP,P1,"NOT RUN - blocked by: deferred: web phase",2026-10-29T17:16:06.8722090+01:00

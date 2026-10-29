@@ -1,0 +1,52 @@
+# GROK_V1 P-02 core corpus: algebra, CAS, spreadsheet, 2D, 3D. Same file is run in the RCP product and in the
+# upstream baseline (plain classpath, pinned desktop distribution). Compared line by line (tolerance: exact string,
+# numeric values compared to 1e-9 by the .ps1).
+JAVA	ENV
+CMD	ALG-01	a = 3
+CMD	ALG-02	b = a^2 + 1
+VAL	ALG-02v	b
+CMD	ALG-03	f(x) = x^2 - 2x
+VAL	ALG-03v	f
+CMD	ALG-04	r = Root(f, 1.5, 3)
+VAL	ALG-04v	r
+CMD	ALG-05	m = {{1, 2}, {3, 4}}
+CMD	ALG-06	d = Determinant(m)
+VAL	ALG-06v	d
+CMD	ALG-07	s = Sum(Sequence(k^2, k, 1, 10))
+VAL	ALG-07v	s
+CMD	ALG-08	i = Integral(f, 0, 3)
+VAL	ALG-08v	i
+CAS	CAS-01	Expand[(x+1)^3]
+CAS	CAS-02	Factor[x^2-5x+6]
+CAS	CAS-03	Solve[x^2=4,x]
+CAS	CAS-04	Derivative[sin(x)*x]
+CAS	CAS-05	Integral[1/x]
+CAS	CAS-06	Simplify[(x^2-1)/(x-1)]
+CMD	SPR-01	A1 = 5
+CMD	SPR-02	A2 = 7
+CMD	SPR-03	B1 = A1 * A2
+VAL	SPR-03v	B1
+CMD	SPR-04	B2 = Sum(A1:A2)
+VAL	SPR-04v	B2
+TYPE	SPR-05	B1
+CMD	G2-01	P = (1, 2)
+CMD	G2-02	Q = (4, 6)
+CMD	G2-03	l = Line(P, Q)
+VAL	G2-03v	l
+CMD	G2-04	c = Circle(P, Q)
+VAL	G2-04v	c
+CMD	G2-05	dPQ = Distance(P, Q)
+VAL	G2-05v	dPQ
+CMD	G2-06	I1 = Intersect(l, c, 1)
+VAL	G2-06v	I1
+TYPE	G2-07	c
+CMD3	G3-01	B = (0, 0, 3)
+CMD3	G3-02	s3 = Sphere(A, 2)
+VAL3	G3-02v	s3
+CMD3	G3-03	pl = Plane(A, B, (1, 0, 0))
+VAL3	G3-03v	pl
+CMD3	G3-04	dAB = Distance(A, B)
+VAL3	G3-04v	dAB
+NAMES	NAMES-2D
+NAMES3	NAMES-3D
+COUNT	COUNT-2D

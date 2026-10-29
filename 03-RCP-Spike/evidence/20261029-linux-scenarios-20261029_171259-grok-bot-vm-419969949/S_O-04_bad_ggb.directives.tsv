@@ -1,0 +1,6 @@
+CMD	G0	Keep = 7
+OPENRAW	G1	/workspace/AlgoGebra/wt-ext/03-RCP-Spike/tests/results/20261029_171259-grok-bot-vm-419969949/S_O-04_garbage.ggb
+OPENRAW	G2	/workspace/AlgoGebra/wt-ext/03-RCP-Spike/tests/results/20261029_171259-grok-bot-vm-419969949/S_O-04_badxml.ggb
+NAMES	G3
+CMD	G4	After = 1
+VAL	G5	After

@@ -1,0 +1,4 @@
+suite,num,id,status,priority,detail,ts
+S_X-04,1,X04-01-undo-one-step,PASS,P0,"N1=[P,Q,r] after undo=[P,Q] after 2nd undo=[P]",2026-10-29T17:18:39.1484356+01:00
+S_X-04,2,X04-02-same-as-baseline,PASS,P0,"baseline N2=[P,Q] N3=[P]",2026-10-29T17:18:39.1558817+01:00
+S_X-04,3,X04-03-external-output-not-native-dependent,SKIP,P0,"NOT RUN - blocked by: host does not yet insert external engine results into the construction (no adapter), so save+undo of an external output and its labelling cannot be tested",2026-10-29T17:18:39.1582548+01:00

@@ -1,0 +1,68 @@
+Run 20261029-171608-2733958 log /workspace/AlgoGebra/image/GeoGebraPlus-RCP-0.1.0-linux-gtk-x86_64/logs/launch-20261029-171608-2733958.log
+Picked up JAVA_TOOL_OPTIONS: -Dggbplus.scenario=/workspace/AlgoGebra/wt-ext/03-RCP-Spike/tests/results/20261029_171259-grok-bot-vm-419969949/S_P-06_offline.directives.tsv -Dggbplus.scenarioExit=true
+WARNING: Using incubator modules: jdk.incubator.vector
+[GeoGebraPlus] Host bundle ACTIVE; id=67
+[GeoGebraPlus] Registered external engine pari; available=true
+[GeoGebraPlus] Registered external engine maxima; available=true
+[GeoGebraPlus] Registered external engine gnuplot; available=true
+[GeoGebraPlus] IApplication.start() — D-02 entry
+[GeoGebraPlus] Runtime: 25.0.5+8-LTS; OS=Linux/amd64
+[GeoGebraPlus] JogAmp boot delegation=null
+[GeoGebraPlus] Normalized lazy bundle to RESOLVED for D-02: com.sun.jna
+[GeoGebraPlus] D-02 D-03-set check: expected=50, found=50, ACTIVE=0, RESOLVED=50, unresolved/other=0, resolveBundles=true
+[GeoGebraPlus] D-02 PASS
+(java:2733970): dbind-WARNING **: 17:16:09.056: AT-SPI: Error retrieving accessibility bus address: org.freedesktop.DBus.Error.ServiceUnknown: The name org.a11y.Bus was not provided by any .service files
+[GeoGebraPlus] GIAC DLL loaded from product classpath: /tmp/geogebraplus-giac-11730800619272972667/libjavagiac64.so
+[GeoGebraPlus] D-05 GIAC natives preloaded in owning bundle class loader: org.eclipse.osgi.internal.loader.EquinoxClassLoader@28a63dd3[org.geogebra.migration.shared.giac.jni:5.4.934.0(id=48)]
+[GeoGebraPlus] GlueGen native loaded from product classpath: /tmp/geogebraplus-gluegen-12876627516616455023/libgluegen_rt.so
+[GeoGebraPlus] D-05 GlueGen natives preloaded in owning bundle class loader: org.eclipse.osgi.internal.loader.EquinoxClassLoader@6c011b32[org.geogebra.migration.external.org.jogamp.gluegen.gluegen-rt:2.6.0(id=40)]
+[GeoGebraPlus] JOGL native loaded from product classpath: /tmp/geogebraplus-jogl-14771033221690678070/libnativewindow_awt.so
+[GeoGebraPlus] JOGL native loaded from product classpath: /tmp/geogebraplus-jogl-13200301957907660427/libnativewindow_x11.so
+[GeoGebraPlus] JOGL native loaded from product classpath: /tmp/geogebraplus-jogl-13331089045649978435/libnewt_head.so
+[GeoGebraPlus] JOGL native loaded from product classpath: /tmp/geogebraplus-jogl-9721250421237560929/libjogl_desktop.so
+[GeoGebraPlus] JOGL native loaded from product classpath: /tmp/geogebraplus-jogl-14154018302486365991/libjogl_mobile.so
+[GeoGebraPlus] D-05 JOGL natives preloaded in owning bundle class loader: org.eclipse.osgi.internal.loader.EquinoxClassLoader@3f0234a9[org.geogebra.migration.external.org.jogamp.jogl.jogl-all:2.6.0(id=41)]
+[GeoGebraPlus] CAS factory prototype installed: org.geogebra.desktop.factories.CASFactoryD
+[GeoGebraPlus] System-loader GIAC DLL resource=null
+GeoGebra 5.4.934.0 20 October 2026 Java 25.0.5-64bit
+Oct 29, 2026 5:16:09 PM java.util.prefs.FileSystemPreferences setupUserRoot
+WARNING: Couldn't create user preferences directory. User preferences are unusable.
+Oct 29, 2026 5:16:09 PM java.util.prefs.FileSystemPreferences setupUserRoot
+WARNING: java.io.IOException: Permission denied
+[GeoGebraPlus] D-04 embedded AppD full-GUI mode=true (spike adapter; GeoGebraPanel constructs AppD with minimal-GUI mode)
+[GeoGebraPlus] D-04 GeoGebraPanel embedded in SWT_AWT shell
+[GeoGebraPlus] D-05 CAS enabled=true; factory=org.geogebra.desktop.factories.CASFactoryD (test adapter uses reflection; not a proposed public API)
+[GeoGebraPlus] D-05 GIAC JNI host-loader native loaded=true
+============== restarted ===============
+[GeoGebraPlus] D-05 GIAC native loaded=true
+[GeoGebraPlus] D-05 CAS result: x² + 2x + 1
+============== restarted ===============
+[GeoGebraPlus] D-05 CAS smoke 1+1: 2
+============== restarted ===============
+[GeoGebraPlus] D-05 CAS smoke x+1: x + 1
+============== restarted ===============
+[GeoGebraPlus] D-05 direct GIAC smoke: org.geogebra.desktop.cas.giac.CASgiacD(1+1) -> 2
+[GeoGebraPlus] D-05 CAS ASSERTION PASS: normalized=x^2+2x+1
+GeoGebra 5.4.934.0 20 October 2026 Java 25.0.5-64bit
+[GeoGebraPlus] D-05 3D point command accepted=true; 3D view initialized=true
+[GeoGebraPlus] D-05 3D note: GeoGebraPanel constructs the 2D AppD; the 3D proof uses an upstream App3D instance in the second SWT_AWT pane
+(SWT:2733970): Gdk-WARNING **: 17:16:11.120: XSetErrorHandler() called with a GDK error trap pushed. Don't do that.
+[GeoGebraPlus] SCN	_BEGIN	OK	S_P-06_offline.directives.tsv	7 lines
+[GeoGebraPlus] SCN	O-1	OK	true
+============== restarted ===============
+[GeoGebraPlus] SCN	O-2	OK	(x + 1) (x - 1)
+[GeoGebraPlus] SCN	O-3	OK	true
+[GeoGebraPlus] SCN	O-3v	OK	s: (x - 1)² + (y - 2)² + (z - 3)² = 1
+[GeoGebraPlus] SCN	O-4	OK	3093 bytes sha256=f02de099139985779789da9d008672a1606eb79c81b70f842318ef8b99971d73
+[GeoGebraPlus] SCN	O-5	OK	objects=1
+[GeoGebraPlus] SCN	O-6	OK	P
+[GeoGebraPlus] SCN	_END	OK	done
+(SWT:2733970): Gdk-WARNING **: 17:16:15.424: XSetErrorHandler() called with a GDK error trap pushed. Don't do that.
+[GeoGebraPlus] Host bundle stopping
+Exception in thread "Sync Timer Thread" java.lang.SecurityException: Could not lock User prefs. Lock file access denied.
+	at java.prefs/java.util.prefs.FileSystemPreferences.checkLockFile0ErrorCode(FileSystemPreferences.java:885)
+	at java.prefs/java.util.prefs.FileSystemPreferences.lockFile(FileSystemPreferences.java:873)
+	at java.prefs/java.util.prefs.FileSystemPreferences.sync(FileSystemPreferences.java:698)
+	at java.prefs/java.util.prefs.FileSystemPreferences.flush(FileSystemPreferences.java:770)
+	at java.prefs/java.util.prefs.FileSystemPreferences.syncWorld(FileSystemPreferences.java:473)
+	at java.prefs/java.util.prefs.FileSystemPreferences$2.run(FileSystemPreferences.java:454)

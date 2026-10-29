@@ -1,0 +1,12 @@
+# Suite: S_O-01
+# Started: 2026-10-29T17:13:28.3350987+01:00
+# Host: grok-bot-vm-419969949 / Debian GNU/Linux 13 (trixie) / pwsh 7.6.9
+
+# Scenario: O-01 - Newer upstream commit, no edit in common | gate - | client infra
+# Evidence: commit=7e2f02e image=/workspace/AlgoGebra/image/GeoGebraPlus-RCP-0.1.0-linux-gtk-x86_64 pin=375db7faf5407390bb322165f2414415da8faeda version=5.4.934.0 os=Unix 6.12.94.0 pwsh=7.6.9
+ok 1 - [P0] O01-01-no-patched-common-class-in-product :: product sources declaring org.geogebra.common.*: 
+ok 2 - [P0] O01-02-upstream-common-clean :: tracked modifications in shared/common (untracked build output ignored): 0
+ok 3 - [P0] O01-03-next-commit # SKIP NOT RUN - blocked by: no newer upstream commit selected (set GGB_NEXT_COMMIT after fetching it into GGB_SOURCE)
+
+PASS: 2 FAIL: 0 SKIP: 1
+# CSV: /workspace/AlgoGebra/wt-ext/03-RCP-Spike/tests/results/20261029_171259-grok-bot-vm-419969949/S_O-01_GROK_V1.csv

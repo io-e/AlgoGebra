@@ -1,0 +1,7 @@
+suite,num,id,status,priority,detail,ts
+S_P-08,1,P08-01-source-at-pin,PASS,P0,"source HEAD=375db7faf5407390bb322165f2414415da8faeda pin=375db7faf5407390bb322165f2414415da8faeda",2026-10-29T17:17:28.7258789+01:00
+S_P-08,2,P08-02-source-common-unmodified,PASS,P0,"tracked modifications in upstream source: 0",2026-10-29T17:17:28.7293603+01:00
+S_P-08,3,P08-03-image-version-string,PASS,P0,"common bundle=org.geogebra.migration.shared.common-5.4.934.0.jar expected VERSION_STRING=5.4.934.0",2026-10-29T17:17:28.7394850+01:00
+S_P-08,4,P08-04-states-cites-pin,PASS,P1,"states.yaml cites commit and VERSION_STRING",2026-10-29T17:17:28.7427509+01:00
+S_P-08,5,P08-05-evidence-cites-pin,FAIL,P1,"evidence runs=5 without pin: [20261029-linux-debian-grokbot-bug006-20261029_160937-grok-bot-vm-419969949, 20261029-windows-codex-689d4b4, debian]",2026-10-29T17:17:28.7842133+01:00
+S_P-08,6,P08-06-acceptance-tag,SKIP,P0,"NOT RUN - blocked by: owner decision: the upstream acceptance tag is not chosen yet (commit pin known, tag open)",2026-10-29T17:17:28.7870437+01:00

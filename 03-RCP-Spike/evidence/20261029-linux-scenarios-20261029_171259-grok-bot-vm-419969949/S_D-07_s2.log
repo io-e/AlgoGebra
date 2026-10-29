@@ -1,0 +1,51 @@
+Run 20261029-171312-2727599 log /workspace/AlgoGebra/image/GeoGebraPlus-RCP-0.1.0-linux-gtk-x86_64/logs/launch-20261029-171312-2727599.log
+Picked up JAVA_TOOL_OPTIONS: -Dggbplus.scenario=/workspace/AlgoGebra/wt-ext/03-RCP-Spike/tests/results/20261029_171259-grok-bot-vm-419969949/S_D-07_s2.directives.tsv -Dggbplus.scenarioExit=true
+WARNING: Using incubator modules: jdk.incubator.vector
+[GeoGebraPlus] Host bundle ACTIVE; id=67
+[GeoGebraPlus] Registered external engine pari; available=true
+[GeoGebraPlus] Registered external engine maxima; available=true
+[GeoGebraPlus] Registered external engine gnuplot; available=true
+[GeoGebraPlus] IApplication.start() — D-02 entry
+[GeoGebraPlus] Runtime: 25.0.5+8-LTS; OS=Linux/amd64
+[GeoGebraPlus] JogAmp boot delegation=null
+[GeoGebraPlus] Normalized lazy bundle to RESOLVED for D-02: com.sun.jna
+[GeoGebraPlus] D-02 D-03-set check: expected=50, found=50, ACTIVE=0, RESOLVED=50, unresolved/other=0, resolveBundles=true
+[GeoGebraPlus] D-02 PASS
+(java:2727611): dbind-WARNING **: 17:13:13.117: AT-SPI: Error retrieving accessibility bus address: org.freedesktop.DBus.Error.ServiceUnknown: The name org.a11y.Bus was not provided by any .service files
+[GeoGebraPlus] GIAC DLL loaded from product classpath: /tmp/geogebraplus-giac-15221394573730009211/libjavagiac64.so
+[GeoGebraPlus] D-05 GIAC natives preloaded in owning bundle class loader: org.eclipse.osgi.internal.loader.EquinoxClassLoader@48dd3d9[org.geogebra.migration.shared.giac.jni:5.4.934.0(id=48)]
+[GeoGebraPlus] GlueGen native loaded from product classpath: /tmp/geogebraplus-gluegen-8528709323865666765/libgluegen_rt.so
+[GeoGebraPlus] D-05 GlueGen natives preloaded in owning bundle class loader: org.eclipse.osgi.internal.loader.EquinoxClassLoader@7d9402c8[org.geogebra.migration.external.org.jogamp.gluegen.gluegen-rt:2.6.0(id=40)]
+[GeoGebraPlus] JOGL native loaded from product classpath: /tmp/geogebraplus-jogl-15623494602805430063/libnativewindow_awt.so
+[GeoGebraPlus] JOGL native loaded from product classpath: /tmp/geogebraplus-jogl-1295850846457070574/libnativewindow_x11.so
+[GeoGebraPlus] JOGL native loaded from product classpath: /tmp/geogebraplus-jogl-13350260317859798836/libnewt_head.so
+[GeoGebraPlus] JOGL native loaded from product classpath: /tmp/geogebraplus-jogl-8187620220932606269/libjogl_desktop.so
+[GeoGebraPlus] JOGL native loaded from product classpath: /tmp/geogebraplus-jogl-9901735062559558575/libjogl_mobile.so
+[GeoGebraPlus] D-05 JOGL natives preloaded in owning bundle class loader: org.eclipse.osgi.internal.loader.EquinoxClassLoader@7eebb357[org.geogebra.migration.external.org.jogamp.jogl.jogl-all:2.6.0(id=41)]
+[GeoGebraPlus] CAS factory prototype installed: org.geogebra.desktop.factories.CASFactoryD
+[GeoGebraPlus] System-loader GIAC DLL resource=null
+GeoGebra 5.4.934.0 20 October 2026 Java 25.0.5-64bit
+[GeoGebraPlus] D-04 embedded AppD full-GUI mode=true (spike adapter; GeoGebraPanel constructs AppD with minimal-GUI mode)
+[GeoGebraPlus] D-04 GeoGebraPanel embedded in SWT_AWT shell
+[GeoGebraPlus] D-05 CAS enabled=true; factory=org.geogebra.desktop.factories.CASFactoryD (test adapter uses reflection; not a proposed public API)
+[GeoGebraPlus] D-05 GIAC JNI host-loader native loaded=true
+============== restarted ===============
+[GeoGebraPlus] D-05 GIAC native loaded=true
+[GeoGebraPlus] D-05 CAS result: x² + 2x + 1
+============== restarted ===============
+[GeoGebraPlus] D-05 CAS smoke 1+1: 2
+============== restarted ===============
+[GeoGebraPlus] D-05 CAS smoke x+1: x + 1
+============== restarted ===============
+[GeoGebraPlus] D-05 direct GIAC smoke: org.geogebra.desktop.cas.giac.CASgiacD(1+1) -> 2
+[GeoGebraPlus] D-05 CAS ASSERTION PASS: normalized=x^2+2x+1
+GeoGebra 5.4.934.0 20 October 2026 Java 25.0.5-64bit
+[GeoGebraPlus] D-05 3D point command accepted=true; 3D view initialized=true
+[GeoGebraPlus] D-05 3D note: GeoGebraPanel constructs the 2D AppD; the 3D proof uses an upstream App3D instance in the second SWT_AWT pane
+(SWT:2727611): Gdk-WARNING **: 17:13:14.923: XSetErrorHandler() called with a GDK error trap pushed. Don't do that.
+[GeoGebraPlus] SCN	_BEGIN	OK	S_D-07_s2.directives.tsv	2 lines
+[GeoGebraPlus] SCN	W4	OK	objects=2
+[GeoGebraPlus] SCN	W5	OK	d = 5
+[GeoGebraPlus] SCN	_END	OK	done
+(SWT:2727611): Gdk-WARNING **: 17:13:19.164: XSetErrorHandler() called with a GDK error trap pushed. Don't do that.
+[GeoGebraPlus] Host bundle stopping

@@ -1,0 +1,60 @@
+GeoGebra 5.4.934.0 20 October 2026 Java 25.0.5-64bit
+
+GeoGebra 5.4.934.0 20 October 2026 Java 25.0.5-64bit
+
+[GeoGebraPlus] baseline ready; ggb=5.4.934.0
+[GeoGebraPlus] SCN	_BEGIN	OK	S_P-02.baseline.directives.tsv	53 lines
+[GeoGebraPlus] SCN	ENV	OK	25.0.5+8-LTS; ggb=5.4.934.0
+[GeoGebraPlus] SCN	ALG-01	OK	true
+[GeoGebraPlus] SCN	ALG-02	OK	true
+[GeoGebraPlus] SCN	ALG-02v	OK	b = 10
+[LaTeX] loadFont():fonts/latin/optional/jlm_cmssbx10.ttf
+[LaTeX] loadFont():fonts/maths/jlm_cmbsy10.ttf
+[GeoGebraPlus] SCN	ALG-03	OK	true
+[GeoGebraPlus] SCN	ALG-03v	OK	f(x) = x² - 2x
+[GeoGebraPlus] SCN	ALG-04	OK	true
+[GeoGebraPlus] SCN	ALG-04v	OK	r = (2, 0)
+[LaTeX] loadFont():fonts/base/jlm_cmex10.ttf
+[GeoGebraPlus] SCN	ALG-05	OK	true
+[GeoGebraPlus] SCN	ALG-06	OK	true
+[GeoGebraPlus] SCN	ALG-06v	OK	d = -2
+[GeoGebraPlus] SCN	ALG-07	OK	true
+[GeoGebraPlus] SCN	ALG-07v	OK	s = 385
+[GeoGebraPlus] SCN	ALG-08	OK	true
+[GeoGebraPlus] SCN	ALG-08v	OK	i = 0
+[GeoGebraPlus] SCN	CAS-01	OK	x³ + 3x² + 3x + 1
+[GeoGebraPlus] SCN	CAS-02	OK	(x - 2) (x - 3)
+[GeoGebraPlus] SCN	CAS-03	OK	{x = -2, x = 2}
+[GeoGebraPlus] SCN	CAS-04	OK	x cos(x) + sin(x)
+[GeoGebraPlus] SCN	CAS-05	OK	ln(abs(x)) + c_{1}
+[GeoGebraPlus] SCN	CAS-06	OK	x + 1
+[GeoGebraPlus] SCN	SPR-01	OK	true
+[GeoGebraPlus] SCN	SPR-02	OK	true
+[GeoGebraPlus] SCN	SPR-03	OK	true
+[GeoGebraPlus] SCN	SPR-03v	OK	B1 = 35
+[GeoGebraPlus] SCN	SPR-04	OK	true
+[GeoGebraPlus] SCN	SPR-04v	OK	B2 = 12
+[GeoGebraPlus] SCN	SPR-05	OK	numeric
+[GeoGebraPlus] SCN	G2-01	OK	true
+[GeoGebraPlus] SCN	G2-02	OK	true
+[GeoGebraPlus] SCN	G2-03	OK	true
+[GeoGebraPlus] SCN	G2-03v	OK	l: -4x + 3y = 2
+[GeoGebraPlus] SCN	G2-04	OK	true
+[GeoGebraPlus] SCN	G2-04v	OK	c: (x - 1)² + (y - 2)² = 25
+[GeoGebraPlus] SCN	G2-05	OK	true
+[GeoGebraPlus] SCN	G2-05v	OK	dPQ = 5
+[GeoGebraPlus] SCN	G2-06	OK	true
+[GeoGebraPlus] SCN	G2-06v	OK	I1 = (4, 6)
+[GeoGebraPlus] SCN	G2-07	OK	circle
+[GeoGebraPlus] SCN	G3-01	OK	true
+[GeoGebraPlus] SCN	G3-02	OK	true
+[GeoGebraPlus] SCN	G3-02v	OK	s3: (x - 1)² + (y - 2)² + (z - 3)² = 4
+[GeoGebraPlus] SCN	G3-03	OK	true
+[GeoGebraPlus] SCN	G3-03v	OK	pl: 6x - 3y + 2z = 6
+[GeoGebraPlus] SCN	G3-04	OK	true
+[GeoGebraPlus] SCN	G3-04v	OK	dAB = 2.24
+[GeoGebraPlus] SCN	NAMES-2D	OK	A1,A2,B1,B2,I1,P,Q,a,b,c,c_{1},d,dPQ,f,i,l,m,r,s
+[GeoGebraPlus] SCN	NAMES-3D	OK	A,B,dAB,pl,s3
+[GeoGebraPlus] SCN	COUNT-2D	OK	19
+[GeoGebraPlus] SCN	_END	OK	done
+

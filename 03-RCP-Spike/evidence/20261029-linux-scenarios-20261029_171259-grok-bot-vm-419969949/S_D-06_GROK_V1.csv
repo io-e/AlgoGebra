@@ -1,0 +1,5 @@
+suite,num,id,status,priority,detail,ts
+S_D-06,1,D06-01-good-extension-resolves,PASS,P0,"good=RESOLVED log=/workspace/AlgoGebra/wt-ext/03-RCP-Spike/tests/results/20261029_171259-grok-bot-vm-419969949/S_D-06_probe.resolve.log",2026-10-29T17:13:02.1109391+01:00
+S_D-06,2,D06-02-bad-extension-isolated,PASS,P0,"bad=INSTALLED",2026-10-29T17:13:02.1135578+01:00
+S_D-06,3,D06-03-core-still-resolves,PASS,P0,"core resolved with probes=50 baseline=50",2026-10-29T17:13:02.1180154+01:00
+S_D-06,4,D06-04-product-registry,SKIP,P0,"NOT RUN - blocked by: product extension registry (extension point, contribution, error report to the user) not implemented yet",2026-10-29T17:13:02.1215066+01:00

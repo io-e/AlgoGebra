@@ -1,0 +1,3 @@
+suite,num,id,status,priority,detail,ts
+S_D-09,1,D09-01-precheck-current-state-recorded,PASS,P1,"unsigned bundle state=RESOLVED signedcontent configured=False (gap: no policy)",2026-10-29T17:13:27.7648047+01:00
+S_D-09,2,D09-02-policy-blocks-unsigned,SKIP,P0,"NOT RUN - blocked by: no signing key, no distribution channel and no signature policy yet (owner decision needed; Gate E)",2026-10-29T17:13:27.7696267+01:00

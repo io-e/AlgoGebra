@@ -1,0 +1,21 @@
+# Suite: S_P-05
+# Started: 2026-10-29T17:15:44.9863542+01:00
+# Host: grok-bot-vm-419969949 / Debian GNU/Linux 13 (trixie) / pwsh 7.6.9
+
+# Scenario: P-05 - Scripts, macros, images, export | gate A | client desktop (web deferred)
+# Evidence: commit=7e2f02e image=/workspace/AlgoGebra/image/GeoGebraPlus-RCP-0.1.0-linux-gtk-x86_64 pin=375db7faf5407390bb322165f2414415da8faeda version=5.4.934.0 os=Unix 6.12.94.0 pwsh=7.6.9
+ok 1 - [P0] P05-script-SC-02 :: product='false' baseline='false'
+ok 2 - [P0] P05-script-SC-02v :: product='m = 7' baseline='m = 7'
+ok 3 - [P0] P05-script-SC-03v :: product='n = 9' baseline='n = 9'
+ok 4 - [P0] P05-script-SC-05 :: product='false' baseline='false'
+ok 5 - [P0] P05-script-SC-06v :: product='m = 11' baseline='m = 11'
+ok 6 - [P0] P05-export-png :: product PNG bytes=35851 baseline=48569
+ok 7 - [P1] P05-export-svg :: product: 110087 chars; starts=<?xml; baseline: 110010 chars; starts=<?xml
+ok 8 - [P1] P05-gap-javascript-ggbOnInit # SKIP NOT RUN - blocked by: gap: JavaScript object scripts need a .ggb with ggbOnInit and the Rhino engine path; not automated yet (listed)
+ok 9 - [P1] P05-gap-user-macro-tool # SKIP NOT RUN - blocked by: gap: user-defined tool (macro) creation needs the Tool Creation dialog or a macro .ggt fixture; not automated yet (listed)
+ok 10 - [P1] P05-gap-image-object # SKIP NOT RUN - blocked by: gap: image GeoImage needs a .ggb fixture with an embedded PNG; not automated yet (listed)
+ok 11 - [P1] P05-gap-export-pdf-animgif # SKIP NOT RUN - blocked by: gap: PDF / animated GIF / print export are dialog-driven; not automated (listed)
+ok 12 - [P1] P05-W-web # SKIP NOT RUN - blocked by: deferred: web phase
+
+PASS: 7 FAIL: 0 SKIP: 5
+# CSV: /workspace/AlgoGebra/wt-ext/03-RCP-Spike/tests/results/20261029_171259-grok-bot-vm-419969949/S_P-05_GROK_V1.csv

@@ -1,0 +1,5 @@
+suite,num,id,status,priority,detail,ts
+S_X-07,1,X07-01-lean-absent-on-host,PASS,P0,"lean on PATH: ",2026-10-29T17:18:44.1734570+01:00
+S_X-07,2,X07-02-app-opens-without-lean,PASS,P0,"CAS='5x' log=/workspace/AlgoGebra/wt-ext/03-RCP-Spike/tests/results/20261029_171259-grok-bot-vm-419969949/S_X-07.log",2026-10-29T17:18:58.3515800+01:00
+S_X-07,3,X07-03-no-lean-bundle-required,PASS,P0,"no mandatory Lean bundle in the product set",2026-10-29T17:18:58.3557247+01:00
+S_X-07,4,X07-04-no-lean-error,PASS,P1,"no Lean error in log",2026-10-29T17:18:58.3567346+01:00

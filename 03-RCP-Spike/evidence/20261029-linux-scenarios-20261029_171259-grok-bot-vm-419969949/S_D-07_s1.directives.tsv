@@ -1,0 +1,3 @@
+CMD	W1	P = (3, 4)
+CMD	W2	d = Distance(P, (0, 0))
+SAVE	W3	/workspace/AlgoGebra/wt-ext/03-RCP-Spike/tests/results/20261029_171259-grok-bot-vm-419969949/S_D-07_work.ggb

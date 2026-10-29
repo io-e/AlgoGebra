@@ -1,0 +1,14 @@
+# Suite: S_D-08
+# Started: 2026-10-29T17:13:25.7532730+01:00
+# Host: grok-bot-vm-419969949 / Debian GNU/Linux 13 (trixie) / pwsh 7.6.9
+
+# Scenario: D-08 - Incompatible extension | gate B | client desktop
+# Evidence: commit=7e2f02e image=/workspace/AlgoGebra/image/GeoGebraPlus-RCP-0.1.0-linux-gtk-x86_64 pin=375db7faf5407390bb322165f2414415da8faeda version=5.4.934.0 os=Unix 6.12.94.0 pwsh=7.6.9
+ok 1 - [P0] D08-01-incompatible-range-refused :: future (needs common [9,10))=INSTALLED
+ok 2 - [P0] D08-02-dependent-not-resolved :: dependent=INSTALLED
+ok 3 - [P1] D08-03-reason-reported :: harness output names the refused bundle; log=/workspace/AlgoGebra/wt-ext/03-RCP-Spike/tests/results/20261029_171259-grok-bot-vm-419969949/S_D-08.resolve.log
+ok 4 - [P0] D08-04-core-unaffected :: core resolved=50
+ok 5 - [P0] D08-05-user-facing-refusal # SKIP NOT RUN - blocked by: product message to the user (which extension, why, what version is needed) not implemented yet
+
+PASS: 4 FAIL: 0 SKIP: 1
+# CSV: /workspace/AlgoGebra/wt-ext/03-RCP-Spike/tests/results/20261029_171259-grok-bot-vm-419969949/S_D-08_GROK_V1.csv

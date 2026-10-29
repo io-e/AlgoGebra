@@ -1,0 +1,6 @@
+suite,num,id,status,priority,detail,ts
+S_D-08,1,D08-01-incompatible-range-refused,PASS,P0,"future (needs common [9,10))=INSTALLED",2026-10-29T17:13:26.6521682+01:00
+S_D-08,2,D08-02-dependent-not-resolved,PASS,P0,"dependent=INSTALLED",2026-10-29T17:13:26.6536431+01:00
+S_D-08,3,D08-03-reason-reported,PASS,P1,"harness output names the refused bundle; log=/workspace/AlgoGebra/wt-ext/03-RCP-Spike/tests/results/20261029_171259-grok-bot-vm-419969949/S_D-08.resolve.log",2026-10-29T17:13:26.6563339+01:00
+S_D-08,4,D08-04-core-unaffected,PASS,P0,"core resolved=50",2026-10-29T17:13:26.6639024+01:00
+S_D-08,5,D08-05-user-facing-refusal,SKIP,P0,"NOT RUN - blocked by: product message to the user (which extension, why, what version is needed) not implemented yet",2026-10-29T17:13:26.6670913+01:00

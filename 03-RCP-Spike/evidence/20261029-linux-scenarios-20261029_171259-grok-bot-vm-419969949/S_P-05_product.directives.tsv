@@ -1,0 +1,13 @@
+CMD	SC-01	n = 1
+CMD	SC-02	Execute({"n = 5", "m = n + 2"})
+VAL	SC-02v	m
+CMD	SC-03	SetValue(n, 9)
+VAL	SC-03v	n
+CMD	SC-04	p = (1, 1)
+CMD	SC-05	SetCaption(p, "Pé")
+CMD	SC-06	UpdateConstruction()
+VAL	SC-06v	m
+CMD	MAC-01	q = (2, 2)
+CMD	IMG-01	g(x) = sin(x)
+PNG	EXP-PNG
+SVG	EXP-SVG	/workspace/AlgoGebra/wt-ext/03-RCP-Spike/tests/results/20261029_171259-grok-bot-vm-419969949/S_P-05_product.svg

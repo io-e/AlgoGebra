@@ -1,0 +1,61 @@
+# Suite: S_P-02
+# Started: 2026-10-29T17:14:32.0129082+01:00
+# Host: grok-bot-vm-419969949 / Debian GNU/Linux 13 (trixie) / pwsh 7.6.9
+
+# Scenario: P-02 - Algebra, CAS, spreadsheet, 2D, 3D vs pinned baseline | gate A | client desktop (web deferred)
+# Evidence: commit=7e2f02e image=/workspace/AlgoGebra/image/GeoGebraPlus-RCP-0.1.0-linux-gtk-x86_64 pin=375db7faf5407390bb322165f2414415da8faeda version=5.4.934.0 os=Unix 6.12.94.0 pwsh=7.6.9
+# fixture sha256=356ee086ebb02d263e976f5788ffebc812f8e551a2462b34a42494794a9e043b
+ok 1 - [P0] P02-00-both-ran :: product=52 lines (/workspace/AlgoGebra/wt-ext/03-RCP-Spike/tests/results/20261029_171259-grok-bot-vm-419969949/S_P-02_product.log); baseline=51 lines (/workspace/AlgoGebra/wt-ext/03-RCP-Spike/tests/results/20261029_171259-grok-bot-vm-419969949/S_P-02.baseline.log)
+not ok 2 - [P0] P02-01-no-directive-error :: ERR: _DIALOG
+ok 3 - [P0] P02-ALG-01 :: product=OK 'true' baseline=OK 'true'
+ok 4 - [P0] P02-ALG-02 :: product=OK 'true' baseline=OK 'true'
+ok 5 - [P0] P02-ALG-02v :: product=OK 'b = 10' baseline=OK 'b = 10'
+not ok 6 - [P0] P02-ALG-03 :: product=OK 'false' baseline=OK 'true'
+ok 7 - [P0] P02-ALG-03v :: product=OK 'f(x) = x² - 2x' baseline=OK 'f(x) = x² - 2x'
+ok 8 - [P0] P02-ALG-04 :: product=OK 'true' baseline=OK 'true'
+ok 9 - [P0] P02-ALG-04v :: product=OK 'r = (2, 0)' baseline=OK 'r = (2, 0)'
+not ok 10 - [P0] P02-ALG-05 :: product=OK 'false' baseline=OK 'true'
+ok 11 - [P0] P02-ALG-06 :: product=OK 'true' baseline=OK 'true'
+ok 12 - [P0] P02-ALG-06v :: product=OK 'd = -2' baseline=OK 'd = -2'
+ok 13 - [P0] P02-ALG-07 :: product=OK 'true' baseline=OK 'true'
+ok 14 - [P0] P02-ALG-07v :: product=OK 's = 385' baseline=OK 's = 385'
+ok 15 - [P0] P02-ALG-08 :: product=OK 'true' baseline=OK 'true'
+ok 16 - [P0] P02-ALG-08v :: product=OK 'i = 0' baseline=OK 'i = 0'
+ok 17 - [P0] P02-CAS-01 :: product=OK 'x³ + 3x² + 3x + 1' baseline=OK 'x³ + 3x² + 3x + 1'
+ok 18 - [P0] P02-CAS-02 :: product=OK '(x - 2) (x - 3)' baseline=OK '(x - 2) (x - 3)'
+ok 19 - [P0] P02-CAS-03 :: product=OK '{x = -2, x = 2}' baseline=OK '{x = -2, x = 2}'
+ok 20 - [P0] P02-CAS-04 :: product=OK 'x cos(x) + sin(x)' baseline=OK 'x cos(x) + sin(x)'
+ok 21 - [P0] P02-CAS-05 :: product=OK 'ln(abs(x)) + c_{1}' baseline=OK 'ln(abs(x)) + c_{1}'
+ok 22 - [P0] P02-CAS-06 :: product=OK 'x + 1' baseline=OK 'x + 1'
+ok 23 - [P0] P02-SPR-01 :: product=OK 'true' baseline=OK 'true'
+ok 24 - [P0] P02-SPR-02 :: product=OK 'true' baseline=OK 'true'
+ok 25 - [P0] P02-SPR-03 :: product=OK 'true' baseline=OK 'true'
+ok 26 - [P0] P02-SPR-03v :: product=OK 'B1 = 35' baseline=OK 'B1 = 35'
+ok 27 - [P0] P02-SPR-04 :: product=OK 'true' baseline=OK 'true'
+ok 28 - [P0] P02-SPR-04v :: product=OK 'B2 = 12' baseline=OK 'B2 = 12'
+ok 29 - [P0] P02-SPR-05 :: product=OK 'numeric' baseline=OK 'numeric'
+ok 30 - [P0] P02-G2-01 :: product=OK 'true' baseline=OK 'true'
+ok 31 - [P0] P02-G2-02 :: product=OK 'true' baseline=OK 'true'
+ok 32 - [P0] P02-G2-03 :: product=OK 'true' baseline=OK 'true'
+ok 33 - [P0] P02-G2-03v :: product=OK 'l: -4x + 3y = 2' baseline=OK 'l: -4x + 3y = 2'
+ok 34 - [P0] P02-G2-04 :: product=OK 'true' baseline=OK 'true'
+ok 35 - [P0] P02-G2-04v :: product=OK 'c: (x - 1)² + (y - 2)² = 25' baseline=OK 'c: (x - 1)² + (y - 2)² = 25'
+ok 36 - [P0] P02-G2-05 :: product=OK 'true' baseline=OK 'true'
+ok 37 - [P0] P02-G2-05v :: product=OK 'dPQ = 5' baseline=OK 'dPQ = 5'
+ok 38 - [P0] P02-G2-06 :: product=OK 'true' baseline=OK 'true'
+ok 39 - [P0] P02-G2-06v :: product=OK 'I1 = (4, 6)' baseline=OK 'I1 = (4, 6)'
+ok 40 - [P0] P02-G2-07 :: product=OK 'circle' baseline=OK 'circle'
+ok 41 - [P0] P02-G3-01 :: product=OK 'true' baseline=OK 'true'
+ok 42 - [P0] P02-G3-02 :: product=OK 'true' baseline=OK 'true'
+ok 43 - [P0] P02-G3-02v :: product=OK 's3: (x - 1)² + (y - 2)² + (z - 3)² = 4' baseline=OK 's3: (x - 1)² + (y - 2)² + (z - 3)² = 4'
+not ok 44 - [P0] P02-G3-03 :: product=OK 'false' baseline=OK 'true'
+ok 45 - [P0] P02-G3-03v :: product=OK 'pl: 6x - 3y + 2z = 6' baseline=OK 'pl: 6x - 3y + 2z = 6'
+ok 46 - [P0] P02-G3-04 :: product=OK 'true' baseline=OK 'true'
+ok 47 - [P0] P02-G3-04v :: product=OK 'dAB = 2.24' baseline=OK 'dAB = 2.24'
+ok 48 - [P0] P02-NAMES-2D :: product=OK 'A1,A2,B1,B2,I1,P,Q,a,b,c,c_{1},d,dPQ,f,i,l,m,r,s' baseline=OK 'A1,A2,B1,B2,I1,P,Q,a,b,c,c_{1},d,dPQ,f,i,l,m,r,s'
+ok 49 - [P0] P02-NAMES-3D :: product=OK 'A,B,dAB,pl,s3' baseline=OK 'A,B,dAB,pl,s3'
+ok 50 - [P0] P02-COUNT-2D :: product=OK '19' baseline=OK '19'
+ok 51 - [P1] P02-W-web-gwt-war # SKIP NOT RUN - blocked by: deferred: web phase (GWT war baseline, W-02)
+
+PASS: 46 FAIL: 4 SKIP: 1
+# CSV: /workspace/AlgoGebra/wt-ext/03-RCP-Spike/tests/results/20261029_171259-grok-bot-vm-419969949/S_P-02_GROK_V1.csv

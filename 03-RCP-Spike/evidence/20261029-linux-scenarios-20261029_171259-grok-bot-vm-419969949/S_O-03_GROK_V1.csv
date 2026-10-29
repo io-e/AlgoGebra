@@ -1,0 +1,5 @@
+suite,num,id,status,priority,detail,ts
+S_O-03,1,O03-01-sbom-written,PASS,P0,"files=87 sbom=/workspace/AlgoGebra/wt-ext/03-RCP-Spike/tests/results/20261029_171259-grok-bot-vm-419969949/S_O-03_sbom.sha256",2026-10-29T17:13:29.8252904+01:00
+S_O-03,2,O03-02-bundles-info-matches-files,PASS,P0,"bundles.info entries=75 missing files=[]",2026-10-29T17:13:29.8486262+01:00
+S_O-03,3,O03-03-clean-rebuild-identical,FAIL,P0,"rc=0 differing files=11: configuration/config.ini, host/build/org.geogebra.plus.compute.api_0.1.0.jar, host/build/org.geogebra.plus.compute.runtime_0.1.0.jar, host/build/org.geogebra.plus.desktop.resources_0.1.0.jar, host/build/org.geogebra.plus.engine.gnuplot_0.1.0.jar, host/build/org.geogebra.plus.engine.maxima_0.1.0.jar, host/build/org.geogebra.plus.engine.pari_0.1.0.jar, host/build/org.geogebra.plus.giac.native_0.1.0.jar",2026-10-29T17:13:37.4000645+01:00
+S_O-03,4,O03-04-standard-sbom,SKIP,P1,"NOT RUN - blocked by: no CycloneDX/SPDX SBOM is produced by the build yet (sha256 list only)",2026-10-29T17:13:37.4126157+01:00

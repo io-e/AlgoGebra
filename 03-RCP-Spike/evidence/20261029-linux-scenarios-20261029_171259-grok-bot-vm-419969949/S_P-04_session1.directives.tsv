@@ -1,0 +1,34 @@
+# GROK_V1 P-04 construction (2D) built before save; values compared after reopen.
+CMD	B-01	a = 2.5
+CMD	B-02	f(x) = a x^2 - 1
+CMD	B-03	P = (1, 3)
+CMD	B-04	c = Circle(P, a)
+CMD	B-05	t = Text("é à ü € α")
+CMD	B-06	A1 = 42
+CMD	B-07	L = {1, 2, 3, a}
+CMD	B-08	sl = Slider(0, 10, 0.5)
+
+NAMES	N-before
+XMLSHA	X-before
+VAL	V1-a	a
+VAL	V1-f	f
+VAL	V1-P	P
+VAL	V1-c	c
+VAL	V1-t	t
+VAL	V1-A1	A1
+VAL	V1-L	L
+VAL	V1-sl	sl
+SAVE	SAVE	/workspace/AlgoGebra/wt-ext/03-RCP-Spike/tests/results/20261029_171259-grok-bot-vm-419969949/S_P-04_saved.ggb
+NEW	NEW
+NAMES	N-afternew
+OPEN	OPEN	/workspace/AlgoGebra/wt-ext/03-RCP-Spike/tests/results/20261029_171259-grok-bot-vm-419969949/S_P-04_saved.ggb
+NAMES	N-reopen
+XMLSHA	X-reopen
+VAL	V2-a	a
+VAL	V2-f	f
+VAL	V2-P	P
+VAL	V2-c	c
+VAL	V2-t	t
+VAL	V2-A1	A1
+VAL	V2-L	L
+VAL	V2-sl	sl

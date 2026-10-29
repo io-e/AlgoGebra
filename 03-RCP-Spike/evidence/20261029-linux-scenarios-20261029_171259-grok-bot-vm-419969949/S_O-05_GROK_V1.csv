@@ -1,0 +1,4 @@
+suite,num,id,status,priority,detail,ts
+S_O-05,1,O05-01-old-format-opens,PASS,P0,"names=[P,g,k] P='P = (2, 3)' k='k = 1.5' g='g(x) = 1.5 x'",2026-10-29T17:14:16.2240070+01:00
+S_O-05,2,O05-02-same-as-baseline,PASS,P0,"baseline names=[P,g,k] g='g(x) = 1.5 x'",2026-10-29T17:14:16.2321118+01:00
+S_O-05,3,O05-03-activity-manifest-upgrade,SKIP,P0,"NOT RUN - blocked by: no activity manifest / versioned activity format yet",2026-10-29T17:14:16.2348343+01:00

@@ -1,0 +1,13 @@
+# Suite: S_O-03
+# Started: 2026-10-29T17:13:29.7133399+01:00
+# Host: grok-bot-vm-419969949 / Debian GNU/Linux 13 (trixie) / pwsh 7.6.9
+
+# Scenario: O-03 - Clean rebuild and hashes | gate E | client desktop
+# Evidence: commit=7e2f02e image=/workspace/AlgoGebra/image/GeoGebraPlus-RCP-0.1.0-linux-gtk-x86_64 pin=375db7faf5407390bb322165f2414415da8faeda version=5.4.934.0 os=Unix 6.12.94.0 pwsh=7.6.9
+ok 1 - [P0] O03-01-sbom-written :: files=87 sbom=/workspace/AlgoGebra/wt-ext/03-RCP-Spike/tests/results/20261029_171259-grok-bot-vm-419969949/S_O-03_sbom.sha256
+ok 2 - [P0] O03-02-bundles-info-matches-files :: bundles.info entries=75 missing files=[]
+not ok 3 - [P0] O03-03-clean-rebuild-identical :: rc=0 differing files=11: configuration/config.ini, host/build/org.geogebra.plus.compute.api_0.1.0.jar, host/build/org.geogebra.plus.compute.runtime_0.1.0.jar, host/build/org.geogebra.plus.desktop.resources_0.1.0.jar, host/build/org.geogebra.plus.engine.gnuplot_0.1.0.jar, host/build/org.geogebra.plus.engine.maxima_0.1.0.jar, host/build/org.geogebra.plus.engine.pari_0.1.0.jar, host/build/org.geogebra.plus.giac.native_0.1.0.jar
+ok 4 - [P1] O03-04-standard-sbom # SKIP NOT RUN - blocked by: no CycloneDX/SPDX SBOM is produced by the build yet (sha256 list only)
+
+PASS: 2 FAIL: 1 SKIP: 1
+# CSV: /workspace/AlgoGebra/wt-ext/03-RCP-Spike/tests/results/20261029_171259-grok-bot-vm-419969949/S_O-03_GROK_V1.csv

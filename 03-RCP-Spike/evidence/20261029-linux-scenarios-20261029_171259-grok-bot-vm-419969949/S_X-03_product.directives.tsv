@@ -1,0 +1,10 @@
+CMD	A1	a = 1
+CMD	A2	b = 2 a
+CMD	A3	c = 5
+CMD	A4	SetFixed(c, true)
+SETVAL	S1	a=4
+SETVAL	S2	b=100
+SETVAL	S3	c=9
+VAL	V1	a
+VAL	V2	b
+VAL	V3	c

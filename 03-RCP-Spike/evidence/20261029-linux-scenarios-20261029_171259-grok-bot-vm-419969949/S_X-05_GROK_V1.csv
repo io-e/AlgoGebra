@@ -1,0 +1,4 @@
+suite,num,id,status,priority,detail,ts
+S_X-05,1,X05-01-capability-type-in-api,PASS,P1,"ComputeCapability declared in compute.api",2026-10-29T17:18:39.4577735+01:00
+S_X-05,2,X05-02-desktop-artifacts-distinct,PASS,P1,"desktop compute bundles: org.geogebra.plus.compute.api, org.geogebra.plus.compute.runtime, org.geogebra.plus.engine.pari, org.geogebra.plus.engine.maxima, org.geogebra.plus.engine.gnuplot",2026-10-29T17:18:39.4722992+01:00
+S_X-05,3,X05-03-web-module-distinct,SKIP,P0,"NOT RUN - blocked by: deferred: web phase (no web module exists)",2026-10-29T17:18:39.4751912+01:00

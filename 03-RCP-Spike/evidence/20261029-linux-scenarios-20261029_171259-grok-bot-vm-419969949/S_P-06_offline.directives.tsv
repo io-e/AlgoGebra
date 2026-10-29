@@ -1,0 +1,7 @@
+CMD	O-1	P = (1, 2)
+CAS	O-2	Factor(x^2 - 1)
+CMD3	O-3	s = Sphere(A, 1)
+VAL3	O-3v	s
+SAVE	O-4	/workspace/AlgoGebra/wt-ext/03-RCP-Spike/tests/results/20261029_171259-grok-bot-vm-419969949/S_P-06_offline.ggb
+OPEN	O-5	/workspace/AlgoGebra/wt-ext/03-RCP-Spike/tests/results/20261029_171259-grok-bot-vm-419969949/S_P-06_offline.ggb
+NAMES	O-6

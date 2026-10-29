@@ -1,0 +1,4 @@
+suite,num,id,status,priority,detail,ts
+S_O-01,1,O01-01-no-patched-common-class-in-product,PASS,P0,"product sources declaring org.geogebra.common.*: ",2026-10-29T17:13:28.3750859+01:00
+S_O-01,2,O01-02-upstream-common-clean,PASS,P0,"tracked modifications in shared/common (untracked build output ignored): 0",2026-10-29T17:13:28.4011137+01:00
+S_O-01,3,O01-03-next-commit,SKIP,P0,"NOT RUN - blocked by: no newer upstream commit selected (set GGB_NEXT_COMMIT after fetching it into GGB_SOURCE)",2026-10-29T17:13:28.4038257+01:00

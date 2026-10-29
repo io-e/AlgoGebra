@@ -1,0 +1,13 @@
+# Suite: S_O-02
+# Started: 2026-10-29T17:13:28.6434467+01:00
+# Host: grok-bot-vm-419969949 / Debian GNU/Linux 13 (trixie) / pwsh 7.6.9
+
+# Scenario: O-02 - License inventory | gate E | client desktop
+# Evidence: commit=7e2f02e image=/workspace/AlgoGebra/image/GeoGebraPlus-RCP-0.1.0-linux-gtk-x86_64 pin=375db7faf5407390bb322165f2414415da8faeda version=5.4.934.0 os=Unix 6.12.94.0 pwsh=7.6.9
+ok 1 - [P0] O02-01-inventory-written :: rows=88 file=/workspace/AlgoGebra/wt-ext/03-RCP-Spike/tests/results/20261029_171259-grok-bot-vm-419969949/S_O-02_license_inventory.tsv
+not ok 2 - [P1] O02-02-every-jar-has-license-info :: jars with neither Bundle-License nor LICENSE/NOTICE file: 46 (each needs a manual source in the review)
+ok 3 - [P1] O02-03-fonts-and-translations-listed :: font files (ttf/otf or ReTeX font classes)=52 translation files=297
+ok 4 - [P0] O02-04-deployment-review # SKIP NOT RUN - blocked by: human/legal review of EUPL 1.2, GeoGebra non-commercial license, natives, fonts and translations not recorded (owner)
+
+PASS: 2 FAIL: 1 SKIP: 1
+# CSV: /workspace/AlgoGebra/wt-ext/03-RCP-Spike/tests/results/20261029_171259-grok-bot-vm-419969949/S_O-02_GROK_V1.csv

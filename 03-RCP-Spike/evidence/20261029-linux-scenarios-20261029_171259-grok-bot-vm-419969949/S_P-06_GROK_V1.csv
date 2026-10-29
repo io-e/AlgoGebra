@@ -1,0 +1,5 @@
+suite,num,id,status,priority,detail,ts
+S_P-06,1,P06-01-namespace-has-no-network,PASS,P0,"interfaces in namespace: lo ",2026-10-29T17:16:07.1885998+01:00
+S_P-06,2,P06-02-started-offline,PASS,P0,"log=/workspace/AlgoGebra/wt-ext/03-RCP-Spike/tests/results/20261029_171259-grok-bot-vm-419969949/S_P-06_offline.log",2026-10-29T17:16:23.3795769+01:00
+S_P-06,3,P06-03-core-work-offline,PASS,P0,"CAS='(x + 1) (x - 1)' 3D='s: (x - 1)² + (y - 2)² + (z - 3)² = 1' reopen names='P'",2026-10-29T17:16:23.3838219+01:00
+S_P-06,4,P06-04-no-network-error,PASS,P1,"network errors: []",2026-10-29T17:16:23.3916790+01:00

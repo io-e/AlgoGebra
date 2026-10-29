@@ -1,0 +1,14 @@
+# Suite: S_D-10
+# Started: 2026-10-29T17:13:28.0167672+01:00
+# Host: grok-bot-vm-419969949 / Debian GNU/Linux 13 (trixie) / pwsh 7.6.9
+
+# Scenario: D-10 - Install, upgrade, rollback | gate - | client desktop
+# Evidence: commit=7e2f02e image=/workspace/AlgoGebra/image/GeoGebraPlus-RCP-0.1.0-linux-gtk-x86_64 pin=375db7faf5407390bb322165f2414415da8faeda version=5.4.934.0 os=Unix 6.12.94.0 pwsh=7.6.9
+not ok 1 - [P0] D10-01-bundled-java-25 :: java= version=
+ok 2 - [P0] D10-02-natives-present :: native files=5
+not ok 3 - [P1] D10-03-launcher-uses-bundled-java :: launcher Java line: JAVA="${JAVA:-$(ls -d /workspace/AlgoGebra/jdk/jdk-25* | head -1)/bin/java}"
+ok 4 - [P1] D10-04-relocatable-configuration :: static configuration lines with an absolute path outside the image: 0 
+ok 5 - [P0] D10-05-install-upgrade-rollback # SKIP NOT RUN - blocked by: no installer (MSI/MSIX/zip+script contract) and no clean Windows VM; install-product.ps1 is a developer helper only
+
+PASS: 2 FAIL: 2 SKIP: 1
+# CSV: /workspace/AlgoGebra/wt-ext/03-RCP-Spike/tests/results/20261029_171259-grok-bot-vm-419969949/S_D-10_GROK_V1.csv

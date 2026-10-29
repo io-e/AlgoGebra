@@ -1,0 +1,18 @@
+# Suite: S_P-01
+# Started: 2026-10-29T17:14:16.4781920+01:00
+# Host: grok-bot-vm-419969949 / Debian GNU/Linux 13 (trixie) / pwsh 7.6.9
+
+# Scenario: P-01 - Clean product, no optional extension | gate A | client desktop (web deferred)
+# Evidence: commit=7e2f02e image=/workspace/AlgoGebra/image/GeoGebraPlus-RCP-0.1.0-linux-gtk-x86_64 pin=375db7faf5407390bb322165f2414415da8faeda version=5.4.934.0 os=Unix 6.12.94.0 pwsh=7.6.9
+# shipped image optional bundles (removed for the clean profile): org.geogebra.plus.compute.runtime, org.geogebra.plus.engine.pari, org.geogebra.plus.engine.maxima, org.geogebra.plus.engine.gnuplot
+ok 1 - [P0] P01-01-clean-profile-has-no-optional-extension :: clean profile copy=/tmp/grok-img-P01-clean-2731776; removed=[org.geogebra.plus.compute.runtime, org.geogebra.plus.engine.pari, org.geogebra.plus.engine.maxima, org.geogebra.plus.engine.gnuplot]; left=[]
+ok 2 - [P0] P01-02-d02-all-mandatory-resolved :: D-02 D-03-set check: expected=50, found=50, ACTIVE=0, RESOLVED=50, unresolved/other=0, resolveBundles=true
+ok 3 - [P0] P01-03-2d-view-open :: GeoGebraPanel (algebra + graphics + input) embedded
+ok 4 - [P0] P01-04-3d-view-open :: 3D view initialized=true
+ok 5 - [P0] P01-05-cas-available :: D-05 CAS result: x² + 2x + 1
+ok 6 - [P0] P01-06-ui-api-reachable :: 3D objects=[A] toolbar chars=257 env=25.0.5+8-LTS; ggb=5.4.934.0
+ok 7 - [P1] P01-07-no-missing-class-or-resource :: [] log=/workspace/AlgoGebra/wt-ext/03-RCP-Spike/tests/results/20261029_171259-grok-bot-vm-419969949/S_P-01_ui.log
+ok 8 - [P1] P01-W-web-client # SKIP NOT RUN - blocked by: deferred: web phase (Gate C, W-01/W-02)
+
+PASS: 7 FAIL: 0 SKIP: 1
+# CSV: /workspace/AlgoGebra/wt-ext/03-RCP-Spike/tests/results/20261029_171259-grok-bot-vm-419969949/S_P-01_GROK_V1.csv

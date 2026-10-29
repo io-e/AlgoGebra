@@ -1,0 +1,16 @@
+# Suite: S_O-04
+# Started: 2026-10-29T17:13:37.6816054+01:00
+# Host: grok-bot-vm-419969949 / Debian GNU/Linux 13 (trixie) / pwsh 7.6.9
+
+# Scenario: O-04 - Missing bundle, bad .ggb, Wims down | gate - | client desktop
+# Evidence: commit=7e2f02e image=/workspace/AlgoGebra/image/GeoGebraPlus-RCP-0.1.0-linux-gtk-x86_64 pin=375db7faf5407390bb322165f2414415da8faeda version=5.4.934.0 os=Unix 6.12.94.0 pwsh=7.6.9
+ok 1 - [P0] O04-01-missing-bundle-reported :: message:  log=/workspace/AlgoGebra/wt-ext/03-RCP-Spike/tests/results/20261029_171259-grok-bot-vm-419969949/S_O-04_missing_bundle.log
+ok 2 - [P1] O04-02-missing-bundle-no-hang :: run time 1 s
+ok 3 - [P0] O04-03-bad-ggb-app-survives :: garbage open: OK 'objects=1'; bad xml: OK 'objects=0'; names after=[]
+# dialogs: 
+ok 4 - [P1] O04-04-log-redacted :: secret-like values in logs: 0
+ok 5 - [P0] O04-05-wims-down # SKIP NOT RUN - blocked by: no Wims client yet (S-xx contracts); cannot simulate Wims down
+ok 6 - [P1] O04-06-user-facing-safe-message # SKIP NOT RUN - blocked by: missing-bundle message is only in the console log; no user dialog/report designed yet
+
+PASS: 4 FAIL: 0 SKIP: 2
+# CSV: /workspace/AlgoGebra/wt-ext/03-RCP-Spike/tests/results/20261029_171259-grok-bot-vm-419969949/S_O-04_GROK_V1.csv

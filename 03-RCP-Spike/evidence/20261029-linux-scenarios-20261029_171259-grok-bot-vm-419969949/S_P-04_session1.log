@@ -1,0 +1,168 @@
+Run 20261029-171516-2732945 log /workspace/AlgoGebra/image/GeoGebraPlus-RCP-0.1.0-linux-gtk-x86_64/logs/launch-20261029-171516-2732945.log
+Picked up JAVA_TOOL_OPTIONS: -Dggbplus.scenario=/workspace/AlgoGebra/wt-ext/03-RCP-Spike/tests/results/20261029_171259-grok-bot-vm-419969949/S_P-04_session1.directives.tsv -Dggbplus.scenarioExit=true
+WARNING: Using incubator modules: jdk.incubator.vector
+[GeoGebraPlus] Host bundle ACTIVE; id=67
+[GeoGebraPlus] Registered external engine pari; available=true
+[GeoGebraPlus] Registered external engine maxima; available=true
+[GeoGebraPlus] Registered external engine gnuplot; available=true
+[GeoGebraPlus] IApplication.start() — D-02 entry
+[GeoGebraPlus] Runtime: 25.0.5+8-LTS; OS=Linux/amd64
+[GeoGebraPlus] JogAmp boot delegation=null
+[GeoGebraPlus] Normalized lazy bundle to RESOLVED for D-02: com.sun.jna
+[GeoGebraPlus] D-02 D-03-set check: expected=50, found=50, ACTIVE=0, RESOLVED=50, unresolved/other=0, resolveBundles=true
+[GeoGebraPlus] D-02 PASS
+(java:2732966): dbind-WARNING **: 17:15:17.358: AT-SPI: Error retrieving accessibility bus address: org.freedesktop.DBus.Error.ServiceUnknown: The name org.a11y.Bus was not provided by any .service files
+[GeoGebraPlus] GIAC DLL loaded from product classpath: /tmp/geogebraplus-giac-13152245328817406639/libjavagiac64.so
+[GeoGebraPlus] D-05 GIAC natives preloaded in owning bundle class loader: org.eclipse.osgi.internal.loader.EquinoxClassLoader@1e6a9892[org.geogebra.migration.shared.giac.jni:5.4.934.0(id=48)]
+[GeoGebraPlus] GlueGen native loaded from product classpath: /tmp/geogebraplus-gluegen-12765169351219966350/libgluegen_rt.so
+[GeoGebraPlus] D-05 GlueGen natives preloaded in owning bundle class loader: org.eclipse.osgi.internal.loader.EquinoxClassLoader@3d5489c[org.geogebra.migration.external.org.jogamp.gluegen.gluegen-rt:2.6.0(id=40)]
+[GeoGebraPlus] JOGL native loaded from product classpath: /tmp/geogebraplus-jogl-12896695682208020248/libnativewindow_awt.so
+[GeoGebraPlus] JOGL native loaded from product classpath: /tmp/geogebraplus-jogl-8333816497908576466/libnativewindow_x11.so
+[GeoGebraPlus] JOGL native loaded from product classpath: /tmp/geogebraplus-jogl-9946518096436208954/libnewt_head.so
+[GeoGebraPlus] JOGL native loaded from product classpath: /tmp/geogebraplus-jogl-1407614288367138774/libjogl_desktop.so
+[GeoGebraPlus] JOGL native loaded from product classpath: /tmp/geogebraplus-jogl-4685352175983892482/libjogl_mobile.so
+[GeoGebraPlus] D-05 JOGL natives preloaded in owning bundle class loader: org.eclipse.osgi.internal.loader.EquinoxClassLoader@1f98585b[org.geogebra.migration.external.org.jogamp.jogl.jogl-all:2.6.0(id=41)]
+[GeoGebraPlus] CAS factory prototype installed: org.geogebra.desktop.factories.CASFactoryD
+[GeoGebraPlus] System-loader GIAC DLL resource=null
+GeoGebra 5.4.934.0 20 October 2026 Java 25.0.5-64bit
+[GeoGebraPlus] D-04 embedded AppD full-GUI mode=true (spike adapter; GeoGebraPanel constructs AppD with minimal-GUI mode)
+[GeoGebraPlus] D-04 GeoGebraPanel embedded in SWT_AWT shell
+[GeoGebraPlus] D-05 CAS enabled=true; factory=org.geogebra.desktop.factories.CASFactoryD (test adapter uses reflection; not a proposed public API)
+[GeoGebraPlus] D-05 GIAC JNI host-loader native loaded=true
+============== restarted ===============
+[GeoGebraPlus] D-05 GIAC native loaded=true
+[GeoGebraPlus] D-05 CAS result: x² + 2x + 1
+============== restarted ===============
+[GeoGebraPlus] D-05 CAS smoke 1+1: 2
+============== restarted ===============
+[GeoGebraPlus] D-05 CAS smoke x+1: x + 1
+============== restarted ===============
+[GeoGebraPlus] D-05 direct GIAC smoke: org.geogebra.desktop.cas.giac.CASgiacD(1+1) -> 2
+[GeoGebraPlus] D-05 CAS ASSERTION PASS: normalized=x^2+2x+1
+GeoGebra 5.4.934.0 20 October 2026 Java 25.0.5-64bit
+[GeoGebraPlus] D-05 3D point command accepted=true; 3D view initialized=true
+[GeoGebraPlus] D-05 3D note: GeoGebraPanel constructs the 2D AppD; the 3D proof uses an upstream App3D instance in the second SWT_AWT pane
+(SWT:2732966): Gdk-WARNING **: 17:15:19.164: XSetErrorHandler() called with a GDK error trap pushed. Don't do that.
+[GeoGebraPlus] SCN	_BEGIN	OK	S_P-04_session1.directives.tsv	34 lines
+[GeoGebraPlus] SCN	B-01	OK	true
+[LaTeX] loadFont():fonts/latin/optional/jlm_cmssbx10.ttf
+[LaTeX] loadFont():fonts/latin/optional/jlm_cmssbx10.ttf
+[LaTeX] loadFont():fonts/latin/jlm_cmr10.ttf
+[GeoGebraPlus] SCN	B-02	OK	false
+(SWT:2732966): Gdk-WARNING **: 17:15:23.288: XSetErrorHandler() called with a GDK error trap pushed. Don't do that.
+[GeoGebraPlus] SCN	B-03	OK	true
+[GeoGebraPlus] SCN	B-04	OK	true
+[GeoGebraPlus] SCN	B-05	OK	true
+[GeoGebraPlus] SCN	B-06	OK	true
+[GeoGebraPlus] SCN	B-07	OK	true
+[GeoGebraPlus] SCN	B-08	OK	true
+[GeoGebraPlus] SCN	N-before	OK	A1,L,P,a,c,f,sl,t
+[GeoGebraPlus] SCN	X-before	OK	b1f2ff0d6daf2ecd32c4bcad4fe55675e764cf070962eba01585fd68bacf5712
+[GeoGebraPlus] SCN	V1-a	OK	a = 2.5
+[GeoGebraPlus] SCN	V1-f	OK	f(x) = 2.5 x² - 1
+[GeoGebraPlus] SCN	V1-P	OK	P = (1, 3)
+[GeoGebraPlus] SCN	V1-c	OK	c: (x - 1)² + (y - 3)² = 6.25
+[GeoGebraPlus] SCN	V1-t	OK	é à ü € α
+[GeoGebraPlus] SCN	V1-A1	OK	A1 = 42
+[GeoGebraPlus] SCN	V1-L	OK	L = {1, 2, 3, 2.5}
+[GeoGebraPlus] SCN	V1-sl	OK	sl = 0
+[GeoGebraPlus] SCN	SAVE	OK	3587 bytes sha256=c944eb541626265a317587ca69e06502a1f35fa9e13717221dccb9341345a905
+[GeoGebraPlus] SCN	_DIALOG	ERR	GeoGebra - Error | Please check your input null [OK]
+[GeoGebraPlus] SCN	NEW	OK	0
+[GeoGebraPlus] SCN	N-afternew	OK	
+[LaTeX] loadFont():fonts/latin/optional/jlm_cmssbx10.ttf
+[LaTeX] loadFont():fonts/latin/optional/jlm_cmssbx10.ttf
+[LaTeX] loadFont():fonts/latin/jlm_cmr10.ttf
+[GeoGebraPlus] SCN	OPEN	OK	objects=8
+[LaTeX] loadFont():fonts/latin/optional/jlm_cmssbx10.ttf
+[LaTeX] loadFont():fonts/latin/optional/jlm_cmssbx10.ttf
+[LaTeX] loadFont():fonts/latin/jlm_cmr10.ttf
+Exception in thread "AWT-EventQueue-0" com.himamis.retex.renderer.share.exception.ResourceParseException: FontLoader: FontLoader 'fonts/latin/jlm_cmr10.ttf'. Error message: Problem reading font data.
+	at com.himamis.retex.renderer.desktop.font.FontLoaderD.loadFont(FontLoaderD.java:78)
+	at com.himamis.retex.renderer.share.platform.FontAdapter.loadFont(FontAdapter.java:68)
+	at com.himamis.retex.renderer.share.FontInfo.getFont(FontInfo.java:325)
+	at com.himamis.retex.renderer.share.TeXFont.getChar(TeXFont.java:238)
+	at com.himamis.retex.renderer.share.SymbolAtom.getChar(SymbolAtom.java:157)
+	at com.himamis.retex.renderer.share.SymbolAtom.createBox(SymbolAtom.java:191)
+	at com.himamis.retex.renderer.share.Dummy.createBox(Dummy.java:141)
+	at com.himamis.retex.renderer.share.RowAtom.createBox(RowAtom.java:350)
+	at com.himamis.retex.renderer.share.ColorAtom.createBox(ColorAtom.java:88)
+	at com.himamis.retex.renderer.share.TeXFormula.createBox(TeXFormula.java:284)
+	at com.himamis.retex.renderer.share.TeXFormula$TeXIconBuilder.build(TeXFormula.java:417)
+	at com.himamis.retex.renderer.share.TeXFormula.createTeXIcon(TeXFormula.java:447)
+	at com.himamis.retex.renderer.share.TeXFormula.createBufferedImage(TeXFormula.java:589)
+	at org.geogebra.common.euclidian.DrawEquation.drawEquation(DrawEquation.java:197)
+	at org.geogebra.desktop.euclidian.DrawEquationD.drawLatexImageIcon(DrawEquationD.java:147)
+	at org.geogebra.desktop.gui.view.algebra.AlgebraTreeCellRenderer.getTreeCellRendererComponent(AlgebraTreeCellRenderer.java:142)
+	at java.desktop/javax.swing.plaf.basic.BasicTreeUI$NodeDimensionsHandler.getNodeDimensions(BasicTreeUI.java:3279)
+	at java.desktop/javax.swing.tree.AbstractLayoutCache.getNodeDimensions(AbstractLayoutCache.java:496)
+	at java.desktop/javax.swing.tree.VariableHeightLayoutCache$TreeStateNode.updatePreferredSize(VariableHeightLayoutCache.java:1344)
+	at java.desktop/javax.swing.tree.VariableHeightLayoutCache$TreeStateNode.getXOrigin(VariableHeightLayoutCache.java:1127)
+	at java.desktop/javax.swing.tree.VariableHeightLayoutCache$TreeStateNode.getNodeBounds(VariableHeightLayoutCache.java:1114)
+	at java.desktop/javax.swing.tree.VariableHeightLayoutCache.getBounds(VariableHeightLayoutCache.java:219)
+	at java.desktop/javax.swing.plaf.basic.BasicTreeUI.getPathBounds(BasicTreeUI.java:738)
+	at java.desktop/javax.swing.plaf.basic.BasicTreeUI.paint(BasicTreeUI.java:1453)
+	at java.desktop/javax.swing.plaf.metal.MetalTreeUI.paint(MetalTreeUI.java:190)
+	at java.desktop/javax.swing.plaf.ComponentUI.update(ComponentUI.java:161)
+	at java.desktop/javax.swing.JComponent.paintComponent(JComponent.java:852)
+	at java.desktop/javax.swing.JComponent.paint(JComponent.java:1128)
+	at java.desktop/javax.swing.JComponent.paintChildren(JComponent.java:961)
+	at java.desktop/javax.swing.JComponent.paint(JComponent.java:1137)
+	at java.desktop/javax.swing.JViewport.paint(JViewport.java:736)
+	at java.desktop/javax.swing.JComponent.paintChildren(JComponent.java:961)
+	at java.desktop/javax.swing.JComponent.paint(JComponent.java:1137)
+	at java.desktop/javax.swing.JComponent.paintChildren(JComponent.java:961)
+	at java.desktop/javax.swing.JComponent.paint(JComponent.java:1137)
+	at java.desktop/javax.swing.JComponent.paintChildren(JComponent.java:961)
+	at java.desktop/javax.swing.JComponent.paint(JComponent.java:1137)
+	at java.desktop/javax.swing.JComponent.paintChildren(JComponent.java:961)
+	at java.desktop/javax.swing.JSplitPane.paintChildren(JSplitPane.java:1076)
+	at java.desktop/javax.swing.JComponent.paint(JComponent.java:1137)
+	at java.desktop/javax.swing.JComponent.paintChildren(JComponent.java:961)
+	at java.desktop/javax.swing.JComponent.paint(JComponent.java:1137)
+	at java.desktop/javax.swing.JComponent.paintChildren(JComponent.java:961)
+	at java.desktop/javax.swing.JSplitPane.paintChildren(JSplitPane.java:1076)
+	at java.desktop/javax.swing.JComponent.paint(JComponent.java:1137)
+	at java.desktop/javax.swing.JComponent.paintChildren(JComponent.java:961)
+	at java.desktop/javax.swing.JComponent.paint(JComponent.java:1137)
+	at java.desktop/javax.swing.JComponent.paintChildren(JComponent.java:961)
+	at java.desktop/javax.swing.JComponent.paint(JComponent.java:1137)
+	at java.desktop/javax.swing.JComponent.paintChildren(JComponent.java:961)
+	at java.desktop/javax.swing.JComponent.paint(JComponent.java:1137)
+	at java.desktop/javax.swing.JComponent.paintChildren(JComponent.java:961)
+	at java.desktop/javax.swing.JComponent.paint(JComponent.java:1137)
+	at java.desktop/javax.swing.JComponent.paintChildren(JComponent.java:961)
+	at java.desktop/javax.swing.JComponent.paint(JComponent.java:1137)
+	at java.desktop/javax.swing.JComponent.paintToOffscreen(JComponent.java:5324)
+	at java.desktop/javax.swing.RepaintManager$PaintManager.paintDoubleBufferedImpl(RepaintManager.java:1599)
+	at java.desktop/javax.swing.RepaintManager$PaintManager.paintDoubleBuffered(RepaintManager.java:1574)
+	at java.desktop/javax.swing.RepaintManager$PaintManager.paint(RepaintManager.java:1512)
+	at java.desktop/javax.swing.BufferStrategyPaintManager.paint(BufferStrategyPaintManager.java:271)
+	at java.desktop/javax.swing.RepaintManager.paint(RepaintManager.java:1279)
+	at java.desktop/javax.swing.JComponent._paintImmediately(JComponent.java:5272)
+	at java.desktop/javax.swing.JComponent.paintImmediately(JComponent.java:5082)
+	at java.desktop/javax.swing.RepaintManager.paintDirtyRegions(RepaintManager.java:825)
+	at java.desktop/javax.swing.RepaintManager.paintDirtyRegions(RepaintManager.java:788)
+	at java.desktop/javax.swing.RepaintManager.prePaintDirtyRegions(RepaintManager.java:738)
+	at java.desktop/javax.swing.RepaintManager$ProcessingRunnable.run(RepaintManager.java:1840)
+	at java.desktop/java.awt.event.InvocationEvent.dispatch(InvocationEvent.java:323)
+	at java.desktop/java.awt.EventQueue.dispatchEventImpl(EventQueue.java:723)
+	at java.desktop/java.awt.EventQueue.dispatchEvent(EventQueue.java:702)
+	at java.desktop/java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:203)
+	at java.desktop/java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:124)
+	at java.desktop/java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:113)
+	at java.desktop/java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:109)
+	at java.desktop/java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:101)
+	at java.desktop/java.awt.EventDispatchThread.run(EventDispatchThread.java:90)
+[GeoGebraPlus] SCN	N-reopen	OK	A1,L,P,a,c,f,sl,t
+[GeoGebraPlus] SCN	X-reopen	OK	c066ecfbb0f5e602a412487755e2ed2382fe58042541456d7cebe30019e78536
+[GeoGebraPlus] SCN	V2-a	OK	a = 2.5
+[GeoGebraPlus] SCN	V2-f	OK	f(x) = 2.5 x² - 1
+[GeoGebraPlus] SCN	V2-P	OK	P = (1, 3)
+[GeoGebraPlus] SCN	V2-c	OK	c: (x - 1)² + (y - 3)² = 6.25
+[GeoGebraPlus] SCN	V2-t	OK	é à ü € α
+[GeoGebraPlus] SCN	V2-A1	OK	A1 = 42
+[GeoGebraPlus] SCN	V2-L	OK	L = {1, 2, 3, 2.5}
+[GeoGebraPlus] SCN	V2-sl	OK	sl = 0
+[GeoGebraPlus] SCN	_END	OK	done
+[GeoGebraPlus] Host bundle stopping

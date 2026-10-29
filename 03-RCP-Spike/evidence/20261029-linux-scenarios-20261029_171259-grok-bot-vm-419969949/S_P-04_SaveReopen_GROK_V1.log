@@ -1,0 +1,25 @@
+# Suite: S_P-04
+# Started: 2026-10-29T17:15:15.4912763+01:00
+# Host: grok-bot-vm-419969949 / Debian GNU/Linux 13 (trixie) / pwsh 7.6.9
+
+# Scenario: P-04 - Open, save, reopen .ggb | gate A | client desktop (web deferred)
+# Evidence: commit=7e2f02e image=/workspace/AlgoGebra/image/GeoGebraPlus-RCP-0.1.0-linux-gtk-x86_64 pin=375db7faf5407390bb322165f2414415da8faeda version=5.4.934.0 os=Unix 6.12.94.0 pwsh=7.6.9
+not ok 1 - [P0] P04-01-build :: build results: B-01=true B-02=false B-03=true B-04=true B-05=true B-06=true B-07=true B-08=true
+ok 2 - [P0] P04-02-save :: 3587 bytes sha256=c944eb541626265a317587ca69e06502a1f35fa9e13717221dccb9341345a905 file=/workspace/AlgoGebra/wt-ext/03-RCP-Spike/tests/results/20261029_171259-grok-bot-vm-419969949/S_P-04_saved.ggb
+ok 3 - [P1] P04-03-new-clears :: after NEW names=''
+ok 4 - [P0] P04-04-reopen-same-objects :: before=[A1,L,P,a,c,f,sl,t] reopen=[A1,L,P,a,c,f,sl,t]
+ok 5 - [P0] P04-05-value-a :: before='a = 2.5' reopen='a = 2.5'
+ok 6 - [P0] P04-05-value-f :: before='f(x) = 2.5 x² - 1' reopen='f(x) = 2.5 x² - 1'
+ok 7 - [P0] P04-05-value-P :: before='P = (1, 3)' reopen='P = (1, 3)'
+ok 8 - [P0] P04-05-value-c :: before='c: (x - 1)² + (y - 3)² = 6.25' reopen='c: (x - 1)² + (y - 3)² = 6.25'
+ok 9 - [P0] P04-05-value-t :: before='é à ü € α' reopen='é à ü € α'
+ok 10 - [P0] P04-05-value-A1 :: before='A1 = 42' reopen='A1 = 42'
+ok 11 - [P0] P04-05-value-L :: before='L = {1, 2, 3, 2.5}' reopen='L = {1, 2, 3, 2.5}'
+ok 12 - [P0] P04-05-value-sl :: before='sl = 0' reopen='sl = 0'
+ok 13 - [P1] P04-06-xml-hash-informative :: xml sha256 before=b1f2ff0d6daf reopen=c066ecfbb0f5 (informative: XML may legitimately differ in ordering)
+ok 14 - [P0] P04-07-fresh-session-reopen :: fresh session names=[A1,L,P,a,c,f,sl,t] diffs=[]
+ok 15 - [P0] P04-08-baseline-opens-product-file :: upstream baseline names=[A1,L,P,a,c,f,sl,t] diffs=[]
+ok 16 - [P1] P04-W-web # SKIP NOT RUN - blocked by: deferred: web phase
+
+PASS: 14 FAIL: 1 SKIP: 1
+# CSV: /workspace/AlgoGebra/wt-ext/03-RCP-Spike/tests/results/20261029_171259-grok-bot-vm-419969949/S_P-04_GROK_V1.csv

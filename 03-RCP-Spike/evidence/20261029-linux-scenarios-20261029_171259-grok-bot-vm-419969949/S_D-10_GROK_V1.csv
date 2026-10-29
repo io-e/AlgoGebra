@@ -1,0 +1,6 @@
+suite,num,id,status,priority,detail,ts
+S_D-10,1,D10-01-bundled-java-25,FAIL,P0,"java= version=",2026-10-29T17:13:28.0485803+01:00
+S_D-10,2,D10-02-natives-present,PASS,P0,"native files=5",2026-10-29T17:13:28.0565374+01:00
+S_D-10,3,D10-03-launcher-uses-bundled-java,FAIL,P1,"launcher Java line: JAVA="${JAVA:-$(ls -d /workspace/AlgoGebra/jdk/jdk-25* | head -1)/bin/java}"",2026-10-29T17:13:28.0657403+01:00
+S_D-10,4,D10-04-relocatable-configuration,PASS,P1,"static configuration lines with an absolute path outside the image: 0 ",2026-10-29T17:13:28.0852829+01:00
+S_D-10,5,D10-05-install-upgrade-rollback,SKIP,P0,"NOT RUN - blocked by: no installer (MSI/MSIX/zip+script contract) and no clean Windows VM; install-product.ps1 is a developer helper only",2026-10-29T17:13:28.0877428+01:00

@@ -1,0 +1,9 @@
+# GROK_V1 P-04 construction (2D) built before save; values compared after reopen.
+CMD	B-01	a = 2.5
+CMD	B-02	f(x) = a x^2 - 1
+CMD	B-03	P = (1, 3)
+CMD	B-04	c = Circle(P, a)
+CMD	B-05	t = Text("é à ü € α")
+CMD	B-06	A1 = 42
+CMD	B-07	L = {1, 2, 3, a}
+CMD	B-08	sl = Slider(0, 10, 0.5)

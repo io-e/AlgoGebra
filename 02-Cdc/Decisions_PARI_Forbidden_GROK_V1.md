@@ -1,7 +1,7 @@
 <!-- GROK_V1 -->
 # Decision — PARI/GP forbidden commands (BUG-006) — GROK_V1
 
-**Author / version:** Grok Bot, GROK_V1 — 2026-10-29 (Europe/Paris). **Status:** ACCEPTED by the user on 2026-10-29 (`eval` addition pending user confirmation, see below).
+**Author / version:** Grok Bot, GROK_V1 — 2026-10-29 (Europe/Paris). **Status:** ACCEPTED by the user on 2026-10-29; the `eval` block was confirmed by the owner on 2026-10-29 ("Keep eval blocked").
 **Scope:** `03-RCP-Spike/engines/pari/.../PariGPEngine.java` (`AGB_ILLEGAL`, checked in `validateCommand`). Related: D-ENG-03 in `Decisions_External_Engines_GROK_V1.md`.
 
 ## Decision
@@ -29,7 +29,7 @@ With gp 2.17.2 and `default(secure,1)`, `install` only prints `[secure mode]: ab
 With piped stdin, which is how the engine talks to gp, the next input line confirms it.
 On 2026-10-29, through the engine (EngineCli, before this change), `eval(Str("ins","tall(\"getpid\",\"l\")"))` followed by `print(getpid())` printed a real PID: a native libc symbol was loaded.
 The plain-word filter alone would miss this, because the name is built from strings. So `eval` is also blocked.
-**User confirmation needed for `eval`:** blocking it also refuses harmless uses such as `eval("x^2")`.
+**Owner confirmation for `eval` (2026-10-29): "Keep eval blocked".** Blocking it also refuses harmless uses such as `eval("x^2")`; this cost is accepted.
 
 ## Deviation from WIMS
 WIMS `pari.c` has an empty `illegal[]` list (only `illpart[]` = plot, write, help). This is a deliberate, documented deviation from WIMS. `WIMS_ILLEGAL` and `WIMS_ILLPART` stay byte-for-byte identical to WIMS; the extra list is separate (`AGB_ILLEGAL`).

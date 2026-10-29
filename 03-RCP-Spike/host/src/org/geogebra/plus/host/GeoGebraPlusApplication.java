@@ -46,6 +46,9 @@ public final class GeoGebraPlusApplication implements IApplication {
 
     private volatile Display display;
     private volatile Shell shell;
+    private volatile Object scenarioApi2d;
+    private volatile Object scenarioApi3d;
+    private volatile Object scenarioApp2d;
 
     @Override
     public Object start(IApplicationContext applicationContext) throws Exception {
@@ -225,6 +228,7 @@ public final class GeoGebraPlusApplication implements IApplication {
         // algebra-input rows. The shell remains resizable.
         shell.setMaximized(true);
         shell.forceActive();
+        startScenarioHookIfRequested();
         if (Boolean.getBoolean("ggbplus.captureEvidenceScreenshot")) {
             display.timerExec(25000, () -> captureEvidenceScreenshot(shell));
         }
@@ -236,6 +240,42 @@ public final class GeoGebraPlusApplication implements IApplication {
         display.dispose();
         display = null;
         shell = null;
+    }
+
+    /** GROK_V1 opt-in test hook: -Dggbplus.scenario=<file> runs ScenarioScript; -Dggbplus.scenarioExit=true closes the shell after it. */
+    private void startScenarioHookIfRequested() {
+        String file = System.getProperty("ggbplus.scenario");
+        if (file == null || file.isEmpty()) {
+            return;
+        }
+        Thread runner = new Thread(() -> {
+            try {
+                Thread.sleep(Long.getLong("ggbplus.scenarioDelayMs", 4000L));
+                new ScenarioScript(scenarioApi2d, scenarioApi3d, scenarioApp2d, System.out).runFile(Paths.get(file), task -> {
+                    try {
+                        SwingUtilities.invokeAndWait(task);
+                    } catch (Exception error) {
+                        throw new IllegalStateException(error);
+                    }
+                });
+            } catch (Throwable error) {
+                System.out.println(ScenarioScript.PREFIX + "_FATAL\tERR\t" + error);
+            } finally {
+                if (Boolean.getBoolean("ggbplus.scenarioExit")) {
+                    Display current = display;
+                    Shell currentShell = shell;
+                    if (current != null && !current.isDisposed()) {
+                        current.asyncExec(() -> {
+                            if (currentShell != null && !currentShell.isDisposed()) {
+                                currentShell.close();
+                            }
+                        });
+                    }
+                }
+            }
+        }, "ggbplus-scenario");
+        runner.setDaemon(true);
+        runner.start();
     }
 
     private static void captureEvidenceScreenshot(Shell targetShell) {
@@ -297,6 +337,8 @@ public final class GeoGebraPlusApplication implements IApplication {
             twoDFrame.setVisible(true);
             twoDFrame.validate();
             System.out.println(LOG + "D-04 GeoGebraPanel embedded in SWT_AWT shell");
+            scenarioApi2d = panel.getGeoGebraAPI();
+            scenarioApp2d = getPanelApp(panel);
 
             try {
                 boolean casEnabled = enableCasForSpike(panel);
@@ -337,6 +379,7 @@ public final class GeoGebraPlusApplication implements IApplication {
                 threeDFrame.add(threeDHost, BorderLayout.CENTER);
                 threeDFrame.setVisible(true);
                 threeDFrame.validate();
+                scenarioApi3d = app3D.getGgbApi();
                 boolean pointCreated = app3D.getGgbApi().evalCommand("A = (1, 2, 3)");
                 boolean threeDInitialized = app3D.isEuclidianView3Dinited();
                 System.out.println(LOG + "D-05 3D point command accepted=" + pointCreated

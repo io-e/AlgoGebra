@@ -1,0 +1,18 @@
+# Suite: S_X-01
+# Started: 2026-10-29T17:17:31.0688593+01:00
+# Host: grok-bot-vm-419969949 / Debian GNU/Linux 13 (trixie) / pwsh 7.6.9
+
+# Scenario: X-01 - Same compute contract | gate D | client both (desktop part)
+# Evidence: commit=7e2f02e image=/workspace/AlgoGebra/image/GeoGebraPlus-RCP-0.1.0-linux-gtk-x86_64 pin=375db7faf5407390bb322165f2414415da8faeda version=5.4.934.0 os=Unix 6.12.94.0 pwsh=7.6.9
+ok 1 - [P1] X01-01-result-field-engineId :: ComputeResult.engineId()
+ok 2 - [P1] X01-01-result-field-text :: ComputeResult.text()
+ok 3 - [P1] X01-01-result-field-artifact :: ComputeResult.artifact()
+ok 4 - [P1] X01-01-result-field-mediaType :: ComputeResult.mediaType()
+ok 5 - [P1] X01-01-result-field-elapsed :: ComputeResult.elapsed()
+not ok 6 - [P1] X01-02-result-kind-typed :: typed result kind (text/number/matrix/image/error) as an enum in the API
+ok 7 - [P0] X01-03-pari-deterministic :: 3 runs factor(2^64+1) -> '274177,1;67280421310721,1'
+ok 8 - [P0] X01-04-cas-same-across-sessions :: C1='x⁵ + 5x⁴ + 10x³ + 10x² + 5x + 1' C2='-x cos(x) + sin(x) + c_{1}' C3='{x = -sqrt(2), x = sqrt(2)}'
+ok 9 - [P0] X01-05-typed-contract-shared-with-web # SKIP NOT RUN - blocked by: shared typed request/result contract (kind enum, error codes) not designed yet; web client deferred: web phase
+
+PASS: 7 FAIL: 1 SKIP: 1
+# CSV: /workspace/AlgoGebra/wt-ext/03-RCP-Spike/tests/results/20261029_171259-grok-bot-vm-419969949/S_X-01_GROK_V1.csv

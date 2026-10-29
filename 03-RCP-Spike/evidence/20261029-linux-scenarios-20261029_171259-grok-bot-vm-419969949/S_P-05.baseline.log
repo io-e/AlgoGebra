@@ -1,0 +1,23 @@
+GeoGebra 5.4.934.0 20 October 2026 Java 25.0.5-64bit
+
+GeoGebra 5.4.934.0 20 October 2026 Java 25.0.5-64bit
+
+[GeoGebraPlus] baseline ready; ggb=5.4.934.0
+[GeoGebraPlus] SCN	_BEGIN	OK	S_P-05.baseline.directives.tsv	13 lines
+[GeoGebraPlus] SCN	SC-01	OK	true
+[GeoGebraPlus] SCN	SC-02	OK	false
+[GeoGebraPlus] SCN	SC-02v	OK	m = 7
+[GeoGebraPlus] SCN	SC-03	OK	false
+[GeoGebraPlus] SCN	SC-03v	OK	n = 9
+[LaTeX] loadFont():fonts/latin/optional/jlm_cmssbx10.ttf
+[LaTeX] loadFont():fonts/base/jlm_cmex10.ttf
+[GeoGebraPlus] SCN	SC-04	OK	true
+[GeoGebraPlus] SCN	SC-05	OK	false
+[GeoGebraPlus] SCN	SC-06	OK	false
+[GeoGebraPlus] SCN	SC-06v	OK	m = 11
+[GeoGebraPlus] SCN	MAC-01	OK	true
+[GeoGebraPlus] SCN	IMG-01	OK	true
+[GeoGebraPlus] SCN	EXP-PNG	OK	true; bytes=48569
+[GeoGebraPlus] SCN	EXP-SVG	OK	110010 chars; starts=<?xml
+[GeoGebraPlus] SCN	_END	OK	done
+

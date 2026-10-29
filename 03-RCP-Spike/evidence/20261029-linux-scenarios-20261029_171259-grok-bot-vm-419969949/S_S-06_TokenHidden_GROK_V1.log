@@ -1,0 +1,11 @@
+# Suite: S_S-06
+# Started: 2026-10-29T17:17:30.4380963+01:00
+# Host: grok-bot-vm-419969949 / Debian GNU/Linux 13 (trixie) / pwsh 7.6.9
+
+# Scenario: S-06 - Token not visible to the extension | gate - | client both (desktop first)
+# Evidence: commit=7e2f02e image=/workspace/AlgoGebra/image/GeoGebraPlus-RCP-0.1.0-linux-gtk-x86_64 pin=375db7faf5407390bb322165f2414415da8faeda version=5.4.934.0 os=Unix 6.12.94.0 pwsh=7.6.9
+ok 1 - [P2] S-06-00-precheck-wims-contract-absent :: Wims submission/activity code found in product sources: 0 (a non-zero count means this script must be extended)
+ok 2 - [P0] S-06-01 # SKIP NOT RUN - blocked by: no Wims activity/submission contract, client or test server yet (section 4 contracts not written); no token handling exists
+
+PASS: 1 FAIL: 0 SKIP: 1
+# CSV: /workspace/AlgoGebra/wt-ext/03-RCP-Spike/tests/results/20261029_171259-grok-bot-vm-419969949/S_S-06_GROK_V1.csv

@@ -1,0 +1,3 @@
+suite,num,id,status,priority,detail,ts
+S_S-06,1,S-06-00-precheck-wims-contract-absent,PASS,P2,"Wims submission/activity code found in product sources: 0 (a non-zero count means this script must be extended)",2026-10-29T17:17:30.4688999+01:00
+S_S-06,2,S-06-01,SKIP,P0,"NOT RUN - blocked by: no Wims activity/submission contract, client or test server yet (section 4 contracts not written); no token handling exists",2026-10-29T17:17:30.4731469+01:00

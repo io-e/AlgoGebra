@@ -1,0 +1,7 @@
+suite,num,id,status,priority,detail,ts
+S_O-04,1,O04-01-missing-bundle-reported,PASS,P0,"message:  log=/workspace/AlgoGebra/wt-ext/03-RCP-Spike/tests/results/20261029_171259-grok-bot-vm-419969949/S_O-04_missing_bundle.log",2026-10-29T17:13:40.6423608+01:00
+S_O-04,2,O04-02-missing-bundle-no-hang,PASS,P1,"run time 1 s",2026-10-29T17:13:40.6455320+01:00
+S_O-04,3,O04-03-bad-ggb-app-survives,PASS,P0,"garbage open: OK 'objects=1'; bad xml: OK 'objects=0'; names after=[]",2026-10-29T17:13:54.8722188+01:00
+S_O-04,4,O04-04-log-redacted,PASS,P1,"secret-like values in logs: 0",2026-10-29T17:13:54.8836944+01:00
+S_O-04,5,O04-05-wims-down,SKIP,P0,"NOT RUN - blocked by: no Wims client yet (S-xx contracts); cannot simulate Wims down",2026-10-29T17:13:54.8863032+01:00
+S_O-04,6,O04-06-user-facing-safe-message,SKIP,P1,"NOT RUN - blocked by: missing-bundle message is only in the console log; no user dialog/report designed yet",2026-10-29T17:13:54.8867164+01:00

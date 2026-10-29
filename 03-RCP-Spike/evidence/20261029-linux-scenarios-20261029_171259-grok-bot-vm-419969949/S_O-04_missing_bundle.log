@@ -1,0 +1,72 @@
+Run 20261029-171339-2730405 log /tmp/grok-img-O04-missing-2730370/logs/launch-20261029-171339-2730405.log
+Picked up JAVA_TOOL_OPTIONS: -Dggbplus.scenario=/workspace/AlgoGebra/wt-ext/03-RCP-Spike/tests/results/20261029_171259-grok-bot-vm-419969949/S_O-04_missing_bundle.directives.tsv -Dggbplus.scenarioExit=true
+WARNING: Using incubator modules: jdk.incubator.vector
+!SESSION 2026-10-29 17:13:39.738 -----------------------------------------[GeoGebraPlus] Registered external engine pari; available=true
+------
+eclipse.buildId=unknown
+java.version=25.0.5
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=en
+Framework arguments:  -application org.geogebra.plus.host.geogebraplusApp
+Command-line arguments:  -data /tmp/grok-img-O04-missing-2730370/workspace-20261029-171339-2730405 -application org.geogebra.plus.host.geogebraplusApp -consoleLog
+!ENTRY org.geogebra.plus.host 4 0 2026-10-29 17:13:40.240
+!MESSAGE FrameworkEvent ERROR
+!STACK 0
+org.osgi.framework.BundleException: Could not resolve module: org.geogebra.plus.host [66]
+  Unresolved requirement: Import-Package: org.geogebra.desktop
+    -> Export-Package: org.geogebra.desktop; bundle-symbolic-name="org.geogebra.migration.desktop"; bundle-version="5.4.934.0"; version="5.4.934.0"; uses:="javax.swing,org.geogebra.common.kernel,org.geogebra.desktop.gui.app,org.geogebra.desktop.plugin"
+       org.geogebra.migration.desktop [5]
+         Unresolved requirement: Import-Package: org.geogebra.editor.desktop
+  Unresolved requirement: Import-Package: org.geogebra.desktop.geogebra3D
+    -> Export-Package: org.geogebra.desktop.geogebra3D; bundle-symbolic-name="org.geogebra.migration.desktop"; bundle-version="5.4.934.0"; version="5.4.934.0"; uses:="javax.swing,org.geogebra.common.awt,org.geogebra.common.euclidian,org.geogebra.common.euclidian3D,org.geogebra.common.geogebra3D.euclidian3D,org.geogebra.common.geogebra3D.euclidianForPlane,org.geogebra.common.geogebra3D.main,org.geogebra.common.gui.layout,org.geogebra.common.io,org.geogebra.common.kernel,org.geogebra.common.kernel.geos,org.geogebra.common.kernel.kernelND,org.geogebra.common.main,org.geogebra.common.main.settings,org.geogebra.desktop,org.geogebra.desktop.gui,org.geogebra.desktop.gui.layout,org.geogebra.desktop.main,org.geogebra.desktop.util"
+	at org.eclipse.osgi.container.Module.start(Module.java:495)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel$2.run(ModuleContainer.java:2110)
+	at org.eclipse.osgi.internal.framework.EquinoxContainerAdaptor$1$1.execute(EquinoxContainerAdaptor.java:146)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:2101)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:2043)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.doContainerStartLevel(ModuleContainer.java:2003)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1915)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1)
+	at org.eclipse.osgi.framework.eventmgr.EventManager.dispatchEvent(EventManager.java:230)
+	at org.eclipse.osgi.framework.eventmgr.EventManager$EventThread.run(EventManager.java:341)
+[GeoGebraPlus] Registered external engine maxima; available=true
+[GeoGebraPlus] Registered external engine gnuplot; available=true
+!ENTRY org.geogebra.migration.desktop 2 0 2026-10-29 17:13:40.251
+!MESSAGE Could not resolve module: org.geogebra.migration.desktop [5]
+  Unresolved requirement: Import-Package: org.geogebra.editor.desktop
+!ENTRY org.geogebra.plus.host 2 0 2026-10-29 17:13:40.251
+!MESSAGE Could not resolve module: org.geogebra.plus.host [66]
+  Unresolved requirement: Import-Package: org.geogebra.desktop
+    -> Export-Package: org.geogebra.desktop; bundle-symbolic-name="org.geogebra.migration.desktop"; bundle-version="5.4.934.0"; version="5.4.934.0"; uses:="javax.swing,org.geogebra.common.kernel,org.geogebra.desktop.gui.app,org.geogebra.desktop.plugin"
+       org.geogebra.migration.desktop [5]
+         Unresolved requirement: Import-Package: org.geogebra.editor.desktop
+!ENTRY org.geogebra.plus.desktop.resources 2 0 2026-10-29 17:13:40.252
+!MESSAGE Could not resolve module: org.geogebra.plus.desktop.resources [67]
+  Unresolved requirement: Fragment-Host: org.geogebra.migration.desktop; bundle-version="[5.4.934,5.4.935)"
+    -> Bundle-SymbolicName: org.geogebra.migration.desktop; bundle-version="5.4.934.0"
+       org.geogebra.migration.desktop [5]
+         Unresolved requirement: Import-Package: org.geogebra.editor.desktop
+!ENTRY org.geogebra.migration.desktop.jogl2 2 0 2026-10-29 17:13:40.252
+!MESSAGE Could not resolve module: org.geogebra.migration.desktop.jogl2 [7]
+  Unresolved requirement: Fragment-Host: org.geogebra.migration.desktop; bundle-version="[5.4.934,5.4.935)"
+    -> Bundle-SymbolicName: org.geogebra.migration.desktop; bundle-version="5.4.934.0"
+       org.geogebra.migration.desktop [5]
+         Unresolved requirement: Import-Package: org.geogebra.editor.desktop
+!ENTRY org.eclipse.osgi 4 0 2026-10-29 17:13:40.252
+!MESSAGE Application error
+!STACK 1
+java.lang.RuntimeException: Application "org.geogebra.plus.host.geogebraplusApp" could not be found in the registry. The applications available are: org.eclipse.equinox.app.error.
+	at org.eclipse.equinox.internal.app.EclipseAppContainer.startDefaultApp(EclipseAppContainer.java:270)
+	at org.eclipse.equinox.internal.app.MainApplicationLauncher.run(MainApplicationLauncher.java:34)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:149)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:115)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:467)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:298)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:615)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:563)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1415)
+	at org.eclipse.equinox.launcher.Main.main(Main.java:1387)
+An error has occurred. See the log file
+/tmp/grok-img-O04-missing-2730370/configuration/runtime-20261029-171339-2730405/1793290419826.log.

@@ -1,0 +1,12 @@
+# Suite: S_O-05
+# Started: 2026-10-29T17:13:55.1866590+01:00
+# Host: grok-bot-vm-419969949 / Debian GNU/Linux 13 (trixie) / pwsh 7.6.9
+
+# Scenario: O-05 - One activity upgrade | gate - | client desktop
+# Evidence: commit=7e2f02e image=/workspace/AlgoGebra/image/GeoGebraPlus-RCP-0.1.0-linux-gtk-x86_64 pin=375db7faf5407390bb322165f2414415da8faeda version=5.4.934.0 os=Unix 6.12.94.0 pwsh=7.6.9
+ok 1 - [P0] O05-01-old-format-opens :: names=[P,g,k] P='P = (2, 3)' k='k = 1.5' g='g(x) = 1.5 x'
+ok 2 - [P0] O05-02-same-as-baseline :: baseline names=[P,g,k] g='g(x) = 1.5 x'
+ok 3 - [P0] O05-03-activity-manifest-upgrade # SKIP NOT RUN - blocked by: no activity manifest / versioned activity format yet
+
+PASS: 2 FAIL: 0 SKIP: 1
+# CSV: /workspace/AlgoGebra/wt-ext/03-RCP-Spike/tests/results/20261029_171259-grok-bot-vm-419969949/S_O-05_GROK_V1.csv

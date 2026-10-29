@@ -1,0 +1,5 @@
+suite,num,id,status,priority,detail,ts
+S_X-03,1,X03-01-free-object-updated,PASS,P0,"a='a = 4' b='b = 8'",2026-10-29T17:18:16.5313490+01:00
+S_X-03,2,X03-02-dependent-object-refused,PASS,P0,"setValue on dependent b ignored",2026-10-29T17:18:16.5336269+01:00
+S_X-03,3,X03-03-same-as-baseline,PASS,P0,"product c='c = 9' baseline c='c = 9'",2026-10-29T17:18:16.5395657+01:00
+S_X-03,4,X03-04-adapter-allow-list,SKIP,P0,"NOT RUN - blocked by: state adapter (allow-list of what an external engine may change) not implemented yet",2026-10-29T17:18:16.5417718+01:00

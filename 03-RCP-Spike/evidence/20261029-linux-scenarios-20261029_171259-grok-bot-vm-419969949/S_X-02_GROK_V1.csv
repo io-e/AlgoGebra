@@ -1,0 +1,3 @@
+suite,num,id,status,priority,detail,ts
+S_X-02,1,X02-01-api-has-request-revision,FAIL,P0,"ComputeContext/ComputeResult carry a request id or construction revision",2026-10-29T17:17:55.5275276+01:00
+S_X-02,2,X02-02-stale-result-rejected,SKIP,P0,"NOT RUN - blocked by: compute API has no request id / construction revision, so a late result cannot be detected (API change needed)",2026-10-29T17:17:55.5318622+01:00

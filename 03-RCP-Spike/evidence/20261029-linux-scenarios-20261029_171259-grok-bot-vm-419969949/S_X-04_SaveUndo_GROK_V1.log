@@ -1,0 +1,12 @@
+# Suite: S_X-04
+# Started: 2026-10-29T17:18:16.8175581+01:00
+# Host: grok-bot-vm-419969949 / Debian GNU/Linux 13 (trixie) / pwsh 7.6.9
+
+# Scenario: X-04 - Save and undo | gate D | client desktop
+# Evidence: commit=7e2f02e image=/workspace/AlgoGebra/image/GeoGebraPlus-RCP-0.1.0-linux-gtk-x86_64 pin=375db7faf5407390bb322165f2414415da8faeda version=5.4.934.0 os=Unix 6.12.94.0 pwsh=7.6.9
+ok 1 - [P0] X04-01-undo-one-step :: N1=[P,Q,r] after undo=[P,Q] after 2nd undo=[P]
+ok 2 - [P0] X04-02-same-as-baseline :: baseline N2=[P,Q] N3=[P]
+ok 3 - [P0] X04-03-external-output-not-native-dependent # SKIP NOT RUN - blocked by: host does not yet insert external engine results into the construction (no adapter), so save+undo of an external output and its labelling cannot be tested
+
+PASS: 2 FAIL: 0 SKIP: 1
+# CSV: /workspace/AlgoGebra/wt-ext/03-RCP-Spike/tests/results/20261029_171259-grok-bot-vm-419969949/S_X-04_GROK_V1.csv

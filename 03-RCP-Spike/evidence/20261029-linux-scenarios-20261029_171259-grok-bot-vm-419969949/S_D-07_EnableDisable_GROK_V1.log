@@ -1,0 +1,13 @@
+# Suite: S_D-07
+# Started: 2026-10-29T17:13:02.3599649+01:00
+# Host: grok-bot-vm-419969949 / Debian GNU/Linux 13 (trixie) / pwsh 7.6.9
+
+# Scenario: D-07 - Enable/disable an extension by restart | gate B | client desktop
+# Evidence: commit=7e2f02e image=/workspace/AlgoGebra/image/GeoGebraPlus-RCP-0.1.0-linux-gtk-x86_64 pin=375db7faf5407390bb322165f2414415da8faeda version=5.4.934.0 os=Unix 6.12.94.0 pwsh=7.6.9
+ok 1 - [P1] D07-01-enabled-set-resolves :: on: ext=RESOLVED core=50
+ok 2 - [P1] D07-02-disabled-set-resolves :: off: core=50
+ok 3 - [P1] D07-03-work-kept-across-restart :: after restart d='d = 5'
+ok 4 - [P0] D07-04-product-enable-disable # SKIP NOT RUN - blocked by: product extension manager (enable/disable UI, persisted state, restart prompt, autosave of open work) not implemented yet
+
+PASS: 3 FAIL: 0 SKIP: 1
+# CSV: /workspace/AlgoGebra/wt-ext/03-RCP-Spike/tests/results/20261029_171259-grok-bot-vm-419969949/S_D-07_GROK_V1.csv

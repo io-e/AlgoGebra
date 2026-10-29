@@ -1,0 +1,6 @@
+suite,num,id,status,priority,detail,ts
+S_X-06,1,X06-01-timeout-error-in-time,PASS,P0,"while(1,) timeout 2 s -> ERR 'ExternalComputeException: pari exceeded timeout 2000 ms; process tree was killed; partial stdout was captured' ms=2150",2026-10-29T17:18:42.4244248+01:00
+S_X-06,2,X06-02-engine-process-killed,PASS,P0,"gp processes left=0",2026-10-29T17:18:43.4462520+01:00
+S_X-06,3,X06-03-next-call-works,PASS,P1,"after timeout 2+2 -> '4'",2026-10-29T17:18:43.5729691+01:00
+S_X-06,4,X06-04-bad-output-typed-error,FAIL,P0,"malformed input -> OK ''",2026-10-29T17:18:43.6705805+01:00
+S_X-06,5,X06-05-core-construction-unchanged,SKIP,P0,"NOT RUN - blocked by: no product path writes engine output into the construction yet (host integration of the compute service missing)",2026-10-29T17:18:43.6740321+01:00

@@ -1,0 +1,11 @@
+# Suite: S_X-02
+# Started: 2026-10-29T17:17:55.5007478+01:00
+# Host: grok-bot-vm-419969949 / Debian GNU/Linux 13 (trixie) / pwsh 7.6.9
+
+# Scenario: X-02 - Stale result rejected | gate D | client both
+# Evidence: commit=7e2f02e image=/workspace/AlgoGebra/image/GeoGebraPlus-RCP-0.1.0-linux-gtk-x86_64 pin=375db7faf5407390bb322165f2414415da8faeda version=5.4.934.0 os=Unix 6.12.94.0 pwsh=7.6.9
+not ok 1 - [P0] X02-01-api-has-request-revision :: ComputeContext/ComputeResult carry a request id or construction revision
+ok 2 - [P0] X02-02-stale-result-rejected # SKIP NOT RUN - blocked by: compute API has no request id / construction revision, so a late result cannot be detected (API change needed)
+
+PASS: 0 FAIL: 1 SKIP: 1
+# CSV: /workspace/AlgoGebra/wt-ext/03-RCP-Spike/tests/results/20261029_171259-grok-bot-vm-419969949/S_X-02_GROK_V1.csv

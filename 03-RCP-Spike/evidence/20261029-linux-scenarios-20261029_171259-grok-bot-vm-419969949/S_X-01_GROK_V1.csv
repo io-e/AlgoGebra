@@ -1,0 +1,10 @@
+suite,num,id,status,priority,detail,ts
+S_X-01,1,X01-01-result-field-engineId,PASS,P1,"ComputeResult.engineId()",2026-10-29T17:17:31.1012181+01:00
+S_X-01,2,X01-01-result-field-text,PASS,P1,"ComputeResult.text()",2026-10-29T17:17:31.1042829+01:00
+S_X-01,3,X01-01-result-field-artifact,PASS,P1,"ComputeResult.artifact()",2026-10-29T17:17:31.1051705+01:00
+S_X-01,4,X01-01-result-field-mediaType,PASS,P1,"ComputeResult.mediaType()",2026-10-29T17:17:31.1058638+01:00
+S_X-01,5,X01-01-result-field-elapsed,PASS,P1,"ComputeResult.elapsed()",2026-10-29T17:17:31.1067174+01:00
+S_X-01,6,X01-02-result-kind-typed,FAIL,P1,"typed result kind (text/number/matrix/image/error) as an enum in the API",2026-10-29T17:17:31.1081704+01:00
+S_X-01,7,X01-03-pari-deterministic,PASS,P0,"3 runs factor(2^64+1) -> '274177,1;67280421310721,1'",2026-10-29T17:17:32.0278521+01:00
+S_X-01,8,X01-04-cas-same-across-sessions,PASS,P0,"C1='x⁵ + 5x⁴ + 10x³ + 10x² + 5x + 1' C2='-x cos(x) + sin(x) + c_{1}' C3='{x = -sqrt(2), x = sqrt(2)}'",2026-10-29T17:17:55.2310009+01:00
+S_X-01,9,X01-05-typed-contract-shared-with-web,SKIP,P0,"NOT RUN - blocked by: shared typed request/result contract (kind enum, error codes) not designed yet; web client deferred: web phase",2026-10-29T17:17:55.2337159+01:00

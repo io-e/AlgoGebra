@@ -22,11 +22,13 @@ function Test-UiPrerequisites {
 function Start-UiDisplay([string]$Geometry = '1600x1000x24') {
     if ($IsWindows) { return }
     $script:XvfbProc = Start-Process Xvfb -ArgumentList $script:UiDisplay, '-screen', '0', $Geometry, '+extension', 'GLX' -PassThru -RedirectStandardError ([IO.Path]::Combine($script:Tmp, "xvfb-$PID.err"))
-    Start-Sleep 2; $env:DISPLAY = $script:UiDisplay
+    $sock = "/tmp/.X11-unix/X$($script:UiDisplay.TrimStart(':'))"
+    for ($i = 0; $i -lt 40 -and -not (Test-Path $sock); $i++) { Start-Sleep -Milliseconds 250 }; Start-Sleep 1; $env:DISPLAY = $script:UiDisplay
 }
 function Stop-UiApp { if ($IsWindows) { Get-CimInstance Win32_Process -Filter "Name='java.exe'" | Where-Object CommandLine -match 'ggbplus.runId' | ForEach-Object { Stop-Process -Id $_.ProcessId -Force -ErrorAction SilentlyContinue } }
     else { & pkill -f 'ggbplus.runId' 2>$null }; Start-Sleep 1 }
-function Stop-UiDisplay { Stop-UiApp; if ($script:XvfbProc) { Stop-Process -Id $script:XvfbProc.Id -Force -ErrorAction SilentlyContinue; $script:XvfbProc = $null } }
+function Stop-UiDisplay { Stop-UiApp; if ($script:XvfbProc) { Stop-Process -Id $script:XvfbProc.Id -Force -ErrorAction SilentlyContinue; $script:XvfbProc.WaitForExit(10000) | Out-Null; $script:XvfbProc = $null
+        $sock = "/tmp/.X11-unix/X$($script:UiDisplay.TrimStart(':'))"; for ($i = 0; $i -lt 20 -and (Test-Path $sock); $i++) { Start-Sleep -Milliseconds 250 } } }
 # Launch the installed image (Linux launch.sh / Windows launch.ps1) and wait until the UI proof lines appear.
 function Start-UiApp([string]$Name, [hashtable]$Env = @{}, [string[]]$LaunchArgs = @()) {
     $log = Join-Path $script:Res "$Name.log"; $saved = @{}
