@@ -1,9 +1,10 @@
 #!/usr/bin/env bash
+# Moved 2026-10-29 from tests/ (test pack is now .ps1-only, pwsh runner); kept as the Debian bash twin.
 # GROK_V1 - Run_All aggregator (cf. Claude Run_All_Tests_CLAUDE_V1.ps1): runs 01..08 in child processes,
 # parses "PASS: n FAIL: n SKIP: n", writes results/Run_All_<ts>_GROK_V1.csv + summary .md; exit 0 if no FAIL, 1 otherwise.
 # Usage: Run_All_GROK_V1.sh [--skip-rcp]
 set -uo pipefail
-HERE="$(cd "$(dirname "$0")" && pwd)"; RES="$HERE/results"; mkdir -p "$RES"; TS="$(date +%Y%m%d_%H%M%S)"
+HERE="$(cd "$(dirname "$0")" && pwd)"; RES="$HERE/../tests/results"; mkdir -p "$RES"; TS="$(date +%Y%m%d_%H%M%S)"
 CSV="$RES/Run_All_${TS}_GROK_V1.csv"; MD="$RES/Run_All_${TS}_GROK_V1.md"; echo "suite,pass,fail,skip,rc,status,log" > "$CSV"
 TP=0; TF=0; TS_=0
 echo "================================================================"; echo "  AlgoGebra engines + RCP test pack (GROK_V1)"; echo "  Date: $(date -Is)  Host: $(hostname)"; echo "================================================================"

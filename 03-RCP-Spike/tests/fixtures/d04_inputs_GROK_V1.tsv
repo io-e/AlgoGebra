@@ -1,0 +1,9 @@
+# GROK_V1 D-04 keyboard cases: id<TAB>text typed with xdotool type<TAB>expect (OK = valid GeoGebra input, no error dialog; ERR = invalid input, dialog expected)
+KBD-01	A=(1,2)	OK
+KBD-02	B=(3,4)	OK
+KBD-03	f(x)=x^2	OK
+KBD-04	C=5	OK
+KBD-05	g(x)=2x+1	OK
+KBD-06	Segment(A,B)	OK
+KBD-07	t="éàü€"	OK
+KBD-08	((((	ERR
