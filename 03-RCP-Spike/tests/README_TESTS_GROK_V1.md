@@ -26,7 +26,7 @@ Modelled on Claude's WIMS4win pack (`tests-win_ALF/*_CLAUDE_V1.ps1`, `lib/TestFr
 | Maxima | `maxima.bat` on PATH (e.g. `C:\maxima-5.49.0\bin`, sourceforge installer). |
 | Gnuplot | `gnuplot.exe` on PATH (gnuplot.info Windows installer, pngcairo terminal). |
 | RCP image | `IMAGE` = installed image, default `D:\ALF_ZGit\G1_Geogebra_Migration\bin\GeoGebraPlus-RCP-0.1.0-win32-x86_64-r8`. **r8 predates the BUG-001/002 fix**: rebuild with build.ps1 + install-product.ps1 (r9+) before expecting engine results from the image. |
-| Env vars | `JAVA_HOME`, `IMAGE`, optional `RESULTS_DIR`; suites 11/13: `GGB_SOURCE`, `BND_JAR`, `REF_BUNDLES`, `GGB_ASSEMBLE=1`, `GGB_SKIP_GRADLE=1`; UI: `UI_DISPLAY` (Linux). |
+| Env vars | `JAVA_HOME`, `IMAGE`, optional `RESULTS_DIR`; suite 11: `GGB_SOURCE`, `BND_JAR`, `REF_BUNDLES`, `GGB_ASSEMBLE=1`; suite 13: `GGB_SOURCE`, `GGB_RERUN_TASKS=1` to force fresh Gradle execution, `GGB_SKIP_GRADLE=1` to count existing XML only; UI: `UI_DISPLAY` (Linux). |
 | Linux | pwsh 7.6.9 (Microsoft tarball, `/usr/local/bin/pwsh`), Temurin 21, Xvfb, xdotool, python3-PIL; optional xclip (clipboard read-back). |
 
 ### Windows PATH example (Codex run of 689d4b4, 2026-10-29)

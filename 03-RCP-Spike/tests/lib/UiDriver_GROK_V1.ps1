@@ -73,11 +73,11 @@ print(hashlib.md5(im.tobytes()).hexdigest(), len(c), round(1-c[0][0]/n,4))
 function Test-UiErrorDialog { (Get-UiWindows 'GeoGebra - Error').Count -gt 0 }
 function Close-UiErrorDialog { $w = Get-UiWindows 'GeoGebra - Error'; if ($w) { if (-not $IsWindows) { & xdotool windowactivate --sync $w[0].Id 2>$null; & xdotool key --window $w[0].Id Return } else { [Windows.Forms.SendKeys]::SendWait('{ENTER}') }; Start-Sleep -Milliseconds 700 } }
 
-# Two SWT_AWT panes (2D left, 3D right). Linux: the two JavaEmbeddedFrame X windows. Windows: split of the shell rect
-# (SashForm default ~58/42, measured on Linux 863/625 px) - approximate, verify with the screenshots.
+# Two SWT_AWT panes (2D left, 3D right). Linux: the two JavaEmbeddedFrame X windows. Windows: split of the shell rect.
+# Calibrated from the Windows r10 UI screenshot (2026-10-29): divider ~57.5/42.5; both input click centers land inside the bars.
 function Get-PaneLayout {
     if ($IsWindows) { $s = Get-UiWindows 'GeoGebraPlus' | Select-Object -First 1; if (-not $s) { return $null }
-        $w2 = [int]($s.W * 0.58); $f2 = [pscustomobject]@{ X = $s.X + 8; Y = $s.Y + 31; W = $w2; H = $s.H - 39 }; $f3 = [pscustomobject]@{ X = $s.X + $w2 + 14; Y = $s.Y + 31; W = $s.W - $w2 - 22; H = $s.H - 39 } }
+        $w2 = [int]($s.W * 0.575); $f2 = [pscustomobject]@{ X = $s.X + 8; Y = $s.Y + 31; W = $w2; H = $s.H - 39 }; $f3 = [pscustomobject]@{ X = $s.X + $w2 + 14; Y = $s.Y + 31; W = $s.W - $w2 - 22; H = $s.H - 39 } }
     else { $fr = Get-UiWindows '^JavaEmbeddedFrame$'; if ($fr.Count -lt 2) { return $null }; $f2 = $fr[0]; $f3 = $fr[1] }
     foreach ($f in $f2, $f3) { $f | Add-Member -Force InX ([int]($f.X + $f.W / 2)); $f | Add-Member -Force InY ([int]($f.Y + $f.H - 18))
         $f | Add-Member -Force Av @($f.X, ($f.Y + 60), ($f.X + 200), ($f.Y + $f.H - 60)); $f | Add-Member -Force Bar @(($f.X + 60), ($f.Y + $f.H - 28), ($f.X + $f.W - 60), ($f.Y + $f.H - 8)) }
