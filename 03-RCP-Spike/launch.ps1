@@ -3,6 +3,7 @@ param(
     [switch]$Headless,
     [switch]$ManualNativeFallback,
     [switch]$BootDelegateJogAmp,
+    [switch]$CaptureEvidenceScreenshot,
     [switch]$NoBuild,
     [string]$JavaHome
 )
@@ -10,14 +11,26 @@ param(
 $ErrorActionPreference = 'Stop'
 $Root = $PSScriptRoot
 if (-not $NoBuild) {
-    & (Join-Path $Root 'build.ps1') -JavaHome $JavaHome
-    if ($LASTEXITCODE -ne 0) { throw "build.ps1 failed with exit code $LASTEXITCODE" }
+    $BuildScript = Join-Path $Root 'build.ps1'
+    if (Test-Path $BuildScript) {
+        & $BuildScript -JavaHome $JavaHome
+        if ($LASTEXITCODE -ne 0) { throw "build.ps1 failed with exit code $LASTEXITCODE" }
+    } else {
+        Write-Host 'No build script is present; using the prebuilt installed product image.'
+    }
 }
 
-$EclipseHome = 'D:\ALF_ZGit\G2_Eclipse\01_src\eclipse'
-$JrePlugin = Get-ChildItem (Join-Path $EclipseHome 'plugins') -Directory -Filter 'org.eclipse.justj.openjdk.hotspot.jre.full.win32.x86_64_25.0.4*' | Select-Object -First 1
-if (-not $JrePlugin) { throw "Java 25 JustJ runtime was not found under $EclipseHome\plugins" }
-$Java = Join-Path $JrePlugin.FullName 'jre\bin\java.exe'
+$BundledJava = Join-Path $Root 'jre\bin\java.exe'
+if (Test-Path $BundledJava) {
+    $Java = $BundledJava
+} else {
+    # Development fallback only. Installed images prefer their bundled JRE
+    # and do not depend on launching through the Eclipse IDE installation.
+    $EclipseHome = 'D:\ALF_ZGit\G2_Eclipse\01_src\eclipse'
+    $JrePlugin = Get-ChildItem (Join-Path $EclipseHome 'plugins') -Directory -Filter 'org.eclipse.justj.openjdk.hotspot.jre.full.win32.x86_64_25.0.4*' | Select-Object -First 1
+    if (-not $JrePlugin) { throw "Java 25 JustJ runtime was not found under $EclipseHome\plugins" }
+    $Java = Join-Path $JrePlugin.FullName 'jre\bin\java.exe'
+}
 if (-not (Test-Path $Java)) { throw "java.exe was not found at $Java" }
 
 $Framework = Get-ChildItem (Join-Path $Root 'bundles') -Filter 'org.eclipse.osgi_*.jar' -File | Select-Object -First 1
@@ -72,6 +85,9 @@ $JvmArgs = @(
     "-Dggbplus.runId=$RunId",
     "-Dggbplus.headless=$HeadlessValue"
 )
+if ($CaptureEvidenceScreenshot) {
+    $JvmArgs += '-Dggbplus.captureEvidenceScreenshot=true'
+}
 if ($ManualNativeFallback) {
     $JvmArgs += "-Djava.library.path=$NativeExtractDir"
     $JvmArgs += '-Djogamp.gluegen.UseTempJarCache=false'
@@ -97,7 +113,7 @@ Write-Host "Launching GeoGebraPlus RCP spike; Java: $Java"
 Write-Host "Run id: $RunId"
 Write-Host "Log: $Log"
 Write-Host "Unique, persistent Equinox configuration/storage: $Configuration"
-Write-Host "Native mode: $(if ($ManualNativeFallback) { 'manual java.library.path fallback' } else { 'native-JAR extractor / app-loader classpath only' })"
+Write-Host "Native mode: $(if ($ManualNativeFallback) { 'manual java.library.path fallback' } else { 'product classpath loaders / no native-path override' })"
 Write-Host 'Existing framework storage and build outputs will not be removed.'
 Push-Location $Root
 try {

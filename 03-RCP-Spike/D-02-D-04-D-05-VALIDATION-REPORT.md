@@ -15,9 +15,9 @@
 |---|---|---|
 | D-02 — Equinox / `IApplication` startup | **PASS** | Headless and GUI launch; host `IApplication.start()` runs; the unchanged D-03 set resolves 50/50. |
 | D-04 — GeoGebra Swing panel in SWT | **PASS — core embedding** | SWT shell, embedded `GeoGebraPanel`, visible algebra views and toolbars, input bar, and a basic resize/redraw were observed. Some optional interoperability checks remain untested/partial; see below. |
-| D-05 — GIAC/CAS and JOGL/3D | **PARTIAL — functional proof with explicit workarounds** | CAS and a visible 3D point work in the successful run. The handoff's exact GIAC `NativeLibClassPathLoader` mechanism was not demonstrated; the default JOGL native-JAR extraction path and sibling-bundle classloader route did **not** pass. Success required a GIAC fragment bootstrap, manual extraction, and application-loader boot delegation. |
+| D-05 — GIAC/CAS and JOGL/3D | **PARTIAL — strict installed-image load proof; loader review remains open** | The latest installed-image run loaded GIAC and all GlueGen/JOGL DLLs without `java.library.path`, manual extraction switches, or JogAmp boot delegation; CAS and 3D initialization assertions passed. The GIAC helper is a product-local classpath-loader replacement that still needs owner review, and strict-mode 3D visual output was not screenshot-verified in that run. |
 
-This is a spike result, **not** evidence that the final product's native loading architecture is resolved. In particular, the successful JOGL setup relaxes OSGi classloader isolation and needs owner/architecture review before it is treated as a product configuration.
+This is a spike result, **not** evidence that the final product's native loading architecture is resolved. The earlier workaround relaxed OSGi classloader isolation; the latest strict installed-image run avoids boot delegation but uses spike-local native-loader fragments that still need owner/architecture review before they are treated as product policy.
 
 ## Evidence and reproducibility
 
@@ -72,10 +72,26 @@ Two earlier Robot screenshots (`rcp-20261028-234616-37212-6a47ee6c.png` and `rcp
 
 #### Native loading findings
 
-- **GIAC:** The spike-only `org.geogebra.plus.giac.native` fragment attaches a bootstrap class to the GIAC JNI bundle and preloads `javagiac64.dll` in the same Equinox classloader as `javagiac.giacJNI`. This fixes the native ownership mismatch seen when the desktop bundle's loader performs the load. The CAS factory installation/enablement uses reflection as a test adapter; it is **not** a proposed upstream/public API.
-- **JOGL/GlueGen success mode:** Seven Windows DLLs were extracted into the unique per-run directory `natives/extract-20261029-000134-9160-c931fe29`; `java.library.path` points there and `-Djogamp.gluegen.UseTempJarCache=false` is set. JogAmp API/native JARs are also on the application classpath. `-Dorg.osgi.framework.bootdelegation=com.jogamp.*,jogamp.*` and `-Dosgi.parentClassloader=app` make the JogAmp classes use the shared application loader. The successful log explicitly reports this mode.
-- **Default extractor is not validated as working here.** Earlier Java 25 runs failed in `jogamp.common.jvm.JVMUtil.initialize(ByteBuffer)` (`rcp-20261028-231711-25132-b9781aa2.log`, also `232239` and `232427`). With manual extraction but JogAmp classes remaining in sibling OSGi loaders, runs failed in `JAWTFactory.JAWT_GetAWT1` (`232608`, `233709`, `233915`, `234215`). A later resolution/ordering issue produced `toolbarPanel is null` (`234317`) and was fixed by building the App3D application panel before showing its 3D view.
-- Therefore the answer to the handoff's extractor question is: **this passing Equinox configuration required manual extraction and `java.library.path`; the native-JAR extractor alone did not pass the Java 25/Equinox test.** The passing arrangement is platform-specific evidence, not yet a deployable cross-platform policy.
+- **GIAC:** The `org.geogebra.plus.giac.native` fragment attaches a bootstrap to the GIAC JNI bundle. In the latest installed image it reads `javagiac64.dll` from the product's native-classifier JAR, extracts it to a unique temporary directory, and calls `System.load` from the same Equinox class loader as `javagiac.giacJNI`. This is a product-local replacement for the behavior of GeoGebra's desktop `NativeLibClassPathLoader`; it avoids editing GeoGebra source and avoids `java.library.path`. It has not yet received the owner review required by the gate decision. CAS factory installation/enablement remains a reflection-based test adapter, not a proposed upstream/public API.
+- **Previously validated JOGL/GlueGen workaround mode:** The initial successful workaround run extracted seven Windows DLLs into `natives/extract-20261029-000134-9160-c931fe29`, set `java.library.path`, and enabled `-Djogamp.gluegen.UseTempJarCache=false`. `-Dorg.osgi.framework.bootdelegation=com.jogamp.*,jogamp.*` and `-Dosgi.parentClassloader=app` loaded JogAmp classes in the shared application loader. This remains historical diagnostic evidence; the latest installed-image run no longer needed these flags.
+- **Earlier failures:** Before the product-local native fragments were implemented, Java 25 runs failed in `jogamp.common.jvm.JVMUtil.initialize(ByteBuffer)` (`rcp-20261028-231711-25132-b9781aa2.log`, also `232239` and `232427`). With manual extraction but JogAmp classes remaining in sibling OSGi loaders, runs failed in `JAWTFactory.JAWT_GetAWT1` (`232608`, `233709`, `233915`, `234215`). A later resolution/ordering issue produced `toolbarPanel is null` (`234317`) and was fixed by building the App3D application panel before showing its 3D view.
+- **JogAmp's own native-JAR extractor is not what passed.** The strict installed-image proof below uses spike-local fragments to extract the natives from classifier-JAR resources and load them from the owning OSGi class loaders. This is automatic product startup behavior, not a manual extraction command or `java.library.path` workaround. It remains Windows x86_64-only evidence.
+
+### Latest installed-image strict run
+
+| Field | Value |
+|---|---|
+| Installed image | `D:\ALF_ZGit\G1_Geogebra_Migration\bin\GeoGebraPlus-RCP-0.1.0-win32-x86_64-r3` |
+| Run ID / log | `20261029-073727-5656-eee96ccd`; `logs/rcp-20261029-073727-5656-eee96ccd.log` under the installed image |
+| Command | `.\launch.ps1 -NoBuild` from the installed image; no `-ManualNativeFallback`, no `-BootDelegateJogAmp` |
+| Runtime | Bundled Java `25.0.4.1+1-LTS`; Windows 11/amd64; Equinox `3.24.300` |
+| D-02 | **PASS:** host `IApplication.start()` entered; 50/50 D-03 bundles resolved; boot delegation reported `null`. |
+| GIAC | **PASS in this run:** owning-bundle fragment loaded the JAR resource; GIAC JNI reported loaded; direct `1+1 -> 2`; CAS assertion `Expand[(x+1)^2] -> x^2+2x+1` passed. |
+| GlueGen / JOGL | **PASS in this run:** `gluegen_rt.dll` and all five JOGL DLLs (`nativewindow_awt`, `nativewindow_win32`, `newt_head`, `jogl_desktop`, `jogl_mobile`) loaded from classifier-JAR resources in their owning bundle loaders. No `UnsatisfiedLinkError` occurred. |
+| 3D | **PASS for initialization and command:** the 3D point command was accepted and the App3D view initialized. The strict-mode view was not screenshot-verified; the prior workaround run has the retained visual screenshot evidence cited above. |
+| Shutdown / screenshot | The process was stopped after the successful assertions; no clean-exit claim is made. Screenshot capture is now opt-in and no screenshot was created for this run. |
+
+This strict installed-image run supersedes the earlier statement that the product could only pass D-05 with manual extraction and boot delegation. The gate nevertheless remains **PARTIAL** until the product-local GIAC loader replacement receives owner review and the strict-mode visual 3D result is recorded or explicitly deemed unnecessary by the gate owner.
 
 ## Commands run
 
@@ -83,9 +99,11 @@ Two earlier Robot screenshots (`rcp-20261028-234616-37212-6a47ee6c.png` and `rcp
 & .\03-RCP-Spike\build.ps1
 & .\03-RCP-Spike\launch.ps1 -Headless -NoBuild
 & .\03-RCP-Spike\launch.ps1 -NoBuild -ManualNativeFallback -BootDelegateJogAmp
+& .\03-RCP-Spike\install-product.ps1 -ProductDirectoryName GeoGebraPlus-RCP-0.1.0-win32-x86_64-r3
+& .\launch.ps1 -NoBuild # from the installed image; strict native mode
 ```
 
-The launch script creates timestamped configuration, workspace, log, and native-extraction directories. Existing build outputs and failed-run evidence were retained; nothing was pushed to a remote.
+The launch script creates timestamped configuration, workspace, and log directories. Its diagnostic fallback creates a persistent per-run DLL extraction directory; the strict product loader instead extracts DLL resources to unique OS temporary directories. Screenshot capture is opt-in. Existing build outputs and failed-run evidence were retained; nothing was pushed to a remote.
 
 ## Scope, limitations, and next decision
 
@@ -96,4 +114,4 @@ The launch script creates timestamped configuration, workspace, log, and native-
 5. Full clipboard interoperability, high-DPI testing, Linux natives, and repeated freeform resize/focus testing remain open.
 6. CAS initialization and GIAC/JOGL helper fragments are spike adapters; replace reflective initialization with a supported integration seam before productization.
 
-**Recommendation:** accept D-02; accept D-04 for the core Swing-in-SWT proof while keeping focus/clipboard/DPI subchecks open; record D-05 as **PARTIAL**—the real CAS and 3D paths work in the tested Windows configuration, but the specified GIAC loader mechanism and a product-grade JOGL loading policy remain unproven. Proceed to owner/Claude review before treating D-02/D-04/D-05 as product gates fully closed.
+**Recommendation:** accept D-02; accept D-04 for the core Swing-in-SWT proof while keeping focus/clipboard/DPI subchecks open; record D-05 as **PARTIAL**—the Windows installed-image strict run now proves GIAC/GlueGen/JOGL native loading and CAS/3D initialization without manual flags, but owner review of the GIAC loader replacement and strict-mode visual confirmation remain open. Proceed to owner/Claude review before treating all D-02/D-04/D-05 gates as closed.

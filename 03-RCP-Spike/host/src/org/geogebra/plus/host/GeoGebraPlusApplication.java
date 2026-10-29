@@ -225,7 +225,9 @@ public final class GeoGebraPlusApplication implements IApplication {
         // algebra-input rows. The shell remains resizable.
         shell.setMaximized(true);
         shell.forceActive();
-        display.timerExec(25000, () -> captureEvidenceScreenshot(shell));
+        if (Boolean.getBoolean("ggbplus.captureEvidenceScreenshot")) {
+            display.timerExec(25000, () -> captureEvidenceScreenshot(shell));
+        }
         while (!shell.isDisposed()) {
             if (!display.readAndDispatch()) {
                 display.sleep();
@@ -378,7 +380,10 @@ public final class GeoGebraPlusApplication implements IApplication {
         if (bootstrap.getClassLoader() != reference.getClassLoader()) {
             throw new IllegalStateException(label + " bootstrap and native API classes have different class loaders");
         }
-        boolean loaded = (Boolean) bootstrap.getMethod("loadFromLibraryPath").invoke(null);
+        // Native libraries are shipped as classifier-JAR resources in this
+        // product. Each bundle fragment extracts and loads the libraries from
+        // its owning bundle class loader so JNI ownership remains explicit.
+        boolean loaded = (Boolean) bootstrap.getMethod("loadFromClasspath").invoke(null);
         if (!loaded) {
             throw new IllegalStateException(label + " native bootstrap returned false");
         }

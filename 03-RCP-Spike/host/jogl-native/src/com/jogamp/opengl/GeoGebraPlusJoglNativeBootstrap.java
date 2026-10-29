@@ -1,6 +1,11 @@
 package com.jogamp.opengl;
 
-/** Spike-only native preloader defined in the JOGL host bundle's class space. */
+import java.io.InputStream;
+import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
+
+/** Product-local native preloader defined in the JOGL bundle's class space. */
 public final class GeoGebraPlusJoglNativeBootstrap {
 
     private static volatile boolean loaded;
@@ -8,19 +13,36 @@ public final class GeoGebraPlusJoglNativeBootstrap {
     private GeoGebraPlusJoglNativeBootstrap() {
     }
 
-    public static synchronized boolean loadFromLibraryPath() {
+    public static synchronized boolean loadFromClasspath() throws Exception {
         if (!loaded) {
             // These nativewindow/Newt classes are packaged in the JOGL host
             // bundle in this OSGi wrapping, so their JNI libraries must be
             // associated with that same bundle class loader (not GlueGen's).
-            System.loadLibrary("nativewindow_awt");
-            System.loadLibrary("nativewindow_win32");
-            System.loadLibrary("newt_head");
-            System.loadLibrary("jogl_desktop");
-            System.loadLibrary("jogl_mobile");
+            loadResource("natives/windows-amd64/nativewindow_awt.dll");
+            loadResource("natives/windows-amd64/nativewindow_win32.dll");
+            loadResource("natives/windows-amd64/newt_head.dll");
+            loadResource("natives/windows-amd64/jogl_desktop.dll");
+            loadResource("natives/windows-amd64/jogl_mobile.dll");
             loaded = true;
         }
         return loaded;
+    }
+
+    private static void loadResource(String resourceName) throws Exception {
+        URL resource = ClassLoader.getSystemResource(resourceName);
+        if (resource == null) {
+            throw new UnsatisfiedLinkError("Native resource is absent from the product class path: "
+                    + resourceName);
+        }
+        String fileName = resourceName.substring(resourceName.lastIndexOf('/') + 1);
+        Path extractionDirectory = Files.createTempDirectory("geogebraplus-jogl-");
+        Path extractedLibrary = extractionDirectory.resolve(fileName);
+        try (InputStream input = resource.openStream()) {
+            Files.copy(input, extractedLibrary);
+        }
+        System.load(extractedLibrary.toAbsolutePath().toString());
+        System.out.println("[GeoGebraPlus] JOGL native loaded from product classpath: "
+                + extractedLibrary.toAbsolutePath());
     }
 
     public static boolean isLoaded() {
