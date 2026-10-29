@@ -1,6 +1,6 @@
 # GROK_V1 - AlgoGebra test pack (Windows twin of the .sh suite; same fixtures). Modelled on Claude *_CLAUDE_V1.ps1.
 . (Join-Path $PSScriptRoot "lib\TestFramework_GROK_V1.ps1")
-Initialize-TestSuite '05_Sandbox'; Initialize-Tools
+Initialize-TestSuite '05_Sandbox'; Require-Engines @('pari','maxima','gnuplot'); Initialize-Tools
 foreach ($row in Read-Fixture 'sandbox_GROK_V1.tsv') { $id, $e, $cmd, $pol = $row
     $cmd = $cmd -replace '/tmp/', ($env:TEMP.Replace('\','/') + '/'); $r = Invoke-Engine $e 3 $cmd
     switch ($pol) {

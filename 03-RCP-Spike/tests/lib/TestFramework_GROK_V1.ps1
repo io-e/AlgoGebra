@@ -36,7 +36,7 @@ function Get-EngineCp { $b = Join-Path $script:SpikeDir 'host\build'
     (@($script:ToolsOut) + @('compute.api', 'compute.runtime', 'engine.pari', 'engine.maxima', 'engine.gnuplot' | ForEach-Object { Join-Path $b "org.geogebra.plus.${_}_0.1.0.jar" })) -join ';' }
 function Initialize-Tools {
     $javac = Join-Path $env:JAVA_HOME 'bin\javac.exe'; if (-not (Test-Path $javac)) { Exit-Bail "JDK 21 not found ($env:JAVA_HOME)" }
-    if (-not (Test-Path (Join-Path $script:SpikeDir 'host\build\org.geogebra.plus.engine.pari_0.1.0.jar'))) { & (Join-Path $script:SpikeDir 'build.ps1') | Out-Null }
+    if (-not (Test-Path (Join-Path $script:SpikeDir 'host\build\org.geogebra.plus.engine.pari_0.1.0.jar'))) { Exit-Bail 'engine bundles not built: run 03-RCP-Spike\build.ps1 first (host\build\org.geogebra.plus.engine.*_0.1.0.jar)' }
     $osgi = Get-ChildItem (Join-Path $script:SpikeDir 'bundles') -Filter 'org.eclipse.osgi_*.jar' -ErrorAction SilentlyContinue | Select-Object -First 1
     New-Item -ItemType Directory -Force $script:ToolsOut | Out-Null
     $cp = (Get-EngineCp) + $(if ($osgi) { ';' + $osgi.FullName } else { '' })
@@ -61,7 +61,7 @@ function Invoke-Engine([string]$Engine, [int]$TimeoutSec, [string]$Command) {
 }
 # Direct references reproducing WIMS src/Interfaces/common.c (header, start marker, command, end marker; keep text after LAST start marker).
 function Get-WimsHeader([string]$Rel) { $t = Get-Content (Join-Path $script:SpikeDir "engines\$Rel") -Raw
-    $m = [regex]::Match($t, 'WIMS_HEADER = """\r?\n(.*?)""";', 'Singleline'); return ($m.Groups[1].Value -split "`r?`n" | ForEach-Object { $_ -replace '^ {12}', '' }) -join "`n" }
+    $m = [regex]::Match($t, 'WIMS_HEADER = [^\r\n]*"""\r?\n(.*?)""";', 'Singleline'); return ($m.Groups[1].Value -split "`r?`n" | ForEach-Object { $_ -replace '^ {12}', '' }) -join "`n" }
 function Get-Between([string]$Out, [string]$Start, [string]$End) {
     $lines = $Out -split "`r?`n" | ForEach-Object { $_.Replace('"', '') }; $acc = $null; $res = ''
     foreach ($l in $lines) { if ($l -eq $Start) { $acc = @(); continue }; if ($l -eq $End) { $res = ($acc | Where-Object { $_ -ne '' }) -join ' '; $acc = $null; continue }; if ($null -ne $acc) { $acc += $l.Trim() } }
@@ -80,3 +80,8 @@ function Invoke-RefGiac([string]$Expr) { $gj = Get-ChildItem (Join-Path $script:
     if (-not (Test-Path $dll)) { New-Item -ItemType Directory -Force $gd | Out-Null; Add-Type -AssemblyName System.IO.Compression.FileSystem; [IO.Compression.ZipFile]::ExtractToDirectory($nj.FullName, $gd, $true) }
     if (-not (Test-Path (Join-Path $script:ToolsOut 'GiacCli_GROK_V1.class'))) { & (Join-Path $env:JAVA_HOME 'bin\javac.exe') -d $script:ToolsOut -cp $gj.FullName (Join-Path $script:TestsDir 'tools\GiacCli_GROK_V1.java') }
     return (Invoke-Process (Join-Path $env:JAVA_HOME 'bin\java.exe') @("-Dgiac.lib=$dll", '-cp', "$($script:ToolsOut);$($gj.FullName)", 'GiacCli_GROK_V1', $Expr) '' 60000).out.Trim() }
+
+# Missing CAS binary => clean BAIL OUT (exit 2), never a crash or a false FAIL.
+$script:EngineBinaries = @{ pari = @('gp.exe', 'gp'); maxima = @('maxima.bat', 'maxima.exe', 'maxima'); gnuplot = @('gnuplot.exe', 'gnuplot') }
+function Find-EngineBinary([string]$Engine) { Get-Command $script:EngineBinaries[$Engine] -ErrorAction SilentlyContinue | Select-Object -First 1 }
+function Require-Engines([string[]]$Engines) { foreach ($e in $Engines) { if (-not (Find-EngineBinary $e)) { Exit-Bail "$e binary not on PATH ($($script:EngineBinaries[$e] -join ', ')); install it or extend PATH" } } }

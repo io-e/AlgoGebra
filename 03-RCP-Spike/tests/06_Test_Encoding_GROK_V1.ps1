@@ -1,6 +1,6 @@
 # GROK_V1 - AlgoGebra test pack (Windows twin of the .sh suite; same fixtures). Modelled on Claude *_CLAUDE_V1.ps1.
 . (Join-Path $PSScriptRoot "lib\TestFramework_GROK_V1.ps1")
-Initialize-TestSuite '06_Encoding'; Initialize-Tools
+Initialize-TestSuite '06_Encoding'; Require-Engines @('pari','maxima','gnuplot'); Initialize-Tools
 foreach ($row in Read-Fixture 'encoding_GROK_V1.tsv') { $id, $e, $cmd, $exp = $row
     $d = if ($e -eq 'pari') { Invoke-RefPari $cmd } else { Invoke-RefMaxima "$cmd;" }
     if ($null -eq $d) { Skip-Test "$id-$e-direct" 'binary not on PATH' } else { Test-Eq "$id-$e-direct" $d $exp }

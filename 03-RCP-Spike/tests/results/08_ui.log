@@ -1,4 +1,4 @@
-Run 20261029-142144-2570200 log /workspace/AlgoGebra/image/GeoGebraPlus-RCP-0.1.0-linux-gtk-x86_64/logs/launch-20261029-142144-2570200.log
+Run 20261029-143141-2589542 log /workspace/AlgoGebra/image/GeoGebraPlus-RCP-0.1.0-linux-gtk-x86_64/logs/launch-20261029-143141-2589542.log
 WARNING: Using incubator modules: jdk.incubator.vector
 [GeoGebraPlus] Host bundle ACTIVE; id=67
 [GeoGebraPlus] Registered external engine pari; available=true
@@ -11,17 +11,17 @@ WARNING: Using incubator modules: jdk.incubator.vector
 [GeoGebraPlus] D-02 D-03-set check: expected=50, found=50, ACTIVE=0, RESOLVED=50, unresolved/other=0, resolveBundles=true
 [GeoGebraPlus] D-02 PASS
 
-(java:2570212): dbind-WARNING **: 14:21:45.422: AT-SPI: Error retrieving accessibility bus address: org.freedesktop.DBus.Error.ServiceUnknown: The name org.a11y.Bus was not provided by any .service files
-[GeoGebraPlus] GIAC DLL loaded from product classpath: /tmp/geogebraplus-giac-9334245255976977194/libjavagiac64.so
-[GeoGebraPlus] D-05 GIAC natives preloaded in owning bundle class loader: org.eclipse.osgi.internal.loader.EquinoxClassLoader@b7e4700[org.geogebra.migration.shared.giac.jni:5.4.934.0(id=48)]
-[GeoGebraPlus] GlueGen native loaded from product classpath: /tmp/geogebraplus-gluegen-9600825024306152216/libgluegen_rt.so
-[GeoGebraPlus] D-05 GlueGen natives preloaded in owning bundle class loader: org.eclipse.osgi.internal.loader.EquinoxClassLoader@79d6259e[org.geogebra.migration.external.org.jogamp.gluegen.gluegen-rt:2.6.0(id=40)]
-[GeoGebraPlus] JOGL native loaded from product classpath: /tmp/geogebraplus-jogl-15465004380884189600/libnativewindow_awt.so
-[GeoGebraPlus] JOGL native loaded from product classpath: /tmp/geogebraplus-jogl-16547807664258516580/libnativewindow_x11.so
-[GeoGebraPlus] JOGL native loaded from product classpath: /tmp/geogebraplus-jogl-9711209560676456219/libnewt_head.so
-[GeoGebraPlus] JOGL native loaded from product classpath: /tmp/geogebraplus-jogl-3456952554367493644/libjogl_desktop.so
-[GeoGebraPlus] JOGL native loaded from product classpath: /tmp/geogebraplus-jogl-12482028696312971862/libjogl_mobile.so
-[GeoGebraPlus] D-05 JOGL natives preloaded in owning bundle class loader: org.eclipse.osgi.internal.loader.EquinoxClassLoader@72a9f193[org.geogebra.migration.external.org.jogamp.jogl.jogl-all:2.6.0(id=41)]
+(java:2589554): dbind-WARNING **: 14:31:42.558: AT-SPI: Error retrieving accessibility bus address: org.freedesktop.DBus.Error.ServiceUnknown: The name org.a11y.Bus was not provided by any .service files
+[GeoGebraPlus] GIAC DLL loaded from product classpath: /tmp/geogebraplus-giac-10410513521976689600/libjavagiac64.so
+[GeoGebraPlus] D-05 GIAC natives preloaded in owning bundle class loader: org.eclipse.osgi.internal.loader.EquinoxClassLoader@d281a78[org.geogebra.migration.shared.giac.jni:5.4.934.0(id=48)]
+[GeoGebraPlus] GlueGen native loaded from product classpath: /tmp/geogebraplus-gluegen-1905821313883935711/libgluegen_rt.so
+[GeoGebraPlus] D-05 GlueGen natives preloaded in owning bundle class loader: org.eclipse.osgi.internal.loader.EquinoxClassLoader@d253787[org.geogebra.migration.external.org.jogamp.gluegen.gluegen-rt:2.6.0(id=40)]
+[GeoGebraPlus] JOGL native loaded from product classpath: /tmp/geogebraplus-jogl-12712884415255342250/libnativewindow_awt.so
+[GeoGebraPlus] JOGL native loaded from product classpath: /tmp/geogebraplus-jogl-15386619728193788809/libnativewindow_x11.so
+[GeoGebraPlus] JOGL native loaded from product classpath: /tmp/geogebraplus-jogl-259206442851586710/libnewt_head.so
+[GeoGebraPlus] JOGL native loaded from product classpath: /tmp/geogebraplus-jogl-5414085914857066555/libjogl_desktop.so
+[GeoGebraPlus] JOGL native loaded from product classpath: /tmp/geogebraplus-jogl-2059061532407936552/libjogl_mobile.so
+[GeoGebraPlus] D-05 JOGL natives preloaded in owning bundle class loader: org.eclipse.osgi.internal.loader.EquinoxClassLoader@d48360b[org.geogebra.migration.external.org.jogamp.jogl.jogl-all:2.6.0(id=41)]
 [GeoGebraPlus] CAS factory prototype installed: org.geogebra.desktop.factories.CASFactoryD
 [GeoGebraPlus] System-loader GIAC DLL resource=null
 GeoGebra 5.4.934.0 20 October 2026 Java 25.0.5-64bit
@@ -45,7 +45,7 @@ GeoGebra 5.4.934.0 20 October 2026 Java 25.0.5-64bit
 [GeoGebraPlus] D-05 3D point command accepted=true; 3D view initialized=true
 [GeoGebraPlus] D-05 3D note: GeoGebraPanel constructs the 2D AppD; the 3D proof uses an upstream App3D instance in the second SWT_AWT pane
 
-(SWT:2570212): Gdk-WARNING **: 14:21:48.910: XSetErrorHandler() called with a GDK error trap pushed. Don't do that.
+(SWT:2589554): Gdk-WARNING **: 14:31:44.959: XSetErrorHandler() called with a GDK error trap pushed. Don't do that.
 X11Util.Display: Shutdown (JVM shutdown: true, open (no close attempt): 1/1, reusable (open, marked uncloseable): 0, pending (open in creation order): 1)
 X11Util: Open X11 Display Connections: 1
-X11Util: Open[0]: NamedX11Display[:99, 0x7ff1fc868d70, refCount 1, unCloseable false]
+X11Util: Open[0]: NamedX11Display[:99, 0x7fdd20954f80, refCount 1, unCloseable false]

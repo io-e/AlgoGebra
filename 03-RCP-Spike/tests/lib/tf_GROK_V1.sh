@@ -37,7 +37,7 @@ eng() { local t0 line; t0=$(date +%s%3N)
   ENG_MS=$(( $(date +%s%3N) - t0 )); ENG_KIND="${line%%$'\t'*}"; ENG_OUT="${line#*$'\t'}"; }
 # --- direct references reproducing WIMS src/Interfaces/common.c: header, then print(start marker),
 #     command, print(end marker); keep only the text between the LAST start marker and the end marker. ---
-wims_header() { sed -n '/WIMS_HEADER = """/,/""";/p' "$SPIKE_DIR/engines/$1" | sed '1d;$d' | sed 's/^            //'; }
+wims_header() { sed -n '/WIMS_HEADER = .*"""$/,/""";/p' "$SPIKE_DIR/engines/$1" | sed '1d;$d' | sed 's/^            //'; }
 ref_pari() { local m="Start line pari $$ $RANDOM" e="End line pari $$ $RANDOM"
   { echo '\p 20'; wims_header pari/src/org/geogebra/plus/engine/pari/PariGPEngine.java; printf 'print("%s")\n%s\nprint("%s")\nquit\n' "$m" "$1" "$e"; } \
    | timeout "${2:-30}" gp -f -q 2>&1 | awk -v m="$m" -v e="$e" '$0==m{f=1;o="";next} $0==e{f=0} f{o=o (o==""?"":" ") $0} END{print o}' | sed 's/^ *//;s/ *$//'; }

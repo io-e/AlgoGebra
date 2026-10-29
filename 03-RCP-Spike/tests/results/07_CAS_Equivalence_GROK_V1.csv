@@ -1,19 +1,19 @@
 suite,num,id,status,priority,detail,ts
-07_CAS_Equivalence,1,EQ-01-giac,PASS,P1,"got=x^2+2*x+1",2026-10-29T14:21:41+01:00
-07_CAS_Equivalence,2,EQ-01-pari,FAIL,P1,"expected=x^2+2*x+1 got=I\n2.7182818284590452354\n2.7182818284590452354\nx^2+2*x+1",2026-10-29T14:21:41+01:00
-07_CAS_Equivalence,3,EQ-01-maxima,FAIL,P1,"expected=x^2+2*x+1 got=20\nfalse\ntrue\ntrue\n5\n1.0E-6\n13\ntrue\ntrue\ntrue\ne\npi\npi\npi\ni\ni\nlog\nsinh\ncosh\ntanh\natan\nasin\nacos\ntan\natan\nasinh\nacosh\natanh\nasinh\nacosh\natanh\ncot\ncot\nlog10(x):=block([],return(log(x)/log(10)))\nlog2(x):=block([],return(log(x)/log(2)))\nlg(x):=log10(x)\nsign\ntrue\ndone\nx^2+2*x+1",2026-10-29T14:21:41+01:00
-07_CAS_Equivalence,4,EQ-02-giac,PASS,P1,"got=18446744073709551615",2026-10-29T14:21:41+01:00
-07_CAS_Equivalence,5,EQ-02-pari,FAIL,P1,"expected=18446744073709551615 got=I\n2.7182818284590452354\n2.7182818284590452354\n18446744073709551615",2026-10-29T14:21:42+01:00
-07_CAS_Equivalence,6,EQ-02-maxima,FAIL,P1,"expected=18446744073709551615 got=20\nfalse\ntrue\ntrue\n5\n1.0E-6\n13\ntrue\ntrue\ntrue\ne\npi\npi\npi\ni\ni\nlog\nsinh\ncosh\ntanh\natan\nasin\nacos\ntan\natan\nasinh\nacosh\natanh\nasinh\nacosh\natanh\ncot\ncot\nlog10(x):=block([],return(log(x)/log(10)))\nlog2(x):=block([],return(log(x)/log(2)))\nlg(x):=log10(x)\nsign\ntrue\ndone\n18446744073709551615",2026-10-29T14:21:42+01:00
-07_CAS_Equivalence,7,EQ-03-giac,PASS,P1,"got=6",2026-10-29T14:21:42+01:00
-07_CAS_Equivalence,8,EQ-03-pari,FAIL,P1,"expected=6 got=I\n2.7182818284590452354\n2.7182818284590452354\n6",2026-10-29T14:21:42+01:00
-07_CAS_Equivalence,9,EQ-03-maxima,FAIL,P1,"expected=6 got=20\nfalse\ntrue\ntrue\n5\n1.0E-6\n13\ntrue\ntrue\ntrue\ne\npi\npi\npi\ni\ni\nlog\nsinh\ncosh\ntanh\natan\nasin\nacos\ntan\natan\nasinh\nacosh\natanh\nasinh\nacosh\natanh\ncot\ncot\nlog10(x):=block([],return(log(x)/log(10)))\nlog2(x):=block([],return(log(x)/log(2)))\nlg(x):=log10(x)\nsign\ntrue\ndone\n6",2026-10-29T14:21:42+01:00
-07_CAS_Equivalence,10,EQ-04-giac,PASS,P1,"got=2*x*cos(x^2)",2026-10-29T14:21:42+01:00
-07_CAS_Equivalence,11,EQ-04-pari,SKIP,P1,"not applicable",2026-10-29T14:21:42+01:00
-07_CAS_Equivalence,12,EQ-04-maxima,FAIL,P1,"expected=2*x*cos(x^2) got=20\nfalse\ntrue\ntrue\n5\n1.0E-6\n13\ntrue\ntrue\ntrue\ne\npi\npi\npi\ni\ni\nlog\nsinh\ncosh\ntanh\natan\nasin\nacos\ntan\natan\nasinh\nacosh\natanh\nasinh\nacosh\natanh\ncot\ncot\nlog10(x):=block([],return(log(x)/log(10)))\nlog2(x):=block([],return(log(x)/log(2)))\nlg(x):=log10(x)\nsign\ntrue\ndone\n2*x*cos(x^2)",2026-10-29T14:21:42+01:00
-07_CAS_Equivalence,13,EQ-05-giac,PASS,P1,"got=3*5*17*257*641*65537*6700417",2026-10-29T14:21:42+01:00
-07_CAS_Equivalence,14,EQ-05-pari,SKIP,P1,"not applicable",2026-10-29T14:21:42+01:00
-07_CAS_Equivalence,15,EQ-05-maxima,FAIL,P1,"expected=3*5*17*257*641*65537*6700417 got=20\nfalse\ntrue\ntrue\n5\n1.0E-6\n13\ntrue\ntrue\ntrue\ne\npi\npi\npi\ni\ni\nlog\nsinh\ncosh\ntanh\natan\nasin\nacos\ntan\natan\nasinh\nacosh\natanh\nasinh\nacosh\natanh\ncot\ncot\nlog10(x):=block([],return(log(x)/log(10)))\nlog2(x):=block([],return(log(x)/log(2)))\nlg(x):=log10(x)\nsign\ntrue\ndone\n3*5*17*257*641*65537*6700417",2026-10-29T14:21:42+01:00
-07_CAS_Equivalence,16,EQ-06-giac,PASS,P1,"got=x+1",2026-10-29T14:21:42+01:00
-07_CAS_Equivalence,17,EQ-06-pari,SKIP,P1,"not applicable",2026-10-29T14:21:42+01:00
-07_CAS_Equivalence,18,EQ-06-maxima,FAIL,P1,"expected=x+1 got=20\nfalse\ntrue\ntrue\n5\n1.0E-6\n13\ntrue\ntrue\ntrue\ne\npi\npi\npi\ni\ni\nlog\nsinh\ncosh\ntanh\natan\nasin\nacos\ntan\natan\nasinh\nacosh\natanh\nasinh\nacosh\natanh\ncot\ncot\nlog10(x):=block([],return(log(x)/log(10)))\nlog2(x):=block([],return(log(x)/log(2)))\nlg(x):=log10(x)\nsign\ntrue\ndone\nx+1",2026-10-29T14:21:42+01:00
+07_CAS_Equivalence,1,EQ-01-giac,PASS,P1,"got=x^2+2*x+1",2026-10-29T14:31:39+01:00
+07_CAS_Equivalence,2,EQ-01-pari,PASS,P1,"got=x^2+2*x+1",2026-10-29T14:31:39+01:00
+07_CAS_Equivalence,3,EQ-01-maxima,PASS,P1,"got=x^2+2*x+1",2026-10-29T14:31:39+01:00
+07_CAS_Equivalence,4,EQ-02-giac,PASS,P1,"got=18446744073709551615",2026-10-29T14:31:39+01:00
+07_CAS_Equivalence,5,EQ-02-pari,PASS,P1,"got=18446744073709551615",2026-10-29T14:31:39+01:00
+07_CAS_Equivalence,6,EQ-02-maxima,PASS,P1,"got=18446744073709551615",2026-10-29T14:31:39+01:00
+07_CAS_Equivalence,7,EQ-03-giac,PASS,P1,"got=6",2026-10-29T14:31:39+01:00
+07_CAS_Equivalence,8,EQ-03-pari,PASS,P1,"got=6",2026-10-29T14:31:39+01:00
+07_CAS_Equivalence,9,EQ-03-maxima,PASS,P1,"got=6",2026-10-29T14:31:40+01:00
+07_CAS_Equivalence,10,EQ-04-giac,PASS,P1,"got=2*x*cos(x^2)",2026-10-29T14:31:40+01:00
+07_CAS_Equivalence,11,EQ-04-pari,SKIP,P1,"not applicable",2026-10-29T14:31:40+01:00
+07_CAS_Equivalence,12,EQ-04-maxima,PASS,P1,"got=2*x*cos(x^2)",2026-10-29T14:31:40+01:00
+07_CAS_Equivalence,13,EQ-05-giac,PASS,P1,"got=3*5*17*257*641*65537*6700417",2026-10-29T14:31:40+01:00
+07_CAS_Equivalence,14,EQ-05-pari,SKIP,P1,"not applicable",2026-10-29T14:31:40+01:00
+07_CAS_Equivalence,15,EQ-05-maxima,PASS,P1,"got=3*5*17*257*641*65537*6700417",2026-10-29T14:31:40+01:00
+07_CAS_Equivalence,16,EQ-06-giac,PASS,P1,"got=x+1",2026-10-29T14:31:40+01:00
+07_CAS_Equivalence,17,EQ-06-pari,SKIP,P1,"not applicable",2026-10-29T14:31:40+01:00
+07_CAS_Equivalence,18,EQ-06-maxima,PASS,P1,"got=x+1",2026-10-29T14:31:40+01:00
