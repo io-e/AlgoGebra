@@ -49,14 +49,14 @@ $r = Invoke-L @('-Course', $evil); T 'LC-16-metachars-literal' $r ($r.Rc -eq 0 -
 $nj = @{ GGB_JAVA = ''; JAVA_HOME = '' }; $ra = Invoke-L @('-Course', (Join-Path $c 'nope.json')) $nj; $rb = Invoke-L @('-Course', $ok) $nj
 T 'LC-17-course-error-before-java' $ra ($ra.Rc -eq 66 -and $rb.Rc -eq 4 -and $rb.Out -match 'no Java >= 25')
 # real launches under Xvfb
-$hasPanel = $false; $hb = Get-ChildItem (Join-Path $script:Image 'bundles') -Filter 'org.geogebra.plus.host*.jar' -ErrorAction SilentlyContinue
+$hasPanel = $false; $hb = @('bundles', 'host/build') | ForEach-Object { Get-ChildItem (Join-Path $script:Image $_) -Filter 'org.geogebra.plus.host*.jar' -ErrorAction SilentlyContinue }
 foreach ($j in $hb) { if ((& unzip -l $j.FullName 2>$null) -match 'CourseTreePanel') { $hasPanel = $true } }
 if (-not $hasPanel) { Skip-Test 'LC-18-xvfb-trig-course-3-panes' 'SKIP reason: image has no CourseTreePanel (Codex X-T4/WP2-06); re-run after image rebuild' 'P1'
     Skip-Test 'LC-19-xvfb-T27-symlink-escape-layering' 'SKIP reason: needs CourseTreePanel + Java OPEN validator (X-T3/X-T4)' 'P1' }
 else { $log = Join-Path $script:Res '18_xvfb.log'
-    $p = Start-Process xvfb-run -ArgumentList '-a', '-s', '-screen 0 1600x1000x24', 'bash', $launch, '-Course', $trig -RedirectStandardOutput $log -RedirectStandardError "$log.err" -PassThru
-    for ($i = 0; $i -lt 90 -and -not $p.HasExited; $i++) { Start-Sleep 1; if ((Get-Content $log -Raw -EA SilentlyContinue) -match 'CourseTreePanel') { break } }
-    & pkill -f 'ggbplus.runId' 2>$null; Test-Ok 'LC-18-xvfb-trig-course-3-panes' ((Get-Content $log -Raw) -match 'CourseTreePanel') "log=$log" 'P1'
+    $p = Start-Process xvfb-run -ArgumentList @('-a', '-s', '"-screen 0 1600x1000x24"', 'env', "IMAGE=$($script:Image)", "GGB_JAVA=$j25/bin/java", 'bash', $launch, '-Course', $trig) -RedirectStandardOutput $log -RedirectStandardError "$log.err" -PassThru
+    for ($i = 0; $i -lt 90 -and -not $p.HasExited; $i++) { Start-Sleep 1; if ((Get-Content $log -Raw -EA SilentlyContinue) -match 'Course loaded|CourseTreePanel') { break } }
+    & pkill -f 'ggbplus.runId' 2>$null; Test-Ok 'LC-18-xvfb-trig-course-3-panes' ("$(Get-Content $log -Raw)" -match 'Course loaded: .*trigonometry_intro\.json \(5 chapters') "log=$log" 'P1'
     Skip-Test 'LC-19-xvfb-T27-symlink-escape-layering' 'SKIP reason: Java OPEN validator (X-T3) not yet observable in log' 'P1' }
 Remove-Item $w -Recurse -Force -ErrorAction SilentlyContinue
 Complete-TestSuite
