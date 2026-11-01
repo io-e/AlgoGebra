@@ -1,0 +1,53 @@
+# GROK_V1 WP9-03 malicious course corpus. layer: schema (checked now by Test-Json) | validator (WP9-02) | scanner (WP9-04). T-10 (>1 MB) is generated at test time.
+id	file	layer	schema	expected	reason	spec_ref	note
+T-01	courses/T-01_GROK_V1.json	validator	SCHEMA_VALID	REJECT	Commands.Execute TABLE_SCRIPTING	spec 6 T-01	
+T-02	courses/T-02_GROK_V1.json	validator	SCHEMA_VALID	REJECT	fr Exécute -> Commands.Execute	spec 6 T-02	locale fr
+T-03	courses/T-03_GROK_V1.json	validator	SCHEMA_VALID	REJECT	nested Execute	spec 6 T-03	
+T-03b	courses/T-03b_GROK_V1.json	validator	SCHEMA_VALID	REJECT	nested localized Execute	spec 1.1	locale fr
+T-03c	courses/T-03c_GROK_V1.json	validator	SCHEMA_VALID	REJECT	case-insensitive Execute	spec 1.2	lower case
+T-15	courses/T-15_GROK_V1.json	validator	SCHEMA_VALID	REJECT	Commands.RunClickScript TABLE_SCRIPTING	spec 1.2	
+T-16	courses/T-16_GROK_V1.json	validator	SCHEMA_VALID	REJECT	Commands.RunUpdateScript TABLE_SCRIPTING	spec 1.2	
+T-16b	courses/T-16b_GROK_V1.json	validator	SCHEMA_VALID	REJECT	fr RunClickScript	spec 1.1	locale fr
+T-17	courses/T-17_GROK_V1.json	validator	SCHEMA_VALID	REJECT	Commands.PlaySound TABLE_SCRIPTING (URL fetch)	spec 1.2	
+T-14	courses/T-14_GROK_V1.json	validator	SCHEMA_VALID	REJECT	Commands.ExportImage TABLE_SCRIPTING	spec 6 T-14	
+T-18	courses/T-18_GROK_V1.json	validator	SCHEMA_VALID	REJECT	Commands.SetValue TABLE_SCRIPTING on graded object	spec 1.2	
+T-12	courses/T-12_GROK_V1.json	validator	SCHEMA_VALID	REJECT	Commands.Delete blocked	spec 6 T-12	
+T-12b	courses/T-12b_GROK_V1.json	validator	SCHEMA_VALID	REJECT	fr Delete	spec 1.1	locale fr
+T-19	courses/T-19_GROK_V1.json	validator	SCHEMA_VALID	REJECT	Commands.Rename blocked	spec 1.2	
+T-20	courses/T-20_GROK_V1.json	validator	SCHEMA_VALID	REJECT	Commands.Repeat TABLE_SCRIPTING (runaway loop)	spec 1.2	
+T-21	courses/T-21_GROK_V1.json	validator	SCHEMA_VALID	REJECT	runaway Sequence (TABLE_LIST is allowed: needs a size/time limit)	SPEC-GAP-2	spec 5 has no element/time limit
+T-22	courses/T-22_GROK_V1.json	validator	SCHEMA_VALID	REJECT	Commands.UpdateConstruction TABLE_SCRIPTING	spec 1.2	
+T-08	courses/T-08_GROK_V1.json	validator	SCHEMA_VALID	ACCEPT	safe construction	spec 6 T-08	
+T-09	courses/T-09_GROK_V1.json	validator	SCHEMA_VALID	ACCEPT	allowed scripting SetColor	spec 6 T-09	
+T-23	courses/T-23_GROK_V1.json	validator	SCHEMA_VALID	ACCEPT	allowed scripting Slider	spec 1.2	
+T-24	courses/T-24_GROK_V1.json	validator	SCHEMA_VALID	REJECT	CAS directive same allow-list	spec 6.2	
+T-04	courses/T-04_GROK_V1.json	validator	SCHEMA_VALID	REJECT	path traversal + non-.ggb	spec 6 T-04	OPEN path
+T-04b	courses/T-04b_GROK_V1.json	validator	SCHEMA_VALID	REJECT	traversal after normalize	spec 2.1	OPEN path
+T-25	courses/T-25_GROK_V1.json	validator	SCHEMA_VALID	REJECT	absolute path	spec 2.2	OPEN path
+T-13	courses/T-13_GROK_V1.json	validator	SCHEMA_VALID	REJECT	absolute path + wrong extension	spec 6 T-13	OPEN path
+T-05	courses/T-05_GROK_V1.json	validator	SCHEMA_VALID	REJECT	URL	spec 6 T-05	OPEN path
+T-05b	courses/T-05b_GROK_V1.json	validator	SCHEMA_VALID	REJECT	protocol-relative URL	spec 2.3	OPEN path
+T-05c	courses/T-05c_GROK_V1.json	validator	SCHEMA_VALID	REJECT	file URL	spec 2.2	OPEN path
+T-26	courses/T-26_GROK_V1.json	validator	SCHEMA_VALID	REJECT	non-.ggb extension	spec 2.2	OPEN path
+T-27	courses/T-27_GROK_V1.json	validator	SCHEMA_VALID	REJECT	symlink inside course dir pointing outside (normalize() alone does not catch it; needs toRealPath)	SPEC-GAP-3	OPEN path
+T-28	courses/T-28_GROK_V1.json	validator	SCHEMA_VALID	ACCEPT	clean archive under course dir	spec 2.1	OPEN path
+T-06	courses/T-06_GROK_V1.json	scanner	SCHEMA_VALID	REJECT	geogebra_javascript.js with ggbOnInit code	spec 6 T-06	ggb
+T-07	courses/T-07_GROK_V1.json	scanner	SCHEMA_VALID	REJECT	per-object <javascript val=...> click script	spec 6 T-07	ggb
+T-29	courses/T-29_GROK_V1.json	scanner	SCHEMA_VALID	REJECT	per-object <ggbscript val="Execute(...)"> (spec 3.1 containsScriptElements misses '<ggbscript' with val=)	SPEC-GAP-1	ggb
+T-30	courses/T-30_GROK_V1.json	scanner	SCHEMA_VALID	REJECT	<ggbscript onUpdate=...>	spec 3	ggb
+T-31	courses/T-31_GROK_V1.json	scanner	SCHEMA_VALID	REJECT	Execute inside geogebra_macro.xml	spec 3	ggb
+T-32	courses/T-32_GROK_V1.json	scanner	SCHEMA_VALID	REJECT	<command name="Execute"> in geogebra.xml construction	spec 3	ggb
+T-33	courses/T-33_GROK_V1.json	scanner	SCHEMA_VALID	ACCEPT_WITH_WARNING	trustedGgb=true loads scripted file with a warning	spec 3.2	ggb
+T-34	courses/T-34_GROK_V1.json	schema	SCHEMA_INVALID	REJECT	unknown directive	schema action.directive enum	
+T-35	courses/T-35_GROK_V1.json	schema	SCHEMA_INVALID	REJECT	additional property	schema additionalProperties	
+T-36	courses/T-36_GROK_V1.json	schema	SCHEMA_INVALID	REJECT	missing value	schema required	
+T-37	courses/T-37_GROK_V1.json	schema	SCHEMA_INVALID	REJECT	wrong schemaVersion	schema const	
+T-38	courses/T-38_GROK_V1.json	schema	SCHEMA_INVALID	REJECT	invalid target	schema enum	
+T-39	courses/T-39_GROK_V1.json	schema	SCHEMA_INVALID	REJECT	more than 20 actions in a step	schema maxItems	
+T-40	courses/T-40_GROK_V1.json	schema	SCHEMA_INVALID	REJECT	empty tree	schema minItems	
+T-41	courses/T-41_GROK_V1.json	schema	SCHEMA_INVALID	REJECT	not JSON	parse	
+T-11	courses/T-11_GROK_V1.json	validator	SCHEMA_VALID	REJECT	tree depth > 5 (schema does not enforce depth)	spec 6 T-11	schema-valid by design
+T-42	courses/T-42_GROK_V1.json	validator	SCHEMA_VALID	REJECT	more than 500 total actions (600)	spec 5	
+T-43	courses/T-43_GROK_V1.json	validator	SCHEMA_VALID	REJECT	more than 10 OPEN actions	spec 5	
+T-44	courses/T-44_GROK_V1.json	validator	SCHEMA_VALID	REJECT	trustedGgb on a non-OPEN action	spec 3.2	schema allows it
+T-10	(generated: courses/T-10_big_GROK_V1.json, >1 MB)	validator	SCHEMA_VALID	REJECT	course.json > 1 MB	spec 6 T-10	schema-valid (50x100 steps, 200-char titles); only the size limit rejects it

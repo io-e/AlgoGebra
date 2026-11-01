@@ -1,0 +1,60 @@
+{
+ "schemaVersion": "1.0",
+ "course": "GROK_V1 security corpus",
+ "tree": [
+  {
+   "title": "Ch",
+   "children": [
+    {
+     "title": "Step",
+     "actions": [
+      {
+       "directive": "OPEN",
+       "value": "clean.ggb"
+      },
+      {
+       "directive": "OPEN",
+       "value": "clean.ggb"
+      },
+      {
+       "directive": "OPEN",
+       "value": "clean.ggb"
+      },
+      {
+       "directive": "OPEN",
+       "value": "clean.ggb"
+      },
+      {
+       "directive": "OPEN",
+       "value": "clean.ggb"
+      },
+      {
+       "directive": "OPEN",
+       "value": "clean.ggb"
+      },
+      {
+       "directive": "OPEN",
+       "value": "clean.ggb"
+      },
+      {
+       "directive": "OPEN",
+       "value": "clean.ggb"
+      },
+      {
+       "directive": "OPEN",
+       "value": "clean.ggb"
+      },
+      {
+       "directive": "OPEN",
+       "value": "clean.ggb"
+      },
+      {
+       "directive": "OPEN",
+       "value": "clean.ggb"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

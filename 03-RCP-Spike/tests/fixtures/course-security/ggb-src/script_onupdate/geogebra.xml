@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<geogebra format="5.0" version="5.4.934.0">
+<construction title="GROK_V1 corpus">
+<element type="point" label="A">
+	<coords x="1" y="2" z="1"/>
+	<ggbscript onUpdate="Delete(A)"/>
+</element>
+</construction>
+</geogebra>

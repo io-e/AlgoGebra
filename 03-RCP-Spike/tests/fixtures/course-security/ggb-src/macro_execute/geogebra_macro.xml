@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<geogebra format="5.0">
+<macro cmdName="Evil" toolName="Evil">
+<macroInput a0="A"/>
+<macroOutput a0="B"/>
+<construction>
+<command name="Execute">
+	<input a0="{&quot;Delete(A)&quot;}"/>
+	<output a0="B"/>
+</command>
+</construction>
+</macro>
+</geogebra>
