@@ -176,16 +176,19 @@ Out of scope for Codex unless asked: WIMS contracts S-01/S-02; editing `common`.
 |---|---|---|
 | C-T1 | Resume from this V1_1 handoff | Do not redo C-22/C-23 |
 | C-T2 | After WAR: close **C-21** host path tweaks | Then Playwright cases |
-| C-T3 | Optional: scaffold `tests/playwright/W09_CourseTree.spec.ts` | From §3 |
-| C-T4 | Optional: T1 plugin.xml entries for D-11/W-09 | With Codex/Eclipse |
-| C-T5 | CT-SEC-01 web allowlist wiring once JSON exists | Pair with Codex X-T6/T7 |
-| C-T6 | Ask owner the questions in §8 before large new scope | — |
+| C-T3 | **Scaffold** `03-RCP-Spike/tests/playwright/W09_CourseTree.spec.ts` | Owner Q8 / Q5 — authorized now |
+| C-T4 | Eclipse **RCP Testing Tool** track for desktop course tree | Owner Q8 — parallel with Playwright |
+| C-T5 | Settle SEC-G1..G3 security errata | `Errata_Security_Spec_for_Claude_GROK_V1.md` |
+| C-T6 | CT-SEC-01 web allowlist once `allowed-commands.json` exists | After Codex WP9-02; demos may use interim denylist |
+| C-T7 | T1 plug-in D-11/W-09 | **Deferred** (owner Q6) until D-01 |
 
 ---
 
 ## 8. Questions for the owner
 
-**Answer sheet (fill here):** `02-Cdc/Questions_Course_Tree_Owner_GROK_V1.md`
+**Answer sheet (recorded):** `02-Cdc/Questions_Course_Tree_Owner_GROK_V1_1.md`  
+**Grok Bot Sprint 1 PRs:** `02-Cdc/Feedback_GrokBot_Sprint1_PRs_GROK_V1.md` (review only — owner no-merge)  
+**Security settle for Claude:** `02-Cdc/Errata_Security_Spec_for_Claude_GROK_V1.md`
 
 1. **Commit / push:** Sprint 4 + D-COURSE-01 are on `feat/external-engines`. Push to `origin` now, or local-only until Codex lands WP2?
 2. **CT-SEC-01 priority:** Block web student pilots until `allowed-commands.json` allowlist, or accept interim denylist with WIMS as grade authority?

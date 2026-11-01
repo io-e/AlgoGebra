@@ -1,13 +1,14 @@
-<!-- CLAUDE_V1 -->
-# Owner questions — Course Tree / Sprint 4 follow-up (`Questions_Course_Tree_Owner_GROK_V1.md`)
+<!-- GROK_V1 — SUPERSEDED by Questions_Course_Tree_Owner_GROK_V1_1.md (answers recorded) -->
+# Owner questions — Course Tree / Sprint 4 follow-up (`Questions_Course_Tree_Owner_GROK_V1.md`) — ARCHIVE
 
 | Field | Value |
 |---|---|
 | Document | `02-Cdc/Questions_Course_Tree_Owner_GROK_V1.md` |
+| Status | **SUPERSEDED** — use **`Questions_Course_Tree_Owner_GROK_V1_1.md`** |
 | Version | GROK_V1 |
 | Date | 2026-11-01 |
 | Related | `Handoff_CLAUDE_by_GROK_V1_1.md` §8, `Decision_Course_Tree_Architecture_GROK_V1.md` (D-COURSE-01) |
-| Commit | `b626459` on `feat/external-engines` (ahead of origin by 1; not pushed) |
+| Commit | `b626459`+ on `feat/external-engines` |
 
 Fill the **Answer** lines. Agents must not invent owner decisions. Recommended defaults are optional hints only.
 

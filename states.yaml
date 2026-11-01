@@ -8,6 +8,15 @@ review: 02-Cdc/Review_Codex_Docs_Eclipse_Automation_Windows_GROK_V1.md
 sprint4_status: 02-Cdc/Sprint4_Course_Tree_Status_GROK_V1.md
 course_tree_architecture: 02-Cdc/Decision_Course_Tree_Architecture_GROK_V1.md
 claude_handoff: Handoff_CLAUDE_by_GROK_V1_1.md
+owner_questions: 02-Cdc/Questions_Course_Tree_Owner_GROK_V1_1.md
+grokbot_sprint1_feedback: 02-Cdc/Feedback_GrokBot_Sprint1_PRs_GROK_V1.md
+security_errata_for_claude: 02-Cdc/Errata_Security_Spec_for_Claude_GROK_V1.md
+merge_policy: no_merge_until_owner
+open_prs_review_only:
+  - {number: 3, url: "https://github.com/io-e/AlgoGebra/pull/3", suite: "16 71/0/44", note: "security corpus; skips await Codex validator"}
+  - {number: 4, url: "https://github.com/io-e/AlgoGebra/pull/4", suite: "17 13/0/0", note: "BUG-017; rebuild images after merge"}
+  - {number: 5, url: "https://github.com/io-e/AlgoGebra/pull/5", suite: "15 15/0/0", note: "GWT self-host; use gwtCompile+copyHtml+mergeDeploy"}
+  - {number: 6, url: "https://github.com/io-e/AlgoGebra/pull/6", suite: "P-01 8/0/1", note: "merge last when allowed"}
 reviewed_documents_2026-10-30:
   governing_spec: 02-Cdc/Architecture_GeoGebraPlus_RCP_Web_Validation_GROK_V2.md
   language_plan: 02-Cdc/Plan_Configuration_Eclipse_Languages_PyDev_CDT_LSP4E_GROK_V1_1.md
@@ -172,8 +181,9 @@ bugs:
     title: "evalCommand false + error dialog for f(x)=x^2-2x, {{1,2},{3,4}}, f(x)=a x^2-1, 3D Plane(A,B,(1,0,0)) in the RCP product; pinned upstream desktop returns true"
     component: RCP host / OSGi image (Windows + Debian; suspected missing command-resource visibility through Equinox; hypothesis unconfirmed)
     severity: high
-    status: OPEN
+    status: OPEN_DESKTOP_INTEGRATION
     evidence: "03-RCP-Spike/evidence/20261029-linux-scenarios-20261029_171259-grok-bot-vm-419969949/S_P-02_CoreFeatures_GROK_V1.log (P02-ALG-03, ALG-05, G3-03, _DIALOG); Windows r11 P-02/P-04 failures recorded in the local Codex scenario run and reconciliation matrix"
+    note: "Grok Bot PR #5: functions and matrices work on self-hosted web build — treat as desktop RCP/OSGi integration, not upstream GeoGebra. Owner: tree may ship trig/CAS before fix; matrix CMD desktop skipped."
     platforms: "Reproduced on Windows and Debian; systemic, not platform-specific"
     hypothesis: "CommandDispatcher / AlgoDispatcher resources may not be visible through the OSGi classloader; not confirmed"
     next: "Compare resource lookup in Equinox with pinned upstream desktop classpath; keep common untouched"
