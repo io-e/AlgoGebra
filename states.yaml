@@ -22,13 +22,23 @@ grok_bot_tasks:
   G-T2: {status: BLOCKED, blocked_by: "Codex X-T8 WAR"}
   G-T3: {status: BLOCKED, blocked_by: "Codex X-T8 WAR + Playwright/browser"}
   G-T4: {status: BLOCKED, blocked_by: "Codex WP2-06 CourseTreePanel"}
+a2a_plan: 02-Cdc/Plan_A2A_Gateway_GrokCLI_GROK_V1.md
+a2a_protocol_target: "1.0"
+codex_course_tree_sprint1:
+  branch: feat/course-tree-sprint1
+  pushed: false
+  x_t8_war: {status: LOCAL_DONE, evidence: "03-RCP-Spike/evidence/20261101-windows-x-t8-gwt-war/", playwright: NOT_RUN}
+  launch_ps1_suite18: {status: LOCAL_DONE, checks: "16 pass"}
+  wp2_06: {status: LOCAL_DONE_HEADLESS, model_tests: "9/9", policy_tests: "9/9", attended_ui: PENDING}
 next_order:
   - lock_rq: done_v1_1_java21_default
-  - codex_war_xt8: pending
-  - codex_launch_ps1_mirror_gt1: pending
-  - codex_coursetree_wp206: pending
-  - playwright_browser_run: blocked_on_war
-  - rcptt_d11: blocked_on_wp206
+  - codex_push_course_tree_sprint1: pending_owner
+  - codex_war_xt8: local_done_await_push
+  - codex_launch_ps1_mirror_gt1: local_done_await_push
+  - codex_coursetree_wp206: local_done_headless_await_ui
+  - playwright_browser_run: blocked_on_push_then_war_deploy
+  - rcptt_d11: blocked_on_push_plus_attended_ui
+  - a2a_v1_via_one_gateway: planned
 merge_policy: no_merge_until_owner
 open_prs_review_only:
   - {number: 3, url: "https://github.com/io-e/AlgoGebra/pull/3", suite: "16 71/0/44", note: "security corpus; skips await Codex validator"}
