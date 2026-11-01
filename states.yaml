@@ -11,6 +11,15 @@ claude_handoff: Handoff_CLAUDE_by_GROK_V1_1.md
 owner_questions: 02-Cdc/Questions_Course_Tree_Owner_GROK_V1_1.md
 grokbot_sprint1_feedback: 02-Cdc/Feedback_GrokBot_Sprint1_PRs_GROK_V1.md
 security_errata_for_claude: 02-Cdc/Errata_Security_Spec_for_Claude_GROK_V1.md
+rcp_testing_questions: 02-Cdc/Questions_RCP_Testing_Owner_GROK_V1.md
+rcp_testing_plan: 02-Cdc/Plan_RCP_Testing_SWTBot_RCPTT_CLAUDE_V1.md
+playwright_w09: 03-RCP-Spike/tests/playwright/
+next_order:
+  - lock_rq: done
+  - codex_war_xt8: pending
+  - codex_coursetree_wp206: pending
+  - playwright_browser_run: blocked_on_war
+  - rcptt_d11: blocked_on_wp206
 merge_policy: no_merge_until_owner
 open_prs_review_only:
   - {number: 3, url: "https://github.com/io-e/AlgoGebra/pull/3", suite: "16 71/0/44", note: "security corpus; skips await Codex validator"}
