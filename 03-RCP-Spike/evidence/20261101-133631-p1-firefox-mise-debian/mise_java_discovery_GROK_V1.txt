@@ -1,0 +1,16 @@
+## M-01 mise on PATH, global java@temurin-25, no other source
+JAVA=/home/box/.local/share/mise/installs/java/temurin-25.0.5+8.0.LTS/bin/java SOURCE=mise MAJOR=25 MIN=25
+rc=0
+## M-02 mise NOT on PATH (installs dir glob only)
+JAVA=/home/box/.local/share/mise/installs/java/temurin-latest/bin/java SOURCE=system MAJOR=25 MIN=25
+rc=0
+## M-03 mise project-local java@temurin-21 (must be rejected, MIN=25)
+JAVA=/home/box/.local/share/mise/installs/java/temurin-latest/bin/java SOURCE=system MAJOR=25 MIN=25
+rc=0
+## M-04 same, GGB_JAVA_MIN=21 (RCPTT-style)
+JAVA=/home/box/.local/share/mise/installs/java/temurin-21.0.13+9.0.LTS/bin/java SOURCE=mise MAJOR=21 MIN=21
+rc=0
+## M-05 dry-run course launch with mise-only java
+DRYRUN argc=26
+ARG /home/box/.local/share/mise/installs/java/temurin-25.0.5+8.0.LTS/bin/java
+rc=0
