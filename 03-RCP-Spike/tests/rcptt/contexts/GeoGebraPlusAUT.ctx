@@ -1,0 +1,19 @@
+--- RCPTT AUT Context — CLAUDE_V1
+--- Application Under Test: GeoGebraPlus RCP product
+--- Product: GeoGebraPlus-RCP-0.1.0-win32-x86_64
+--- Java: 21+ (25 preferred, fallback to 21 if RCPTT AUT injection fails on 25)
+--- See: 02-Cdc/Plan_RCP_Testing_SWTBot_RCPTT_CLAUDE_V1.md §3.2
+---
+--- AUT launch configuration is provided via rcptt.properties or CLI args.
+--- This context sets default VM args and working directory.
+
+------=_.ecl.context-718f04b4-ed39-33e3-af62-0995e4561998
+Content-Type: text/ecl
+
+// AUT launch args
+set-aut-arg "-Dggbplus.test=true"
+
+// Course tree tests need the course flag
+// set-aut-arg "-Dggbplus.course=courses/trigonometry_intro.json"
+
+------=_.ecl.context-718f04b4-ed39-33e3-af62-0995e4561998--

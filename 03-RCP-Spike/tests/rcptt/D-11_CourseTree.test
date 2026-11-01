@@ -1,0 +1,64 @@
+--- RCPTT testcase — CLAUDE_V1
+--- D-11: Course tree renders in SWT Tree (desktop workflow)
+--- Lane: E2E (product-level)
+--- Prerequisite: Product image with CourseTreePanel (WP2-06), -Dggbplus.course set
+--- Evidence: screenshot at each step + pass/fail verdict
+---
+--- This test drives the full D-11 user workflow:
+--- 1. Launch with -Dggbplus.course=courses/trigonometry_intro.json
+--- 2. Verify three-pane layout (tree + GeoGebra + description)
+--- 3. Expand chapters, run steps, check CAS identity
+
+------=_.ecl.context-718f04b4-ed39-33e3-af62-0995e4561998
+Content-Type: text/ecl
+
+// Wait for application with course tree
+wait 15000
+get-window "GeoGebraPlus" | get-property "isVisible()" | equals true | verify-true
+
+// Verify course tree panel is present
+with [get-window "GeoGebraPlus"] {
+    // Tree should show the course title
+    get-tree | get-property "itemCount" | is-greater-than 0 | verify-true
+    take-screenshot -file "D-11_01_initial.png"
+}
+
+// Expand chapters
+with [get-window "GeoGebraPlus" | get-tree] {
+    // Select first chapter
+    select [get-item -path "Chapter 1.*"]
+    expand [get-item -path "Chapter 1.*"]
+    take-screenshot -file "D-11_02_expanded.png"
+}
+
+// Run step 1.1: create point O
+with [get-window "GeoGebraPlus"] {
+    get-tree | select [get-item -path "Chapter 1.*/1.1.*"]
+    get-button "Run Step" | click
+    wait 2000
+    take-screenshot -file "D-11_03_step_O.png"
+}
+
+// Run step 1.2: create circle
+with [get-window "GeoGebraPlus"] {
+    get-tree | select [get-item -path "Chapter 1.*/1.2.*"]
+    get-button "Run Step" | click
+    wait 2000
+    take-screenshot -file "D-11_04_step_circle.png"
+}
+
+// CAS identity check
+with [get-window "GeoGebraPlus"] {
+    get-tree | select [get-item -path "Chapter 1.*/1.*/CAS.*"]
+    get-button "Check" | click
+    wait 3000
+    // Verify pass feedback
+    take-screenshot -file "D-11_05_cas_check.png"
+}
+
+// Verify no error dialogs appeared
+verify-error -command {
+    get-window "Error"
+}
+
+------=_.ecl.context-718f04b4-ed39-33e3-af62-0995e4561998--

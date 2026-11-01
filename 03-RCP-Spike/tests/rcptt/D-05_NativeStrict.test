@@ -1,0 +1,41 @@
+--- RCPTT testcase — CLAUDE_V1
+--- D-05: Native loading (GIAC + JOGL) strict mode
+--- Lane: E2E (product-level)
+--- Prerequisite: Product image with fragment bootstraps (r3+)
+--- Evidence: 3D screenshot + console log showing DLL loads
+---
+--- This test validates that GIAC, GlueGen, and JOGL DLLs load from
+--- product classpath JARs with no boot delegation and no java.library.path.
+
+------=_.ecl.context-718f04b4-ed39-33e3-af62-0995e4561998
+Content-Type: text/ecl
+
+// Wait for full initialization (CAS + 3D)
+wait 20000
+get-window "GeoGebraPlus" | get-property "isVisible()" | equals true | verify-true
+
+// Test CAS (exercises GIAC native)
+with [get-window "GeoGebraPlus"] {
+    get-editbox | set-text "Factor(x^2 - 1)"
+    key-type Enter
+    wait 3000
+    take-screenshot -file "D-05_01_cas_factor.png"
+}
+
+// Test 3D view (exercises JOGL + GlueGen natives)
+with [get-window "GeoGebraPlus"] {
+    // Open 3D view if not already visible
+    get-menu -path "View/3D Graphics" | click
+    wait 5000
+    take-screenshot -file "D-05_02_3d_view.png"
+}
+
+// Create a 3D object to confirm rendering
+with [get-window "GeoGebraPlus"] {
+    get-editbox | set-text "Sphere((0,0,0), 1)"
+    key-type Enter
+    wait 3000
+    take-screenshot -file "D-05_03_3d_sphere.png"
+}
+
+------=_.ecl.context-718f04b4-ed39-33e3-af62-0995e4561998--

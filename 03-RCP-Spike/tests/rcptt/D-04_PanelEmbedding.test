@@ -1,0 +1,37 @@
+--- RCPTT testcase — CLAUDE_V1
+--- D-04: GeoGebra panel embeds in SWT shell
+--- Lane: E2E (product-level)
+--- Prerequisite: Product image with GeoGebraPanel
+--- Evidence: screenshot + pass/fail verdict
+---
+--- This test validates the compiled product launches with an embedded
+--- GeoGebra panel, handles resize, and accepts basic algebra input.
+
+------=_.ecl.context-718f04b4-ed39-33e3-af62-0995e4561998
+Content-Type: text/ecl
+
+// Wait for the application to start
+wait 10000
+get-window "GeoGebraPlus" | get-label -after [get-label "GeoGebra"] | get-property caption
+    | verify-true
+
+// Verify the GeoGebra panel is embedded
+with [get-window "GeoGebraPlus"] {
+    // Panel should be visible
+    get-canvas -index 0 | get-property "isVisible()" | equals true | verify-true
+
+    // Resize the shell
+    get-menu -path "Window/Resize" | click
+}
+
+// Enter a command in the algebra input
+with [get-window "GeoGebraPlus"] {
+    // Type a command
+    get-editbox | set-text "C = 5"
+    key-type Enter
+}
+
+// Take evidence screenshot
+get-window "GeoGebraPlus" | take-screenshot -file "D-04_panel_embedding.png"
+
+------=_.ecl.context-718f04b4-ed39-33e3-af62-0995e4561998--
