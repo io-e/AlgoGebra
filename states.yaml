@@ -1,9 +1,10 @@
-# GROK_V1_5 - project state (P2 reviews posted; Codex PR #11 unblocks G-T2..G-T4)
+# GROK_V1_6 - project state (Codex sprint1 STOP; Grok Bot continues on #11)
 project: GeoGebraPlus / AlgoGebra RCP
 geogebra_pin: 375db7faf5407390bb322165f2414415da8faeda
 geogebra_version: 5.4.934.0
 repo: https://github.com/io-e/AlgoGebra
-updated: 2026-11-01T21:45+01:00
+updated: 2026-11-01T22:00+01:00
+codex_sprint1_stop: 02-Cdc/Decision_Codex_Sprint1_Stop_GROK_V1.md
 review: 02-Cdc/Review_Codex_Docs_Eclipse_Automation_Windows_GROK_V1.md
 sprint4_status: 02-Cdc/Sprint4_Course_Tree_Status_GROK_V1.md
 course_tree_architecture: 02-Cdc/Decision_Course_Tree_Architecture_GROK_V1.md
@@ -40,7 +41,8 @@ codex_course_tree_sprint1:
   pr: 11
   pr_url: "https://github.com/io-e/AlgoGebra/pull/11"
   owner_decision: "push_review_only_pr_into_feat/external-engines"
-  note: "PR #11 opened review-only; headless+D-02 PASS; attended SWT UI still needed"
+  status: STOPPED_OWNER
+  note: "Owner stop 2026-11-01: PR #11 is deliverable; no more Codex commits unless asked; attended UI deferred"
   x_t8_war: {status: PUSHED, evidence: "03-RCP-Spike/evidence/20261101-windows-x-t8-gwt-war/", playwright: NOT_RUN}
   launch_ps1_suite18: {status: PUSHED, checks: "16/16"}
   wp2_06: {status: PUSHED_HEADLESS, model_tests: "9/9", policy_tests: "9/9", rcp_build: PASS, d02_headless: PASS, attended_ui: PENDING}
@@ -49,7 +51,7 @@ next_order:
   - grokbot_p0_p1: done_prs_9_10
   - owner_ack_pr8: bot_6558291104_canonical
   - owner_p2_review_post: done_posted
-  - codex_sprint1_pr: open_11_review_only
+  - codex_sprint1: stopped_pr_11_review_only
   - grokbot_after_codex: dispatched_6558362317_await_results
   - playwright_browser_run: await_G-T2_war
   - rcptt_d11: await_mechanical_then_attended_ui
