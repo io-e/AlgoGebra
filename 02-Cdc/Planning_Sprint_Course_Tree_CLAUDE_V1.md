@@ -1,10 +1,10 @@
-<!-- CLAUDE_V1 -->
+<!-- CLAUDE_V1_1 -->
 # Sprint Planning — Course Tree Feature (All Three Agents)
 
 | Field | Value |
 |---|---|
 | Document | `02-Cdc/Planning_Sprint_Course_Tree_CLAUDE_V1.md` |
-| Version | CLAUDE_V1 |
+| Version | CLAUDE_V1_1 |
 | Date | 2026-11-01 |
 | Status | Active |
 | Source of truth | `Workload_Course_Tree_CLAUDE_V1_1.md` + errata `V1_2.md` |
@@ -61,7 +61,7 @@ All 3 agents          All 3 agents         All 3 agents         Grok + Owner
 |---|---|---|---|---|---|---|
 | C-16 | VS Code `tasks.json` + extensions + problem matcher | WP5-01..03 | 1.75h | Plan | `.vscode/tasks.json`, `.vscode/extensions.json` | — |
 | C-17 | Course authoring Cheat Sheet | WP4-04 | 1h | Schema + Study | `cheatsheets/Course_Authoring.xml` | C-01 |
-| C-18 | Evidence rule checklist in script headers | WP6-08 | 0.5h | CLAUDE.md evidence rule | Checklist template | — |
+| C-18 | Evidence rule checklist in script headers | WP6-08 | 0.5h | `AGENTS.md` evidence rule | Checklist template | — |
 | C-19 | `S_D-11_CourseTree_CLAUDE_V1.ps1` (desktop scenario) | WP6-01 | 2h | Scenario patterns | `scenarios/S_D-11_CourseTree_CLAUDE_V1.ps1` | Codex WP2-06 |
 | C-20 | `S_W-09_CourseTreeWeb_CLAUDE_V1.ps1` (web scenario) | WP6-02 | 2h | Web patterns | `scenarios/S_W-09_CourseTreeWeb_CLAUDE_V1.ps1` | C-12 |
 | C-21 | `course-host.html` adjust after WAR verification | WP3a-04 | 1h | Codex WP3a-02 results | Updated host page | Codex WP3a-02 |
@@ -139,21 +139,21 @@ All 3 agents          All 3 agents         All 3 agents         Grok + Owner
 
 | # | Task | WP | Effort | Input | Deliverable | Depends on |
 |---|---|---|---|---|---|---|
-| G-01 | Debian/Xvfb environment prep | WP8a-01 | 1h | Current RCP product | Environment report | — |
-| G-02 | Verify product starts on Debian (P-01 equiv) | WP8a-02 | 0.5h | G-01 | TAP result + screenshot | G-01 |
+| G-01 | Debian/Xvfb environment prep | WP8a-01 | — | Current RCP product | Environment report | **DONE** |
+| G-02 | Verify product starts on Debian (P-01 equiv) | WP8a-02 | — | G-01 | TAP 8/0/1 + screenshot | **DONE** (export evidence) |
 | G-03 | GWT WAR build at pinned commit (Debian) | WP3a-03 | 3h | GeoGebra source | Build log + WAR | — |
 | G-04 | **BUG-017 fix** (`launch.sh` JDK discovery) | — | 1h | Bug handoff V1 | Fixed `launch.sh` | — |
-| G-05 | Malicious course file corpus (14 test cases) | WP9-03 | 2h | Security spec §6 | Test fixtures + `.sh` tests | Security spec (done) |
+| G-05 | Malicious course file corpus (14 test cases) | WP9-03 | 2h | Security spec §6 | Test fixtures + `_GROK_V1.ps1` tests in `03-RCP-Spike/tests/` | Security spec (done) |
 
-**Sprint 1 total: ~7.5h**
+**Sprint 1 total: ~6h (G-01/G-02 done, export evidence only)**
 
-**Parallel work:** G-01/G-02 and G-03 are independent — run simultaneously. G-05 can start immediately (security spec is done). G-04 is a quick fix.
+**Parallel work:** G-03, G-04, and G-05 are independent — run simultaneously. G-05 can start immediately (security spec is done). G-04 is a quick fix. G-01/G-02 are already done — just need evidence export.
 
 ### Sprint 2 — Week 2: OEF converter and web test
 
 | # | Task | WP | Effort | Input | Deliverable | Depends on |
 |---|---|---|---|---|---|---|
-| G-06 | OEF→course.json converter (Python + test wrapper) | WP7-02 | 4h | Schema (done) + OEF fixtures | `tools/oef2course.py` + tests | Schema (done) |
+| G-06 | OEF→course.json converter (Python + `.ps1` test wrapper) | WP7-02 | 4h | Schema (done) + OEF fixtures | `tools/oef2course.py` + `S_WP7-02_OefConverter_GROK_V1.ps1` | Schema (done) |
 | G-07 | Test `course-tree.js` on Firefox/Debian | WP3-07 | 0.5h | Claude web files | Debian test report | C-12, G-03 |
 | G-08 | `launch.sh -Course` flag (Study V1_2 §2.8) | — | 0.5h | Study V1_2 | Updated `launch.sh` | G-04 |
 
@@ -197,10 +197,10 @@ All 3 agents          All 3 agents         All 3 agents         Grok + Owner
          ▼         ▼                      ▼
     Sprint 1      Sprint 1               Sprint 1
     CLAUDE        CODEX                   GROK BOT
-    C-05 sample   X-01..04 model/parser   G-01..02 baseline
+    C-05 sample   X-01..04 model/parser   G-01..02 DONE ✓
     C-07 CSS      X-05 BUG-014 invest.    G-03 WAR build
     C-08 T1 rec.                          G-04 BUG-017
-                                          G-05 security corpus
+                                          G-05 security corpus (.ps1)
          │              │                      │
          ▼              ▼                      ▼
     Sprint 2      Sprint 2               Sprint 2
@@ -246,9 +246,14 @@ Each agent pushes commits to `feat/external-engines` as work completes. No branc
 |---|---|---|
 | Claude | `02-Cdc/*.md`, `02-Cdc/*.json`, `web-host/*`, `.vscode/*`, `cheatsheets/*`, `scenarios/S_D-11_*`, `scenarios/S_W-09_*` | ✓ |
 | Codex | `host/src/**/*.java`, `host/test/**/*.java`, `build.ps1`, `launch.ps1` | ✓ |
-| Grok Bot | `linux-tests/*`, `tools/*`, `wims/*`, `launch.sh`, `Handoff_*_GROK_*` | ✓ |
+| Grok Bot | `03-RCP-Spike/tests/scenarios/S_*_GROK_V1.ps1`, `tools/*`, `wims/*`, `launch.sh`, `Handoff_*_GROK_*` | ✓ |
 
-Shared file: `SCENARIOS_TRACKING` — Claude updates after all agents report results (Sprint 4, C-22).
+Shared files requiring coordination:
+- `states.yaml` — each agent updates their own bug/scenario entries. Pull before editing.
+- `03-RCP-Spike/tests/Run_All_GROK_V1.ps1` — Grok's security tests plug into this runner. Claude updates scenario count in Sprint 4 (C-22).
+- `SCENARIOS_TRACKING` — Claude updates after all agents report results (Sprint 4, C-22).
+
+**Pre-condition:** PR #2 (Windows guard checks) should be merged into `feat/external-engines` before Codex starts Sprint 1, so Windows test runs use the guards.
 
 ---
 
@@ -265,10 +270,10 @@ Shared file: `SCENARIOS_TRACKING` — Claude updates after all agents report res
 - [ ] Start `CourseModel.java` parser (X-03)
 
 ### Grok Bot — ready now
-- [ ] Debian/Xvfb baseline (G-01, G-02)
+- [x] Debian/Xvfb baseline (G-01, G-02) — **DONE**, export evidence
 - [ ] GWT WAR build on Debian (G-03)
 - [ ] BUG-017 fix: `launch.sh` JDK discovery (G-04)
-- [ ] Malicious course file corpus from security spec (G-05)
+- [ ] Malicious course file corpus from security spec (G-05) — `.ps1` tests in `03-RCP-Spike/tests/`
 
 ### Owner — Sprint 1 decision needed
 - [ ] Approve or defer D-01 (Eclipse project import)
