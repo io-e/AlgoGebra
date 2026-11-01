@@ -1,4 +1,4 @@
-<!-- CLAUDE_V5 -->
+<!-- CLAUDE_V5 — GROK_V1_1 2026-11-01: scenario count 47 + D-COURSE-01 pointer -->
 # AGENTS.md
 
 This file provides guidance to Codex (claude.ai/code) when working with code in this repository.
@@ -91,11 +91,12 @@ Installed image: `D:\ALF_ZGit\G1_Geogebra_Migration\bin\GeoGebraPlus-RCP-0.1.0-w
 
 **Owner review done:** The product-local GIAC loader replacement (not the upstream `NativeLibClassPathLoader`) is accepted as architecture (D-GIAC-01, `Gate_Decision_D-04_D-05_GROK_V1_1.md`).
 
-### Scenario status summary (45 total)
+### Scenario status summary (47 total)
 
-- **PASS:** D-02, D-03, D-05 (3)
-- **PARTIAL:** D-04, P-08 (2)
-- **Scenario pack (2026-10-29, Debian desktop run):** 45 scenarios = 3 PASS, 13 PARTIAL, 5 FAIL, 24 NOT RUN (the former 40 NOT RUN of P 01–07, D 01/06–10, W, X, S, O). Details and evidence: `03-RCP-Spike/tests/SCENARIOS_TRACKING_GROK_V1.md`, `states.yaml` `scenarios:`.
+- **PASS:** D-02, D-03, D-05 (and X-07) — see ledger for full PASS set (4)
+- **PARTIAL / FAIL / NOT RUN:** see ledger
+- **Reviewed 2026-10-30 (45 rows):** 4 PASS, 12 PARTIAL, 7 FAIL, 22 NOT RUN — archive `SCENARIOS_TRACKING_GROK_V1_1.md`
+- **Course tree 2026-11-01 (47 rows):** +D-11 +W-09 as NOT RUN — canonical `03-RCP-Spike/tests/SCENARIOS_TRACKING_GROK_V1_2.md` (4 PASS, 12 PARTIAL, 7 FAIL, 24 NOT RUN). Architecture accepted: `02-Cdc/Decision_Course_Tree_Architecture_GROK_V1.md` (D-COURSE-01). Reconciliation: `Handoff_Windows_Debian_Reconciliation_GROK_V1.md`, `states.yaml`.
 
 ### Gates
 

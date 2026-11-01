@@ -1,16 +1,19 @@
-# GROK_V1_1 - project state and bug tracker (created 2026-10-29 by Grok Bot; reconciled 2026-10-30)
+# GROK_V1_2 - project state and bug tracker (created 2026-10-29 by Grok Bot; reconciled 2026-10-30; Sprint 4 C-22 2026-11-01)
 project: GeoGebraPlus / AlgoGebra RCP
 geogebra_pin: 375db7faf5407390bb322165f2414415da8faeda
 geogebra_version: 5.4.934.0
 repo: https://github.com/io-e/AlgoGebra
-updated: 2026-10-30T12:00+01:00
+updated: 2026-11-01T12:30+01:00
 review: 02-Cdc/Review_Codex_Docs_Eclipse_Automation_Windows_GROK_V1.md
+sprint4_status: 02-Cdc/Sprint4_Course_Tree_Status_GROK_V1.md
+course_tree_architecture: 02-Cdc/Decision_Course_Tree_Architecture_GROK_V1.md
+claude_handoff: Handoff_CLAUDE_by_GROK_V1_1.md
 reviewed_documents_2026-10-30:
   governing_spec: 02-Cdc/Architecture_GeoGebraPlus_RCP_Web_Validation_GROK_V2.md
   language_plan: 02-Cdc/Plan_Configuration_Eclipse_Languages_PyDev_CDT_LSP4E_GROK_V1_1.md
   automation_synthesis: 02-Cdc/Synthesis_Automation_Tools_Eclipse_Equinox_GROK_V1_1.md
   windows_handoff: "Handoff_Windows_Test_Status_CODEX_V1.md (archive; see Handoff_Windows_Debian_Reconciliation_GROK_V1.md)"
-  scenario_tracking: 03-RCP-Spike/tests/SCENARIOS_TRACKING_GROK_V1_1.md
+  scenario_tracking: 03-RCP-Spike/tests/SCENARIOS_TRACKING_GROK_V1_2.md
   full_review: 02-Cdc/Review_Codex_Docs_Eclipse_Automation_Windows_GROK_V1.md
 
 branches:
@@ -26,11 +29,11 @@ gates:
   C: NOT_REACHED
   D: NOT_REACHED
   E: NOT_REACHED
-  scenarios: {total: 45, PASS: 4, PARTIAL: 12, FAIL: 7, NOT_RUN: 22, tracking: 03-RCP-Spike/tests/SCENARIOS_TRACKING_GROK_V1_1.md}
+  scenarios: {total: 47, PASS: 4, PARTIAL: 12, FAIL: 7, NOT_RUN: 24, tracking: 03-RCP-Spike/tests/SCENARIOS_TRACKING_GROK_V1_2.md}
 
 scenarios:
-  # GROK_V1_1 2026-10-30: reconciled with Windows r11/r12 + Debian evidence. status = spec-level (reviewed).
-  _run: {evidence: 03-RCP-Spike/evidence/20261029-linux-scenarios-20261029_171259-grok-bot-vm-419969949, windows_r11_local: 03-RCP-Spike/tests/results/20261029_174320-SHADOW-TB64BO9R, reconciliation: Handoff_Windows_Debian_Reconciliation_GROK_V1.md, tracking: 03-RCP-Spike/tests/SCENARIOS_TRACKING_GROK_V1_1.md, counts: {'PARTIAL': 12, 'FAIL': 7, 'NOT RUN': 22, 'PASS': 4}}
+  # GROK_V1_2 2026-11-01: +D-11 +W-09 (course tree). Prior GROK_V1_1 2026-10-30 reconciliation kept for the original 45.
+  _run: {evidence: 03-RCP-Spike/evidence/20261029-linux-scenarios-20261029_171259-grok-bot-vm-419969949, windows_r11_local: 03-RCP-Spike/tests/results/20261029_174320-SHADOW-TB64BO9R, reconciliation: Handoff_Windows_Debian_Reconciliation_GROK_V1.md, tracking: 03-RCP-Spike/tests/SCENARIOS_TRACKING_GROK_V1_2.md, counts: {'PARTIAL': 12, 'FAIL': 7, 'NOT RUN': 24, 'PASS': 4}}
   P-01: {status: "PARTIAL", client: both, gate: "-", debian_desktop: "PASS", windows_r11: "INVALID", script: "03-RCP-Spike/tests/scenarios/S_P-01_CleanProduct_GROK_V1.ps1", blockers: "web: deferred: web phase; Windows r11 result INVALID (Codex run 20261029_174320-SHADOW-TB64BO9R: screenshot captured the user's browser editor, not GeoGebra) - re-run with the foreground guard (branch feat/ui-foreground-guard)"}
   P-02: {status: "FAIL", client: both, gate: "A", debian_desktop: "FAIL", script: "03-RCP-Spike/tests/scenarios/S_P-02_CoreFeatures_GROK_V1.ps1", blockers: "BUG-014 (3 divergences: f(x)=x^2-2x, m={{1,2},{3,4}}, 3D Plane(A,B,(1,0,0)): evalCommand false + error dialog in product, true in baseline); web deferred"}
   P-03: {status: "PARTIAL", client: both, gate: "A", debian_desktop: "PARTIAL", script: "03-RCP-Spike/tests/scenarios/S_P-03_StandardTools_GROK_V1.ps1", blockers: "3D toolbar not compared (needs a 3D GuiManager directive); web deferred"}
@@ -49,6 +52,7 @@ scenarios:
   D-08: {status: "PARTIAL", client: desktop, gate: "B", debian_desktop: "PARTIAL", script: "03-RCP-Spike/tests/scenarios/S_D-08_IncompatibleExtension_GROK_V1.ps1", blockers: "user-facing refusal message not implemented"}
   D-09: {status: "NOT RUN", client: desktop, gate: "E", debian_desktop: "NOT RUN", script: "03-RCP-Spike/tests/scenarios/S_D-09_SignatureChannel_GROK_V1.ps1", blockers: "no signing key, channel or policy (owner decision)"}
   D-10: {status: "NOT RUN", client: desktop, gate: "-", debian_desktop: "FAIL", script: "03-RCP-Spike/tests/scenarios/S_D-10_InstallUpgrade_GROK_V1.ps1", blockers: "BUG-017 (Linux image has no bundled Java; launch.sh hard-codes /workspace/AlgoGebra/jdk); no installer; no clean Windows VM"}
+  D-11: {status: "NOT RUN", client: desktop, gate: "-", debian_desktop: "NOT RUN", script: "03-RCP-Spike/tests/scenarios/S_D-11_CourseTree_GROK_V1.ps1", blockers: "Codex WP2-06 CourseTreePanel not landed; product launch with -Dggbplus.course blocked"}
   W-01: {status: "NOT RUN", client: web, gate: "C", debian_desktop: "-", script: "-", blockers: "deferred: web phase (no script yet)"}
   W-02: {status: "NOT RUN", client: web, gate: "C", debian_desktop: "-", script: "-", blockers: "deferred: web phase (no script yet)"}
   W-03: {status: "NOT RUN", client: web, gate: "-", debian_desktop: "-", script: "-", blockers: "deferred: web phase (no script yet)"}
@@ -57,6 +61,7 @@ scenarios:
   W-06: {status: "NOT RUN", client: web, gate: "-", debian_desktop: "-", script: "-", blockers: "deferred: web phase (no script yet)"}
   W-07: {status: "NOT RUN", client: web, gate: "-", debian_desktop: "-", script: "-", blockers: "deferred: web phase (no script yet)"}
   W-08: {status: "NOT RUN", client: web, gate: "-", debian_desktop: "-", script: "-", blockers: "deferred: web phase (no script yet)"}
+  W-09: {status: "NOT RUN", client: web, gate: "-", debian_desktop: "-", script: "03-RCP-Spike/tests/scenarios/S_W-09_CourseTreeWeb_GROK_V1.ps1", blockers: "spec NOT RUN until browser half; static prechecks PASS 15/0/4 on 2026-11-01 (WAR+HTTP still required for W09-20..23)", windows_static_20261101: "PASS 15/0/4"}
   X-01: {status: "PARTIAL", client: both, gate: "D", debian_desktop: "FAIL", script: "03-RCP-Spike/tests/scenarios/S_X-01_ComputeContract_GROK_V1.ps1", blockers: "no result-kind enum in compute.api (typed contract gap); web deferred"}
   X-02: {status: "FAIL", client: both, gate: "D", debian_desktop: "FAIL", windows_r11: "FAIL", script: "03-RCP-Spike/tests/scenarios/S_X-02_StaleResult_GROK_V1.ps1", blockers: "compute API has no revision (API change needed); raised NOT RUN->FAIL on 2026-10-30 Grok reconciliation"}
   X-03: {status: "NOT RUN", client: both, gate: "D", debian_desktop: "PASS (precheck)", script: "03-RCP-Spike/tests/scenarios/S_X-03_WriteBack_GROK_V1.ps1", blockers: "state adapter / allow-list not implemented"}

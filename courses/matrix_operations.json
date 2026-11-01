@@ -1,0 +1,236 @@
+{
+  "schemaVersion": "1.0",
+  "course": "Matrix Operations",
+  "description": "Create matrices and compute determinant, transpose, product, and inverse via CAS. Authored for the web host (GWT). Desktop CMD matrix literals such as m={{1,2},{3,4}} remain unreliable under BUG-014 until that fix lands; prefer this course on web or CAS-only paths.",
+  "author": "GeoGebraPlus Course Team",
+  "locale": "en",
+  "tree": [
+    {
+      "title": "1. Create Matrices",
+      "description": "Define two 2x2 matrices with CAS.",
+      "children": [
+        {
+          "title": "1.1 Define matrix A",
+          "description": "Create A = [[1, 2], [3, 4]] using CAS.",
+          "actions": [
+            {
+              "directive": "CAS",
+              "value": "A := [[1, 2], [3, 4]]",
+              "description": "Assign matrix A."
+            }
+          ],
+          "check": {
+            "type": "cas_equals",
+            "variable": "A",
+            "expected": "[[1,2],[3,4]]",
+            "feedback": {
+              "pass": "Matrix A is defined.",
+              "fail": "Expected A to be [[1,2],[3,4]]."
+            }
+          }
+        },
+        {
+          "title": "1.2 Define matrix B",
+          "description": "Create B = [[0, 1], [1, 0]] using CAS.",
+          "actions": [
+            {
+              "directive": "CAS",
+              "value": "B := [[0, 1], [1, 0]]",
+              "description": "Assign matrix B (swap rows of the identity)."
+            }
+          ]
+        },
+        {
+          "title": "1.3 Display A",
+          "description": "Read back matrix A.",
+          "actions": [
+            {
+              "directive": "CAS",
+              "value": "A",
+              "description": "Display A."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "2. Determinant and Transpose",
+      "description": "Compute det(A) and A^T.",
+      "children": [
+        {
+          "title": "2.1 Determinant of A",
+          "description": "det([[1,2],[3,4]]) = 1*4 - 2*3 = -2.",
+          "actions": [
+            {
+              "directive": "CAS",
+              "value": "Determinant(A)",
+              "description": "Compute det(A)."
+            }
+          ],
+          "check": {
+            "type": "cas_equals",
+            "variable": "Determinant(A)",
+            "expected": "-2",
+            "feedback": {
+              "pass": "Correct: det(A) = -2.",
+              "fail": "Expected det(A) = -2."
+            }
+          }
+        },
+        {
+          "title": "2.2 Transpose of A",
+          "description": "Swap rows and columns of A.",
+          "actions": [
+            {
+              "directive": "CAS",
+              "value": "Transpose(A)",
+              "description": "Compute A^T."
+            }
+          ],
+          "check": {
+            "type": "cas_equals",
+            "variable": "Transpose(A)",
+            "expected": "[[1,3],[2,4]]",
+            "feedback": {
+              "pass": "Correct: A^T = [[1,3],[2,4]].",
+              "fail": "Expected [[1,3],[2,4]]."
+            }
+          }
+        }
+      ]
+    },
+    {
+      "title": "3. Matrix Product",
+      "description": "Multiply A and B.",
+      "children": [
+        {
+          "title": "3.1 Compute A * B",
+          "description": "Matrix product AB.",
+          "actions": [
+            {
+              "directive": "CAS",
+              "value": "A * B",
+              "description": "Compute the product AB."
+            }
+          ]
+        },
+        {
+          "title": "3.2 Compute B * A",
+          "description": "Show that matrix multiplication is not commutative in general.",
+          "actions": [
+            {
+              "directive": "CAS",
+              "value": "B * A",
+              "description": "Compute the product BA."
+            }
+          ]
+        },
+        {
+          "title": "3.3 Compare AB and BA",
+          "description": "Simplify AB - BA; a non-zero result shows non-commutativity.",
+          "actions": [
+            {
+              "directive": "CAS",
+              "value": "Simplify(A * B - B * A)",
+              "description": "Difference of the two products."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "4. Inverse",
+      "description": "Invert A and verify A * A^(-1) = I.",
+      "children": [
+        {
+          "title": "4.1 Inverse of A",
+          "description": "Because det(A) = -2 ≠ 0, A is invertible.",
+          "actions": [
+            {
+              "directive": "CAS",
+              "value": "Invert(A)",
+              "description": "Compute A^(-1)."
+            }
+          ]
+        },
+        {
+          "title": "4.2 Verify A * Invert(A)",
+          "description": "The product should simplify to the 2x2 identity.",
+          "actions": [
+            {
+              "directive": "CAS",
+              "value": "Simplify(A * Invert(A))",
+              "description": "Check A * A^(-1)."
+            }
+          ],
+          "check": {
+            "type": "cas_equals",
+            "variable": "Simplify(A * Invert(A))",
+            "expected": "[[1,0],[0,1]]",
+            "feedback": {
+              "pass": "Correct: A * A^(-1) = I.",
+              "fail": "Expected the 2x2 identity matrix."
+            }
+          }
+        }
+      ]
+    },
+    {
+      "title": "5. Trace and Identity",
+      "description": "Quick checks with the identity matrix.",
+      "children": [
+        {
+          "title": "5.1 Identity matrix",
+          "description": "Define I2 = [[1, 0], [0, 1]].",
+          "actions": [
+            {
+              "directive": "CAS",
+              "value": "I2 := [[1, 0], [0, 1]]",
+              "description": "2x2 identity."
+            }
+          ]
+        },
+        {
+          "title": "5.2 A * I2 = A",
+          "description": "Multiplying by the identity leaves A unchanged.",
+          "actions": [
+            {
+              "directive": "CAS",
+              "value": "Simplify(A * I2)",
+              "description": "Should equal A."
+            }
+          ],
+          "check": {
+            "type": "cas_equals",
+            "variable": "Simplify(A * I2)",
+            "expected": "[[1,2],[3,4]]",
+            "feedback": {
+              "pass": "Correct: A * I = A.",
+              "fail": "Expected A unchanged."
+            }
+          }
+        },
+        {
+          "title": "5.3 Trace of A",
+          "description": "tr(A) = 1 + 4 = 5.",
+          "actions": [
+            {
+              "directive": "CAS",
+              "value": "Trace(A)",
+              "description": "Sum of diagonal entries."
+            }
+          ],
+          "check": {
+            "type": "cas_equals",
+            "variable": "Trace(A)",
+            "expected": "5",
+            "feedback": {
+              "pass": "Correct: tr(A) = 5.",
+              "fail": "Expected tr(A) = 5."
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

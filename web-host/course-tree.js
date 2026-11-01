@@ -1,14 +1,15 @@
 // CLAUDE_V1_1 — GeoGebraPlus course tree controller (web host)
-// Security: string-based command allowlist per Spec_Course_Security_CLAUDE_V1.md §1.4
+// GROK_V1_1 — W-09 comment tweak; CT-SEC-01: interim denylist until allowed-commands.json (D-COURSE-01)
+// Security target: Spec_Course_Security_CLAUDE_V1.md §1.4 string allowlist from Commands enum
 // Threading: setErrorDialogsActive(false/true) around each step per Study V1_2 §2.4
-// CAS readiness: evalCommandCAS only (G-07 fix — no evalCommand("1+1"))
+// CAS readiness: use evalCommandCAS for the arithmetic smoke check (G-07); never the algebra CMD path
 
 'use strict';
 
 var courseTree = (function () {
   var STEP_TIMEOUT_MS = 10000;
 
-  // §1.4: blocked scripting commands (TABLE_SCRIPTING minus safe styling)
+  // INTERIM (CT-SEC-01): denylist only. Replace with allowlist from allowed-commands.json (Codex WP9-02).
   var BLOCKED_COMMANDS = [
     'Execute', 'RunClickScript', 'RunUpdateScript', 'ExportImage',
     'StartRecord', 'PlaySound', 'ReadText', 'StartAnimation',

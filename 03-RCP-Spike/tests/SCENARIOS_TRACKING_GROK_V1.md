@@ -1,7 +1,9 @@
-<!-- GROK_V1 -->
-# Scenario tracking — 45 scenarios of the validation spec (GROK_V1)
+<!-- GROK_V1_3 — C-22 complete: D-11/W-09 table + detail entries (45→47). Prior header-only CLAUDE_V1_1 pass retained in history. -->
+# Scenario tracking — 47 scenarios of the validation spec (GROK_V1_3)
 
-**Author / version:** Grok Bot, GROK_V1, 2026-10-29 (Europe/Paris). **Source:** `02-Cdc/Architecture_GeoGebraPlus_RCP_Web_Validation_GROK_V2.md` section 5 (45 rows). **Focus:** desktop (RCP heavy client) first; web rows are listed and marked *deferred: web phase*.
+**Author / version:** Grok Bot, GROK_V1_1, 2026-10-30; Claude header draft 2026-11-01; Grok, GROK_V1_3, 2026-11-01 (C-22: D-11/W-09 rows and details). **Source:** `02-Cdc/Architecture_GeoGebraPlus_RCP_Web_Validation_GROK_V2.md` section 5 (45 rows) + course tree feature (2 rows). **Focus:** desktop (RCP heavy client) first; web rows are listed and marked *deferred: web phase*.
+**Review:** Windows↔Debian reconciliation in `Handoff_Windows_Debian_Reconciliation_GROK_V1.md` and `02-Cdc/Review_Codex_Docs_Eclipse_Automation_Windows_GROK_V1.md`.
+**Canonical sibling:** Prefer `SCENARIOS_TRACKING_GROK_V1_2.md` for the completed 47-row ledger.
 
 ## Rules
 - **Status** is the spec-level status of the whole scenario (desktop + web where the spec says D+W, both OSes where relevant). It is set by review, not by the runner.
@@ -26,23 +28,28 @@ Env: `IMAGE`, `JAVA_HOME` (JDK 21), `GGB_SOURCE` (upstream checkout at the pin),
 | Status | Count |
 |---|---|
 | NOT RUN | 24 |
-| PARTIAL | 13 |
-| FAIL | 5 |
-| PASS | 3 |
+| PARTIAL | 12 |
+| FAIL | 7 |
+| PASS | 4 |
 
 | Client | Count |
 |---|---|
 | both | 20 |
-| desktop | 16 |
-| web | 8 |
+| desktop | 17 |
+| web | 9 |
 | infra | 1 |
 
-The former "40 NOT RUN" are now: 24 NOT RUN, 11 PARTIAL, 5 FAIL (D-02/03/05 PASS, D-04 and P-08 PARTIAL unchanged).
+Total scenarios: **47** (45 validation-spec + D-11 + W-09 course tree).
+
+GROK_V1_1 reconciliation (2026-10-30): O-02 and X-02 → FAIL (both OSes); X-07 → PASS (Debian + Windows r11). D-02/D-03/D-05 remain PASS; D-04 and P-08 remain PARTIAL.
 
 ## Codex Windows r11 run (2026-10-29 17:43, image r11 built from afa9d1f; r10 preserved)
 32/33 scenario scripts: 137 PASS / 10 FAIL / 38 SKIP; P-07 excluded (input-driven). Non-UI pack 101/0/3 Gate MET; suite 08 7/7.
 Failures: P-02/P-04 (BUG-014), O-02 (47 JARs lack license metadata), P-08 (older evidence lacks pin), X-01/X-02/X-06 (BUG-015).
-**P-01 INVALID** (screenshot = browser editor). P-07 and D-04 paused until the foreground guard is merged. Results local only (not exported).
+**P-01 INVALID** (screenshot = browser editor). P-07 and D-04 paused until Windows suite 14 proves G-04/G-05. Results local only (not exported).
+
+## Windows r12 packaging (2026-10-30)
+Suite 11: **111 PASS / 0 FAIL / 2 SKIP** (53 bundles including `org.geogebra.plus.renderer.resources`). BUG-011 ReTeX fonts FIXED at classloader level. GUI/CAS smoke log `…/r12/logs/rcp-20261030-114443-16464-d8a36709.log` PASS (no font parse errors). Attended suite 09 still NOT RUN.
 
 ## Table
 | ID | Gate | Scenario | Client | Status | Debian desktop | Script | Priority |
@@ -65,6 +72,7 @@ Failures: P-02/P-04 (BUG-014), O-02 (47 JARs lack license metadata), P-08 (older
 | D-08 | B | Incompatible version ranges | desktop | **PARTIAL** | PARTIAL | `S_D-08_IncompatibleExtension_GROK_V1.ps1` | P1 |
 | D-09 | E | Unsigned or unapproved jar | desktop | **NOT RUN** | NOT RUN | `S_D-09_SignatureChannel_GROK_V1.ps1` | P0 |
 | D-10 | - | Install, upgrade, rollback on clean Windows | desktop | **NOT RUN** | FAIL | `S_D-10_InstallUpgrade_GROK_V1.ps1` | P1 |
+| D-11 | - | Course tree renders in SWT Tree | desktop | **NOT RUN** | NOT RUN | `S_D-11_CourseTree_GROK_V1.ps1` | P1 |
 | W-01 | C | Score Java-to-web and JS/TS | web | **NOT RUN** | - | `-` | P1 |
 | W-02 | C | Chosen non-GWT client runs P-02 and P-03 | web | **NOT RUN** | - | `-` | P1 |
 | W-03 | - | Approved, missing, incompatible web modules | web | **NOT RUN** | - | `-` | P1 |
@@ -73,13 +81,14 @@ Failures: P-02/P-04 (BUG-014), O-02 (47 JARs lack license metadata), P-08 (older
 | W-06 | - | Resize and touch on supported browsers | web | **NOT RUN** | - | `-` | P1 |
 | W-07 | - | Offline after first load | web | **NOT RUN** | - | `-` | P1 |
 | W-08 | - | Same activity contract on both clients | web | **NOT RUN** | - | `-` | P1 |
+| W-09 | - | Course tree renders in HTML tree | web | **NOT RUN** | - | `S_W-09_CourseTreeWeb_GROK_V1.ps1` | P1 |
 | X-01 | D | External algorithm, not an AlgoElement | both | **PARTIAL** | FAIL | `S_X-01_ComputeContract_GROK_V1.ps1` | P0 |
-| X-02 | D | Input changes during compute | both | **NOT RUN** | FAIL | `S_X-02_StaleResult_GROK_V1.ps1` | P0 |
+| X-02 | D | Input changes during compute | both | **FAIL** | FAIL | `S_X-02_StaleResult_GROK_V1.ps1` | P0 |
 | X-03 | D | Write an allowlisted number back | both | **NOT RUN** | PASS (precheck) | `S_X-03_WriteBack_GROK_V1.ps1` | P0 |
 | X-04 | D | Save and undo | both | **NOT RUN** | PASS (precheck) | `S_X-04_SaveUndo_GROK_V1.ps1` | P0 |
 | X-05 | D | Same capability id, two artifacts | both | **PARTIAL** | PASS (desktop half) | `S_X-05_CapabilityArtifacts_GROK_V1.ps1` | P1 |
 | X-06 | D | Timeout and bad output | both | **FAIL** | FAIL | `S_X-06_TimeoutBadOutput_GROK_V1.ps1` | P0 |
-| X-07 | - | Lean 4 absent | desktop | **PARTIAL** | PASS | `S_X-07_LeanAbsent_GROK_V1.ps1` | P1 |
+| X-07 | - | Lean 4 absent | desktop | **PASS** | PASS | `S_X-07_LeanAbsent_GROK_V1.ps1` | P1 |
 | S-01 | D | Teacher picks a schema and a capability | both | **NOT RUN** | NOT RUN | `S_S-01_SchemaCapability_GROK_V1.ps1` | P1 |
 | S-02 | D | Submit once | both | **NOT RUN** | NOT RUN | `S_S-02_SubmitOnce_GROK_V1.ps1` | P1 |
 | S-03 | D | Retry the same idempotency key | both | **NOT RUN** | NOT RUN | `S_S-03_Idempotency_GROK_V1.ps1` | P1 |
@@ -88,7 +97,7 @@ Failures: P-02/P-04 (BUG-014), O-02 (47 JARs lack license metadata), P-08 (older
 | S-06 | - | Token not visible to the extension | both | **NOT RUN** | NOT RUN | `S_S-06_TokenHidden_GROK_V1.ps1` | P1 |
 | S-07 | - | Sample OEF to XWims | both | **NOT RUN** | NOT RUN | `S_S-07_OefToXWims_GROK_V1.ps1` | P1 |
 | O-01 | - | Newer upstream commit, still no edit in common | infra | **NOT RUN** | PASS (precheck) | `S_O-01_UpstreamUpdate_GROK_V1.ps1` | P2 |
-| O-02 | E | License inventory | desktop | **NOT RUN** | FAIL | `S_O-02_LicenseInventory_GROK_V1.ps1` | P0 |
+| O-02 | E | License inventory | desktop | **FAIL** | FAIL | `S_O-02_LicenseInventory_GROK_V1.ps1` | P0 |
 | O-03 | E | Clean rebuild and hashes | desktop | **FAIL** | FAIL | `S_O-03_CleanRebuildSbom_GROK_V1.ps1` | P0 |
 | O-04 | - | Missing bundle, bad .ggb, Wims down | desktop | **PARTIAL** | PARTIAL | `S_O-04_FailureMessages_GROK_V1.ps1` | P1 |
 | O-05 | - | One activity upgrade | desktop | **NOT RUN** | PASS (precheck) | `S_O-05_ActivityUpgrade_GROK_V1.ps1` | P2 |
@@ -171,16 +180,16 @@ Failures: P-02/P-04 (BUG-014), O-02 (47 JARs lack license metadata), P-08 (older
 - Blockers / findings: -.
 
 ### D-04 — Swing GeoGebra inside an RCP shell
-- Gate B; client desktop; priority P0; status **PARTIAL**; Debian desktop: FAIL.
+- Gate B; client desktop; priority P0; status **PARTIAL**; Debian desktop: FAIL; Windows suite 09: NOT RUN.
 - Acceptance (spec): Focus, menus, clipboard, DPI work, or the SWT rewrite cost is written down.
 - Automation: suite 09 (Linux FAIL); P-07 adds API-verified keyboard check.
-- Blockers / findings: BUG-004, BUG-010..013; Windows suite 09 NOT RUN (attended).
+- Blockers / findings: BUG-004, BUG-010..013; Windows suite 09 NOT RUN (attended; suite 14 G-04/G-05 still SKIP). BUG-011 (ReTeX fonts) FIXED on r12 packaging + smoke; does not close D-04.
 
 ### D-05 — CAS and 3D from the RCP product
-- Gate B; client desktop; priority P0; status **PASS**; Debian desktop: PASS.
+- Gate B; client desktop; priority P0; status **PASS**; Debian desktop: PASS; Windows: suite 08 + r12 CAS smoke PASS; suite 10 real-GPU screenshot NOT RUN.
 - Acceptance (spec): GIAC and JOGL load once.
 - Automation: suite 10 + suite 08.
-- Blockers / findings: -.
+- Blockers / findings: Windows strict 3D visual screenshot still open (Debian evidence is software-OpenGL).
 
 ### D-06 — One good and one bad extension bundle at startup
 - Gate B; client desktop; priority P0; status **PARTIAL**; Debian desktop: PARTIAL.
@@ -216,6 +225,13 @@ Failures: P-02/P-04 (BUG-014), O-02 (47 JARs lack license metadata), P-08 (older
 - Automation: precheck on the Linux image: natives present, configuration relocatable; no bundled Java.
 - Blockers / findings: BUG-017 (Linux image has no bundled Java; launch.sh hard-codes /workspace/AlgoGebra/jdk); no installer; no clean Windows VM.
 - Script: `03-RCP-Spike/tests/scenarios/S_D-10_InstallUpgrade_GROK_V1.ps1`; log: `03-RCP-Spike/evidence/20261029-linux-scenarios-20261029_171259-grok-bot-vm-419969949/S_D-10_InstallUpgrade_GROK_V1.log`.
+
+### D-11 — Course tree renders in SWT Tree
+- Gate -; client desktop; priority P1; status **NOT RUN**; Debian desktop: NOT RUN.
+- Acceptance (spec): Course JSON loads; SWT tree shows chapters/steps; Run Step executes via GgbAPI; Check returns pass/fail; error dialogs suppressed; no UI freeze.
+- Automation: schema precheck on `courses/trigonometry_intro.json`; product launch with `-Dggbplus.course=…`; SCN markers for CMD/CAS steps. Authoring twin: `scenarios/S_D-11_CourseTree_CLAUDE_V1.ps1`.
+- Blockers / findings: Codex WP2-06 (`CourseTreePanel` host integration) not landed; desktop matrix/CMD path still affected by BUG-014 for some constructions.
+- Script: `03-RCP-Spike/tests/scenarios/S_D-11_CourseTree_GROK_V1.ps1`; log: (none yet). Cheat sheet: `cheatsheets/scenarios/D-11.xml`.
 
 ### W-01 — Score Java-to-web and JS/TS
 - Gate C; client web; priority P1; status **NOT RUN**; Debian desktop: -.
@@ -265,6 +281,13 @@ Failures: P-02/P-04 (BUG-014), O-02 (47 JARs lack license metadata), P-08 (older
 - Automation: deferred: web phase.
 - Blockers / findings: deferred: web phase (no script yet).
 
+### W-09 — Course tree renders in HTML tree
+- Gate -; client web; priority P1; status **NOT RUN**; Debian desktop: -.
+- Acceptance (spec): `course-host.html` loads local GWT WAR; HTML tree renders course; Run Step / Check work via JS API; allowlist blocks `Execute`; OPEN path traversal rejected; ARIA tree roles present.
+- Automation: static file and `course-tree.js` security checks in script; browser load/step checks SKIP until self-hosted WAR + HTTP server. Authoring twin: `scenarios/S_W-09_CourseTreeWeb_CLAUDE_V1.ps1`.
+- Blockers / findings: browser half blocked on self-hosted WAR (Codex WP3a / Grok G-03). Static prechecks **PASS** 15/0/4 on Windows 2026-11-01 after comment-only host tweaks (GROK_V1).
+- Script: `03-RCP-Spike/tests/scenarios/S_W-09_CourseTreeWeb_GROK_V1.ps1`; CSV: `03-RCP-Spike/tests/results/S_W-09_GROK_V1.csv`. Cheat sheet: `cheatsheets/scenarios/W-09.xml`.
+
 ### X-01 — External algorithm, not an AlgoElement
 - Gate D; client both; priority P0; status **PARTIAL**; Debian desktop: FAIL.
 - Acceptance (spec): Deterministic typed result.
@@ -273,10 +296,10 @@ Failures: P-02/P-04 (BUG-014), O-02 (47 JARs lack license metadata), P-08 (older
 - Script: `03-RCP-Spike/tests/scenarios/S_X-01_ComputeContract_GROK_V1.ps1`; log: `03-RCP-Spike/evidence/20261029-linux-scenarios-20261029_171259-grok-bot-vm-419969949/S_X-01_ComputeContract_GROK_V1.log`.
 
 ### X-02 — Input changes during compute
-- Gate D; client both; priority P0; status **NOT RUN**; Debian desktop: FAIL.
+- Gate D; client both; priority P0; status **FAIL**; Debian desktop: FAIL; Windows r11: FAIL.
 - Acceptance (spec): Stale revision dropped.
 - Automation: checks that the API carries a request id / revision: it does not.
-- Blockers / findings: compute API has no revision (API change needed).
+- Blockers / findings: compute API has no revision (API change needed). GROK_V1_1: raised from NOT RUN to FAIL after both OS scripts failed the same check.
 - Script: `03-RCP-Spike/tests/scenarios/S_X-02_StaleResult_GROK_V1.ps1`; log: `03-RCP-Spike/evidence/20261029-linux-scenarios-20261029_171259-grok-bot-vm-419969949/S_X-02_StaleResult_GROK_V1.log`.
 
 ### X-03 — Write an allowlisted number back
@@ -308,10 +331,10 @@ Failures: P-02/P-04 (BUG-014), O-02 (47 JARs lack license metadata), P-08 (older
 - Script: `03-RCP-Spike/tests/scenarios/S_X-06_TimeoutBadOutput_GROK_V1.ps1`; log: `03-RCP-Spike/evidence/20261029-linux-scenarios-20261029_171259-grok-bot-vm-419969949/S_X-06_TimeoutBadOutput_GROK_V1.log`.
 
 ### X-07 — Lean 4 absent
-- Gate -; client desktop; priority P1; status **PARTIAL**; Debian desktop: PASS.
+- Gate -; client desktop; priority P1; status **PASS**; Debian desktop: PASS; Windows r11: PASS.
 - Acceptance (spec): App still opens.
 - Automation: no lean on PATH, no Lean bundle, app opens, CAS works, no Lean error.
-- Blockers / findings: Windows run pending.
+- Blockers / findings: -. GROK_V1_1: Windows r11 cleared the previous “Windows run pending” note.
 - Script: `03-RCP-Spike/tests/scenarios/S_X-07_LeanAbsent_GROK_V1.ps1`; log: `03-RCP-Spike/evidence/20261029-linux-scenarios-20261029_171259-grok-bot-vm-419969949/S_X-07_LeanAbsent_GROK_V1.log`.
 
 ### S-01 — Teacher picks a schema and a capability
@@ -371,10 +394,10 @@ Failures: P-02/P-04 (BUG-014), O-02 (47 JARs lack license metadata), P-08 (older
 - Script: `03-RCP-Spike/tests/scenarios/S_O-01_UpstreamUpdate_GROK_V1.ps1`; log: `03-RCP-Spike/evidence/20261029-linux-scenarios-20261029_171259-grok-bot-vm-419969949/S_O-01_UpstreamUpdate_GROK_V1.log`.
 
 ### O-02 — License inventory
-- Gate E; client desktop; priority P0; status **NOT RUN**; Debian desktop: FAIL.
+- Gate E; client desktop; priority P0; status **FAIL**; Debian desktop: FAIL; Windows r11: FAIL (47 JARs).
 - Acceptance (spec): Deployment review recorded.
 - Automation: inventory TSV (jar sha256, Bundle-License, vendor, LICENSE/NOTICE, fonts, translations, natives).
-- Blockers / findings: 46 jars without license metadata; human/legal review not recorded.
+- Blockers / findings: 46–47 jars without license metadata; human/legal review not recorded. GROK_V1_1: raised from NOT RUN to FAIL after both OS runs failed the inventory check.
 - Script: `03-RCP-Spike/tests/scenarios/S_O-02_LicenseInventory_GROK_V1.ps1`; log: `03-RCP-Spike/evidence/20261029-linux-scenarios-20261029_171259-grok-bot-vm-419969949/S_O-02_LicenseInventory_GROK_V1.log`.
 
 ### O-03 — Clean rebuild and hashes
@@ -406,4 +429,4 @@ Failures: P-02/P-04 (BUG-014), O-02 (47 JARs lack license metadata), P-08 (older
 - O-02: 46 jars carry neither Bundle-License nor a LICENSE/NOTICE file. P-08: 3 older evidence folders do not cite the pin.
 
 ## Windows
-The scenario scripts are syntax-checked on Windows only. Running them there needs an image rebuilt from this commit (r10: scenario hook + BUG-006 filter); UI scenarios must run in an attended session or on a test VM (handoff).
+GROK_V1_1: Codex ran the scenario pack on Windows r11 (`tests/results/20261029_174320-SHADOW-TB64BO9R`, local, not exported). UI input scenarios stay gated on suite 14 Windows G-04/G-05. r12 adds the ReTeX renderer-resources fragment (suite 11 111/0/2). See `Handoff_Windows_Debian_Reconciliation_GROK_V1.md`.

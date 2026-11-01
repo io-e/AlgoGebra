@@ -1,7 +1,7 @@
-<!-- GROK_V1 -->
+<!-- GROK_V1_1 -->
 # AlgoGebra external engines + RCP image — test pack (GROK_V1)
 
-**Author / version:** Grok Bot, GROK_V1 — 2026-10-29. **Audience:** Codex (Windows) and Grok Bot (Debian).
+**Author / version:** Grok Bot, GROK_V1 — 2026-10-29; GROK_V1_1 — 2026-11-01 (D-11/W-09 + tracking V1_2). **Audience:** Codex (Windows) and Grok Bot (Debian).
 Modelled on Claude's WIMS4win pack (`tests-win_ALF/*_CLAUDE_V1.ps1`, `lib/TestFramework_CLAUDE_V1.ps1`,
 `Run_All_Tests_CLAUDE_V1.ps1`, `tests-win/run_equiv_pc.ps1`), the WA-OEF2IPYNB Maxima tier and `test_unicode_E2.ps1`.
 
@@ -16,7 +16,7 @@ Modelled on Claude's WIMS4win pack (`tests-win_ALF/*_CLAUDE_V1.ps1`, `lib/TestFr
 - `../evidence/<date>-<os>-<who>-<runid>/` — versioned, immutable evidence of reviewed runs with `MANIFEST_GROK_V1.tsv` (sha256). Export with `-ExportEvidence <name>`. Archive routine full logs as CI artifacts or keep them locally by run ID.
 
 ## Scenario pack (spec section 5)
-`scenarios/S_<ID>_<Short>_GROK_V1.ps1` (33 scripts) + `scenarios/lib/Scenario_GROK_V1.ps1` + `scenarios/fixtures/`. One script per spec scenario of the desktop client and shared core; D-02..D-05 map to suites 08/11/09/10; W-01..W-08 are listed only (deferred: web phase). `Run_All_GROK_V1.ps1 -Scenarios | -Gate A..E | -Only <ids>`. Full list, statuses, blockers and evidence: **`SCENARIOS_TRACKING_GROK_V1.md`**. Product-side test hook: `-Dggbplus.scenario=<file>` only (off by default).
+`scenarios/S_<ID>_<Short>_GROK_V1.ps1` (35 scripts) + `scenarios/lib/Scenario_GROK_V1.ps1` + `scenarios/fixtures/`. One script per spec scenario of the desktop client and shared core; D-02..D-05 map to suites 08/11/09/10; W-01..W-08 remain deferred for the full web phase; **W-09** and **D-11** (course tree) are included. `Run_All_GROK_V1.ps1 -Scenarios | -Gate A..E | -Only <ids>`. Full list, statuses, blockers and evidence: **`SCENARIOS_TRACKING_GROK_V1_2.md`**. Product-side test hook: `-Dggbplus.scenario=<file>` only (off by default).
 
 ## Prerequisites (Windows)
 | Item | Requirement / hint |
@@ -82,7 +82,7 @@ Screenshots are cropped to the GeoGebraPlus window rect, never the full desktop.
 | 08 | RCP_Image | D-02 50/50 resolved, 3 engines available, GIAC `Expand[(x+1)^2]`, 3D view | PASS on Debian; on Windows image engines are available only if binaries are on PATH |
 | 09 | D04_UI | D-04: input bar keystrokes (`fixtures/d04_inputs_GROK_V1.tsv`), error dialog, lost keystrokes, 2D<->3D focus, clipboard, ctrl+a NPE, ReTeX fonts, HiDPI; screenshots `results/screenshots/09_*.png` | FAIL expected (BUG-004, BUG-009..012) |
 | 10 | D05_Strict3D | strict (no boot delegation) 3D: init, no JOGL link errors, non-blank canvas pixels, redraw after `A=(1,2,3)` | PASS on Debian (Mesa llvmpipe) |
-| 11 | Bundle_Build (opt-in `-WithBuild`) | bnd 7.1.0 rebuild of the 02-Cdc recipes, BSN/version/exports/imports/class list vs r8, Equinox resolution with r8 externals | PASS on Debian |
+| 11 | Bundle_Build (opt-in `-WithBuild`) | bnd 7.1.0 rebuild of the 02-Cdc recipes, BSN/version/exports/imports/class list vs r8, Equinox resolution, and ReTeX TTF loading through the renderer bundle class loader | Existing checks passed on Debian; updated TTF check added 2026-10-30 (rerun pending) |
 | 12 | Engine_Robustness | 8 parallel calls PARI/Maxima, long outputs, timeout/crash recovery, no orphan processes, fake-marker payloads | PASS |
 | 13 | GeoGebra_Baseline (opt-in `-WithBaseline`) | upstream Gradle `:common-jre:test`, `:desktop:test` at the pin, JUnit XML counts | PASS on Debian |
 

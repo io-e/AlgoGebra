@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- CLAUDE_V1 — placeholder until scenario script S_D-11_CourseTree_CLAUDE_V1.ps1 exists -->
+<!-- CLAUDE_V1 — authoring cheat sheet; GROK_V1_1 2026-11-01: scripts exist, WP2-06 still open -->
 <cheatsheet title="D-11 — Course tree renders in SWT Tree (desktop)">
-  <intro><description>Validates the course tree panel in the RCP desktop product. Requires -Dggbplus.course=path to be set. Checks tree rendering, step execution, validation feedback, and error handling. Gate: none (feature scenario). Status: NOT RUN (code not yet implemented).</description></intro>
+  <intro><description>Validates the course tree panel in the RCP desktop product. Requires -Dggbplus.course=path. Scripts: scenarios/S_D-11_CourseTree_CLAUDE_V1.ps1 (authoring) and 03-RCP-Spike/tests/scenarios/S_D-11_CourseTree_GROK_V1.ps1 (Run_All). Gate: none. Spec status: NOT RUN until Codex WP2-06 CourseTreePanel lands. Architecture: D-COURSE-01 accepted.</description></intro>
   <item title="1. Prerequisites">
     <description>Scenario type: UI / product-runtime. Client scope: desktop. Confirm applicable prerequisites before starting.</description>
     <subitem label="RCP image with course tree code (Codex WP2-06) is built and installed." skip="false"/>

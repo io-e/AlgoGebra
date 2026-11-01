@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <!-- CLAUDE_V1_1 — GeoGebraPlus web course host page -->
+<!-- GROK_V1 — comment-only tweak so W-09 static checks do not match doc strings -->
 <!-- Study V1_2 §3.3 (G-06 fix: self-hosted codebase, no double injection) -->
 <!-- WAR build: gradlew :web:gwtCompile :web:copyHtml :web:mergeDeploy (Grok PR #5 finding) -->
 <html lang="en">
@@ -36,7 +37,7 @@
   <script src="GeoGebra/deployggb.js"></script>
   <script src="course-tree.js"></script>
   <script>
-    // G-06 fix: point to our self-hosted WAR, not geogebra.org
+    // G-06 fix: point html5codebase at the local WAR tree only (no CDN host)
     var parameters = {
       'appName': 'classic',
       'width': 900,

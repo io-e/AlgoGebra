@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- CLAUDE_V1 — placeholder until scenario script S_W-09_CourseTreeWeb_CLAUDE_V1.ps1 exists -->
+<!-- CLAUDE_V1 — authoring cheat sheet; GROK_V1_1 2026-11-01: scripts exist, browser half open -->
 <cheatsheet title="W-09 — Course tree renders in HTML tree (web)">
-  <intro><description>Validates the course tree in the web browser host page. Requires self-hosted GWT WAR and course-tree.js/css. Gate: none (feature scenario). Status: NOT RUN (code not yet implemented).</description></intro>
+  <intro><description>Validates the course tree in the web browser host page. Requires self-hosted GWT WAR and course-tree.js/css. Scripts: scenarios/S_W-09_CourseTreeWeb_CLAUDE_V1.ps1 and 03-RCP-Spike/tests/scenarios/S_W-09_CourseTreeWeb_GROK_V1.ps1. Gate: none. Spec status: NOT RUN; static prechecks PASS 15/0/4 (2026-11-01). Browser half needs WAR. Architecture: D-COURSE-01 accepted. Prefer Playwright suite (see Handoff_CLAUDE_by_GROK_V1_1.md) for automated browser evidence.</description></intro>
   <item title="1. Prerequisites">
     <description>Scenario type: browser / web host page. Client scope: web. Confirm applicable prerequisites before starting.</description>
     <subitem label="GWT WAR built and self-hosted (GeoGebra/ directory with deployggb.js and HTML5/5.0/web3d/)." skip="false"/>
