@@ -3,7 +3,7 @@ project: GeoGebraPlus / AlgoGebra RCP
 geogebra_pin: 375db7faf5407390bb322165f2414415da8faeda
 geogebra_version: 5.4.934.0
 repo: https://github.com/io-e/AlgoGebra
-updated: 2026-11-01T12:30+01:00
+updated: 2026-11-01T18:00+01:00
 review: 02-Cdc/Review_Codex_Docs_Eclipse_Automation_Windows_GROK_V1.md
 sprint4_status: 02-Cdc/Sprint4_Course_Tree_Status_GROK_V1.md
 course_tree_architecture: 02-Cdc/Decision_Course_Tree_Architecture_GROK_V1.md
@@ -11,12 +11,21 @@ claude_handoff: Handoff_CLAUDE_by_GROK_V1_1.md
 owner_questions: 02-Cdc/Questions_Course_Tree_Owner_GROK_V1_1.md
 grokbot_sprint1_feedback: 02-Cdc/Feedback_GrokBot_Sprint1_PRs_GROK_V1.md
 security_errata_for_claude: 02-Cdc/Errata_Security_Spec_for_Claude_GROK_V1.md
-rcp_testing_questions: 02-Cdc/Questions_RCP_Testing_Owner_GROK_V1.md
+rcp_testing_questions: 02-Cdc/Questions_RCP_Testing_Owner_GROK_V1_1.md
 rcp_testing_plan: 02-Cdc/Plan_RCP_Testing_SWTBot_RCPTT_CLAUDE_V1.md
 playwright_w09: 03-RCP-Spike/tests/playwright/
+grokbot_gt1_gt5_feedback: 02-Cdc/Feedback_GrokBot_GT1_GT5_PRs_GROK_V1.md
+rcptt_java: {default: "21", product_swbot: "25", note: "RQ-1 override — RCPTT docs cover 17-22 only"}
+grok_bot_tasks:
+  G-T1: {status: DONE_PR, pr: 8, url: "https://github.com/io-e/AlgoGebra/pull/8", note: "launch.sh -Course design; symlink resolve; suite 18 planned (19 cases); Codex mirror exit codes on launch.ps1"}
+  G-T5: {status: DONE_PR, pr: 7, url: "https://github.com/io-e/AlgoGebra/pull/7", note: "corpus re-verify on 6baf1d4: 71/0/44 unchanged; skips await Codex validator"}
+  G-T2: {status: BLOCKED, blocked_by: "Codex X-T8 WAR"}
+  G-T3: {status: BLOCKED, blocked_by: "Codex X-T8 WAR + Playwright/browser"}
+  G-T4: {status: BLOCKED, blocked_by: "Codex WP2-06 CourseTreePanel"}
 next_order:
-  - lock_rq: done
+  - lock_rq: done_v1_1_java21_default
   - codex_war_xt8: pending
+  - codex_launch_ps1_mirror_gt1: pending
   - codex_coursetree_wp206: pending
   - playwright_browser_run: blocked_on_war
   - rcptt_d11: blocked_on_wp206
@@ -26,6 +35,8 @@ open_prs_review_only:
   - {number: 4, url: "https://github.com/io-e/AlgoGebra/pull/4", suite: "17 13/0/0", note: "BUG-017; rebuild images after merge"}
   - {number: 5, url: "https://github.com/io-e/AlgoGebra/pull/5", suite: "15 15/0/0", note: "GWT self-host; use gwtCompile+copyHtml+mergeDeploy"}
   - {number: 6, url: "https://github.com/io-e/AlgoGebra/pull/6", suite: "P-01 8/0/1", note: "merge last when allowed"}
+  - {number: 7, url: "https://github.com/io-e/AlgoGebra/pull/7", suite: "16 71/0/44", note: "G-T5 re-verify on 6baf1d4; unchanged"}
+  - {number: 8, url: "https://github.com/io-e/AlgoGebra/pull/8", suite: "design+suite18 plan", note: "G-T1 launch.sh -Course; RQ-1 Java 21 default"}
 reviewed_documents_2026-10-30:
   governing_spec: 02-Cdc/Architecture_GeoGebraPlus_RCP_Web_Validation_GROK_V2.md
   language_plan: 02-Cdc/Plan_Configuration_Eclipse_Languages_PyDev_CDT_LSP4E_GROK_V1_1.md

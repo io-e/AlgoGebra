@@ -187,10 +187,11 @@ Out of scope for Codex unless asked: WIMS contracts S-01/S-02; editing `common`.
 ## 8. Questions for the owner
 
 **Answer sheet (recorded):** `02-Cdc/Questions_Course_Tree_Owner_GROK_V1_1.md`  
-**RCP testing RQ-1..3 (recorded):** `02-Cdc/Questions_RCP_Testing_Owner_GROK_V1.md`  
+**RCP testing RQ-1..3:** `02-Cdc/Questions_RCP_Testing_Owner_GROK_V1_1.md` — **RQ-1 overridden: Java 21 default for RCPTT** (product/SWTBot stay on 25)  
 **Grok Bot Sprint 1 PRs:** `02-Cdc/Feedback_GrokBot_Sprint1_PRs_GROK_V1.md` (review only — owner no-merge)  
-**Security settle for Claude:** `02-Cdc/Errata_Security_Spec_for_Claude_GROK_V1.md`  
-**Claude delivery `6baf1d4`:** Playwright W-09 scaffold + RCPTT/SWTBot plan — **already on origin**; browser run blocked on Codex WAR (X-T8).
+**Grok Bot G-T1/G-T5:** `02-Cdc/Feedback_GrokBot_GT1_GT5_PRs_GROK_V1.md` — PR [#7](https://github.com/io-e/AlgoGebra/pull/7) corpus 71/0/44; PR [#8](https://github.com/io-e/AlgoGebra/pull/8) `launch.sh -Course` design  
+**Security settle for Claude:** `02-Cdc/Errata_Security_Spec_for_Claude_GROK_V1.md` (SEC-G3 partly addressed by launcher realpath in PR #8)  
+**Claude delivery `6baf1d4`:** Playwright W-09 scaffold + RCPTT/SWTBot plan — on origin; browser run blocked on Codex WAR (X-T8).
 
 1. **Commit / push:** Sprint 4 + D-COURSE-01 are on `feat/external-engines`. Push to `origin` now, or local-only until Codex lands WP2?
 2. **CT-SEC-01 priority:** Block web student pilots until `allowed-commands.json` allowlist, or accept interim denylist with WIMS as grade authority?

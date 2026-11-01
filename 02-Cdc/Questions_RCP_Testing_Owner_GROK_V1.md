@@ -1,14 +1,14 @@
-<!-- GROK_V1 -->
-# Owner questions — Hybrid RCP testing (SWTBot + RCPTT)
+<!-- GROK_V1 — SUPERSEDED by Questions_RCP_Testing_Owner_GROK_V1_1.md (RQ-1 overridden: Java 21 default) -->
+# Owner questions — Hybrid RCP testing (SWTBot + RCPTT) — ARCHIVE
 
 | Field | Value |
 |---|---|
 | Document | `02-Cdc/Questions_RCP_Testing_Owner_GROK_V1.md` |
+| Status | **SUPERSEDED** — use **`Questions_RCP_Testing_Owner_GROK_V1_1.md`** |
 | Version | GROK_V1 |
 | Date | 2026-11-01 |
 | Source plan | `02-Cdc/Plan_RCP_Testing_SWTBot_RCPTT_CLAUDE_V1.md` §9 (RQ-1..3) |
 | Delivery | Commit `6baf1d4` (already on `origin/feat/external-engines`) |
-| Status | **Defaults applied** (owner asked to do all in order; edit Answer lines to override) |
 
 ---
 
@@ -35,8 +35,8 @@ Playwright scaffold and RCPTT skeletons in `6baf1d4` are **not** evidence of PAS
 | | |
 |---|---|
 | **Recommended** | **Yes.** Product/SWTBot stay on Java 25; RCPTT AUT may use Temurin 21 when injection fails. Document the JDK used in every evidence row. |
-| **Answer** | **Yes** — Java 21 fallback allowed for RCPTT AUT only. |
-| **Date / by** | 2026-11-01 / Owner via “do all in correct order” (Grok recorded) |
+| **Answer** | ~~Yes — Java 21 fallback~~ → **OVERRIDDEN:** see V1_1 — **Java 21 is the default** for RCPTT. |
+| **Date / by** | 2026-11-01 / superseded |
 
 ---
 
@@ -68,7 +68,7 @@ Playwright scaffold and RCPTT skeletons in `6baf1d4` are **not** evidence of PAS
 
 | Id | Topic | Answer |
 |---|---|---|
-| RQ-1 | Java 21 fallback for RCPTT | **yes** |
+| RQ-1 | Java 21 for RCPTT | **OVERRIDDEN → V1_1: Java 21 default** |
 | RQ-2 | SWTBot path | **`03-RCP-Spike/host/tests/`** |
 | RQ-3 | RCPTT runner | **hybrid pin** |
 
