@@ -1,4 +1,4 @@
-// CLAUDE_V1 — GeoGebraPlus course tree controller (web host)
+// CLAUDE_V1_1 — GeoGebraPlus course tree controller (web host)
 // Security: string-based command allowlist per Spec_Course_Security_CLAUDE_V1.md §1.4
 // Threading: setErrorDialogsActive(false/true) around each step per Study V1_2 §2.4
 // CAS readiness: evalCommandCAS only (G-07 fix — no evalCommand("1+1"))
@@ -224,6 +224,8 @@ var courseTree = (function () {
     return m ? m[1] : null;
   }
 
+  var MAX_SEQUENCE_ITER = 10000;
+
   function isCommandBlocked(value) {
     var name = extractCommandName(value);
     if (!name) return false; // assignment or expression — allowed
@@ -232,6 +234,9 @@ var courseTree = (function () {
     for (var i = 0; i < BLOCKED_COMMANDS.length; i++) {
       if (value.indexOf(BLOCKED_COMMANDS[i] + '(') >= 0) return true;
     }
+    // V1_1: Sequence size limit (Grok Bot finding)
+    var seqMatch = value.match(/Sequence\s*\([^,]+,[^,]+,[^,]+,\s*(\d+)\s*\)/);
+    if (seqMatch && parseInt(seqMatch[1], 10) > MAX_SEQUENCE_ITER) return true;
     return false;
   }
 

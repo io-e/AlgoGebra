@@ -1,12 +1,13 @@
-<!-- CLAUDE_V1 -->
+<!-- CLAUDE_V1_1 -->
 # Specification — Course File Security Contract
 
 | Field | Value |
 |---|---|
 | Document | `02-Cdc/Spec_Course_Security_CLAUDE_V1.md` |
-| Version | CLAUDE_V1 |
+| Version | CLAUDE_V1_1 |
 | Status | Specification |
 | Date | 2026-11-01 |
+| V1_1 review | Grok Bot Sprint 1 (PR #3) — three gaps found and fixed |
 | Depends on | `Study_Course_Tree_RCP_and_Web_CLAUDE_V1_2.md`, `Schema_Course_JSON_CLAUDE_V1.json` |
 | Constraint | **`common` is untouchable.** All validation runs in the host bundle or host page. |
 | Implements | WP9-01 (Workload V1_2) |
@@ -146,8 +147,10 @@ The `OPEN` directive loads a `.ggb` file into the GeoGebra applet.
 The resolved path must be **under the course directory** (the directory containing the `course.json` file).
 
 ```java
-Path resolved = courseDir.resolve(openPath).normalize();
-if (!resolved.startsWith(courseDir)) {
+// V1_1: toRealPath() resolves symlinks (Grok Bot finding — symlink escape)
+Path resolved = courseDir.resolve(openPath).toRealPath();
+Path realCourseDir = courseDir.toRealPath();
+if (!resolved.startsWith(realCourseDir)) {
     throw new SecurityException("OPEN path escapes course directory: " + openPath);
 }
 ```
@@ -176,6 +179,7 @@ A `.ggb` file is a ZIP archive. It can contain:
 | `geogebra.xml` | Construction XML — may contain `<command>` elements | Scan for blocked commands (same allowlist as §1) |
 | `geogebra_javascript.js` | **Global JavaScript executed on load** | **Must be empty or absent.** Reject the file if this entry contains any code. |
 | Per-object `onUpdate`, `onClick`, `onMouseDown` script attributes in `geogebra.xml` | Script execution per object | Scan all `<element>` nodes for `<script>` or `<javascript>` child elements. Reject if any are found (unless `trustedGgb: true`). |
+| `<ggbscript val="…">` elements in `geogebra.xml` | **Inline GeoGebra script blocks** (V1_1 fix) | Scan for `<ggbscript` elements. These contain GeoGebra commands executed on events. Reject if any contain blocked commands, or reject unconditionally (unless `trustedGgb: true`). |
 | `geogebra_defaults2d.xml`, `geogebra_defaults3d.xml` | Styling defaults | Safe — no code execution |
 | `geogebra_macro.xml` | Macro definitions | Scan for blocked commands within macro definitions |
 | Image files (`.png`, `.svg`) | Embedded images | Safe |
@@ -226,10 +230,10 @@ public class GgbScriptScanner {
     }
     
     private static boolean containsScriptElements(String xml) {
-        // Check for <javascript>, <script>, onUpdate=, onClick= attributes
-        // in <element> nodes
+        // V1_1: added <ggbscript detection (Grok Bot finding)
         return xml.contains("<javascript") 
             || xml.contains("<script")
+            || xml.contains("<ggbscript")
             || xml.matches("(?s).*on(Update|Click|MouseDown)\\s*=.*");
     }
 }
@@ -276,6 +280,7 @@ The course tree's `VAL` checks are **formative feedback** — they help the stud
 | Maximum total actions | 500 | Prevents denial of service via step execution |
 | Maximum `.ggb` file size | 50 MB | GeoGebra files can contain embedded images |
 | Maximum `OPEN` actions per course | 10 | Limits file system access |
+| Maximum `Sequence` iteration count | 10 000 (V1_1) | Prevents CPU exhaustion. `Sequence(cmd, k, 1, N)` with unbounded N can freeze the applet. The executor must reject any `Sequence` with an end value exceeding this limit before passing it to GeoGebra. |
 
 ---
 
@@ -299,6 +304,9 @@ Grok Bot will create a corpus of malicious course files to verify the security c
 | T-12 | `"directive": "CMD", "value": "Delete(A)"` | Rejected: `Delete` individually blocked |
 | T-13 | `"directive": "OPEN", "value": "C:\\Windows\\System32\\calc.exe"` | Rejected: absolute path + wrong extension |
 | T-14 | `"directive": "CMD", "value": "ExportImage(\"type\", \"png\", \"filename\", \"/tmp/out.png\")"` | Rejected: `ExportImage` in blocked TABLE_SCRIPTING |
+| T-15 | `"directive": "OPEN", "value": "clean.ggb"` (with `<ggbscript val="Execute(...)">` in geogebra.xml) | Rejected: `<ggbscript>` element detected (V1_1) |
+| T-16 | `"directive": "CMD", "value": "Sequence(A + k, k, 1, 999999)"` | Rejected: Sequence end value exceeds 10 000 limit (V1_1) |
+| T-17 | `"directive": "OPEN", "value": "link.ggb"` where `link.ggb` is a symlink to `/etc/passwd` | Rejected: `toRealPath()` resolves symlink, resolved path escapes course directory (V1_1) |
 
 ---
 
