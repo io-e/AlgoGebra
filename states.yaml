@@ -3,7 +3,7 @@ project: GeoGebraPlus / AlgoGebra RCP
 geogebra_pin: 375db7faf5407390bb322165f2414415da8faeda
 geogebra_version: 5.4.934.0
 repo: https://github.com/io-e/AlgoGebra
-updated: 2026-10-30T12:00+01:00
+updated: 2026-11-01T12:10+01:00
 review: 02-Cdc/Review_Codex_Docs_Eclipse_Automation_Windows_GROK_V1.md
 reviewed_documents_2026-10-30:
   governing_spec: 02-Cdc/Architecture_GeoGebraPlus_RCP_Web_Validation_GROK_V2.md
@@ -31,7 +31,7 @@ gates:
 scenarios:
   # GROK_V1_1 2026-10-30: reconciled with Windows r11/r12 + Debian evidence. status = spec-level (reviewed).
   _run: {evidence: 03-RCP-Spike/evidence/20261029-linux-scenarios-20261029_171259-grok-bot-vm-419969949, windows_r11_local: 03-RCP-Spike/tests/results/20261029_174320-SHADOW-TB64BO9R, reconciliation: Handoff_Windows_Debian_Reconciliation_GROK_V1.md, tracking: 03-RCP-Spike/tests/SCENARIOS_TRACKING_GROK_V1_1.md, counts: {'PARTIAL': 12, 'FAIL': 7, 'NOT RUN': 22, 'PASS': 4}}
-  P-01: {status: "PARTIAL", client: both, gate: "-", debian_desktop: "PASS", windows_r11: "INVALID", script: "03-RCP-Spike/tests/scenarios/S_P-01_CleanProduct_GROK_V1.ps1", blockers: "web: deferred: web phase; Windows r11 result INVALID (Codex run 20261029_174320-SHADOW-TB64BO9R: screenshot captured the user's browser editor, not GeoGebra) - re-run with the foreground guard (branch feat/ui-foreground-guard)"}
+  P-01: {status: "PARTIAL", client: both, gate: "-", debian_desktop: "PASS", debian_evidence_2026-11-01: "03-RCP-Spike/evidence/20261101-linux-debian-grok-s1-20261101_120011-grok-bot-vm-419969949 (8/0/1, screenshot while running, commit a71fb38, Java 25.0.5)", windows_r11: "INVALID", script: "03-RCP-Spike/tests/scenarios/S_P-01_CleanProduct_GROK_V1.ps1", blockers: "web: deferred: web phase; Windows r11 result INVALID (Codex run 20261029_174320-SHADOW-TB64BO9R: screenshot captured the user's browser editor, not GeoGebra) - re-run with the foreground guard (branch feat/ui-foreground-guard)"}
   P-02: {status: "FAIL", client: both, gate: "A", debian_desktop: "FAIL", script: "03-RCP-Spike/tests/scenarios/S_P-02_CoreFeatures_GROK_V1.ps1", blockers: "BUG-014 (3 divergences: f(x)=x^2-2x, m={{1,2},{3,4}}, 3D Plane(A,B,(1,0,0)): evalCommand false + error dialog in product, true in baseline); web deferred"}
   P-03: {status: "PARTIAL", client: both, gate: "A", debian_desktop: "PARTIAL", script: "03-RCP-Spike/tests/scenarios/S_P-03_StandardTools_GROK_V1.ps1", blockers: "3D toolbar not compared (needs a 3D GuiManager directive); web deferred"}
   P-04: {status: "FAIL", client: both, gate: "A", debian_desktop: "FAIL", script: "03-RCP-Spike/tests/scenarios/S_P-04_SaveReopen_GROK_V1.ps1", blockers: "BUG-014: f(x) = a x^2 - 1 not created by evalCommand in the product (so it is absent from the saved file); all other values identical, baseline reads the product file"}
@@ -188,7 +188,8 @@ bugs:
     title: "Linux image has no bundled Java; launch.sh falls back to /workspace/AlgoGebra/jdk and a hard-coded image path"
     component: build.sh / launch.sh
     severity: medium
-    status: OPEN
+    status: FIX_PENDING_MERGE
+    fix: "PR #4 feat/grok-s1-bug017 (1b7a8d0): launch.sh Java discovery GGB_JAVA/JAVA > $IMAGE/jre|jdk > JAVA_HOME > mise > ~/.local/share/mise, /usr/lib/jvm, /opt/java > PATH, major >= GGB_JAVA_MIN (25), exit 4 lists candidates; no /workspace fallback; suite 17 13/0/0. Images must be rebuilt (build.sh copies launch.sh); mise path untested on box"
     evidence: "same run, S_D-10_InstallUpgrade_GROK_V1.log D10-01/03"
   - id: BUG-018
     title: "Upstream desktop test CallJavaScriptTest.testEval fails (locale-sensitive) on Windows"
@@ -211,6 +212,12 @@ bugs:
     status: MITIGATION_PENDING_TEST
     fix: "feat/ui-guard-windows: pre-flight lists locked files + java processes mentioning the clone (kills nothing) and records BLOCKED; GGB_RERUN_TASKS=1 now uses task option --rerun (only the test task reruns, build-logic outputs not deleted); GGB_RERUN_TASKS=all = --rerun-tasks; GGB_PROJECT_CACHE_DIR; GGB_LOCK_IGNORE=1"
     evidence: "Codex Windows r11 run 2026-10-29 evening (local); existing JUnit XML counts are not fresh results"
+grok_sprint_1:  # 02-Cdc Planning_Sprint_Course_Tree_CLAUDE_V1.md, Grok tasks; date 2026-11-01 (Europe/Paris), Debian 13.7
+  G-01: {status: DONE, task: "re-run P-01 on Debian with Run_All -ExportEvidence", result: "PASS 8/0/1 (web skip deferred)", evidence: "03-RCP-Spike/evidence/20261101-linux-debian-grok-s1-20261101_120011-grok-bot-vm-419969949", branch: feat/grok-s1-evidence}
+  G-02: {status: DONE, task: "commit evidence + sha256 manifest", manifest: "03-RCP-Spike/evidence/20261101-linux-debian-grok-s1-20261101_120011-grok-bot-vm-419969949/MANIFEST_GROK_V1.tsv", branch: feat/grok-s1-evidence}
+  G-03: {status: DONE, wp: WP3a-03, task: "GWT web build JDK 21 + self-hosted deployggb.js check", result: "suite 15 15/0/0; gwtCompile OK 118 s; :web:deployIntoWar FAILS on Gradle 9.4.1 (Copy.destinationDir unset) -> use :web:gwtCompile :web:copyHtml :web:mergeDeploy", report: 03-RCP-Spike/docs/Report_WebBuild_GROK_V1.md, archive: "box /workspace/AlgoGebra/webbuild/geogebra-web-SuperWeb-375db7f_GROK_V1.tar.gz sha256 d8b862f42d3e81c0469d7a7675eaadca70d645e5236ae068c54fd092c22cd99f (not committed)", pr: "https://github.com/io-e/AlgoGebra/pull/5"}
+  G-04: {status: DONE, bug: BUG-017, task: "launch.sh JDK discovery + suite 17", result: "17_Test_Launcher 13/0/0", pr: "https://github.com/io-e/AlgoGebra/pull/4", pending: "merge; rebuild images; mise path untested"}
+  G-05: {status: DONE, wp: WP9-03, task: "malicious course corpus + suite 16", result: "16_Test_CourseSecurity 71/0/44 (validator/scanner SKIP pending WP9-02/04, contract COURSE_VALIDATOR)", pr: "https://github.com/io-e/AlgoGebra/pull/3", spec_gaps: ["SPEC-GAP-1 section 3.1 scanner misses <ggbscript val=...>", "SPEC-GAP-2 Sequence has no size limit", "SPEC-GAP-3 normalize() without toRealPath() lets a symlink escape the course dir"]}
 open_items:
   - "Linux image still staged from r8 bundles; suite 11 shows the Linux bnd rebuild matches r8 (manifests/class lists) but build.sh does not use it yet"
   - "Prove Windows suite 14 G-04/G-05, then run attended Windows suite 09 (D-04) and suite 10 (strict 3D screenshot); keep browser/editors closed"

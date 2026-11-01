@@ -241,3 +241,12 @@ This is **Grok Bot's lane** (Linux packaging). Codex should not modify `launch.s
 - **`common` is untouchable.** All fixes must be in the host bundle, engine code, build scripts, or OSGi configuration.
 - **No upstream edits.** If BUG-014 turns out to require a change in `common`, **stop** and report back. Allowed outcomes: change the host, revise the no-fork rule, or cut scope.
 - Each fix must be committed with evidence (date, commit, OS, Java, command, expected vs actual, log path).
+
+## Grok Bot handoff note — Sprint 1 (2026-11-01, Europe/Paris) — GROK_V1
+
+| Task | Status | PR | Result |
+|---|---|---|---|
+| G-01/G-02 P-01 Debian evidence | DONE | this PR (feat/grok-s1-evidence) | `03-RCP-Spike/evidence/20261101-linux-debian-grok-s1-20261101_120011-grok-bot-vm-419969949/` 8 pass / 0 fail / 1 skip (web deferred), commit a71fb38, Debian 13.7, Java 25.0.5, MANIFEST_GROK_V1.tsv (sha256) |
+| G-03 WP3a-03 GWT web build | DONE | #5 | JDK 21.0.13, gwtCompile OK (118 s); `:web:deployIntoWar` fails on Gradle 9.4.1 (Copy.destinationDir unset) — use `:web:gwtCompile :web:copyHtml :web:mergeDeploy`; self-hosted deployggb.js + setHTML5Codebase OK in headless Chrome; suite 15 15/0/0; no binaries committed |
+| G-04 BUG-017 | FIX PENDING MERGE | #4 | launch.sh Java discovery + version check (>= 25), exit 4 with candidates; suite 17 13/0/0; rebuild images after merge; mise path untested |
+| G-05 WP9-03 course corpus | DONE | #3 | 51 cases, suite 16 71/0/44 (validator/scanner SKIP until `COURSE_VALIDATOR`); SPEC-GAP-1..3 for Spec_Course_Security (ggbscript val, Sequence size, symlink realPath) |
