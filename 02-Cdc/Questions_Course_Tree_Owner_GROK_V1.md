@@ -1,4 +1,4 @@
-<!-- GROK_V1 -->
+<!-- CLAUDE_V1 -->
 # Owner questions — Course Tree / Sprint 4 follow-up (`Questions_Course_Tree_Owner_GROK_V1.md`)
 
 | Field | Value |
@@ -20,8 +20,8 @@ Fill the **Answer** lines. Agents must not invent owner decisions. Recommended d
 | | |
 |---|---|
 | **Recommended** | Push when the next agent session starts on another machine; keep local-only if only this PC works the branch. |
-| **Answer** | _pending_ |
-| **Date / by** | |
+| **Answer** | **Yes — push now.** Other agents need D-COURSE-01 and the V1_1 handoff. |
+| **Date / by** | 2026-11-01 / Owner |
 
 ---
 
@@ -32,8 +32,8 @@ Fill the **Answer** lines. Agents must not invent owner decisions. Recommended d
 | | |
 |---|---|
 | **Recommended** | Accept interim denylist for internal demos only; no external student cohort until allowlist. |
-| **Answer** | _pending_ |
-| **Date / by** | |
+| **Answer** | **Interim denylist OK for internal demos.** No external student cohort until allowlist. |
+| **Date / by** | 2026-11-01 / Owner |
 
 ---
 
@@ -44,8 +44,8 @@ Fill the **Answer** lines. Agents must not invent owner decisions. Recommended d
 | | |
 |---|---|
 | **Recommended** | Ship tree behind `-Dggbplus.course` with trig + CAS courses; keep matrix CMD desktop skipped until BUG-014 closed. |
-| **Answer** | _pending_ |
-| **Date / by** | |
+| **Answer** | **Tree ships before BUG-014 fix.** Trig/CAS courses behind `-Dggbplus.course`; matrix CMD desktop stays skipped. |
+| **Date / by** | 2026-11-01 / Owner |
 
 ---
 
@@ -56,8 +56,8 @@ Fill the **Answer** lines. Agents must not invent owner decisions. Recommended d
 | | |
 |---|---|
 | **Recommended** | Codex on Windows first (matches desktop spike machine); Grok Bot mirrors on Debian for W-09 browser. |
-| **Answer** | _pending_ |
-| **Date / by** | |
+| **Answer** | **Codex (Windows).** Matches desktop spike machine; Grok Bot mirrors on Debian for W-09 browser. |
+| **Date / by** | 2026-11-01 / Owner |
 
 ---
 
@@ -68,8 +68,8 @@ Fill the **Answer** lines. Agents must not invent owner decisions. Recommended d
 | | |
 |---|---|
 | **Recommended** | `03-RCP-Spike/tests/playwright/` next to `S_W-09_*` so evidence export stays in one tree. |
-| **Answer** | _pending_ |
-| **Date / by** | |
+| **Answer** | **In-repo.** `03-RCP-Spike/tests/playwright/` next to existing test infrastructure. |
+| **Date / by** | 2026-11-01 / Owner |
 
 ---
 
@@ -80,8 +80,8 @@ Fill the **Answer** lines. Agents must not invent owner decisions. Recommended d
 | | |
 |---|---|
 | **Recommended** | Keep XMLs in AlgoGebra now; T1 plug-in update after D-01 approval. |
-| **Answer** | _pending_ |
-| **Date / by** | |
+| **Answer** | **Keep XMLs in this repo for now.** T1 plug-in update after D-01 approval. |
+| **Date / by** | 2026-11-01 / Owner |
 
 ---
 
@@ -92,8 +92,8 @@ Fill the **Answer** lines. Agents must not invent owner decisions. Recommended d
 | | |
 |---|---|
 | **Recommended** | Keep no-merge until BUG-014 path and WAR ownership are chosen. |
-| **Answer** | _pending_ |
-| **Date / by** | |
+| **Answer** | **Keep no-merge.** No PR merges until further notice. |
+| **Date / by** | 2026-11-01 / Owner |
 
 ---
 
@@ -104,8 +104,8 @@ Fill the **Answer** lines. Agents must not invent owner decisions. Recommended d
 | | |
 |---|---|
 | **Recommended** | (c) idle on product code; optional (a) Playwright scaffold only if Q4/Q5 are answered. |
-| **Answer** | _pending_ |
-| **Date / by** | |
+| **Answer** | **(a) Playwright W-09 scaffold + Eclipse RCP Testing Tool** for the RCP client. Both tracks in parallel. |
+| **Date / by** | 2026-11-01 / Owner |
 
 ---
 
@@ -115,14 +115,14 @@ Use this table for a fast owner pass:
 
 | Id | Topic | Owner answer (yes / no / name) |
 |---|---|---|
-| L1 | Push `b626459` now? | |
-| L2 | Interim web denylist OK for demos? | |
-| L3 | Tree before BUG-014 fix OK? | |
-| L4 | WAR builder (Codex / Grok / owner) | |
-| L5 | Playwright in-repo? | |
-| L6 | Update T1 Cheat Sheets now? | |
-| L7 | Keep no-merge? | |
-| L8 | Claude next: Playwright / S-01-02 / idle | |
+| L1 | Push `b626459` now? | **yes** |
+| L2 | Interim web denylist OK for demos? | **yes** |
+| L3 | Tree before BUG-014 fix OK? | **yes** |
+| L4 | WAR builder (Codex / Grok / owner) | **Codex** |
+| L5 | Playwright in-repo? | **yes** |
+| L6 | Update T1 Cheat Sheets now? | **no** |
+| L7 | Keep no-merge? | **yes** |
+| L8 | Claude next: Playwright / S-01-02 / idle | **Playwright + RCP Testing Tool** |
 
 ---
 
