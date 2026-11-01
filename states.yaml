@@ -26,6 +26,7 @@ a2a_plan: 02-Cdc/Plan_A2A_Gateway_GrokCLI_GROK_V1_1.md
 a2a_protocol_target: "1.0"
 a2a_gateway_shape: {owner_sketch: "GrokCLI->Bifrost->agentgateway->GrokBot", recommendation: "Bifrost-only for v1; two-hop still open"}
 codex_push_brief: 02-Cdc/Actions_Codex_Push_Course_Tree_Sprint1_GROK_V1.md
+grokbot_after_codex_brief: 02-Cdc/Actions_GrokBot_After_Codex_Sprint1_GROK_V1.md
 codex_course_tree_sprint1:
   branch: feat/course-tree-sprint1
   remote_tip: 04b0c15
@@ -33,6 +34,7 @@ codex_course_tree_sprint1:
   pushed: false
   pr: pending
   owner_decision: "push_review_only_pr_into_feat/external-engines"
+  note: "Codex actively committing in worktree (2026-11-01); Grok preparing post-push Grok Bot brief"
   x_t8_war: {status: LOCAL_DONE, evidence: "03-RCP-Spike/evidence/20261101-windows-x-t8-gwt-war/", playwright: NOT_RUN}
   launch_ps1_suite18: {status: LOCAL_DONE, checks: "16 pass"}
   wp2_06: {status: LOCAL_DONE_HEADLESS, model_tests: "9/9", policy_tests: "9/9", attended_ui: PENDING}
