@@ -1,9 +1,17 @@
-# GROK_V1 - project state and bug tracker (created 2026-10-29 by Grok Bot)
+# GROK_V1_1 - project state and bug tracker (created 2026-10-29 by Grok Bot; reconciled 2026-10-30)
 project: GeoGebraPlus / AlgoGebra RCP
 geogebra_pin: 375db7faf5407390bb322165f2414415da8faeda
 geogebra_version: 5.4.934.0
 repo: https://github.com/io-e/AlgoGebra
-updated: 2026-10-29T22:00+01:00
+updated: 2026-10-30T12:00+01:00
+review: 02-Cdc/Review_Codex_Docs_Eclipse_Automation_Windows_GROK_V1.md
+reviewed_documents_2026-10-30:
+  governing_spec: 02-Cdc/Architecture_GeoGebraPlus_RCP_Web_Validation_GROK_V2.md
+  language_plan: 02-Cdc/Plan_Configuration_Eclipse_Languages_PyDev_CDT_LSP4E_GROK_V1_1.md
+  automation_synthesis: 02-Cdc/Synthesis_Automation_Tools_Eclipse_Equinox_GROK_V1_1.md
+  windows_handoff: "Handoff_Windows_Test_Status_CODEX_V1.md (archive; see Handoff_Windows_Debian_Reconciliation_GROK_V1.md)"
+  scenario_tracking: 03-RCP-Spike/tests/SCENARIOS_TRACKING_GROK_V1_1.md
+  full_review: 02-Cdc/Review_Codex_Docs_Eclipse_Automation_Windows_GROK_V1.md
 
 branches:
   feat/external-engines: {last_tested_code: e3e8a82, note: "Evidence/docs commits follow this Windows-tested code revision; see git log for current branch tip"}
@@ -18,12 +26,12 @@ gates:
   C: NOT_REACHED
   D: NOT_REACHED
   E: NOT_REACHED
-  scenarios: {total: 45, PASS: 3, PARTIAL: 13, FAIL: 5, NOT_RUN: 24, tracking: 03-RCP-Spike/tests/SCENARIOS_TRACKING_GROK_V1.md}
+  scenarios: {total: 45, PASS: 4, PARTIAL: 12, FAIL: 7, NOT_RUN: 22, tracking: 03-RCP-Spike/tests/SCENARIOS_TRACKING_GROK_V1_1.md}
 
 scenarios:
-  # GROK_V1 2026-10-29: all 45 spec scenarios. status = spec-level (reviewed); debian_desktop = script result in evidence run.
-  _run: {evidence: 03-RCP-Spike/evidence/20261029-linux-scenarios-20261029_171259-grok-bot-vm-419969949, tracking: 03-RCP-Spike/tests/SCENARIOS_TRACKING_GROK_V1.md, counts: {'PARTIAL': 13, 'FAIL': 5, 'NOT RUN': 24, 'PASS': 3}}
-  P-01: {status: "PARTIAL", client: both, gate: "-", debian_desktop: "PASS", windows_r11: "INVALID", debian_p01_08: "PASS 2026-10-29 21:50 (screenshot taken while running, 1494x871 window rect)", script: "03-RCP-Spike/tests/scenarios/S_P-01_CleanProduct_GROK_V1.ps1", blockers: "web: deferred: web phase; Windows r11 result INVALID (Codex run 20261029_174320-SHADOW-TB64BO9R: screenshot captured the user's browser editor, not GeoGebra) - re-run with the foreground guard (branch feat/ui-foreground-guard)"}
+  # GROK_V1_1 2026-10-30: reconciled with Windows r11/r12 + Debian evidence. status = spec-level (reviewed).
+  _run: {evidence: 03-RCP-Spike/evidence/20261029-linux-scenarios-20261029_171259-grok-bot-vm-419969949, windows_r11_local: 03-RCP-Spike/tests/results/20261029_174320-SHADOW-TB64BO9R, reconciliation: Handoff_Windows_Debian_Reconciliation_GROK_V1.md, tracking: 03-RCP-Spike/tests/SCENARIOS_TRACKING_GROK_V1_1.md, counts: {'PARTIAL': 12, 'FAIL': 7, 'NOT RUN': 22, 'PASS': 4}}
+  P-01: {status: "PARTIAL", client: both, gate: "-", debian_desktop: "PASS", windows_r11: "INVALID", script: "03-RCP-Spike/tests/scenarios/S_P-01_CleanProduct_GROK_V1.ps1", blockers: "web: deferred: web phase; Windows r11 result INVALID (Codex run 20261029_174320-SHADOW-TB64BO9R: screenshot captured the user's browser editor, not GeoGebra) - re-run with the foreground guard (branch feat/ui-foreground-guard)"}
   P-02: {status: "FAIL", client: both, gate: "A", debian_desktop: "FAIL", script: "03-RCP-Spike/tests/scenarios/S_P-02_CoreFeatures_GROK_V1.ps1", blockers: "BUG-014 (3 divergences: f(x)=x^2-2x, m={{1,2},{3,4}}, 3D Plane(A,B,(1,0,0)): evalCommand false + error dialog in product, true in baseline); web deferred"}
   P-03: {status: "PARTIAL", client: both, gate: "A", debian_desktop: "PARTIAL", script: "03-RCP-Spike/tests/scenarios/S_P-03_StandardTools_GROK_V1.ps1", blockers: "3D toolbar not compared (needs a 3D GuiManager directive); web deferred"}
   P-04: {status: "FAIL", client: both, gate: "A", debian_desktop: "FAIL", script: "03-RCP-Spike/tests/scenarios/S_P-04_SaveReopen_GROK_V1.ps1", blockers: "BUG-014: f(x) = a x^2 - 1 not created by evalCommand in the product (so it is absent from the saved file); all other values identical, baseline reads the product file"}
@@ -34,8 +42,8 @@ scenarios:
   D-01: {status: "NOT RUN", client: desktop, gate: "-", debian_desktop: "NOT RUN", script: "03-RCP-Spike/tests/scenarios/S_D-01_EclipseImport_GROK_V1.ps1", blockers: "Eclipse + Buildship not installed (owner approval needed)"}
   D-02: {status: "PASS", client: desktop, gate: "B", debian_desktop: "PASS", script: "08_Test_RCP_Image_GROK_V1.ps1 (suite)", blockers: "-"}
   D-03: {status: "PASS", client: desktop, gate: "B", debian_desktop: "PASS", script: "11_Test_Bundle_Build_GROK_V1.ps1 (suite)", blockers: "-"}
-  D-04: {status: "PARTIAL", client: desktop, gate: "B", debian_desktop: "FAIL", script: "09_Test_D04_UI_GROK_V1.ps1 (suite)", blockers: "BUG-004, BUG-010..013; Windows suite 09 NOT RUN (attended)"}
-  D-05: {status: "PASS", client: desktop, gate: "B", debian_desktop: "PASS", script: "10_Test_D05_Strict3D_GROK_V1.ps1 (suite)", blockers: "-"}
+  D-04: {status: "PARTIAL", client: desktop, gate: "B", debian_desktop: "FAIL", windows_suite09: "NOT RUN", script: "09_Test_D04_UI_GROK_V1.ps1 (suite)", blockers: "BUG-004, BUG-010..013; Windows suite 09 NOT RUN (attended; suite 14 G-04/G-05 SKIP); BUG-011 fonts FIXED on r12 but D-04 not closed"}
+  D-05: {status: "PASS", client: desktop, gate: "B", debian_desktop: "PASS", windows_suite08: "PASS", windows_r12_cas_smoke: "PASS", windows_suite10_screenshot: "NOT RUN", script: "10_Test_D05_Strict3D_GROK_V1.ps1 (suite)", blockers: "Windows real-GPU strict 3D screenshot still open"}
   D-06: {status: "PARTIAL", client: desktop, gate: "B", debian_desktop: "PARTIAL", script: "03-RCP-Spike/tests/scenarios/S_D-06_ExtensionRegistry_GROK_V1.ps1", blockers: "product extension registry not implemented"}
   D-07: {status: "PARTIAL", client: desktop, gate: "B", debian_desktop: "PARTIAL", script: "03-RCP-Spike/tests/scenarios/S_D-07_EnableDisable_GROK_V1.ps1", blockers: "no extension manager / persisted state"}
   D-08: {status: "PARTIAL", client: desktop, gate: "B", debian_desktop: "PARTIAL", script: "03-RCP-Spike/tests/scenarios/S_D-08_IncompatibleExtension_GROK_V1.ps1", blockers: "user-facing refusal message not implemented"}
@@ -50,12 +58,12 @@ scenarios:
   W-07: {status: "NOT RUN", client: web, gate: "-", debian_desktop: "-", script: "-", blockers: "deferred: web phase (no script yet)"}
   W-08: {status: "NOT RUN", client: web, gate: "-", debian_desktop: "-", script: "-", blockers: "deferred: web phase (no script yet)"}
   X-01: {status: "PARTIAL", client: both, gate: "D", debian_desktop: "FAIL", script: "03-RCP-Spike/tests/scenarios/S_X-01_ComputeContract_GROK_V1.ps1", blockers: "no result-kind enum in compute.api (typed contract gap); web deferred"}
-  X-02: {status: "NOT RUN", client: both, gate: "D", debian_desktop: "FAIL", script: "03-RCP-Spike/tests/scenarios/S_X-02_StaleResult_GROK_V1.ps1", blockers: "compute API has no revision (API change needed)"}
+  X-02: {status: "FAIL", client: both, gate: "D", debian_desktop: "FAIL", windows_r11: "FAIL", script: "03-RCP-Spike/tests/scenarios/S_X-02_StaleResult_GROK_V1.ps1", blockers: "compute API has no revision (API change needed); raised NOT RUN->FAIL on 2026-10-30 Grok reconciliation"}
   X-03: {status: "NOT RUN", client: both, gate: "D", debian_desktop: "PASS (precheck)", script: "03-RCP-Spike/tests/scenarios/S_X-03_WriteBack_GROK_V1.ps1", blockers: "state adapter / allow-list not implemented"}
   X-04: {status: "NOT RUN", client: both, gate: "D", debian_desktop: "PASS (precheck)", script: "03-RCP-Spike/tests/scenarios/S_X-04_SaveUndo_GROK_V1.ps1", blockers: "no path writes engine output into the construction"}
   X-05: {status: "PARTIAL", client: both, gate: "D", debian_desktop: "PASS (desktop half)", script: "03-RCP-Spike/tests/scenarios/S_X-05_CapabilityArtifacts_GROK_V1.ps1", blockers: "web module does not exist"}
   X-06: {status: "FAIL", client: both, gate: "D", debian_desktop: "FAIL", script: "03-RCP-Spike/tests/scenarios/S_X-06_TimeoutBadOutput_GROK_V1.ps1", blockers: "BUG-015 (malformed PARI input returns OK with empty text); construction path not integrated"}
-  X-07: {status: "PARTIAL", client: desktop, gate: "-", debian_desktop: "PASS", script: "03-RCP-Spike/tests/scenarios/S_X-07_LeanAbsent_GROK_V1.ps1", blockers: "Windows run pending"}
+  X-07: {status: "PASS", client: desktop, gate: "-", debian_desktop: "PASS", windows_r11: "PASS", script: "03-RCP-Spike/tests/scenarios/S_X-07_LeanAbsent_GROK_V1.ps1", blockers: "-"}
   S-01: {status: "NOT RUN", client: both, gate: "D", debian_desktop: "NOT RUN", script: "03-RCP-Spike/tests/scenarios/S_S-01_SchemaCapability_GROK_V1.ps1", blockers: "no Wims activity/submission contract, client or test server"}
   S-02: {status: "NOT RUN", client: both, gate: "D", debian_desktop: "NOT RUN", script: "03-RCP-Spike/tests/scenarios/S_S-02_SubmitOnce_GROK_V1.ps1", blockers: "no Wims activity/submission contract, client or test server"}
   S-03: {status: "NOT RUN", client: both, gate: "D", debian_desktop: "NOT RUN", script: "03-RCP-Spike/tests/scenarios/S_S-03_Idempotency_GROK_V1.ps1", blockers: "no Wims activity/submission contract, client or test server"}
@@ -64,7 +72,7 @@ scenarios:
   S-06: {status: "NOT RUN", client: both, gate: "-", debian_desktop: "NOT RUN", script: "03-RCP-Spike/tests/scenarios/S_S-06_TokenHidden_GROK_V1.ps1", blockers: "no Wims activity/submission contract, client or test server"}
   S-07: {status: "NOT RUN", client: both, gate: "-", debian_desktop: "NOT RUN", script: "03-RCP-Spike/tests/scenarios/S_S-07_OefToXWims_GROK_V1.ps1", blockers: "no Wims activity/submission contract, client or test server"}
   O-01: {status: "NOT RUN", client: infra, gate: "-", debian_desktop: "PASS (precheck)", script: "03-RCP-Spike/tests/scenarios/S_O-01_UpstreamUpdate_GROK_V1.ps1", blockers: "no newer upstream commit selected"}
-  O-02: {status: "NOT RUN", client: desktop, gate: "E", debian_desktop: "FAIL", script: "03-RCP-Spike/tests/scenarios/S_O-02_LicenseInventory_GROK_V1.ps1", blockers: "46 jars without license metadata; human/legal review not recorded"}
+  O-02: {status: "FAIL", client: desktop, gate: "E", debian_desktop: "FAIL", windows_r11: "FAIL", script: "03-RCP-Spike/tests/scenarios/S_O-02_LicenseInventory_GROK_V1.ps1", blockers: "46-47 jars without license metadata; human/legal review not recorded; raised NOT RUN->FAIL on 2026-10-30 Grok reconciliation"}
   O-03: {status: "FAIL", client: desktop, gate: "E", debian_desktop: "FAIL", script: "03-RCP-Spike/tests/scenarios/S_O-03_CleanRebuildSbom_GROK_V1.ps1", blockers: "BUG-016 (rebuild not byte-identical: product jars and config.ini differ); no CycloneDX/SPDX"}
   O-04: {status: "PARTIAL", client: desktop, gate: "-", debian_desktop: "PARTIAL", script: "03-RCP-Spike/tests/scenarios/S_O-04_FailureMessages_GROK_V1.ps1", blockers: "Wims down: no client; user-facing message not designed"}
   O-05: {status: "NOT RUN", client: desktop, gate: "-", debian_desktop: "PASS (precheck)", script: "03-RCP-Spike/tests/scenarios/S_O-05_ActivityUpgrade_GROK_V1.ps1", blockers: "no activity manifest / versioned activity format"}
@@ -157,10 +165,13 @@ bugs:
 
   - id: BUG-014
     title: "evalCommand false + error dialog for f(x)=x^2-2x, {{1,2},{3,4}}, f(x)=a x^2-1, 3D Plane(A,B,(1,0,0)) in the RCP product; pinned upstream desktop returns true"
-    component: RCP host / OSGi image (suspected localisation or command resources, see BUG-010/013)
+    component: RCP host / OSGi image (Windows + Debian; suspected missing command-resource visibility through Equinox; hypothesis unconfirmed)
     severity: high
     status: OPEN
-    evidence: "03-RCP-Spike/evidence/20261029-linux-scenarios-20261029_171259-grok-bot-vm-419969949/S_P-02_CoreFeatures_GROK_V1.log (P02-ALG-03, ALG-05, G3-03, _DIALOG)"
+    evidence: "03-RCP-Spike/evidence/20261029-linux-scenarios-20261029_171259-grok-bot-vm-419969949/S_P-02_CoreFeatures_GROK_V1.log (P02-ALG-03, ALG-05, G3-03, _DIALOG); Windows r11 P-02/P-04 failures recorded in the local Codex scenario run and reconciliation matrix"
+    platforms: "Reproduced on Windows and Debian; systemic, not platform-specific"
+    hypothesis: "CommandDispatcher / AlgoDispatcher resources may not be visible through the OSGi classloader; not confirmed"
+    next: "Compare resource lookup in Equinox with pinned upstream desktop classpath; keep common untouched"
   - id: BUG-015
     title: "PARI engine returns OK with empty text for malformed input factor(( instead of a typed error"
     component: engines/pari
@@ -202,14 +213,15 @@ bugs:
     evidence: "Codex Windows r11 run 2026-10-29 evening (local); existing JUnit XML counts are not fresh results"
 open_items:
   - "Linux image still staged from r8 bundles; suite 11 shows the Linux bnd rebuild matches r8 (manifests/class lists) but build.sh does not use it yet"
-  - "Run attended Windows suite 09 (D-04 input/focus/clipboard) and suite 10 (strict 3D visual screenshot); do not drive the user's desktop unattended"
-  - "Windows suite 11 remains NOT RUN: locate or install the Bnd CLI, then compare rebuilt bundles with r9"
-  - "Re-run suite 13 with common-jre forced to execute; desktop has the known locale-dependent CallJavaScriptTest.testEval failure"
+  - "Prove Windows suite 14 G-04/G-05, then run attended Windows suite 09 (D-04) and suite 10 (strict 3D screenshot); keep browser/editors closed"
+  - "Commit local r12 renderer-resources packaging when owner requests (suite 11 111/0/2 already demonstrated; unpushed)"
+  - "Diagnose suite 13 Kotlin-DSL directory lock; then force common-jre/desktop baseline; desktop has known locale CallJavaScriptTest.testEval (BUG-018)"
   - "GIAC activator CASFactory.setPrototype + DLL cache with fallback to dummy CAS"
-  - "Confirm separate compute.api bundle (deviation from Cdc)"
-  - "GPL boundaries in combined image / licence policy before distribution"
+  - "Confirm separate compute.api bundle (deviation from Cdc) — Grok earlier review recommended accept"
+  - "GPL boundaries in combined image / licence policy before distribution (O-02 FAIL)"
   - "Choose P-08 acceptance tag"
   - "Delete temp archives %TEMP%\\r8.zip and r8-nojre.zip"
+  - "Eclipse languages plan remaining: create GeoGebraPlus-Languages workspace; PyDev interpreter; MSYS2 UCRT64; LSP4E map to ocamllsp"
 results_tracking:
   decision: "2026-10-29 user: stop tracking mutable 03-RCP-Spike/tests/results/ (git rm --cached, .gitignore, README kept); Run_All writes results/<runid>/ and -ExportEvidence <name> copies a reviewed run to 03-RCP-Spike/evidence/<date>-<os>-<name>-<runid>/ with MANIFEST_GROK_V1.tsv (sha256); routine full logs = CI artifacts or local by run id"
   evidence_folders:
@@ -238,7 +250,7 @@ test_packs:
       06_Encoding: {pass: 11, fail: 0, skip: 0}
       07_CAS_Equivalence: {pass: 15, fail: 0, skip: 3, note: "3 SKIP = no PARI equivalent"}
       08_RCP_Image: {pass: 7, fail: 0, skip: 0}
-    windows_ps1: "PARTIAL (latest Windows evidence below; attended UI suites 09/10 and Bnd CLI suite 11 not run; suite 13 has one known locale failure)"
+    windows_ps1: "PARTIAL (engines/RCP non-UI PASS; suite 11 r12 PASS 111/0/2; suite 14 Windows G-04/G-05 SKIP; attended 09/10 NOT RUN; suite 13 lock + BUG-018)"
     windows:
       - {date: "2026-10-29", by: Codex, commit: 689d4b4, base: e6f4bbc, os: Windows, runner: "Run_All_GROK_V1.ps1", engines_path_temporary: {pari: "C:\\Program Files (x86)\\Pari64-2-19-0\\gp.exe", maxima: "C:\\maxima-5.49.0\\bin\\maxima.bat", gnuplot: "C:\\maxima-5.49.0\\gnuplot\\bin\\gnuplot.exe"}, test_engines_ps1: PASS, suites_01_07: {pass: 75, fail: 0, skip: 3}, suite_08: "SKIPPED (opens UI; r9 not rebuilt, BUG-008)", suites_09_13: NOT_RUN, logs: "03-RCP-Spike/evidence/20261029-windows-codex-689d4b4/"}
       - {date: "2026-10-29", run_window: "15:36-15:46 Europe/Paris", by: Codex, tested_commit: e3e8a82, branch_base: ffb3ff2, os: "Windows 10.0.26100", pwsh: "7.6.9", java: "JDK 21.0.12.101-hotspot (build/tests); product runtime Java 25", fixtures_sha256_concat_prefix: 058fe5027ff68fd3, image: "D:\\ALF_ZGit\\G1_Geogebra_Migration\\bin\\GeoGebraPlus-RCP-0.1.0-win32-x86_64-r9", engines_path_temporary: {pari: "C:\\Program Files (x86)\\Pari64-2-19-0\\gp.exe", maxima: "C:\\maxima-5.49.0\\bin\\maxima.bat", gnuplot: "C:\\maxima-5.49.0\\gnuplot\\bin\\gnuplot.exe"}, command: "pwsh -File 03-RCP-Spike/tests/Run_All_GROK_V1.ps1 -SkipUi", suites_01_08_12: {pass: 95, fail: 0, skip: 3, gate: MET}, suite_08: "7/0/0; 50/50 bundles; all 3 external engines available; GIAC CAS and JOGL 3D initialization passed", suite_13: {pass: 3, fail: 2, skip: 0, note: "common-jre 6,526 existing XML results (6,514 pass, 12 skipped), Gradle UP-TO-DATE; desktop executed 1,090 tests (1,088 pass, 1 locale failure, 1 skipped)"}, suites_09_10: "NOT RUN (attended UI)", suite_11: "NOT RUN (Bnd CLI unavailable)", test_engines_ps1: PASS, run_summary: 03-RCP-Spike/evidence/20261029-windows-codex-r9-e3e8a82/Run_All_20261029_153650_GROK_V1.csv, suite_13_summary: 03-RCP-Spike/evidence/20261029-windows-codex-r9-e3e8a82/13_GeoGebra_Baseline_GROK_V1.csv, logs: "tracked under 03-RCP-Spike/evidence/20261029-windows-codex-r9-e3e8a82/"}
@@ -313,8 +325,9 @@ bugs_added_2026-10-29:
     title: "ReTeX FontLoaderD cannot read fonts/latin/jlm_cmr10.ttf in the OSGi image ('Problem reading font data')"
     component: bundle packaging (renderer resources / classloader)
     severity: medium
-    status: OPEN
-    evidence: "09 D04-FONT-01: 2 occurrences in results/09_ui_session1.log"
+    status: FIXED
+    resolution: "Added org.geogebra.plus.renderer.resources as a fragment of org.geogebra.migration.desktop.renderer so ReTeX fonts are visible from the renderer bundle class loader."
+    evidence: "Windows r12 suite 11 (2026-10-30): Equinox 3.24.300 resolved all 53 bundles; exact FactoryProviderDesktop.class resource lookup + Font.createFont succeeded for all 46 renderer TTFs, including jlm_cmr10.ttf and jlm_cmssbx10.ttf. Local log: 03-RCP-Spike/tests/results/11_equinox_resolution.log. GUI/CAS smoke 2026-10-30 log bin/.../r12/logs/rcp-20261030-114443-16464-d8a36709.log: CAS assertion PASS; loadFont jlm_cmssbx10/jlm_cmbsy10; no ResourceParseException. Attended suite 09 remains open."
   - id: BUG-012
     title: "Clipboard copy from the 2D input bar and paste into the 3D input bar has no effect"
     component: RCP host (SWT_AWT clipboard / focus)
