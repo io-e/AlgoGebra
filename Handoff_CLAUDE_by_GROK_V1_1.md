@@ -185,6 +185,8 @@ Out of scope for Codex unless asked: WIMS contracts S-01/S-02; editing `common`.
 
 ## 8. Questions for the owner
 
+**Answer sheet (fill here):** `02-Cdc/Questions_Course_Tree_Owner_GROK_V1.md`
+
 1. **Commit / push:** Sprint 4 + D-COURSE-01 are on `feat/external-engines`. Push to `origin` now, or local-only until Codex lands WP2?
 2. **CT-SEC-01 priority:** Block web student pilots until `allowed-commands.json` allowlist, or accept interim denylist with WIMS as grade authority?
 3. **BUG-014:** Fix before any `CourseTreePanel` merge, or ship tree with CAS/trig-only courses and skip matrix CMD on desktop?
