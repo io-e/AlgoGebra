@@ -1,0 +1,17 @@
+PASS: no course keeps course property absent
+PASS: relative -Course resolves to absolute path
+PASS: --course=<absolute-path> alias
+PASS: path with spaces remains one Java property argument
+PASS: missing -Course value returns 64
+PASS: repeated -Course returns 64
+PASS: missing course returns 66
+PASS: directory course path returns 66
+PASS: non-JSON extension returns 65
+PASS: course above 1 MiB returns 65
+PASS: remote URL returns 64
+PASS: course outside configured root returns 77
+PASS: course inside configured root is accepted
+PASS: GGBPLUS_COURSE environment fallback
+PASS: -Course flag takes precedence over environment fallback
+PASS: Headless and Course can appear in either order
+PASS: 16 FAIL: 0 SKIP: 0

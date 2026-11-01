@@ -1,0 +1,20 @@
+PASS: valid model, defaults, and immutable tree
+PASS: nested steps and 3D/OPEN/check parsing
+PASS: strict JSON grammar and duplicate-key rejection
+PASS: schema and enum validation
+PASS: four nested step levels are allowed; fifth is rejected
+PASS: action-count, trust flag, and check-range constraints
+PASS: 1 MiB course-size cap for strings and files
+PASS: UTF-8 load and malformed-byte rejection
+PASS: RCP course-tree smoke fixture loads
+CourseModelTest: 9 PASS, 0 FAIL
+PASS: geometry command allowed
+PASS: algebra command allowed
+PASS: CAS command allowed
+PASS: SetColor scripting exception allowed
+PASS: Slider scripting exception allowed
+PASS: Execute scripting command blocked
+PASS: Delete blocked
+PASS: SetValue blocked
+PASS: null command denied
+StepValidatorPolicyTest: 9 PASS, 0 FAIL

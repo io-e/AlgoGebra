@@ -30,6 +30,18 @@ public final class CourseModelTest {
         run("action-count, trust flag, and check-range constraints", CourseModelTest::securityConstraints);
         run("1 MiB course-size cap for strings and files", CourseModelTest::sizeLimit);
         run("UTF-8 load and malformed-byte rejection", CourseModelTest::utf8Load);
+        if (args.length > 0) {
+            run("RCP course-tree smoke fixture loads", () -> {
+                try {
+                    CourseModel fixture = CourseModel.load(Path.of(args[0]));
+                    equals("Course Tree Smoke — Trigonometry", fixture.getCourse());
+                    equals(1, fixture.getTree().size());
+                    equals(3, fixture.getTree().get(0).children().get(0).actions().size());
+                } catch (IOException error) {
+                    throw new AssertionError("Could not load course-tree smoke fixture", error);
+                }
+            });
+        }
         System.out.println("CourseModelTest: " + passed + " PASS, " + failed + " FAIL");
         if (failed > 0) {
             throw new AssertionError("CourseModelTest has failures");
