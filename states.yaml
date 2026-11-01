@@ -3,7 +3,7 @@ project: GeoGebraPlus / AlgoGebra RCP
 geogebra_pin: 375db7faf5407390bb322165f2414415da8faeda
 geogebra_version: 5.4.934.0
 repo: https://github.com/io-e/AlgoGebra
-updated: 2026-10-29T19:10+01:00
+updated: 2026-10-29T22:00+01:00
 
 branches:
   feat/external-engines: {last_tested_code: e3e8a82, note: "Evidence/docs commits follow this Windows-tested code revision; see git log for current branch tip"}
@@ -23,7 +23,7 @@ gates:
 scenarios:
   # GROK_V1 2026-10-29: all 45 spec scenarios. status = spec-level (reviewed); debian_desktop = script result in evidence run.
   _run: {evidence: 03-RCP-Spike/evidence/20261029-linux-scenarios-20261029_171259-grok-bot-vm-419969949, tracking: 03-RCP-Spike/tests/SCENARIOS_TRACKING_GROK_V1.md, counts: {'PARTIAL': 13, 'FAIL': 5, 'NOT RUN': 24, 'PASS': 3}}
-  P-01: {status: "PARTIAL", client: both, gate: "-", debian_desktop: "PASS", windows_r11: "INVALID", script: "03-RCP-Spike/tests/scenarios/S_P-01_CleanProduct_GROK_V1.ps1", blockers: "web: deferred: web phase; Windows r11 result INVALID (Codex run 20261029_174320-SHADOW-TB64BO9R: screenshot captured the user's browser editor, not GeoGebra) - re-run with the foreground guard (branch feat/ui-foreground-guard)"}
+  P-01: {status: "PARTIAL", client: both, gate: "-", debian_desktop: "PASS", windows_r11: "INVALID", debian_p01_08: "PASS 2026-10-29 21:50 (screenshot taken while running, 1494x871 window rect)", script: "03-RCP-Spike/tests/scenarios/S_P-01_CleanProduct_GROK_V1.ps1", blockers: "web: deferred: web phase; Windows r11 result INVALID (Codex run 20261029_174320-SHADOW-TB64BO9R: screenshot captured the user's browser editor, not GeoGebra) - re-run with the foreground guard (branch feat/ui-foreground-guard)"}
   P-02: {status: "FAIL", client: both, gate: "A", debian_desktop: "FAIL", script: "03-RCP-Spike/tests/scenarios/S_P-02_CoreFeatures_GROK_V1.ps1", blockers: "BUG-014 (3 divergences: f(x)=x^2-2x, m={{1,2},{3,4}}, 3D Plane(A,B,(1,0,0)): evalCommand false + error dialog in product, true in baseline); web deferred"}
   P-03: {status: "PARTIAL", client: both, gate: "A", debian_desktop: "PARTIAL", script: "03-RCP-Spike/tests/scenarios/S_P-03_StandardTools_GROK_V1.ps1", blockers: "3D toolbar not compared (needs a 3D GuiManager directive); web deferred"}
   P-04: {status: "FAIL", client: both, gate: "A", debian_desktop: "FAIL", script: "03-RCP-Spike/tests/scenarios/S_P-04_SaveReopen_GROK_V1.ps1", blockers: "BUG-014: f(x) = a x^2 - 1 not created by evalCommand in the product (so it is absent from the saved file); all other values identical, baseline reads the product file"}
@@ -81,6 +81,9 @@ scenario_runs:  # earlier per-run records (kept)
     baseline_13: {common_jre: "6514 pass, 12 skipped", desktop: "1088 pass, 1 fail (CallJavaScriptTest.testEval, BUG-018), 1 skipped"}
     failures: {P-02: BUG-014, P-04: BUG-014, O-02: "47 JARs lack license metadata", P-08: "older evidence lacks the pin", X-01: BUG-015, X-02: BUG-015, X-06: "BUG-015 (malformed PARI input returns empty success)"}
     invalid: {P-01: "screenshot captured the user's browser editor (foreground capture) - INVALID, re-run with guard"}
+    suite_11: {status: PASS, pass: 63, fail: 0, skip: 2, note: "Bnd 7.1.0 downloaded to temp, Maven Central SHA-1 matched; Equinox 52/52; skips = optional bundles without r11 reference jars. Suite 11 now caches bnd in tests/tools/bnd/ (git-ignored, SHA-256 pinned)"}
+    suite_14: {status: UNPROVEN, pass: 3, fail: 0, skip: 3, note: "old script: G-04/G-05 were Linux-only even with IMAGE=r11 and -AllowForegroundInput; Windows paths added on feat/ui-guard-windows, not yet run on Windows"}
+    suite_13: {status: BLOCKED, bug: BUG-020}
     paused: "P-07 and suite 09 (D-04) UI input until feat/ui-foreground-guard is merged; re-run only with Run_All -AllowForegroundInput after closing browsers/editors with unsaved work"
   D-02: {status: PASS, os: Windows}
   D-03: {status: PASS, os: Windows}
@@ -187,8 +190,16 @@ bugs:
     component: 03-RCP-Spike/tests/lib/UiDriver_GROK_V1.ps1
     severity: high
     status: FIXED_PENDING_MERGE
+    note: "PR #1 merged into feat/external-engines; Windows G-04/G-05 parity + P-01 screenshot-while-running on feat/ui-guard-windows"
     fix: "branch feat/ui-foreground-guard: Assert-GgbForeground before every click/key/paste/screenshot/pixel read; BLOCKED status; window-rect screenshots; Run_All -AllowForegroundInput opt-in; suite 14_Test_UiGuard"
     evidence: "Codex r11 run 20261029_174320-SHADOW-TB64BO9R P-01 screenshot; Debian suite 14 6/0/1"
+  - id: BUG-020
+    title: "Windows suite 13: Gradle cannot delete source\\build-logic\\convention\\build\\kotlin-dsl\\plugins-blocks\\compiled (locked) even after gradlew --stop"
+    component: "13_Test_GeoGebra_Baseline_GROK_V1.ps1 / Windows host (lock holder unknown - VS Code XML language-server java, Defender or indexer suspected)"
+    severity: medium
+    status: MITIGATION_PENDING_TEST
+    fix: "feat/ui-guard-windows: pre-flight lists locked files + java processes mentioning the clone (kills nothing) and records BLOCKED; GGB_RERUN_TASKS=1 now uses task option --rerun (only the test task reruns, build-logic outputs not deleted); GGB_RERUN_TASKS=all = --rerun-tasks; GGB_PROJECT_CACHE_DIR; GGB_LOCK_IGNORE=1"
+    evidence: "Codex Windows r11 run 2026-10-29 evening (local); existing JUnit XML counts are not fresh results"
 open_items:
   - "Linux image still staged from r8 bundles; suite 11 shows the Linux bnd rebuild matches r8 (manifests/class lists) but build.sh does not use it yet"
   - "Run attended Windows suite 09 (D-04 input/focus/clipboard) and suite 10 (strict 3D visual screenshot); do not drive the user's desktop unattended"

@@ -25,6 +25,18 @@
   4. Any `guard-BLOCKED` row means GeoGebraPlus was not foreground: no input was sent; fix focus and re-run, do not count it.
 - P-07 stays Linux-only (uses xdotool resize); its Windows keyboard part is covered by suite 09.
 
+## Windows guard parity — merge `feat/ui-guard-windows` (PR into feat/external-engines)
+Run from `D:\ALF_Agents\G1_Geogebra_Migration\03-RCP-Spike\tests` after `git pull` (close browser editor / unsaved work first):
+```powershell
+$env:IMAGE = 'D:\ALF_ZGit\G1_Geogebra_Migration\bin\GeoGebraPlus-RCP-0.1.0-win32-x86_64-r11'
+pwsh -NoProfile -File .\14_Test_UiGuard_GROK_V1.ps1                          # expect G-01..G-04 pass, G-05/06 SKIP (reason: needs opt-in)
+pwsh -NoProfile -File .\14_Test_UiGuard_GROK_V1.ps1 -AllowForegroundInput    # expect 6 pass incl. G-05/G-06 (r11 is brought to front; no keys typed)
+pwsh -NoProfile -Command "./Run_All_GROK_V1.ps1 -AllowForegroundInput -Only 'P-01','D-04','D-05'"   # only if suite 14 is 0 FAIL
+pwsh -NoProfile -File .\11_Test_Bundle_Build_GROK_V1.ps1                      # downloads bnd once into tests\tools\bnd (SHA-256 checked), reused after
+$env:GGB_RERUN_TASKS = '1'; pwsh -NoProfile -File .\13_Test_GeoGebra_Baseline_GROK_V1.ps1   # pre-flight lists locked files; --rerun only the test task
+```
+If suite 13 reports `GGB-00b ... BLOCKED`, send the LOCKED list and the `# java pid=` lines; do not kill the VS Code language server unless the owner agrees.
+
 ## Next Codex tasks
 1. **D-04 / suite 09:** run on Windows in an attended session to check input/focus, valid function creation, clipboard, and localization/font findings (BUG-004, BUG-009..013). Suite 09 drives the desktop; do not use the PC while it runs.
 2. **Strict 3D / suite 10:** run on Windows in an attended session and capture the visual screenshot. Debian 13's software-OpenGL screenshot passed, but no real-GPU claim is made.

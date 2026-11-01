@@ -23,7 +23,8 @@ function Test-ImagePresent { if (-not (Test-Path $script:Launcher)) { Exit-Bail 
 function Parse-Scn([string]$Text) { $h = [ordered]@{}
     foreach ($l in ($Text -split "`r?`n")) { if ($l -match '\[GeoGebraPlus\] SCN\t([^\t]*)\t(OK|ERR)\t(.*)$') { $h[$Matches[1]] = [pscustomobject]@{ St = $Matches[2]; Val = $Matches[3] } } }; return $h }
 # Runs a directive file in the RCP product (UI, Xvfb on Linux). Returns @{ Scn; Log; Text }.
-function Invoke-ProductScenario([string]$Name, [string]$Directives, [int]$TimeoutSec = 180, [hashtable]$Env = @{}, [string[]]$Wrapper = @()) {
+function Invoke-ProductScenario([string]$Name, [string]$Directives, [int]$TimeoutSec = 180, [hashtable]$Env = @{}, [string[]]$Wrapper = @(), [scriptblock]$OnRunning = $null) {
+    # -OnRunning: called once while the product is still up (after '3D view initialized'), e.g. for a guarded screenshot.
     $tsv = Join-Path $script:Res "$Name.directives.tsv"; Set-Content $tsv $Directives -Encoding UTF8
     $props = "-Dggbplus.scenario=$tsv -Dggbplus.scenarioExit=true"; if ($Env['JAVA_TOOL_OPTIONS']) { $props = "$($Env['JAVA_TOOL_OPTIONS']) $props" }
     $e = @{} + $Env; $e['JAVA_TOOL_OPTIONS'] = $props
@@ -33,7 +34,10 @@ function Invoke-ProductScenario([string]$Name, [string]$Directives, [int]$Timeou
     else { $cmd = @($Wrapper) + @('bash', $script:Launcher); $p = Start-Process $cmd[0] -ArgumentList ($cmd | Select-Object -Skip 1) -RedirectStandardOutput $log -RedirectStandardError "$log.err" -PassThru }
     foreach ($k in $saved.Keys) { [Environment]::SetEnvironmentVariable($k, $saved[$k]) }
     $sw = [Diagnostics.Stopwatch]::StartNew()
-    while ($sw.Elapsed.TotalSeconds -lt $TimeoutSec -and -not $p.HasExited) { Start-Sleep 1; if ((Test-Path $log) -and ((Get-Content $log -Raw) -match 'SCN\t_(END|FATAL)')) { break } }
+    $ran = $false
+    while ($sw.Elapsed.TotalSeconds -lt $TimeoutSec -and -not $p.HasExited) { Start-Sleep 1; $lt = if (Test-Path $log) { Get-Content $log -Raw } else { '' }
+        if ($OnRunning -and -not $ran -and $lt -match '3D view initialized') { $ran = $true; Start-Sleep 2; & $OnRunning; continue }
+        if ($lt -match 'SCN\t_(END|FATAL)') { break } }
     for ($i = 0; $i -lt 15 -and -not $p.HasExited; $i++) { Start-Sleep 1 }
     if (-not $p.HasExited) { Stop-UiApp }
     $t = (Get-Content $log -Raw) + "`n" + ((Test-Path "$log.err") ? (Get-Content "$log.err" -Raw) : '')

@@ -99,7 +99,7 @@ Failures: P-02/P-04 (BUG-014), O-02 (47 JARs lack license metadata), P-08 (older
 - Acceptance (spec): Views open, no missing mandatory bundle.
 - Automation: Image copy with engine/compute.runtime bundles removed from bundles.info; D-02 50/50; 2D+3D views; CAS; no ClassNotFound/MissingResource.
 - Blockers / findings: web: deferred: web phase.
-- **Windows r11 result INVALID** (Codex run `20261029_174320-SHADOW-TB64BO9R`, image r11 from afa9d1f): the screenshot captured the user's browser editor, not GeoGebra (unguarded foreground capture, BUG-019). Must be re-run with the foreground guard (`feat/ui-foreground-guard`); the screenshot is now check P01-08, BLOCKED when GeoGebraPlus is not foreground.
+- **Windows r11 result INVALID** (Codex run `20261029_174320-SHADOW-TB64BO9R`, image r11 from afa9d1f): the screenshot captured the user's browser editor, not GeoGebra (unguarded foreground capture, BUG-019). Must be re-run with the foreground guard (`feat/ui-foreground-guard`); the screenshot is now check P01-08, BLOCKED when GeoGebraPlus is not foreground. Since `feat/ui-guard-windows` it is taken while the product is still running (Invoke-ProductScenario -OnRunning, scenario hook delayed 20 s); Debian Xvfb 2026-10-29 21:50: P-01 8/0/1, P01-08 PASS (1494x871 window-only shot). Windows re-run pending.
 - Script: `03-RCP-Spike/tests/scenarios/S_P-01_CleanProduct_GROK_V1.ps1`; log: `03-RCP-Spike/evidence/20261029-linux-scenarios-20261029_171259-grok-bot-vm-419969949/S_P-01_CleanProduct_GROK_V1.log`.
 
 ### P-02 — Algebra, CAS, spreadsheet, 2D, 3D

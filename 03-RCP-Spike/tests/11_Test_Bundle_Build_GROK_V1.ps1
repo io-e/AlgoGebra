@@ -7,7 +7,20 @@
 . (Join-Path $PSScriptRoot 'lib/TestFramework_GROK_V1.ps1')
 Initialize-TestSuite '11_Bundle_Build'
 $src = if ($env:GGB_SOURCE) { $env:GGB_SOURCE } elseif ($IsWindows) { 'D:\ALF_ZGit\G1_Geogebra_Migration\source' } else { '/workspace/AlgoGebra/geogebra/source' }
-$bnd = if ($env:BND_JAR) { $env:BND_JAR } elseif ($IsWindows) { 'D:\ALF_ZGit\G1_Geogebra_Migration\tools\biz.aQute.bnd-7.1.0.jar' } else { '/workspace/AlgoGebra/bnd/biz.aQute.bnd-7.1.0.jar' }
+# Bnd CLI: BND_JAR > cache tests/tools/bnd/ (git-ignored) > legacy local paths > download from Maven Central into the cache.
+# Every candidate must match the pinned SHA-256 (Maven Central SHA-1 49e4ebe633c608c498cbfc7d7a4e9dda5fefa2fc, verified 2026-10-29).
+$bndSha256 = 'd68703e97d0950ced1610f8ff5c37c11cc68e67b96d746c3c7375eaa4980210d'
+$bndUrl = 'https://repo1.maven.org/maven2/biz/aQute/bnd/biz.aQute.bnd/7.1.0/biz.aQute.bnd-7.1.0.jar'
+$bndCache = Join-Path $PSScriptRoot 'tools/bnd/biz.aQute.bnd-7.1.0.jar'
+function Test-BndJar([string]$P) { $P -and (Test-Path $P) -and ((Get-FileHash $P -Algorithm SHA256).Hash.ToLower() -eq $bndSha256) }
+$bnd = $null
+foreach ($c in @($env:BND_JAR, $bndCache, $(if ($IsWindows) { 'D:\ALF_ZGit\G1_Geogebra_Migration\tools\biz.aQute.bnd-7.1.0.jar' } else { '/workspace/AlgoGebra/bnd/biz.aQute.bnd-7.1.0.jar' }))) {
+    if (Test-BndJar $c) { $bnd = $c; break } elseif ($c -and (Test-Path $c)) { Write-Host "# bnd candidate rejected (SHA-256 mismatch): $c" } }
+if (-not $bnd -and $env:BND_NO_DOWNLOAD -ne '1') { New-Item -ItemType Directory -Force (Split-Path $bndCache) | Out-Null; $tmpJar = "$bndCache.part"
+    try { Invoke-WebRequest $bndUrl -OutFile $tmpJar -UseBasicParsing; if (Test-BndJar $tmpJar) { Move-Item $tmpJar $bndCache -Force; $bnd = $bndCache; Write-Host "# bnd downloaded and verified -> $bndCache" } else { Remove-Item $tmpJar -Force; Write-Host '# downloaded bnd failed SHA-256 check; discarded' } }
+    catch { Write-Host "# bnd download failed: $($_.Exception.Message)" } }
+if (-not $bnd) { Exit-Bail "Bnd CLI 7.1.0 not available (set BND_JAR, or allow download to $bndCache)" }
+Write-Host "# bnd: $bnd (sha256 $bndSha256)"
 $ref = if ($env:REF_BUNDLES) { $env:REF_BUNDLES } else { Join-Path $script:Image 'bundles' }
 $repo = Split-Path $script:SpikeDir -Parent; $drafts = Join-Path $repo '02-Cdc/osgi-manifest-drafts'; $harness = Join-Path $repo '02-Cdc/Bnd_Equinox_Resolution_Win64/EquinoxResolveHarness.java'
 foreach ($p in $src, $bnd, $ref, $drafts) { if (-not (Test-Path $p)) { Exit-Bail "missing: $p" } }
