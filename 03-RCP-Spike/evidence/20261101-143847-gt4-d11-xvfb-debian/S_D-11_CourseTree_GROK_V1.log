@@ -1,0 +1,24 @@
+# Suite: S_D-11
+# Started: 2026-11-01T14:35:14.8549459+01:00
+# Host: grok-bot-vm-419969949 / Debian GNU/Linux 13 (trixie) / pwsh 7.6.9
+
+# Scenario: D-11 - Course tree renders in SWT Tree | gate - | client desktop
+# Evidence: commit=53c2f47 image=/workspace/AlgoGebra/image-pr11/GeoGebraPlus-RCP-0.1.0-linux-gtk-x86_64 pin=375db7faf5407390bb322165f2414415da8faeda version=5.4.934.0 os=Unix 6.12.94.0 pwsh=7.6.9
+&: /tmp/gt4/03-RCP-Spike/tests/scenarios/S_D-11_CourseTree_GROK_V1.ps1:14
+Line |
+  14 |      $valid = & python -I -c @"
+     |                 ~~~~~~
+     | The term 'python' is not recognized as a name of a cmdlet, function,
+     | script file, or executable program. Check the spelling of the name, or
+     | if a path was included, verify that the path is correct and try again.
+not ok 1 - [P0] D11-01-schema-valid :: schema validation: 
+not ok 2 - [P0] D11-02-product-launches :: log=/tmp/gt4/03-RCP-Spike/tests/results/20261101_143514-grok-bot-vm-419969949/D-11-course-tree.log
+not ok 3 - [P1] D11-03-tree-renders :: log=/tmp/gt4/03-RCP-Spike/tests/results/20261101_143514-grok-bot-vm-419969949/D-11-course-tree.log
+ok 4 - [P0] D11-04-step-O :: O creation: OK false
+ok 5 - [P0] D11-04-step-circle :: Circle creation: OK false
+not ok 6 - [P0] D11-05-cas-identity :: CAS result: 
+ok 7 - [P1] D11-06-no-error-dialog :: No error dialog in log
+ok 8 - [P1] D11-07-no-timeout :: Completed in 9s
+
+PASS: 4 FAIL: 4 SKIP: 0
+# CSV: /tmp/gt4/03-RCP-Spike/tests/results/20261101_143514-grok-bot-vm-419969949/S_D-11_GROK_V1.csv

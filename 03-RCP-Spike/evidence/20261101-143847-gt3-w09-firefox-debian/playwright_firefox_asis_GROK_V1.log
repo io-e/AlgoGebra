@@ -1,0 +1,380 @@
+
+Running 10 tests using 1 worker
+
+  ✘   1 [firefox] › W09_CourseTree.spec.ts:10:7 › W-09 Course Tree — Web Host › PW-W09-01 page loads with local applet host (1.5s)
+  ✘   2 [firefox] › W09_CourseTree.spec.ts:26:7 › W-09 Course Tree — Web Host › PW-W09-02 CAS readiness check (1.1s)
+  ✘   3 [firefox] › W09_CourseTree.spec.ts:38:7 › W-09 Course Tree — Web Host › PW-W09-03 tree has chapters (1.0s)
+  ✘   4 [firefox] › W09_CourseTree.spec.ts:49:7 › W-09 Course Tree — Web Host › PW-W09-04 run step 1.1 creates point O (1.0s)
+  ✘   5 [firefox] › W09_CourseTree.spec.ts:70:7 › W-09 Course Tree — Web Host › PW-W09-05 run step 1.2 creates circle (1.0s)
+  ✘   6 [firefox] › W09_CourseTree.spec.ts:89:7 › W-09 Course Tree — Web Host › PW-W09-06 CAS identity check passes (952ms)
+  ✘   7 [firefox] › W09_CourseTree.spec.ts:97:7 › W-09 Course Tree — Web Host › PW-W09-07 Execute command is blocked (976ms)
+  ✘   8 [firefox] › W09_CourseTree.spec.ts:110:7 › W-09 Course Tree — Web Host › PW-W09-08 path traversal rejected (1.0s)
+  ✘   9 [firefox] › W09_CourseTree.spec.ts:121:7 › W-09 Course Tree — Web Host › PW-W09-09 keyboard navigation works (961ms)
+  ✘  10 [firefox] › W09_CourseTree.spec.ts:135:7 › W-09 Course Tree — Web Host › PW-W09-10 mobile responsive layout (914ms)
+
+
+  1) [firefox] › W09_CourseTree.spec.ts:10:7 › W-09 Course Tree — Web Host › PW-W09-01 page loads with local applet host 
+
+    Error: page.goto: NS_ERROR_CONNECTION_REFUSED
+    Call log:
+      - navigating to "http://localhost:4173/course-host.html", waiting until "load"
+
+
+       at fixtures/courses.ts:10
+
+       8 | export const test = base.extend<CourseFixtures>({
+       9 |   coursePage: async ({ page }, use) => {
+    > 10 |     await page.goto('/course-host.html');
+         |                ^
+      11 |     await use(page);
+      12 |   },
+      13 | });
+        at Object.coursePage (/tmp/w09/03-RCP-Spike/tests/playwright/fixtures/courses.ts:10:16)
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../results/playwright/W09_CourseTree-W-09-Course-6c180-oads-with-local-applet-host-firefox/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../results/playwright/W09_CourseTree-W-09-Course-6c180-oads-with-local-applet-host-firefox/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../results/playwright/W09_CourseTree-W-09-Course-6c180-oads-with-local-applet-host-firefox/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../results/playwright/W09_CourseTree-W-09-Course-6c180-oads-with-local-applet-host-firefox/trace.zip
+    Usage:
+
+        npx playwright show-trace ../results/playwright/W09_CourseTree-W-09-Course-6c180-oads-with-local-applet-host-firefox/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) [firefox] › W09_CourseTree.spec.ts:26:7 › W-09 Course Tree — Web Host › PW-W09-02 CAS readiness check 
+
+    Error: page.goto: NS_ERROR_CONNECTION_REFUSED
+    Call log:
+      - navigating to "http://localhost:4173/course-host.html", waiting until "load"
+
+
+       at fixtures/courses.ts:10
+
+       8 | export const test = base.extend<CourseFixtures>({
+       9 |   coursePage: async ({ page }, use) => {
+    > 10 |     await page.goto('/course-host.html');
+         |                ^
+      11 |     await use(page);
+      12 |   },
+      13 | });
+        at Object.coursePage (/tmp/w09/03-RCP-Spike/tests/playwright/fixtures/courses.ts:10:16)
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../results/playwright/W09_CourseTree-W-09-Course-ed6b0--W09-02-CAS-readiness-check-firefox/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../results/playwright/W09_CourseTree-W-09-Course-ed6b0--W09-02-CAS-readiness-check-firefox/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../results/playwright/W09_CourseTree-W-09-Course-ed6b0--W09-02-CAS-readiness-check-firefox/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../results/playwright/W09_CourseTree-W-09-Course-ed6b0--W09-02-CAS-readiness-check-firefox/trace.zip
+    Usage:
+
+        npx playwright show-trace ../results/playwright/W09_CourseTree-W-09-Course-ed6b0--W09-02-CAS-readiness-check-firefox/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3) [firefox] › W09_CourseTree.spec.ts:38:7 › W-09 Course Tree — Web Host › PW-W09-03 tree has chapters 
+
+    Error: page.goto: NS_ERROR_CONNECTION_REFUSED
+    Call log:
+      - navigating to "http://localhost:4173/course-host.html", waiting until "load"
+
+
+       at fixtures/courses.ts:10
+
+       8 | export const test = base.extend<CourseFixtures>({
+       9 |   coursePage: async ({ page }, use) => {
+    > 10 |     await page.goto('/course-host.html');
+         |                ^
+      11 |     await use(page);
+      12 |   },
+      13 | });
+        at Object.coursePage (/tmp/w09/03-RCP-Spike/tests/playwright/fixtures/courses.ts:10:16)
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../results/playwright/W09_CourseTree-W-09-Course-5a985-PW-W09-03-tree-has-chapters-firefox/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../results/playwright/W09_CourseTree-W-09-Course-5a985-PW-W09-03-tree-has-chapters-firefox/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../results/playwright/W09_CourseTree-W-09-Course-5a985-PW-W09-03-tree-has-chapters-firefox/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../results/playwright/W09_CourseTree-W-09-Course-5a985-PW-W09-03-tree-has-chapters-firefox/trace.zip
+    Usage:
+
+        npx playwright show-trace ../results/playwright/W09_CourseTree-W-09-Course-5a985-PW-W09-03-tree-has-chapters-firefox/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  4) [firefox] › W09_CourseTree.spec.ts:49:7 › W-09 Course Tree — Web Host › PW-W09-04 run step 1.1 creates point O 
+
+    Error: page.goto: NS_ERROR_CONNECTION_REFUSED
+    Call log:
+      - navigating to "http://localhost:4173/course-host.html", waiting until "load"
+
+
+       at fixtures/courses.ts:10
+
+       8 | export const test = base.extend<CourseFixtures>({
+       9 |   coursePage: async ({ page }, use) => {
+    > 10 |     await page.goto('/course-host.html');
+         |                ^
+      11 |     await use(page);
+      12 |   },
+      13 | });
+        at Object.coursePage (/tmp/w09/03-RCP-Spike/tests/playwright/fixtures/courses.ts:10:16)
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../results/playwright/W09_CourseTree-W-09-Course-6c2df-un-step-1-1-creates-point-O-firefox/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../results/playwright/W09_CourseTree-W-09-Course-6c2df-un-step-1-1-creates-point-O-firefox/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../results/playwright/W09_CourseTree-W-09-Course-6c2df-un-step-1-1-creates-point-O-firefox/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../results/playwright/W09_CourseTree-W-09-Course-6c2df-un-step-1-1-creates-point-O-firefox/trace.zip
+    Usage:
+
+        npx playwright show-trace ../results/playwright/W09_CourseTree-W-09-Course-6c2df-un-step-1-1-creates-point-O-firefox/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  5) [firefox] › W09_CourseTree.spec.ts:70:7 › W-09 Course Tree — Web Host › PW-W09-05 run step 1.2 creates circle 
+
+    Error: page.goto: NS_ERROR_CONNECTION_REFUSED
+    Call log:
+      - navigating to "http://localhost:4173/course-host.html", waiting until "load"
+
+
+       at fixtures/courses.ts:10
+
+       8 | export const test = base.extend<CourseFixtures>({
+       9 |   coursePage: async ({ page }, use) => {
+    > 10 |     await page.goto('/course-host.html');
+         |                ^
+      11 |     await use(page);
+      12 |   },
+      13 | });
+        at Object.coursePage (/tmp/w09/03-RCP-Spike/tests/playwright/fixtures/courses.ts:10:16)
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../results/playwright/W09_CourseTree-W-09-Course-658aa-run-step-1-2-creates-circle-firefox/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../results/playwright/W09_CourseTree-W-09-Course-658aa-run-step-1-2-creates-circle-firefox/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../results/playwright/W09_CourseTree-W-09-Course-658aa-run-step-1-2-creates-circle-firefox/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../results/playwright/W09_CourseTree-W-09-Course-658aa-run-step-1-2-creates-circle-firefox/trace.zip
+    Usage:
+
+        npx playwright show-trace ../results/playwright/W09_CourseTree-W-09-Course-658aa-run-step-1-2-creates-circle-firefox/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  6) [firefox] › W09_CourseTree.spec.ts:89:7 › W-09 Course Tree — Web Host › PW-W09-06 CAS identity check passes 
+
+    Error: page.goto: NS_ERROR_CONNECTION_REFUSED
+    Call log:
+      - navigating to "http://localhost:4173/course-host.html", waiting until "load"
+
+
+       at fixtures/courses.ts:10
+
+       8 | export const test = base.extend<CourseFixtures>({
+       9 |   coursePage: async ({ page }, use) => {
+    > 10 |     await page.goto('/course-host.html');
+         |                ^
+      11 |     await use(page);
+      12 |   },
+      13 | });
+        at Object.coursePage (/tmp/w09/03-RCP-Spike/tests/playwright/fixtures/courses.ts:10:16)
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../results/playwright/W09_CourseTree-W-09-Course-4b058-6-CAS-identity-check-passes-firefox/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../results/playwright/W09_CourseTree-W-09-Course-4b058-6-CAS-identity-check-passes-firefox/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../results/playwright/W09_CourseTree-W-09-Course-4b058-6-CAS-identity-check-passes-firefox/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../results/playwright/W09_CourseTree-W-09-Course-4b058-6-CAS-identity-check-passes-firefox/trace.zip
+    Usage:
+
+        npx playwright show-trace ../results/playwright/W09_CourseTree-W-09-Course-4b058-6-CAS-identity-check-passes-firefox/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  7) [firefox] › W09_CourseTree.spec.ts:97:7 › W-09 Course Tree — Web Host › PW-W09-07 Execute command is blocked 
+
+    Error: page.goto: NS_ERROR_CONNECTION_REFUSED
+    Call log:
+      - navigating to "http://localhost:4173/course-host.html", waiting until "load"
+
+
+       at fixtures/courses.ts:10
+
+       8 | export const test = base.extend<CourseFixtures>({
+       9 |   coursePage: async ({ page }, use) => {
+    > 10 |     await page.goto('/course-host.html');
+         |                ^
+      11 |     await use(page);
+      12 |   },
+      13 | });
+        at Object.coursePage (/tmp/w09/03-RCP-Spike/tests/playwright/fixtures/courses.ts:10:16)
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../results/playwright/W09_CourseTree-W-09-Course-242a8--Execute-command-is-blocked-firefox/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../results/playwright/W09_CourseTree-W-09-Course-242a8--Execute-command-is-blocked-firefox/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../results/playwright/W09_CourseTree-W-09-Course-242a8--Execute-command-is-blocked-firefox/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../results/playwright/W09_CourseTree-W-09-Course-242a8--Execute-command-is-blocked-firefox/trace.zip
+    Usage:
+
+        npx playwright show-trace ../results/playwright/W09_CourseTree-W-09-Course-242a8--Execute-command-is-blocked-firefox/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  8) [firefox] › W09_CourseTree.spec.ts:110:7 › W-09 Course Tree — Web Host › PW-W09-08 path traversal rejected 
+
+    Error: page.goto: NS_ERROR_CONNECTION_REFUSED
+    Call log:
+      - navigating to "http://localhost:4173/course-host.html", waiting until "load"
+
+
+       at fixtures/courses.ts:10
+
+       8 | export const test = base.extend<CourseFixtures>({
+       9 |   coursePage: async ({ page }, use) => {
+    > 10 |     await page.goto('/course-host.html');
+         |                ^
+      11 |     await use(page);
+      12 |   },
+      13 | });
+        at Object.coursePage (/tmp/w09/03-RCP-Spike/tests/playwright/fixtures/courses.ts:10:16)
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../results/playwright/W09_CourseTree-W-09-Course-13654--08-path-traversal-rejected-firefox/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../results/playwright/W09_CourseTree-W-09-Course-13654--08-path-traversal-rejected-firefox/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../results/playwright/W09_CourseTree-W-09-Course-13654--08-path-traversal-rejected-firefox/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../results/playwright/W09_CourseTree-W-09-Course-13654--08-path-traversal-rejected-firefox/trace.zip
+    Usage:
+
+        npx playwright show-trace ../results/playwright/W09_CourseTree-W-09-Course-13654--08-path-traversal-rejected-firefox/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  9) [firefox] › W09_CourseTree.spec.ts:121:7 › W-09 Course Tree — Web Host › PW-W09-09 keyboard navigation works 
+
+    Error: page.goto: NS_ERROR_CONNECTION_REFUSED
+    Call log:
+      - navigating to "http://localhost:4173/course-host.html", waiting until "load"
+
+
+       at fixtures/courses.ts:10
+
+       8 | export const test = base.extend<CourseFixtures>({
+       9 |   coursePage: async ({ page }, use) => {
+    > 10 |     await page.goto('/course-host.html');
+         |                ^
+      11 |     await use(page);
+      12 |   },
+      13 | });
+        at Object.coursePage (/tmp/w09/03-RCP-Spike/tests/playwright/fixtures/courses.ts:10:16)
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../results/playwright/W09_CourseTree-W-09-Course-ee570-9-keyboard-navigation-works-firefox/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../results/playwright/W09_CourseTree-W-09-Course-ee570-9-keyboard-navigation-works-firefox/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../results/playwright/W09_CourseTree-W-09-Course-ee570-9-keyboard-navigation-works-firefox/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../results/playwright/W09_CourseTree-W-09-Course-ee570-9-keyboard-navigation-works-firefox/trace.zip
+    Usage:
+
+        npx playwright show-trace ../results/playwright/W09_CourseTree-W-09-Course-ee570-9-keyboard-navigation-works-firefox/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  10) [firefox] › W09_CourseTree.spec.ts:135:7 › W-09 Course Tree — Web Host › PW-W09-10 mobile responsive layout 
+
+    Error: page.goto: NS_ERROR_CONNECTION_REFUSED
+    Call log:
+      - navigating to "http://localhost:4173/course-host.html", waiting until "load"
+
+
+      138 |     });
+      139 |     const page = await context.newPage();
+    > 140 |     await page.goto('/course-host.html');
+          |                ^
+      141 |
+      142 |     const mobileToggle = page.locator('#mobile-tree-toggle');
+      143 |     await expect(mobileToggle).toBeVisible({ timeout: 5_000 });
+        at /tmp/w09/03-RCP-Spike/tests/playwright/W09_CourseTree.spec.ts:140:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../results/playwright/W09_CourseTree-W-09-Course-79626-10-mobile-responsive-layout-firefox/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../results/playwright/W09_CourseTree-W-09-Course-79626-10-mobile-responsive-layout-firefox/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../results/playwright/W09_CourseTree-W-09-Course-79626-10-mobile-responsive-layout-firefox/trace.zip
+    Usage:
+
+        npx playwright show-trace ../results/playwright/W09_CourseTree-W-09-Course-79626-10-mobile-responsive-layout-firefox/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  10 failed
+    [firefox] › W09_CourseTree.spec.ts:10:7 › W-09 Course Tree — Web Host › PW-W09-01 page loads with local applet host 
+    [firefox] › W09_CourseTree.spec.ts:26:7 › W-09 Course Tree — Web Host › PW-W09-02 CAS readiness check 
+    [firefox] › W09_CourseTree.spec.ts:38:7 › W-09 Course Tree — Web Host › PW-W09-03 tree has chapters 
+    [firefox] › W09_CourseTree.spec.ts:49:7 › W-09 Course Tree — Web Host › PW-W09-04 run step 1.1 creates point O 
+    [firefox] › W09_CourseTree.spec.ts:70:7 › W-09 Course Tree — Web Host › PW-W09-05 run step 1.2 creates circle 
+    [firefox] › W09_CourseTree.spec.ts:89:7 › W-09 Course Tree — Web Host › PW-W09-06 CAS identity check passes 
+    [firefox] › W09_CourseTree.spec.ts:97:7 › W-09 Course Tree — Web Host › PW-W09-07 Execute command is blocked 
+    [firefox] › W09_CourseTree.spec.ts:110:7 › W-09 Course Tree — Web Host › PW-W09-08 path traversal rejected 
+    [firefox] › W09_CourseTree.spec.ts:121:7 › W-09 Course Tree — Web Host › PW-W09-09 keyboard navigation works 
+    [firefox] › W09_CourseTree.spec.ts:135:7 › W-09 Course Tree — Web Host › PW-W09-10 mobile responsive layout 
