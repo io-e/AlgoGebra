@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- CLAUDE_V1 — placeholder until scenario script S_W-09_CourseTreeWeb_CLAUDE_V1.ps1 exists -->
+<cheatsheet title="W-09 — Course tree renders in HTML tree (web)">
+  <intro><description>Validates the course tree in the web browser host page. Requires self-hosted GWT WAR and course-tree.js/css. Gate: none (feature scenario). Status: NOT RUN (code not yet implemented).</description></intro>
+  <item title="1. Prerequisites">
+    <description>Scenario type: browser / web host page. Client scope: web. Confirm applicable prerequisites before starting.</description>
+    <subitem label="GWT WAR built and self-hosted (GeoGebra/ directory with deployggb.js and HTML5/5.0/web3d/)." skip="false"/>
+    <subitem label="web-host/course-host.html, course-tree.js, course-tree.css deployed." skip="false"/>
+    <subitem label="Sample course file accessible at courses/trigonometry_intro.json." skip="false"/>
+  </item>
+  <item title="2. Page load">
+    <description>Open course-host.html in Chrome or Firefox. GeoGebra applet loads (html5codebase points to local WAR). CAS readiness check completes (evalCommandCAS '1+1' returns '2').</description>
+    <subitem label="Applet renders without console errors." skip="false"/>
+    <subitem label="Status bar shows 'Ready' after CAS check." skip="false"/>
+  </item>
+  <item title="3. Tree rendering">
+    <description>Course title in #course-title. 5 chapters with expand/collapse. Steps under each chapter with status icons.</description>
+    <subitem label="Course title 'Introduction to Trigonometry' appears." skip="false"/>
+    <subitem label="Chapters expand/collapse on click." skip="false"/>
+    <subitem label="ARIA roles present: role=tree, role=treeitem, aria-expanded." skip="false"/>
+  </item>
+  <item title="4. Step execution">
+    <description>Select step 1.1, click Run Step: point O appears. Select step 1.2, click Run Step: circle drawn. Status bar updates.</description>
+    <subitem label="Run Step button disabled during execution, re-enabled after." skip="false"/>
+    <subitem label="setErrorDialogsActive(false) called before each step." skip="false"/>
+  </item>
+  <item title="5. Validation">
+    <description>After step 1.1, Check: 'O exists' shows pass icon. After step 3.3, CAS check: Pythagorean identity returns '1'.</description>
+    <subitem label="Green checkmark icon on pass." skip="false"/>
+    <subitem label="Feedback text displayed in status bar." skip="false"/>
+  </item>
+  <item title="6. Security (subset of T-01..T-14)">
+    <description>Verify command allowlist blocks Execute, path traversal rejected for OPEN.</description>
+    <subitem label="courseTree.isCommandBlocked('Execute(\"Delete(A)\")') returns true." skip="false"/>
+    <subitem label="courseTree.isOpenPathSafe('../../etc/passwd') returns false." skip="false"/>
+    <subitem label="courseTree.isOpenPathSafe('clean.ggb') returns true." skip="false"/>
+  </item>
+  <item title="7. Keyboard navigation (accessibility)">
+    <description>Arrow Up/Down moves between steps. Enter/Space runs the step. Home/End jump to first/last.</description>
+    <subitem label="Focus follows selection (aria-selected=true)." skip="false"/>
+    <subitem label="Tab order is logical." skip="false"/>
+  </item>
+  <item title="8. Mobile responsive">
+    <description>At viewport width under 640px: sidebar becomes a slide-out panel with toggle button. Applet fills the viewport.</description>
+    <subitem label="Toggle button (hamburger) visible on mobile." skip="false"/>
+    <subitem label="Sidebar opens/closes with backdrop overlay." skip="false"/>
+  </item>
+  <item title="9. Record evidence">
+    <description>Record date, commit, OS, browser version, course URL, expected vs actual, screenshot path. Update SCENARIOS_TRACKING.</description>
+    <subitem label="Evidence follows the AGENTS.md evidence rule." skip="false"/>
+  </item>
+</cheatsheet>

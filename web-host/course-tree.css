@@ -1,4 +1,4 @@
-/* CLAUDE_V1 — GeoGebraPlus course tree panel styles (web host) */
+/* CLAUDE_V1_1 — GeoGebraPlus course tree panel styles (web host) */
 
 /* ── Layout ── */
 #app-container {
@@ -233,22 +233,92 @@
   color: #2563eb;
 }
 
-/* ── Responsive ── */
+/* ── Mobile toggle button (hidden on desktop) ── */
+#mobile-tree-toggle {
+  display: none;
+  position: fixed;
+  bottom: 16px;
+  left: 16px;
+  z-index: 100;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: none;
+  background: #3b82f6;
+  color: #ffffff;
+  font-size: 20px;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+}
+
+/* ── Responsive: tablet ── */
+@media (max-width: 900px) {
+  #course-tree {
+    width: 240px;
+    min-width: 180px;
+  }
+}
+
+/* ── Responsive: phone ── */
 @media (max-width: 640px) {
   #app-container {
     flex-direction: column;
+    position: relative;
   }
 
   #course-tree {
-    width: 100%;
-    max-width: none;
-    max-height: 40vh;
-    border-right: none;
-    border-bottom: 1px solid #d1d5db;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 85vw;
+    max-width: 320px;
+    height: 100vh;
+    max-height: none;
+    border-right: 1px solid #d1d5db;
+    z-index: 90;
+    transform: translateX(-100%);
+    transition: transform 0.25s ease;
+    box-shadow: 2px 0 12px rgba(0,0,0,0.15);
+  }
+
+  #course-tree.open {
+    transform: translateX(0);
+  }
+
+  #mobile-tree-toggle {
+    display: block;
   }
 
   #ggb-host {
-    flex: 1;
+    width: 100%;
+    height: 100vh;
     min-height: 300px;
+  }
+
+  #button-bar {
+    flex-wrap: wrap;
+  }
+
+  #button-bar button {
+    min-width: 44px;
+    padding: 8px 6px;
+  }
+}
+
+/* ── Mobile overlay backdrop ── */
+#mobile-backdrop {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.3);
+  z-index: 80;
+}
+
+@media (max-width: 640px) {
+  #mobile-backdrop.visible {
+    display: block;
   }
 }

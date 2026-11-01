@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- CLAUDE_V1 — placeholder until scenario script S_D-11_CourseTree_CLAUDE_V1.ps1 exists -->
+<cheatsheet title="D-11 — Course tree renders in SWT Tree (desktop)">
+  <intro><description>Validates the course tree panel in the RCP desktop product. Requires -Dggbplus.course=path to be set. Checks tree rendering, step execution, validation feedback, and error handling. Gate: none (feature scenario). Status: NOT RUN (code not yet implemented).</description></intro>
+  <item title="1. Prerequisites">
+    <description>Scenario type: UI / product-runtime. Client scope: desktop. Confirm applicable prerequisites before starting.</description>
+    <subitem label="RCP image with course tree code (Codex WP2-06) is built and installed." skip="false"/>
+    <subitem label="Sample course file exists: courses/trigonometry_intro.json" skip="false"/>
+    <subitem label="launch.ps1 accepts -Course parameter." skip="false"/>
+  </item>
+  <item title="2. Launch with course file">
+    <description>launch.ps1 -Course courses/trigonometry_intro.json. Shell opens with three-pane layout (tree | 2D | 3D).</description>
+    <subitem label="Window appears with SWT Tree panel on the left." skip="false"/>
+    <subitem label="GeoGebra 2D and 3D panels visible on the right." skip="false"/>
+  </item>
+  <item title="3. Tree rendering">
+    <description>Course title visible in tree panel header. 5 chapters visible with expand/collapse. Steps visible under each chapter.</description>
+    <subitem label="Course title 'Introduction to Trigonometry' appears." skip="false"/>
+    <subitem label="5 chapters rendered with expand/collapse controls." skip="false"/>
+    <subitem label="Steps show status icons (pending circle)." skip="false"/>
+  </item>
+  <item title="4. Step execution">
+    <description>Select step 1.1 (Create the origin), click Run. Point O appears at the origin in the 2D view.</description>
+    <subitem label="Status bar shows success after step 1.1." skip="false"/>
+    <subitem label="Select step 1.2, click Run: unit circle drawn." skip="false"/>
+    <subitem label="No UI freeze during execution (threading contract)." skip="false"/>
+  </item>
+  <item title="5. Validation (Check button)">
+    <description>After step 1.1, click Check: 'O exists' passes. After step 3.3, Check: CAS Pythagorean identity returns '1'.</description>
+    <subitem label="Check icon changes to green checkmark on pass." skip="false"/>
+    <subitem label="Check icon changes to red cross on fail." skip="false"/>
+  </item>
+  <item title="6. Error handling">
+    <description>Error dialogs suppressed during step execution (setErrorDialogsActive contract). Timeout after 10s shown in status bar. Button re-enables after error.</description>
+    <subitem label="No GeoGebra modal error dialog appears during step execution." skip="false"/>
+    <subitem label="Status bar shows timeout message if step exceeds 10s." skip="false"/>
+  </item>
+  <item title="7. Record evidence">
+    <description>Record date, commit, OS, Java version, image, command, expected vs actual, log path. Update SCENARIOS_TRACKING.</description>
+    <subitem label="Evidence follows the AGENTS.md evidence rule." skip="false"/>
+  </item>
+</cheatsheet>

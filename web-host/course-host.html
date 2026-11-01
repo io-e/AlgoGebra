@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<!-- CLAUDE_V1 — GeoGebraPlus web course host page -->
+<!-- Study V1_2 §3.3 (G-06 fix: self-hosted codebase, no double injection) -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GeoGebraPlus — Course</title>
+  <link rel="stylesheet" href="course-tree.css">
+</head>
+<body>
+  <div id="app-container">
+    <nav id="course-tree" aria-label="Course navigation">
+      <h2 id="course-title">Loading…</h2>
+      <ul id="tree-root" role="tree" aria-label="Course steps"></ul>
+      <div id="step-description" role="status" aria-live="polite"></div>
+      <div id="button-bar">
+        <button id="btn-run" disabled aria-label="Run current step">Run Step</button>
+        <button id="btn-check" disabled aria-label="Check current step">Check</button>
+        <button id="btn-next" aria-label="Go to next step">Next &#x25B6;</button>
+        <button id="btn-reset" aria-label="Reset construction">Reset</button>
+      </div>
+      <div id="status-bar" role="status" aria-live="polite"></div>
+    </nav>
+    <article id="ggb-host">
+      <div id="applet1"></div>
+    </article>
+  </div>
+
+  <!-- C-11: mobile sidebar toggle -->
+  <button id="mobile-tree-toggle" aria-label="Toggle course tree">&#x2630;</button>
+  <div id="mobile-backdrop"></div>
+
+  <!-- GeoGebra: self-hosted WAR (html5codebase points to local copy) -->
+  <script src="GeoGebra/deployggb.js"></script>
+  <script src="course-tree.js"></script>
+  <script>
+    // G-06 fix: point to our self-hosted WAR, not geogebra.org
+    var parameters = {
+      'appName': 'classic',
+      'width': 900,
+      'height': 600,
+      'showToolBar': true,
+      'showAlgebraInput': true,
+      'showMenuBar': true,
+      'html5codebase': 'GeoGebra/HTML5/5.0/web3d/'
+    };
+
+    var applet = new GGBApplet(parameters, '5.0', 'applet1');
+
+    // Called by GeoGebra once the applet is ready
+    function ggbOnInit() {
+      var api = document.ggbApplet || applet.getAppletObject();
+      courseTree.setApi(api);
+      courseTree.verifyCasReady(api, function () {
+        // Course URL from query param or default
+        var params = new URLSearchParams(window.location.search);
+        var courseUrl = params.get('course') || 'courses/trigonometry_intro.json';
+        courseTree.loadCourse(courseUrl);
+        courseTree.enable();
+      });
+    }
+
+    // Single injection point (G-06: no duplicate)
+    window.addEventListener('load', function () {
+      applet.inject('applet1');
+    });
+
+    // C-11: mobile sidebar toggle
+    (function () {
+      var toggle = document.getElementById('mobile-tree-toggle');
+      var tree = document.getElementById('course-tree');
+      var backdrop = document.getElementById('mobile-backdrop');
+      function open() {
+        tree.classList.add('open');
+        backdrop.classList.add('visible');
+      }
+      function close() {
+        tree.classList.remove('open');
+        backdrop.classList.remove('visible');
+      }
+      if (toggle) toggle.addEventListener('click', function () {
+        tree.classList.contains('open') ? close() : open();
+      });
+      if (backdrop) backdrop.addEventListener('click', close);
+    })();
+  </script>
+</body>
+</html>
