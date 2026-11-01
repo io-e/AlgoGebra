@@ -1,0 +1,111 @@
+{
+  "$comment": "CLAUDE_V1 — GeoGebraPlus development tasks (WP5-01)",
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "RCP: Build host bundle",
+      "type": "shell",
+      "command": "pwsh",
+      "args": ["-NoProfile", "-File", "${workspaceFolder}/03-RCP-Spike/build.ps1"],
+      "group": "build",
+      "problemMatcher": "$javac",
+      "presentation": { "reveal": "always", "panel": "shared" }
+    },
+    {
+      "label": "RCP: Launch product",
+      "type": "shell",
+      "command": "pwsh",
+      "args": ["-NoProfile", "-File", "${workspaceFolder}/03-RCP-Spike/launch.ps1"],
+      "group": "test",
+      "isBackground": true,
+      "presentation": { "reveal": "always", "panel": "dedicated" }
+    },
+    {
+      "label": "RCP: Launch with course",
+      "type": "shell",
+      "command": "pwsh",
+      "args": ["-NoProfile", "-File", "${workspaceFolder}/03-RCP-Spike/launch.ps1", "-Course", "${input:courseFile}"],
+      "group": "test",
+      "isBackground": true,
+      "presentation": { "reveal": "always", "panel": "dedicated" }
+    },
+    {
+      "label": "Test: Run All (Grok suite)",
+      "type": "shell",
+      "command": "pwsh",
+      "args": ["-NoProfile", "-ExecutionPolicy", "Bypass", "-File", "${workspaceFolder}/03-RCP-Spike/tests/Run_All_GROK_V1.ps1"],
+      "group": "test",
+      "problemMatcher": {
+        "owner": "tap",
+        "fileLocation": "absolute",
+        "pattern": {
+          "regexp": "^not ok \\d+ - (.+)$",
+          "message": 1
+        }
+      },
+      "presentation": { "reveal": "always", "panel": "shared" }
+    },
+    {
+      "label": "Test: Run scenario by ID",
+      "type": "shell",
+      "command": "pwsh",
+      "args": ["-NoProfile", "-ExecutionPolicy", "Bypass", "-File", "${workspaceFolder}/03-RCP-Spike/tests/scenarios/S_${input:scenarioId}_GROK_V1.ps1"],
+      "group": "test",
+      "problemMatcher": {
+        "owner": "tap",
+        "fileLocation": "absolute",
+        "pattern": {
+          "regexp": "^not ok \\d+ - (.+)$",
+          "message": 1
+        }
+      },
+      "presentation": { "reveal": "always", "panel": "shared" }
+    },
+    {
+      "label": "GeoGebra: Desktop assemble",
+      "type": "shell",
+      "command": "pwsh",
+      "args": ["-NoProfile", "-Command", "$env:JAVA_HOME='C:\\Program Files\\Eclipse Adoptium\\jdk-21.0.12.101-hotspot'; & 'D:\\ALF_ZGit\\G1_Geogebra_Migration\\gradlew' -p 'D:\\ALF_ZGit\\G1_Geogebra_Migration\\source\\desktop' assemble"],
+      "group": "build",
+      "problemMatcher": "$javac"
+    },
+    {
+      "label": "GeoGebra: Run desktop (upstream)",
+      "type": "shell",
+      "command": "pwsh",
+      "args": ["-NoProfile", "-Command", "$env:JAVA_HOME='C:\\Program Files\\Eclipse Adoptium\\jdk-21.0.12.101-hotspot'; & 'D:\\ALF_ZGit\\G1_Geogebra_Migration\\gradlew' -p 'D:\\ALF_ZGit\\G1_Geogebra_Migration\\source\\desktop' :desktop:run"],
+      "group": "test",
+      "isBackground": true
+    },
+    {
+      "label": "GeoGebra: GWT compile + Sass",
+      "type": "shell",
+      "command": "pwsh",
+      "args": ["-NoProfile", "-Command", "$env:JAVA_HOME='C:\\Program Files\\Eclipse Adoptium\\jdk-21.0.12.101-hotspot'; & 'D:\\ALF_ZGit\\G1_Geogebra_Migration\\gradlew' -p 'D:\\ALF_ZGit\\G1_Geogebra_Migration\\source\\web' :web:gwtCompile :web:copyHtml :web:mergeDeploy"],
+      "group": "build",
+      "problemMatcher": []
+    },
+    {
+      "label": "Schema: Validate course file",
+      "type": "shell",
+      "command": "python",
+      "args": ["-c", "import json; from jsonschema import validate; s=json.load(open('02-Cdc/Schema_Course_JSON_CLAUDE_V1.json')); c=json.load(open('${input:courseFile}')); validate(c, s); print('PASS')"],
+      "group": "test",
+      "problemMatcher": []
+    }
+  ],
+  "inputs": [
+    {
+      "id": "courseFile",
+      "description": "Path to course.json file",
+      "type": "promptString",
+      "default": "courses/trigonometry_intro.json"
+    },
+    {
+      "id": "scenarioId",
+      "description": "Scenario ID (e.g. D-11, W-09, P-01)",
+      "type": "promptString",
+      "default": "D-11"
+    }
+  ]
+}

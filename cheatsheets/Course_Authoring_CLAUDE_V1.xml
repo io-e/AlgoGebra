@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- CLAUDE_V1 — Course authoring guide for teachers and content creators (WP4-04) -->
+<cheatsheet title="Course Authoring — GeoGebraPlus">
+  <intro><description>Step-by-step guide for creating a course.json file that works in both the RCP desktop and web browser hosts. See Schema_Course_JSON_CLAUDE_V1.json for the full schema and Spec_Course_Security_CLAUDE_V1_1.md for security constraints.</description></intro>
+
+  <item title="1. Create the course file">
+    <description>Create a new file named courses/my_course.json. Start with the required top-level fields.</description>
+    <subitem label="Set schemaVersion to '1.0'." skip="false"/>
+    <subitem label="Set course to your course title (max 200 chars)." skip="false"/>
+    <subitem label="Set locale to 'en' (or 'fr' for French command names)." skip="false"/>
+    <subitem label="Add a tree array with at least one chapter." skip="false"/>
+  </item>
+
+  <item title="2. Structure chapters and steps">
+    <description>Each chapter has a title and children (array of steps). Steps can nest up to 4 levels deep (5 total with the chapter). Keep courses under 50 chapters and 500 total actions.</description>
+    <subitem label="Each chapter needs title (required) and children (required, at least one step)." skip="false"/>
+    <subitem label="Each step needs title (required). actions and check are optional." skip="false"/>
+    <subitem label="A step with no actions is informational (description only)." skip="false"/>
+  </item>
+
+  <item title="3. Write actions (directives)">
+    <description>Actions are the commands GeoGebra executes when the student clicks Run Step. Each action has a directive type and a value.</description>
+    <subitem label="CMD: evalCommand — e.g. 'A = (1, 2)' or 'c = Circle(O, 1)'." skip="false"/>
+    <subitem label="CAS: evalCommandCAS — e.g. 'Simplify(cos(x)^2 + sin(x)^2)'." skip="false"/>
+    <subitem label="VAL: read a value — e.g. 'x(A)' to display the x-coordinate of A." skip="false"/>
+    <subitem label="OPEN: load a .ggb file — path must be relative, under the course directory, ending in .ggb." skip="false"/>
+    <subitem label="SAVE / PNG: save construction or export screenshot (desktop only)." skip="false"/>
+  </item>
+
+  <item title="4. Add validation checks">
+    <description>Checks give formative feedback when the student clicks the Check button. They are NOT grades — grades come from WIMS server-side.</description>
+    <subitem label="object_exists: check if a named object exists — e.g. variable: 'O'." skip="false"/>
+    <subitem label="value_equals: compare a numeric value — e.g. variable: 'y(A)', expected: 2.0, tolerance: 0.001." skip="false"/>
+    <subitem label="value_range: check a range — e.g. expected: {min: 0.706, max: 0.708}." skip="false"/>
+    <subitem label="cas_equals: compare CAS output — e.g. variable: 'Simplify(sin(x)^2+cos(x)^2)', expected: '1'." skip="false"/>
+    <subitem label="Add feedback.pass and feedback.fail messages for student guidance." skip="false"/>
+  </item>
+
+  <item title="5. Security constraints">
+    <description>The course executor enforces an allowlist. Blocked commands will be rejected at runtime. See the security spec for the full list.</description>
+    <subitem label="TABLE_SCRIPTING commands are blocked: Execute, RunClickScript, RunUpdateScript, ExportImage, etc." skip="false"/>
+    <subitem label="Individual blocks: Delete, Rename, Pan, ZoomIn/Out, CenterView, SetPerspective." skip="false"/>
+    <subitem label="Safe styling allowed: SetColor, SetPointStyle, SetLineThickness, SetCaption, ShowLabel, SetFixed, Slider, Checkbox." skip="false"/>
+    <subitem label="OPEN paths: no .., no absolute paths, no URLs, .ggb extension only." skip="false"/>
+    <subitem label="Sequence limit: max 10,000 iterations." skip="false"/>
+  </item>
+
+  <item title="6. Target 2D vs 3D">
+    <description>On the RCP desktop, there are separate 2D and 3D GeoGebra instances. Specify which one each action targets.</description>
+    <subitem label="Default target is '2d' (omit the field for 2D commands)." skip="false"/>
+    <subitem label="Set target: '3d' for 3D commands like Point(1,2,3) or Plane(A,B,C)." skip="false"/>
+    <subitem label="On the web, both targets go to the same applet (3D view must be open)." skip="false"/>
+  </item>
+
+  <item title="7. Validate and test">
+    <description>Before distributing, validate your course file against the JSON schema.</description>
+    <subitem label="VS Code task 'Schema: Validate course file' runs jsonschema validation." skip="false"/>
+    <subitem label="Launch with: launch.ps1 -Course courses/my_course.json (desktop)." skip="false"/>
+    <subitem label="Or open course-host.html?course=courses/my_course.json (web)." skip="false"/>
+    <subitem label="Check that all steps execute and all checks pass/fail as expected." skip="false"/>
+  </item>
+
+  <item title="8. Include .ggb files">
+    <description>If your course loads pre-built constructions, place .ggb files in the same directory as course.json.</description>
+    <subitem label="Use OPEN directive with a relative path: 'constructions/setup.ggb'." skip="false"/>
+    <subitem label="The .ggb file is scanned for embedded scripts. Files with geogebra_javascript.js, script elements, or ggbscript blocks are rejected." skip="false"/>
+    <subitem label="Set trustedGgb: true only if you vouch for the embedded scripts." skip="false"/>
+  </item>
+</cheatsheet>

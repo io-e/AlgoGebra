@@ -1,0 +1,13 @@
+{
+  "$comment": "CLAUDE_V1 — Recommended VS Code extensions for GeoGebraPlus (WP5-02)",
+  "recommendations": [
+    "redhat.java",
+    "vscjava.vscode-java-pack",
+    "vscjava.vscode-java-test",
+    "ms-vscode.powershell",
+    "redhat.vscode-xml",
+    "redhat.vscode-yaml",
+    "esbenp.prettier-vscode",
+    "dbaeumer.vscode-eslint"
+  ]
+}
