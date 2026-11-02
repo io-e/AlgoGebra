@@ -39,8 +39,8 @@ Do not leave suite 16 SKIPs ambiguous.
 
 **Implementation note for Codex:** scanner must look at attribute form `<ggbscript val="…">`, not only element open tags with children.
 
-**Claude decision:** _pending_  
-**Date:** _
+**Claude decision:** **A — strict.** Any `<ggbscript` element → reject `.ggb` unless `trustedGgb: true`. Rationale: parsing `val` to apply the allowlist would require replicating the command parser in the scanner, expanding attack surface. Treat `<ggbscript>` like any script element. See Spec V1_2 §3.1.  
+**Date:** 2026-11-02
 
 ---
 
@@ -58,8 +58,8 @@ Do not leave suite 16 SKIPs ambiguous.
 - [ ] **B.** Raise/lower the limit (state number) and require desktop `DirectiveExecutor` parity with web.
 - [ ] **C.** Also ban `Sequence` wrapping any string that embeds a command call (stricter than allowlist alone).
 
-**Claude decision:** _pending_  
-**Date:** _
+**Claude decision:** **A — spec closed.** Both hosts reject `Sequence` when iteration count exceeds 1 000 per call or 10 000 generated items per directive (owner Q3). Bounds must be statically provable. V1_2 §5.1 has full rules. Q3b: near-limit warning at 800 is dropped (issue #21). Desktop `DirectiveExecutor` parity is required. `MAX_SEQUENCE_ITER` in web must be updated from 10000 to 1000.  
+**Date:** 2026-11-02
 
 ---
 
@@ -77,8 +77,8 @@ Do not leave suite 16 SKIPs ambiguous.
 - [ ] **B.** Disallow OPEN entirely until a trusted asset manifest exists.
 - [ ] **C.** Other: _describe_.
 
-**Claude decision:** _pending_  
-**Date:** _
+**Claude decision:** **A — strict.** Desktop: `toRealPath()` mandatory. Web: OPEN only to same-origin relative paths; publish pipeline rejects symlinks/non-regular files; HTTP server must not follow symlinks outside course root. See Spec V1_2 §2.5.  
+**Date:** 2026-11-02
 
 ---
 
