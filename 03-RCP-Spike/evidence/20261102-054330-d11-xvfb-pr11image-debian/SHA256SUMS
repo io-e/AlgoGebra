@@ -1,0 +1,13 @@
+150165a998d9706d6a713f2cbe41219a817124239e12df73efad36843abe525e  ./SUMMARY_GROK_V1.md
+a60baacecc219938c4b085af6eb10c341caafd8869c9aaae1e9ed981f76a49a1  ./run1/D-11-course-tree.directives.tsv
+9ebf9f789aab8f01fecbf5c5287ba5b86d51f15e0f48de36036a48137427a296  ./run1/D-11-course-tree.log
+e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855  ./run1/D-11-course-tree.log.err
+e4d5e71ad512ac5b383b2a944f2d2b9241c1f1da3792e6a622ed4d27d27f0e23  ./run1/Run_All_20261102_054301_GROK_V1.csv
+583ac7516e9fedbaa12fa392eefc172cba182bb8d9283dc12cb680f6a3cd4568  ./run1/S_D-11_CourseTree_GROK_V1.log
+6c6b6b3d9339c7a7261f3cf27d70875cf451c4ecddd49260039791d95cc448e0  ./run1/S_D-11_GROK_V1.csv
+a60baacecc219938c4b085af6eb10c341caafd8869c9aaae1e9ed981f76a49a1  ./run2/D-11-course-tree.directives.tsv
+c7c2402a29531ce4f916181d1cf84d5167f593fb03669fb7f0f56c894c396116  ./run2/D-11-course-tree.log
+e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855  ./run2/D-11-course-tree.log.err
+e4d5e71ad512ac5b383b2a944f2d2b9241c1f1da3792e6a622ed4d27d27f0e23  ./run2/Run_All_20261102_054321_GROK_V1.csv
+3c2db68e19f9247a75bf9412bfe24fc9220616305f76b4e667d0244f9742f6fd  ./run2/S_D-11_CourseTree_GROK_V1.log
+937df60d8c553f983ced3fb01b7f65b6f99b2420c53bd25d8c088a3281c6fbf5  ./run2/S_D-11_GROK_V1.csv
