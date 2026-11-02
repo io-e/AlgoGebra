@@ -82,7 +82,7 @@ Installed image: `D:\ALF_ZGit\G1_Geogebra_Migration\bin\GeoGebraPlus-RCP-0.1.0-w
 | D-03 | **PASS** | (unchanged from Phase 0) 50 bundles resolve, jogl2 fragment wired. |
 | D-04 | **PARTIAL** | Core embedding PASS: SWT shell hosts `GeoGebraPanel`, Algebra View + toolbars visible, resize/redraw works, `C=5` accepted. Input/focus PARTIAL: "Please check your input" warning on Enter; clipboard and high-DPI not tested. |
 | D-05 | **PARTIAL** | **Strict installed-image run (r3):** GIAC, GlueGen, and all 5 JOGL DLLs load from product classpath JARs — **no boot delegation, no `java.library.path`, no manual extraction.** CAS and 3D initialization pass. Remaining open: owner review of the product-local GIAC loader replacement; strict-mode 3D visual screenshot not captured. |
-| P-08 | PARTIAL | Pin known (`375db7faf54`, `5.4.934.0`), acceptance tag not chosen. |
+| P-08 | **PASS** | Pin `375db7faf54` / `5.4.934.0`, acceptance tag `ggb-baseline-v5.4.934.0` created (2026-11-02). |
 
 **D-05 native loading architecture (r3):** Three OSGi fragment bootstraps extract DLLs from classifier-JAR resources in the owning bundle's classloader and call `System.load` with absolute paths. This replaces the initial boot-delegation workaround:
 - `GiacNativeBootstrap` (fragment of `giac.jni` bundle) — replaces upstream `NativeLibClassPathLoader`
