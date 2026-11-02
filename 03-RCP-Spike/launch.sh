@@ -15,7 +15,7 @@ try_java() { local j="$1" src="$2" m; [ -n "$j" ] && [ -x "$j" ] || { [ -n "$j" 
 find_java() {
   local explicit="${GGB_JAVA:-${JAVA:-}}"
   if [ -n "$explicit" ]; then try_java "$explicit" "GGB_JAVA" && return 0
-    echo "launch.sh: GGB_JAVA/JAVA='$explicit' is not a usable Java >= $MIN (${TRIED[*]})" >&2; exit 4; fi
+    echo "launch.sh: GGB_JAVA/JAVA='$explicit' is not a usable Java >= $MIN (${TRIED[*]})" >&2; exit 69; fi
   for d in "$IMAGE/jre" "$IMAGE/jdk"; do try_java "$d/bin/java" "bundled" && return 0; done
   [ -n "${JAVA_HOME:-}" ] && try_java "$JAVA_HOME/bin/java" "JAVA_HOME" && return 0
   if command -v mise >/dev/null 2>&1; then local mw; mw="$(mise where java 2>/dev/null || true)"; [ -n "$mw" ] && try_java "$mw/bin/java" "mise" && return 0; fi
@@ -23,7 +23,7 @@ find_java() {
   command -v java >/dev/null 2>&1 && try_java "$(command -v java)" "PATH" && return 0
   echo "launch.sh: no Java >= $MIN found. Set GGB_JAVA=/path/to/bin/java or JAVA_HOME, or install a JDK (e.g. apt install openjdk-25-jre, or 'mise use java@25')." >&2
   [ ${#TRIED[@]} -gt 0 ] && printf '  tried: %s\n' "${TRIED[@]}" >&2
-  exit 4; }
+  exit 69; }
 find_java
 for a in "$@"; do [ "$a" = "--print-java" ] && { echo "JAVA=$JAVA SOURCE=$JAVA_SRC MAJOR=$JAVA_MAJOR MIN=$MIN"; exit 0; }; done
 HEADLESS=false; BOOT=false
