@@ -1,0 +1,45 @@
+{
+ "schemaVersion": "1.0",
+ "course": "GROK_V1 security corpus",
+ "tree": [
+  {
+   "title": "Ch",
+   "children": [
+    {
+     "title": "L6",
+     "children": [
+      {
+       "title": "L1",
+       "children": [
+        {
+         "title": "L2",
+         "children": [
+          {
+           "title": "L3",
+           "children": [
+            {
+             "title": "L4",
+             "children": [
+              {
+               "title": "L5",
+               "actions": [
+                {
+                 "directive": "CMD",
+                 "value": "A=(1,1)"
+                }
+               ]
+              }
+             ]
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}
