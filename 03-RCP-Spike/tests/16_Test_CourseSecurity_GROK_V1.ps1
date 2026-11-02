@@ -5,7 +5,8 @@
 #   validator - Codex WP9-02 (allow-list after parse, OPEN path rules, limits)   } SKIP 'pending WP9-02/04' unless
 #   scanner   - Codex WP9-04 (GgbScriptScanner)                                   } COURSE_VALIDATOR is set
 # Contract for Codex: COURSE_VALIDATOR = executable (or 'java -cp ... Main') called as `<cmd> <course.json>` with the course dir
-# prepared by this suite; first stdout token ACCEPT | ACCEPT_WITH_WARNING | REJECT (rest = reason). Exit code is ignored.
+# prepared by this suite; first stdout token ACCEPT | ACCEPT_WITH_WARNING | REJECT (rest = reason/warnings). Exit code is ignored.
+# Owner Q4 (issue #17): structured result; a warning never overrides a REJECT; any other first token = CONTRACT_VIOLATION (FAIL).
 # Reference oracles below (OPEN path rules, archive scan) are test-side only: they check the corpus expectations, not the product.
 . (Join-Path $PSScriptRoot 'lib/TestFramework_GROK_V1.ps1')
 Initialize-TestSuite '16_CourseSecurity'
@@ -63,9 +64,11 @@ function Test-SpecNaiveScan([string]$Ggb) { # Spec 3.1 containsScriptElements() 
 foreach ($r in $rows | Where-Object { $_.Layer -ne 'schema' }) { $c = Get-Content (Get-CasePath $r) -Raw | ConvertFrom-Json -Depth 20
     $acts = @($c.tree | ForEach-Object { $_.children } | ForEach-Object { $_.actions }) | Where-Object { $_ }
     $open = @($acts | Where-Object directive -eq 'OPEN')
-    if ($r.Note -eq 'OPEN path') { $v = $open[0].value; $why = Test-RefOpenPath $v
+    if ($r.Note -like 'OPEN path*') { $v = $open[0].value; $why = Test-RefOpenPath $v
         if ($r.Id -eq 'T-27' -and -not $linkOk) { Skip-Test "REF-$($r.Id)" 'symlink could not be created on this host'; continue }
-        $got = if ($why) { 'REJECT' } else { 'ACCEPT' }; Test-Ok "REF-$($r.Id)-open-path" ($got -eq $r.Expected) "OPEN '$v' -> $got ($why) expected $($r.Expected)" 'P1' }
+        # prescan-fail-closed (owner Q2): path rules allow the file, the verdict is REJECT only because untrusted OPEN is blocked until the scanner
+        $wantPath = if ($r.Note -like '*prescan-fail-closed*') { 'ACCEPT' } else { $r.Expected }
+        $got = if ($why) { 'REJECT' } else { 'ACCEPT' }; Test-Ok "REF-$($r.Id)-open-path" ($got -eq $wantPath) "OPEN '$v' -> path rules $got ($why) expected $wantPath; case verdict $($r.Expected)" 'P1' }
     elseif ($r.Note -eq 'ggb') { $g = Join-Path $cdir $open[0].value; $fs = @(Get-RefScan $g)
         $got = if ($fs.Count -eq 0) { 'ACCEPT' } elseif ($open[0].trustedGgb) { 'ACCEPT_WITH_WARNING' } else { 'REJECT' }
         Test-Ok "REF-$($r.Id)-scan" ($got -eq $r.Expected) "$($open[0].value): findings=[$($fs -join ', ')] -> $got expected $($r.Expected)" 'P1' } }
@@ -77,6 +80,8 @@ else { Test-Ok 'SPEC-GAP-1-naive-scan-misses-ggbscript' $true 'spec scan catches
 foreach ($r in $rows | Where-Object { $_.Layer -in 'validator', 'scanner' }) { $p = Get-CasePath $r
     if (-not $env:COURSE_VALIDATOR) { Skip-Test "VAL-$($r.Id)" "pending WP9-02/04 (Codex): expected $($r.Expected) - $($r.Reason) [$($r.Ref)]" $(if ($r.Ref -like 'SPEC-GAP*') { 'P1' } else { 'P0' }); continue }
     $parts = $env:COURSE_VALIDATOR -split ' '; $o = (& $parts[0] @($parts | Select-Object -Skip 1) $p 2>&1 | Out-String).Trim()
-    $got = ($o -split '\s+')[0]; Test-Ok "VAL-$($r.Id)" ($got -eq $r.Expected) "validator: '$o' expected $($r.Expected) ($($r.Reason))" 'P0' }
+    # owner Q4: first token is exactly ACCEPT | ACCEPT_WITH_WARNING | REJECT; anything else is a contract violation (FAIL)
+    $first = (($o -split "`r?`n") | Where-Object { $_.Trim() } | Select-Object -First 1); $got = if ($first -match '^\s*(ACCEPT_WITH_WARNING|ACCEPT|REJECT)(\s|$)') { $Matches[1] } else { 'CONTRACT_VIOLATION' }
+    Test-Ok "VAL-$($r.Id)" ($got -eq $r.Expected) "validator: '$o' -> $got expected $($r.Expected) ($($r.Reason))" 'P0' }
 Remove-Item $work -Recurse -Force -ErrorAction SilentlyContinue
 Complete-TestSuite

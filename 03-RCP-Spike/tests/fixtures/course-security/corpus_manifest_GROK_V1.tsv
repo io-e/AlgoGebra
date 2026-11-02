@@ -15,7 +15,7 @@ T-12	courses/T-12_GROK_V1.json	validator	SCHEMA_VALID	REJECT	Commands.Delete blo
 T-12b	courses/T-12b_GROK_V1.json	validator	SCHEMA_VALID	REJECT	fr Delete	spec 1.1	locale fr
 T-19	courses/T-19_GROK_V1.json	validator	SCHEMA_VALID	REJECT	Commands.Rename blocked	spec 1.2	
 T-20	courses/T-20_GROK_V1.json	validator	SCHEMA_VALID	REJECT	Commands.Repeat TABLE_SCRIPTING (runaway loop)	spec 1.2	
-T-21	courses/T-21_GROK_V1.json	validator	SCHEMA_VALID	REJECT	runaway Sequence (TABLE_LIST is allowed: needs a size/time limit)	SPEC-GAP-2	spec 5 has no element/time limit
+T-21	courses/T-21_GROK_V1.json	validator	SCHEMA_VALID	REJECT	runaway Sequence 1e9 iterations > 1000 per Sequence (owner Q3)	owner Q3 issue #17	
 T-22	courses/T-22_GROK_V1.json	validator	SCHEMA_VALID	REJECT	Commands.UpdateConstruction TABLE_SCRIPTING	spec 1.2	
 T-08	courses/T-08_GROK_V1.json	validator	SCHEMA_VALID	ACCEPT	safe construction	spec 6 T-08	
 T-09	courses/T-09_GROK_V1.json	validator	SCHEMA_VALID	ACCEPT	allowed scripting SetColor	spec 6 T-09	
@@ -30,14 +30,14 @@ T-05b	courses/T-05b_GROK_V1.json	validator	SCHEMA_VALID	REJECT	protocol-relative
 T-05c	courses/T-05c_GROK_V1.json	validator	SCHEMA_VALID	REJECT	file URL	spec 2.2	OPEN path
 T-26	courses/T-26_GROK_V1.json	validator	SCHEMA_VALID	REJECT	non-.ggb extension	spec 2.2	OPEN path
 T-27	courses/T-27_GROK_V1.json	validator	SCHEMA_VALID	REJECT	symlink inside course dir pointing outside (normalize() alone does not catch it; needs toRealPath)	SPEC-GAP-3	OPEN path
-T-28	courses/T-28_GROK_V1.json	validator	SCHEMA_VALID	ACCEPT	clean archive under course dir	spec 2.1	OPEN path
+T-28	courses/T-28_GROK_V1.json	validator	SCHEMA_VALID	REJECT	untrusted OPEN blocked pre-scanner (fail-closed, owner Q2); after the WP9-04 scanner a clean in-course .ggb may ACCEPT; trusted files need a visible warning	owner Q2 issue #17	OPEN path;prescan-fail-closed
 T-06	courses/T-06_GROK_V1.json	scanner	SCHEMA_VALID	REJECT	geogebra_javascript.js with ggbOnInit code	spec 6 T-06	ggb
 T-07	courses/T-07_GROK_V1.json	scanner	SCHEMA_VALID	REJECT	per-object <javascript val=...> click script	spec 6 T-07	ggb
 T-29	courses/T-29_GROK_V1.json	scanner	SCHEMA_VALID	REJECT	per-object <ggbscript val="Execute(...)"> (spec 3.1 containsScriptElements misses '<ggbscript' with val=)	SPEC-GAP-1	ggb
 T-30	courses/T-30_GROK_V1.json	scanner	SCHEMA_VALID	REJECT	<ggbscript onUpdate=...>	spec 3	ggb
 T-31	courses/T-31_GROK_V1.json	scanner	SCHEMA_VALID	REJECT	Execute inside geogebra_macro.xml	spec 3	ggb
 T-32	courses/T-32_GROK_V1.json	scanner	SCHEMA_VALID	REJECT	<command name="Execute"> in geogebra.xml construction	spec 3	ggb
-T-33	courses/T-33_GROK_V1.json	scanner	SCHEMA_VALID	ACCEPT_WITH_WARNING	trustedGgb=true loads scripted file with a warning	spec 3.2	ggb
+T-33	courses/T-33_GROK_V1.json	scanner	SCHEMA_VALID	ACCEPT_WITH_WARNING	trustedGgb=true loads scripted file with a warning	spec 3.2; owner Q4 issue #17	ggb
 T-34	courses/T-34_GROK_V1.json	schema	SCHEMA_INVALID	REJECT	unknown directive	schema action.directive enum	
 T-35	courses/T-35_GROK_V1.json	schema	SCHEMA_INVALID	REJECT	additional property	schema additionalProperties	
 T-36	courses/T-36_GROK_V1.json	schema	SCHEMA_INVALID	REJECT	missing value	schema required	
@@ -50,4 +50,15 @@ T-11	courses/T-11_GROK_V1.json	validator	SCHEMA_VALID	REJECT	tree depth > 5 (sch
 T-42	courses/T-42_GROK_V1.json	validator	SCHEMA_VALID	REJECT	more than 500 total actions (600)	spec 5	
 T-43	courses/T-43_GROK_V1.json	validator	SCHEMA_VALID	REJECT	more than 10 OPEN actions	spec 5	
 T-44	courses/T-44_GROK_V1.json	validator	SCHEMA_VALID	REJECT	trustedGgb on a non-OPEN action	spec 3.2	schema allows it
+T-45	courses/T-45_GROK_V1.json	validator	SCHEMA_VALID	ACCEPT	Sequence at the per-Sequence boundary (1000 iterations)	owner Q3/Q4 issue #17	Q3 accept boundary
+T-46	courses/T-46_GROK_V1.json	validator	SCHEMA_VALID	REJECT	Sequence 1001 iterations > 1000 per Sequence	owner Q3/Q4 issue #17	Q3 over-budget
+T-47	courses/T-47_GROK_V1.json	validator	SCHEMA_VALID	REJECT	Sequence bound depends on an object (not statically provable)	owner Q3/Q4 issue #17	Q3 dynamic
+T-48	courses/T-48_GROK_V1.json	validator	SCHEMA_VALID	REJECT	Sequence bound expression 10^12 (over budget; bounds must be literal/provable)	owner Q3/Q4 issue #17	Q3 over-budget
+T-49	courses/T-49_GROK_V1.json	validator	SCHEMA_VALID	ACCEPT	nested Sequence 100x100 = 10000 items (directive budget boundary)	owner Q3/Q4 issue #17	Q3 accept boundary
+T-50	courses/T-50_GROK_V1.json	validator	SCHEMA_VALID	REJECT	nested Sequence 100x101 = 10100 items > 10000 per directive	owner Q3/Q4 issue #17	Q3 nested-over-budget
+T-51	courses/T-51_GROK_V1.json	validator	SCHEMA_VALID	ACCEPT	10 Sequences of 1000 in one directive = 10000 items (boundary)	owner Q3/Q4 issue #17	Q3 accept boundary
+T-52	courses/T-52_GROK_V1.json	validator	SCHEMA_VALID	REJECT	11 Sequences of 1000 in one directive = 11000 items > 10000	owner Q3/Q4 issue #17	Q3 over-budget
+T-53	courses/T-53_GROK_V1.json	validator	SCHEMA_VALID	REJECT	short form Sequence(1001) > 1000 iterations	owner Q3/Q4 issue #17	Q3 over-budget
+T-54	courses/T-54_GROK_V1.json	validator	SCHEMA_VALID	REJECT	Sequence step 0 (unbounded / non-terminating)	owner Q3/Q4 issue #17	Q3 dynamic/unbounded
+T-55	courses/T-55_GROK_V1.json	validator	SCHEMA_VALID	REJECT	trusted OPEN warning must not override a blocked command in the same step	owner Q3/Q4 issue #17	Q4 warning never overrides rejection
 T-10	(generated: courses/T-10_big_GROK_V1.json, >1 MB)	validator	SCHEMA_VALID	REJECT	course.json > 1 MB	spec 6 T-10	schema-valid (50x100 steps, 200-char titles); only the size limit rejects it
