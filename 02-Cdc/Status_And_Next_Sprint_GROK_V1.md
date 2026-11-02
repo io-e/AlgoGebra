@@ -16,7 +16,7 @@
 | Grok extra | G-T1..G-T5, P0/P1, F-1 mise warning, test-side validator CLI over real `StepValidator` + headless `AppDNoGui`, final-tip Run_All | #8, #10, #12, #18, #19 |
 | Codex | X-01..X-08 model/parser/panel/executor/validator, X-12 panel in host, X-13 `launch.ps1 -Course`, X-14 build, Q2–Q4 security (fail-closed OPEN, Sequence 1000/10000, ACCEPT_WITH_WARNING) | #11, #18 |
 | Claude | C-01..C-04, C-05 trigonometry + C-23 matrix courses, C-07/C-09..C-12 web host, C-16 VS Code, C-17 authoring cheat sheet | repo |
-| Owner | Q1–Q8 decided (issue #17) | states.yaml |
+| Owner | Q1–Q8 decided (issue #17); Q3b drop near-limit warning (#21) | states.yaml |
 
 ## 2. Remaining
 | Item | Lane | Blocking? | Note |
@@ -24,7 +24,7 @@
 | BUG-014 `evalCommand` false in the RCP product (D-11, P-02, P-04) | Codex | **yes** (D-11, X-17, C-23 smoke) | persists with #18 host on the rebuilt image |
 | D-11 CAS result empty | Codex | yes (D-11) | probably the same root as BUG-014 / CAS init |
 | WP9-04 `GgbScriptScanner` (X-09) | Codex | yes for untrusted OPEN (Q2) | then a clean in-course .ggb may ACCEPT |
-| Near-limit Sequence warning (≥800) vs corpus ACCEPT (T-45/T-51) | Owner → Codex/Grok | no | keep (update corpus) or drop |
+| Remove near-limit Sequence warning (≥800), Q3b DECIDED 2026-11-02 ([#21](https://github.com/io-e/AlgoGebra/issues/21)) | Codex | no | T-45/T-51 must return ACCEPT; Grok verifies |
 | Trusted-OPEN SWT dialog: attended check | Codex/Owner (Windows) | no | not visually tested |
 | Spec: SPEC-GAP-1 `<ggbscript>`, SPEC-GAP-3 realpath, §5 Sequence 1000/10000 | Claude (Q5) | no | tests already match the decisions |
 | BUG-015 PARI empty error (X-06), BUG-016 reproducible build (O-03), BUG-010 input dialog (P-07) | Codex | no | |
@@ -42,7 +42,7 @@
 | 1 | BUG-014 root cause + fix (evalCommand false in RCP) | Codex | 6 | — |
 | 2 | D-11 CAS empty | Codex | 2 | 1 |
 | 3 | `GgbScriptScanner` + suite 16 VAL-T-06/07/29–33 green | Codex | 4 | Claude #6 |
-| 4 | Decide near-limit warning; align corpus or code | Owner + Grok/Codex | 0.5 | — |
+| 4 | Remove near-limit warning (Q3b, #21); Grok verifies suite 16 136/0/1 | Codex | 0.5 | — |
 | 5 | Attended Windows: trusted-OPEN dialog, D-11, W-09 Chrome, unified suite 18 | Owner/Codex | 2 | 1 |
 | 6 | Spec V1_1: SPEC-GAP-1/3 + Sequence limits + result states | Claude | 2 | — |
 | 7 | Rebuild Linux image, rerun D-11/LC-18/LC-19, G-09 screenshot, G-11 locale | Grok | 2 | 1, 2 |
@@ -51,7 +51,7 @@
 | 10 | BUG-015 PARI empty error | Codex | 1.5 | — |
 | 11 | G-17 reconciliation report | Grok | 1 | 5, 7 |
 | 12 | WIMS S-01/S-02 contract decision → unblock G-14..G-16 | Owner | 0.5 | — |
-| | **Total** | | **25.5** (Codex 13.5, Grok 7, Claude 2, Owner/mixed 3) | |
+| | **Total** | | **25.5** (Codex 14, Grok 7, Claude 2, Owner/mixed 2.5) | |
 
 ## 4. Verdict
 **New planning needed: yes, a light one.** The original 4-week plan is still the right frame, and Grok's Sprint 1–2 items are all done. What it doesn't cover:
