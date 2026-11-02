@@ -31,10 +31,8 @@ import org.geogebra.desktop.main.LocalizationD;
  */
 public final class CourseCorpusRealValidatorTest_GROK_V1 {
 
-    /** Known product gaps; owner decision Q3b (issue #21): near-limit warning to be removed by Codex. */
-    static final Map<String, String> XFAIL = Map.of(
-            "T-45", "issue #21 (Q3b): near-limit Sequence warning returns ACCEPT_WITH_WARNING at 1000 iterations",
-            "T-51", "issue #21 (Q3b): near-limit Sequence warning returns ACCEPT_WITH_WARNING at 1000 iterations");
+    /** No near-limit Sequence warning XFAILs remain after owner decision Q3b (issue #21). */
+    static final Map<String, String> XFAIL = Map.of();
 
     private int pass, fail, xfail, xpass, n;
 

@@ -24,7 +24,6 @@ public final class StepValidator {
 
     static final int MAX_SEQUENCE_ITERATIONS = 1_000;
     static final long MAX_SEQUENCE_GENERATED_ITEMS_PER_DIRECTIVE = 10_000;
-    static final int SEQUENCE_WARNING_THRESHOLD = 800;
     private static final int MAX_EXPRESSION_DEPTH = 256;
     private static final String TRUSTED_OPEN_WARNING = "This .ggb file is explicitly trusted but its embedded scripts "
             + "are not scanned; scripts may execute when it is opened.";
@@ -121,10 +120,7 @@ public final class StepValidator {
                 try {
                     long iterations = sequenceIterations(command);
                     state.sequenceIterations.put(command, iterations);
-                    if (iterations >= SEQUENCE_WARNING_THRESHOLD) {
-                        state.warnings.add("Sequence uses " + iterations + " iterations, close to the per-Sequence limit of "
-                                + MAX_SEQUENCE_ITERATIONS + ".");
-                    }
+                    // Q3b (#21): valid near-limit sequences are plain ACCEPT; warnings remain for other Q4 cases.
                 } catch (IllegalArgumentException error) {
                     state.rejection = error.getMessage();
                     return;
