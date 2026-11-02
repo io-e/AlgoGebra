@@ -1,0 +1,9 @@
+import org.geogebra.desktop.headless.AppDNoGui; import org.geogebra.desktop.main.LocalizationD;
+import org.geogebra.common.main.App;
+public class B14 { public static void main(String[] a) throws Exception {
+  App app = new AppDNoGui(new LocalizationD(3), false);
+  for (String c : new String[]{"A=(1,2)","f(x)=x^2","f2(x)=x^2-2x","m={{1,2},{3,4}}","O=(0,0)","c=Circle(O,1)"}) {
+    try { var r = app.getKernel().getAlgebraProcessor().processAlgebraCommandNoExceptionHandling(c, false, app.getErrorHandler(), false, null);
+      System.out.println(c+" -> "+(r==null?"null":r.length)); } catch (Throwable t) { System.out.println(c+" EXC "+t); t.printStackTrace(System.out); }
+    System.out.println("  ggbApi.evalCommand="+app.getGgbApi().evalCommand(c.replace("f(","q(").replace("A=","A1=")));
+  } System.exit(0);} }

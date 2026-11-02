@@ -1,0 +1,6 @@
+CMD	O = (0, 0)	O = (0, 0)
+CMD	c = Circle(O, 1)	c = Circle(O, 1)
+CMD	P = Point(c)	P = Point(c)
+CMD	SetColor(c, 0, 0, 255)	SetColor(c, 0, 0, 255)
+VAL	x(P)	x(P)
+CAS	Simplify(cos(x)^2 + sin(x)^2)	Simplify(cos(x)^2 + sin(x)^2)

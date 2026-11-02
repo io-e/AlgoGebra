@@ -1,0 +1,17 @@
+# Suite: S_D-11
+# Started: 2026-11-02T08:06:37.9850083+01:00
+# Host: grok-bot-vm-419969949 / Debian GNU/Linux 13 (trixie) / pwsh 7.6.9
+
+# Scenario: D-11 - Course tree renders in SWT Tree | gate - | client desktop
+# Evidence: commit=39ee335 image=/workspace/AlgoGebra/image-final/GeoGebraPlus-RCP-0.1.0-linux-gtk-x86_64 pin=375db7faf5407390bb322165f2414415da8faeda version=5.4.934.0 os=Unix 6.12.94.0 pwsh=7.6.9
+ok 1 - [P0] D11-01-schema-valid :: Test-Json -SchemaFile: True
+ok 2 - [P0] D11-02-product-launches :: log=/workspace/AlgoGebra/wt-b14/03-RCP-Spike/tests/results/20261102_080637-grok-bot-vm-419969949/D-11-course-tree.log
+ok 3 - [P1] D11-03-tree-renders :: course=/workspace/AlgoGebra/wt-b14/courses/trigonometry_intro.json chapters=5 schema=1.0
+ok 4 - [P0] D11-04-step-O :: O = (0, 0) -> st=OK val=true 
+ok 5 - [P0] D11-04-step-circle :: c = Circle(O, 1) -> st=OK val=true 
+ok 6 - [P0] D11-05-cas-identity :: CAS result: [1]
+ok 7 - [P1] D11-06-no-error-dialog :: error-dialog markers in log: 0
+ok 8 - [P1] D11-07-no-timeout :: Completed in 8s
+
+PASS: 8 FAIL: 0 SKIP: 0
+# CSV: /workspace/AlgoGebra/wt-b14/03-RCP-Spike/tests/results/20261102_080637-grok-bot-vm-419969949/S_D-11_GROK_V1.csv

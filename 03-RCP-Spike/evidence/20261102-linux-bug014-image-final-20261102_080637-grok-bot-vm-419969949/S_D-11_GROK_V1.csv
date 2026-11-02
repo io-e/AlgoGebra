@@ -1,0 +1,9 @@
+suite,num,id,status,priority,detail,ts
+S_D-11,1,D11-01-schema-valid,PASS,P0,"Test-Json -SchemaFile: True",2026-11-02T08:06:38.0790769+01:00
+S_D-11,2,D11-02-product-launches,PASS,P0,"log=/workspace/AlgoGebra/wt-b14/03-RCP-Spike/tests/results/20261102_080637-grok-bot-vm-419969949/D-11-course-tree.log",2026-11-02T08:06:46.1644254+01:00
+S_D-11,3,D11-03-tree-renders,PASS,P1,"course=/workspace/AlgoGebra/wt-b14/courses/trigonometry_intro.json chapters=5 schema=1.0",2026-11-02T08:06:46.1729878+01:00
+S_D-11,4,D11-04-step-O,PASS,P0,"O = (0, 0) -> st=OK val=true ",2026-11-02T08:06:46.1822142+01:00
+S_D-11,5,D11-04-step-circle,PASS,P0,"c = Circle(O, 1) -> st=OK val=true ",2026-11-02T08:06:46.1831835+01:00
+S_D-11,6,D11-05-cas-identity,PASS,P0,"CAS result: [1]",2026-11-02T08:06:46.1841297+01:00
+S_D-11,7,D11-06-no-error-dialog,PASS,P1,"error-dialog markers in log: 0",2026-11-02T08:06:46.1892102+01:00
+S_D-11,8,D11-07-no-timeout,PASS,P1,"Completed in 8s",2026-11-02T08:06:46.1912114+01:00

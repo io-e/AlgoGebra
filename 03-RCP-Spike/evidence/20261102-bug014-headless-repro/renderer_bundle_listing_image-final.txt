@@ -1,0 +1,29 @@
+Archive:  /workspace/AlgoGebra/image-final/GeoGebraPlus-RCP-0.1.0-linux-gtk-x86_64/bundles/org.geogebra.migration.desktop.renderer-5.4.934.0.jar
+  Length      Date    Time    Name
+---------  ---------- -----   ----
+        0  2026-10-28 20:56   META-INF/
+     1817  2026-10-28 20:56   META-INF/MANIFEST.MF
+        0  2026-10-28 20:56   com/
+        0  2026-10-28 20:56   com/himamis/
+        0  2026-10-28 20:56   com/himamis/retex/
+        0  2026-10-28 20:56   com/himamis/retex/renderer/
+        0  2026-10-28 20:56   com/himamis/retex/renderer/desktop/
+     1084  1980-02-01 00:00   com/himamis/retex/renderer/desktop/FactoryProviderDesktop.class
+     2795  1980-02-01 00:00   com/himamis/retex/renderer/desktop/IconHelper$1.class
+      686  1980-02-01 00:00   com/himamis/retex/renderer/desktop/IconHelper.class
+     3248  1980-02-01 00:00   com/himamis/retex/renderer/desktop/TestJlmDesktop.class
+        0  2026-10-28 20:56   com/himamis/retex/renderer/desktop/font/
+     3349  1980-02-01 00:00   com/himamis/retex/renderer/desktop/font/FontD.class
+     2097  1980-02-01 00:00   com/himamis/retex/renderer/desktop/font/FontFactoryDesktop.class
+     2819  1980-02-01 00:00   com/himamis/retex/renderer/desktop/font/FontLoaderD.class
+      701  1980-02-01 00:00   com/himamis/retex/renderer/desktop/font/FontRenderContextD.class
+      653  1980-02-01 00:00   com/himamis/retex/renderer/desktop/font/TextAttributeD.class
+     1376  1980-02-01 00:00   com/himamis/retex/renderer/desktop/font/TextAttributeProviderD.class
+     1555  1980-02-01 00:00   com/himamis/retex/renderer/desktop/font/TextLayoutD.class
+        0  2026-10-28 20:56   com/himamis/retex/renderer/desktop/graphics/
+     7084  1980-02-01 00:00   com/himamis/retex/renderer/desktop/graphics/Base64.class
+     7395  1980-02-01 00:00   com/himamis/retex/renderer/desktop/graphics/Graphics2DD.class
+     2939  1980-02-01 00:00   com/himamis/retex/renderer/desktop/graphics/GraphicsFactoryDesktop.class
+     1242  1980-02-01 00:00   com/himamis/retex/renderer/desktop/graphics/ImageD.class
+---------                     -------
+    40840                     24 files
