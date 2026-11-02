@@ -1,0 +1,11 @@
+# GROK_V1 evidence MANIFEST - immutable
+# run: 20261101_120011-grok-bot-vm-419969949 commit=a71fb38 date=2026-11-01T12:00:48.2288848+01:00 os=Unix 6.12.94.0 pwsh=7.6.9
+# totals: 8 pass, 0 fail, 1 skip, 0 bail; gate=MET
+# columns: path<TAB>bytes<TAB>sha256
+Run_All_20261101_120011_GROK_V1.csv	191	e2755da7561a960f29813fc8f89f8c977d72d9b0ef73df0a1820672bbc646022
+S_P-01_CleanProduct_GROK_V1.log	1998	d1354d78e96ecb7d19d719440a4274ca85fc4464d4ac99614dde303efbce617a
+S_P-01_GROK_V1.csv	1610	90d301d8178464b4e15d93bb2248cc0659be22c27599bac872c5e7e7ffa5479b
+S_P-01_ui.directives.tsv	66	52cd849ba50b0d90173e69ffbf0dde2c51f7a06eeb299bce8dd9f94df85ce07d
+S_P-01_ui.log	4793	b9ce6c0c5ea17a1f85c2ae991828e558efb46149aeba8065c240441beb0013ba
+S_P-01_ui.log.err	0	e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+screenshots/S_P-01_views.png	59799	551661a82a82c305ecf4b21b3ce5d0c0f84c6d542b2c322a0aa841b70ff31654

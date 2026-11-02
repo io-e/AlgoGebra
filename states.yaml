@@ -3,7 +3,7 @@ project: GeoGebraPlus / AlgoGebra RCP
 geogebra_pin: 375db7faf5407390bb322165f2414415da8faeda
 geogebra_version: 5.4.934.0
 repo: https://github.com/io-e/AlgoGebra
-updated: 2026-11-01T22:00+01:00
+updated: 2026-11-02T06:00+01:00
 codex_sprint1_stop: 02-Cdc/Decision_Codex_Sprint1_Stop_GROK_V1.md
 review: 02-Cdc/Review_Codex_Docs_Eclipse_Automation_Windows_GROK_V1.md
 sprint4_status: 02-Cdc/Sprint4_Course_Tree_Status_GROK_V1.md
@@ -59,8 +59,9 @@ next_order:
 merge_policy: no_merge_until_owner
 merge_order_suggested_by_grokbot: "#4_or_#9 -> #3 -> #7 -> #5 -> #8 -> #10 -> #6_last_after_rebase"
 pr_notes:
-  pr4_vs_pr9: "PR #9 includes PR #4 JDK fix — merge one, close the other"
-  pr6: "conflicts on states.yaml tip; fresh branch needed; merge last"
+  pr4_vs_pr9: "PR #9 includes PR #4 JDK fix (+F-1 mise warning) — merge #9, then close #4"
+  pr6: "SUPERSEDED by PR feat/grok-states-refresh (P-01 evidence + BUG-017 re-applied on tip bdfd306); do not merge #6"
+  pr12: "historical twin evidence; collision resolved in #9 (14fc3a6); W-09 fix applied in #13"
 open_prs_review_only:
   - {number: 3, url: "https://github.com/io-e/AlgoGebra/pull/3", suite: "16 71/0/44", note: "security corpus; skips await Codex validator"}
   - {number: 4, url: "https://github.com/io-e/AlgoGebra/pull/4", suite: "17 13/0/0", note: "BUG-017; superseded by #9 if #9 merges"}
@@ -68,9 +69,12 @@ open_prs_review_only:
   - {number: 6, url: "https://github.com/io-e/AlgoGebra/pull/6", suite: "P-01 8/0/1", note: "CONFLICT states.yaml; rebase/fresh branch; merge last"}
   - {number: 7, url: "https://github.com/io-e/AlgoGebra/pull/7", suite: "16 71/0/44", note: "G-T5 re-verify on 6baf1d4; unchanged"}
   - {number: 8, url: "https://github.com/io-e/AlgoGebra/pull/8", suite: "design+exit codes", note: "G-T1; ack comment pending owner"}
-  - {number: 9, url: "https://github.com/io-e/AlgoGebra/pull/9", suite: "18 17/0/2", note: "P0 launch.sh -Course; includes #4; LC-18/19 SKIP until panel"}
+  - {number: 9, url: "https://github.com/io-e/AlgoGebra/pull/9", suite: "18 unified 21/0/1 (image-pr11), 20/0/2 (r8); 17 15/0/0", note: "P0 launch.sh -Course + F-1; includes #4; suite 18 collision with #11 resolved; MERGEABLE; Windows run of unified suite 18 needed"}
   - {number: 10, url: "https://github.com/io-e/AlgoGebra/pull/10", suite: "Firefox+Mise", note: "P1 smoke PASS; W-09 browser still needs WAR"}
-  - {number: 11, url: "https://github.com/io-e/AlgoGebra/pull/11", suite: "course-tree sprint1", note: "Codex WP2-06+launch.ps1+X-T8; 16/16 suite18; attended UI pending"}
+  - {number: 11, url: "https://github.com/io-e/AlgoGebra/pull/11", suite: "course-tree sprint1", note: "MERGED 2026-11-02 04:34 UTC (bdfd306)"}
+  - {number: 12, url: "https://github.com/io-e/AlgoGebra/pull/12", suite: "twin18/WAR/W-09/D-11/16-adapter", note: "evidence; suite 16 via StepValidator adapter 108/6/1"}
+  - {number: 13, url: "https://github.com/io-e/AlgoGebra/pull/13", suite: "W-09 PW firefox 10/10 x2", note: "host page + harness + spec fixes"}
+  - {number: 14, url: "https://github.com/io-e/AlgoGebra/pull/14", suite: "D-11 5/3/0", note: "honest BUG-014 detection, Test-Json schema"}
 reviewed_documents_2026-10-30:
   governing_spec: 02-Cdc/Architecture_GeoGebraPlus_RCP_Web_Validation_GROK_V2.md
   language_plan: 02-Cdc/Plan_Configuration_Eclipse_Languages_PyDev_CDT_LSP4E_GROK_V1_1.md
@@ -97,7 +101,7 @@ gates:
 scenarios:
   # GROK_V1_2 2026-11-01: +D-11 +W-09 (course tree). Prior GROK_V1_1 2026-10-30 reconciliation kept for the original 45.
   _run: {evidence: 03-RCP-Spike/evidence/20261029-linux-scenarios-20261029_171259-grok-bot-vm-419969949, windows_r11_local: 03-RCP-Spike/tests/results/20261029_174320-SHADOW-TB64BO9R, reconciliation: Handoff_Windows_Debian_Reconciliation_GROK_V1.md, tracking: 03-RCP-Spike/tests/SCENARIOS_TRACKING_GROK_V1_2.md, counts: {'PARTIAL': 12, 'FAIL': 7, 'NOT RUN': 24, 'PASS': 4}}
-  P-01: {status: "PARTIAL", client: both, gate: "-", debian_desktop: "PASS", windows_r11: "INVALID", script: "03-RCP-Spike/tests/scenarios/S_P-01_CleanProduct_GROK_V1.ps1", blockers: "web: deferred: web phase; Windows r11 result INVALID (Codex run 20261029_174320-SHADOW-TB64BO9R: screenshot captured the user's browser editor, not GeoGebra) - re-run with the foreground guard (branch feat/ui-foreground-guard)"}
+  P-01: {status: "PARTIAL", client: both, gate: "-", debian_desktop: "PASS", debian_evidence_2026-11-01: "03-RCP-Spike/evidence/20261101-linux-debian-grok-s1-20261101_120011-grok-bot-vm-419969949 (8/0/1, re-applied from PR #6)", windows_r11: "INVALID", script: "03-RCP-Spike/tests/scenarios/S_P-01_CleanProduct_GROK_V1.ps1", blockers: "web: deferred: web phase; Windows r11 result INVALID (Codex run 20261029_174320-SHADOW-TB64BO9R: screenshot captured the user's browser editor, not GeoGebra) - re-run with the foreground guard (branch feat/ui-foreground-guard)"}
   P-02: {status: "FAIL", client: both, gate: "A", debian_desktop: "FAIL", script: "03-RCP-Spike/tests/scenarios/S_P-02_CoreFeatures_GROK_V1.ps1", blockers: "BUG-014 (3 divergences: f(x)=x^2-2x, m={{1,2},{3,4}}, 3D Plane(A,B,(1,0,0)): evalCommand false + error dialog in product, true in baseline); web deferred"}
   P-03: {status: "PARTIAL", client: both, gate: "A", debian_desktop: "PARTIAL", script: "03-RCP-Spike/tests/scenarios/S_P-03_StandardTools_GROK_V1.ps1", blockers: "3D toolbar not compared (needs a 3D GuiManager directive); web deferred"}
   P-04: {status: "FAIL", client: both, gate: "A", debian_desktop: "FAIL", script: "03-RCP-Spike/tests/scenarios/S_P-04_SaveReopen_GROK_V1.ps1", blockers: "BUG-014: f(x) = a x^2 - 1 not created by evalCommand in the product (so it is absent from the saved file); all other values identical, baseline reads the product file"}
@@ -115,7 +119,7 @@ scenarios:
   D-08: {status: "PARTIAL", client: desktop, gate: "B", debian_desktop: "PARTIAL", script: "03-RCP-Spike/tests/scenarios/S_D-08_IncompatibleExtension_GROK_V1.ps1", blockers: "user-facing refusal message not implemented"}
   D-09: {status: "NOT RUN", client: desktop, gate: "E", debian_desktop: "NOT RUN", script: "03-RCP-Spike/tests/scenarios/S_D-09_SignatureChannel_GROK_V1.ps1", blockers: "no signing key, channel or policy (owner decision)"}
   D-10: {status: "NOT RUN", client: desktop, gate: "-", debian_desktop: "FAIL", script: "03-RCP-Spike/tests/scenarios/S_D-10_InstallUpgrade_GROK_V1.ps1", blockers: "BUG-017 (Linux image has no bundled Java; launch.sh hard-codes /workspace/AlgoGebra/jdk); no installer; no clean Windows VM"}
-  D-11: {status: "NOT RUN", client: desktop, gate: "-", debian_desktop: "NOT RUN", script: "03-RCP-Spike/tests/scenarios/S_D-11_CourseTree_GROK_V1.ps1", blockers: "Codex WP2-06 CourseTreePanel not landed; product launch with -Dggbplus.course blocked"}
+  D-11: {status: "FAIL", client: desktop, gate: "-", debian_desktop: "FAIL (Xvfb, mechanical)", script: "03-RCP-Spike/tests/scenarios/S_D-11_CourseTree_GROK_V1.ps1", blockers: "PR #14 scenario fix: 5/3/0 on image-pr11; course loads (5 chapters) but CMD evalCommand=false (BUG-014) and CAS empty; attended SWT UI stays Windows"}
   W-01: {status: "NOT RUN", client: web, gate: "C", debian_desktop: "-", script: "-", blockers: "deferred: web phase (no script yet)"}
   W-02: {status: "NOT RUN", client: web, gate: "C", debian_desktop: "-", script: "-", blockers: "deferred: web phase (no script yet)"}
   W-03: {status: "NOT RUN", client: web, gate: "-", debian_desktop: "-", script: "-", blockers: "deferred: web phase (no script yet)"}
@@ -124,7 +128,7 @@ scenarios:
   W-06: {status: "NOT RUN", client: web, gate: "-", debian_desktop: "-", script: "-", blockers: "deferred: web phase (no script yet)"}
   W-07: {status: "NOT RUN", client: web, gate: "-", debian_desktop: "-", script: "-", blockers: "deferred: web phase (no script yet)"}
   W-08: {status: "NOT RUN", client: web, gate: "-", debian_desktop: "-", script: "-", blockers: "deferred: web phase (no script yet)"}
-  W-09: {status: "NOT RUN", client: web, gate: "-", debian_desktop: "-", script: "03-RCP-Spike/tests/scenarios/S_W-09_CourseTreeWeb_GROK_V1.ps1", blockers: "spec NOT RUN until browser half; static prechecks PASS 15/0/4 on 2026-11-01 (WAR+HTTP still required for W09-20..23)", windows_static_20261101: "PASS 15/0/4"}
+  W-09: {status: "PASS (pending merge)", client: web, gate: "-", debian_desktop: "-", debian_firefox: "PW 10/10 x2 (PR #13); S_W-09 static 15/0/4", script: "03-RCP-Spike/tests/scenarios/S_W-09_CourseTreeWeb_GROK_V1.ps1 + tests/playwright/W09_CourseTree.spec.ts", blockers: "PR #13 not merged; WAR staged locally (not in git); Windows/Chromium not run"}
   X-01: {status: "PARTIAL", client: both, gate: "D", debian_desktop: "FAIL", script: "03-RCP-Spike/tests/scenarios/S_X-01_ComputeContract_GROK_V1.ps1", blockers: "no result-kind enum in compute.api (typed contract gap); web deferred"}
   X-02: {status: "FAIL", client: both, gate: "D", debian_desktop: "FAIL", windows_r11: "FAIL", script: "03-RCP-Spike/tests/scenarios/S_X-02_StaleResult_GROK_V1.ps1", blockers: "compute API has no revision (API change needed); raised NOT RUN->FAIL on 2026-10-30 Grok reconciliation"}
   X-03: {status: "NOT RUN", client: both, gate: "D", debian_desktop: "PASS (precheck)", script: "03-RCP-Spike/tests/scenarios/S_X-03_WriteBack_GROK_V1.ps1", blockers: "state adapter / allow-list not implemented"}
@@ -257,7 +261,8 @@ bugs:
     title: "Linux image has no bundled Java; launch.sh falls back to /workspace/AlgoGebra/jdk and a hard-coded image path"
     component: build.sh / launch.sh
     severity: medium
-    status: OPEN
+    status: FIX_PENDING_MERGE
+    fix: "PR #9 (contains PR #4 1b7a8d0 + F-1 fc81487): discovery GGB_JAVA/JAVA > $IMAGE/jre|jdk > JAVA_HOME > mise > installs glob,/usr/lib/jvm,/opt/java > PATH, major >= GGB_JAVA_MIN (25), exit 4; mise path VERIFIED (PR #10 M-01..05) and warns on too-old pin (F-1); suite 17 15/0/0. Images must be rebuilt after merge"
     evidence: "same run, S_D-10_InstallUpgrade_GROK_V1.log D10-01/03"
   - id: BUG-018
     title: "Upstream desktop test CallJavaScriptTest.testEval fails (locale-sensitive) on Windows"
@@ -291,6 +296,24 @@ open_items:
   - "Choose P-08 acceptance tag"
   - "Delete temp archives %TEMP%\\r8.zip and r8-nojre.zip"
   - "Eclipse languages plan remaining: create GeoGebraPlus-Languages workspace; PyDev interpreter; MSYS2 UCRT64; LSP4E map to ocamllsp"
+grok_status_2026-11-02:
+  G-T1: {status: DONE, pr: 8, note: "launch.sh -Course design + RQ-1 note; exit codes aligned to 4/3"}
+  G-T2: {status: DONE, pr: 12, note: "WAR rebuilt on Debian (recipe OK; sha256 differ from Windows, GWT non-reproducible); WAR not in git"}
+  G-T3: {status: DONE, pr: 13, note: "W-09 Playwright Firefox 10/10 x2 after fixes"}
+  G-T4: {status: DONE_MECHANICAL, pr: 14, note: "D-11 Xvfb 5/3/0 — BUG-014"}
+  G-T5: {status: DONE, pr: 7, note: "suite 16 71/0/44 unchanged at 6baf1d4"}
+  P0: {status: DONE, pr: 9, note: "launch.sh -Course; unified suite 18 21/0/1"}
+  P1: {status: DONE, pr: 10, note: "Firefox 157 smoke PASS; mise->Java verified; F-1 fixed in #9"}
+  suite16_with_stepvalidator_adapter: {result: "108/6/1", pr: 12, fails: "T-03b/T-16b/T-12b adapter-only (localized); T-21 Sequence limit; T-28 policy; T-33 no warning channel"}
+  suite18_unified: {result: "21/0/1 image-pr11; 20/0/2 r8", pr: 9, windows: "needs Codex run"}
+open_decisions_2026-11-02:
+  - {id: EXIT-NOJDK, text: "no usable JDK exit code: launch.sh 4 (PR #4) vs launch.ps1 69 (PR #11, design draft) — owner picks one; tests report the divergence"}
+  - {id: T-28, text: "PR #11 disables ALL untrusted OPEN until the scanner exists; corpus/spec expect clean .ggb under course dir ACCEPT — keep strict (update corpus) or relax"}
+  - {id: SEQ-LIMIT, text: "Sequence (TABLE_LIST) allowed with no size/time limit (T-21, SPEC-GAP-2) — needs a limit in StepValidator/spec"}
+  - {id: SPEC-GAP-1, text: "spec 3.1 scanner misses <ggbscript val=...> (T-29); scanner WP9-04 not implemented"}
+  - {id: SPEC-GAP-2, text: "Sequence size/time limit (see SEQ-LIMIT)"}
+  - {id: SPEC-GAP-3, text: "symlink escape: launch.sh realpath + Java toRealPath in DirectiveExecutor — closed in code (PR #9/#11), spec text still to update by Claude"}
+  - {id: WARN-CHANNEL, text: "T-33 trustedGgb scripted file expects ACCEPT_WITH_WARNING; no warning channel in PR #11"}
 results_tracking:
   decision: "2026-10-29 user: stop tracking mutable 03-RCP-Spike/tests/results/ (git rm --cached, .gitignore, README kept); Run_All writes results/<runid>/ and -ExportEvidence <name> copies a reviewed run to 03-RCP-Spike/evidence/<date>-<os>-<name>-<runid>/ with MANIFEST_GROK_V1.tsv (sha256); routine full logs = CI artifacts or local by run id"
   evidence_folders:
