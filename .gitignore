@@ -34,3 +34,7 @@ __pycache__/
 !03-RCP-Spike/tests/results/README.md
 !03-RCP-Spike/evidence/2*/**/*.log
 !03-RCP-Spike/evidence/2*/*.log
+
+# GROK_V1: self-hosted GWT WAR is staged locally, never committed
+web-host/GeoGebra
+03-RCP-Spike/tests/playwright/node_modules/

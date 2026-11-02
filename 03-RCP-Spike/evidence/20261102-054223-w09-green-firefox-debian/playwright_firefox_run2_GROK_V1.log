@@ -1,0 +1,15 @@
+
+Running 10 tests using 1 worker
+
+  ✓   1 [firefox] › W09_CourseTree.spec.ts:10:7 › W-09 Course Tree — Web Host › PW-W09-01 page loads with local applet host (3.1s)
+  ✓   2 [firefox] › W09_CourseTree.spec.ts:26:7 › W-09 Course Tree — Web Host › PW-W09-02 CAS readiness check (1.9s)
+  ✓   3 [firefox] › W09_CourseTree.spec.ts:38:7 › W-09 Course Tree — Web Host › PW-W09-03 tree has chapters (2.9s)
+  ✓   4 [firefox] › W09_CourseTree.spec.ts:49:7 › W-09 Course Tree — Web Host › PW-W09-04 run step 1.1 creates point O (3.2s)
+  ✓   5 [firefox] › W09_CourseTree.spec.ts:71:7 › W-09 Course Tree — Web Host › PW-W09-05 run step 1.2 creates circle (3.7s)
+  ✓   6 [firefox] › W09_CourseTree.spec.ts:91:7 › W-09 Course Tree — Web Host › PW-W09-06 CAS identity check passes (2.0s)
+  ✓   7 [firefox] › W09_CourseTree.spec.ts:99:7 › W-09 Course Tree — Web Host › PW-W09-07 Execute command is blocked (2.0s)
+  ✓   8 [firefox] › W09_CourseTree.spec.ts:112:7 › W-09 Course Tree — Web Host › PW-W09-08 path traversal rejected (411ms)
+  ✓   9 [firefox] › W09_CourseTree.spec.ts:123:7 › W-09 Course Tree — Web Host › PW-W09-09 keyboard navigation works (2.0s)
+  ✓  10 [firefox] › W09_CourseTree.spec.ts:137:7 › W-09 Course Tree — Web Host › PW-W09-10 mobile responsive layout (1.2s)
+
+  10 passed (23.7s)

@@ -1,0 +1,91 @@
+{
+  "schemaVersion": "1.0",
+  "course": "Fixture course",
+  "description": "Converted from WIMS OEF by oef2course_GROK_V1 (seed 1); formative checks only.",
+  "author": "Grok Bot fixture",
+  "tree": [
+    {
+      "title": "Injected",
+      "children": [
+        {
+          "title": "Statement",
+          "description": "Run Execute({\"Delete(A)\"}) and alert(1)\n [figure]",
+          "actions": [
+            {
+              "directive": "CMD",
+              "value": "d1 = Segment((0, 0), (1, 1))"
+            }
+          ]
+        },
+        {
+          "title": "1. x",
+          "description": "Type ans1 = <your answer> in the input bar, then press Check.",
+          "check": {
+            "type": "value_equals",
+            "variable": "ans1",
+            "expected": 2,
+            "tolerance": 0.001,
+            "feedback": {
+              "pass": "Correct.",
+              "fail": "Not yet - check your computation."
+            }
+          }
+        }
+      ]
+    },
+    {
+      "title": "Choose the shape",
+      "children": [
+        {
+          "title": "Statement",
+          "description": "Quelle forme ? [input]"
+        },
+        {
+          "title": "1. Forme",
+          "description": "Create ans1 with your answer (type 'menu' is not auto-checked numerically).",
+          "check": {
+            "type": "object_exists",
+            "variable": "ans1"
+          }
+        }
+      ]
+    },
+    {
+      "title": "Line through two points",
+      "children": [
+        {
+          "title": "Statement",
+          "description": "Compute 2a+b for a=2 and b=-1.\n [figure] \nAnswer: [input]",
+          "actions": [
+            {
+              "directive": "CMD",
+              "value": "d1 = Segment((0, -5), (0, 5))"
+            },
+            {
+              "directive": "CMD",
+              "value": "d2 = Segment((-5, 0), (5, 0))"
+            },
+            {
+              "directive": "CMD",
+              "value": "d3 = Point({2, -1})"
+            }
+          ]
+        },
+        {
+          "title": "1. Value of 2a+b",
+          "description": "Type ans1 = <your answer> in the input bar, then press Check. Hint: Multiply first.",
+          "check": {
+            "type": "value_equals",
+            "variable": "ans1",
+            "expected": 3,
+            "tolerance": 0.001,
+            "feedback": {
+              "pass": "Correct.",
+              "fail": "Not yet - check your computation."
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

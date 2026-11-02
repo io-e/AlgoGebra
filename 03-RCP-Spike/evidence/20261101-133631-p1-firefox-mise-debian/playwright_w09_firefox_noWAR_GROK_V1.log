@@ -1,0 +1,85 @@
+
+Running 10 tests using 1 worker
+
+[1/10] [firefox] › W09_CourseTree.spec.ts:10:7 › W-09 Course Tree — Web Host › PW-W09-01 page loads with local applet host
+  1) [firefox] › W09_CourseTree.spec.ts:10:7 › W-09 Course Tree — Web Host › PW-W09-01 page loads with local applet host 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: locator('#applet1')
+    Expected: visible
+    Timeout: 15000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" locator('#applet1') with timeout 15000ms
+      - waiting for locator('#applet1')
+
+
+      10 |   test('PW-W09-01 page loads with local applet host', async ({ coursePage }) => {
+      11 |     const appletHost = coursePage.locator('#applet1');
+    > 12 |     await expect(appletHost).toBeVisible({ timeout: 15_000 });
+         |                              ^
+      13 |
+      14 |     const consoleErrors: string[] = [];
+      15 |     coursePage.on('console', (msg) => {
+        at /workspace/AlgoGebra/wt-p0/03-RCP-Spike/tests/playwright/W09_CourseTree.spec.ts:12:30
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../results/playwright/W09_CourseTree-W-09-Course-6c180-oads-with-local-applet-host-firefox/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../results/playwright/W09_CourseTree-W-09-Course-6c180-oads-with-local-applet-host-firefox/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../results/playwright/W09_CourseTree-W-09-Course-6c180-oads-with-local-applet-host-firefox/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../results/playwright/W09_CourseTree-W-09-Course-6c180-oads-with-local-applet-host-firefox/trace.zip
+    Usage:
+
+        npx playwright show-trace ../results/playwright/W09_CourseTree-W-09-Course-6c180-oads-with-local-applet-host-firefox/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[2/10] [firefox] › W09_CourseTree.spec.ts:26:7 › W-09 Course Tree — Web Host › PW-W09-02 CAS readiness check
+  2) [firefox] › W09_CourseTree.spec.ts:26:7 › W-09 Course Tree — Web Host › PW-W09-02 CAS readiness check 
+
+    Test timeout of 60000ms exceeded.
+
+    Error: page.waitForFunction: Test timeout of 60000ms exceeded.
+
+       at fixtures/courses.ts:18
+
+      16 |
+      17 | export async function waitForAppletReady(page: Page, timeoutMs = 30_000): Promise<void> {
+    > 18 |   await page.waitForFunction(
+         |              ^
+      19 |     () => {
+      20 |       const applet = (window as any).ggbApplet;
+      21 |       return applet && typeof applet.evalCommandCAS === 'function';
+        at waitForAppletReady (/workspace/AlgoGebra/wt-p0/03-RCP-Spike/tests/playwright/fixtures/courses.ts:18:14)
+        at /workspace/AlgoGebra/wt-p0/03-RCP-Spike/tests/playwright/W09_CourseTree.spec.ts:27:29
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../results/playwright/W09_CourseTree-W-09-Course-ed6b0--W09-02-CAS-readiness-check-firefox/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../results/playwright/W09_CourseTree-W-09-Course-ed6b0--W09-02-CAS-readiness-check-firefox/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../results/playwright/W09_CourseTree-W-09-Course-ed6b0--W09-02-CAS-readiness-check-firefox/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../results/playwright/W09_CourseTree-W-09-Course-ed6b0--W09-02-CAS-readiness-check-firefox/trace.zip
+    Usage:
+
+        npx playwright show-trace ../results/playwright/W09_CourseTree-W-09-Course-ed6b0--W09-02-CAS-readiness-check-firefox/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[3/10] [firefox] › W09_CourseTree.spec.ts:38:7 › W-09 Course Tree — Web Host › PW-W09-03 tree has chapters

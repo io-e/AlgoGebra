@@ -1,0 +1,62 @@
+FAIL: no course keeps course property absent — Join-Path: /tmp/twin/03-RCP-Spike/launch.ps1:156
+Line |
+ 156 |          $JrePlugins = Join-Path $EclipseHome 'plugins'
+     |                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     | Cannot find drive. A drive with the name 'D' does not exist.
+
+FAIL: relative -Course resolves to absolute path — Join-Path: /tmp/twin/03-RCP-Spike/launch.ps1:156
+Line |
+ 156 |          $JrePlugins = Join-Path $EclipseHome 'plugins'
+     |                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     | Cannot find drive. A drive with the name 'D' does not exist.
+
+FAIL: --course=<absolute-path> alias — Join-Path: /tmp/twin/03-RCP-Spike/launch.ps1:156
+Line |
+ 156 |          $JrePlugins = Join-Path $EclipseHome 'plugins'
+     |                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     | Cannot find drive. A drive with the name 'D' does not exist.
+
+FAIL: path with spaces remains one Java property argument — Join-Path: /tmp/twin/03-RCP-Spike/launch.ps1:156
+Line |
+ 156 |          $JrePlugins = Join-Path $EclipseHome 'plugins'
+     |                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     | Cannot find drive. A drive with the name 'D' does not exist.
+
+PASS: missing -Course value returns 64
+PASS: repeated -Course returns 64
+PASS: missing course returns 66
+PASS: directory course path returns 66
+PASS: non-JSON extension returns 65
+PASS: course above 1 MiB returns 65
+PASS: remote URL returns 64
+PASS: course outside configured root returns 77
+FAIL: course inside configured root is accepted — Join-Path: /tmp/twin/03-RCP-Spike/launch.ps1:156
+Line |
+ 156 |          $JrePlugins = Join-Path $EclipseHome 'plugins'
+     |                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     | Cannot find drive. A drive with the name 'D' does not exist.
+
+FAIL: GGBPLUS_COURSE environment fallback — Join-Path: /tmp/twin/03-RCP-Spike/launch.ps1:156
+Line |
+ 156 |          $JrePlugins = Join-Path $EclipseHome 'plugins'
+     |                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     | Cannot find drive. A drive with the name 'D' does not exist.
+
+FAIL: -Course flag takes precedence over environment fallback — Join-Path: /tmp/twin/03-RCP-Spike/launch.ps1:156
+Line |
+ 156 |          $JrePlugins = Join-Path $EclipseHome 'plugins'
+     |                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     | Cannot find drive. A drive with the name 'D' does not exist.
+
+FAIL: Headless and Course can appear in either order — Join-Path: /tmp/twin/03-RCP-Spike/launch.ps1:156
+Line |
+ 156 |          $JrePlugins = Join-Path $EclipseHome 'plugins'
+     |                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     | Cannot find drive. A drive with the name 'D' does not exist.
+Join-Path: /tmp/twin/03-RCP-Spike/launch.ps1:156
+Line |
+ 156 |          $JrePlugins = Join-Path $EclipseHome 'plugins'
+     |                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     | Cannot find drive. A drive with the name 'D' does not exist.
+
+PASS: 8 FAIL: 8 SKIP: 0

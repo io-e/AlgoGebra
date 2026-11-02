@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<!-- GROK_V1 probe page for suite 15 (G-03 / WP3a-03): self-hosted deployggb.js + setHTML5Codebase('war/web3d/'),
+     then Apps API checks. Result JSON is written to #probe-result (and beaconed as GET /__probe_result?d=... for the server log). Served next to a 'war' link. -->
+<html><head><meta charset="utf-8"><title>GROK_V1 web build probe</title>
+<script src="war/deployggb.js"></script></head>
+<body><div id="ggb"></div><pre id="probe-result">PENDING</pre>
+<script>
+var R = { start: Date.now() };
+function done() {
+  R.ms = Date.now() - R.start;
+  R.resources = performance.getEntriesByType('resource').map(function (e) { return e.name; });
+  R.external = R.resources.filter(function (u) { return u.indexOf(location.origin) !== 0; });
+  var j = JSON.stringify(R); document.getElementById('probe-result').textContent = 'RESULT ' + j;
+  // beacon: python http.server logs the request line (404), the test parses it from the server log
+  fetch('/__probe_result?d=' + encodeURIComponent(j)).catch(function () {});
+}
+var params = { appName: 'classic', width: 900, height: 600, showToolBar: true, showAlgebraInput: true,
+  appletOnLoad: function (api) {
+    try {
+      R.loaded = true;
+      R.evalPoint = api.evalCommand('A=(1,2)');
+      R.valPoint = api.getValueString('A');
+      R.evalFunc = api.evalCommand('f(x)=x^2-2x');
+      R.valFunc = api.getValueString('f');
+      R.evalMatrix = api.evalCommand('m={{1,2},{3,4}}');
+      R.valMatrix = api.getValueString('m');
+      R.value = api.getValue('x(A)');
+    } catch (e) { R.error = String(e); }
+    var n = 0, t = setInterval(function () {
+      n++; var c = '';
+      try { c = api.evalCommandCAS('Expand((x+1)^2)', ''); } catch (e) { c = 'EXC ' + e; }
+      if ((c && c !== '?' && c.indexOf('EXC') !== 0) || n > 60) { clearInterval(t); R.cas = c; R.casPolls = n; done(); }
+    }, 500);
+  } };
+var applet = new GGBApplet(params, true);
+applet.setHTML5Codebase('war/web3d/');
+window.addEventListener('load', function () { applet.inject('ggb'); });
+setTimeout(function () { if (!R.loaded) { R.timeout = true; done(); } }, 90000);
+</script></body></html>

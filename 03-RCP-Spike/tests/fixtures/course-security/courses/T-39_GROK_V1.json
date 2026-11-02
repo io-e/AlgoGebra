@@ -1,0 +1,100 @@
+{
+ "schemaVersion": "1.0",
+ "course": "GROK_V1 security corpus",
+ "tree": [
+  {
+   "title": "Ch",
+   "children": [
+    {
+     "title": "Step",
+     "actions": [
+      {
+       "directive": "CMD",
+       "value": "A=(0,1)"
+      },
+      {
+       "directive": "CMD",
+       "value": "A=(1,1)"
+      },
+      {
+       "directive": "CMD",
+       "value": "A=(2,1)"
+      },
+      {
+       "directive": "CMD",
+       "value": "A=(3,1)"
+      },
+      {
+       "directive": "CMD",
+       "value": "A=(4,1)"
+      },
+      {
+       "directive": "CMD",
+       "value": "A=(5,1)"
+      },
+      {
+       "directive": "CMD",
+       "value": "A=(6,1)"
+      },
+      {
+       "directive": "CMD",
+       "value": "A=(7,1)"
+      },
+      {
+       "directive": "CMD",
+       "value": "A=(8,1)"
+      },
+      {
+       "directive": "CMD",
+       "value": "A=(9,1)"
+      },
+      {
+       "directive": "CMD",
+       "value": "A=(10,1)"
+      },
+      {
+       "directive": "CMD",
+       "value": "A=(11,1)"
+      },
+      {
+       "directive": "CMD",
+       "value": "A=(12,1)"
+      },
+      {
+       "directive": "CMD",
+       "value": "A=(13,1)"
+      },
+      {
+       "directive": "CMD",
+       "value": "A=(14,1)"
+      },
+      {
+       "directive": "CMD",
+       "value": "A=(15,1)"
+      },
+      {
+       "directive": "CMD",
+       "value": "A=(16,1)"
+      },
+      {
+       "directive": "CMD",
+       "value": "A=(17,1)"
+      },
+      {
+       "directive": "CMD",
+       "value": "A=(18,1)"
+      },
+      {
+       "directive": "CMD",
+       "value": "A=(19,1)"
+      },
+      {
+       "directive": "CMD",
+       "value": "A=(20,1)"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

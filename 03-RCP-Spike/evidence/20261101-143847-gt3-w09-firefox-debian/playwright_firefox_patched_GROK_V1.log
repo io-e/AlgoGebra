@@ -1,0 +1,394 @@
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:33:46] "GET /course-host.html HTTP/1.1" 200 -
+
+Running 10 tests using 1 worker
+
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:33:48] "GET /course-host.html HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:33:48] "GET /course-tree.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:33:48] "GET /GeoGebra/deployggb.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:33:48] "GET /course-tree.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:33:48] code 404, message File not found
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:33:48] "GET /favicon.ico HTTP/1.1" 404 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:33:48] "GET /GeoGebra/web3d/web3d.nocache.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:33:48] "GET /GeoGebra/web3d/0C67C8A47F0579D49611F42F63B45791.cache.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:33:49] "GET /GeoGebra/css/bundles/simple-bundle.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:33:49] "GET /GeoGebra/css/bundles/bundle.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:33:49] "GET /GeoGebra/css/fonts.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:33:49] "GET /GeoGebra/css/keyboard-styles.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:33:49] "GET /GeoGebra/css/greek-font.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:33:49] "GET /GeoGebra/web3d/deferredjs/0C67C8A47F0579D49611F42F63B45791/14.cache.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:33:49] "GET /GeoGebra/web3d/deferredjs/0C67C8A47F0579D49611F42F63B45791/6.cache.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:33:49] "GET /GeoGebra/web3d/deferredjs/0C67C8A47F0579D49611F42F63B45791/9.cache.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:33:49] "GET /GeoGebra/web3d/deferredjs/0C67C8A47F0579D49611F42F63B45791/5.cache.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:33:49] "GET /GeoGebra/web3d/deferredjs/0C67C8A47F0579D49611F42F63B45791/8.cache.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:33:49] "GET /GeoGebra/web3d/deferredjs/0C67C8A47F0579D49611F42F63B45791/7.cache.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:33:49] "GET /GeoGebra/web3d/deferredjs/0C67C8A47F0579D49611F42F63B45791/10.cache.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:33:49] "GET /GeoGebra/web3d/deferredjs/0C67C8A47F0579D49611F42F63B45791/3.cache.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:33:49] "GET /GeoGebra/web3d/deferredjs/0C67C8A47F0579D49611F42F63B45791/2.cache.js HTTP/1.1" 200 -
+  ✓   1 [firefox] › W09_CourseTree.spec.ts:10:7 › W-09 Course Tree — Web Host › PW-W09-01 page loads with local applet host (3.1s)
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:33:50] "GET /course-host.html HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:33:50] "GET /course-tree.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:33:50] "GET /course-tree.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:33:50] "GET /GeoGebra/deployggb.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:33:50] code 404, message File not found
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:33:50] "GET /favicon.ico HTTP/1.1" 404 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:33:50] "GET /GeoGebra/web3d/web3d.nocache.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:33:50] "GET /GeoGebra/web3d/0C67C8A47F0579D49611F42F63B45791.cache.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:33:51] "GET /GeoGebra/css/bundles/simple-bundle.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:33:51] "GET /GeoGebra/css/keyboard-styles.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:33:51] "GET /GeoGebra/css/fonts.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:33:51] "GET /GeoGebra/css/bundles/bundle.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:33:51] "GET /GeoGebra/css/greek-font.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:33:51] "GET /GeoGebra/web3d/deferredjs/0C67C8A47F0579D49611F42F63B45791/14.cache.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:33:51] "GET /GeoGebra/web3d/deferredjs/0C67C8A47F0579D49611F42F63B45791/6.cache.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:33:51] "GET /GeoGebra/web3d/deferredjs/0C67C8A47F0579D49611F42F63B45791/9.cache.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:33:51] "GET /GeoGebra/web3d/deferredjs/0C67C8A47F0579D49611F42F63B45791/5.cache.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:33:51] "GET /GeoGebra/web3d/deferredjs/0C67C8A47F0579D49611F42F63B45791/8.cache.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:33:51] "GET /GeoGebra/web3d/deferredjs/0C67C8A47F0579D49611F42F63B45791/7.cache.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:33:51] "GET /GeoGebra/web3d/deferredjs/0C67C8A47F0579D49611F42F63B45791/10.cache.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:33:51] "GET /GeoGebra/web3d/deferredjs/0C67C8A47F0579D49611F42F63B45791/3.cache.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:33:51] "GET /GeoGebra/web3d/deferredjs/0C67C8A47F0579D49611F42F63B45791/2.cache.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:33:52] "GET /courses/trigonometry_intro.json HTTP/1.1" 200 -
+  ✘   2 [firefox] › W09_CourseTree.spec.ts:26:7 › W-09 Course Tree — Web Host › PW-W09-02 CAS readiness check (2.6s)
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:33:55] "GET /course-host.html HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:33:56] "GET /course-tree.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:33:56] "GET /GeoGebra/deployggb.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:33:56] "GET /course-tree.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:33:56] "GET /GeoGebra/web3d/web3d.nocache.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:33:56] code 404, message File not found
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:33:56] "GET /favicon.ico HTTP/1.1" 404 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:33:56] "GET /GeoGebra/web3d/0C67C8A47F0579D49611F42F63B45791.cache.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:33:57] "GET /GeoGebra/css/bundles/bundle.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:33:57] "GET /GeoGebra/css/bundles/simple-bundle.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:33:57] "GET /GeoGebra/css/keyboard-styles.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:33:57] "GET /GeoGebra/css/fonts.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:33:57] "GET /GeoGebra/css/greek-font.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:33:57] "GET /GeoGebra/web3d/deferredjs/0C67C8A47F0579D49611F42F63B45791/14.cache.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:33:57] "GET /GeoGebra/web3d/deferredjs/0C67C8A47F0579D49611F42F63B45791/6.cache.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:33:57] "GET /GeoGebra/web3d/deferredjs/0C67C8A47F0579D49611F42F63B45791/5.cache.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:33:57] "GET /GeoGebra/web3d/deferredjs/0C67C8A47F0579D49611F42F63B45791/9.cache.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:33:57] "GET /GeoGebra/web3d/deferredjs/0C67C8A47F0579D49611F42F63B45791/7.cache.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:33:57] "GET /GeoGebra/web3d/deferredjs/0C67C8A47F0579D49611F42F63B45791/8.cache.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:33:57] "GET /GeoGebra/web3d/deferredjs/0C67C8A47F0579D49611F42F63B45791/10.cache.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:33:57] "GET /GeoGebra/web3d/deferredjs/0C67C8A47F0579D49611F42F63B45791/3.cache.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:33:57] "GET /GeoGebra/web3d/deferredjs/0C67C8A47F0579D49611F42F63B45791/2.cache.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:33:58] "GET /courses/trigonometry_intro.json HTTP/1.1" 200 -
+  ✘   3 [firefox] › W09_CourseTree.spec.ts:38:7 › W-09 Course Tree — Web Host › PW-W09-03 tree has chapters (13.2s)
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:34:11] "GET /course-host.html HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:34:11] "GET /GeoGebra/deployggb.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:34:11] "GET /course-tree.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:34:11] "GET /course-tree.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:34:11] code 404, message File not found
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:34:11] "GET /favicon.ico HTTP/1.1" 404 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:34:11] "GET /GeoGebra/web3d/web3d.nocache.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:34:11] "GET /GeoGebra/web3d/0C67C8A47F0579D49611F42F63B45791.cache.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:34:12] "GET /GeoGebra/css/bundles/simple-bundle.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:34:12] "GET /GeoGebra/css/bundles/bundle.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:34:12] "GET /GeoGebra/css/keyboard-styles.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:34:12] "GET /GeoGebra/css/fonts.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:34:12] "GET /GeoGebra/css/greek-font.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:34:12] "GET /GeoGebra/web3d/deferredjs/0C67C8A47F0579D49611F42F63B45791/14.cache.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:34:12] "GET /GeoGebra/web3d/deferredjs/0C67C8A47F0579D49611F42F63B45791/6.cache.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:34:12] "GET /GeoGebra/web3d/deferredjs/0C67C8A47F0579D49611F42F63B45791/5.cache.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:34:12] "GET /GeoGebra/web3d/deferredjs/0C67C8A47F0579D49611F42F63B45791/9.cache.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:34:12] "GET /GeoGebra/web3d/deferredjs/0C67C8A47F0579D49611F42F63B45791/8.cache.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:34:12] "GET /GeoGebra/web3d/deferredjs/0C67C8A47F0579D49611F42F63B45791/7.cache.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:34:12] "GET /GeoGebra/web3d/deferredjs/0C67C8A47F0579D49611F42F63B45791/10.cache.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:34:12] "GET /GeoGebra/web3d/deferredjs/0C67C8A47F0579D49611F42F63B45791/3.cache.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:34:13] "GET /GeoGebra/web3d/deferredjs/0C67C8A47F0579D49611F42F63B45791/2.cache.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:34:14] "GET /courses/trigonometry_intro.json HTTP/1.1" 200 -
+  ✘   4 [firefox] › W09_CourseTree.spec.ts:49:7 › W-09 Course Tree — Web Host › PW-W09-04 run step 1.1 creates point O (5.9s)
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:34:19] "GET /course-host.html HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:34:19] "GET /GeoGebra/deployggb.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:34:19] "GET /course-tree.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:34:19] "GET /course-tree.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:34:19] code 404, message File not found
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:34:19] "GET /favicon.ico HTTP/1.1" 404 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:34:19] "GET /GeoGebra/web3d/web3d.nocache.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:34:19] "GET /GeoGebra/web3d/0C67C8A47F0579D49611F42F63B45791.cache.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:34:20] "GET /GeoGebra/css/bundles/simple-bundle.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:34:20] "GET /GeoGebra/css/keyboard-styles.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:34:20] "GET /GeoGebra/css/bundles/bundle.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:34:20] "GET /GeoGebra/css/fonts.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:34:20] "GET /GeoGebra/css/greek-font.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:34:20] "GET /GeoGebra/web3d/deferredjs/0C67C8A47F0579D49611F42F63B45791/14.cache.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:34:20] "GET /GeoGebra/web3d/deferredjs/0C67C8A47F0579D49611F42F63B45791/6.cache.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:34:20] "GET /GeoGebra/web3d/deferredjs/0C67C8A47F0579D49611F42F63B45791/9.cache.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:34:20] "GET /GeoGebra/web3d/deferredjs/0C67C8A47F0579D49611F42F63B45791/5.cache.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:34:20] "GET /GeoGebra/web3d/deferredjs/0C67C8A47F0579D49611F42F63B45791/7.cache.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:34:20] "GET /GeoGebra/web3d/deferredjs/0C67C8A47F0579D49611F42F63B45791/8.cache.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:34:20] "GET /GeoGebra/web3d/deferredjs/0C67C8A47F0579D49611F42F63B45791/10.cache.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:34:20] "GET /GeoGebra/web3d/deferredjs/0C67C8A47F0579D49611F42F63B45791/3.cache.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:34:20] "GET /GeoGebra/web3d/deferredjs/0C67C8A47F0579D49611F42F63B45791/2.cache.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:34:21] "GET /courses/trigonometry_intro.json HTTP/1.1" 200 -
+  ✓   5 [firefox] › W09_CourseTree.spec.ts:70:7 › W-09 Course Tree — Web Host › PW-W09-05 run step 1.2 creates circle (5.3s)
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:34:23] "GET /course-host.html HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:34:23] "GET /course-tree.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:34:23] "GET /GeoGebra/deployggb.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:34:23] "GET /course-tree.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:34:23] code 404, message File not found
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:34:23] "GET /favicon.ico HTTP/1.1" 404 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:34:23] "GET /GeoGebra/web3d/web3d.nocache.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:34:23] "GET /GeoGebra/web3d/0C67C8A47F0579D49611F42F63B45791.cache.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:34:24] "GET /GeoGebra/css/bundles/simple-bundle.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:34:24] "GET /GeoGebra/css/keyboard-styles.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:34:24] "GET /GeoGebra/css/bundles/bundle.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:34:24] "GET /GeoGebra/css/fonts.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:34:24] "GET /GeoGebra/css/greek-font.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:34:24] "GET /GeoGebra/web3d/deferredjs/0C67C8A47F0579D49611F42F63B45791/14.cache.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:34:24] "GET /GeoGebra/web3d/deferredjs/0C67C8A47F0579D49611F42F63B45791/9.cache.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:34:24] "GET /GeoGebra/web3d/deferredjs/0C67C8A47F0579D49611F42F63B45791/6.cache.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:34:24] "GET /GeoGebra/web3d/deferredjs/0C67C8A47F0579D49611F42F63B45791/5.cache.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:34:24] "GET /GeoGebra/web3d/deferredjs/0C67C8A47F0579D49611F42F63B45791/8.cache.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:34:24] "GET /GeoGebra/web3d/deferredjs/0C67C8A47F0579D49611F42F63B45791/7.cache.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:34:24] "GET /GeoGebra/web3d/deferredjs/0C67C8A47F0579D49611F42F63B45791/10.cache.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:34:24] "GET /GeoGebra/web3d/deferredjs/0C67C8A47F0579D49611F42F63B45791/3.cache.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:34:25] "GET /GeoGebra/web3d/deferredjs/0C67C8A47F0579D49611F42F63B45791/2.cache.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:34:26] "GET /courses/trigonometry_intro.json HTTP/1.1" 200 -
+  ✘   6 [firefox] › W09_CourseTree.spec.ts:89:7 › W-09 Course Tree — Web Host › PW-W09-06 CAS identity check passes (2.5s)
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:34:28] "GET /course-host.html HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:34:28] "GET /course-tree.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:34:28] "GET /GeoGebra/deployggb.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:34:28] "GET /course-tree.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:34:28] code 404, message File not found
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:34:28] "GET /favicon.ico HTTP/1.1" 404 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:34:28] "GET /GeoGebra/web3d/web3d.nocache.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:34:28] "GET /GeoGebra/web3d/0C67C8A47F0579D49611F42F63B45791.cache.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:34:29] "GET /GeoGebra/css/bundles/simple-bundle.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:34:29] "GET /GeoGebra/css/bundles/bundle.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:34:29] "GET /GeoGebra/css/fonts.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:34:29] "GET /GeoGebra/css/keyboard-styles.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:34:29] "GET /GeoGebra/css/greek-font.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:34:29] "GET /GeoGebra/web3d/deferredjs/0C67C8A47F0579D49611F42F63B45791/14.cache.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:34:29] "GET /GeoGebra/web3d/deferredjs/0C67C8A47F0579D49611F42F63B45791/6.cache.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:34:29] "GET /GeoGebra/web3d/deferredjs/0C67C8A47F0579D49611F42F63B45791/5.cache.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:34:29] "GET /GeoGebra/web3d/deferredjs/0C67C8A47F0579D49611F42F63B45791/9.cache.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:34:29] "GET /GeoGebra/web3d/deferredjs/0C67C8A47F0579D49611F42F63B45791/8.cache.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:34:29] "GET /GeoGebra/web3d/deferredjs/0C67C8A47F0579D49611F42F63B45791/7.cache.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:34:29] "GET /GeoGebra/web3d/deferredjs/0C67C8A47F0579D49611F42F63B45791/10.cache.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:34:29] "GET /GeoGebra/web3d/deferredjs/0C67C8A47F0579D49611F42F63B45791/3.cache.js HTTP/1.1" 200 -
+  ✓   7 [firefox] › W09_CourseTree.spec.ts:97:7 › W-09 Course Tree — Web Host › PW-W09-07 Execute command is blocked (2.1s)
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:34:30] "GET /course-host.html HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:34:30] "GET /course-tree.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:34:30] "GET /GeoGebra/deployggb.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:34:30] "GET /course-tree.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:34:30] code 404, message File not found
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:34:30] "GET /favicon.ico HTTP/1.1" 404 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:34:30] "GET /GeoGebra/web3d/web3d.nocache.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:34:30] "GET /GeoGebra/web3d/0C67C8A47F0579D49611F42F63B45791.cache.js HTTP/1.1" 200 -
+  ✓   8 [firefox] › W09_CourseTree.spec.ts:110:7 › W-09 Course Tree — Web Host › PW-W09-08 path traversal rejected (445ms)
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:34:30] "GET /course-host.html HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:34:30] "GET /course-tree.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:34:30] "GET /GeoGebra/deployggb.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:34:30] "GET /course-tree.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:34:30] code 404, message File not found
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:34:30] "GET /favicon.ico HTTP/1.1" 404 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:34:30] "GET /GeoGebra/web3d/web3d.nocache.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:34:30] "GET /GeoGebra/web3d/0C67C8A47F0579D49611F42F63B45791.cache.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:34:31] "GET /GeoGebra/css/bundles/simple-bundle.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:34:31] "GET /GeoGebra/css/bundles/bundle.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:34:31] "GET /GeoGebra/css/keyboard-styles.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:34:31] "GET /GeoGebra/css/fonts.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:34:31] "GET /GeoGebra/css/greek-font.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:34:31] "GET /GeoGebra/web3d/deferredjs/0C67C8A47F0579D49611F42F63B45791/14.cache.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:34:31] "GET /GeoGebra/web3d/deferredjs/0C67C8A47F0579D49611F42F63B45791/9.cache.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:34:31] "GET /GeoGebra/web3d/deferredjs/0C67C8A47F0579D49611F42F63B45791/6.cache.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:34:31] "GET /GeoGebra/web3d/deferredjs/0C67C8A47F0579D49611F42F63B45791/5.cache.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:34:31] "GET /GeoGebra/web3d/deferredjs/0C67C8A47F0579D49611F42F63B45791/7.cache.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:34:31] "GET /GeoGebra/web3d/deferredjs/0C67C8A47F0579D49611F42F63B45791/8.cache.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:34:31] "GET /GeoGebra/web3d/deferredjs/0C67C8A47F0579D49611F42F63B45791/10.cache.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:34:31] "GET /GeoGebra/web3d/deferredjs/0C67C8A47F0579D49611F42F63B45791/3.cache.js HTTP/1.1" 200 -
+  ✓   9 [firefox] › W09_CourseTree.spec.ts:121:7 › W-09 Course Tree — Web Host › PW-W09-09 keyboard navigation works (1.5s)
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:34:32] "GET /course-host.html HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:34:32] "GET /course-tree.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:34:32] "GET /GeoGebra/deployggb.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:34:32] "GET /course-tree.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:34:32] code 404, message File not found
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:34:32] "GET /favicon.ico HTTP/1.1" 404 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:34:32] "GET /GeoGebra/web3d/web3d.nocache.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [01/Nov/2026 14:34:32] "GET /GeoGebra/web3d/0C67C8A47F0579D49611F42F63B45791.cache.js HTTP/1.1" 200 -
+  ✘  10 [firefox] › W09_CourseTree.spec.ts:135:7 › W-09 Course Tree — Web Host › PW-W09-10 mobile responsive layout (648ms)
+
+
+  1) [firefox] › W09_CourseTree.spec.ts:26:7 › W-09 Course Tree — Web Host › PW-W09-02 CAS readiness check 
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: "2"
+    Received: "?"
+
+      28 |
+      29 |     const result = await evalCAS(coursePage, '1+1');
+    > 30 |     expect(result.trim()).toBe('2');
+         |                           ^
+      31 |
+      32 |     // Readiness probe must not create a visible algebra object named "2"
+      33 |     const has2 = await objectExists(coursePage, '2');
+        at /tmp/w09/03-RCP-Spike/tests/playwright/W09_CourseTree.spec.ts:30:27
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../results/playwright/W09_CourseTree-W-09-Course-ed6b0--W09-02-CAS-readiness-check-firefox/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../results/playwright/W09_CourseTree-W-09-Course-ed6b0--W09-02-CAS-readiness-check-firefox/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../results/playwright/W09_CourseTree-W-09-Course-ed6b0--W09-02-CAS-readiness-check-firefox/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../results/playwright/W09_CourseTree-W-09-Course-ed6b0--W09-02-CAS-readiness-check-firefox/trace.zip
+    Usage:
+
+        npx playwright show-trace ../results/playwright/W09_CourseTree-W-09-Course-ed6b0--W09-02-CAS-readiness-check-firefox/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) [firefox] › W09_CourseTree.spec.ts:38:7 › W-09 Course Tree — Web Host › PW-W09-03 tree has chapters 
+
+    Error: expect(locator).toHaveCount(expected) failed
+
+    Locator:  locator('#tree-root [role="treeitem"]')
+    Expected: 5
+    Received: 21
+    Timeout:  10000ms
+
+    Call log:
+      - Expect "toHaveCount" locator('#tree-root [role="treeitem"]') with timeout 10000ms
+      - waiting for locator('#tree-root [role="treeitem"]')
+        6 × locator resolved to 0 elements
+          - unexpected value "0"
+        18 × locator resolved to 21 elements
+           - unexpected value "21"
+
+
+      40 |
+      41 |     const treeItems = coursePage.locator('#tree-root [role="treeitem"]');
+    > 42 |     await expect(treeItems).toHaveCount(5, { timeout: 10_000 });
+         |                             ^
+      43 |     // "at least 5" — use >= via count
+      44 |     const count = await treeItems.count();
+      45 |     expect(count).toBeGreaterThanOrEqual(5);
+        at /tmp/w09/03-RCP-Spike/tests/playwright/W09_CourseTree.spec.ts:42:29
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../results/playwright/W09_CourseTree-W-09-Course-5a985-PW-W09-03-tree-has-chapters-firefox/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../results/playwright/W09_CourseTree-W-09-Course-5a985-PW-W09-03-tree-has-chapters-firefox/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../results/playwright/W09_CourseTree-W-09-Course-5a985-PW-W09-03-tree-has-chapters-firefox/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../results/playwright/W09_CourseTree-W-09-Course-5a985-PW-W09-03-tree-has-chapters-firefox/trace.zip
+    Usage:
+
+        npx playwright show-trace ../results/playwright/W09_CourseTree-W-09-Course-5a985-PW-W09-03-tree-has-chapters-firefox/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3) [firefox] › W09_CourseTree.spec.ts:49:7 › W-09 Course Tree — Web Host › PW-W09-04 run step 1.1 creates point O 
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: true
+    Received: false
+
+      61 |     await coursePage.waitForTimeout(1_000);
+      62 |     const exists = await objectExists(coursePage, 'O');
+    > 63 |     expect(exists).toBe(true);
+         |                    ^
+      64 |
+      65 |     // Button should re-enable after execution
+      66 |     await expect(runBtn).toBeEnabled({ timeout: 5_000 });
+        at /tmp/w09/03-RCP-Spike/tests/playwright/W09_CourseTree.spec.ts:63:20
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../results/playwright/W09_CourseTree-W-09-Course-6c2df-un-step-1-1-creates-point-O-firefox/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../results/playwright/W09_CourseTree-W-09-Course-6c2df-un-step-1-1-creates-point-O-firefox/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../results/playwright/W09_CourseTree-W-09-Course-6c2df-un-step-1-1-creates-point-O-firefox/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../results/playwright/W09_CourseTree-W-09-Course-6c2df-un-step-1-1-creates-point-O-firefox/trace.zip
+    Usage:
+
+        npx playwright show-trace ../results/playwright/W09_CourseTree-W-09-Course-6c2df-un-step-1-1-creates-point-O-firefox/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  4) [firefox] › W09_CourseTree.spec.ts:89:7 › W-09 Course Tree — Web Host › PW-W09-06 CAS identity check passes 
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: "1"
+    Received: "?"
+
+      91 |
+      92 |     const result = await evalCAS(coursePage, 'Simplify(cos(x)^2+sin(x)^2)');
+    > 93 |     expect(result.trim()).toBe('1');
+         |                           ^
+      94 |   });
+      95 |
+      96 |   // PW-W09-07: Execute command is blocked by security layer
+        at /tmp/w09/03-RCP-Spike/tests/playwright/W09_CourseTree.spec.ts:93:27
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../results/playwright/W09_CourseTree-W-09-Course-4b058-6-CAS-identity-check-passes-firefox/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../results/playwright/W09_CourseTree-W-09-Course-4b058-6-CAS-identity-check-passes-firefox/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../results/playwright/W09_CourseTree-W-09-Course-4b058-6-CAS-identity-check-passes-firefox/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../results/playwright/W09_CourseTree-W-09-Course-4b058-6-CAS-identity-check-passes-firefox/trace.zip
+    Usage:
+
+        npx playwright show-trace ../results/playwright/W09_CourseTree-W-09-Course-4b058-6-CAS-identity-check-passes-firefox/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  5) [firefox] › W09_CourseTree.spec.ts:135:7 › W-09 Course Tree — Web Host › PW-W09-10 mobile responsive layout 
+
+    Error: expect(received).not.toBe(expected) // Object.is equality
+
+    Expected: not true
+
+      150 |     await mobileToggle.click();
+      151 |     const isVisibleAfter = await sidebar.isVisible();
+    > 152 |     expect(isVisible).not.toBe(isVisibleAfter);
+          |                           ^
+      153 |
+      154 |     await context.close();
+      155 |   });
+        at /tmp/w09/03-RCP-Spike/tests/playwright/W09_CourseTree.spec.ts:152:27
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../results/playwright/W09_CourseTree-W-09-Course-79626-10-mobile-responsive-layout-firefox/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../results/playwright/W09_CourseTree-W-09-Course-79626-10-mobile-responsive-layout-firefox/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../results/playwright/W09_CourseTree-W-09-Course-79626-10-mobile-responsive-layout-firefox/trace.zip
+    Usage:
+
+        npx playwright show-trace ../results/playwright/W09_CourseTree-W-09-Course-79626-10-mobile-responsive-layout-firefox/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  5 failed
+    [firefox] › W09_CourseTree.spec.ts:26:7 › W-09 Course Tree — Web Host › PW-W09-02 CAS readiness check 
+    [firefox] › W09_CourseTree.spec.ts:38:7 › W-09 Course Tree — Web Host › PW-W09-03 tree has chapters 
+    [firefox] › W09_CourseTree.spec.ts:49:7 › W-09 Course Tree — Web Host › PW-W09-04 run step 1.1 creates point O 
+    [firefox] › W09_CourseTree.spec.ts:89:7 › W-09 Course Tree — Web Host › PW-W09-06 CAS identity check passes 
+    [firefox] › W09_CourseTree.spec.ts:135:7 › W-09 Course Tree — Web Host › PW-W09-10 mobile responsive layout 
+  5 passed (46.9s)

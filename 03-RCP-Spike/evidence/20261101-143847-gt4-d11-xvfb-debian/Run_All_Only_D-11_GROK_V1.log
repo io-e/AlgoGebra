@@ -1,0 +1,6 @@
+# run id: 20261101_143514-grok-bot-vm-419969949 -> /tmp/gt4/03-RCP-Spike/tests/results/20261101_143514-grok-bot-vm-419969949
+# scenario filter: D-11
+# selected: 1 scripts
+  [FAIL] S_D-11_CourseTree                    4 pass   4 fail   0 skip (rc=1) verdict=FAIL
+TOTAL: 4 pass, 4 fail, 0 skip, 0 bail
+GATE: NOT MET

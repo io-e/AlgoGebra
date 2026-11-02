@@ -1,0 +1,326 @@
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/9.4.1/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build 
+> Task :build-logic:convention:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :build-logic:convention:generateExternalPluginSpecBuilders UP-TO-DATE
+> Task :build-logic:convention:extractPrecompiledScriptPluginPlugins UP-TO-DATE
+> Task :build-logic:convention:compilePluginsBlocks UP-TO-DATE
+> Task :build-logic:convention:generatePrecompiledScriptPluginAccessors UP-TO-DATE
+> Task :build-logic:convention:generateScriptPluginAdapters UP-TO-DATE
+> Task :build-logic:convention:compileKotlin UP-TO-DATE
+> Task :build-logic:convention:compileJava NO-SOURCE
+> Task :build-logic:convention:pluginDescriptors UP-TO-DATE
+> Task :build-logic:convention:processResources UP-TO-DATE
+> Task :build-logic:convention:classes UP-TO-DATE
+> Task :build-logic:convention:jar UP-TO-DATE
+> Task :shared:renderer-base:processResources NO-SOURCE
+> Task :carota-web:processResources UP-TO-DATE
+> Task :shared:ggbjdk:processResources UP-TO-DATE
+> Task :gwt-generator:processResources NO-SOURCE
+> Task :shared:keyboard-scientific:processResources NO-SOURCE
+> Task :canvas-web:processResources UP-TO-DATE
+> Task :shared:common:compileJavacc UP-TO-DATE
+> Task :shared:editor-base:compileJavacc UP-TO-DATE
+> Task :editor-web:processResources UP-TO-DATE
+> Task :keyboard-web:processResources UP-TO-DATE
+> Task :gwtutil:processResources UP-TO-DATE
+> Task :shared:keyboard-base:compileJava UP-TO-DATE
+> Task :web-dev:processResources UP-TO-DATE
+> Task :shared:canvas-base:compileJava UP-TO-DATE
+> Task :renderer-web:processResources UP-TO-DATE
+> Task :shared:keyboard-base:processResources NO-SOURCE
+> Task :shared:editor-base:processResources NO-SOURCE
+> Task :shared:keyboard-base:classes UP-TO-DATE
+> Task :shared:keyboard-base:jar UP-TO-DATE
+> Task :shared:keyboard-scientific:compileJava UP-TO-DATE
+> Task :shared:keyboard-scientific:classes UP-TO-DATE
+> Task :shared:canvas-base:processResources NO-SOURCE
+> Task :shared:canvas-base:classes UP-TO-DATE
+> Task :shared:canvas-base:jar UP-TO-DATE
+> Task :shared:ggbjdk:compileJava UP-TO-DATE
+> Task :shared:ggbjdk:classes UP-TO-DATE
+> Task :shared:ggbjdk:jar UP-TO-DATE
+> Task :shared:keyboard-scientific:jar UP-TO-DATE
+> Task :shared:renderer-base:compileJava UP-TO-DATE
+> Task :shared:renderer-base:classes UP-TO-DATE
+> Task :shared:renderer-base:jar UP-TO-DATE
+> Task :shared:editor-base:compileJava UP-TO-DATE
+> Task :shared:editor-base:classes UP-TO-DATE
+> Task :shared:editor-base:jar UP-TO-DATE
+> Task :shared:common:processResources UP-TO-DATE
+> Task :web-common:extractJs
+> Task :web-common:processResources UP-TO-DATE
+> Task :web:extractJs
+> Task :web:processResources UP-TO-DATE
+> Task :web:downloadSass UP-TO-DATE
+> Task :web:installSass UP-TO-DATE
+> Task :shared:common:compileJava UP-TO-DATE
+> Task :shared:common:classes UP-TO-DATE
+> Task :shared:common:jar UP-TO-DATE
+> Task :web:compileSass UP-TO-DATE
+> Task :gwt-generator:compileJava UP-TO-DATE
+> Task :gwt-generator:classes UP-TO-DATE
+> Task :gwt-generator:jar UP-TO-DATE
+> Task :gwtutil:compileJava UP-TO-DATE
+> Task :gwtutil:classes UP-TO-DATE
+> Task :gwtutil:jar UP-TO-DATE
+> Task :carota-web:compileJava UP-TO-DATE
+> Task :carota-web:classes UP-TO-DATE
+> Task :carota-web:jar UP-TO-DATE
+> Task :web-dev:compileJava UP-TO-DATE
+> Task :web-dev:classes UP-TO-DATE
+> Task :canvas-web:compileJava UP-TO-DATE
+> Task :canvas-web:classes UP-TO-DATE
+> Task :web-dev:jar UP-TO-DATE
+> Task :canvas-web:jar UP-TO-DATE
+> Task :renderer-web:compileJava UP-TO-DATE
+> Task :renderer-web:classes UP-TO-DATE
+> Task :renderer-web:jar UP-TO-DATE
+> Task :editor-web:compileJava UP-TO-DATE
+> Task :editor-web:classes UP-TO-DATE
+> Task :editor-web:jar UP-TO-DATE
+> Task :keyboard-web:compileJava UP-TO-DATE
+> Task :keyboard-web:classes UP-TO-DATE
+> Task :web-common:compileJava UP-TO-DATE
+> Task :web-common:classes UP-TO-DATE
+> Task :keyboard-web:jar UP-TO-DATE
+> Task :web-common:jar UP-TO-DATE
+> Task :web:copyHtml
+> Task :web:compileJava UP-TO-DATE
+
+> Task :web:gwtCompile
+Compiling module org.geogebra.web.SuperWeb
+   Warnings in Unknown
+      [WARN] Line 0: [unusable-by-js] Return type of 'AlgebraOutputFiltering Restrictions.ContextDependencies.algebraOutputFiltering()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'AlgebraProcessor Restrictions.ContextDependencies.algebraProcessor()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'AlgoDispatcher Restrictions.ContextDependencies.algoDispatcher()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'ArrayNode MatrixResizeController.Matrix.arrayNode()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'AttributedString StatisticGroup.heading()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'AttributedString TableValuesStatisticsViewModel.Content.Error.header()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'AttributedString TableValuesStatisticsViewModel.Content.Regression.header()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'AttributedString TableValuesStatisticsViewModel.Content.Statistics.header()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'AutocompleteProvider Restrictions.ContextDependencies.autoCompleteProvider()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'ClipRect ClippedFragmentsResult.clipRect()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'CommandDispatcher Restrictions.ContextDependencies.commandDispatcher()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'Construction Restrictions.ContextDependencies.construction()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'EdgeHit ClippedFragmentsBuilder.SegmentNode.hit()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'FaceInteriorPointFinder.BoundaryPath FaceInteriorPointFinder.FaceContext.outerBoundary()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'FragmentBounds[] BoundarySegmentProcessor.BoundaryBuildData.fragmentBounds()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'FragmentEndpoint ClippedFragment.end()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'FragmentEndpoint ClippedFragment.start()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'FunctionNode MatrixResizeController.Vector.functionNode()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'GPoint2D BoundaryHierarchyBuilder.BoundaryContainmentCheck.firstOutsidePoint()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'GPoint2D GraphBuilder.PerimeterVertex.point()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'GPoint2D RegionClassifier.VisibleSampleResult.point()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'GRectangle2D MatrixResizeController.PopupState.anchor()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'GeoElementPropertiesFactory Restrictions.ContextDependencies.geoElementPropertiesFactory()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'InputBoxRoundingProperty.RoundingType InputBoxRoundingProperty.Rounding.type()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'Localization Restrictions.ContextDependencies.localization()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'MyImage ImageProperty.Value.image()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'MyPoint ClippedFragmentsBuilder.SegmentNode.point()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'OpenFragmentClosureInput.ViewportTopology OpenFragmentClosureInput.viewportTopology()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'OpenFragmentClosureResult.EdgeKind OpenFragmentClosureResult.Failure.edgeKind()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'OpenFragmentClosureResult.FailureReason OpenFragmentClosureResult.Failure.reason()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'PlanarGeometry.BoundingBox FaceInteriorPointFinder.FaceContext.boundingBox()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'PropertiesRegistry Restrictions.ContextDependencies.propertiesRegistry()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'RegionClassifier.WorldBox RegionClassifier.VisibleSampleResult.sampleBox()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'RegressionSpecification SpreadsheetStatistics.Input.RegressionInput.regression()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'Runnable TableValuesStatisticsViewModel.Content.Regression.plotAction()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'ScheduledPreviewFromInputBar Restrictions.ContextDependencies.scheduledPreviewFromInputBar()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'Settings Restrictions.ContextDependencies.settings()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'SpreadsheetReference SpreadsheetStatistics.Input.FrequencyTableInput.classesRange()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'SpreadsheetReference SpreadsheetStatistics.Input.FrequencyTableInput.dataRange()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'SpreadsheetReference SpreadsheetStatistics.Input.OneVarInput.cellRange()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'SpreadsheetReference SpreadsheetStatistics.Input.RegressionInput.cellRangeX()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'SpreadsheetReference SpreadsheetStatistics.Input.RegressionInput.cellRangeY()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'SpreadsheetReference SpreadsheetStatistics.Input.TwoVarInput.cellRangeX()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'SpreadsheetReference SpreadsheetStatistics.Input.TwoVarInput.cellRangeY()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'SpreadsheetStatistics.DataRange SpreadsheetStatistics.Result.Invalid.dataRange()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'SpreadsheetStatistics.Error SpreadsheetStatistics.Result.Invalid.error()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'SpreadsheetStatistics.Grouping SpreadsheetStatistics.Input.FrequencyTableInput.grouping()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'State TableValuesStatisticsViewModel.Content.Regression.groups()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'State TableValuesStatisticsViewModel.Content.Regression.regressionModels()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'State TableValuesStatisticsViewModel.Content.Regression.selectedRegressionIndex()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'State TableValuesStatisticsViewModel.Content.Statistics.groups()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'StatisticGroupsBuilder Restrictions.ContextDependencies.statisticGroupsBuilder()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'ToolsProvider Restrictions.ContextDependencies.toolsProvider()' is not usable by but exposed to JavaScript.
+   [WARN] Suppress "[unusable-by-js]" warnings by adding a `@SuppressWarnings("unusable-by-js")` annotation to the corresponding member.
+   Compiling 1 permutation
+      Compiling permutation 0...
+      Source Maps Enabled
+   Compile of permutations succeeded
+   Compilation succeeded -- 108.236s
+Linking into /workspace/AlgoGebra/geogebra/source/web/web/war/web3d; Writing extras to /workspace/AlgoGebra/geogebra/source/web/web/build/gwt/extra/web3d
+   Link succeeded
+   Linking succeeded -- 2.855s
+Compiling module org.geogebra.web.WebSimple
+   Warnings in Unknown
+      [WARN] Line 0: [unusable-by-js] Return type of 'ArrayNode MatrixResizeController.Matrix.arrayNode()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'ClipRect ClippedFragmentsResult.clipRect()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'EdgeHit ClippedFragmentsBuilder.SegmentNode.hit()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'FaceInteriorPointFinder.BoundaryPath FaceInteriorPointFinder.FaceContext.outerBoundary()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'FragmentBounds[] BoundarySegmentProcessor.BoundaryBuildData.fragmentBounds()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'FragmentEndpoint ClippedFragment.end()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'FragmentEndpoint ClippedFragment.start()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'FunctionNode MatrixResizeController.Vector.functionNode()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'GPoint2D BoundaryHierarchyBuilder.BoundaryContainmentCheck.firstOutsidePoint()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'GPoint2D GraphBuilder.PerimeterVertex.point()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'GPoint2D RegionClassifier.VisibleSampleResult.point()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'GRectangle2D MatrixResizeController.PopupState.anchor()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'MyPoint ClippedFragmentsBuilder.SegmentNode.point()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'OpenFragmentClosureInput.ViewportTopology OpenFragmentClosureInput.viewportTopology()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'OpenFragmentClosureResult.EdgeKind OpenFragmentClosureResult.Failure.edgeKind()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'OpenFragmentClosureResult.FailureReason OpenFragmentClosureResult.Failure.reason()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'PlanarGeometry.BoundingBox FaceInteriorPointFinder.FaceContext.boundingBox()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'RegionClassifier.WorldBox RegionClassifier.VisibleSampleResult.sampleBox()' is not usable by but exposed to JavaScript.
+   [WARN] Suppress "[unusable-by-js]" warnings by adding a `@SuppressWarnings("unusable-by-js")` annotation to the corresponding member.
+   Compiling 1 permutation
+      Compiling permutation 0...
+   Compile of permutations succeeded
+   Compilation succeeded -- 59.530s
+Linking into /workspace/AlgoGebra/geogebra/source/web/web/war/webSimple; Writing extras to /workspace/AlgoGebra/geogebra/source/web/web/build/gwt/extra/webSimple
+   Link succeeded
+   Linking succeeded -- 0.230s
+Compiling module org.geogebra.web.Web
+   Warnings in Unknown
+      [WARN] Line 0: [unusable-by-js] Return type of 'AlgebraOutputFiltering Restrictions.ContextDependencies.algebraOutputFiltering()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'AlgebraProcessor Restrictions.ContextDependencies.algebraProcessor()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'AlgoDispatcher Restrictions.ContextDependencies.algoDispatcher()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'ArrayNode MatrixResizeController.Matrix.arrayNode()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'AttributedString StatisticGroup.heading()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'AttributedString TableValuesStatisticsViewModel.Content.Error.header()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'AttributedString TableValuesStatisticsViewModel.Content.Regression.header()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'AttributedString TableValuesStatisticsViewModel.Content.Statistics.header()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'AutocompleteProvider Restrictions.ContextDependencies.autoCompleteProvider()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'ClipRect ClippedFragmentsResult.clipRect()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'CommandDispatcher Restrictions.ContextDependencies.commandDispatcher()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'Construction Restrictions.ContextDependencies.construction()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'EdgeHit ClippedFragmentsBuilder.SegmentNode.hit()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'FaceInteriorPointFinder.BoundaryPath FaceInteriorPointFinder.FaceContext.outerBoundary()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'FragmentBounds[] BoundarySegmentProcessor.BoundaryBuildData.fragmentBounds()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'FragmentEndpoint ClippedFragment.end()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'FragmentEndpoint ClippedFragment.start()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'FunctionNode MatrixResizeController.Vector.functionNode()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'GPoint2D BoundaryHierarchyBuilder.BoundaryContainmentCheck.firstOutsidePoint()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'GPoint2D GraphBuilder.PerimeterVertex.point()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'GPoint2D RegionClassifier.VisibleSampleResult.point()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'GRectangle2D MatrixResizeController.PopupState.anchor()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'GeoElementPropertiesFactory Restrictions.ContextDependencies.geoElementPropertiesFactory()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'InputBoxRoundingProperty.RoundingType InputBoxRoundingProperty.Rounding.type()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'Localization Restrictions.ContextDependencies.localization()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'MyImage ImageProperty.Value.image()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'MyPoint ClippedFragmentsBuilder.SegmentNode.point()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'OpenFragmentClosureInput.ViewportTopology OpenFragmentClosureInput.viewportTopology()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'OpenFragmentClosureResult.EdgeKind OpenFragmentClosureResult.Failure.edgeKind()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'OpenFragmentClosureResult.FailureReason OpenFragmentClosureResult.Failure.reason()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'PlanarGeometry.BoundingBox FaceInteriorPointFinder.FaceContext.boundingBox()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'PropertiesRegistry Restrictions.ContextDependencies.propertiesRegistry()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'RegionClassifier.WorldBox RegionClassifier.VisibleSampleResult.sampleBox()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'RegressionSpecification SpreadsheetStatistics.Input.RegressionInput.regression()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'Runnable TableValuesStatisticsViewModel.Content.Regression.plotAction()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'ScheduledPreviewFromInputBar Restrictions.ContextDependencies.scheduledPreviewFromInputBar()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'Settings Restrictions.ContextDependencies.settings()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'SpreadsheetReference SpreadsheetStatistics.Input.FrequencyTableInput.classesRange()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'SpreadsheetReference SpreadsheetStatistics.Input.FrequencyTableInput.dataRange()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'SpreadsheetReference SpreadsheetStatistics.Input.OneVarInput.cellRange()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'SpreadsheetReference SpreadsheetStatistics.Input.RegressionInput.cellRangeX()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'SpreadsheetReference SpreadsheetStatistics.Input.RegressionInput.cellRangeY()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'SpreadsheetReference SpreadsheetStatistics.Input.TwoVarInput.cellRangeX()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'SpreadsheetReference SpreadsheetStatistics.Input.TwoVarInput.cellRangeY()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'SpreadsheetStatistics.DataRange SpreadsheetStatistics.Result.Invalid.dataRange()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'SpreadsheetStatistics.Error SpreadsheetStatistics.Result.Invalid.error()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'SpreadsheetStatistics.Grouping SpreadsheetStatistics.Input.FrequencyTableInput.grouping()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'State TableValuesStatisticsViewModel.Content.Regression.groups()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'State TableValuesStatisticsViewModel.Content.Regression.regressionModels()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'State TableValuesStatisticsViewModel.Content.Regression.selectedRegressionIndex()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'State TableValuesStatisticsViewModel.Content.Statistics.groups()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'StatisticGroupsBuilder Restrictions.ContextDependencies.statisticGroupsBuilder()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'ToolsProvider Restrictions.ContextDependencies.toolsProvider()' is not usable by but exposed to JavaScript.
+   [WARN] Suppress "[unusable-by-js]" warnings by adding a `@SuppressWarnings("unusable-by-js")` annotation to the corresponding member.
+   Compiling 1 permutation
+      Compiling permutation 0...
+   Compile of permutations succeeded
+   Compilation succeeded -- 92.953s
+Linking into /workspace/AlgoGebra/geogebra/source/web/web/war/web; Writing extras to /workspace/AlgoGebra/geogebra/source/web/web/build/gwt/extra/web
+   Link succeeded
+   Linking succeeded -- 0.298s
+Compiling module org.geogebra.web.Tablet3D
+   Warnings in Unknown
+      [WARN] Line 0: [unusable-by-js] Return type of 'AlgebraOutputFiltering Restrictions.ContextDependencies.algebraOutputFiltering()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'AlgebraProcessor Restrictions.ContextDependencies.algebraProcessor()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'AlgoDispatcher Restrictions.ContextDependencies.algoDispatcher()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'ArrayNode MatrixResizeController.Matrix.arrayNode()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'AttributedString StatisticGroup.heading()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'AttributedString TableValuesStatisticsViewModel.Content.Error.header()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'AttributedString TableValuesStatisticsViewModel.Content.Regression.header()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'AttributedString TableValuesStatisticsViewModel.Content.Statistics.header()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'AutocompleteProvider Restrictions.ContextDependencies.autoCompleteProvider()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'ClipRect ClippedFragmentsResult.clipRect()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'CommandDispatcher Restrictions.ContextDependencies.commandDispatcher()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'Construction Restrictions.ContextDependencies.construction()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'EdgeHit ClippedFragmentsBuilder.SegmentNode.hit()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'FaceInteriorPointFinder.BoundaryPath FaceInteriorPointFinder.FaceContext.outerBoundary()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'FragmentBounds[] BoundarySegmentProcessor.BoundaryBuildData.fragmentBounds()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'FragmentEndpoint ClippedFragment.end()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'FragmentEndpoint ClippedFragment.start()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'FunctionNode MatrixResizeController.Vector.functionNode()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'GPoint2D BoundaryHierarchyBuilder.BoundaryContainmentCheck.firstOutsidePoint()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'GPoint2D GraphBuilder.PerimeterVertex.point()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'GPoint2D RegionClassifier.VisibleSampleResult.point()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'GRectangle2D MatrixResizeController.PopupState.anchor()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'GeoElementPropertiesFactory Restrictions.ContextDependencies.geoElementPropertiesFactory()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'InputBoxRoundingProperty.RoundingType InputBoxRoundingProperty.Rounding.type()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'Localization Restrictions.ContextDependencies.localization()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'MyImage ImageProperty.Value.image()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'MyPoint ClippedFragmentsBuilder.SegmentNode.point()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'OpenFragmentClosureInput.ViewportTopology OpenFragmentClosureInput.viewportTopology()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'OpenFragmentClosureResult.EdgeKind OpenFragmentClosureResult.Failure.edgeKind()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'OpenFragmentClosureResult.FailureReason OpenFragmentClosureResult.Failure.reason()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'PlanarGeometry.BoundingBox FaceInteriorPointFinder.FaceContext.boundingBox()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'PropertiesRegistry Restrictions.ContextDependencies.propertiesRegistry()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'RegionClassifier.WorldBox RegionClassifier.VisibleSampleResult.sampleBox()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'RegressionSpecification SpreadsheetStatistics.Input.RegressionInput.regression()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'Runnable TableValuesStatisticsViewModel.Content.Regression.plotAction()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'ScheduledPreviewFromInputBar Restrictions.ContextDependencies.scheduledPreviewFromInputBar()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'Settings Restrictions.ContextDependencies.settings()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'SpreadsheetReference SpreadsheetStatistics.Input.FrequencyTableInput.classesRange()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'SpreadsheetReference SpreadsheetStatistics.Input.FrequencyTableInput.dataRange()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'SpreadsheetReference SpreadsheetStatistics.Input.OneVarInput.cellRange()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'SpreadsheetReference SpreadsheetStatistics.Input.RegressionInput.cellRangeX()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'SpreadsheetReference SpreadsheetStatistics.Input.RegressionInput.cellRangeY()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'SpreadsheetReference SpreadsheetStatistics.Input.TwoVarInput.cellRangeX()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'SpreadsheetReference SpreadsheetStatistics.Input.TwoVarInput.cellRangeY()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'SpreadsheetStatistics.DataRange SpreadsheetStatistics.Result.Invalid.dataRange()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'SpreadsheetStatistics.Error SpreadsheetStatistics.Result.Invalid.error()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'SpreadsheetStatistics.Grouping SpreadsheetStatistics.Input.FrequencyTableInput.grouping()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'State TableValuesStatisticsViewModel.Content.Regression.groups()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'State TableValuesStatisticsViewModel.Content.Regression.regressionModels()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'State TableValuesStatisticsViewModel.Content.Regression.selectedRegressionIndex()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'State TableValuesStatisticsViewModel.Content.Statistics.groups()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'StatisticGroupsBuilder Restrictions.ContextDependencies.statisticGroupsBuilder()' is not usable by but exposed to JavaScript.
+      [WARN] Line 0: [unusable-by-js] Return type of 'ToolsProvider Restrictions.ContextDependencies.toolsProvider()' is not usable by but exposed to JavaScript.
+   [WARN] Suppress "[unusable-by-js]" warnings by adding a `@SuppressWarnings("unusable-by-js")` annotation to the corresponding member.
+   Compiling 1 permutation
+      Compiling permutation 0...
+   Compile of permutations succeeded
+   Compilation succeeded -- 107.325s
+Linking into /workspace/AlgoGebra/geogebra/source/web/web/war/tablet3d; Writing extras to /workspace/AlgoGebra/geogebra/source/web/web/build/gwt/extra/tablet3d
+   Link succeeded
+   Linking succeeded -- 0.256s
+
+> Task :web:mergeDeploy
+
+[Incubating] Problems report is available at: file:///workspace/AlgoGebra/geogebra/source/web/build/reports/problems/problems-report.html
+
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 10.
+
+You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+
+For more on this, please refer to https://docs.gradle.org/9.4.1/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
+
+BUILD SUCCESSFUL in 6m 30s
+63 actionable tasks: 5 executed, 58 up-to-date
+
+real	6m30.976s
+user	11m3.080s
+sys	0m18.331s
+rc=0

@@ -1,0 +1,5 @@
+\title{Choose the shape}
+\language{fr}
+\text{good=random(cercle,carre,triangle)}
+\statement{Quelle forme ? \embed{reply1}}
+\answer{Forme}{\good}{type=menu}

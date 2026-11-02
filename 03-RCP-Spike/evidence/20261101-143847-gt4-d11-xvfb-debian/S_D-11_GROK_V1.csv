@@ -1,0 +1,9 @@
+suite,num,id,status,priority,detail,ts
+S_D-11,1,D11-01-schema-valid,FAIL,P0,"schema validation: ",2026-11-01T14:35:14.9905290+01:00
+S_D-11,2,D11-02-product-launches,FAIL,P0,"log=/tmp/gt4/03-RCP-Spike/tests/results/20261101_143514-grok-bot-vm-419969949/D-11-course-tree.log",2026-11-01T14:35:24.0723322+01:00
+S_D-11,3,D11-03-tree-renders,FAIL,P1,"log=/tmp/gt4/03-RCP-Spike/tests/results/20261101_143514-grok-bot-vm-419969949/D-11-course-tree.log",2026-11-01T14:35:24.0737427+01:00
+S_D-11,4,D11-04-step-O,PASS,P0,"O creation: OK false",2026-11-01T14:35:24.0783405+01:00
+S_D-11,5,D11-04-step-circle,PASS,P0,"Circle creation: OK false",2026-11-01T14:35:24.0791511+01:00
+S_D-11,6,D11-05-cas-identity,FAIL,P0,"CAS result: ",2026-11-01T14:35:24.0798936+01:00
+S_D-11,7,D11-06-no-error-dialog,PASS,P1,"No error dialog in log",2026-11-01T14:35:24.0809663+01:00
+S_D-11,8,D11-07-no-timeout,PASS,P1,"Completed in 9s",2026-11-01T14:35:24.0825595+01:00

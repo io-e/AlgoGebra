@@ -1,0 +1,14 @@
+suite,num,id,status,priority,detail,ts
+17_Launcher,1,L-01-ggb-java,PASS,P0,"rc=0 (want 0) out=[JAVA=/workspace/AlgoGebra/jdk/jdk-25.0.5+8/bin/java SOURCE=GGB_JAVA MAJOR=25 MIN=25]",2026-11-01T13:33:11.9174183+01:00
+17_Launcher,2,L-02-legacy-JAVA,PASS,P0,"rc=0 (want 0) out=[JAVA=/workspace/AlgoGebra/jdk/jdk-25.0.5+8/bin/java SOURCE=GGB_JAVA MAJOR=25 MIN=25]",2026-11-01T13:33:11.9632353+01:00
+17_Launcher,3,L-03-ggb-java-too-old,PASS,P0,"rc=4 (want 4) out=[launch.sh: GGB_JAVA/JAVA='/workspace/AlgoGebra/jdk/jdk-21.0.13+9/bin/java' is not a usable Java >= 25 (GGB_JAVA: /workspace/AlgoGebra/jdk/jdk-21.0.13+9/bin/java (Java 21 < 25))]",2026-11-01T13:33:12.0719440+01:00
+17_Launcher,4,L-04-java-home,PASS,P0,"rc=0 (want 0) out=[JAVA=/workspace/AlgoGebra/jdk/jdk-25.0.5+8/bin/java SOURCE=JAVA_HOME MAJOR=25 MIN=25]",2026-11-01T13:33:12.1221702+01:00
+17_Launcher,5,L-05-java-home-too-old-none-else,PASS,P0,"rc=4 (want 4) out=[launch.sh: no Java >= 25 found. Set GGB_JAVA=/path/to/bin/java or JAVA_HOME, or install a JDK (e.g. apt install openjdk-25-jre, or 'mise use java@25'). |   tried: JAVA_HOME: /workspace/AlgoGebra/jdk/jdk-21.0.13+9/bin/java (Java 21 < 25)]",2026-11-01T13:33:12.1796201+01:00
+17_Launcher,6,L-06-path-java,PASS,P0,"rc=0 (want 0) out=[JAVA=/tmp/grok17-2885413/pathbin/java SOURCE=PATH MAJOR=25 MIN=25]",2026-11-01T13:33:12.2249090+01:00
+17_Launcher,7,L-07-min-override-21,PASS,P0,"rc=0 (want 0) out=[JAVA=/workspace/AlgoGebra/jdk/jdk-21.0.13+9/bin/java SOURCE=JAVA_HOME MAJOR=21 MIN=21]",2026-11-01T13:33:12.2661264+01:00
+17_Launcher,8,L-08-legacy-1.8-version-parse,PASS,P0,"rc=4 (want 4) out=[launch.sh: no Java >= 25 found. Set GGB_JAVA=/path/to/bin/java or JAVA_HOME, or install a JDK (e.g. apt install openjdk-25-jre, or 'mise use java@25'). |   tried: JAVA_HOME: /tmp/grok17-2885413/old/bin/java (Java 8 < 25)]",2026-11-01T13:33:12.2873082+01:00
+17_Launcher,9,L-09-nothing-found-clear-error,PASS,P0,"rc=4 (want 4) out=[launch.sh: no Java >= 25 found. Set GGB_JAVA=/path/to/bin/java or JAVA_HOME, or install a JDK (e.g. apt install openjdk-25-jre, or 'mise use java@25').]",2026-11-01T13:33:12.3002278+01:00
+17_Launcher,10,L-10-bundled-jre-wins-over-java-home,PASS,P0,"out=[JAVA=/tmp/grok17-2885413/image/jre/bin/java SOURCE=bundled MAJOR=25 MIN=25]",2026-11-01T13:33:12.3436215+01:00
+17_Launcher,11,L-11-missing-image,PASS,P1,"rc=3 out=[launch.sh: no RCP image at '/tmp/grok17-2885413/no-image' (bundles/ missing); set IMAGE=<image dir>]",2026-11-01T13:33:12.3537540+01:00
+17_Launcher,12,L-12-no-hardcoded-workspace-path,PASS,P0,"launch.sh has no /workspace/AlgoGebra fallback",2026-11-01T13:33:12.3571156+01:00
+17_Launcher,13,L-13-headless-start,PASS,P1,"repo launch.sh --headless, image=/workspace/AlgoGebra/image/GeoGebraPlus-RCP-0.1.0-linux-gtk-x86_64 java=/workspace/AlgoGebra/jdk/jdk-25.0.5+8 log=/workspace/AlgoGebra/wt-p0/03-RCP-Spike/tests/results/17_headless.log",2026-11-01T13:33:17.3767616+01:00

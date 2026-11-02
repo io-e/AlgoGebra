@@ -1,0 +1,138 @@
+Run 20261101-143515-2929078 log /workspace/AlgoGebra/image-pr11/GeoGebraPlus-RCP-0.1.0-linux-gtk-x86_64/logs/launch-20261101-143515-2929078.log
+Picked up JAVA_TOOL_OPTIONS: -Dggbplus.course=/tmp/gt4/courses/trigonometry_intro.json -Dggbplus.scenario=/tmp/gt4/03-RCP-Spike/tests/results/20261101_143514-grok-bot-vm-419969949/D-11-course-tree.directives.tsv -Dggbplus.scenarioExit=true
+WARNING: Using incubator modules: jdk.incubator.vector
+[GeoGebraPlus] Host bundle ACTIVE; id=67
+[GeoGebraPlus] Registered external engine pari; available=true
+[GeoGebraPlus] Registered external engine maxima; available=true
+[GeoGebraPlus] Registered external engine gnuplot; available=true
+[GeoGebraPlus] IApplication.start() — D-02 entry
+[GeoGebraPlus] Runtime: 25.0.5+8-LTS; OS=Linux/amd64
+[GeoGebraPlus] Course loaded: /tmp/gt4/courses/trigonometry_intro.json (5 chapters; schema 1.0)
+[GeoGebraPlus] JogAmp boot delegation=null
+[GeoGebraPlus] Normalized lazy bundle to RESOLVED for D-02: com.sun.jna
+[GeoGebraPlus] D-02 D-03-set check: expected=50, found=50, ACTIVE=0, RESOLVED=50, unresolved/other=0, resolveBundles=true
+[GeoGebraPlus] D-02 PASS
+(java:2929114): dbind-WARNING **: 14:35:16.212: AT-SPI: Error retrieving accessibility bus address: org.freedesktop.DBus.Error.ServiceUnknown: The name org.a11y.Bus was not provided by any .service files
+[GeoGebraPlus] GIAC DLL loaded from product classpath: /tmp/geogebraplus-giac-16180046595327677682/libjavagiac64.so
+[GeoGebraPlus] D-05 GIAC natives preloaded in owning bundle class loader: org.eclipse.osgi.internal.loader.EquinoxClassLoader@76b3c467[org.geogebra.migration.shared.giac.jni:5.4.934.0(id=48)]
+[GeoGebraPlus] GlueGen native loaded from product classpath: /tmp/geogebraplus-gluegen-9123867998506933547/libgluegen_rt.so
+[GeoGebraPlus] D-05 GlueGen natives preloaded in owning bundle class loader: org.eclipse.osgi.internal.loader.EquinoxClassLoader@63dcfd92[org.geogebra.migration.external.org.jogamp.gluegen.gluegen-rt:2.6.0(id=40)]
+[GeoGebraPlus] JOGL native loaded from product classpath: /tmp/geogebraplus-jogl-14404588521777366869/libnativewindow_awt.so
+[GeoGebraPlus] JOGL native loaded from product classpath: /tmp/geogebraplus-jogl-7231503982387161275/libnativewindow_x11.so
+[GeoGebraPlus] JOGL native loaded from product classpath: /tmp/geogebraplus-jogl-14653687191736822387/libnewt_head.so
+[GeoGebraPlus] JOGL native loaded from product classpath: /tmp/geogebraplus-jogl-9677986245708100252/libjogl_desktop.so
+[GeoGebraPlus] JOGL native loaded from product classpath: /tmp/geogebraplus-jogl-11348626493993639787/libjogl_mobile.so
+[GeoGebraPlus] D-05 JOGL natives preloaded in owning bundle class loader: org.eclipse.osgi.internal.loader.EquinoxClassLoader@c7cf6dd[org.geogebra.migration.external.org.jogamp.jogl.jogl-all:2.6.0(id=41)]
+[GeoGebraPlus] CAS factory prototype installed: org.geogebra.desktop.factories.CASFactoryD
+[GeoGebraPlus] System-loader GIAC DLL resource=null
+GeoGebra 5.4.934.0 20 October 2026 Java 25.0.5-64bit
+[GeoGebraPlus] D-04 embedded AppD full-GUI mode=true (spike adapter; GeoGebraPanel constructs AppD with minimal-GUI mode)
+[GeoGebraPlus] D-04 GeoGebraPanel embedded in SWT_AWT shell
+[GeoGebraPlus] D-05 CAS enabled=true; factory=org.geogebra.desktop.factories.CASFactoryD (test adapter uses reflection; not a proposed public API)
+[GeoGebraPlus] D-05 GIAC JNI host-loader native loaded=true
+============== restarted ===============
+[GeoGebraPlus] D-05 GIAC native loaded=true
+[GeoGebraPlus] D-05 CAS result: x² + 2x + 1
+============== restarted ===============
+[GeoGebraPlus] D-05 CAS smoke 1+1: 2
+============== restarted ===============
+[GeoGebraPlus] D-05 CAS smoke x+1: x + 1
+============== restarted ===============
+[GeoGebraPlus] D-05 direct GIAC smoke: org.geogebra.desktop.cas.giac.CASgiacD(1+1) -> 2
+[GeoGebraPlus] D-05 CAS ASSERTION PASS: normalized=x^2+2x+1
+GeoGebra 5.4.934.0 20 October 2026 Java 25.0.5-64bit
+[GeoGebraPlus] D-05 3D point command accepted=true; 3D view initialized=true
+[GeoGebraPlus] D-05 3D note: GeoGebraPanel constructs the 2D AppD; the 3D proof uses an upstream App3D instance in the second SWT_AWT pane
+(SWT:2929114): Gdk-WARNING **: 14:35:19.175: XSetErrorHandler() called with a GDK error trap pushed. Don't do that.
+[GeoGebraPlus] SCN	_BEGIN	OK	D-11-course-tree.directives.tsv	6 lines
+[GeoGebraPlus] SCN	O = (0, 0)	OK	false
+(SWT:2929114): Gdk-WARNING **: 14:35:23.225: XSetErrorHandler() called with a GDK error trap pushed. Don't do that.
+[GeoGebraPlus] SCN	c = Circle(O, 1)	OK	false
+[GeoGebraPlus] SCN	P = Point(c)	OK	false
+[GeoGebraPlus] SCN	SetColor(c, 0, 0, 255)	OK	false
+[GeoGebraPlus] SCN	x(P)	OK	
+[GeoGebraPlus] SCN	Simplify(cos(x)^2 + sin(x)^2)	OK	
+[GeoGebraPlus] SCN	_END	OK	done
+Exception in thread "AWT-EventQueue-0" java.lang.NullPointerException: Cannot invoke "sun.awt.X11.XWindowPeer.getOwnerPeer()" because "window" is null
+	at java.desktop/sun.awt.X11.XWindowPeer.restoreTransientFor(XWindowPeer.java:1768)
+	at java.desktop/sun.awt.X11.XWindowPeer.removeFromTransientFors(XWindowPeer.java:1834)
+	at java.desktop/sun.awt.X11.XWindowPeer.setModalBlocked(XWindowPeer.java:1548)
+	at java.desktop/sun.awt.X11.XEmbeddedFramePeer.setModalBlocked(XEmbeddedFramePeer.java:39)
+	at java.desktop/sun.awt.X11.XWindowPeer.setModalBlocked(XWindowPeer.java:1520)
+	at java.desktop/sun.awt.X11.XEmbeddedFramePeer.setModalBlocked(XEmbeddedFramePeer.java:322)
+	at java.desktop/java.awt.Window.setModalBlocked(Window.java:1455)
+	at java.desktop/java.awt.Dialog.unblockWindow(Dialog.java:1540)
+	at java.desktop/java.awt.Dialog.modalHide(Dialog.java:1426)
+	at java.desktop/java.awt.Dialog.hideAndDisposePreHandler(Dialog.java:1101)
+	at java.desktop/java.awt.Dialog.hide(Dialog.java:1130)
+	at java.desktop/java.awt.Window$1DisposeAction.run(Window.java:1156)
+	at java.desktop/java.awt.Window.doDispose(Window.java:1174)
+	at java.desktop/java.awt.Dialog.doDispose(Dialog.java:1148)
+	at java.desktop/java.awt.Window.dispose(Window.java:1115)
+	at java.desktop/java.awt.Window.disposeImpl(Window.java:1125)
+	at java.desktop/java.awt.Window$1DisposeAction.run(Window.java:1153)
+	at java.desktop/java.awt.Window.doDispose(Window.java:1174)
+	at java.desktop/java.awt.Window.dispose(Window.java:1115)
+	at org.eclipse.swt.awt.SWT_AWT.lambda$6(SWT_AWT.java:230)
+	at java.desktop/java.awt.event.InvocationEvent.dispatch(InvocationEvent.java:323)
+	at java.desktop/java.awt.EventQueue.dispatchEventImpl(EventQueue.java:723)
+	at java.desktop/java.awt.EventQueue.dispatchEvent(EventQueue.java:702)
+	at java.desktop/java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:203)
+	at java.desktop/java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:124)
+	at java.desktop/java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:117)
+	at java.desktop/java.awt.WaitDispatchSupport$2.run(WaitDispatchSupport.java:187)
+	at java.desktop/java.awt.WaitDispatchSupport.enter(WaitDispatchSupport.java:229)
+	at java.desktop/java.awt.Dialog.show(Dialog.java:1051)
+	at java.desktop/javax.swing.JOptionPane.showOptionDialog(JOptionPane.java:881)
+	at java.desktop/javax.swing.JOptionPane.showConfirmDialog(JOptionPane.java:806)
+	at java.desktop/javax.swing.JOptionPane.showConfirmDialog(JOptionPane.java:768)
+	at org.geogebra.desktop.main.AppD$2.lambda$showError$0(AppD.java:3502)
+	at java.desktop/java.awt.event.InvocationEvent.dispatch(InvocationEvent.java:323)
+	at java.desktop/java.awt.EventQueue.dispatchEventImpl(EventQueue.java:723)
+	at java.desktop/java.awt.EventQueue.dispatchEvent(EventQueue.java:702)
+	at java.desktop/java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:203)
+	at java.desktop/java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:124)
+	at java.desktop/java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:117)
+	at java.desktop/java.awt.WaitDispatchSupport$2.run(WaitDispatchSupport.java:187)
+	at java.desktop/java.awt.WaitDispatchSupport.enter(WaitDispatchSupport.java:229)
+	at java.desktop/java.awt.Dialog.show(Dialog.java:1051)
+	at java.desktop/javax.swing.JOptionPane.showOptionDialog(JOptionPane.java:881)
+	at java.desktop/javax.swing.JOptionPane.showConfirmDialog(JOptionPane.java:806)
+	at java.desktop/javax.swing.JOptionPane.showConfirmDialog(JOptionPane.java:768)
+	at org.geogebra.desktop.main.AppD$2.lambda$showError$0(AppD.java:3502)
+	at java.desktop/java.awt.event.InvocationEvent.dispatch(InvocationEvent.java:323)
+	at java.desktop/java.awt.EventQueue.dispatchEventImpl(EventQueue.java:723)
+	at java.desktop/java.awt.EventQueue.dispatchEvent(EventQueue.java:702)
+	at java.desktop/java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:203)
+	at java.desktop/java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:124)
+	at java.desktop/java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:117)
+	at java.desktop/java.awt.WaitDispatchSupport$2.run(WaitDispatchSupport.java:187)
+	at java.desktop/java.awt.WaitDispatchSupport.enter(WaitDispatchSupport.java:229)
+	at java.desktop/java.awt.Dialog.show(Dialog.java:1051)
+	at java.desktop/javax.swing.JOptionPane.showOptionDialog(JOptionPane.java:881)
+	at java.desktop/javax.swing.JOptionPane.showConfirmDialog(JOptionPane.java:806)
+	at java.desktop/javax.swing.JOptionPane.showConfirmDialog(JOptionPane.java:768)
+	at org.geogebra.desktop.main.AppD$2.lambda$showError$0(AppD.java:3502)
+	at java.desktop/java.awt.event.InvocationEvent.dispatch(InvocationEvent.java:323)
+	at java.desktop/java.awt.EventQueue.dispatchEventImpl(EventQueue.java:723)
+	at java.desktop/java.awt.EventQueue.dispatchEvent(EventQueue.java:702)
+	at java.desktop/java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:203)
+	at java.desktop/java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:124)
+	at java.desktop/java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:117)
+	at java.desktop/java.awt.WaitDispatchSupport$2.run(WaitDispatchSupport.java:187)
+	at java.desktop/java.awt.WaitDispatchSupport.enter(WaitDispatchSupport.java:229)
+	at java.desktop/java.awt.Dialog.show(Dialog.java:1051)
+	at java.desktop/javax.swing.JOptionPane.showOptionDialog(JOptionPane.java:881)
+	at java.desktop/javax.swing.JOptionPane.showConfirmDialog(JOptionPane.java:806)
+	at java.desktop/javax.swing.JOptionPane.showConfirmDialog(JOptionPane.java:768)
+	at org.geogebra.desktop.main.AppD$2.lambda$showError$0(AppD.java:3502)
+	at java.desktop/java.awt.event.InvocationEvent.dispatch(InvocationEvent.java:323)
+	at java.desktop/java.awt.EventQueue.dispatchEventImpl(EventQueue.java:723)
+	at java.desktop/java.awt.EventQueue.dispatchEvent(EventQueue.java:702)
+	at java.desktop/java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:203)
+	at java.desktop/java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:124)
+	at java.desktop/java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:113)
+	at java.desktop/java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:109)
+	at java.desktop/java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:101)
+	at java.desktop/java.awt.EventDispatchThread.run(EventDispatchThread.java:90)
+[GeoGebraPlus] Host bundle stopping

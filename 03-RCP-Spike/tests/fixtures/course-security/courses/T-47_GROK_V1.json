@@ -1,0 +1,24 @@
+{
+ "schemaVersion": "1.0",
+ "course": "GROK_V1 security corpus",
+ "tree": [
+  {
+   "title": "Ch",
+   "children": [
+    {
+     "title": "Step",
+     "actions": [
+      {
+       "directive": "CMD",
+       "value": "n = 5"
+      },
+      {
+       "directive": "CMD",
+       "value": "Sequence(k, k, 1, n)"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

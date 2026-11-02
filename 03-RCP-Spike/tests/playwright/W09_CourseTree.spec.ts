@@ -2,7 +2,7 @@
 // Requires: self-hosted GWT WAR under web-host/GeoGebra/ + HTTP server on :4173
 // Evidence: screenshots + traces under 03-RCP-Spike/results/playwright/
 // Reference: Handoff_CLAUDE_by_GROK_V1_1.md §3.3
-import { test, expect, waitForAppletReady, evalCAS, evalCommand, objectExists } from './fixtures/courses';
+import { test, expect, waitForAppletReady, waitForCourseLoaded, stepButtons, evalCAS, evalCommand, objectExists } from './fixtures/courses';
 
 test.describe('W-09 Course Tree — Web Host', () => {
 
@@ -38,9 +38,9 @@ test.describe('W-09 Course Tree — Web Host', () => {
   test('PW-W09-03 tree has chapters', async ({ coursePage }) => {
     await waitForAppletReady(coursePage);
 
-    const treeItems = coursePage.locator('#tree-root [role="treeitem"]');
-    await expect(treeItems).toHaveCount(5, { timeout: 10_000 });
-    // "at least 5" — use >= via count
+    // GROK_V1: top-level chapters only (nested steps are treeitems too)
+    await waitForCourseLoaded(coursePage);
+    const treeItems = coursePage.locator('#tree-root > [role="treeitem"]');
     const count = await treeItems.count();
     expect(count).toBeGreaterThanOrEqual(5);
   });
@@ -49,8 +49,9 @@ test.describe('W-09 Course Tree — Web Host', () => {
   test('PW-W09-04 run step 1.1 creates point O', async ({ coursePage }) => {
     await waitForAppletReady(coursePage);
 
-    // Click first step (chapter 1, step 1)
-    const firstStep = coursePage.locator('#tree-root [role="treeitem"]').first();
+    // Click first step (chapter 1, step 1) - GROK_V1: step button, not the chapter treeitem
+    await waitForCourseLoaded(coursePage);
+    const firstStep = stepButtons(coursePage).first();
     await firstStep.click();
 
     const runBtn = coursePage.locator('#btn-run');
@@ -71,7 +72,8 @@ test.describe('W-09 Course Tree — Web Host', () => {
     await waitForAppletReady(coursePage);
 
     // Run step 1.1 first (prerequisite)
-    const steps = coursePage.locator('#tree-root [role="treeitem"]');
+    await waitForCourseLoaded(coursePage);
+    const steps = stepButtons(coursePage);
     await steps.first().click();
     await coursePage.locator('#btn-run').click();
     await coursePage.waitForTimeout(500);
@@ -146,10 +148,10 @@ test.describe('W-09 Course Tree — Web Host', () => {
     await mobileToggle.click();
     const sidebar = page.locator('#course-tree');
     // After toggle, sidebar visibility should change
-    const isVisible = await sidebar.isVisible();
+    // GROK_V1: the sidebar slides off-canvas via CSS transform, so isVisible() never changes; assert the .open state
+    await expect(sidebar).toHaveClass(/(^|\s)open(\s|$)/);
     await mobileToggle.click();
-    const isVisibleAfter = await sidebar.isVisible();
-    expect(isVisible).not.toBe(isVisibleAfter);
+    await expect(sidebar).not.toHaveClass(/(^|\s)open(\s|$)/);
 
     await context.close();
   });
