@@ -1,0 +1,323 @@
+{
+  "schemaVersion": "1.0",
+  "course": "Trigonométrie — αβγ / Тригонометрия / 三角函数",
+  "description": "Build the unit circle, define sine and cosine, and verify key identities. All commands are 2D — avoids functions, matrices, and 3D planes (BUG-014 safe).",
+  "author": "GeoGebraPlus Course Team",
+  "locale": "fr",
+  "tree": [
+    {
+      "title": "1. Le cercle unité (é è à ç ù œ « »)",
+      "description": "Construct the unit circle and a moving point on it.",
+      "children": [
+        {
+          "title": "1.1 Origine O — point d’origine",
+          "description": "Place a point at the origin and name it O.",
+          "actions": [
+            {
+              "directive": "CMD",
+              "value": "O = (0, 0)",
+              "description": "Create point O at the origin."
+            }
+          ],
+          "check": {
+            "type": "object_exists",
+            "variable": "O"
+          }
+        },
+        {
+          "title": "1.2 Тригонометрия: окружность",
+          "description": "Draw a circle with center O and radius 1.",
+          "actions": [
+            {
+              "directive": "CMD",
+              "value": "c = Circle(O, 1)",
+              "description": "Create the unit circle."
+            }
+          ],
+          "check": {
+            "type": "object_exists",
+            "variable": "c"
+          }
+        },
+        {
+          "title": "1.3 Ελληνικά: α β γ δ θ π",
+          "description": "Create a point P on the unit circle. You can drag it later.",
+          "actions": [
+            {
+              "directive": "CMD",
+              "value": "P = Point(c)",
+              "description": "Create point P on circle c."
+            }
+          ],
+          "check": {
+            "type": "object_exists",
+            "variable": "P"
+          }
+        },
+        {
+          "title": "1.4 数学 三角函数 半径",
+          "description": "Connect O to P to visualize the radius.",
+          "actions": [
+            {
+              "directive": "CMD",
+              "value": "r = Segment(O, P)",
+              "description": "Draw segment from O to P."
+            },
+            {
+              "directive": "CMD",
+              "value": "SetColor(r, 0, 0, 255)",
+              "description": "Color the radius blue."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "2. Maths: √2 ≤ π ≥ ∑ ∞ ∫ → ± ½",
+      "description": "Define the angle alpha and project P onto the axes.",
+      "children": [
+        {
+          "title": "2.1 Emoji 📐 ✓ (fallback)",
+          "description": "Place a fixed point A at (1, 0) on the circle.",
+          "actions": [
+            {
+              "directive": "CMD",
+              "value": "A = (1, 0)",
+              "description": "Create point A at (1,0)."
+            }
+          ]
+        },
+        {
+          "title": "2.2 Ünïcödé Ñ ß Ø Å",
+          "description": "Measure the angle from A to P around O.",
+          "actions": [
+            {
+              "directive": "CMD",
+              "value": "alpha = Angle(A, O, P)",
+              "description": "Create angle alpha = angle(AOP)."
+            }
+          ],
+          "check": {
+            "type": "object_exists",
+            "variable": "alpha"
+          }
+        },
+        {
+          "title": "2.3 Project P onto the x-axis",
+          "description": "Drop a perpendicular from P to the x-axis to find cos(alpha).",
+          "actions": [
+            {
+              "directive": "CMD",
+              "value": "Px = (x(P), 0)",
+              "description": "Projection of P onto x-axis."
+            },
+            {
+              "directive": "CMD",
+              "value": "segX = Segment(P, Px)",
+              "description": "Vertical projection line."
+            },
+            {
+              "directive": "CMD",
+              "value": "SetLineStyle(segX, 1)",
+              "description": "Dashed style for the projection."
+            }
+          ]
+        },
+        {
+          "title": "2.4 Project P onto the y-axis",
+          "description": "Drop a perpendicular from P to the y-axis to find sin(alpha).",
+          "actions": [
+            {
+              "directive": "CMD",
+              "value": "Py = (0, y(P))",
+              "description": "Projection of P onto y-axis."
+            },
+            {
+              "directive": "CMD",
+              "value": "segY = Segment(P, Py)",
+              "description": "Horizontal projection line."
+            },
+            {
+              "directive": "CMD",
+              "value": "SetLineStyle(segY, 1)",
+              "description": "Dashed style for the projection."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "3. Sine and Cosine Values",
+      "description": "Read the coordinates of P and verify they match sin and cos.",
+      "children": [
+        {
+          "title": "3.1 Display cos(alpha)",
+          "description": "The x-coordinate of P is cos(alpha).",
+          "actions": [
+            {
+              "directive": "VAL",
+              "value": "x(P)",
+              "description": "Read the x-coordinate of P (should equal cos(alpha))."
+            }
+          ]
+        },
+        {
+          "title": "3.2 Display sin(alpha)",
+          "description": "The y-coordinate of P is sin(alpha).",
+          "actions": [
+            {
+              "directive": "VAL",
+              "value": "y(P)",
+              "description": "Read the y-coordinate of P (should equal sin(alpha))."
+            }
+          ]
+        },
+        {
+          "title": "3.3 Verify: cos^2 + sin^2 = 1",
+          "description": "Check the fundamental identity using CAS.",
+          "actions": [
+            {
+              "directive": "CAS",
+              "value": "Simplify(cos(x)^2 + sin(x)^2)",
+              "description": "CAS simplification of the Pythagorean identity."
+            }
+          ],
+          "check": {
+            "type": "cas_equals",
+            "variable": "Simplify(cos(x)^2 + sin(x)^2)",
+            "expected": "1",
+            "feedback": {
+              "pass": "Correct! The Pythagorean identity holds: cos²(x) + sin²(x) = 1.",
+              "fail": "Something went wrong. The CAS should simplify this to 1."
+            }
+          }
+        }
+      ]
+    },
+    {
+      "title": "4. Special Angles",
+      "description": "Set P to known positions and verify exact values.",
+      "children": [
+        {
+          "title": "4.1 Set alpha = 30 degrees",
+          "description": "Move P so the angle is 30° and check cos and sin.",
+          "actions": [
+            {
+              "directive": "CMD",
+              "value": "P30 = (cos(30°), sin(30°))",
+              "description": "Create point at 30° on the unit circle."
+            },
+            {
+              "directive": "CMD",
+              "value": "SetCaption(P30, \"30°\")",
+              "description": "Label the point."
+            }
+          ],
+          "check": {
+            "type": "value_equals",
+            "variable": "y(P30)",
+            "expected": 0.5,
+            "tolerance": 0.001,
+            "feedback": {
+              "pass": "Correct! sin(30°) = 0.5",
+              "fail": "Expected sin(30°) = 0.5"
+            }
+          }
+        },
+        {
+          "title": "4.2 Set alpha = 45 degrees",
+          "description": "Move P so the angle is 45° — sin and cos should be equal.",
+          "actions": [
+            {
+              "directive": "CMD",
+              "value": "P45 = (cos(45°), sin(45°))",
+              "description": "Create point at 45° on the unit circle."
+            },
+            {
+              "directive": "CMD",
+              "value": "SetCaption(P45, \"45°\")",
+              "description": "Label the point."
+            }
+          ],
+          "check": {
+            "type": "value_range",
+            "variable": "x(P45)",
+            "expected": {
+              "min": 0.706,
+              "max": 0.708
+            },
+            "feedback": {
+              "pass": "Correct! cos(45°) = sin(45°) ≈ 0.707",
+              "fail": "Expected cos(45°) ≈ √2/2 ≈ 0.707"
+            }
+          }
+        },
+        {
+          "title": "4.3 Set alpha = 60 degrees",
+          "description": "Place a point at 60° and verify sin(60°) = √3/2.",
+          "actions": [
+            {
+              "directive": "CMD",
+              "value": "P60 = (cos(60°), sin(60°))",
+              "description": "Create point at 60° on the unit circle."
+            },
+            {
+              "directive": "CMD",
+              "value": "SetCaption(P60, \"60°\")",
+              "description": "Label the point."
+            }
+          ],
+          "check": {
+            "type": "value_range",
+            "variable": "y(P60)",
+            "expected": {
+              "min": 0.865,
+              "max": 0.867
+            },
+            "feedback": {
+              "pass": "Correct! sin(60°) = √3/2 ≈ 0.866",
+              "fail": "Expected sin(60°) ≈ √3/2 ≈ 0.866"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "title": "5. Double Angle Formula",
+      "description": "Verify sin(2x) = 2 sin(x) cos(x) using CAS.",
+      "children": [
+        {
+          "title": "5.1 Expand sin(2x)",
+          "description": "Use the CAS to expand the double angle formula.",
+          "actions": [
+            {
+              "directive": "CAS",
+              "value": "TrigExpand(sin(2x))",
+              "description": "Expand sin(2x) into 2sin(x)cos(x)."
+            }
+          ],
+          "check": {
+            "type": "cas_equals",
+            "variable": "TrigExpand(sin(2x))",
+            "expected": "2 cos(x) sin(x)",
+            "feedback": {
+              "pass": "Correct! sin(2x) = 2 sin(x) cos(x).",
+              "fail": "The CAS should return 2 cos(x) sin(x)."
+            }
+          }
+        },
+        {
+          "title": "5.2 Verify cos(2x)",
+          "description": "Expand cos(2x) and check the result.",
+          "actions": [
+            {
+              "directive": "CAS",
+              "value": "TrigExpand(cos(2x))",
+              "description": "Expand cos(2x)."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
