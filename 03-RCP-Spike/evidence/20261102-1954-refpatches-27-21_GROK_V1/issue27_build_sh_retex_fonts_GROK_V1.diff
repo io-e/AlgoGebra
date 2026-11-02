@@ -1,0 +1,29 @@
+diff --git a/03-RCP-Spike/build.sh b/03-RCP-Spike/build.sh
+index 1d1fc89..8e60247 100755
+--- a/03-RCP-Spike/build.sh
++++ b/03-RCP-Spike/build.sh
+@@ -5,7 +5,8 @@
+ #                 OSGi bundles, platform jars and the Equinox launcher (pure Java);
+ #   GGB_SRC     : GeoGebra upstream checkout at pin 375db7faf54 (resources only);
+ #   Linux natives (SWT gtk, GlueGen/JOGL linux-amd64, javagiac linux-amd64) from Maven.
+-# Upstream GeoGebra code and the 50 bundle jars are never modified.
++# Upstream GeoGebra code is never modified; the 50 bundle jars are copied unchanged except the
++# renderer bundle, which gets the upstream ReTeX font resources added (BUG-014, #27).
+ set -euo pipefail
+ ROOT="$(cd "$(dirname "$0")" && pwd)"
+ BASE="${ALGOGEBRA_BASE:-/workspace/AlgoGebra}"
+@@ -30,6 +31,14 @@ cp "$NAT"/org.eclipse.swt.gtk.linux.x86_64-3.135.0.jar "$IMAGE/platform/org.ecli
+ for j in "$REF_IMAGE"/natives/*.jar; do case "$j" in *natives-windows*) ;; *) cp "$j" "$IMAGE/natives/";; esac; done
+ cp "$NAT"/gluegen-rt-2.6.0-natives-linux-amd64.jar "$NAT"/jogl-all-2.6.0-natives-linux-amd64.jar "$NAT"/javagiac-70501-natives-linux-amd64.jar "$IMAGE/natives/"
+ [ "$(ls "$IMAGE"/bundles/*.jar | grep -v org.eclipse.osgi_ | wc -l)" = 50 ] || { echo "Expected 50 D-03 bundles"; exit 1; }
++# BUG-014 (#27): the reference renderer bundle lacks the ReTeX desktop fonts (JLaTeXMath .ttf); add them from GGB_SRC.
++RJ="$(ls "$IMAGE"/bundles/org.geogebra.migration.desktop.renderer-*.jar)"
++if ! unzip -l "$RJ" | grep -q '\.ttf$'; then
++  FR="$GGB_SRC/desktop/renderer-desktop/src/main/resources"
++  [ -d "$FR/com/himamis/retex/renderer/desktop/fonts" ] || { echo "ReTeX fonts not found under $FR"; exit 1; }
++  "$JAR" uf "$RJ" -C "$FR" com/himamis/retex/renderer/desktop/fonts
++fi
++[ "$(unzip -l "$RJ" | grep -c '\.ttf$')" -gt 0 ] || { echo "renderer bundle has no ReTeX .ttf"; exit 1; }
+ OUT="$IMAGE/host/build"; T="$(mktemp -d)"
+ CP="$(ls "$IMAGE"/bundles/*.jar "$IMAGE"/platform/*.jar "$IMAGE"/natives/*.jar | tr '\n' ':')"
+ mkdir -p "$T/host"; "$JAVAC" -encoding UTF-8 --release 21 -cp "$CP" -d "$T/host" $(find "$ROOT/host/src" -name '*.java')
