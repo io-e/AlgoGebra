@@ -24,7 +24,9 @@ $seq = @()
 foreach ($row in Read-Fixture 'd04_inputs_GROK_V1.tsv') { $id, $txt, $exp = $row
     $r = @(Invoke-Input $p2 $txt)[-1]; $shot = Save-UiShot "09_$id"
     $seq += "[$txt => lostFirstBurst=$($r.Lost) dialog=$($r.Dialog) algebraChanged=$($r.Changed)]"
-    if ($exp -eq 'OK') { Test-Ok "$id-[$txt]" ((-not $r.Dialog) -and $r.Changed) "lostFirstBurst=$($r.Lost) dialog=$($r.Dialog) algebraViewChanged=$($r.Changed) keystrokes: click bar; End,shift+Home,BackSpace; type '$txt'; Return; shot=$shot" 'P0' }
+    # GROK_V1 S3: classify instead of hiding: object created but dialog = KNOWN_BUG BUG-010; keys lost right after a dialog = BUG-010 follow-on
+    $tag = if ($r.Dialog -and $r.Changed) { ' KNOWN_BUG BUG-010: object created but "Please check your input" dialog' } elseif ($r.Lost) { ' KNOWN_BUG BUG-010 follow-on: input dead after previous dialog' } else { '' }
+    if ($exp -eq 'OK') { Test-Ok "$id-[$txt]" ((-not $r.Dialog) -and $r.Changed) "lostFirstBurst=$($r.Lost) dialog=$($r.Dialog) algebraViewChanged=$($r.Changed)$tag keystrokes: click bar; End,shift+Home,BackSpace; type '$txt'; Return; shot=$shot" 'P0' }
     else { Test-Ok "$id-[$txt]-error-dialog" $r.Dialog "dialog=$($r.Dialog) (invalid input must be reported) shot=$shot" 'P1' }
     if ($r.Lost) { Test-Ok "$id-keys-reach-input" $false 'first click+keystrokes after the previous Return/dialog did not reach the AWT input bar; retyped after a 2nd click' 'P1' }
     Close-UiErrorDialog }
@@ -34,7 +36,8 @@ $n0 = ([regex]::Matches($uilog, 'Log\.logger" is null')).Count; Invoke-UiClick $
 $n1 = ([regex]::Matches((Get-Content $log -Raw), 'Log\.logger" is null')).Count
 Test-Ok 'D04-CTRLA-01-no-npe' ($n1 -eq $n0) "ctrl+a in 2D input bar: NPE 'Log.logger is null' (ScreenReaderAdapterD.readText -> Log.read) count $n0 -> $n1" 'P1'
 $f0 = ([regex]::Matches((Get-Content $log -Raw), "jlm_cmr10\.ttf'\. Error message: Problem reading font data")).Count
-Test-Ok 'D04-FONT-01-latex-fonts' ($f0 -eq 0) "ReTeX FontLoaderD fonts/latin/jlm_cmr10.ttf 'Problem reading font data': $f0 occurrence(s)" 'P1'
+$rj = @(Get-ChildItem (Join-Path $script:Image 'bundles') -Filter '*desktop.renderer*.jar' -EA SilentlyContinue | Select-Object -First 1); $ttf = if ($rj -and -not $IsWindows) { @((& unzip -l $rj.FullName 2>$null) -match '\.ttf').Count } else { -1 }
+Test-Ok 'D04-FONT-01-latex-fonts' ($f0 -eq 0) "ReTeX FontLoaderD fonts/latin/jlm_cmr10.ttf 'Problem reading font data': $f0 occurrence(s); renderer bundle $($rj.Name) contains $ttf .ttf$(if ($ttf -eq 0) { ' (KNOWN: Linux image renderer bundle has no ReTeX fonts - see 02-Cdc/BUG-014_Debian_Analysis_GROK_V1.md)' })" 'P1'
 $r = @(Invoke-Input $p3 'E=(1,1,1)')[-1]; $shot = Save-UiShot '09_focus_3d'
 Test-Ok 'D04-FOCUS-01-2d-to-3d' ((-not $r.Dialog) -and $r.Changed) "3D bar E=(1,1,1): lost=$($r.Lost) dialog=$($r.Dialog) algebra3DChanged=$($r.Changed) shot=$shot" 'P0'; Close-UiErrorDialog
 $r = @(Invoke-Input $p2 'P=(2,3)')[-1]; $shot = Save-UiShot '09_focus_back_2d'

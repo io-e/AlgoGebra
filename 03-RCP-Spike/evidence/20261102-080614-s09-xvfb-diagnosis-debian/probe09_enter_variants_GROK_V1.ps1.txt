@@ -1,0 +1,9 @@
+. ./lib/TestFramework_GROK_V1.ps1; . ./lib/UiDriver_GROK_V1.ps1
+Initialize-TestSuite 'probe09'
+Start-UiDisplay '1600x1000x24'; $log = Start-UiApp 'probe'; $p = (Get-PaneLayout)[0]
+foreach ($k in 'Return','KP_Enter','ctrl+m') { foreach ($t in "A$($k.Length)=(1,2)") {
+  Invoke-UiClick $p.InX $p.InY; Send-UiKeys @('End','shift+Home','BackSpace'); Send-UiText $t; Start-Sleep 1
+  Send-UiKeys @($k); Start-Sleep 2; $d = Test-UiErrorDialog; Write-Host "RESULT key=$k text=$t dialog=$d"; Save-UiShot "probe_$($k -replace '\+','_')" | Out-Null; Close-UiErrorDialog; Start-Sleep 1 } }
+# xdotool type with newline
+Invoke-UiClick $p.InX $p.InY; Send-UiKeys @('End','shift+Home','BackSpace'); & xdotool type --delay 60 "Z=(5,5)`n"; Start-Sleep 2; Write-Host "RESULT key=type-newline dialog=$(Test-UiErrorDialog)"; Close-UiErrorDialog
+Stop-UiDisplay
