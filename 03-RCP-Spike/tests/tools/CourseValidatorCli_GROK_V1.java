@@ -4,6 +4,8 @@ package org.geogebra.plus.course;
 // DirectiveExecutor.resolveInput (OPEN path rules incl. toRealPath) + its "untrusted OPEN disabled" policy.
 // APPROXIMATION: command names are tokenized by regex (Name( / Name[) + Commands.stringToCommand, NOT the
 // post-parse walk of StepValidator.validateCommand (needs a live App), so localized names are not resolved.
+// Owner Q4 (issue #17): result ACCEPT | ACCEPT_WITH_WARNING | REJECT; a trusted OPEN that resolves adds a warning,
+// any REJECT wins over warnings. Sequence limits (Q3) are NOT emulated here: product gap until Codex implements them.
 import java.lang.reflect.*; import java.nio.file.*; import java.util.*; import java.util.regex.*;
 import org.geogebra.common.kernel.commands.Commands;
 public final class CourseValidatorCli_GROK_V1 {
@@ -12,6 +14,7 @@ public final class CourseValidatorCli_GROK_V1 {
     try { Path f = Path.of(a[0]); CourseModel m = CourseModel.load(f);
       DirectiveExecutor ex = new DirectiveExecutor(null, f, null, null, null, null);
       Method ri = DirectiveExecutor.class.getDeclaredMethod("resolveInput", String.class, String.class); ri.setAccessible(true);
+      List<String> warn = new ArrayList<>();
       Deque<CourseNode> q = new ArrayDeque<>(m.getTree());
       while (!q.isEmpty()) { CourseNode n = q.pop(); if (n.children() != null) q.addAll(n.children());
         if (n.actions() == null) continue;
@@ -20,9 +23,9 @@ public final class CourseValidatorCli_GROK_V1 {
               Commands c = Commands.stringToCommand(mt.group(1));
               if (c != null && !StepValidator.isAllowed(c)) { System.out.println("REJECT command " + mt.group(1)); return; } } }
           case OPEN -> { if (!act.trustedGgb()) { System.out.println("REJECT OPEN untrusted (disabled until scanner)"); return; }
-              try { ri.invoke(ex, act.value(), ".ggb"); } catch (InvocationTargetException e) { System.out.println("REJECT " + e.getCause()); return; } }
+              try { ri.invoke(ex, act.value(), ".ggb"); warn.add("trustedGgb OPEN " + act.value()); } catch (InvocationTargetException e) { System.out.println("REJECT " + e.getCause()); return; } }
           default -> { } } }
-      System.out.println("ACCEPT");
+      System.out.println(warn.isEmpty() ? "ACCEPT" : "ACCEPT_WITH_WARNING " + String.join("; ", warn));
     } catch (Throwable t) { System.out.println("REJECT " + t.getClass().getSimpleName() + ": " + t.getMessage()); }
   }
 }
