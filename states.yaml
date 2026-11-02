@@ -457,3 +457,8 @@ bugs_added_2026-10-29:
     severity: low
     status: OPEN
     evidence: "screenshots 03-RCP-Spike/evidence/20261029-debian-grokbot-c5dc145/screenshots/09_00_start.png"
+# --- Grok (Debian lane) 2026-11-02 sprint-3 follow-up ---
+grok_debian_20261102_followup:
+  pr_29_reconciliation_windows_debian: {state: merged, merge: 791fef67, finding: "no platform divergence in non-UI suites; suite 18 Win 17/0/5 vs Deb 21/0/1 (skips platform-expected); Windows suite 05 stale (14 vs 20 tests)"}
+  pr_30_suite20_in_run_all: {state: merged, merge: 6c3ea99c, run_all_linux_tip: "321/17/63", suite20: "54/0/2", optout: GGB_SKIP_JAVA_CORPUS=1}
+  verify_issues_27_28_harness: {script: 03-RCP-Spike/tests/Verify_Issues_27_28_GROK_V1.ps1, image_fontfix: {"#27": PASS, "#28": FAIL}, image_final_tip: {"#27": FAIL, "#28": FAIL}, evidence: 03-RCP-Spike/evidence/20261102-verify-27-28_GROK_V1}

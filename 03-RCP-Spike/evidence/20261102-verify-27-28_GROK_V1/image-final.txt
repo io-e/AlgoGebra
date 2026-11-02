@@ -1,0 +1,9 @@
+27-renderer-ttf      FAIL  org.geogebra.migration.desktop.renderer-5.4.934.0.jar: 0 .ttf
+27-P-02              FAIL  46/4/1
+27-D-11              PASS  8/0/0
+27-suite09-font      FAIL  D04-FONT-01=False
+28-valid-inputs      FAIL  failing: KBD-01, KBD-02, KBD-03, KBD-04, KBD-05, KBD-06, KBD-07, D04-FOCUS-02-3d-to-2d, D04-ORDER-01-fx-first-input, D04-ORDER-03-function-in-3d-pane (suite 09 7/17/0)
+28-no-dead-input     FAIL  keys-reach-input failures: 4
+VERDICT #27: FAIL
+VERDICT #28: FAIL
+# image=/workspace/AlgoGebra/image-final/GeoGebraPlus-RCP-0.1.0-linux-gtk-x86_64 scenarios=/workspace/AlgoGebra/wt-vi/03-RCP-Spike/tests/results/20261102_082857-grok-bot-vm-419969949
