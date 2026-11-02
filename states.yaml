@@ -262,7 +262,7 @@ bugs:
     component: build.sh / launch.sh
     severity: medium
     status: FIX_PENDING_MERGE
-    fix: "PR #9 (contains PR #4 1b7a8d0 + F-1 fc81487): discovery GGB_JAVA/JAVA > $IMAGE/jre|jdk > JAVA_HOME > mise > installs glob,/usr/lib/jvm,/opt/java > PATH, major >= GGB_JAVA_MIN (25), exit 4; mise path VERIFIED (PR #10 M-01..05) and warns on too-old pin (F-1); suite 17 15/0/0. Images must be rebuilt after merge"
+    fix: "PR #9 (contains PR #4 1b7a8d0 + F-1 fc81487): discovery GGB_JAVA/JAVA > $IMAGE/jre|jdk > JAVA_HOME > mise > installs glob,/usr/lib/jvm,/opt/java > PATH, major >= GGB_JAVA_MIN (25), exit 69 (owner Q1, 6c32896; PR #4 5a1350f); mise path VERIFIED (PR #10 M-01..05) and warns on too-old pin (F-1); suite 17 15/0/0. Images must be rebuilt after merge"
     evidence: "same run, S_D-10_InstallUpgrade_GROK_V1.log D10-01/03"
   - id: BUG-018
     title: "Upstream desktop test CallJavaScriptTest.testEval fails (locale-sensitive) on Windows"
@@ -297,23 +297,29 @@ open_items:
   - "Delete temp archives %TEMP%\\r8.zip and r8-nojre.zip"
   - "Eclipse languages plan remaining: create GeoGebraPlus-Languages workspace; PyDev interpreter; MSYS2 UCRT64; LSP4E map to ocamllsp"
 grok_status_2026-11-02:
-  G-T1: {status: DONE, pr: 8, note: "launch.sh -Course design + RQ-1 note; exit codes aligned to 4/3"}
+  G-T1: {status: DONE, pr: 8, note: "launch.sh -Course design + RQ-1 note; §5 no-JDK = 69 (owner Q1, aa648de), no image = 3"}
   G-T2: {status: DONE, pr: 12, note: "WAR rebuilt on Debian (recipe OK; sha256 differ from Windows, GWT non-reproducible); WAR not in git"}
   G-T3: {status: DONE, pr: 13, note: "W-09 Playwright Firefox 10/10 x2 after fixes"}
   G-T4: {status: DONE_MECHANICAL, pr: 14, note: "D-11 Xvfb 5/3/0 — BUG-014"}
   G-T5: {status: DONE, pr: 7, note: "suite 16 71/0/44 unchanged at 6baf1d4"}
   P0: {status: DONE, pr: 9, note: "launch.sh -Course; unified suite 18 21/0/1"}
   P1: {status: DONE, pr: 10, note: "Firefox 157 smoke PASS; mise->Java verified; F-1 fixed in #9"}
-  suite16_with_stepvalidator_adapter: {result: "108/6/1", pr: 12, fails: "T-03b/T-16b/T-12b adapter-only (localized); T-21 Sequence limit; T-28 policy; T-33 no warning channel"}
-  suite18_unified: {result: "21/0/1 image-pr11; 20/0/2 r8", pr: 9, windows: "needs Codex run"}
-open_decisions_2026-11-02:
-  - {id: EXIT-NOJDK, text: "no usable JDK exit code: launch.sh 4 (PR #4) vs launch.ps1 69 (PR #11, design draft) — owner picks one; tests report the divergence"}
-  - {id: T-28, text: "PR #11 disables ALL untrusted OPEN until the scanner exists; corpus/spec expect clean .ggb under course dir ACCEPT — keep strict (update corpus) or relax"}
-  - {id: SEQ-LIMIT, text: "Sequence (TABLE_LIST) allowed with no size/time limit (T-21, SPEC-GAP-2) — needs a limit in StepValidator/spec"}
-  - {id: SPEC-GAP-1, text: "spec 3.1 scanner misses <ggbscript val=...> (T-29); scanner WP9-04 not implemented"}
-  - {id: SPEC-GAP-2, text: "Sequence size/time limit (see SEQ-LIMIT)"}
-  - {id: SPEC-GAP-3, text: "symlink escape: launch.sh realpath + Java toRealPath in DirectiveExecutor — closed in code (PR #9/#11), spec text still to update by Claude"}
-  - {id: WARN-CHANNEL, text: "T-33 trustedGgb scripted file expects ACCEPT_WITH_WARNING; no warning channel in PR #11"}
+  suite16_with_stepvalidator_adapter: {result: "125/11/1 (62 cases, after Q2-Q4; was 108/6/1)", pr: "3 (corpus 76cb203) + 12 (adapter f6e998b)", fails: "T-03b/T-16b/T-12b adapter-only (localized); 8 Sequence-budget cases T-21/46/47/48/50/52/53/54 = Codex to implement (Q3)", fixed: "T-28 REJECT, T-33 ACCEPT_WITH_WARNING, T-55 PASS"}
+  suite16_no_validator: {result: "82/0/55", pr: 3}
+  suite17: {result: "15/0/0 (PR #9), 13/0/0 (PR #4)", note: "no-JDK expects 69"}
+  suite18_unified: {result: "21/0/1 image-pr11; 20/0/2 r8 (LC-17b expects 69)", pr: 9, windows: "owner/Grok run from a clean isolated worktree (Q8)"}
+owner_decisions_2026-11-02:
+  source: "https://github.com/io-e/AlgoGebra/issues/17#issuecomment-6569788303"
+  note: "No merges authorized by this comment."
+  Q1_EXIT-NOJDK: {status: DECIDED, decision: "no usable JDK = 69 (EX_UNAVAILABLE) on both launchers; 64/65/66/77 unchanged", applied: "PR #9 6c32896, PR #4 5a1350f, PR #8 aa648de; suite 17 15/0/0, suite 18 LC-17b-no-jdk-exit-code-69"}
+  Q2_T-28: {status: DECIDED, decision: "untrusted OPEN fail-closed until the .ggb scanner; corpus T-28 = REJECT; after scanner a clean in-course .ggb may ACCEPT; trusted files need a visible warning", applied: "PR #3 76cb203"}
+  Q3_SEQ-LIMIT: {status: DECIDED, decision: "<=1000 iterations per Sequence, <=10000 generated items per directive, bounds statically provable; reject dynamic/unbounded/over-budget/nested; 2 s watchdog report-only, never interrupts UI thread", applied: "corpus T-45..T-54 (PR #3); Codex handoff 02-Cdc/Handoff_Sequence_Limits_Warning_Channel_GROK_V1.md", pending: "Codex StepValidator implementation"}
+  Q4_WARN-CHANNEL: {status: DECIDED, decision: "structured result ACCEPT | ACCEPT_WITH_WARNING | REJECT; warnings never override a security rejection", applied: "suite 16 strict first-token parsing + T-55 (PR #3), adapter (PR #12 f6e998b)", pending: "Codex product ValidationResult"}
+  Q5_SPEC: {status: DECIDED, decision: "Claude assigned: security spec SPEC-GAP-1 (<ggbscript>) and SPEC-GAP-3 (real-path/symlink), reconcile tests with final contract", owner: Claude, grok_action: none}
+  Q6_REVIEW-ORDER: {status: DECIDED, decision: "review order #9 -> #3 -> #7 -> #5 -> #8 -> #10 -> #12 -> #13 -> #14 -> #16 -> #15; close #4 after #9 merges, close #6 after #15; not a merge authorization"}
+  Q7_W09-CLAUDE-FILES: {status: DECIDED, decision: "accept #13 host-page/test-spec changes in principle; review limited to project-owned host/test files; no upstream common changes", grok_action: none}
+  Q8_WINDOWS-SUITE18: {status: DECIDED, decision: "do not pull into the dirty checkout; run from a clean isolated worktree at the updated head, preserving uncommitted changes; Grok may provide Windows evidence instead of Codex"}
+  SPEC-GAP-2: {status: "CLOSED by Q3 (spec text: Claude, Q5)"}
 results_tracking:
   decision: "2026-10-29 user: stop tracking mutable 03-RCP-Spike/tests/results/ (git rm --cached, .gitignore, README kept); Run_All writes results/<runid>/ and -ExportEvidence <name> copies a reviewed run to 03-RCP-Spike/evidence/<date>-<os>-<name>-<runid>/ with MANIFEST_GROK_V1.tsv (sha256); routine full logs = CI artifacts or local by run id"
   evidence_folders:
