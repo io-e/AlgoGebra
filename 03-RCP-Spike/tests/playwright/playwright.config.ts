@@ -13,7 +13,7 @@ export default defineConfig({
     ['html', { open: 'never', outputFolder: '../results/playwright/html-report' }],
   ],
   use: {
-    baseURL: 'http://localhost:4173',
+    baseURL: 'http://127.0.0.1:4173',
     screenshot: 'on',
     trace: 'retain-on-failure',
     video: 'retain-on-failure',
@@ -33,8 +33,9 @@ export default defineConfig({
     },
   ],
   webServer: {
-    command: 'npx --yes serve -p 4173 ../../../../web-host',
-    port: 4173,
+    // GROK_V1: was 'npx serve ../../../../web-host' (one level above the repo) -> cross-platform node server
+    command: 'node serve_GROK_V1.mjs',
+    url: 'http://127.0.0.1:4173/course-host.html',
     reuseExistingServer: true,
     timeout: 15_000,
   },

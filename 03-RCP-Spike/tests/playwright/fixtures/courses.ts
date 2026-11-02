@@ -14,14 +14,25 @@ export const test = base.extend<CourseFixtures>({
 
 export { expect };
 
-export async function waitForAppletReady(page: Page, timeoutMs = 30_000): Promise<void> {
+// GROK_V1: wait for the API AND a warm CAS (evalCommandCAS returns '?' for a few seconds after load)
+export async function waitForAppletReady(page: Page, timeoutMs = 45_000): Promise<void> {
   await page.waitForFunction(
     () => {
       const applet = (window as any).ggbApplet;
-      return applet && typeof applet.evalCommandCAS === 'function';
+      if (!applet || typeof applet.evalCommandCAS !== 'function') return false;
+      try { return applet.evalCommandCAS('1+1') === '2'; } catch { return false; }
     },
-    { timeout: timeoutMs },
+    undefined,
+    { timeout: timeoutMs, polling: 500 },
   );
+}
+
+// GROK_V1: tree is loaded asynchronously after ggbOnInit; step nodes carry data-step-index
+export function stepButtons(page: Page) {
+  return page.locator('#tree-root button[data-step-index]');
+}
+export async function waitForCourseLoaded(page: Page, timeoutMs = 20_000): Promise<void> {
+  await expect(stepButtons(page).first()).toBeVisible({ timeout: timeoutMs });
 }
 
 export async function evalCAS(page: Page, expr: string): Promise<string> {

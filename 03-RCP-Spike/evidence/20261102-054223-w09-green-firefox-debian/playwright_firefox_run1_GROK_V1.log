@@ -1,0 +1,584 @@
+
+Running 10 tests using 1 worker
+
+  ✓   1 [firefox] › W09_CourseTree.spec.ts:10:7 › W-09 Course Tree — Web Host › PW-W09-01 page loads with local applet host (3.7s)
+  ✓   2 [firefox] › W09_CourseTree.spec.ts:26:7 › W-09 Course Tree — Web Host › PW-W09-02 CAS readiness check (2.0s)
+  ✓   3 [firefox] › W09_CourseTree.spec.ts:38:7 › W-09 Course Tree — Web Host › PW-W09-03 tree has chapters (3.0s)
+  ✓   4 [firefox] › W09_CourseTree.spec.ts:49:7 › W-09 Course Tree — Web Host › PW-W09-04 run step 1.1 creates point O (3.2s)
+  ✓   5 [firefox] › W09_CourseTree.spec.ts:71:7 › W-09 Course Tree — Web Host › PW-W09-05 run step 1.2 creates circle (3.9s)
+  ✓   6 [firefox] › W09_CourseTree.spec.ts:91:7 › W-09 Course Tree — Web Host › PW-W09-06 CAS identity check passes (2.1s)
+  ✓   7 [firefox] › W09_CourseTree.spec.ts:99:7 › W-09 Course Tree — Web Host › PW-W09-07 Execute command is blocked (2.1s)
+  ✓   8 [firefox] › W09_CourseTree.spec.ts:112:7 › W-09 Course Tree — Web Host › PW-W09-08 path traversal rejected (447ms)
+  ✓   9 [firefox] › W09_CourseTree.spec.ts:123:7 › W-09 Course Tree — Web Host › PW-W09-09 keyboard navigation works (2.6s)
+  ✓  10 [firefox] › W09_CourseTree.spec.ts:137:7 › W-09 Course Tree — Web Host › PW-W09-10 mobile responsive layout (953ms)
+
+  10 passed (26.6s)
+{
+  "config": {
+    "argv": [
+      "/usr/bin/node",
+      "/workspace/AlgoGebra/wt-w09/03-RCP-Spike/tests/playwright/node_modules/.bin/playwright",
+      "test",
+      "--project=firefox",
+      "--reporter=list,json"
+    ],
+    "configFile": "/workspace/AlgoGebra/wt-w09/03-RCP-Spike/tests/playwright/playwright.config.ts",
+    "rootDir": "/workspace/AlgoGebra/wt-w09/03-RCP-Spike/tests/playwright",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/workspace/AlgoGebra/wt-w09/03-RCP-Spike/tests/results/playwright",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "/workspace/AlgoGebra/wt-w09/03-RCP-Spike/tests/playwright",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 60000
+      },
+      {
+        "outputDir": "/workspace/AlgoGebra/wt-w09/03-RCP-Spike/tests/results/playwright",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "firefox",
+        "name": "firefox",
+        "testDir": "/workspace/AlgoGebra/wt-w09/03-RCP-Spike/tests/playwright",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 60000
+      },
+      {
+        "outputDir": "/workspace/AlgoGebra/wt-w09/03-RCP-Spike/tests/results/playwright",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "mobile-safari",
+        "name": "mobile-safari",
+        "testDir": "/workspace/AlgoGebra/wt-w09/03-RCP-Spike/tests/playwright",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 60000
+      }
+    ],
+    "filteredProjects": [
+      {
+        "grep": {},
+        "grepInvert": null,
+        "outputDir": "/workspace/AlgoGebra/wt-w09/03-RCP-Spike/tests/results/playwright",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "name": "firefox",
+        "testDir": "/workspace/AlgoGebra/wt-w09/03-RCP-Spike/tests/playwright",
+        "snapshotDir": "/workspace/AlgoGebra/wt-w09/03-RCP-Spike/tests/playwright",
+        "testIgnore": [],
+        "testMatch": "**/*.@(spec|test).?(c|m)[jt]s?(x)",
+        "timeout": 60000,
+        "use": {
+          "baseURL": "http://127.0.0.1:4173",
+          "screenshot": "on",
+          "trace": "retain-on-failure",
+          "video": "retain-on-failure",
+          "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:157.0) Gecko/20100101 Firefox/157.0",
+          "viewport": {
+            "width": 1280,
+            "height": 720
+          },
+          "screen": {
+            "width": 1920,
+            "height": 1080
+          },
+          "deviceScaleFactor": 1,
+          "isMobile": false,
+          "hasTouch": false,
+          "defaultBrowserType": "firefox"
+        },
+        "dependencies": [],
+        "ignoreSnapshots": false,
+        "__projectId": "firefox"
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list"
+      ],
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "default",
+    "updateSourceMethod": "patch",
+    "version": "1.64.1",
+    "workers": 4,
+    "webServer": {
+      "command": "node serve_GROK_V1.mjs",
+      "url": "http://127.0.0.1:4173/course-host.html",
+      "reuseExistingServer": true,
+      "timeout": 15000
+    }
+  },
+  "suites": [
+    {
+      "title": "W09_CourseTree.spec.ts",
+      "file": "W09_CourseTree.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "W-09 Course Tree — Web Host",
+          "file": "W09_CourseTree.spec.ts",
+          "line": 7,
+          "column": 6,
+          "specs": [
+            {
+              "title": "PW-W09-01 page loads with local applet host",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 3704,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-02T04:41:16.303Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/workspace/AlgoGebra/wt-w09/03-RCP-Spike/tests/results/playwright/W09_CourseTree-W-09-Course-6c180-oads-with-local-applet-host-firefox/test-finished-1.png"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "1c5930c3f5253005dc47-7cca04b27e1627d8bbf9",
+              "file": "W09_CourseTree.spec.ts",
+              "line": 10,
+              "column": 7
+            },
+            {
+              "title": "PW-W09-02 CAS readiness check",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2033,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-02T04:41:21.358Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/workspace/AlgoGebra/wt-w09/03-RCP-Spike/tests/results/playwright/W09_CourseTree-W-09-Course-ed6b0--W09-02-CAS-readiness-check-firefox/test-finished-1.png"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "1c5930c3f5253005dc47-f4d5c3892ef320b61bf2",
+              "file": "W09_CourseTree.spec.ts",
+              "line": 26,
+              "column": 7
+            },
+            {
+              "title": "PW-W09-03 tree has chapters",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2997,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-02T04:41:23.401Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/workspace/AlgoGebra/wt-w09/03-RCP-Spike/tests/results/playwright/W09_CourseTree-W-09-Course-5a985-PW-W09-03-tree-has-chapters-firefox/test-finished-1.png"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "1c5930c3f5253005dc47-7beec41b7ad9add7213b",
+              "file": "W09_CourseTree.spec.ts",
+              "line": 38,
+              "column": 7
+            },
+            {
+              "title": "PW-W09-04 run step 1.1 creates point O",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 3172,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-02T04:41:26.407Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/workspace/AlgoGebra/wt-w09/03-RCP-Spike/tests/results/playwright/W09_CourseTree-W-09-Course-6c2df-un-step-1-1-creates-point-O-firefox/test-finished-1.png"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "1c5930c3f5253005dc47-64807ee42f10cec6df8e",
+              "file": "W09_CourseTree.spec.ts",
+              "line": 49,
+              "column": 7
+            },
+            {
+              "title": "PW-W09-05 run step 1.2 creates circle",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 3887,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-02T04:41:29.588Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/workspace/AlgoGebra/wt-w09/03-RCP-Spike/tests/results/playwright/W09_CourseTree-W-09-Course-658aa-run-step-1-2-creates-circle-firefox/test-finished-1.png"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "1c5930c3f5253005dc47-0adfa3b7f1ac1a602179",
+              "file": "W09_CourseTree.spec.ts",
+              "line": 71,
+              "column": 7
+            },
+            {
+              "title": "PW-W09-06 CAS identity check passes",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2072,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-02T04:41:33.485Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/workspace/AlgoGebra/wt-w09/03-RCP-Spike/tests/results/playwright/W09_CourseTree-W-09-Course-4b058-6-CAS-identity-check-passes-firefox/test-finished-1.png"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "1c5930c3f5253005dc47-f4ca972fc10346dfdbed",
+              "file": "W09_CourseTree.spec.ts",
+              "line": 91,
+              "column": 7
+            },
+            {
+              "title": "PW-W09-07 Execute command is blocked",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2131,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-02T04:41:35.567Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/workspace/AlgoGebra/wt-w09/03-RCP-Spike/tests/results/playwright/W09_CourseTree-W-09-Course-242a8--Execute-command-is-blocked-firefox/test-finished-1.png"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "1c5930c3f5253005dc47-8a41fcaf95a6015f8343",
+              "file": "W09_CourseTree.spec.ts",
+              "line": 99,
+              "column": 7
+            },
+            {
+              "title": "PW-W09-08 path traversal rejected",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 447,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-02T04:41:37.708Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/workspace/AlgoGebra/wt-w09/03-RCP-Spike/tests/results/playwright/W09_CourseTree-W-09-Course-13654--08-path-traversal-rejected-firefox/test-finished-1.png"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "1c5930c3f5253005dc47-6028a9a3d8a81973115b",
+              "file": "W09_CourseTree.spec.ts",
+              "line": 112,
+              "column": 7
+            },
+            {
+              "title": "PW-W09-09 keyboard navigation works",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2635,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-02T04:41:38.163Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/workspace/AlgoGebra/wt-w09/03-RCP-Spike/tests/results/playwright/W09_CourseTree-W-09-Course-ee570-9-keyboard-navigation-works-firefox/test-finished-1.png"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "1c5930c3f5253005dc47-0b7085abb293b889db6f",
+              "file": "W09_CourseTree.spec.ts",
+              "line": 123,
+              "column": 7
+            },
+            {
+              "title": "PW-W09-10 mobile responsive layout",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 953,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-02T04:41:40.824Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/workspace/AlgoGebra/wt-w09/03-RCP-Spike/tests/results/playwright/W09_CourseTree-W-09-Course-79626-10-mobile-responsive-layout-firefox/test-finished-1.png"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "1c5930c3f5253005dc47-48ca2298914dce3bdc5a",
+              "file": "W09_CourseTree.spec.ts",
+              "line": 137,
+              "column": 7
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-11-02T04:41:15.519Z",
+    "duration": 26569.76,
+    "expected": 10,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}
