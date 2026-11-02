@@ -7,9 +7,11 @@
 Initialize-TestSuite '20_CourseValidatorJava'
 $jh = if ($env:J25) { $env:J25 } elseif ($env:JAVA_HOME) { $env:JAVA_HOME } else { (Get-ChildItem '/workspace/AlgoGebra/jdk' -Directory -Filter 'jdk-25*' -EA SilentlyContinue | Select-Object -First 1).FullName }
 $x = if ($IsWindows) { '.exe' } else { '' }; $javac = Join-Path $jh "bin/javac$x"; $java = Join-Path $jh "bin/java$x"
-if (-not (Test-Path $javac)) { Exit-Bail "no javac under '$jh' (set J25 or JAVA_HOME)" }
+# Run_All auto-discovers this suite; without a JDK or image jars it SKIPs (not BAIL) so plain runs stay green. GGB_SKIP_JAVA_CORPUS=1 opts out.
+if ($env:GGB_SKIP_JAVA_CORPUS -eq '1') { Skip-Test 'JV-00-compile' 'SKIP reason: GGB_SKIP_JAVA_CORPUS=1' 'P1'; Complete-TestSuite; return }
+if (-not (Test-Path $javac)) { Skip-Test 'JV-00-compile' "SKIP reason: no javac under '$jh' (set J25 or JAVA_HOME)" 'P1'; Complete-TestSuite; return }
 $jars = @('bundles', 'platform') | ForEach-Object { Get-ChildItem (Join-Path $script:Image $_) -Filter '*.jar' -EA SilentlyContinue } | Where-Object Name -notlike 'org.geogebra.plus.host*'
-if (-not $jars) { Exit-Bail "no image jars under $($script:Image)" }
+if (-not $jars -or -not ($jars | Where-Object Name -like 'org.geogebra.migration.desktop-*')) { Skip-Test 'JV-00-compile' "SKIP reason: no GeoGebra image jars under $($script:Image) (set IMAGE)" 'P1'; Complete-TestSuite; return }
 $cp = ($jars.FullName -join [IO.Path]::PathSeparator); $out = Join-Path $script:Tmp "grok20-$PID"; New-Item -ItemType Directory -Force $out | Out-Null
 $src = @(Get-ChildItem (Join-Path $script:SpikeDir 'host/src/org/geogebra/plus/course') -Filter '*.java').FullName + (Join-Path $script:SpikeDir 'host/test/org/geogebra/plus/course/CourseCorpusRealValidatorTest_GROK_V1.java')
 $c = (& $javac --release 21 -encoding UTF-8 -cp $cp -d $out @src 2>&1 | Out-String); Test-Ok 'JV-00-compile' ($LASTEXITCODE -eq 0) "javac rc=$LASTEXITCODE $($c.Trim())" 'P0'

@@ -1,5 +1,5 @@
 # GROK_V1 - Run_All aggregator, single cross-platform runner (pwsh 7 on Windows and Linux; cf. Claude Run_All_Tests_CLAUDE_V1.ps1).
-# Suites 01-13. -SkipRcp skips 08; -SkipUi skips 09/10 (they drive the desktop); 11 (bnd build) and 13 (GeoGebra Gradle baseline) are heavy: opt-in -WithBuild / -WithBaseline.
+# Suites 01-20 (auto-discovered NN_Test_*_GROK_V1.ps1; 20 = GeoGebra-backed Java corpus test, auto-SKIP without JDK/image jars). -SkipRcp skips 08; -SkipUi skips 09/10 (they drive the desktop); 11 (bnd build) and 13 (GeoGebra Gradle baseline) are heavy: opt-in -WithBuild / -WithBaseline.
 # Output: results/<runid>/ (git-ignored, runid = yyyyMMdd_HHmmss-<host>). -ExportEvidence <name> copies the run to
 # ../evidence/<yyyyMMdd>-<os>-<name>-<runid>/ with MANIFEST_GROK_V1.tsv (commit, date, OS, path/bytes/sha256) for reviewed runs.
 # Scenarios (spec section 5): -Scenarios runs scenarios/S_*_GROK_V1.ps1 instead of the suites; -Gate A|B|C|D|E keeps the gate's
