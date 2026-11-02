@@ -3,7 +3,7 @@ project: GeoGebraPlus / AlgoGebra RCP
 geogebra_pin: 375db7faf5407390bb322165f2414415da8faeda
 geogebra_version: 5.4.934.0
 repo: https://github.com/io-e/AlgoGebra
-updated: 2026-11-02T06:00+01:00
+updated: 2026-11-02T07:40+01:00
 codex_sprint1_stop: 02-Cdc/Decision_Codex_Sprint1_Stop_GROK_V1.md
 review: 02-Cdc/Review_Codex_Docs_Eclipse_Automation_Windows_GROK_V1.md
 sprint4_status: 02-Cdc/Sprint4_Course_Tree_Status_GROK_V1.md
@@ -56,25 +56,34 @@ next_order:
   - playwright_browser_run: await_G-T2_war
   - rcptt_d11: await_mechanical_then_attended_ui
   - a2a_v1_via_one_gateway: planned_bifrost_preferred
-merge_policy: no_merge_until_owner
+merge_policy: "owner authorized merge train 2026-11-02 07:03 (chat); normal merge commits, branches kept"
 merge_order_suggested_by_grokbot: "#4_or_#9 -> #3 -> #7 -> #5 -> #8 -> #10 -> #6_last_after_rebase"
 pr_notes:
   pr4_vs_pr9: "PR #9 includes PR #4 JDK fix (+F-1 mise warning) — merge #9, then close #4"
   pr6: "SUPERSEDED by PR feat/grok-states-refresh (P-01 evidence + BUG-017 re-applied on tip bdfd306); do not merge #6"
   pr12: "historical twin evidence; collision resolved in #9 (14fc3a6); W-09 fix applied in #13"
-open_prs_review_only:
-  - {number: 3, url: "https://github.com/io-e/AlgoGebra/pull/3", suite: "16 71/0/44", note: "security corpus; skips await Codex validator"}
-  - {number: 4, url: "https://github.com/io-e/AlgoGebra/pull/4", suite: "17 13/0/0", note: "BUG-017; superseded by #9 if #9 merges"}
-  - {number: 5, url: "https://github.com/io-e/AlgoGebra/pull/5", suite: "15 15/0/0", note: "GWT self-host; use gwtCompile+copyHtml+mergeDeploy"}
-  - {number: 6, url: "https://github.com/io-e/AlgoGebra/pull/6", suite: "P-01 8/0/1", note: "CONFLICT states.yaml; rebase/fresh branch; merge last"}
-  - {number: 7, url: "https://github.com/io-e/AlgoGebra/pull/7", suite: "16 71/0/44", note: "G-T5 re-verify on 6baf1d4; unchanged"}
-  - {number: 8, url: "https://github.com/io-e/AlgoGebra/pull/8", suite: "design+exit codes", note: "G-T1; ack comment pending owner"}
-  - {number: 9, url: "https://github.com/io-e/AlgoGebra/pull/9", suite: "18 unified 21/0/1 (image-pr11), 20/0/2 (r8); 17 15/0/0", note: "P0 launch.sh -Course + F-1; includes #4; suite 18 collision with #11 resolved; MERGEABLE; Windows run of unified suite 18 needed"}
-  - {number: 10, url: "https://github.com/io-e/AlgoGebra/pull/10", suite: "Firefox+Mise", note: "P1 smoke PASS; W-09 browser still needs WAR"}
-  - {number: 11, url: "https://github.com/io-e/AlgoGebra/pull/11", suite: "course-tree sprint1", note: "MERGED 2026-11-02 04:34 UTC (bdfd306)"}
-  - {number: 12, url: "https://github.com/io-e/AlgoGebra/pull/12", suite: "twin18/WAR/W-09/D-11/16-adapter", note: "evidence; suite 16 via StepValidator adapter 108/6/1"}
-  - {number: 13, url: "https://github.com/io-e/AlgoGebra/pull/13", suite: "W-09 PW firefox 10/10 x2", note: "host page + harness + spec fixes"}
-  - {number: 14, url: "https://github.com/io-e/AlgoGebra/pull/14", suite: "D-11 5/3/0", note: "honest BUG-014 detection, Test-Json schema"}
+merged_2026-11-02:  # owner merge train (issue #17 Q6 order + Codex #18 after #3/#7); merge commits on feat/external-engines
+  - {pr: 9, merge: e2901695a0cdaa74a71dbe06753ad5dfe5acf29c, tests: "17 15/0/0; 18 21/0/1 (pr11), 20/0/2 (r8)"}
+  - {pr: 3, merge: 50e00fb53f846aeddf80df6b1a3172c9e782c89c, tests: "16 82/0/55 (no validator)"}
+  - {pr: 7, merge: 810e62dab5a1219830c523d1dac161d601bbbbf2, tests: "16 82/0/55"}
+  - {pr: 18, merge: 2afdc10aa18bb2f2dbf2e5ad6919690a0eeb2b46, tests: "Codex Java 27/0 (CourseModel 9, policy 18); 16 with real validator 134/2/1 (T-45/T-51 ACCEPT_WITH_WARNING near-limit warning: owner decision)"}
+  - {pr: 5, merge: db8bde09bea2743f119c2f6dba2385ebc71ffbd9, tests: "15 15/0/0 (existing WAR)"}
+  - {pr: 8, merge: 48a42bc838b22c0fc10a0127d06fdf3f8e56ce1c, tests: "docs"}
+  - {pr: 10, merge: e59db1c065351caf24ef5a49563f478552ac4451, tests: "evidence"}
+  - {pr: 12, merge: 701f1ea866a1223db69ee41894f36dfc0ba9a243, tests: "adapters compile on merged tip"}
+  - {pr: 13, merge: 91b937ddc475c18c9649b1a2a3a98a4fbe246836, tests: "W-09 Playwright firefox 10/10"}
+  - {pr: 14, merge: 78f8b90093f9651d1f1a3f01f6ee6d504a985c4f, tests: "D-11 5/3/0 (known BUG-014 + CAS empty, image-pr11 predates #18)"}
+  - {pr: 16, merge: 29356c8c8887421b1294418e433eae29f870d743, tests: "19 15/0/1; 16/0/0 with 300-file corpus"}
+  - {pr: 15, merge: "this PR", tests: "yaml parses"}
+closed_2026-11-02:
+  - {pr: 4, reason: "Superseded by #9 (1b7a8d0 + Q1 69); owner Q6"}
+  - {pr: 6, reason: "Superseded by #15; owner Q6"}
+open_items_2026-11-02:
+  - "Codex: BUG-014 (evalCommand false in D-11 RCP), CAS empty in D-11, WP9-04 .ggb scanner, attended SWT UI (trusted-OPEN dialog not visually tested)"
+  - "Owner/Codex: keep or drop the >=800-iteration near-limit warning (T-45/T-51 expect ACCEPT)"
+  - "Claude (Q5): spec SPEC-GAP-1 <ggbscript>, SPEC-GAP-3 realpath/symlink, spec §5 Sequence 1000/10000"
+  - "Rebuild Linux image from merged tip (image-pr11 predates #18) and rerun D-11/LC-18/19"
+  - "Windows: unified suite 18 run by owner from a clean worktree (Q8)"
 reviewed_documents_2026-10-30:
   governing_spec: 02-Cdc/Architecture_GeoGebraPlus_RCP_Web_Validation_GROK_V2.md
   language_plan: 02-Cdc/Plan_Configuration_Eclipse_Languages_PyDev_CDT_LSP4E_GROK_V1_1.md
