@@ -1,0 +1,9 @@
+27-renderer-ttf      PASS  org.geogebra.migration.desktop.renderer-5.4.934.0.jar: 46 .ttf
+27-P-02              PASS  50/0/1
+27-D-11              PASS  8/0/0
+27-suite09-font      PASS  D04-FONT-01=True
+28-valid-inputs      FAIL  failing: D04-FOCUS-01-2d-to-3d (suite 09 19/1/0)
+28-no-dead-input     PASS  keys-reach-input failures: 0
+VERDICT #27: PASS
+VERDICT #28: FAIL
+# image=/workspace/AlgoGebra/image-g09/GeoGebraPlus-RCP-0.1.0-linux-gtk-x86_64 scenarios=/workspace/AlgoGebra/wt-scratch-g09/03-RCP-Spike/tests/results/20261102_200406-grok-bot-vm-419969949
