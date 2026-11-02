@@ -1,0 +1,29 @@
+# Suite: 18_LaunchCourse
+# Started: 2026-11-02T08:25:15.0395760+01:00
+# Host: grok-bot-vm-419969949 / Debian GNU/Linux 13 (trixie) / pwsh 7.6.9
+
+ok 1 - [P0] LC-01-no-flag-no-property :: rc=0 course=[] out=[DRYRUN argc=25]
+ok 2 - [P0] LC-02-relative-to-abs-realpath :: rc=0 course=[/tmp/grok18-3131400/courses/ok.json] out=[DRYRUN argc=26]
+ok 3 - [P0] LC-03-long-eq-form :: rc=0 course=[/tmp/grok18-3131400/courses/ok.json] out=[DRYRUN argc=26]
+ok 4 - [P0] LC-04-path-with-spaces-one-arg :: rc=0 course=[/tmp/grok18-3131400/courses/a dir/my course.json] out=[DRYRUN argc=26]
+ok 5 - [P0] LC-05-missing-value-64 :: rc=64 course=[] out=[launch.sh: -Course needs a value]
+ok 6 - [P0] LC-06-repeated-flag-64 :: rc=64 course=[] out=[launch.sh: -Course given more than once]
+ok 7 - [P0] LC-07-missing-file-66 :: rc=66 course=[] out=[launch.sh: course file not found: /tmp/grok18-3131400/courses/nope.json]
+ok 8 - [P0] LC-08-directory-66 :: rc=66 course=[] out=[launch.sh: course is not a readable regular file: /tmp/grok18-3131400/courses]
+ok 9 - [P0] LC-09-wrong-extension-65 :: rc=65 course=[] out=[launch.sh: course must be a .json file: /tmp/grok18-3131400/courses/c.ggb]
+ok 10 - [P0] LC-10-over-1MiB-65 :: rc=65 course=[] out=[launch.sh: course file exceeds 1 MB: /tmp/grok18-3131400/courses/big.json]
+ok 11 - [P0] LC-11-url-64 :: rc=64 course=[] out=[launch.sh: course must be a local file, not a URL: https://example.org/course.json]
+ok 12 - [P0] LC-12-symlink-resolved :: rc=0 course=[/tmp/grok18-3131400/courses/ok.json] out=[DRYRUN argc=26]
+ok 13 - [P0] LC-13-root-abs-dotdot-escape-77-inside-ok :: rc=77 course=[] out=[launch.sh: course outside GGBPLUS_COURSE_ROOT (/tmp/grok18-3131400/courses): /tmp/grok18-3131400/outside/ext.json]
+ok 14 - [P0] LC-13b-root-symlink-escape-77 :: rc=77 course=[] out=[launch.sh: course outside GGBPLUS_COURSE_ROOT (/tmp/grok18-3131400/courses): /tmp/grok18-3131400/outside/ext.json]
+ok 15 - [P0] LC-14-env-fallback-flag-wins :: rc=0 course=[/tmp/grok18-3131400/courses/ok.json] out=[DRYRUN argc=26]
+ok 16 - [P0] LC-15-flag-order :: rc=0 course=[/tmp/grok18-3131400/courses/ok.json] out=[DRYRUN argc=26]
+ok 17 - [P0] LC-16-metachars-literal :: rc=0 course=[/tmp/grok18-3131400/courses/x$(touch PWNED);y.json] out=[DRYRUN argc=26]
+ok 18 - [P0] LC-17-course-error-before-java :: rc=66 course=[] out=[launch.sh: course file not found: /tmp/grok18-3131400/courses/nope.json]
+ok 19 - [P1] LC-17b-no-jdk-exit-code-69 :: rc=69 course=[] out=[launch.sh: no Java >= 25 found. Set GGB_JAVA=/path/to/bin/java or JAVA_HOME, or install a JDK (e.g. apt install openjdk-25-jre, or 'mise use java@25').]
+ok 20 - [P1] LC-18-xvfb-trig-course-3-panes :: log=/workspace/AlgoGebra/wt-ra/03-RCP-Spike/tests/results/20261102_082123-grok-bot-vm-419969949/18_xvfb.log
+ok 21 - [P1] LC-19-xvfb-T27-symlink-escape-layering # SKIP SKIP reason: Java OPEN validator rejection not yet observable in the product log
+ok 22 - [P0] LC-20-flag-wins-over-invalid-env :: rc=0 course=[/tmp/grok18-3131400/courses/ok.json] out=[DRYRUN argc=26]
+
+PASS: 21 FAIL: 0 SKIP: 1
+# CSV: /workspace/AlgoGebra/wt-ra/03-RCP-Spike/tests/results/20261102_082123-grok-bot-vm-419969949/18_LaunchCourse_GROK_V1.csv

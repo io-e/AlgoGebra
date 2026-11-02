@@ -1,0 +1,17 @@
+suite,num,id,status,priority,detail,ts
+19_OefConverter,1,OC-01-numeric-converts,PASS,P0,"rc=0 ",2026-11-02T08:25:18.4136780+01:00
+19_OefConverter,2,OC-02-schema-valid,PASS,P0,"/tmp/grok19-3131997/n1.json",2026-11-02T08:25:18.4685826+01:00
+19_OefConverter,3,OC-03-metadata,PASS,P1,"course=Line through two points locale=en",2026-11-02T08:25:18.4802190+01:00
+19_OefConverter,4,OC-04-numeric-check-matches-random-params,PASS,P0,"statement a,b=4,-2 expected=6 want=6",2026-11-02T08:25:18.4975196+01:00
+19_OefConverter,5,OC-05-hint-in-description,PASS,P2,"Type ans1 = <your answer> in the input bar, then press Check. Hint: Multiply first.",2026-11-02T08:25:18.4984589+01:00
+19_OefConverter,6,OC-06-draw-to-safe-cmds,PASS,P1,"cmds=d1 = Segment((0, -5), (0, 5)) ; d2 = Segment((-5, 0), (5, 0)) ; d3 = Point({4, -2})",2026-11-02T08:25:18.5040284+01:00
+19_OefConverter,7,OC-07-deterministic-seed,PASS,P0,"same seed -> identical bytes",2026-11-02T08:25:18.5449498+01:00
+19_OefConverter,8,OC-08-nonnumeric-object-exists-warned,PASS,P1,"out=warning: nonnumeric_GROK_V1.oef: answer 1 (menu) not numeric - emitted as object_exists",2026-11-02T08:25:18.5944173+01:00
+19_OefConverter,9,OC-09-no-scripting-emitted,PASS,P0,"actions=d1 = Segment((0, 0), (1, 1))",2026-11-02T08:25:18.6388969+01:00
+19_OefConverter,10,OC-10-directory-input-multi-chapter,PASS,P0,"chapters=3 out=warning: broken_GROK_V1.oef: skipped: unbalanced braces at offset 25 | warning: empty_GROK_V1.oef: skipped: no \statement and no \answer | warning: nonnumeric_GROK_V1.oef: answer 1 (menu) not numeric - emitted as object_exists",2026-11-02T08:25:18.6782705+01:00
+19_OefConverter,11,OC-11-broken-65,PASS,P1,"rc=65",2026-11-02T08:25:18.7107880+01:00
+19_OefConverter,12,OC-12-empty-65,PASS,P1,"rc=65",2026-11-02T08:25:18.7436630+01:00
+19_OefConverter,13,OC-13-missing-66,PASS,P1,"rc=66",2026-11-02T08:25:18.7736837+01:00
+19_OefConverter,14,OC-14-usage-64,PASS,P1,"rc=64",2026-11-02T08:25:18.8040242+01:00
+19_OefConverter,15,OC-15-latin1-decoded,PASS,P2,"course=Équation",2026-11-02T08:25:18.8420331+01:00
+19_OefConverter,16,OC-16-corpus-schema-valid,SKIP,P2,"SKIP reason: set OEF_CORPUS=<dir or .txt list> to sweep real OEF files",2026-11-02T08:25:18.8441878+01:00

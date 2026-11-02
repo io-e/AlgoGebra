@@ -1,0 +1,57 @@
+suite,num,id,status,priority,detail,ts
+20_CourseValidatorJava,1,JV-00-compile,PASS,P0,"javac rc=0 ",2026-11-02T08:25:20.1035409+01:00
+20_CourseValidatorJava,2,JV-T-01,PASS,P0,"REJECT Course command is not allowed: Execute",2026-11-02T08:25:20.9574468+01:00
+20_CourseValidatorJava,3,JV-T-02,PASS,P0,"REJECT Course command is not allowed: Exécute",2026-11-02T08:25:20.9602189+01:00
+20_CourseValidatorJava,4,JV-T-03,PASS,P0,"REJECT Course command is not allowed: Execute",2026-11-02T08:25:20.9611046+01:00
+20_CourseValidatorJava,5,JV-T-03b,PASS,P0,"REJECT Course command is not allowed: Séquence",2026-11-02T08:25:20.9619111+01:00
+20_CourseValidatorJava,6,JV-T-03c,PASS,P0,"REJECT Course command is not allowed: Execute",2026-11-02T08:25:20.9627353+01:00
+20_CourseValidatorJava,7,JV-T-15,PASS,P0,"REJECT Course command is not allowed: RunClickScript",2026-11-02T08:25:20.9635269+01:00
+20_CourseValidatorJava,8,JV-T-16,PASS,P0,"REJECT Course command is not allowed: RunUpdateScript",2026-11-02T08:25:20.9642607+01:00
+20_CourseValidatorJava,9,JV-T-16b,PASS,P0,"REJECT Course command is not allowed: LanceScriptClic",2026-11-02T08:25:20.9651756+01:00
+20_CourseValidatorJava,10,JV-T-17,PASS,P0,"REJECT Course command is not allowed: PlaySound",2026-11-02T08:25:20.9660330+01:00
+20_CourseValidatorJava,11,JV-T-14,PASS,P0,"REJECT Course command is not allowed: ExportImage",2026-11-02T08:25:20.9668182+01:00
+20_CourseValidatorJava,12,JV-T-18,PASS,P0,"REJECT Course command is not allowed: SetValue",2026-11-02T08:25:20.9675355+01:00
+20_CourseValidatorJava,13,JV-T-12,PASS,P0,"REJECT Course command is not allowed: Delete",2026-11-02T08:25:20.9682833+01:00
+20_CourseValidatorJava,14,JV-T-12b,PASS,P0,"REJECT Course command is not allowed: Effacer",2026-11-02T08:25:20.9691186+01:00
+20_CourseValidatorJava,15,JV-T-19,PASS,P0,"REJECT Course command is not allowed: Rename",2026-11-02T08:25:20.9699334+01:00
+20_CourseValidatorJava,16,JV-T-20,PASS,P0,"REJECT Course command is not allowed: Repeat",2026-11-02T08:25:20.9707760+01:00
+20_CourseValidatorJava,17,JV-T-21,PASS,P0,"REJECT Sequence exceeds the maximum of 1000 iterations.",2026-11-02T08:25:20.9716598+01:00
+20_CourseValidatorJava,18,JV-T-22,PASS,P0,"REJECT Course command is not allowed: UpdateConstruction",2026-11-02T08:25:20.9725809+01:00
+20_CourseValidatorJava,19,JV-T-08,PASS,P0,"ACCEPT",2026-11-02T08:25:20.9734429+01:00
+20_CourseValidatorJava,20,JV-T-09,PASS,P0,"ACCEPT",2026-11-02T08:25:20.9743629+01:00
+20_CourseValidatorJava,21,JV-T-23,PASS,P0,"ACCEPT",2026-11-02T08:25:20.9752915+01:00
+20_CourseValidatorJava,22,JV-T-24,PASS,P0,"REJECT Course command is not allowed: Execute",2026-11-02T08:25:20.9760646+01:00
+20_CourseValidatorJava,23,JV-T-04,PASS,P0,"REJECT OPEN is blocked for untrusted .ggb files until script scanning is available.",2026-11-02T08:25:20.9768364+01:00
+20_CourseValidatorJava,24,JV-T-04b,PASS,P0,"REJECT OPEN is blocked for untrusted .ggb files until script scanning is available.",2026-11-02T08:25:20.9776825+01:00
+20_CourseValidatorJava,25,JV-T-25,PASS,P0,"REJECT OPEN is blocked for untrusted .ggb files until script scanning is available.",2026-11-02T08:25:20.9784761+01:00
+20_CourseValidatorJava,26,JV-T-13,PASS,P0,"REJECT OPEN is blocked for untrusted .ggb files until script scanning is available.",2026-11-02T08:25:20.9794184+01:00
+20_CourseValidatorJava,27,JV-T-05,PASS,P0,"REJECT OPEN is blocked for untrusted .ggb files until script scanning is available.",2026-11-02T08:25:20.9804834+01:00
+20_CourseValidatorJava,28,JV-T-05b,PASS,P0,"REJECT OPEN is blocked for untrusted .ggb files until script scanning is available.",2026-11-02T08:25:20.9818249+01:00
+20_CourseValidatorJava,29,JV-T-05c,PASS,P0,"REJECT OPEN is blocked for untrusted .ggb files until script scanning is available.",2026-11-02T08:25:20.9831592+01:00
+20_CourseValidatorJava,30,JV-T-26,PASS,P0,"REJECT OPEN is blocked for untrusted .ggb files until script scanning is available.",2026-11-02T08:25:20.9841455+01:00
+20_CourseValidatorJava,31,JV-T-27,PASS,P0,"REJECT OPEN is blocked for untrusted .ggb files until script scanning is available.",2026-11-02T08:25:20.9852223+01:00
+20_CourseValidatorJava,32,JV-T-28,PASS,P0,"REJECT OPEN is blocked for untrusted .ggb files until script scanning is available.",2026-11-02T08:25:20.9860429+01:00
+20_CourseValidatorJava,33,JV-T-06,PASS,P0,"REJECT OPEN is blocked for untrusted .ggb files until script scanning is available.",2026-11-02T08:25:20.9869413+01:00
+20_CourseValidatorJava,34,JV-T-07,PASS,P0,"REJECT OPEN is blocked for untrusted .ggb files until script scanning is available.",2026-11-02T08:25:20.9878313+01:00
+20_CourseValidatorJava,35,JV-T-29,PASS,P0,"REJECT OPEN is blocked for untrusted .ggb files until script scanning is available.",2026-11-02T08:25:20.9886373+01:00
+20_CourseValidatorJava,36,JV-T-30,PASS,P0,"REJECT OPEN is blocked for untrusted .ggb files until script scanning is available.",2026-11-02T08:25:20.9894706+01:00
+20_CourseValidatorJava,37,JV-T-31,PASS,P0,"REJECT OPEN is blocked for untrusted .ggb files until script scanning is available.",2026-11-02T08:25:20.9902080+01:00
+20_CourseValidatorJava,38,JV-T-32,PASS,P0,"REJECT OPEN is blocked for untrusted .ggb files until script scanning is available.",2026-11-02T08:25:20.9909608+01:00
+20_CourseValidatorJava,39,JV-T-33,PASS,P0,"ACCEPT_WITH_WARNING This .ggb file is explicitly trusted but its embedded scripts are not scanned; scripts may execute when it is opened.",2026-11-02T08:25:20.9917204+01:00
+20_CourseValidatorJava,40,JV-T-11,PASS,P0,"REJECT IOException: Invalid course file: $.tree[0].children[0].children[0].children[0].children[0].children[0] step nesting exceeds four levels below a chapter",2026-11-02T08:25:20.9924074+01:00
+20_CourseValidatorJava,41,JV-T-42,PASS,P0,"REJECT IOException: Invalid course file: $.tree[8].children[20].actions course exceeds the maximum of 500 actions",2026-11-02T08:25:20.9930607+01:00
+20_CourseValidatorJava,42,JV-T-43,PASS,P0,"REJECT OPEN is blocked for untrusted .ggb files until script scanning is available.",2026-11-02T08:25:20.9939507+01:00
+20_CourseValidatorJava,43,JV-T-44,PASS,P0,"REJECT IOException: Invalid course file: $.tree[0].children[0].actions[0].trustedGgb is valid only for OPEN actions",2026-11-02T08:25:20.9948215+01:00
+20_CourseValidatorJava,44,JV-T-45,SKIP,P0,"XFAIL issue #21 (Q3b): near-limit Sequence warning returns ACCEPT_WITH_WARNING at 1000 iterations :: got 'ACCEPT_WITH_WARNING Sequence uses 1000 iterations, close to the per-Sequence limit of 1000.' expected ACCEPT",2026-11-02T08:25:20.9976402+01:00
+20_CourseValidatorJava,45,JV-T-46,PASS,P0,"REJECT Sequence exceeds the maximum of 1000 iterations.",2026-11-02T08:25:20.9985677+01:00
+20_CourseValidatorJava,46,JV-T-47,PASS,P0,"REJECT Sequence end bound must be a static numeric constant.",2026-11-02T08:25:20.9994800+01:00
+20_CourseValidatorJava,47,JV-T-48,PASS,P0,"REJECT Sequence exceeds the maximum of 1000 iterations.",2026-11-02T08:25:21.0002989+01:00
+20_CourseValidatorJava,48,JV-T-49,PASS,P0,"ACCEPT",2026-11-02T08:25:21.0009998+01:00
+20_CourseValidatorJava,49,JV-T-50,PASS,P0,"REJECT Course directive exceeds the total Sequence output budget of 10000 items.",2026-11-02T08:25:21.0017886+01:00
+20_CourseValidatorJava,50,JV-T-51,SKIP,P0,"XFAIL issue #21 (Q3b): near-limit Sequence warning returns ACCEPT_WITH_WARNING at 1000 iterations :: got 'ACCEPT_WITH_WARNING Sequence uses 1000 iterations, close to the per-Sequence limit of 1000. | Sequence uses 1000 iterations, close to the per-Sequence limit of 1000. | Sequence uses 1000 iterations, close to the per-Sequence limit of 1000. | Sequence uses 1000 iterations, close to the per-Sequence limit of 1000. | Sequence uses 1000 iterations, close to the per-Sequence limit of 1000. | Sequence uses 1000 iterations, close to the per-Sequence limit of 1000. | Sequence uses 1000 iterations, close to the per-Sequence limit of 1000. | Sequence uses 1000 iterations, close to the per-Sequence limit of 1000. | Sequence uses 1000 iterations, close to the per-Sequence limit of 1000. | Sequence uses 1000 iterations, close to the per-Sequence limit of 1000.' expected ACCEPT",2026-11-02T08:25:21.0026071+01:00
+20_CourseValidatorJava,51,JV-T-52,PASS,P0,"REJECT Course directive exceeds the total Sequence output budget of 10000 items.",2026-11-02T08:25:21.0033521+01:00
+20_CourseValidatorJava,52,JV-T-53,PASS,P0,"REJECT Sequence requires explicit start and end bounds in a course command.",2026-11-02T08:25:21.0040986+01:00
+20_CourseValidatorJava,53,JV-T-54,PASS,P0,"REJECT Sequence bounds must be finite and the step must be non-zero.",2026-11-02T08:25:21.0049640+01:00
+20_CourseValidatorJava,54,JV-T-55,PASS,P0,"REJECT Course command is not allowed: Execute",2026-11-02T08:25:21.0057297+01:00
+20_CourseValidatorJava,55,JV-T-10,PASS,P0,"REJECT IOException: Course file exceeds the 1 MiB limit: 1066493 bytes",2026-11-02T08:25:21.0063936+01:00
+20_CourseValidatorJava,56,JV-99-summary,PASS,P0,"CourseCorpusRealValidatorTest_GROK_V1: 52 PASS, 0 FAIL, 2 XFAIL, 0 XPASS",2026-11-02T08:25:21.0112415+01:00
