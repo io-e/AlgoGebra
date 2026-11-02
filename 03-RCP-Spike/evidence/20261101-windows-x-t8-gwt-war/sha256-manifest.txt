@@ -1,0 +1,6 @@
+2e549a6ecf45416ecaa14139c15a3718f0b9cc608008067dec123b9e2ef9781b  D:\ALF_Agents\_worktrees\course-tree-codex-sprint1-20261101\03-RCP-Spike\evidence\20261101-windows-x-t8-gwt-war\gwt-war-build-followup.log
+b4307df658c55bb7d53b586ddc7340ef9edaa96cb63ba4b649f94cfcbe475324  D:\ALF_Agents\_worktrees\geogebra-course-tree-wp3a-20261101\source\web\web\war\deployggb.js
+5212e733435318f3f3b9386885b530195c8140e5ccdfbe323125be50130a7be6  D:\ALF_Agents\_worktrees\geogebra-course-tree-wp3a-20261101\source\web\web\war\web3d\web3d.nocache.js
+829c80ad5b16056b638e695d07e1bd5ea06d6de76dc1be91162d2b6f3fc1141c  D:\ALF_Agents\_worktrees\geogebra-course-tree-wp3a-20261101\source\web\web\war\web\web.nocache.js
+b4c717ac8b0f79306c6794af09409cb7298f7c5df9b3193721315f8140bd4b69  D:\ALF_Agents\_worktrees\geogebra-course-tree-wp3a-20261101\source\web\web\war\webSimple\webSimple.nocache.js
+067e31e8647b39f0a1805668a25e6d9b40d908ced8b0f20b46de9c61d04d25ee  D:\ALF_Agents\_worktrees\geogebra-course-tree-wp3a-20261101\source\web\web\war\tablet3d\tablet3d.nocache.js

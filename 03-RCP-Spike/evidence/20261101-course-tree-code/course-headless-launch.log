@@ -1,0 +1,22 @@
+Launching GeoGebraPlus RCP spike; Java: D:\ALF_ZGit\G2_Eclipse\01_src\eclipse\plugins\org.eclipse.justj.openjdk.hotspot.jre.full.win32.x86_64_25.0.4.v20260826-0822\jre\bin\java.exe
+Run id: 20261101-135746-8252-2cfe1f33
+Log: D:\ALF_Agents\_worktrees\course-tree-codex-sprint1-20261101\03-RCP-Spike\logs\rcp-20261101-135746-8252-2cfe1f33.log
+Unique, persistent Equinox configuration/storage: D:\ALF_Agents\_worktrees\course-tree-codex-sprint1-20261101\03-RCP-Spike\configuration\runtime-20261101-135746-8252-2cfe1f33
+Native mode: product classpath loaders / no native-path override
+Course: D:\ALF_Agents\_worktrees\course-tree-codex-sprint1-20261101\03-RCP-Spike\tests\fixtures\course-tree-trig-smoke.json
+Course SHA-256: 67f5f275a8b722620370c9426e565e2ea64ca43ed7deaa2aa5d38224c457beca
+Existing framework storage and build outputs will not be removed.
+[GeoGebraPlus] Host bundle ACTIVE; id=67
+[GeoGebraPlus] Registered external engine pari; available=false
+[GeoGebraPlus] Registered external engine maxima; available=false
+[GeoGebraPlus] Registered external engine gnuplot; available=false
+[GeoGebraPlus] IApplication.start() � D-02 entry
+[GeoGebraPlus] Runtime: 25.0.4.1+1-LTS; OS=Windows 11/amd64
+[GeoGebraPlus] Course loaded: D:\ALF_Agents\_worktrees\course-tree-codex-sprint1-20261101\03-RCP-Spike\tests\fixtures\course-tree-trig-smoke.json (1 chapters; schema 1.0)
+[GeoGebraPlus] JogAmp boot delegation=null
+[GeoGebraPlus] Normalized lazy bundle to RESOLVED for D-02: com.sun.jna
+[GeoGebraPlus] D-02 D-03-set check: expected=50, found=50, ACTIVE=0, RESOLVED=50, unresolved/other=0, resolveBundles=true
+[GeoGebraPlus] D-02 PASS
+[GeoGebraPlus] Headless D-02 smoke mode; UI was intentionally skipped
+[GeoGebraPlus] Host bundle stopping
+Equinox exit code: 0

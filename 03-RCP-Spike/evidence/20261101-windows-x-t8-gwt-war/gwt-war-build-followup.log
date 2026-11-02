@@ -1,0 +1,101 @@
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/9.4.1/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build
+> Task :build-logic:convention:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :build-logic:convention:generateExternalPluginSpecBuilders UP-TO-DATE
+> Task :build-logic:convention:extractPrecompiledScriptPluginPlugins UP-TO-DATE
+> Task :build-logic:convention:compilePluginsBlocks UP-TO-DATE
+> Task :build-logic:convention:generatePrecompiledScriptPluginAccessors UP-TO-DATE
+> Task :build-logic:convention:generateScriptPluginAdapters UP-TO-DATE
+> Task :build-logic:convention:compileKotlin UP-TO-DATE
+> Task :build-logic:convention:compileJava NO-SOURCE
+> Task :build-logic:convention:pluginDescriptors UP-TO-DATE
+> Task :build-logic:convention:processResources UP-TO-DATE
+> Task :build-logic:convention:classes UP-TO-DATE
+> Task :build-logic:convention:jar UP-TO-DATE
+> Task :shared:renderer-base:processResources NO-SOURCE
+> Task :shared:keyboard-scientific:processResources NO-SOURCE
+> Task :shared:ggbjdk:processResources UP-TO-DATE
+> Task :shared:editor-base:compileJavacc UP-TO-DATE
+> Task :shared:common:compileJavacc UP-TO-DATE
+> Task :gwt-generator:processResources NO-SOURCE
+> Task :shared:editor-base:processResources NO-SOURCE
+> Task :canvas-web:processResources UP-TO-DATE
+> Task :carota-web:processResources UP-TO-DATE
+> Task :editor-web:processResources UP-TO-DATE
+> Task :gwtutil:processResources UP-TO-DATE
+> Task :keyboard-web:processResources UP-TO-DATE
+> Task :shared:keyboard-base:compileJava UP-TO-DATE
+> Task :shared:canvas-base:compileJava UP-TO-DATE
+> Task :shared:keyboard-base:processResources NO-SOURCE
+> Task :web-dev:processResources UP-TO-DATE
+> Task :shared:keyboard-base:classes UP-TO-DATE
+> Task :shared:keyboard-base:jar UP-TO-DATE
+> Task :shared:canvas-base:processResources NO-SOURCE
+> Task :shared:canvas-base:classes UP-TO-DATE
+> Task :shared:keyboard-scientific:compileJava UP-TO-DATE
+> Task :shared:keyboard-scientific:classes UP-TO-DATE
+> Task :shared:keyboard-scientific:jar UP-TO-DATE
+> Task :shared:canvas-base:jar UP-TO-DATE
+> Task :renderer-web:processResources UP-TO-DATE
+> Task :shared:ggbjdk:compileJava UP-TO-DATE
+> Task :shared:renderer-base:compileJava UP-TO-DATE
+> Task :shared:ggbjdk:classes UP-TO-DATE
+> Task :shared:renderer-base:classes UP-TO-DATE
+> Task :shared:ggbjdk:jar UP-TO-DATE
+> Task :shared:renderer-base:jar UP-TO-DATE
+> Task :shared:editor-base:compileJava UP-TO-DATE
+> Task :shared:editor-base:classes UP-TO-DATE
+> Task :shared:editor-base:jar UP-TO-DATE
+> Task :shared:common:processResources UP-TO-DATE
+> Task :web-common:extractJs
+> Task :web:extractJs
+> Task :web-common:processResources UP-TO-DATE
+> Task :web:processResources UP-TO-DATE
+> Task :web:downloadSass UP-TO-DATE
+> Task :web:installSass UP-TO-DATE
+> Task :web:compileSass UP-TO-DATE
+> Task :shared:common:compileJava UP-TO-DATE
+> Task :shared:common:classes UP-TO-DATE
+> Task :shared:common:jar UP-TO-DATE
+> Task :gwt-generator:compileJava UP-TO-DATE
+> Task :gwt-generator:classes UP-TO-DATE
+> Task :gwt-generator:jar UP-TO-DATE
+> Task :gwtutil:compileJava UP-TO-DATE
+> Task :gwtutil:classes UP-TO-DATE
+> Task :gwtutil:jar UP-TO-DATE
+> Task :canvas-web:compileJava UP-TO-DATE
+> Task :canvas-web:classes UP-TO-DATE
+> Task :canvas-web:jar UP-TO-DATE
+> Task :web-dev:compileJava UP-TO-DATE
+> Task :web-dev:classes UP-TO-DATE
+> Task :carota-web:compileJava UP-TO-DATE
+> Task :carota-web:classes UP-TO-DATE
+> Task :web-dev:jar UP-TO-DATE
+> Task :carota-web:jar UP-TO-DATE
+> Task :renderer-web:compileJava UP-TO-DATE
+> Task :renderer-web:classes UP-TO-DATE
+> Task :renderer-web:jar UP-TO-DATE
+> Task :editor-web:compileJava UP-TO-DATE
+> Task :editor-web:classes UP-TO-DATE
+> Task :editor-web:jar UP-TO-DATE
+> Task :keyboard-web:compileJava UP-TO-DATE
+> Task :keyboard-web:classes UP-TO-DATE
+> Task :keyboard-web:jar UP-TO-DATE
+> Task :web:copyHtml
+> Task :web-common:compileJava UP-TO-DATE
+> Task :web-common:classes UP-TO-DATE
+> Task :web-common:jar UP-TO-DATE
+> Task :web:compileJava UP-TO-DATE
+> Task :web:gwtCompile UP-TO-DATE
+> Task :web:mergeDeploy
+
+[Incubating] Problems report is available at: file:///D:/ALF_Agents/_worktrees/geogebra-course-tree-wp3a-20261101/source/web/build/reports/problems/problems-report.html
+
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 10.
+
+You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+
+For more on this, please refer to https://docs.gradle.org/9.4.1/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
+
+BUILD SUCCESSFUL in 26s
+63 actionable tasks: 4 executed, 59 up-to-date

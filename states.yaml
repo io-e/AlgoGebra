@@ -1,15 +1,18 @@
-# GROK_V1_2 - project state and bug tracker (created 2026-10-29 by Grok Bot; reconciled 2026-10-30; Sprint 4 C-22 2026-11-01)
+# GROK_V1_6 - project state (Codex sprint1 STOP; Grok Bot continues on #11)
 project: GeoGebraPlus / AlgoGebra RCP
 geogebra_pin: 375db7faf5407390bb322165f2414415da8faeda
 geogebra_version: 5.4.934.0
 repo: https://github.com/io-e/AlgoGebra
-updated: 2026-11-01T18:00+01:00
+updated: 2026-11-01T22:00+01:00
+codex_sprint1_stop: 02-Cdc/Decision_Codex_Sprint1_Stop_GROK_V1.md
 review: 02-Cdc/Review_Codex_Docs_Eclipse_Automation_Windows_GROK_V1.md
 sprint4_status: 02-Cdc/Sprint4_Course_Tree_Status_GROK_V1.md
 course_tree_architecture: 02-Cdc/Decision_Course_Tree_Architecture_GROK_V1.md
 claude_handoff: Handoff_CLAUDE_by_GROK_V1_1.md
 owner_questions: 02-Cdc/Questions_Course_Tree_Owner_GROK_V1_1.md
 grokbot_sprint1_feedback: 02-Cdc/Feedback_GrokBot_Sprint1_PRs_GROK_V1.md
+grokbot_p0_p1_feedback: 02-Cdc/Feedback_GrokBot_P0_P1_PRs_GROK_V1.md
+grokbot_p2_reviews_posted: 02-Cdc/Feedback_GrokBot_P2_Reviews_Posted_GROK_V1.md
 security_errata_for_claude: 02-Cdc/Errata_Security_Spec_for_Claude_GROK_V1.md
 rcp_testing_questions: 02-Cdc/Questions_RCP_Testing_Owner_GROK_V1_1.md
 rcp_testing_plan: 02-Cdc/Plan_RCP_Testing_SWTBot_RCPTT_CLAUDE_V1.md
@@ -17,26 +20,57 @@ playwright_w09: 03-RCP-Spike/tests/playwright/
 grokbot_gt1_gt5_feedback: 02-Cdc/Feedback_GrokBot_GT1_GT5_PRs_GROK_V1.md
 rcptt_java: {default: "21", product_swbot: "25", note: "RQ-1 override — RCPTT docs cover 17-22 only"}
 grok_bot_tasks:
-  G-T1: {status: DONE_PR, pr: 8, url: "https://github.com/io-e/AlgoGebra/pull/8", note: "launch.sh -Course design; symlink resolve; suite 18 planned (19 cases); Codex mirror exit codes on launch.ps1"}
+  G-T1: {status: DONE_PR, pr: 8, url: "https://github.com/io-e/AlgoGebra/pull/8", note: "design + exit-code align commit adbfcff with #4/#9"}
   G-T5: {status: DONE_PR, pr: 7, url: "https://github.com/io-e/AlgoGebra/pull/7", note: "corpus re-verify on 6baf1d4: 71/0/44 unchanged; skips await Codex validator"}
-  G-T2: {status: BLOCKED, blocked_by: "Codex X-T8 WAR"}
-  G-T3: {status: BLOCKED, blocked_by: "Codex X-T8 WAR + Playwright/browser"}
-  G-T4: {status: BLOCKED, blocked_by: "Codex WP2-06 CourseTreePanel"}
+  P0_suite18: {status: DONE_PR, pr: 9, url: "https://github.com/io-e/AlgoGebra/pull/9", counts: "17/0/2", evidence: "03-RCP-Spike/evidence/20261101-133332-p0-launch-course-debian/", note: "includes #4 JDK fix; LC-18/19 SKIP until WP2-06 image; suite17 13/13"}
+  P1_firefox_mise: {status: DONE_PR, pr: 10, url: "https://github.com/io-e/AlgoGebra/pull/10", note: "Firefox 157 headless smoke PASS; Mise M-01..05 PASS; quiet fallback if Mise Java too old"}
+  P2_reviews: {status: POSTED, comments: [6558289319,6558289606,6558289881,6558290158,6558290464,6558290804], ack_pr8: 6558291104, note: "self-reviews on #3-#8; Bot ack prefers 6558291104 over later stale 6558337305"}
+  G-T2: {status: DISPATCHED, blocked_by: null, dispatch: "https://github.com/io-e/AlgoGebra/pull/11#issuecomment-6558362317", note: "Codex PR #11 delivers WAR evidence + panel; twin suite18 then WAR consume"}
+  G-T3: {status: DISPATCHED, blocked_by: "G-T2 WAR on Debian", note: "Playwright W-09 after local WAR"}
+  G-T4: {status: DISPATCHED, blocked_by: "optional Xvfb mechanical; attended UI still Windows", note: "D-11 mechanical only until attended SWT"}
+a2a_plan: 02-Cdc/Plan_A2A_Gateway_GrokCLI_GROK_V1_1.md
+a2a_protocol_target: "1.0"
+a2a_gateway_shape: {owner_sketch: "GrokCLI->Bifrost->agentgateway->GrokBot", recommendation: "Bifrost-only for v1; two-hop still open"}
+codex_push_brief: 02-Cdc/Actions_Codex_Push_Course_Tree_Sprint1_GROK_V1.md
+grokbot_after_codex_brief: 02-Cdc/Actions_GrokBot_After_Codex_Sprint1_GROK_V1.md
+codex_course_tree_sprint1:
+  branch: feat/course-tree-sprint1
+  remote_tip: 24f2d3a
+  worktree: "D:\\ALF_Agents\\_worktrees\\course-tree-codex-sprint1-20261101"
+  pushed: true
+  pr: 11
+  pr_url: "https://github.com/io-e/AlgoGebra/pull/11"
+  owner_decision: "push_review_only_pr_into_feat/external-engines"
+  status: STOPPED_OWNER
+  note: "Owner stop 2026-11-01: PR #11 is deliverable; no more Codex commits unless asked; attended UI deferred"
+  x_t8_war: {status: PUSHED, evidence: "03-RCP-Spike/evidence/20261101-windows-x-t8-gwt-war/", playwright: NOT_RUN}
+  launch_ps1_suite18: {status: PUSHED, checks: "16/16"}
+  wp2_06: {status: PUSHED_HEADLESS, model_tests: "9/9", policy_tests: "9/9", rcp_build: PASS, d02_headless: PASS, attended_ui: PENDING}
 next_order:
   - lock_rq: done_v1_1_java21_default
-  - codex_war_xt8: pending
-  - codex_launch_ps1_mirror_gt1: pending
-  - codex_coursetree_wp206: pending
-  - playwright_browser_run: blocked_on_war
-  - rcptt_d11: blocked_on_wp206
+  - grokbot_p0_p1: done_prs_9_10
+  - owner_ack_pr8: bot_6558291104_canonical
+  - owner_p2_review_post: done_posted
+  - codex_sprint1: stopped_pr_11_review_only
+  - grokbot_after_codex: dispatched_6558362317_await_results
+  - playwright_browser_run: await_G-T2_war
+  - rcptt_d11: await_mechanical_then_attended_ui
+  - a2a_v1_via_one_gateway: planned_bifrost_preferred
 merge_policy: no_merge_until_owner
+merge_order_suggested_by_grokbot: "#4_or_#9 -> #3 -> #7 -> #5 -> #8 -> #10 -> #6_last_after_rebase"
+pr_notes:
+  pr4_vs_pr9: "PR #9 includes PR #4 JDK fix — merge one, close the other"
+  pr6: "conflicts on states.yaml tip; fresh branch needed; merge last"
 open_prs_review_only:
   - {number: 3, url: "https://github.com/io-e/AlgoGebra/pull/3", suite: "16 71/0/44", note: "security corpus; skips await Codex validator"}
-  - {number: 4, url: "https://github.com/io-e/AlgoGebra/pull/4", suite: "17 13/0/0", note: "BUG-017; rebuild images after merge"}
+  - {number: 4, url: "https://github.com/io-e/AlgoGebra/pull/4", suite: "17 13/0/0", note: "BUG-017; superseded by #9 if #9 merges"}
   - {number: 5, url: "https://github.com/io-e/AlgoGebra/pull/5", suite: "15 15/0/0", note: "GWT self-host; use gwtCompile+copyHtml+mergeDeploy"}
-  - {number: 6, url: "https://github.com/io-e/AlgoGebra/pull/6", suite: "P-01 8/0/1", note: "merge last when allowed"}
+  - {number: 6, url: "https://github.com/io-e/AlgoGebra/pull/6", suite: "P-01 8/0/1", note: "CONFLICT states.yaml; rebase/fresh branch; merge last"}
   - {number: 7, url: "https://github.com/io-e/AlgoGebra/pull/7", suite: "16 71/0/44", note: "G-T5 re-verify on 6baf1d4; unchanged"}
-  - {number: 8, url: "https://github.com/io-e/AlgoGebra/pull/8", suite: "design+suite18 plan", note: "G-T1 launch.sh -Course; RQ-1 Java 21 default"}
+  - {number: 8, url: "https://github.com/io-e/AlgoGebra/pull/8", suite: "design+exit codes", note: "G-T1; ack comment pending owner"}
+  - {number: 9, url: "https://github.com/io-e/AlgoGebra/pull/9", suite: "18 17/0/2", note: "P0 launch.sh -Course; includes #4; LC-18/19 SKIP until panel"}
+  - {number: 10, url: "https://github.com/io-e/AlgoGebra/pull/10", suite: "Firefox+Mise", note: "P1 smoke PASS; W-09 browser still needs WAR"}
+  - {number: 11, url: "https://github.com/io-e/AlgoGebra/pull/11", suite: "course-tree sprint1", note: "Codex WP2-06+launch.ps1+X-T8; 16/16 suite18; attended UI pending"}
 reviewed_documents_2026-10-30:
   governing_spec: 02-Cdc/Architecture_GeoGebraPlus_RCP_Web_Validation_GROK_V2.md
   language_plan: 02-Cdc/Plan_Configuration_Eclipse_Languages_PyDev_CDT_LSP4E_GROK_V1_1.md
