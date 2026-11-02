@@ -1,0 +1,116 @@
+suite,num,id,status,priority,detail,ts
+16_CourseSecurity,1,SEC-00-manifest,PASS,P0,"cases=51 (unique ids)",2026-11-01T14:12:59.4825490+01:00
+16_CourseSecurity,2,SEC-01-T-10-size,PASS,P1,"T-10 size=1066494 bytes",2026-11-01T14:12:59.5989451+01:00
+16_CourseSecurity,3,SEC-02-archives-built,PASS,P0,"built: clean.ggb, construction_execute.ggb, link_outside.ggb, macro_execute.ggb, script_ggbscript.ggb, script_js.ggb, script_onclick_js.ggb, script_onupdate.ggb",2026-11-01T14:12:59.6048950+01:00
+16_CourseSecurity,4,SCH-T-01,PASS,P1,"schema valid=True expected=SCHEMA_VALID (Commands.Execute TABLE_SCRIPTING) sha256=2994aab14c77d6df",2026-11-01T14:12:59.6635433+01:00
+16_CourseSecurity,5,SCH-T-02,PASS,P1,"schema valid=True expected=SCHEMA_VALID (fr Exécute -> Commands.Execute) sha256=5d4a869fcfd04bba",2026-11-01T14:12:59.6685027+01:00
+16_CourseSecurity,6,SCH-T-03,PASS,P1,"schema valid=True expected=SCHEMA_VALID (nested Execute) sha256=301f1f20ab1bc226",2026-11-01T14:12:59.6707761+01:00
+16_CourseSecurity,7,SCH-T-03b,PASS,P1,"schema valid=True expected=SCHEMA_VALID (nested localized Execute) sha256=5ea37b07e73ff9c0",2026-11-01T14:12:59.6727710+01:00
+16_CourseSecurity,8,SCH-T-03c,PASS,P1,"schema valid=True expected=SCHEMA_VALID (case-insensitive Execute) sha256=f03819fa17c5178f",2026-11-01T14:12:59.6747257+01:00
+16_CourseSecurity,9,SCH-T-15,PASS,P1,"schema valid=True expected=SCHEMA_VALID (Commands.RunClickScript TABLE_SCRIPTING) sha256=30f39ff8048b9bab",2026-11-01T14:12:59.6767526+01:00
+16_CourseSecurity,10,SCH-T-16,PASS,P1,"schema valid=True expected=SCHEMA_VALID (Commands.RunUpdateScript TABLE_SCRIPTING) sha256=8050f5059922b7a2",2026-11-01T14:12:59.6785426+01:00
+16_CourseSecurity,11,SCH-T-16b,PASS,P1,"schema valid=True expected=SCHEMA_VALID (fr RunClickScript) sha256=feaa740008717d36",2026-11-01T14:12:59.6806600+01:00
+16_CourseSecurity,12,SCH-T-17,PASS,P1,"schema valid=True expected=SCHEMA_VALID (Commands.PlaySound TABLE_SCRIPTING (URL fetch)) sha256=4412e850ae8bb7f0",2026-11-01T14:12:59.6824742+01:00
+16_CourseSecurity,13,SCH-T-14,PASS,P1,"schema valid=True expected=SCHEMA_VALID (Commands.ExportImage TABLE_SCRIPTING) sha256=927eefb213305234",2026-11-01T14:12:59.6843765+01:00
+16_CourseSecurity,14,SCH-T-18,PASS,P1,"schema valid=True expected=SCHEMA_VALID (Commands.SetValue TABLE_SCRIPTING on graded object) sha256=d46d57d342d18f8d",2026-11-01T14:12:59.6863770+01:00
+16_CourseSecurity,15,SCH-T-12,PASS,P1,"schema valid=True expected=SCHEMA_VALID (Commands.Delete blocked) sha256=32970e3c18788f6f",2026-11-01T14:12:59.6883673+01:00
+16_CourseSecurity,16,SCH-T-12b,PASS,P1,"schema valid=True expected=SCHEMA_VALID (fr Delete) sha256=dce76b1214d9ffe1",2026-11-01T14:12:59.6904445+01:00
+16_CourseSecurity,17,SCH-T-19,PASS,P1,"schema valid=True expected=SCHEMA_VALID (Commands.Rename blocked) sha256=63b34847fa8d62cf",2026-11-01T14:12:59.6925426+01:00
+16_CourseSecurity,18,SCH-T-20,PASS,P1,"schema valid=True expected=SCHEMA_VALID (Commands.Repeat TABLE_SCRIPTING (runaway loop)) sha256=ff3c8c37954a0397",2026-11-01T14:12:59.6948078+01:00
+16_CourseSecurity,19,SCH-T-21,PASS,P1,"schema valid=True expected=SCHEMA_VALID (runaway Sequence (TABLE_LIST is allowed: needs a size/time limit)) sha256=3a1c2903d2bb0082",2026-11-01T14:12:59.6970223+01:00
+16_CourseSecurity,20,SCH-T-22,PASS,P1,"schema valid=True expected=SCHEMA_VALID (Commands.UpdateConstruction TABLE_SCRIPTING) sha256=439f04d4cd142314",2026-11-01T14:12:59.6989557+01:00
+16_CourseSecurity,21,SCH-T-08,PASS,P1,"schema valid=True expected=SCHEMA_VALID (safe construction) sha256=5009897c4fc0a485",2026-11-01T14:12:59.7011599+01:00
+16_CourseSecurity,22,SCH-T-09,PASS,P1,"schema valid=True expected=SCHEMA_VALID (allowed scripting SetColor) sha256=00bf4272530ed38f",2026-11-01T14:12:59.7030366+01:00
+16_CourseSecurity,23,SCH-T-23,PASS,P1,"schema valid=True expected=SCHEMA_VALID (allowed scripting Slider) sha256=28ea03360317f2b8",2026-11-01T14:12:59.7051578+01:00
+16_CourseSecurity,24,SCH-T-24,PASS,P1,"schema valid=True expected=SCHEMA_VALID (CAS directive same allow-list) sha256=795ba2c8cd0ee320",2026-11-01T14:12:59.7070459+01:00
+16_CourseSecurity,25,SCH-T-04,PASS,P1,"schema valid=True expected=SCHEMA_VALID (path traversal + non-.ggb) sha256=1ab460e725a89949",2026-11-01T14:12:59.7091757+01:00
+16_CourseSecurity,26,SCH-T-04b,PASS,P1,"schema valid=True expected=SCHEMA_VALID (traversal after normalize) sha256=95273143fef4439b",2026-11-01T14:12:59.7109697+01:00
+16_CourseSecurity,27,SCH-T-25,PASS,P1,"schema valid=True expected=SCHEMA_VALID (absolute path) sha256=09179b677d55ef7f",2026-11-01T14:12:59.7129919+01:00
+16_CourseSecurity,28,SCH-T-13,PASS,P1,"schema valid=True expected=SCHEMA_VALID (absolute path + wrong extension) sha256=a1308fd07bad9fdc",2026-11-01T14:12:59.7150988+01:00
+16_CourseSecurity,29,SCH-T-05,PASS,P1,"schema valid=True expected=SCHEMA_VALID (URL) sha256=85c3cc1e5f39b8d7",2026-11-01T14:12:59.7171785+01:00
+16_CourseSecurity,30,SCH-T-05b,PASS,P1,"schema valid=True expected=SCHEMA_VALID (protocol-relative URL) sha256=dacb644480539f32",2026-11-01T14:12:59.7190333+01:00
+16_CourseSecurity,31,SCH-T-05c,PASS,P1,"schema valid=True expected=SCHEMA_VALID (file URL) sha256=a7b1f4e27865db0c",2026-11-01T14:12:59.7210127+01:00
+16_CourseSecurity,32,SCH-T-26,PASS,P1,"schema valid=True expected=SCHEMA_VALID (non-.ggb extension) sha256=c49cc30147be5c56",2026-11-01T14:12:59.7228018+01:00
+16_CourseSecurity,33,SCH-T-27,PASS,P1,"schema valid=True expected=SCHEMA_VALID (symlink inside course dir pointing outside (normalize() alone does not catch it; needs toRealPath)) sha256=61a7e6df953868f5",2026-11-01T14:12:59.7248830+01:00
+16_CourseSecurity,34,SCH-T-28,PASS,P1,"schema valid=True expected=SCHEMA_VALID (clean archive under course dir) sha256=6cec9a82df34c416",2026-11-01T14:12:59.7267972+01:00
+16_CourseSecurity,35,SCH-T-06,PASS,P1,"schema valid=True expected=SCHEMA_VALID (geogebra_javascript.js with ggbOnInit code) sha256=d9034ab0ccdafc9a",2026-11-01T14:12:59.7287604+01:00
+16_CourseSecurity,36,SCH-T-07,PASS,P1,"schema valid=True expected=SCHEMA_VALID (per-object <javascript val=...> click script) sha256=08219c106c793aed",2026-11-01T14:12:59.7306682+01:00
+16_CourseSecurity,37,SCH-T-29,PASS,P1,"schema valid=True expected=SCHEMA_VALID (per-object <ggbscript val="Execute(...)"> (spec 3.1 containsScriptElements misses '<ggbscript' with val=)) sha256=ca9f92a64cd838c1",2026-11-01T14:12:59.7328497+01:00
+16_CourseSecurity,38,SCH-T-30,PASS,P1,"schema valid=True expected=SCHEMA_VALID (<ggbscript onUpdate=...>) sha256=de70f9a4ce6d9d4a",2026-11-01T14:12:59.7347790+01:00
+16_CourseSecurity,39,SCH-T-31,PASS,P1,"schema valid=True expected=SCHEMA_VALID (Execute inside geogebra_macro.xml) sha256=2b74e2ebe76cee42",2026-11-01T14:12:59.7367648+01:00
+16_CourseSecurity,40,SCH-T-32,PASS,P1,"schema valid=True expected=SCHEMA_VALID (<command name="Execute"> in geogebra.xml construction) sha256=09d26c2588e3fc96",2026-11-01T14:12:59.7385657+01:00
+16_CourseSecurity,41,SCH-T-33,PASS,P1,"schema valid=True expected=SCHEMA_VALID (trustedGgb=true loads scripted file with a warning) sha256=a943180648ccea3e",2026-11-01T14:12:59.7404227+01:00
+16_CourseSecurity,42,SCH-T-34,PASS,P0,"schema valid=False expected=SCHEMA_INVALID (unknown directive) sha256=fe01aa9d2ab4e8f7",2026-11-01T14:12:59.7438659+01:00
+16_CourseSecurity,43,SCH-T-35,PASS,P0,"schema valid=False expected=SCHEMA_INVALID (additional property) sha256=51248cf3585a54f2",2026-11-01T14:12:59.7460807+01:00
+16_CourseSecurity,44,SCH-T-36,PASS,P0,"schema valid=False expected=SCHEMA_INVALID (missing value) sha256=8fa20a37494671a3",2026-11-01T14:12:59.7483584+01:00
+16_CourseSecurity,45,SCH-T-37,PASS,P0,"schema valid=False expected=SCHEMA_INVALID (wrong schemaVersion) sha256=d8fc93b0ffc1a48e",2026-11-01T14:12:59.7559159+01:00
+16_CourseSecurity,46,SCH-T-38,PASS,P0,"schema valid=False expected=SCHEMA_INVALID (invalid target) sha256=71377b21d1c6748a",2026-11-01T14:12:59.7578574+01:00
+16_CourseSecurity,47,SCH-T-39,PASS,P0,"schema valid=False expected=SCHEMA_INVALID (more than 20 actions in a step) sha256=6f4b09e06ec57a8d",2026-11-01T14:12:59.7617689+01:00
+16_CourseSecurity,48,SCH-T-40,PASS,P0,"schema valid=False expected=SCHEMA_INVALID (empty tree) sha256=2964e98b3171c937",2026-11-01T14:12:59.7639975+01:00
+16_CourseSecurity,49,SCH-T-41,PASS,P0,"schema valid=False expected=SCHEMA_INVALID (not JSON) sha256=f847b4d838be9774",2026-11-01T14:12:59.7663931+01:00
+16_CourseSecurity,50,SCH-T-11,PASS,P1,"schema valid=True expected=SCHEMA_VALID (tree depth > 5 (schema does not enforce depth)) sha256=55ca09b74a4f9e18",2026-11-01T14:12:59.7682752+01:00
+16_CourseSecurity,51,SCH-T-42,PASS,P1,"schema valid=True expected=SCHEMA_VALID (more than 500 total actions (600)) sha256=f0fe082fcfa743c7",2026-11-01T14:12:59.8102495+01:00
+16_CourseSecurity,52,SCH-T-43,PASS,P1,"schema valid=True expected=SCHEMA_VALID (more than 10 OPEN actions) sha256=470664a1e75f191b",2026-11-01T14:12:59.8119741+01:00
+16_CourseSecurity,53,SCH-T-44,PASS,P1,"schema valid=True expected=SCHEMA_VALID (trustedGgb on a non-OPEN action) sha256=b3edd33ae157fe29",2026-11-01T14:12:59.8135739+01:00
+16_CourseSecurity,54,SCH-T-10,PASS,P1,"schema valid=True expected=SCHEMA_VALID (course.json > 1 MB) sha256=8a5bcc7babb3e7c5",2026-11-01T14:12:59.9304680+01:00
+16_CourseSecurity,55,REF-T-04-open-path,PASS,P1,"OPEN '../../etc/passwd' -> REJECT (extension) expected REJECT",2026-11-01T14:12:59.9665850+01:00
+16_CourseSecurity,56,REF-T-04b-open-path,PASS,P1,"OPEN 'sub/../../outside.ggb' -> REJECT (traversal) expected REJECT",2026-11-01T14:12:59.9721789+01:00
+16_CourseSecurity,57,REF-T-25-open-path,PASS,P1,"OPEN '/tmp/evil.ggb' -> REJECT (absolute) expected REJECT",2026-11-01T14:12:59.9733167+01:00
+16_CourseSecurity,58,REF-T-13-open-path,PASS,P1,"OPEN 'C:\Windows\System32\calc.exe' -> REJECT (url-or-drive) expected REJECT",2026-11-01T14:12:59.9743064+01:00
+16_CourseSecurity,59,REF-T-05-open-path,PASS,P1,"OPEN 'http://evil.example/payload.ggb' -> REJECT (url-or-drive) expected REJECT",2026-11-01T14:12:59.9755592+01:00
+16_CourseSecurity,60,REF-T-05b-open-path,PASS,P1,"OPEN '//evil.example/payload.ggb' -> REJECT (url-or-drive) expected REJECT",2026-11-01T14:12:59.9766736+01:00
+16_CourseSecurity,61,REF-T-05c-open-path,PASS,P1,"OPEN 'file:///etc/evil.ggb' -> REJECT (url-or-drive) expected REJECT",2026-11-01T14:12:59.9776135+01:00
+16_CourseSecurity,62,REF-T-26-open-path,PASS,P1,"OPEN 'exploit.jar' -> REJECT (extension) expected REJECT",2026-11-01T14:12:59.9785349+01:00
+16_CourseSecurity,63,REF-T-27-open-path,PASS,P1,"OPEN 'link_outside.ggb' -> REJECT (symlink-escape) expected REJECT",2026-11-01T14:12:59.9838579+01:00
+16_CourseSecurity,64,REF-T-28-open-path,PASS,P1,"OPEN 'clean.ggb' -> ACCEPT () expected ACCEPT",2026-11-01T14:12:59.9863435+01:00
+16_CourseSecurity,65,REF-T-06-scan,PASS,P1,"script_js.ggb: findings=[global-js] -> REJECT expected REJECT",2026-11-01T14:12:59.9985411+01:00
+16_CourseSecurity,66,REF-T-07-scan,PASS,P1,"script_onclick_js.ggb: findings=[object-script:javascript] -> REJECT expected REJECT",2026-11-01T14:13:00.0014600+01:00
+16_CourseSecurity,67,REF-T-29-scan,PASS,P1,"script_ggbscript.ggb: findings=[object-script:ggbscript] -> REJECT expected REJECT",2026-11-01T14:13:00.0026348+01:00
+16_CourseSecurity,68,REF-T-30-scan,PASS,P1,"script_onupdate.ggb: findings=[object-script:ggbscript] -> REJECT expected REJECT",2026-11-01T14:13:00.0037151+01:00
+16_CourseSecurity,69,REF-T-31-scan,PASS,P1,"macro_execute.ggb: findings=[blocked-command:Execute:geogebra_macro.xml] -> REJECT expected REJECT",2026-11-01T14:13:00.0051402+01:00
+16_CourseSecurity,70,REF-T-32-scan,PASS,P1,"construction_execute.ggb: findings=[blocked-command:Execute:geogebra.xml] -> REJECT expected REJECT",2026-11-01T14:13:00.0062588+01:00
+16_CourseSecurity,71,REF-T-33-scan,PASS,P1,"script_js.ggb: findings=[global-js] -> ACCEPT_WITH_WARNING expected ACCEPT_WITH_WARNING",2026-11-01T14:13:00.0085286+01:00
+16_CourseSecurity,72,SPEC-GAP-1-naive-scan-misses-ggbscript,SKIP,P1,"FINDING: spec 3.1 containsScriptElements() returns false for <ggbscript val="Execute(...)"/> (T-29); the scanner must match '<ggbscript' (GeoGebra ScriptType xml name) - report to Claude/Codex",2026-11-01T14:13:00.1312050+01:00
+16_CourseSecurity,73,VAL-T-01,PASS,P0,"validator: 'REJECT command Execute' expected REJECT (Commands.Execute TABLE_SCRIPTING)",2026-11-01T14:13:00.2532386+01:00
+16_CourseSecurity,74,VAL-T-02,PASS,P0,"validator: 'REJECT command Delete' expected REJECT (fr Exécute -> Commands.Execute)",2026-11-01T14:13:00.3357439+01:00
+16_CourseSecurity,75,VAL-T-03,PASS,P0,"validator: 'REJECT command Execute' expected REJECT (nested Execute)",2026-11-01T14:13:00.4159296+01:00
+16_CourseSecurity,76,VAL-T-03b,FAIL,P0,"validator: 'ACCEPT' expected REJECT (nested localized Execute)",2026-11-01T14:13:00.4940656+01:00
+16_CourseSecurity,77,VAL-T-03c,PASS,P0,"validator: 'REJECT command Delete' expected REJECT (case-insensitive Execute)",2026-11-01T14:13:00.5749809+01:00
+16_CourseSecurity,78,VAL-T-15,PASS,P0,"validator: 'REJECT command RunClickScript' expected REJECT (Commands.RunClickScript TABLE_SCRIPTING)",2026-11-01T14:13:00.6828686+01:00
+16_CourseSecurity,79,VAL-T-16,PASS,P0,"validator: 'REJECT command RunUpdateScript' expected REJECT (Commands.RunUpdateScript TABLE_SCRIPTING)",2026-11-01T14:13:00.7822244+01:00
+16_CourseSecurity,80,VAL-T-16b,FAIL,P0,"validator: 'ACCEPT' expected REJECT (fr RunClickScript)",2026-11-01T14:13:00.8672850+01:00
+16_CourseSecurity,81,VAL-T-17,PASS,P0,"validator: 'REJECT command PlaySound' expected REJECT (Commands.PlaySound TABLE_SCRIPTING (URL fetch))",2026-11-01T14:13:00.9526533+01:00
+16_CourseSecurity,82,VAL-T-14,PASS,P0,"validator: 'REJECT command ExportImage' expected REJECT (Commands.ExportImage TABLE_SCRIPTING)",2026-11-01T14:13:01.0314485+01:00
+16_CourseSecurity,83,VAL-T-18,PASS,P0,"validator: 'REJECT command SetValue' expected REJECT (Commands.SetValue TABLE_SCRIPTING on graded object)",2026-11-01T14:13:01.1126358+01:00
+16_CourseSecurity,84,VAL-T-12,PASS,P0,"validator: 'REJECT command Delete' expected REJECT (Commands.Delete blocked)",2026-11-01T14:13:01.1972837+01:00
+16_CourseSecurity,85,VAL-T-12b,FAIL,P0,"validator: 'ACCEPT' expected REJECT (fr Delete)",2026-11-01T14:13:01.2770352+01:00
+16_CourseSecurity,86,VAL-T-19,PASS,P0,"validator: 'REJECT command Rename' expected REJECT (Commands.Rename blocked)",2026-11-01T14:13:01.3585955+01:00
+16_CourseSecurity,87,VAL-T-20,PASS,P0,"validator: 'REJECT command Repeat' expected REJECT (Commands.Repeat TABLE_SCRIPTING (runaway loop))",2026-11-01T14:13:01.4736136+01:00
+16_CourseSecurity,88,VAL-T-21,FAIL,P0,"validator: 'ACCEPT' expected REJECT (runaway Sequence (TABLE_LIST is allowed: needs a size/time limit))",2026-11-01T14:13:01.5725679+01:00
+16_CourseSecurity,89,VAL-T-22,PASS,P0,"validator: 'REJECT command UpdateConstruction' expected REJECT (Commands.UpdateConstruction TABLE_SCRIPTING)",2026-11-01T14:13:01.6919972+01:00
+16_CourseSecurity,90,VAL-T-08,PASS,P0,"validator: 'ACCEPT' expected ACCEPT (safe construction)",2026-11-01T14:13:01.7885375+01:00
+16_CourseSecurity,91,VAL-T-09,PASS,P0,"validator: 'ACCEPT' expected ACCEPT (allowed scripting SetColor)",2026-11-01T14:13:01.8941754+01:00
+16_CourseSecurity,92,VAL-T-23,PASS,P0,"validator: 'ACCEPT' expected ACCEPT (allowed scripting Slider)",2026-11-01T14:13:02.1071927+01:00
+16_CourseSecurity,93,VAL-T-24,PASS,P0,"validator: 'REJECT command Execute' expected REJECT (CAS directive same allow-list)",2026-11-01T14:13:02.2742100+01:00
+16_CourseSecurity,94,VAL-T-04,PASS,P0,"validator: 'REJECT OPEN untrusted (disabled until scanner)' expected REJECT (path traversal + non-.ggb)",2026-11-01T14:13:02.4046581+01:00
+16_CourseSecurity,95,VAL-T-04b,PASS,P0,"validator: 'REJECT OPEN untrusted (disabled until scanner)' expected REJECT (traversal after normalize)",2026-11-01T14:13:02.4888625+01:00
+16_CourseSecurity,96,VAL-T-25,PASS,P0,"validator: 'REJECT OPEN untrusted (disabled until scanner)' expected REJECT (absolute path)",2026-11-01T14:13:02.5723299+01:00
+16_CourseSecurity,97,VAL-T-13,PASS,P0,"validator: 'REJECT OPEN untrusted (disabled until scanner)' expected REJECT (absolute path + wrong extension)",2026-11-01T14:13:02.6962297+01:00
+16_CourseSecurity,98,VAL-T-05,PASS,P0,"validator: 'REJECT OPEN untrusted (disabled until scanner)' expected REJECT (URL)",2026-11-01T14:13:02.7870368+01:00
+16_CourseSecurity,99,VAL-T-05b,PASS,P0,"validator: 'REJECT OPEN untrusted (disabled until scanner)' expected REJECT (protocol-relative URL)",2026-11-01T14:13:02.8621599+01:00
+16_CourseSecurity,100,VAL-T-05c,PASS,P0,"validator: 'REJECT OPEN untrusted (disabled until scanner)' expected REJECT (file URL)",2026-11-01T14:13:02.9384870+01:00
+16_CourseSecurity,101,VAL-T-26,PASS,P0,"validator: 'REJECT OPEN untrusted (disabled until scanner)' expected REJECT (non-.ggb extension)",2026-11-01T14:13:03.0264272+01:00
+16_CourseSecurity,102,VAL-T-27,PASS,P0,"validator: 'REJECT OPEN untrusted (disabled until scanner)' expected REJECT (symlink inside course dir pointing outside (normalize() alone does not catch it; needs toRealPath))",2026-11-01T14:13:03.1143222+01:00
+16_CourseSecurity,103,VAL-T-28,FAIL,P0,"validator: 'REJECT OPEN untrusted (disabled until scanner)' expected ACCEPT (clean archive under course dir)",2026-11-01T14:13:03.1935329+01:00
+16_CourseSecurity,104,VAL-T-06,PASS,P0,"validator: 'REJECT OPEN untrusted (disabled until scanner)' expected REJECT (geogebra_javascript.js with ggbOnInit code)",2026-11-01T14:13:03.2742661+01:00
+16_CourseSecurity,105,VAL-T-07,PASS,P0,"validator: 'REJECT OPEN untrusted (disabled until scanner)' expected REJECT (per-object <javascript val=...> click script)",2026-11-01T14:13:03.3557948+01:00
+16_CourseSecurity,106,VAL-T-29,PASS,P0,"validator: 'REJECT OPEN untrusted (disabled until scanner)' expected REJECT (per-object <ggbscript val="Execute(...)"> (spec 3.1 containsScriptElements misses '<ggbscript' with val=))",2026-11-01T14:13:03.4340022+01:00
+16_CourseSecurity,107,VAL-T-30,PASS,P0,"validator: 'REJECT OPEN untrusted (disabled until scanner)' expected REJECT (<ggbscript onUpdate=...>)",2026-11-01T14:13:03.5189133+01:00
+16_CourseSecurity,108,VAL-T-31,PASS,P0,"validator: 'REJECT OPEN untrusted (disabled until scanner)' expected REJECT (Execute inside geogebra_macro.xml)",2026-11-01T14:13:03.6068478+01:00
+16_CourseSecurity,109,VAL-T-32,PASS,P0,"validator: 'REJECT OPEN untrusted (disabled until scanner)' expected REJECT (<command name="Execute"> in geogebra.xml construction)",2026-11-01T14:13:03.7294805+01:00
+16_CourseSecurity,110,VAL-T-33,FAIL,P0,"validator: 'ACCEPT' expected ACCEPT_WITH_WARNING (trustedGgb=true loads scripted file with a warning)",2026-11-01T14:13:03.8132297+01:00
+16_CourseSecurity,111,VAL-T-11,PASS,P0,"validator: 'REJECT IOException: Invalid course file: $.tree[0].children[0].children[0].children[0].children[0].children[0] step nesting exceeds four levels below a chapter' expected REJECT (tree depth > 5 (schema does not enforce depth))",2026-11-01T14:13:03.8574967+01:00
+16_CourseSecurity,112,VAL-T-42,PASS,P0,"validator: 'REJECT IOException: Invalid course file: $.tree[8].children[20].actions course exceeds the maximum of 500 actions' expected REJECT (more than 500 total actions (600))",2026-11-01T14:13:03.9356549+01:00
+16_CourseSecurity,113,VAL-T-43,PASS,P0,"validator: 'REJECT OPEN untrusted (disabled until scanner)' expected REJECT (more than 10 OPEN actions)",2026-11-01T14:13:04.0105734+01:00
+16_CourseSecurity,114,VAL-T-44,PASS,P0,"validator: 'REJECT IOException: Invalid course file: $.tree[0].children[0].actions[0].trustedGgb is valid only for OPEN actions' expected REJECT (trustedGgb on a non-OPEN action)",2026-11-01T14:13:04.0544640+01:00
+16_CourseSecurity,115,VAL-T-10,PASS,P0,"validator: 'REJECT IOException: Course file exceeds the 1 MiB limit: 1066494 bytes' expected REJECT (course.json > 1 MB)",2026-11-01T14:13:04.0919239+01:00
