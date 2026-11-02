@@ -3,7 +3,7 @@ project: GeoGebraPlus / AlgoGebra RCP
 geogebra_pin: 375db7faf5407390bb322165f2414415da8faeda
 geogebra_version: 5.4.934.0
 repo: https://github.com/io-e/AlgoGebra
-updated: 2026-11-02T07:40+01:00
+updated: 2026-11-02T08:20+01:00
 codex_sprint1_stop: 02-Cdc/Decision_Codex_Sprint1_Stop_GROK_V1.md
 review: 02-Cdc/Review_Codex_Docs_Eclipse_Automation_Windows_GROK_V1.md
 sprint4_status: 02-Cdc/Sprint4_Course_Tree_Status_GROK_V1.md
@@ -80,11 +80,16 @@ closed_2026-11-02:
   - {pr: 4, reason: "Superseded by #9 (1b7a8d0 + Q1 69); owner Q6"}
   - {pr: 6, reason: "Superseded by #15; owner Q6"}
 status_and_next_sprint: 02-Cdc/Status_And_Next_Sprint_GROK_V1.md
+grok_sprint3_2026-11-02:
+  - {item: "suite 09 Xvfb diagnosis", pr: 23, merge: 39ee335e20d0894fd56a55f4ca6366b00acf9654, result: "7/17/0 unchanged, failures tagged KNOWN_BUG BUG-010 / fonts; product, not focus"}
+  - {item: "BUG-014 Debian analysis + D-11 harness fix", pr: 24, merge: f3c858daff5333c11a2f3de9135a0fff03b0b37c, result: "D-11 8/0/0; P-02 46/4/1 (50/0/1 with fonts)"}
+  - {item: "GeoGebra-backed Java corpus test, suite 20", pr: 25, merge: 9d496ca38aa51226d89036c65e53613b9961a1b3, result: "54/0/2 (T-45/T-51 XFAIL issue #21)"}
+counts_2026-11-02T08:20: {suite09: "7/17/0", suite16_no_validator: "82/0/55", suite16_real_validator: "134/2/1", suite17: "15/0/0", suite18: "21/0/1", suite19: "15/0/1", suite20: "54/0/2", D-11: "8/0/0", P-02: "46/4/1"}
 open_items_2026-11-02:
   - "Codex: BUG-014 (evalCommand false in D-11 RCP), CAS empty in D-11, WP9-04 .ggb scanner, attended SWT UI (trusted-OPEN dialog not visually tested)"
   - "Codex (issue #21, Q3b DECIDED): remove the >=800-iteration near-limit warning (T-45/T-51 expect ACCEPT)"
   - "Claude (Q5): spec SPEC-GAP-1 <ggbscript>, SPEC-GAP-3 realpath/symlink, spec §5 Sequence 1000/10000"
-  - "Rebuild Linux image from merged tip (image-pr11 predates #18) and rerun D-11/LC-18/19"
+  - "Codex: package renderer-desktop resources (ReTeX fonts) in the renderer bundle (BUG-014 Debian root cause), then rebuild images; host Log.setLogger lead for BUG-010"
   - "Windows: unified suite 18 run by owner from a clean worktree (Q8)"
 reviewed_documents_2026-10-30:
   governing_spec: 02-Cdc/Architecture_GeoGebraPlus_RCP_Web_Validation_GROK_V2.md
@@ -130,7 +135,7 @@ scenarios:
   D-08: {status: "PARTIAL", client: desktop, gate: "B", debian_desktop: "PARTIAL", script: "03-RCP-Spike/tests/scenarios/S_D-08_IncompatibleExtension_GROK_V1.ps1", blockers: "user-facing refusal message not implemented"}
   D-09: {status: "NOT RUN", client: desktop, gate: "E", debian_desktop: "NOT RUN", script: "03-RCP-Spike/tests/scenarios/S_D-09_SignatureChannel_GROK_V1.ps1", blockers: "no signing key, channel or policy (owner decision)"}
   D-10: {status: "NOT RUN", client: desktop, gate: "-", debian_desktop: "FAIL", script: "03-RCP-Spike/tests/scenarios/S_D-10_InstallUpgrade_GROK_V1.ps1", blockers: "BUG-017 (Linux image has no bundled Java; launch.sh hard-codes /workspace/AlgoGebra/jdk); no installer; no clean Windows VM"}
-  D-11: {status: "FAIL", client: desktop, gate: "-", debian_desktop: "FAIL (Xvfb, mechanical)", script: "03-RCP-Spike/tests/scenarios/S_D-11_CourseTree_GROK_V1.ps1", blockers: "PR #14 scenario fix: 5/3/0 on image-pr11; course loads (5 chapters) but CMD evalCommand=false (BUG-014) and CAS empty; attended SWT UI stays Windows"}
+  D-11: {status: "PASS (Debian Xvfb)", client: desktop, gate: "-", debian_desktop: "PASS 8/0/0 (PR #24 harness id-column fix; was 5/3/0, misattributed to BUG-014)", script: "03-RCP-Spike/tests/scenarios/S_D-11_CourseTree_GROK_V1.ps1", blockers: "attended SWT UI stays Windows"}
   W-01: {status: "NOT RUN", client: web, gate: "C", debian_desktop: "-", script: "-", blockers: "deferred: web phase (no script yet)"}
   W-02: {status: "NOT RUN", client: web, gate: "C", debian_desktop: "-", script: "-", blockers: "deferred: web phase (no script yet)"}
   W-03: {status: "NOT RUN", client: web, gate: "-", debian_desktop: "-", script: "-", blockers: "deferred: web phase (no script yet)"}
@@ -255,6 +260,7 @@ bugs:
     note: "Grok Bot PR #5: functions and matrices work on self-hosted web build — treat as desktop RCP/OSGi integration, not upstream GeoGebra. Owner: tree may ship trig/CAS before fix; matrix CMD desktop skipped."
     platforms: "Reproduced on Windows and Debian; systemic, not platform-specific"
     hypothesis: "CommandDispatcher / AlgoDispatcher resources may not be visible through the OSGi classloader; not confirmed"
+    debian_root_cause_2026-11-02: "Linux image renderer bundle org.geogebra.migration.desktop.renderer has no ReTeX fonts (r8 copy); FontLoaderD ResourceParseException on the EDT when rendering functions/matrices/planes -> evalCommand false + dialog. With fonts injected P-02 46/4/1 -> 50/0/1; headless AppDNoGui creates all objects. Fix = Codex: package renderer resources (r12) + rebuild images. Analysis: 02-Cdc/BUG-014_Debian_Analysis_GROK_V1.md (PR #24)"
     next: "Compare resource lookup in Equinox with pinned upstream desktop classpath; keep common untouched"
   - id: BUG-015
     title: "PARI engine returns OK with empty text for malformed input factor(( instead of a typed error"
@@ -431,6 +437,7 @@ bugs_added_2026-10-29:
     severity: high
     status: OPEN
     evidence: "09 log KBD-02/04/06/08 lostFirstBurst=True; FOCUS-01/02 lost=True"
+    debian_2026-11-02: "Not a harness/focus issue (WM and XTEST experiments worse, PR #23). Valid input is created AND the dialog opens (all Enter variants); lost keys follow the dialog. Lead for Codex: embedded GeoGebraPanel never calls Log.setLogger -> ScreenReaderAdapterD Log.read NPE (unproven). Suite 09: 7/17/0 tagged KNOWN_BUG; 8/16/0 with fonts"
   - id: BUG-011
     title: "ReTeX FontLoaderD cannot read fonts/latin/jlm_cmr10.ttf in the OSGi image ('Problem reading font data')"
     component: bundle packaging (renderer resources / classloader)
