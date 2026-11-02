@@ -44,7 +44,10 @@ find_java() {
     echo "launch.sh: GGB_JAVA/JAVA='$explicit' is not a usable Java >= $MIN (${TRIED[*]})" >&2; exit 4; fi
   for d in "$IMAGE/jre" "$IMAGE/jdk"; do try_java "$d/bin/java" "bundled" && return 0; done
   [ -n "${JAVA_HOME:-}" ] && try_java "$JAVA_HOME/bin/java" "JAVA_HOME" && return 0
-  if command -v mise >/dev/null 2>&1; then local mw; mw="$(mise where java 2>/dev/null || true)"; [ -n "$mw" ] && try_java "$mw/bin/java" "mise" && return 0; fi
+  if command -v mise >/dev/null 2>&1; then local mw; mw="$(mise where java 2>/dev/null || true)"
+    if [ -n "$mw" ]; then try_java "$mw/bin/java" "mise" && return 0
+      # F-1 (GROK_V1): a mise-pinned Java below MIN is skipped; say so instead of silently using another JDK
+      echo "launch.sh: warning: mise-pinned Java at $mw is below $MIN (${TRIED[${#TRIED[@]}-1]:-unusable}); continuing discovery" >&2; fi; fi
   for d in $(ls -d "$HOME"/.local/share/mise/installs/java/* /usr/lib/jvm/* /opt/java/* 2>/dev/null | sort -rV); do try_java "$d/bin/java" "system" && return 0; done
   command -v java >/dev/null 2>&1 && try_java "$(command -v java)" "PATH" && return 0
   echo "launch.sh: no Java >= $MIN found. Set GGB_JAVA=/path/to/bin/java or JAVA_HOME, or install a JDK (e.g. apt install openjdk-25-jre, or 'mise use java@25')." >&2

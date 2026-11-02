@@ -31,6 +31,14 @@ foreach ($c in $cases) { $r = Invoke-Launch $c.Env; Test-Ok $c.Id ($r.Rc -eq $c.
 New-Item -ItemType Directory -Force (Join-Path $img 'jre/bin') | Out-Null; & ln -s (Join-Path $j25 'bin/java') (Join-Path $img 'jre/bin/java')
 $r = Invoke-Launch @{ JAVA_HOME = $j21 }; Test-Ok 'L-10-bundled-jre-wins-over-java-home' ($r.Rc -eq 0 -and $r.Out -match 'SOURCE=bundled MAJOR=25') "out=[$($r.Out)]" 'P0'
 $r = Invoke-Launch @{} (Join-Path $w 'no-image'); Test-Ok 'L-11-missing-image' ($r.Rc -eq 3 -and $r.Out -match 'no RCP image') "rc=$($r.Rc) out=[$($r.Out)]" 'P1'
+# F-1 (GROK_V1): mise cases with a fake `mise` on PATH (prints `mise where java`), so no real mise install is needed
+$mb = Join-Path $w 'misebin'; New-Item -ItemType Directory -Force $mb | Out-Null
+function Set-FakeMise([string]$JHome) { Set-Content (Join-Path $mb 'mise') "#!/bin/sh`n[ `"`$1 `$2`" = 'where java' ] && echo '$JHome'`n" -Encoding ascii; & chmod +x (Join-Path $mb 'mise') }
+Set-FakeMise $j25
+New-Item -ItemType Directory -Force (Join-Path $w 'img-mise/bundles') | Out-Null; $r = Invoke-Launch @{ PATH = "${mb}:/usr/bin:/bin" } (Join-Path $w 'img-mise')
+Test-Ok 'L-14-mise-java-25' ($r.Rc -eq 0 -and $r.Out -match 'SOURCE=mise MAJOR=25' -and $r.Out -notmatch 'warning') "out=[$($r.Out)]" 'P1'
+Set-FakeMise $j21; $r = Invoke-Launch @{ PATH = "${mb}:$(Join-Path $w 'pathbin'):/usr/bin:/bin" } (Join-Path $w 'img-mise')
+Test-Ok 'L-15-mise-pin-too-old-warns-and-falls-through' ($r.Rc -eq 0 -and $r.Out -match 'warning: mise-pinned Java at .* is below 25' -and $r.Out -match 'SOURCE=PATH MAJOR=25') "out=[$($r.Out -replace "`n", ' | ')]" 'P1'
 $t = Get-Content $launch -Raw; Test-Ok 'L-12-no-hardcoded-workspace-path' ($t -notmatch '/workspace/AlgoGebra') 'launch.sh has no /workspace/AlgoGebra fallback' 'P0'
 # real headless start of the installed image with the repo launcher (GGB_JAVA from the test framework / J25)
 $realImg = $script:Image
