@@ -48,6 +48,17 @@ public final class DirectiveExecutor {
             return;
         }
         SwingUtilities.invokeLater(() -> {
+            CourseValidationResult validation;
+            try {
+                validation = validateStep(step);
+            } catch (Exception error) {
+                complete(completion, false, "Course action validation failed: " + message(error));
+                return;
+            }
+            if (!validation.isAccepted()) {
+                complete(completion, false, validation.message());
+                return;
+            }
             List<GgbAPI> dialogsDisabled = new ArrayList<>(2);
             try {
                 disableErrorDialogs(api2d, dialogsDisabled);
@@ -58,7 +69,12 @@ public final class DirectiveExecutor {
                 for (CourseAction action : step.actions()) {
                     results.add(execute(action));
                 }
-                String message = results.isEmpty() ? "This step has no actions." : String.join("; ", results);
+                List<String> feedback = new ArrayList<>();
+                for (String warning : validation.warnings()) {
+                    feedback.add("Warning: " + warning);
+                }
+                feedback.add(results.isEmpty() ? "This step has no actions." : String.join("; ", results));
+                String message = String.join("; ", feedback);
                 complete(completion, true, message);
             } catch (Throwable error) {
                 complete(completion, false, message(error));
@@ -98,17 +114,14 @@ public final class DirectiveExecutor {
 
     private String execute(CourseAction action) throws Exception {
         GgbAPI api = apiFor(action.target());
-        App app = appFor(action.target());
         return switch (action.directive()) {
         case CMD -> {
-            validator.validateCommand(app, action.value());
             boolean labelReturned = api.evalCommand(action.value());
             yield labelReturned
                     ? "Command submitted; GeoGebra returned output labels"
                     : "Command submitted; no output labels returned (not treated as a failure)";
         }
         case CAS -> {
-            validator.validateCommand(app, action.value());
             String result = api.evalCommandCAS(action.value(), null);
             yield "CAS: " + (result == null ? "(no result)" : result);
         }
@@ -119,6 +132,22 @@ public final class DirectiveExecutor {
         };
     }
 
+    private CourseValidationResult validateStep(CourseNode step) throws Exception {
+        List<String> warnings = new ArrayList<>();
+        for (CourseAction action : step.actions()) {
+            CourseValidationResult result = switch (action.directive()) {
+            case CMD, CAS -> validator.validateCommand(appFor(action.target()), action.value());
+            case OPEN -> validator.validateOpen(action);
+            case VAL, SAVE, PNG -> CourseValidationResult.accept();
+            };
+            if (!result.isAccepted()) {
+                return result;
+            }
+            warnings.addAll(result.warnings());
+        }
+        return CourseValidationResult.acceptWithWarnings(warnings);
+    }
+
     private String openTrustedGgb(GgbAPI api, CourseAction action) throws IOException {
         if (!action.trustedGgb()) {
             throw new SecurityException("OPEN is disabled for untrusted .ggb files until script scanning is available; "
@@ -127,7 +156,8 @@ public final class DirectiveExecutor {
         Path path = resolveInput(action.value(), ".ggb");
         byte[] bytes = Files.readAllBytes(path);
         api.setBase64(Base64.getEncoder().encodeToString(bytes));
-        return "Opened trusted construction " + path.getFileName();
+        return "Opened trusted construction " + path.getFileName()
+                + " (warning: embedded scripts were not scanned)";
     }
 
     private String saveConstruction(GgbAPI api, String rawPath) throws IOException {
