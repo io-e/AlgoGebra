@@ -1,0 +1,14 @@
+GeoGebra 5.4.934.0 20 October 2026 Java 25.0.5-64bit
+
+GeoGebra 5.4.934.0 20 October 2026 Java 25.0.5-64bit
+
+[GeoGebraPlus] baseline ready; ggb=5.4.934.0
+[GeoGebraPlus] SCN	_BEGIN	OK	S_O-05.baseline.directives.tsv	5 lines
+[LaTeX] loadFont():fonts/latin/optional/jlm_cmssbx10.ttf
+[GeoGebraPlus] SCN	A1	OK	objects=3
+[GeoGebraPlus] SCN	A2	OK	P,g,k
+[GeoGebraPlus] SCN	A3	OK	P = (2, 3)
+[GeoGebraPlus] SCN	A4	OK	k = 1.5
+[GeoGebraPlus] SCN	A5	OK	g(x) = 1.5 x
+[GeoGebraPlus] SCN	_END	OK	done
+

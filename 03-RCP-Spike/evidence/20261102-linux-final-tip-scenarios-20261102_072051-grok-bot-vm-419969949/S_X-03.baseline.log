@@ -1,0 +1,18 @@
+GeoGebra 5.4.934.0 20 October 2026 Java 25.0.5-64bit
+
+GeoGebra 5.4.934.0 20 October 2026 Java 25.0.5-64bit
+
+[GeoGebraPlus] baseline ready; ggb=5.4.934.0
+[GeoGebraPlus] SCN	_BEGIN	OK	S_X-03.baseline.directives.tsv	10 lines
+[GeoGebraPlus] SCN	A1	OK	true
+[GeoGebraPlus] SCN	A2	OK	true
+[GeoGebraPlus] SCN	A3	OK	true
+[GeoGebraPlus] SCN	A4	OK	false
+[GeoGebraPlus] SCN	S1	OK	a = 4
+[GeoGebraPlus] SCN	S2	OK	b = 8
+[GeoGebraPlus] SCN	S3	OK	c = 9
+[GeoGebraPlus] SCN	V1	OK	a = 4
+[GeoGebraPlus] SCN	V2	OK	b = 8
+[GeoGebraPlus] SCN	V3	OK	c = 9
+[GeoGebraPlus] SCN	_END	OK	done
+

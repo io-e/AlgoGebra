@@ -1,0 +1,21 @@
+suite,num,id,status,priority,detail,ts
+05_Sandbox,1,SBX-01-pari-reject,PASS,P0,"cmd=write("/tmp/algogebra_sbx_pari",1) -> ERR ExternalComputeException: PARI/GP command contains a WIMS-blocked term: write",2026-11-02T07:16:58.4343649+01:00
+05_Sandbox,2,SBX-02-pari-reject,PASS,P0,"cmd=system("id") -> ERR ExternalComputeException: PARI/GP command contains a blocked command (AlgoGebra defence in depth, BUG-006): system",2026-11-02T07:16:58.5074854+01:00
+05_Sandbox,3,SBX-03-pari-reject,PASS,P0,"cmd=plot(x=0,1,x) -> ERR ExternalComputeException: PARI/GP command contains a WIMS-blocked term: plot",2026-11-02T07:16:58.5750321+01:00
+05_Sandbox,4,SBX-04-maxima-reject,PASS,P0,"cmd=system("id") -> ERR ExternalComputeException: Maxima command contains a WIMS-blocked command: system",2026-11-02T07:16:58.6483644+01:00
+05_Sandbox,5,SBX-05-maxima-reject,PASS,P0,"cmd=load("/tmp/x.mac") -> ERR ExternalComputeException: Maxima command contains a WIMS-blocked term: load",2026-11-02T07:16:58.7207969+01:00
+05_Sandbox,6,SBX-06-maxima-reject,PASS,P0,"cmd=with_stdout("/tmp/algogebra_sbx_max",print(1)) -> ERR ExternalComputeException: Maxima command contains a WIMS-blocked command: with_stdout",2026-11-02T07:16:58.7934519+01:00
+05_Sandbox,7,SBX-07-maxima-noexec,PASS,P0,"cmd=:lisp (run-program "id" nil) -> OK",2026-11-02T07:16:58.9088574+01:00
+05_Sandbox,8,SBX-08-gnuplot-reject,PASS,P0,"cmd=system "id" -> ERR ExternalComputeException: Gnuplot system and shell commands are blocked",2026-11-02T07:16:58.9783945+01:00
+05_Sandbox,9,SBX-09-gnuplot-reject,PASS,P0,"cmd=set output "/tmp/algogebra_sbx_gp.png" -> ERR ExternalComputeException: Gnuplot file, terminal, and output redirection commands are blocked",2026-11-02T07:16:59.0468477+01:00
+05_Sandbox,10,SBX-10-gnuplot-reject,PASS,P0,"cmd=!id -> ERR ExternalComputeException: Gnuplot shell escape commands beginning with ! are blocked",2026-11-02T07:16:59.1219161+01:00
+05_Sandbox,11,SBX-11-pari-timeout,PASS,P0,"budget=3s elapsed=3104ms -> ExternalComputeException: pari exceeded timeout 3000 ms; process tree was killed; partial stdout was captured",2026-11-02T07:17:02.2313158+01:00
+05_Sandbox,12,SBX-12-maxima-timeout,PASS,P0,"budget=3s elapsed=3136ms -> ExternalComputeException: maxima exceeded timeout 3000 ms; process tree was killed; partial stdout was captured",2026-11-02T07:17:05.3704732+01:00
+05_Sandbox,13,SBX-13-maxima-noexec,PASS,P0,"cmd=:lisp (let ((s (open "/tmp/algogebra_sbx_lisp" :direction :output :if-exists :supersede))) (princ 1 s) (close s)) -> OK",2026-11-02T07:17:05.4823251+01:00
+05_Sandbox,14,SBX-14-pari-reject,PASS,P0,"cmd=extern("id") -> ERR ExternalComputeException: PARI/GP command contains a blocked command (AlgoGebra defence in depth, BUG-006): extern",2026-11-02T07:17:05.5506131+01:00
+05_Sandbox,15,SBX-15-pari-reject,PASS,P0,"cmd=externstr("id") -> ERR ExternalComputeException: PARI/GP command contains a blocked command (AlgoGebra defence in depth, BUG-006): externstr",2026-11-02T07:17:05.6188562+01:00
+05_Sandbox,16,SBX-16-pari-reject,PASS,P0,"cmd=fileextern("id") -> ERR ExternalComputeException: PARI/GP command contains a blocked command (AlgoGebra defence in depth, BUG-006): fileextern",2026-11-02T07:17:05.6846354+01:00
+05_Sandbox,17,SBX-17-pari-reject,PASS,P0,"cmd=install("getpid","l") -> ERR ExternalComputeException: PARI/GP command contains a blocked command (AlgoGebra defence in depth, BUG-006): install",2026-11-02T07:17:05.7912370+01:00
+05_Sandbox,18,SBX-18-pari-reject,PASS,P0,"cmd=alias(s,system); s("id") -> ERR ExternalComputeException: PARI/GP command contains a blocked command (AlgoGebra defence in depth, BUG-006): system",2026-11-02T07:17:05.8578682+01:00
+05_Sandbox,19,SBX-19-pari-reject,PASS,P0,"cmd=eval(Str("ins","tall(\"getpid\",\"l\")")) -> ERR ExternalComputeException: PARI/GP command contains a blocked command (AlgoGebra defence in depth, BUG-006): eval",2026-11-02T07:17:05.9261568+01:00
+05_Sandbox,20,SBX-99-no-files-written,PASS,P0,"",2026-11-02T07:17:05.9311328+01:00

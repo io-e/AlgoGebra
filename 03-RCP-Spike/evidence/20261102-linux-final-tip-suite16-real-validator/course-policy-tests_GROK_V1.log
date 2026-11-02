@@ -1,0 +1,29 @@
+PASS: valid model, defaults, and immutable tree
+PASS: nested steps and 3D/OPEN/check parsing
+PASS: strict JSON grammar and duplicate-key rejection
+PASS: schema and enum validation
+PASS: four nested step levels are allowed; fifth is rejected
+PASS: action-count, trust flag, and check-range constraints
+PASS: 1 MiB course-size cap for strings and files
+PASS: UTF-8 load and malformed-byte rejection
+PASS: RCP course-tree smoke fixture loads
+CourseModelTest: 9 PASS, 0 FAIL
+PASS: geometry command allowed
+PASS: algebra command allowed
+PASS: CAS command allowed
+PASS: SetColor scripting exception allowed
+PASS: Slider scripting exception allowed
+PASS: Execute scripting command blocked
+PASS: Delete blocked
+PASS: SetValue blocked
+PASS: null command denied
+PASS: untrusted OPEN rejected until archive scanner exists
+PASS: trusted OPEN is accepted with an explicit warning
+PASS: Sequence accepts the 1,000 iteration boundary
+PASS: Sequence rejects more than 1,000 iterations
+PASS: Sequence rejects non-finite bounds or a zero step
+PASS: Sequence handles direction mismatch as empty
+PASS: per-directive Sequence budget allows exactly 10,000 items
+PASS: nested Sequence expansion cannot exceed total budget
+PASS: warning result is distinct from rejection
+StepValidatorPolicyTest: 18 PASS, 0 FAIL

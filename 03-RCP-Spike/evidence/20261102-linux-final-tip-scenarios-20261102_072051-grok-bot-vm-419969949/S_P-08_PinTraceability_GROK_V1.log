@@ -1,0 +1,15 @@
+# Suite: S_P-08
+# Started: 2026-11-02T07:25:50.1904977+01:00
+# Host: grok-bot-vm-419969949 / Debian GNU/Linux 13 (trixie) / pwsh 7.6.9
+
+# Scenario: P-08 - Upstream version and pin | gate - | client infra
+# Evidence: commit=e2cfff3 image=/workspace/AlgoGebra/image-final/GeoGebraPlus-RCP-0.1.0-linux-gtk-x86_64 pin=375db7faf5407390bb322165f2414415da8faeda version=5.4.934.0 os=Unix 6.12.94.0 pwsh=7.6.9
+ok 1 - [P0] P08-01-source-at-pin :: source HEAD=375db7faf5407390bb322165f2414415da8faeda pin=375db7faf5407390bb322165f2414415da8faeda
+ok 2 - [P0] P08-02-source-common-unmodified :: tracked modifications in upstream source: 0
+ok 3 - [P0] P08-03-image-version-string :: common bundle=org.geogebra.migration.shared.common-5.4.934.0.jar expected VERSION_STRING=5.4.934.0
+ok 4 - [P1] P08-04-states-cites-pin :: states.yaml cites commit and VERSION_STRING
+not ok 5 - [P1] P08-05-evidence-cites-pin :: evidence runs=30 without pin: [20261029-linux-debian-grokbot-bug006-20261029_160937-grok-bot-vm-419969949, 20261029-windows-codex-689d4b4, 20261101-131331-gt5-corpus-reverify-debian, 20261101-133332-p0-launch-course-debian, 20261101-133631-p1-firefox-mise-debian, 20261101-143808-p0b-suite18-pr11-image-debian, 20261101-143847-gt2-war-debian, 20261101-143847-suite16-stepvalidator-adapter-debian, 20261101-143847-twin18-debian, 20261102-053859-suite18-unified-debian, 20261102-054223-w09-green-firefox-debian, 20261102-054330-d11-xvfb-pr11image-debian, 20261102-054424-f1-mise-warning-debian, 20261102-054819-g06-oef-converter-debian, 20261102-062900-suite18-unified-windows-SHADOW-TB64BO9R, 20261102-062925-q1-exit69-debian, 20261102-063155-q2q3q4-suite16-debian, 20261102-070637-codex-q2q4-review-debian, 20261102-course-security-q2-q4-windows, 20261102-linux-final-tip-suites-20261102_071651-grok-bot-vm-419969949, debian]
+ok 6 - [P0] P08-06-acceptance-tag # SKIP NOT RUN - blocked by: owner decision: the upstream acceptance tag is not chosen yet (commit pin known, tag open)
+
+PASS: 4 FAIL: 1 SKIP: 1
+# CSV: /workspace/AlgoGebra/wt-final/03-RCP-Spike/tests/results/20261102_072051-grok-bot-vm-419969949/S_P-08_GROK_V1.csv
