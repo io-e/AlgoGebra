@@ -1,0 +1,22 @@
+diff --git a/03-RCP-Spike/host/src/org/geogebra/plus/host/GeoGebraPlusApplication.java b/03-RCP-Spike/host/src/org/geogebra/plus/host/GeoGebraPlusApplication.java
+index 62b379b..0034431 100644
+--- a/03-RCP-Spike/host/src/org/geogebra/plus/host/GeoGebraPlusApplication.java
++++ b/03-RCP-Spike/host/src/org/geogebra/plus/host/GeoGebraPlusApplication.java
+@@ -59,6 +59,17 @@ public final class GeoGebraPlusApplication implements IApplication {
+     @Override
+     public Object start(IApplicationContext applicationContext) throws Exception {
+         System.out.println(LOG + "IApplication.start() — D-02 entry");
++        // BUG-010 experiment (GROK_V1): initialise GeoGebra's logger, which the embedded panel never does.
++        try {
++            ClassLoader ggb = GeoGebraPanel.class.getClassLoader();
++            Class<?> logC = Class.forName("org.geogebra.common.util.debug.Log", true, ggb);
++            Object logger = Class.forName("org.geogebra.desktop.util.LoggerD", true, ggb).getConstructor().newInstance();
++            logC.getMethod("setLogger", logC).invoke(null, logger);
++            logC.getMethod("setLogLevel", String.class).invoke(null, "DEBUG");
++            System.out.println(LOG + "BUG-010 experiment: Log.setLogger(new LoggerD()) installed");
++        } catch (Throwable t) {
++            System.out.println(LOG + "BUG-010 experiment: logger init failed: " + t);
++        }
+         System.out.println(LOG + "Runtime: " + System.getProperty("java.runtime.version")
+                 + "; OS=" + System.getProperty("os.name") + "/"
+                 + System.getProperty("os.arch"));

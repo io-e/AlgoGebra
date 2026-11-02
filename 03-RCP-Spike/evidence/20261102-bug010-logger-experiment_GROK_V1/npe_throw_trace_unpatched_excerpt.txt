@@ -1,0 +1,97 @@
+[                        ]  thrown in C1 compiled method <{method} {0x00007fd68d162828} 'getMenuDefault' '(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;' in 'org/geogebra/common/jre/main/LocalizationJre'>
+[                        ]  at PC0x00007fd6bc492bec for thread 0x00007fd6d4b38fe0
+[8.616s][info][exceptions] Exception <a 'java/lang/NullPointerException'{0x000000070b42d340}> (0x000000070b42d340) 
+[                        ] thrown [src/hotspot/share/interpreter/linkResolver.cpp, line 1416]
+[                        ] for thread 0x00007fd6d4b38fe0
+[8.616s][info][exceptions] Exception <a 'java/lang/NullPointerException'{0x000000070b42d340}>
+[                        ]  thrown in interpreter method <{method} {0x00007fd68d31de10} 'read' '(Ljava/lang/String;)V' in 'org/geogebra/common/util/debug/Log'>
+[                        ]  at bci 4 for thread 0x00007fd6d4b38fe0 (AWT-EventQueue-0)
+[8.616s][info][exceptions] Exception <a 'java/lang/NullPointerException'{0x000000070b42d340}>
+[                        ]  thrown in interpreter method <{method} {0x00007fd68d969520} 'readText' '(Ljava/lang/String;)V' in 'org/geogebra/desktop/euclidian/ScreenReaderAdapterD'>
+[                        ]  at bci 6 for thread 0x00007fd6d4b38fe0 (AWT-EventQueue-0)
+[8.616s][info][exceptions] Exception <a 'java/lang/NullPointerException'{0x000000070b42d340}>
+[                        ]  thrown in interpreter method <{method} {0x00007fd68f15d640} 'readText' '(Ljava/lang/String;Lorg/geogebra/common/main/App;)V' in 'org/geogebra/common/main/ScreenReader'>
+[                        ]  at bci 60 for thread 0x00007fd6d4b38fe0 (AWT-EventQueue-0)
+[8.616s][info][exceptions] Exception <a 'java/lang/NullPointerException'{0x000000070b42d340}>
+[                        ]  thrown in interpreter method <{method} {0x00007fd68f15d5e8} 'readText' '(Lorg/geogebra/common/kernel/geos/GeoElement;)V' in 'org/geogebra/common/main/ScreenReader'>
+[                        ]  at bci 25 for thread 0x00007fd6d4b38fe0 (AWT-EventQueue-0)
+[8.616s][info][exceptions] Exception <a 'java/lang/NullPointerException'{0x000000070b42d340}>
+[                        ]  thrown in interpreter method <{method} {0x00007fd68f15d510} 'updateSelection' '(Lorg/geogebra/common/main/App;)V' in 'org/geogebra/common/main/ScreenReader'>
+[                        ]  at bci 26 for thread 0x00007fd6d4b38fe0 (AWT-EventQueue-0)
+[8.616s][info][exceptions] Exception <a 'java/lang/NullPointerException'{0x000000070b42d340}>
+[                        ]  thrown in interpreter method <{method} {0x00007fd68cc33b18} 'updateSelection' '(Z)V' in 'org/geogebra/common/main/App'>
+[                        ]  at bci 122 for thread 0x00007fd6d4b38fe0 (AWT-EventQueue-0)
+[8.616s][info][exceptions] Exception <a 'java/lang/NullPointerException'{0x000000070b42d340}>
+[                        ]  thrown in interpreter method <{method} {0x00007fd68d8f5178} 'updateSelection' '(Z)V' in 'org/geogebra/common/main/SelectionManager'>
+[                        ]  at bci 29 for thread 0x00007fd6d4b38fe0 (AWT-EventQueue-0)
+[8.616s][info][exceptions] Exception <a 'java/lang/NullPointerException'{0x000000070b42d340}>
+[                        ]  thrown in interpreter method <{method} {0x00007fd68d8f5090} 'updateSelection' '()V' in 'org/geogebra/common/main/SelectionManager'>
+[                        ]  at bci 2 for thread 0x00007fd6d4b38fe0 (AWT-EventQueue-0)
+[8.616s][info][exceptions] Exception <a 'java/lang/NullPointerException'{0x000000070b42d340}>
+[                        ]  thrown in interpreter method <{method} {0x00007fd68d8f2028} 'setSelectedGeos' '(Ljava/util/List;Z)V' in 'org/geogebra/common/main/SelectionManager'>
+[                        ]  at bci 103 for thread 0x00007fd6d4b38fe0 (AWT-EventQueue-0)
+[8.616s][info][exceptions] Exception <a 'java/lang/NullPointerException'{0x000000070b42d340}>
+[                        ]  thrown in interpreter method <{method} {0x00007fd68d8f1ed8} 'setSelectedGeos' '(Ljava/util/List;)V' in 'org/geogebra/common/main/SelectionManager'>
+[                        ]  at bci 3 for thread 0x00007fd6d4b38fe0 (AWT-EventQueue-0)
+[8.616s][info][exceptions] Exception <a 'java/lang/NullPointerException'{0x000000070b42d340}>
+[                        ]  thrown in interpreter method <{method} {0x00007fd68f125e68} 'callback' '([Lorg/geogebra/common/kernel/kernelND/GeoElementND;)V' in 'org/geogebra/desktop/gui/inputbar/InputBarCallback'>
+[                        ]  at bci 147 for thread 0x00007fd6d4b38fe0 (AWT-EventQueue-0)
+[8.616s][info][exceptions] Exception <a 'java/lang/NullPointerException'{0x000000070b42d340}>
+[                        ]  thrown in interpreter method <{method} {0x00007fd68f125f50} 'callback' '(Ljava/lang/Object;)V' in 'org/geogebra/desktop/gui/inputbar/InputBarCallback'>
+[                        ]  at bci 5 for thread 0x00007fd6d4b38fe0 (AWT-EventQueue-0)
+[8.616s][info][exceptions] Exception <a 'java/lang/NullPointerException'{0x000000070b42d340}>
+[                        ]  thrown in interpreter method <{method} {0x00007fd68e0109e0} 'postProcessCreatedElements' '(Lorg/geogebra/common/kernel/arithmetic/ValidExpression;Lorg/geogebra/common/util/AsyncOperation;[Lorg/geogebra/common/kernel/kernelND/GeoElementND;Lorg/geogebra/common/main/error/ErrorHandler;Lj>
+[                        ]  at bci 201 for thread 0x00007fd6d4b38fe0 (AWT-EventQueue-0)
+[8.616s][info][exceptions] Exception <a 'java/lang/NullPointerException'{0x000000070b42d340}>
+[                        ]  thrown in interpreter method <{method} {0x00007fd68e0103f0} 'processAlgebraCommandNoExceptionHandling' '(Lorg/geogebra/common/kernel/arithmetic/ValidExpression;ZLorg/geogebra/common/main/error/ErrorHandler;Lorg/geogebra/common/util/AsyncOperation;Lorg/geogebra/common/kernel/commands/E>
+[                        ]  at bci 465 for thread 0x00007fd6d4b38fe0 (AWT-EventQueue-0)
+[8.616s][info][exceptions] Exception <a 'java/lang/NullPointerException'{0x000000070b42d340}>
+[                        ]  thrown in interpreter method <{method} {0x00007fd68e010360} 'processAlgebraCommandNoExceptionHandling' '(Ljava/lang/String;ZLorg/geogebra/common/main/error/ErrorHandler;Lorg/geogebra/common/kernel/commands/EvalInfo;Lorg/geogebra/common/util/AsyncOperation;)[Lorg/geogebra/common/kernel>
+[                        ]  at bci 104 for thread 0x00007fd6d4b38fe0 (AWT-EventQueue-0)
+[8.616s][info][exceptions] Found matching handler for exception of type "java.lang.NullPointerException" in method "processAlgebraCommandNoExceptionHandling" at BCI: 108
+[8.617s][info][exceptions] Exception <a 'java/util/MissingResourceException'{0x000000070b42e2a0}: Not found>
+[                        ]  thrown in C1 compiled method <{method} {0x000000002a24c6c0} 'getObject' '(Ljava/lang/String;)Ljava/lang/Object;' in 'java/util/ResourceBundle'>
+[                        ]  at PC0x00007fd6bc8f9824 for thread 0x00007fd6d4b38fe0
+[8.617s][info][exceptions] Exception <a 'java/util/MissingResourceException'{0x000000070b42e2a0}: Not found>
+[                        ]  thrown in C1 compiled method <{method} {0x00007fd68d162828} 'getMenuDefault' '(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;' in 'org/geogebra/common/jre/main/LocalizationJre'>
+[                        ]  at PC0x00007fd6bc492bec for thread 0x00007fd6d4b38fe0
+[8.621s][info][exceptions] Exception <a 'java/util/MissingResourceException'{0x000000070b44b3c0}: Not found>
+[                        ]  thrown in C1 compiled method <{method} {0x000000002a24c6c0} 'getObject' '(Ljava/lang/String;)Ljava/lang/Object;' in 'java/util/ResourceBundle'>
+[                        ]  at PC0x00007fd6bc8f9824 for thread 0x00007fd6d4b38fe0
+[8.621s][info][exceptions] Exception <a 'java/util/MissingResourceException'{0x000000070b44b3c0}: Not found>
+[                        ]  thrown in C1 compiled method <{method} {0x00007fd68d162828} 'getMenuDefault' '(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;' in 'org/geogebra/common/jre/main/LocalizationJre'>
+[                        ]  at PC0x00007fd6bc492bec for thread 0x00007fd6d4b38fe0
+[8.638s][info][exceptions] Exception <a 'com/jogamp/opengl/GLException'{0x000000070b4b7e48}: Java2D OpenGL pipeline not active>
+[                        ]  thrown in C1 compiled method <{method} {0x00007fd68e6d5cb0} 'isJava2DQueueFlusherThread' '()Z' in 'jogamp/nativewindow/jawt/JAWTUtil'>
+[                        ]  at PC0x00007fd6bcce0d74 for thread 0x00007fd6d4b38fe0
+[8.638s][info][exceptions] Exception <a 'java/lang/reflect/InvocationTargetException'{0x000000070b4b83d0}>
+[                        ]  thrown in C1 compiled method <{method} {0x00007fd68e6d5cb0} 'isJava2DQueueFlusherThread' '()Z' in 'jogamp/nativewindow/jawt/JAWTUtil'>
+[                        ]  at PC0x00007fd6bcce1c3c for thread 0x00007fd6d4b38fe0
+[8.640s][info][exceptions] Exception <a 'com/jogamp/opengl/GLException'{0x000000070b4b9390}: Java2D OpenGL pipeline not active>
+[                        ]  thrown in C1 compiled method <{method} {0x00007fd68e6d5cb0} 'isJava2DQueueFlusherThread' '()Z' in 'jogamp/nativewindow/jawt/JAWTUtil'>
+[                        ]  at PC0x00007fd6bcce0d74 for thread 0x00007fd6d4b38fe0
+[8.640s][info][exceptions] Exception <a 'java/lang/reflect/InvocationTargetException'{0x000000070b4b9918}>
+[                        ]  thrown in C1 compiled method <{method} {0x00007fd68e6d5cb0} 'isJava2DQueueFlusherThread' '()Z' in 'jogamp/nativewindow/jawt/JAWTUtil'>
+[                        ]  at PC0x00007fd6bcce1c3c for thread 0x00007fd6d4b38fe0
+[8.642s][info][exceptions] Exception <a 'com/jogamp/opengl/GLException'{0x000000070b4d0660}: Java2D OpenGL pipeline not active>
+[                        ]  thrown in C1 compiled method <{method} {0x00007fd68e6d5cb0} 'isJava2DQueueFlusherThread' '()Z' in 'jogamp/nativewindow/jawt/JAWTUtil'>
+[                        ]  at PC0x00007fd6bcce0d74 for thread 0x00007fd6d4b38fe0
+[8.642s][info][exceptions] Exception <a 'java/lang/reflect/InvocationTargetException'{0x000000070b4d0be8}>
+[                        ]  thrown in C1 compiled method <{method} {0x00007fd68e6d5cb0} 'isJava2DQueueFlusherThread' '()Z' in 'jogamp/nativewindow/jawt/JAWTUtil'>
+[                        ]  at PC0x00007fd6bcce1c3c for thread 0x00007fd6d4b38fe0
+[8.644s][info][exceptions] Exception <a 'com/jogamp/opengl/GLException'{0x000000070b4d1ba8}: Java2D OpenGL pipeline not active>
+[                        ]  thrown in C1 compiled method <{method} {0x00007fd68e6d5cb0} 'isJava2DQueueFlusherThread' '()Z' in 'jogamp/nativewindow/jawt/JAWTUtil'>
+[                        ]  at PC0x00007fd6bcce0d74 for thread 0x00007fd6d4b38fe0
+[8.644s][info][exceptions] Exception <a 'java/lang/reflect/InvocationTargetException'{0x000000070b4d2130}>
+[                        ]  thrown in C1 compiled method <{method} {0x00007fd68e6d5cb0} 'isJava2DQueueFlusherThread' '()Z' in 'jogamp/nativewindow/jawt/JAWTUtil'>
+[                        ]  at PC0x00007fd6bcce1c3c for thread 0x00007fd6d4b38fe0
+[8.656s][info][exceptions] Exception <a 'com/jogamp/opengl/GLException'{0x000000070b4d9ae8}: Java2D OpenGL pipeline not active>
+[                        ]  thrown in C1 compiled method <{method} {0x00007fd68e6d5cb0} 'isJava2DQueueFlusherThread' '()Z' in 'jogamp/nativewindow/jawt/JAWTUtil'>
+[                        ]  at PC0x00007fd6bcce0d74 for thread 0x00007fd6d4b38fe0
+[8.656s][info][exceptions] Exception <a 'java/lang/reflect/InvocationTargetException'{0x000000070b4da070}>
+[                        ]  thrown in C1 compiled method <{method} {0x00007fd68e6d5cb0} 'isJava2DQueueFlusherThread' '()Z' in 'jogamp/nativewindow/jawt/JAWTUtil'>
+[                        ]  at PC0x00007fd6bcce1c3c for thread 0x00007fd6d4b38fe0
+[8.658s][info][exceptions] Exception <a 'com/jogamp/opengl/GLException'{0x000000070b4db030}: Java2D OpenGL pipeline not active>
+[                        ]  thrown in C1 compiled method <{method} {0x00007fd68e6d5cb0} 'isJava2DQueueFlusherThread' '()Z' in 'jogamp/nativewindow/jawt/JAWTUtil'>
+[                        ]  at PC0x00007fd6bcce0d74 for thread 0x00007fd6d4b38fe0
+[8.658s][info][exceptions] Exception <a 'java/lang/reflect/InvocationTargetException'{0x000000070b4db5b8}>
