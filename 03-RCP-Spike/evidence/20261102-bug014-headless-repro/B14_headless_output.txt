@@ -1,0 +1,12 @@
+A=(1,2) -> 1
+  ggbApi.evalCommand=true
+f(x)=x^2 -> 1
+  ggbApi.evalCommand=true
+f2(x)=x^2-2x -> 1
+  ggbApi.evalCommand=true
+m={{1,2},{3,4}} -> 1
+  ggbApi.evalCommand=true
+O=(0,0) -> 1
+  ggbApi.evalCommand=true
+c=Circle(O,1) -> 1
+  ggbApi.evalCommand=true

@@ -23,12 +23,14 @@ elseif ((Get-Command Test-Json).Parameters.ContainsKey('SchemaFile')) {
 }
 
 $directives = @(
-    "CMD`tO = (0, 0)"
-    "CMD`tc = Circle(O, 1)"
-    "CMD`tP = Point(c)"
-    "CMD`tSetColor(c, 0, 0, 255)"
-    "VAL`tx(P)"
-    "CAS`tSimplify(cos(x)^2 + sin(x)^2)"
+    # GROK_V1 S3: ScenarioScript reads "<OP>`t<id>`t<arg>"; the id column was missing, so evalCommand('') ran (false) -
+    # that was misread as BUG-014. The id is the command text so the $scn lookups below stay unchanged.
+    "CMD`tO = (0, 0)`tO = (0, 0)"
+    "CMD`tc = Circle(O, 1)`tc = Circle(O, 1)"
+    "CMD`tP = Point(c)`tP = Point(c)"
+    "CMD`tSetColor(c, 0, 0, 255)`tSetColor(c, 0, 0, 255)"
+    "VAL`tx(P)`tx(P)"
+    "CAS`tSimplify(cos(x)^2 + sin(x)^2)`tSimplify(cos(x)^2 + sin(x)^2)"
 ) -join "`n"
 
 $result = Invoke-ProductScenario 'D-11-course-tree' $directives -Env @{

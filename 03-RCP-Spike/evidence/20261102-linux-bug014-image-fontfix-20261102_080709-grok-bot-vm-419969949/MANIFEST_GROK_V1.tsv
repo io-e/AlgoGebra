@@ -1,0 +1,17 @@
+# GROK_V1 evidence MANIFEST - immutable
+# run: 20261102_080709-grok-bot-vm-419969949 commit=39ee335 date=2026-11-02T08:07:40.8448723+01:00 os=Unix 6.12.94.0 pwsh=7.6.9
+# totals: 58 pass, 0 fail, 1 skip, 0 bail; gate=MET
+# columns: path<TAB>bytes<TAB>sha256
+D-11-course-tree.directives.tsv	222	b1a529a64208ce846c89ce53ad4117af26995f529225255566345af050cd65ae
+D-11-course-tree.log	4853	d0f84afd65028766601e79afeb82bd115822d4df69f2a9db5d4c8ac8e6e4f460
+D-11-course-tree.log.err	0	e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+Run_All_20261102_080709_GROK_V1.csv	282	404a78c821e5f40e58d83daf8cfcf5c243a2c21be2904fbeefb71dc25ad14533
+S_D-11_CourseTree_GROK_V1.log	1199	c22be1b96c1c70d2d42a18334f8ea3fa472f8258c2a46c58316710acfbf20872
+S_D-11_GROK_V1.csv	985	e3de8115b1a2bf8a745d3a40cedfa656695e50ffef461fae08c72f3dd04afe0d
+S_P-02_CoreFeatures_GROK_V1.log	4706	58e9fff207e1aae2f8d74d5e80905658424b9f42ac5327dd049441f730db7bd9
+S_P-02_GROK_V1.csv	6003	8517129cfa3f6f5b38f6faeb5fb320ed54aa13d4ff2cd1dbfe6abb0290732806
+S_P-02_product.directives.tsv	1354	cf3583247d47782b5abb0e48eeb9ddf12c6e45aa45db3fb6acbb0ce303cd37ea
+S_P-02_product.log	6704	1c5251c73c6e988d9d643d9f203cc7976abcd7e05a527aa85932c5b64d595ed0
+S_P-02_product.log.err	0	e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+S_P-02.baseline.directives.tsv	1354	cf3583247d47782b5abb0e48eeb9ddf12c6e45aa45db3fb6acbb0ce303cd37ea
+S_P-02.baseline.log	2350	e45b6b950d3ae84be370c14e0c188968e8b99e0a11a438ad1929c3c2e5d758d4
