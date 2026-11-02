@@ -1,0 +1,18 @@
+\title{Line through two points}
+\language{en}
+\author{Grok Bot fixture}
+\precision{1000}
+\integer{a=random(2..5)}
+\integer{b=random(-3..3)}
+\real{s=\a*2+\b}
+\statement{Compute \(2a+b) for a=\a and b=\b.
+\draw{200,200}{
+xrange=-5,5
+yrange=-5,5
+segment 0,-5,0,5,red
+segment -5,0,5,0,red
+point \a,\b,blue
+}
+Answer: \embed{reply1}}
+\hint{Multiply first.}
+\answer{Value of 2a+b}{\s}{type=numeric}
