@@ -40,15 +40,18 @@
     // G-06 fix: point html5codebase at the local WAR tree only (no CDN host)
     var parameters = {
       'appName': 'classic',
+      'id': 'ggbApplet',
+      'appletOnLoad': function () { ggbOnInit('ggbApplet'); },
       'width': 900,
       'height': 600,
       'showToolBar': true,
       'showAlgebraInput': true,
       'showMenuBar': true,
-      'html5codebase': 'GeoGebra/HTML5/5.0/web3d/'
+      'html5codebase': 'GeoGebra/web3d/'
     };
 
     var applet = new GGBApplet(parameters, '5.0', 'applet1');
+    applet.setHTML5Codebase('GeoGebra/web3d/');
 
     // Called by GeoGebra once the applet is ready
     function ggbOnInit() {
