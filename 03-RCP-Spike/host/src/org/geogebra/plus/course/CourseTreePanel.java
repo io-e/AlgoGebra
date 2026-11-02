@@ -11,11 +11,13 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.Tree;
 import org.eclipse.swt.widgets.TreeItem;
 import org.geogebra.common.main.App;
 import org.geogebra.common.plugin.GgbAPI;
+import org.geogebra.plus.course.CourseAction.Directive;
 import org.geogebra.plus.course.CourseNode.Kind;
 
 /** Native SWT course tree shown only when a course file is selected. */
@@ -123,8 +125,29 @@ public final class CourseTreePanel extends Composite {
         if (step == null) {
             return;
         }
+        if (!confirmUnscannedTrustedFiles(step)) {
+            status.setText("Cancelled before opening the explicitly trusted .ggb file.");
+            return;
+        }
         setBusy(true);
         executor.runAsync(step, (success, message) -> finish(success, message));
+    }
+
+    private boolean confirmUnscannedTrustedFiles(CourseNode step) {
+        List<CourseAction> trustedOpens = step.actions().stream()
+                .filter(action -> action.directive() == Directive.OPEN && action.trustedGgb())
+                .toList();
+        if (trustedOpens.isEmpty()) {
+            return true;
+        }
+        String names = trustedOpens.stream().map(CourseAction::value).reduce((left, right) -> left + "\n" + right)
+                .orElse("(file name unavailable)");
+        MessageBox warning = new MessageBox(getShell(), SWT.ICON_WARNING | SWT.OK | SWT.CANCEL);
+        warning.setText("Trusted GeoGebra files are not scanned");
+        warning.setMessage("This course explicitly trusts the following .ggb file(s), but this build has no script "
+                + "scanner. Embedded JavaScript or object scripts may execute when a file opens. Continue only if "
+                + "you trust the course author and files:\n\n" + names);
+        return warning.open() == SWT.OK;
     }
 
     private void checkSelected() {
