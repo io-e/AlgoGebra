@@ -74,10 +74,12 @@ merged_2026-11-02:  # owner merge train (issue #17 Q6 order + Codex #18 after #3
   - {pr: 13, merge: 91b937ddc475c18c9649b1a2a3a98a4fbe246836, tests: "W-09 Playwright firefox 10/10"}
   - {pr: 14, merge: 78f8b90093f9651d1f1a3f01f6ee6d504a985c4f, tests: "D-11 5/3/0 (known BUG-014 + CAS empty, image-pr11 predates #18)"}
   - {pr: 16, merge: 29356c8c8887421b1294418e433eae29f870d743, tests: "19 15/0/1; 16/0/0 with 300-file corpus"}
-  - {pr: 15, merge: "this PR", tests: "yaml parses"}
+  - {pr: 15, merge: e2cfff3c8f40c009d6d72df340fef85e2a35b2f8, tests: "yaml parses"}
+  - {pr: 19, merge: 4cb48d3975ae088d899da5d1ec6e6f9e009c8793, tests: "final-tip Debian: suites 267/17/61, scenarios 165/17/42, S_W-09 15/0/4 after test fix, suite 16 real validator 134/2/1, Codex Java 27/0"}
 closed_2026-11-02:
   - {pr: 4, reason: "Superseded by #9 (1b7a8d0 + Q1 69); owner Q6"}
   - {pr: 6, reason: "Superseded by #15; owner Q6"}
+status_and_next_sprint: 02-Cdc/Status_And_Next_Sprint_GROK_V1.md
 open_items_2026-11-02:
   - "Codex: BUG-014 (evalCommand false in D-11 RCP), CAS empty in D-11, WP9-04 .ggb scanner, attended SWT UI (trusted-OPEN dialog not visually tested)"
   - "Owner/Codex: keep or drop the >=800-iteration near-limit warning (T-45/T-51 expect ACCEPT)"
