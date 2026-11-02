@@ -40,7 +40,7 @@ The launcher is a **convenience gate, not the security boundary**. Java `Directi
 | 64 | usage: missing value, repeated flag, URL |
 | 65 | not `.json` or > 1 MB |
 | 66 | missing / unreadable / not a regular file |
-| 4 | no usable JDK (BUG-017 discovery, PR #4 contract; was 69 in the first draft) |
+| 69 | no usable JDK (EX_UNAVAILABLE; BUG-017 discovery). Same as `launch.ps1`. **DECIDED** by owner Q1, https://github.com/io-e/AlgoGebra/issues/17#issuecomment-6569788303 (was 4 in PR #4 / adbfcff) |
 | 3 | no RCP image (PR #4) |
 | 77 | outside `GGBPLUS_COURSE_ROOT` |
 Proposal to Codex: X-T5 uses the same numbers so suite 18 cases are cross-platform.
@@ -72,7 +72,7 @@ Order: parse args → validate course → discover JDK → build ARGS → exec. 
 | LC-14 | `GGBPLUS_COURSE` only; then flag + env | env honored; flag wins |
 | LC-15 | `--headless -Course x` and `-Course x --headless` | both parsed |
 | LC-16 | filename with `$(touch /tmp/pwn)` / `;` | literal, nothing executed |
-| LC-17 | no JDK + bad course | course error (65/66) wins; no JDK alone → 4 |
+| LC-17 | no JDK + bad course | course error (65/66) wins; no JDK alone → 69 (LC-17b, both platforms) |
 | LC-18 | Xvfb real launch, trig course (needs X-T4 image) | log shows CourseTreePanel, 3 panes |
 | LC-19 | Xvfb, corpus T-27 symlink escape | launcher accepts, Java rejects OPEN (layering proof) |
 
