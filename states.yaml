@@ -82,7 +82,7 @@ closed_2026-11-02:
 status_and_next_sprint: 02-Cdc/Status_And_Next_Sprint_GROK_V1.md
 open_items_2026-11-02:
   - "Codex: BUG-014 (evalCommand false in D-11 RCP), CAS empty in D-11, WP9-04 .ggb scanner, attended SWT UI (trusted-OPEN dialog not visually tested)"
-  - "Owner/Codex: keep or drop the >=800-iteration near-limit warning (T-45/T-51 expect ACCEPT)"
+  - "Codex (issue #21, Q3b DECIDED): remove the >=800-iteration near-limit warning (T-45/T-51 expect ACCEPT)"
   - "Claude (Q5): spec SPEC-GAP-1 <ggbscript>, SPEC-GAP-3 realpath/symlink, spec §5 Sequence 1000/10000"
   - "Rebuild Linux image from merged tip (image-pr11 predates #18) and rerun D-11/LC-18/19"
   - "Windows: unified suite 18 run by owner from a clean worktree (Q8)"
@@ -330,6 +330,7 @@ owner_decisions_2026-11-02:
   Q6_REVIEW-ORDER: {status: DECIDED, decision: "review order #9 -> #3 -> #7 -> #5 -> #8 -> #10 -> #12 -> #13 -> #14 -> #16 -> #15; close #4 after #9 merges, close #6 after #15; not a merge authorization"}
   Q7_W09-CLAUDE-FILES: {status: DECIDED, decision: "accept #13 host-page/test-spec changes in principle; review limited to project-owned host/test files; no upstream common changes", grok_action: none}
   Q8_WINDOWS-SUITE18: {status: DECIDED, decision: "do not pull into the dirty checkout; run from a clean isolated worktree at the updated head, preserving uncommitted changes; Grok may provide Windows evidence instead of Codex"}
+  Q3b_NEAR-LIMIT-WARNING: {status: DECIDED, by: owner, date: 2026-11-02, decision: "drop the >=800-iteration near-limit ACCEPT_WITH_WARNING; Sequence <=1000 / directive <=10000 = ACCEPT, no warning; reject only above limits; ACCEPT_WITH_WARNING kept for other Q4 reasons", issue: "https://github.com/io-e/AlgoGebra/issues/21", owner_lane: Codex, acceptance: "suite 16 real validator 136/0/1 + Codex Java green"}
   SPEC-GAP-2: {status: "CLOSED by Q3 (spec text: Claude, Q5)"}
 results_tracking:
   decision: "2026-10-29 user: stop tracking mutable 03-RCP-Spike/tests/results/ (git rm --cached, .gitignore, README kept); Run_All writes results/<runid>/ and -ExportEvidence <name> copies a reviewed run to 03-RCP-Spike/evidence/<date>-<os>-<name>-<runid>/ with MANIFEST_GROK_V1.tsv (sha256); routine full logs = CI artifacts or local by run id"
