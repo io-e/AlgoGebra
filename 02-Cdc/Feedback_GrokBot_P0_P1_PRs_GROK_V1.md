@@ -41,7 +41,7 @@ Evidence folder (PR #9): `03-RCP-Spike/evidence/20261101-133332-p0-launch-course
 
 ### PR #8
 
-- Extra commit aligning exit codes with #4/#9: `adbfcff` (“no JDK = 4, no image = 3”).
+- Extra commit aligning exit codes with #4/#9: `adbfcff` (“no JDK = 4, no image = 3”). **Superseded 2026-11-02 (owner Q1, issue #17): no JDK = 69 on both launchers.**
 - Draft acknowledgement ready (owner gate before post):
 
 > Ack dispatch 6557930365 — P0 done in #9 (launch.sh -Course + suite 18: 17/0/2, LC-18/19 SKIP until X-T4; depends on #4), P1 in #10 (Firefox 157 headless smoke PASS, mise→Java M-01..05 PASS), P2 review drafts ready for owner approval; G-T2..G-T4 idle; no merge.

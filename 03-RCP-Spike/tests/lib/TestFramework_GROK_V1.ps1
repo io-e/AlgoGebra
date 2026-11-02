@@ -12,6 +12,8 @@ New-Item -ItemType Directory -Force $script:Res | Out-Null
 $script:Sep = [IO.Path]::PathSeparator; $script:Exe = if ($IsWindows) { '.exe' } else { '' }
 $script:Tmp = [IO.Path]::GetTempPath()
 if (-not $env:JAVA_HOME) { $env:JAVA_HOME = if ($IsWindows) { 'C:\Program Files\Eclipse Adoptium\jdk-21.0.12.101-hotspot' } else { (Get-ChildItem '/workspace/AlgoGebra/jdk' -Directory -Filter 'jdk-21*' -ErrorAction SilentlyContinue | Select-Object -First 1).FullName } }
+# BUG-017: launch.sh no longer falls back to a hard-coded JDK; on the Debian test box point it at the Java 25 runtime explicitly.
+if (-not $IsWindows -and -not $env:GGB_JAVA) { $j25 = Get-ChildItem '/workspace/AlgoGebra/jdk' -Directory -Filter 'jdk-25*' -ErrorAction SilentlyContinue | Select-Object -First 1; if ($j25) { $env:GGB_JAVA = Join-Path $j25.FullName 'bin/java' } }
 function Get-JavaTool([string]$Name) { Join-Path (Join-Path $env:JAVA_HOME 'bin') ($Name + $script:Exe) }
 $script:Image = if ($env:IMAGE) { $env:IMAGE } elseif ($IsWindows) { 'D:\ALF_ZGit\G1_Geogebra_Migration\bin\GeoGebraPlus-RCP-0.1.0-win32-x86_64-r8' } else { '/workspace/AlgoGebra/image/GeoGebraPlus-RCP-0.1.0-linux-gtk-x86_64' }
 $script:ToolsOut = [IO.Path]::Combine($script:SpikeDir, 'host', 'build', 'test-tools-ps1')

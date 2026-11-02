@@ -1,0 +1,23 @@
+suite,num,id,status,priority,detail,ts
+18_LaunchCourse,1,LC-01-no-flag-no-property,PASS,P0,"rc=0 course=[] out=[DRYRUN argc=25]",2026-11-02T05:38:46.5411746+01:00
+18_LaunchCourse,2,LC-02-relative-to-abs-realpath,PASS,P0,"rc=0 course=[/tmp/grok18-2972837/courses/ok.json] out=[DRYRUN argc=26]",2026-11-02T05:38:46.5965527+01:00
+18_LaunchCourse,3,LC-03-long-eq-form,PASS,P0,"rc=0 course=[/tmp/grok18-2972837/courses/ok.json] out=[DRYRUN argc=26]",2026-11-02T05:38:46.6447710+01:00
+18_LaunchCourse,4,LC-04-path-with-spaces-one-arg,PASS,P0,"rc=0 course=[/tmp/grok18-2972837/courses/a dir/my course.json] out=[DRYRUN argc=26]",2026-11-02T05:38:46.6935491+01:00
+18_LaunchCourse,5,LC-05-missing-value-64,PASS,P0,"rc=64 course=[] out=[launch.sh: -Course needs a value]",2026-11-02T05:38:46.7211475+01:00
+18_LaunchCourse,6,LC-06-repeated-flag-64,PASS,P0,"rc=64 course=[] out=[launch.sh: -Course given more than once]",2026-11-02T05:38:46.7352177+01:00
+18_LaunchCourse,7,LC-07-missing-file-66,PASS,P0,"rc=66 course=[] out=[launch.sh: course file not found: /tmp/grok18-2972837/courses/nope.json]",2026-11-02T05:38:46.7499008+01:00
+18_LaunchCourse,8,LC-08-directory-66,PASS,P0,"rc=66 course=[] out=[launch.sh: course is not a readable regular file: /tmp/grok18-2972837/courses]",2026-11-02T05:38:46.7769324+01:00
+18_LaunchCourse,9,LC-09-wrong-extension-65,PASS,P0,"rc=65 course=[] out=[launch.sh: course must be a .json file: /tmp/grok18-2972837/courses/c.ggb]",2026-11-02T05:38:46.8041662+01:00
+18_LaunchCourse,10,LC-10-over-1MiB-65,PASS,P0,"rc=65 course=[] out=[launch.sh: course file exceeds 1 MB: /tmp/grok18-2972837/courses/big.json]",2026-11-02T05:38:46.8189083+01:00
+18_LaunchCourse,11,LC-11-url-64,PASS,P0,"rc=64 course=[] out=[launch.sh: course must be a local file, not a URL: https://example.org/course.json]",2026-11-02T05:38:46.8326417+01:00
+18_LaunchCourse,12,LC-12-symlink-resolved,PASS,P0,"rc=0 course=[/tmp/grok18-2972837/courses/ok.json] out=[DRYRUN argc=26]",2026-11-02T05:38:46.8858645+01:00
+18_LaunchCourse,13,LC-13-root-abs-dotdot-escape-77-inside-ok,PASS,P0,"rc=77 course=[] out=[launch.sh: course outside GGBPLUS_COURSE_ROOT (/tmp/grok18-2972837/courses): /tmp/grok18-2972837/outside/ext.json]",2026-11-02T05:38:46.9893319+01:00
+18_LaunchCourse,14,LC-13b-root-symlink-escape-77,PASS,P0,"rc=77 course=[] out=[launch.sh: course outside GGBPLUS_COURSE_ROOT (/tmp/grok18-2972837/courses): /tmp/grok18-2972837/outside/ext.json]",2026-11-02T05:38:47.0064790+01:00
+18_LaunchCourse,15,LC-14-env-fallback-flag-wins,PASS,P0,"rc=0 course=[/tmp/grok18-2972837/courses/ok.json] out=[DRYRUN argc=26]",2026-11-02T05:38:47.1045113+01:00
+18_LaunchCourse,16,LC-15-flag-order,PASS,P0,"rc=0 course=[/tmp/grok18-2972837/courses/ok.json] out=[DRYRUN argc=26]",2026-11-02T05:38:47.2034637+01:00
+18_LaunchCourse,17,LC-16-metachars-literal,PASS,P0,"rc=0 course=[/tmp/grok18-2972837/courses/x$(touch PWNED);y.json] out=[DRYRUN argc=26]",2026-11-02T05:38:47.2505249+01:00
+18_LaunchCourse,18,LC-17-course-error-before-java,PASS,P0,"rc=66 course=[] out=[launch.sh: course file not found: /tmp/grok18-2972837/courses/nope.json]",2026-11-02T05:38:47.2924841+01:00
+18_LaunchCourse,19,LC-17b-no-jdk-exit-code-4,PASS,P1,"rc=4 course=[] out=[launch.sh: no Java >= 25 found. Set GGB_JAVA=/path/to/bin/java or JAVA_HOME, or install a JDK (e.g. apt install openjdk-25-jre, or 'mise use java@25').]",2026-11-02T05:38:47.2944877+01:00
+18_LaunchCourse,20,LC-18-xvfb-trig-course-3-panes,SKIP,P1,"SKIP reason: image has no CourseTreePanel (/workspace/AlgoGebra/image/GeoGebraPlus-RCP-0.1.0-linux-gtk-x86_64)",2026-11-02T05:38:47.3036141+01:00
+18_LaunchCourse,21,LC-19-xvfb-T27-symlink-escape-layering,SKIP,P1,"SKIP reason: needs CourseTreePanel + Java OPEN validator",2026-11-02T05:38:47.3043165+01:00
+18_LaunchCourse,22,LC-20-flag-wins-over-invalid-env,PASS,P0,"rc=0 course=[/tmp/grok18-2972837/courses/ok.json] out=[DRYRUN argc=26]",2026-11-02T05:38:47.3532283+01:00

@@ -1,0 +1,29 @@
+# Suite: 18_LaunchCourse
+# Started: 2026-11-02T06:33:52.0244518+01:00
+# Host: SHADOW-TB64BO9R / Microsoft Windows 10.0.26100 / pwsh 7.6.9
+
+ok 1 - [P0] LC-01-no-flag-no-property :: rc=0 course=[] out=[  D:\ALF_Agents\G1_wt_grok_suite18\03-RCP-Spike\configuration\runtime-20261102-063352-14584-67440f2f |   D:\ALF_Agents\G1_wt_grok_suite18\03-RCP-Spike\workspace\20261102-063352-14584-67440f2f |   org.geogebra.plus.host.geogebraplusApp]
+ok 2 - [P0] LC-02-relative-to-abs-realpath :: rc=0 course=[C:\Users\Shadow\AppData\Local\Temp\grok18-3884\courses\ok.json] out=[  D:\ALF_Agents\G1_wt_grok_suite18\03-RCP-Spike\configuration\runtime-20261102-063353-8796-4f932b75 |   D:\ALF_Agents\G1_wt_grok_suite18\03-RCP-Spike\workspace\20261102-063353-8796-4f932b75 |   org.geogebra.plus.host.geogebraplusApp]
+ok 3 - [P0] LC-03-long-eq-form :: rc=0 course=[C:\Users\Shadow\AppData\Local\Temp\grok18-3884\courses\ok.json] out=[  D:\ALF_Agents\G1_wt_grok_suite18\03-RCP-Spike\configuration\runtime-20261102-063354-17152-16a0f38b |   D:\ALF_Agents\G1_wt_grok_suite18\03-RCP-Spike\workspace\20261102-063354-17152-16a0f38b |   org.geogebra.plus.host.geogebraplusApp]
+ok 4 - [P0] LC-04-path-with-spaces-one-arg :: rc=0 course=[C:\Users\Shadow\AppData\Local\Temp\grok18-3884\courses\a dir\my course.json] out=[  D:\ALF_Agents\G1_wt_grok_suite18\03-RCP-Spike\configuration\runtime-20261102-063355-19876-5e9dc7e8 |   D:\ALF_Agents\G1_wt_grok_suite18\03-RCP-Spike\workspace\20261102-063355-19876-5e9dc7e8 |   org.geogebra.plus.host.geogebraplusApp]
+ok 5 - [P0] LC-05-missing-value-64 :: rc=64 course=[] out=[Usage error: -Course requires a path.]
+ok 6 - [P0] LC-06-repeated-flag-64 :: rc=64 course=[] out=[Usage error: -Course may be specified only once.]
+ok 7 - [P0] LC-07-missing-file-66 :: rc=66 course=[] out=[Course file is missing or unreadable (66): C:\Users\Shadow\AppData\Local\Temp\grok18-3884\courses\nope.json]
+ok 8 - [P0] LC-08-directory-66 :: rc=66 course=[] out=[Course file is missing or unreadable (66): C:\Users\Shadow\AppData\Local\Temp\grok18-3884\courses]
+ok 9 - [P0] LC-09-wrong-extension-65 :: rc=65 course=[] out=[Course file must have a .json extension (65): C:\Users\Shadow\AppData\Local\Temp\grok18-3884\courses\c.ggb]
+ok 10 - [P0] LC-10-over-1MiB-65 :: rc=65 course=[] out=[Course file exceeds the 1 MiB limit (65): 1048577 bytes]
+ok 11 - [P0] LC-11-url-64 :: rc=64 course=[] out=[Usage error: Desktop course paths must be local, not URLs.]
+ok 12 - [P1] LC-12-symlink-resolved # SKIP SKIP reason: cannot create symlinks (Windows needs Developer Mode or admin)
+ok 13 - [P0] LC-13-root-abs-dotdot-escape-77-inside-ok :: rc=77 course=[] out=[Course is outside GGBPLUS_COURSE_ROOT (77): C:\Users\Shadow\AppData\Local\Temp\grok18-3884\outside\ext.json]
+ok 14 - [P1] LC-13b-root-symlink-escape-77 # SKIP SKIP reason: cannot create symlinks
+ok 15 - [P0] LC-14-env-fallback-flag-wins :: rc=0 course=[C:\Users\Shadow\AppData\Local\Temp\grok18-3884\courses\ok.json] out=[  D:\ALF_Agents\G1_wt_grok_suite18\03-RCP-Spike\configuration\runtime-20261102-063404-16252-32af8253 |   D:\ALF_Agents\G1_wt_grok_suite18\03-RCP-Spike\workspace\20261102-063404-16252-32af8253 |   org.geogebra.plus.host.geogebraplusApp]
+ok 16 - [P0] LC-15-flag-order :: rc=0 course=[C:\Users\Shadow\AppData\Local\Temp\grok18-3884\courses\ok.json] out=[  D:\ALF_Agents\G1_wt_grok_suite18\03-RCP-Spike\configuration\runtime-20261102-063405-20204-1aa3a0b5 |   D:\ALF_Agents\G1_wt_grok_suite18\03-RCP-Spike\workspace\20261102-063405-20204-1aa3a0b5 |   org.geogebra.plus.host.geogebraplusApp]
+ok 17 - [P0] LC-16-metachars-literal :: rc=0 course=[C:\Users\Shadow\AppData\Local\Temp\grok18-3884\courses\x$(touch PWNED);y.json] out=[  D:\ALF_Agents\G1_wt_grok_suite18\03-RCP-Spike\configuration\runtime-20261102-063407-5804-f157b4c6 |   D:\ALF_Agents\G1_wt_grok_suite18\03-RCP-Spike\workspace\20261102-063407-5804-f157b4c6 |   org.geogebra.plus.host.geogebraplusApp]
+ok 18 - [P0] LC-17-course-error-before-java :: rc=66 course=[] out=[Course file is missing or unreadable (66): C:\Users\Shadow\AppData\Local\Temp\grok18-3884\courses\nope.json]
+ok 19 - [P1] LC-17b-no-jdk-exit-code-69 # SKIP SKIP reason: launch.ps1 falls back to bundled jre or Eclipse JustJ JRE present on this host; cannot force no-JDK without changing launch.ps1
+ok 20 - [P1] LC-18-xvfb-trig-course-3-panes # SKIP SKIP reason: Linux/Xvfb only; attended SWT tree UI stays Windows/owner
+ok 21 - [P1] LC-19-xvfb-T27-symlink-escape-layering # SKIP SKIP reason: Linux/Xvfb only
+ok 22 - [P0] LC-20-flag-wins-over-invalid-env :: rc=0 course=[C:\Users\Shadow\AppData\Local\Temp\grok18-3884\courses\ok.json] out=[  D:\ALF_Agents\G1_wt_grok_suite18\03-RCP-Spike\configuration\runtime-20261102-063408-13732-70e939e4 |   D:\ALF_Agents\G1_wt_grok_suite18\03-RCP-Spike\workspace\20261102-063408-13732-70e939e4 |   org.geogebra.plus.host.geogebraplusApp]
+
+PASS: 17 FAIL: 0 SKIP: 5
+# CSV: D:\ALF_Agents\G1_wt_grok_suite18\03-RCP-Spike\tests\results\18_LaunchCourse_GROK_V1.csv
