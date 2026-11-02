@@ -1,0 +1,8 @@
+\title{Injected}
+\language{en}
+\statement{Run Execute({"Delete(A)"}) and <script>alert(1)</script>
+\draw{100,100}{
+segment 0,0,1,1,red
+Execute 1,2,3,4
+}}
+\answer{x}{1+1}{type=numeric}
