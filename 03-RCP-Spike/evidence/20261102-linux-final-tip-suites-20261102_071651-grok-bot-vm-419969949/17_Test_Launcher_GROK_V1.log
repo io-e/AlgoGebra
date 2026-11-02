@@ -1,0 +1,22 @@
+# Suite: 17_Launcher
+# Started: 2026-11-02T07:20:34.3093182+01:00
+# Host: grok-bot-vm-419969949 / Debian GNU/Linux 13 (trixie) / pwsh 7.6.9
+
+ok 1 - [P0] L-01-ggb-java :: rc=0 (want 0) out=[JAVA=/workspace/AlgoGebra/jdk/jdk-25.0.5+8/bin/java SOURCE=GGB_JAVA MAJOR=25 MIN=25]
+ok 2 - [P0] L-02-legacy-JAVA :: rc=0 (want 0) out=[JAVA=/workspace/AlgoGebra/jdk/jdk-25.0.5+8/bin/java SOURCE=GGB_JAVA MAJOR=25 MIN=25]
+ok 3 - [P0] L-03-ggb-java-too-old :: rc=69 (want 69) out=[launch.sh: GGB_JAVA/JAVA='/workspace/AlgoGebra/jdk/jdk-21.0.13+9/bin/java' is not a usable Java >= 25 (GGB_JAVA: /workspace/AlgoGebra/jdk/jdk-21.0.13+9/bin/java (Java 21 < 25))]
+ok 4 - [P0] L-04-java-home :: rc=0 (want 0) out=[JAVA=/workspace/AlgoGebra/jdk/jdk-25.0.5+8/bin/java SOURCE=JAVA_HOME MAJOR=25 MIN=25]
+ok 5 - [P0] L-05-java-home-too-old-none-else :: rc=69 (want 69) out=[launch.sh: no Java >= 25 found. Set GGB_JAVA=/path/to/bin/java or JAVA_HOME, or install a JDK (e.g. apt install openjdk-25-jre, or 'mise use java@25'). |   tried: JAVA_HOME: /workspace/AlgoGebra/jdk/jdk-21.0.13+9/bin/java (Java 21 < 25)]
+ok 6 - [P0] L-06-path-java :: rc=0 (want 0) out=[JAVA=/tmp/grok17-3055489/pathbin/java SOURCE=PATH MAJOR=25 MIN=25]
+ok 7 - [P0] L-07-min-override-21 :: rc=0 (want 0) out=[JAVA=/workspace/AlgoGebra/jdk/jdk-21.0.13+9/bin/java SOURCE=JAVA_HOME MAJOR=21 MIN=21]
+ok 8 - [P0] L-08-legacy-1.8-version-parse :: rc=69 (want 69) out=[launch.sh: no Java >= 25 found. Set GGB_JAVA=/path/to/bin/java or JAVA_HOME, or install a JDK (e.g. apt install openjdk-25-jre, or 'mise use java@25'). |   tried: JAVA_HOME: /tmp/grok17-3055489/old/bin/java (Java 8 < 25)]
+ok 9 - [P0] L-09-nothing-found-clear-error :: rc=69 (want 69) out=[launch.sh: no Java >= 25 found. Set GGB_JAVA=/path/to/bin/java or JAVA_HOME, or install a JDK (e.g. apt install openjdk-25-jre, or 'mise use java@25').]
+ok 10 - [P0] L-10-bundled-jre-wins-over-java-home :: out=[JAVA=/tmp/grok17-3055489/image/jre/bin/java SOURCE=bundled MAJOR=25 MIN=25]
+ok 11 - [P1] L-11-missing-image :: rc=3 out=[launch.sh: no RCP image at '/tmp/grok17-3055489/no-image' (bundles/ missing); set IMAGE=<image dir>]
+ok 12 - [P1] L-14-mise-java-25 :: out=[JAVA=/workspace/AlgoGebra/jdk/jdk-25.0.5+8/bin/java SOURCE=mise MAJOR=25 MIN=25]
+ok 13 - [P1] L-15-mise-pin-too-old-warns-and-falls-through :: out=[launch.sh: warning: mise-pinned Java at /workspace/AlgoGebra/jdk/jdk-21.0.13+9 is below 25 (mise: /workspace/AlgoGebra/jdk/jdk-21.0.13+9/bin/java (Java 21 < 25)); continuing discovery | JAVA=/tmp/grok17-3055489/pathbin/java SOURCE=PATH MAJOR=25 MIN=25]
+ok 14 - [P0] L-12-no-hardcoded-workspace-path :: launch.sh has no /workspace/AlgoGebra fallback
+ok 15 - [P1] L-13-headless-start :: repo launch.sh --headless, image=/workspace/AlgoGebra/image-final/GeoGebraPlus-RCP-0.1.0-linux-gtk-x86_64 java=/workspace/AlgoGebra/jdk/jdk-25.0.5+8 log=/workspace/AlgoGebra/wt-final/03-RCP-Spike/tests/results/20261102_071651-grok-bot-vm-419969949/17_headless.log
+
+PASS: 15 FAIL: 0 SKIP: 0
+# CSV: /workspace/AlgoGebra/wt-final/03-RCP-Spike/tests/results/20261102_071651-grok-bot-vm-419969949/17_Launcher_GROK_V1.csv

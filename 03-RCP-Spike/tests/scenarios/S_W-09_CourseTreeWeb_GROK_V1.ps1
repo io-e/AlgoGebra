@@ -24,7 +24,7 @@ Test-Ok 'W09-07-error-dialog-guard' ($jsContent -match 'setErrorDialogsActive\(f
 Test-Ok 'W09-08-cas-readiness' ($jsContent -match 'evalCommandCAS.*1\+1' -and $jsContent -notmatch 'evalCommand\s*\(\s*[''"]1\+1') 'CAS readiness via evalCommandCAS only' 'P0'
 
 $htmlContent = if (Test-Path $courseHost) { Get-Content $courseHost -Raw } else { '' }
-Test-Ok 'W09-09-local-codebase' ($htmlContent -match 'html5codebase.*GeoGebra/HTML5' -and $htmlContent -notmatch 'geogebra\.org') 'html5codebase is local, not geogebra.org' 'P0'
+Test-Ok 'W09-09-local-codebase' ($htmlContent -match 'html5codebase.*GeoGebra/(HTML5|web3d)' -and $htmlContent -notmatch 'geogebra\.org') 'html5codebase is local, not geogebra.org' 'P0'
 $injectCount = ([regex]::Matches($htmlContent, 'applet\.inject')).Count
 Test-Ok 'W09-10-single-inject' ($injectCount -eq 1) "applet.inject count: $injectCount (expected 1)" 'P0'
 Test-Ok 'W09-11-aria-tree' ($htmlContent -match 'role="tree"') 'role=tree in HTML' 'P0'

@@ -1,0 +1,7 @@
+# GROK_V1 evidence MANIFEST - immutable
+# run: 20261102_072737-grok-bot-vm-419969949 commit=e2cfff3 date=2026-11-02T07:27:38.0120070+01:00 os=Unix 6.12.94.0 pwsh=7.6.9
+# totals: 15 pass, 0 fail, 4 skip, 0 bail; gate=MET
+# columns: path<TAB>bytes<TAB>sha256
+Run_All_20261102_072737_GROK_V1.csv	194	4c1b324be6fafdf6c34e56dcc29ed83fe8dc36086690bc1c72bfb48d5a95b4ef
+S_W-09_CourseTreeWeb_GROK_V1.log	1947	693f940df94103a514ba6f0a263ab04f81b4fd13003db7d371aa072e12396d63
+S_W-09_GROK_V1.csv	2137	7bc08ce11c74642aa23cec1eeaf58fb55c3ee79599d91c392e36836ad1731a94

@@ -1,0 +1,7 @@
+suite,num,id,status,priority,detail,ts
+S_O-04,1,O04-01-missing-bundle-reported,PASS,P0,"message: D-02 D-03-set check: expected=50, found=50, ACTIVE=0, RESOLVED=50, unresolved/other=0, resolveBundles=true log=/workspace/AlgoGebra/wt-final/03-RCP-Spike/tests/results/20261102_072051-grok-bot-vm-419969949/S_O-04_missing_bundle.log",2026-11-02T07:21:46.6439824+01:00
+S_O-04,2,O04-02-missing-bundle-no-hang,PASS,P1,"run time 7 s",2026-11-02T07:21:46.6469368+01:00
+S_O-04,3,O04-03-bad-ggb-app-survives,PASS,P0,"garbage open: OK 'objects=1'; bad xml: OK 'objects=0'; names after=[]",2026-11-02T07:21:59.7961775+01:00
+S_O-04,4,O04-04-log-redacted,PASS,P1,"secret-like values in logs: 0",2026-11-02T07:21:59.8079967+01:00
+S_O-04,5,O04-05-wims-down,SKIP,P0,"NOT RUN - blocked by: no Wims client yet (S-xx contracts); cannot simulate Wims down",2026-11-02T07:21:59.8460974+01:00
+S_O-04,6,O04-06-user-facing-safe-message,SKIP,P1,"NOT RUN - blocked by: missing-bundle message is only in the console log; no user dialog/report designed yet",2026-11-02T07:21:59.8466280+01:00

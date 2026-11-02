@@ -1,0 +1,28 @@
+# Suite: S_W-09
+# Started: 2026-11-02T07:27:37.8997834+01:00
+# Host: grok-bot-vm-419969949 / Debian GNU/Linux 13 (trixie) / pwsh 7.6.9
+
+# Scenario: W-09 - Course tree renders in HTML tree | gate - | client web
+# Evidence: commit=e2cfff3 image=/workspace/AlgoGebra/image-final/GeoGebraPlus-RCP-0.1.0-linux-gtk-x86_64 pin=375db7faf5407390bb322165f2414415da8faeda version=5.4.934.0 os=Unix 6.12.94.0 pwsh=7.6.9
+ok 1 - [P0] W09-01-host-html :: course-host.html exists: True
+ok 2 - [P0] W09-02-course-js :: course-tree.js exists: True
+ok 3 - [P0] W09-03-course-css :: course-tree.css exists: True
+ok 4 - [P0] W09-04-course-json :: trigonometry_intro.json exists: True
+ok 5 - [P0] W09-05-blocklist-present :: BLOCKED_COMMANDS array found in JS
+ok 6 - [P0] W09-06-execute-blocked :: Execute in BLOCKED_COMMANDS
+ok 7 - [P0] W09-07-error-dialog-guard :: setErrorDialogsActive(false/true) present
+ok 8 - [P0] W09-08-cas-readiness :: CAS readiness via evalCommandCAS only
+ok 9 - [P0] W09-09-local-codebase :: html5codebase is local, not geogebra.org
+ok 10 - [P0] W09-10-single-inject :: applet.inject count: 1 (expected 1)
+ok 11 - [P0] W09-11-aria-tree :: role=tree in HTML
+ok 12 - [P0] W09-11-aria-label :: aria-label present
+ok 13 - [P0] W09-12-mobile-toggle :: mobile toggle button in HTML
+ok 14 - [P0] W09-13-sequence-limit :: Sequence iteration limit enforced
+ok 15 - [P0] W09-14-open-path-check :: OPEN path validation present
+ok 16 - [P1] W09-20-browser-load # SKIP NOT RUN - blocked by: Requires self-hosted WAR + HTTP server; run manually or with Grok suite 15
+ok 17 - [P1] W09-21-browser-tree # SKIP NOT RUN - blocked by: depends on W09-20
+ok 18 - [P1] W09-22-browser-step # SKIP NOT RUN - blocked by: depends on W09-20
+ok 19 - [P1] W09-23-browser-check # SKIP NOT RUN - blocked by: depends on W09-20
+
+PASS: 15 FAIL: 0 SKIP: 4
+# CSV: /workspace/AlgoGebra/wt-final/03-RCP-Spike/tests/results/20261102_072737-grok-bot-vm-419969949/S_W-09_GROK_V1.csv

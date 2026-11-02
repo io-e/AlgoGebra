@@ -1,0 +1,20 @@
+suite,num,id,status,priority,detail,ts
+S_W-09,1,W09-01-host-html,PASS,P0,"course-host.html exists: True",2026-11-02T07:25:52.5667303+01:00
+S_W-09,2,W09-02-course-js,PASS,P0,"course-tree.js exists: True",2026-11-02T07:25:52.5692844+01:00
+S_W-09,3,W09-03-course-css,PASS,P0,"course-tree.css exists: True",2026-11-02T07:25:52.5700800+01:00
+S_W-09,4,W09-04-course-json,PASS,P0,"trigonometry_intro.json exists: True",2026-11-02T07:25:52.5707100+01:00
+S_W-09,5,W09-05-blocklist-present,PASS,P0,"BLOCKED_COMMANDS array found in JS",2026-11-02T07:25:52.5751994+01:00
+S_W-09,6,W09-06-execute-blocked,PASS,P0,"Execute in BLOCKED_COMMANDS",2026-11-02T07:25:52.5758093+01:00
+S_W-09,7,W09-07-error-dialog-guard,PASS,P0,"setErrorDialogsActive(false/true) present",2026-11-02T07:25:52.5765331+01:00
+S_W-09,8,W09-08-cas-readiness,PASS,P0,"CAS readiness via evalCommandCAS only",2026-11-02T07:25:52.5772401+01:00
+S_W-09,9,W09-09-local-codebase,FAIL,P0,"html5codebase is local, not geogebra.org",2026-11-02T07:25:52.5781955+01:00
+S_W-09,10,W09-10-single-inject,PASS,P0,"applet.inject count: 1 (expected 1)",2026-11-02T07:25:52.5838092+01:00
+S_W-09,11,W09-11-aria-tree,PASS,P0,"role=tree in HTML",2026-11-02T07:25:52.5844301+01:00
+S_W-09,12,W09-11-aria-label,PASS,P0,"aria-label present",2026-11-02T07:25:52.5849304+01:00
+S_W-09,13,W09-12-mobile-toggle,PASS,P0,"mobile toggle button in HTML",2026-11-02T07:25:52.5853934+01:00
+S_W-09,14,W09-13-sequence-limit,PASS,P0,"Sequence iteration limit enforced",2026-11-02T07:25:52.5861504+01:00
+S_W-09,15,W09-14-open-path-check,PASS,P0,"OPEN path validation present",2026-11-02T07:25:52.5869821+01:00
+S_W-09,16,W09-20-browser-load,SKIP,P1,"NOT RUN - blocked by: Requires self-hosted WAR + HTTP server; run manually or with Grok suite 15",2026-11-02T07:25:52.5894807+01:00
+S_W-09,17,W09-21-browser-tree,SKIP,P1,"NOT RUN - blocked by: depends on W09-20",2026-11-02T07:25:52.5900573+01:00
+S_W-09,18,W09-22-browser-step,SKIP,P1,"NOT RUN - blocked by: depends on W09-20",2026-11-02T07:25:52.5905609+01:00
+S_W-09,19,W09-23-browser-check,SKIP,P1,"NOT RUN - blocked by: depends on W09-20",2026-11-02T07:25:52.5911295+01:00

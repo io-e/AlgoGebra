@@ -1,0 +1,23 @@
+127.0.0.1 - - [02/Nov/2026 07:20:28] "GET /webbuild_probe_GROK_V1.html HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 07:20:28] "GET /webbuild_probe_GROK_V1.html HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 07:20:28] "GET /war/deployggb.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 07:20:28] "GET /war/web3d/web3d.nocache.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 07:20:28] "GET /war/web3d/0C67C8A47F0579D49611F42F63B45791.cache.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 07:20:28] code 404, message File not found
+127.0.0.1 - - [02/Nov/2026 07:20:28] "GET /favicon.ico HTTP/1.1" 404 -
+127.0.0.1 - - [02/Nov/2026 07:20:28] "GET /war/css/bundles/bundle.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 07:20:28] "GET /war/css/keyboard-styles.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 07:20:28] "GET /war/css/bundles/simple-bundle.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 07:20:28] "GET /war/css/greek-font.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 07:20:28] "GET /war/css/fonts.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 07:20:28] "GET /war/web3d/deferredjs/0C67C8A47F0579D49611F42F63B45791/14.cache.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 07:20:28] "GET /war/web3d/deferredjs/0C67C8A47F0579D49611F42F63B45791/6.cache.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 07:20:28] "GET /war/web3d/deferredjs/0C67C8A47F0579D49611F42F63B45791/9.cache.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 07:20:28] "GET /war/web3d/deferredjs/0C67C8A47F0579D49611F42F63B45791/5.cache.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 07:20:28] "GET /war/web3d/deferredjs/0C67C8A47F0579D49611F42F63B45791/8.cache.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 07:20:28] "GET /war/web3d/deferredjs/0C67C8A47F0579D49611F42F63B45791/7.cache.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 07:20:28] "GET /war/web3d/deferredjs/0C67C8A47F0579D49611F42F63B45791/10.cache.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 07:20:28] "GET /war/web3d/deferredjs/0C67C8A47F0579D49611F42F63B45791/3.cache.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 07:20:29] "GET /war/web3d/deferredjs/0C67C8A47F0579D49611F42F63B45791/2.cache.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 07:20:30] code 404, message File not found
+127.0.0.1 - - [02/Nov/2026 07:20:30] "GET /__probe_result?d=%7B%22start%22%3A1793600428393%2C%22loaded%22%3Atrue%2C%22evalPoint%22%3Atrue%2C%22valPoint%22%3A%22A%20%3D%20(1%2C%202)%22%2C%22evalFunc%22%3Atrue%2C%22valFunc%22%3A%22f(x)%20%3D%20x%C2%B2%20-%202x%22%2C%22evalMatrix%22%3Atrue%2C%22valMatrix%22%3A%22m%20%3D%20%7B%7B1%2C%202%7D%2C%20%7B3%2C%204%7D%7D%22%2C%22value%22%3A1%2C%22cas%22%3A%22x%C2%B2%20%2B%202x%20%2B%201%22%2C%22casPolls%22%3A2%2C%22ms%22%3A1609%2C%22resources%22%3A%5B%22http%3A%2F%2F127.0.0.1%3A8765%2Fwar%2Fdeployggb.js%22%2C%22http%3A%2F%2F127.0.0.1%3A8765%2Fwar%2Fweb3d%2Fweb3d.nocache.js%22%2C%22http%3A%2F%2F127.0.0.1%3A8765%2Ffavicon.ico%22%2C%22http%3A%2F%2F127.0.0.1%3A8765%2Fwar%2Fcss%2Fbundles%2Fsimple-bundle.css%22%2C%22http%3A%2F%2F127.0.0.1%3A8765%2Fwar%2Fcss%2Fbundles%2Fbundle.css%22%2C%22http%3A%2F%2F127.0.0.1%3A8765%2Fwar%2Fcss%2Fkeyboard-styles.css%22%2C%22http%3A%2F%2F127.0.0.1%3A8765%2Fwar%2Fcss%2Fgreek-font.css%22%2C%22http%3A%2F%2F127.0.0.1%3A8765%2Fwar%2Fcss%2Ffonts.css%22%2C%22http%3A%2F%2F127.0.0.1%3A8765%2Fwar%2Fweb3d%2Fdeferredjs%2F0C67C8A47F0579D49611F42F63B45791%2F14.cache.js%22%2C%22http%3A%2F%2F127.0.0.1%3A8765%2Fwar%2Fweb3d%2Fdeferredjs%2F0C67C8A47F0579D49611F42F63B45791%2F6.cache.js%22%2C%22http%3A%2F%2F127.0.0.1%3A8765%2Fwar%2Fweb3d%2Fdeferredjs%2F0C67C8A47F0579D49611F42F63B45791%2F9.cache.js%22%2C%22http%3A%2F%2F127.0.0.1%3A8765%2Fwar%2Fweb3d%2Fdeferredjs%2F0C67C8A47F0579D49611F42F63B45791%2F5.cache.js%22%2C%22http%3A%2F%2F127.0.0.1%3A8765%2Fwar%2Fweb3d%2Fdeferredjs%2F0C67C8A47F0579D49611F42F63B45791%2F8.cache.js%22%2C%22http%3A%2F%2F127.0.0.1%3A8765%2Fwar%2Fweb3d%2Fdeferredjs%2F0C67C8A47F0579D49611F42F63B45791%2F7.cache.js%22%2C%22http%3A%2F%2F127.0.0.1%3A8765%2Fwar%2Fweb3d%2Fdeferredjs%2F0C67C8A47F0579D49611F42F63B45791%2F10.cache.js%22%2C%22http%3A%2F%2F127.0.0.1%3A8765%2Fwar%2Fweb3d%2Fdeferredjs%2F0C67C8A47F0579D49611F42F63B45791%2F3.cache.js%22%2C%22http%3A%2F%2F127.0.0.1%3A8765%2Fwar%2Fweb3d%2Fdeferredjs%2F0C67C8A47F0579D49611F42F63B45791%2F2.cache.js%22%5D%2C%22external%22%3A%5B%5D%7D HTTP/1.1" 404 -
