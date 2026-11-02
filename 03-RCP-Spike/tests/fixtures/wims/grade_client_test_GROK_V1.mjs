@@ -1,0 +1,33 @@
+// GROK_V1 — G-15 unit/contract tests for wims-grade-client_GROK_V1.js against the local D-S01 mock. Output: TAP-like lines.
+import { createRequire } from 'node:module'; import path from 'node:path'; import fs from 'node:fs'; import os from 'node:os';
+import { fileURLToPath } from 'node:url'; import { start } from './mock_wims_cgi_GROK_V1.mjs';
+const here = path.dirname(fileURLToPath(import.meta.url)); const repo = path.resolve(here, '../../../..');
+const C = createRequire(import.meta.url)(path.join(repo, 'wims/course-activity-template/wims-grade-client_GROK_V1.js'));
+const log = path.join(os.tmpdir(), 'wims-mock-' + process.pid + '.jsonl'); process.env.WIMS_MOCK_LOG = log;
+const srv = await start(0); const ep = 'http://127.0.0.1:' + srv.address().port + '/wims/wims.cgi';
+const ggb = Buffer.concat([Buffer.from('PK\x03\x04', 'latin1'), Buffer.alloc(64, 1)]).toString('base64');
+let n = 0, fail = 0; const ok = (id, c, d = '') => { n++; if (!c) fail++; console.log(`${c ? 'ok' : 'not ok'} ${n} - ${id}${d ? ' :: ' + d : ''}`); };
+const last = () => JSON.parse(fs.readFileSync(log, 'utf8').trim().split('\n').pop());
+
+let b = C.buildBody('ok-1', ggb); const q = new URLSearchParams(b);
+ok('GC-01-body-fields-D-S01', q.get('module') === 'adm/class/sheet' && q.get('job') === 'getresult' && q.get('exercise') === 'ok-1' && q.get('ans1') === ggb, b.slice(0, 70));
+ok('GC-02-no-grade-field-sent', ![...q.keys()].some(k => /grade|score|note/i.test(k)), [...q.keys()].join(','));
+ok('GC-03-reject-bad-exercise', (() => { try { C.buildBody('a b&c', ggb); return false; } catch { return true; } })());
+ok('GC-04-reject-bad-base64', (() => { try { C.buildBody('ok-1', '###'); return false; } catch { return true; } })());
+let r = await C.submit({ endpoint: ep, exercise: 'ok-1', base64: ggb });
+let m = last();
+ok('GC-05-post-form-urlencoded', m.method === 'POST' && /application\/x-www-form-urlencoded/.test(m.ct), m.ct);
+ok('GC-06-ans1-is-ggb-zip', m.ans1Zip === true && m.ans1Len === ggb.length);
+ok('GC-07-grade-from-wims', r.ok && r.grade === 0.8 && /4 of 5/.test(r.feedback), JSON.stringify(r));
+r = await C.submit({ endpoint: ep, exercise: 'html-1', base64: ggb }); ok('GC-08-html-response-is-error', !r.ok && /HTML/.test(r.error), r.error);
+r = await C.submit({ endpoint: ep, exercise: 'e500-1', base64: ggb }); ok('GC-09-http-500-is-error', !r.ok && /500/.test(r.error), r.error);
+r = await C.submit({ endpoint: ep, exercise: 'bad-1', base64: ggb }); ok('GC-10-grade-out-of-range-rejected', !r.ok && /0\.\.1/.test(r.error), r.error);
+r = await C.submit({ endpoint: ep, exercise: 'slow-1', base64: ggb, timeoutMs: 500 }); ok('GC-11-timeout', !r.ok && /in time/.test(r.error), r.error);
+r = await C.submit({ endpoint: 'http://127.0.0.1:1/wims/wims.cgi', exercise: 'ok-1', base64: ggb }); ok('GC-12-network-error', !r.ok && /network/.test(r.error), r.error);
+r = await C.submit({ endpoint: ep, exercise: '', base64: ggb }); ok('GC-13-no-exercise-no-request', !r.ok && /exercise/.test(r.error));
+ok('GC-14-parse-non-object', !C.parseResult(200, 'application/json', '[1]').ok && !C.parseResult(200, 'application/json', '{"grade":"0.5"}').ok);
+const src = fs.readFileSync(path.join(repo, 'wims/course-activity-template/wims-grade-client_GROK_V1.js'), 'utf8');
+ok('GC-15-no-innerHTML', !/\.innerHTML\s*=/.test(src));
+ok('GC-16-no-local-grading', !/grade\s*=\s*[^=]/.test(src.replace(/\/\/.*$/gm, '')), 'client never assigns a grade');
+srv.close(); fs.rmSync(log, { force: true });
+console.log(`# grade client: ${n - fail} PASS, ${fail} FAIL`); process.exit(fail ? 1 : 0);
