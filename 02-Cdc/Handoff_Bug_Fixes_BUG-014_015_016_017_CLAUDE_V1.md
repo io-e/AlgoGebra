@@ -212,7 +212,7 @@ The Linux image has no bundled JDK. `launch.sh` falls back to `/workspace/AlgoGe
 1. Check `JAVA_HOME` environment variable first
 2. Check common JDK install paths (`/usr/lib/jvm/java-*`, `/opt/java/`)
 3. Check the product's own `jdk/` subdirectory (for a bundled JDK)
-4. Fail with a clear error message if no JDK is found
+4. Fail with a clear error message if no JDK is found — exit **69** (EX_UNAVAILABLE), same as launch.ps1 (owner Q1, issue #17, 2026-11-02)
 
 ### Acceptance criteria
 

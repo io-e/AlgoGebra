@@ -5,7 +5,7 @@
 #   passed as -Dggbplus.course=<realpath>. Env: GGBPLUS_COURSE (fallback), GGBPLUS_COURSE_ROOT (optional allow-root),
 #   GGBPLUS_LAUNCH_DRYRUN=1 (print final java argv, start nothing). Launcher checks are a convenience gate; the Java
 #   validator (toRealPath on OPEN targets) stays authoritative.
-# Exit codes: 3 no image, 4 no Java >= MIN (BUG-017), 64 usage, 65 not .json / > 1 MB, 66 missing/unreadable/not a file, 77 outside root.
+# Exit codes: 3 no image, 69 no Java >= MIN (EX_UNAVAILABLE, BUG-017; same as launch.ps1, owner Q1 2026-11-02), 64 usage, 65 not .json / > 1 MB, 66 missing/unreadable/not a file, 77 outside root.
 set -euo pipefail
 HEADLESS=false; BOOT=false; PRINT_JAVA=false; COURSE=""; COURSE_SET=false
 die() { echo "launch.sh: $2" >&2; exit "$1"; }
@@ -41,7 +41,7 @@ try_java() { local j="$1" src="$2" m; [ -n "$j" ] && [ -x "$j" ] || { [ -n "$j" 
 find_java() {
   local explicit="${GGB_JAVA:-${JAVA:-}}"
   if [ -n "$explicit" ]; then try_java "$explicit" "GGB_JAVA" && return 0
-    echo "launch.sh: GGB_JAVA/JAVA='$explicit' is not a usable Java >= $MIN (${TRIED[*]})" >&2; exit 4; fi
+    echo "launch.sh: GGB_JAVA/JAVA='$explicit' is not a usable Java >= $MIN (${TRIED[*]})" >&2; exit 69; fi
   for d in "$IMAGE/jre" "$IMAGE/jdk"; do try_java "$d/bin/java" "bundled" && return 0; done
   [ -n "${JAVA_HOME:-}" ] && try_java "$JAVA_HOME/bin/java" "JAVA_HOME" && return 0
   if command -v mise >/dev/null 2>&1; then local mw; mw="$(mise where java 2>/dev/null || true)"
@@ -52,7 +52,7 @@ find_java() {
   command -v java >/dev/null 2>&1 && try_java "$(command -v java)" "PATH" && return 0
   echo "launch.sh: no Java >= $MIN found. Set GGB_JAVA=/path/to/bin/java or JAVA_HOME, or install a JDK (e.g. apt install openjdk-25-jre, or 'mise use java@25')." >&2
   [ ${#TRIED[@]} -gt 0 ] && printf '  tried: %s\n' "${TRIED[@]}" >&2
-  exit 4; }
+  exit 69; }
 find_java
 $PRINT_JAVA && { echo "JAVA=$JAVA SOURCE=$JAVA_SRC MAJOR=$JAVA_MAJOR MIN=$MIN"; exit 0; }
 DRY="${GGBPLUS_LAUNCH_DRYRUN:-0}"

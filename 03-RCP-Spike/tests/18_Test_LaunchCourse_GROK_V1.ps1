@@ -3,7 +3,7 @@
 # Merged from Codex's Windows version (PR #11, 16 cases, credit: Codex) and Grok's Debian version (PR #9); Codex cases map to LC-01..LC-15 + LC-20.
 # All dry-run cases use GGBPLUS_LAUNCH_DRYRUN=1 (final java argv printed, nothing started).
 # Exit codes: 64 usage | 65 not .json / > 1 MiB | 66 missing / not a file | 77 outside GGBPLUS_COURSE_ROOT.
-# Known divergence (reported, not changed): no usable JDK = 4 in launch.sh (BUG-017, PR #4) vs 69 in launch.ps1.
+# No usable JDK = 69 (EX_UNAVAILABLE) on both launchers (owner Q1, issue #17, 2026-11-02).
 # Platform-only: LC-12/13-symlink need symlink privilege on Windows (else SKIP); LC-17b no-JDK code, LC-18/19 Xvfb = Linux only.
 . (Join-Path $PSScriptRoot 'lib/TestFramework_GROK_V1.ps1')
 Initialize-TestSuite '18_LaunchCourse'
@@ -79,11 +79,19 @@ T 'LC-15-flag-order' $ra ((Same $ra.Course $okR) -and (Same $rb.Course $okR) -an
 $r = Invoke-L @('-Course', $evil); T 'LC-16-metachars-literal' $r ($r.Rc -eq 0 -and (Same $r.Course (Real $evil)) -and -not (Test-Path (Join-Path $w 'PWNED')) -and -not (Test-Path (Join-Path $c 'PWNED')))
 if ($IsWindows) {
     $r = Invoke-L @('-JavaHome', (Join-Path $w 'nojdk'), '-Course', (Join-Path $c 'nope.json')); T 'LC-17-course-error-before-java' $r ($r.Rc -eq 66)
-    Skip-Test 'LC-17b-no-jdk-exit-code' 'SKIP reason: launch.ps1 falls back to bundled/Eclipse JRE; its no-JDK code is 69 (launch.sh: 4) - divergence reported' 'P2'
+    # launch.ps1 can only be forced to "no JDK" when neither <image>\jre nor the hard-coded Eclipse JustJ plugin exists (no launch.ps1 change).
+    $bundled = Join-Path $script:Image 'jre\bin\java.exe'; $justj = 'D:\ALF_ZGit\G2_Eclipse\01_src\eclipse\plugins'
+    $hasJustj = (Test-Path -LiteralPath $justj) -and @(Get-ChildItem $justj -Directory -Filter 'org.eclipse.justj.openjdk.hotspot.jre.full.win32.x86_64_25.0.4*' -EA SilentlyContinue).Count -gt 0
+    if ((Test-Path -LiteralPath $bundled) -or $hasJustj) {
+        Skip-Test 'LC-17b-no-jdk-exit-code-69' 'SKIP reason: launch.ps1 falls back to bundled jre or Eclipse JustJ JRE present on this host; cannot force no-JDK without changing launch.ps1' 'P1'
+    } else {
+        $rb = Invoke-L @('-JavaHome', (Join-Path $w 'nojdk'), '-Course', $ok) @{ JAVA = '' }
+        T 'LC-17b-no-jdk-exit-code-69' $rb ($rb.Rc -eq 69) 'P1'
+    }
 } else {
     $nj = @{ GGB_JAVA = '' }; $ra = Invoke-L @('-Course', (Join-Path $c 'nope.json')) $nj; $rb = Invoke-L @('-Course', $ok) $nj
     T 'LC-17-course-error-before-java' $ra ($ra.Rc -eq 66)
-    T 'LC-17b-no-jdk-exit-code-4' $rb ($rb.Rc -eq 4 -and $rb.Out -match 'no Java >= 25') 'P1'
+    T 'LC-17b-no-jdk-exit-code-69' $rb ($rb.Rc -eq 69 -and $rb.Out -match 'no Java >= 25') 'P1'
 }
 if ($IsWindows) {
     Skip-Test 'LC-18-xvfb-trig-course-3-panes' 'SKIP reason: Linux/Xvfb only; attended SWT tree UI stays Windows/owner' 'P1'

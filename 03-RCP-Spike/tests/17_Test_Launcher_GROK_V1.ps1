@@ -20,13 +20,13 @@ function Invoke-Launch([hashtable]$Env, [string]$Image = $img, [string[]]$A = @(
 $cases = @(
     @{ Id = 'L-01-ggb-java'; Env = @{ GGB_JAVA = "$j25/bin/java" }; Rc = 0; Rx = 'SOURCE=GGB_JAVA MAJOR=25' },
     @{ Id = 'L-02-legacy-JAVA'; Env = @{ JAVA = "$j25/bin/java" }; Rc = 0; Rx = 'SOURCE=GGB_JAVA MAJOR=25' },
-    @{ Id = 'L-03-ggb-java-too-old'; Env = @{ GGB_JAVA = "$j21/bin/java" }; Rc = 4; Rx = 'not a usable Java >= 25.*Java 21 < 25' },
+    @{ Id = 'L-03-ggb-java-too-old'; Env = @{ GGB_JAVA = "$j21/bin/java" }; Rc = 69; Rx = 'not a usable Java >= 25.*Java 21 < 25' },
     @{ Id = 'L-04-java-home'; Env = @{ JAVA_HOME = $j25 }; Rc = 0; Rx = 'SOURCE=JAVA_HOME MAJOR=25' },
-    @{ Id = 'L-05-java-home-too-old-none-else'; Env = @{ JAVA_HOME = $j21 }; Rc = 4; Rx = 'no Java >= 25 found(?s).*JAVA_HOME: .*\(Java 21 < 25\)' },
+    @{ Id = 'L-05-java-home-too-old-none-else'; Env = @{ JAVA_HOME = $j21 }; Rc = 69; Rx = 'no Java >= 25 found(?s).*JAVA_HOME: .*\(Java 21 < 25\)' },
     @{ Id = 'L-06-path-java'; Env = @{ PATH = "$(Join-Path $w 'pathbin'):/usr/bin:/bin" }; Rc = 0; Rx = 'SOURCE=PATH MAJOR=25' },
     @{ Id = 'L-07-min-override-21'; Env = @{ JAVA_HOME = $j21; GGB_JAVA_MIN = '21' }; Rc = 0; Rx = 'SOURCE=JAVA_HOME MAJOR=21 MIN=21' },
-    @{ Id = 'L-08-legacy-1.8-version-parse'; Env = @{ JAVA_HOME = (Join-Path $w 'old') }; Rc = 4; Rx = '\(Java 8 < 25\)' },
-    @{ Id = 'L-09-nothing-found-clear-error'; Env = @{}; Rc = 4; Rx = 'no Java >= 25 found\. Set GGB_JAVA' })
+    @{ Id = 'L-08-legacy-1.8-version-parse'; Env = @{ JAVA_HOME = (Join-Path $w 'old') }; Rc = 69; Rx = '\(Java 8 < 25\)' },
+    @{ Id = 'L-09-nothing-found-clear-error'; Env = @{}; Rc = 69; Rx = 'no Java >= 25 found\. Set GGB_JAVA' })
 foreach ($c in $cases) { $r = Invoke-Launch $c.Env; Test-Ok $c.Id ($r.Rc -eq $c.Rc -and $r.Out -match $c.Rx) "rc=$($r.Rc) (want $($c.Rc)) out=[$($r.Out -replace "`n", ' | ')]" 'P0' }
 New-Item -ItemType Directory -Force (Join-Path $img 'jre/bin') | Out-Null; & ln -s (Join-Path $j25 'bin/java') (Join-Path $img 'jre/bin/java')
 $r = Invoke-Launch @{ JAVA_HOME = $j21 }; Test-Ok 'L-10-bundled-jre-wins-over-java-home' ($r.Rc -eq 0 -and $r.Out -match 'SOURCE=bundled MAJOR=25') "out=[$($r.Out)]" 'P0'
