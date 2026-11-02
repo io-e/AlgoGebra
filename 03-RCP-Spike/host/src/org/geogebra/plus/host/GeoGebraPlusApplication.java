@@ -26,9 +26,12 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.geogebra.common.main.App;
+import org.geogebra.common.plugin.GgbAPI;
 import org.geogebra.desktop.CommandLineArguments;
 import org.geogebra.desktop.GeoGebraPanel;
 import org.geogebra.desktop.geogebra3D.App3D;
+import org.geogebra.plus.course.CourseModel;
+import org.geogebra.plus.course.CourseTreePanel;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.FrameworkUtil;
@@ -46,9 +49,12 @@ public final class GeoGebraPlusApplication implements IApplication {
 
     private volatile Display display;
     private volatile Shell shell;
-    private volatile Object scenarioApi2d;
-    private volatile Object scenarioApi3d;
-    private volatile Object scenarioApp2d;
+    private volatile GgbAPI scenarioApi2d;
+    private volatile GgbAPI scenarioApi3d;
+    private volatile App scenarioApp2d;
+    private volatile App scenarioApp3d;
+    private CourseModel courseModel;
+    private Path courseFile;
 
     @Override
     public Object start(IApplicationContext applicationContext) throws Exception {
@@ -56,6 +62,7 @@ public final class GeoGebraPlusApplication implements IApplication {
         System.out.println(LOG + "Runtime: " + System.getProperty("java.runtime.version")
                 + "; OS=" + System.getProperty("os.name") + "/"
                 + System.getProperty("os.arch"));
+        loadRequestedCourse();
         BundleContext context = FrameworkUtil.getBundle(getClass()).getBundleContext();
         System.out.println(LOG + "JogAmp boot delegation="
                 + context.getProperty("org.osgi.framework.bootdelegation"));
@@ -208,9 +215,13 @@ public final class GeoGebraPlusApplication implements IApplication {
 
         SashForm sash = new SashForm(shell, SWT.HORIZONTAL);
         sash.setSashWidth(6);
+        Composite courseComposite = courseModel == null ? null : new Composite(sash, SWT.NONE);
         Composite twoDComposite = new Composite(sash, SWT.EMBEDDED | SWT.NO_BACKGROUND);
         Composite threeDComposite = new Composite(sash, SWT.EMBEDDED | SWT.NO_BACKGROUND);
-        sash.setWeights(new int[] {58, 42});
+        sash.setWeights(courseComposite == null ? new int[] {58, 42} : new int[] {20, 50, 30});
+        if (courseComposite != null) {
+            courseComposite.setLayout(new FillLayout());
+        }
 
         Frame twoDFrame = SWT_AWT.new_Frame(twoDComposite);
         Frame threeDFrame = SWT_AWT.new_Frame(threeDComposite);
@@ -222,6 +233,11 @@ public final class GeoGebraPlusApplication implements IApplication {
         }));
 
         SwingUtilities.invokeAndWait(() -> initializeGeoGebra(twoDFrame, threeDFrame));
+
+        if (courseComposite != null) {
+            new CourseTreePanel(courseComposite, courseModel, courseFile,
+                    scenarioApi2d, scenarioApi3d, scenarioApp2d, scenarioApp3d);
+        }
 
         shell.open();
         // Start with enough room for the full GeoGebra UI, including the
@@ -380,6 +396,7 @@ public final class GeoGebraPlusApplication implements IApplication {
                 threeDFrame.setVisible(true);
                 threeDFrame.validate();
                 scenarioApi3d = app3D.getGgbApi();
+                scenarioApp3d = app3D;
                 boolean pointCreated = app3D.getGgbApi().evalCommand("A = (1, 2, 3)");
                 boolean threeDInitialized = app3D.isEuclidianView3Dinited();
                 System.out.println(LOG + "D-05 3D point command accepted=" + pointCreated
@@ -486,10 +503,36 @@ public final class GeoGebraPlusApplication implements IApplication {
         }
     }
 
-    private static Object getPanelApp(GeoGebraPanel panel) throws ReflectiveOperationException {
+    private static App getPanelApp(GeoGebraPanel panel) throws ReflectiveOperationException {
         Field appField = GeoGebraPanel.class.getDeclaredField("app");
         appField.setAccessible(true);
-        return appField.get(panel);
+        return (App) appField.get(panel);
+    }
+
+    private void loadRequestedCourse() throws Exception {
+        String configured = System.getProperty("ggbplus.course");
+        if (configured == null || configured.isBlank()) {
+            return;
+        }
+        if (configured.matches("(?i)^[a-z][a-z0-9+.-]*://.*")) {
+            throw new IllegalArgumentException("Desktop course files must be local paths, not URLs.");
+        }
+        Path resolved = Paths.get(configured).toRealPath();
+        if (!Files.isRegularFile(resolved)
+                || !resolved.getFileName().toString().toLowerCase(java.util.Locale.ROOT).endsWith(".json")) {
+            throw new IllegalArgumentException("-Dggbplus.course must name an existing .json file: " + resolved);
+        }
+        String configuredRoot = System.getenv("GGBPLUS_COURSE_ROOT");
+        if (configuredRoot != null && !configuredRoot.isBlank()) {
+            Path allowedRoot = Paths.get(configuredRoot).toRealPath();
+            if (!resolved.startsWith(allowedRoot)) {
+                throw new SecurityException("Course file is outside GGBPLUS_COURSE_ROOT: " + resolved);
+            }
+        }
+        courseModel = CourseModel.load(resolved);
+        courseFile = resolved;
+        System.out.println(LOG + "Course loaded: " + resolved + " (" + courseModel.getTree().size()
+                + " chapters; schema " + courseModel.getSchemaVersion() + ")");
     }
 
     private static boolean enableCasForSpike(GeoGebraPanel panel) throws ReflectiveOperationException {

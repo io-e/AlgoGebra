@@ -1,0 +1,38 @@
+{
+  "schemaVersion": "1.0",
+  "course": "Course Tree Smoke — Trigonometry",
+  "description": "A small safe course used to validate the RCP course-tree wiring.",
+  "author": "GeoGebraPlus test fixture",
+  "locale": "en",
+  "tree": [
+    {
+      "title": "Prepare the triangle",
+      "description": "Create three points before exploring the angle.",
+      "children": [
+        {
+          "title": "Create the triangle points",
+          "description": "Run this step, then check that point A exists.",
+          "actions": [
+            { "directive": "CMD", "value": "A = (0, 0)" },
+            { "directive": "CMD", "value": "B = (4, 0)" },
+            { "directive": "CMD", "value": "C = (2, 3)" }
+          ],
+          "check": {
+            "type": "object_exists",
+            "variable": "A",
+            "target": "2d",
+            "feedback": {
+              "pass": "Point A exists. This is formative feedback only.",
+              "fail": "Run the step and check again."
+            }
+          }
+        },
+        {
+          "title": "Explore the angle",
+          "description": "Use the GeoGebra tools to inspect the triangle.",
+          "actions": []
+        }
+      ]
+    }
+  ]
+}
