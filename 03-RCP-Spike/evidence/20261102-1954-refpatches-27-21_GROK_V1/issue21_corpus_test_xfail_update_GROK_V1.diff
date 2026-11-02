@@ -1,0 +1,17 @@
+diff --git a/03-RCP-Spike/host/test/org/geogebra/plus/course/CourseCorpusRealValidatorTest_GROK_V1.java b/03-RCP-Spike/host/test/org/geogebra/plus/course/CourseCorpusRealValidatorTest_GROK_V1.java
+index e84c7e9..4700333 100644
+--- a/03-RCP-Spike/host/test/org/geogebra/plus/course/CourseCorpusRealValidatorTest_GROK_V1.java
++++ b/03-RCP-Spike/host/test/org/geogebra/plus/course/CourseCorpusRealValidatorTest_GROK_V1.java
+@@ -31,10 +31,8 @@ import org.geogebra.desktop.main.LocalizationD;
+  */
+ public final class CourseCorpusRealValidatorTest_GROK_V1 {
+ 
+-    /** Known product gaps; owner decision Q3b (issue #21): near-limit warning to be removed by Codex. */
+-    static final Map<String, String> XFAIL = Map.of(
+-            "T-45", "issue #21 (Q3b): near-limit Sequence warning returns ACCEPT_WITH_WARNING at 1000 iterations",
+-            "T-51", "issue #21 (Q3b): near-limit Sequence warning returns ACCEPT_WITH_WARNING at 1000 iterations");
++    /** Known product gaps (none since #21 / Q3b removed the near-limit warning). */
++    static final Map<String, String> XFAIL = Map.of(); // T-45/T-51 resolved by #21 (Q3b)
+ 
+     private int pass, fail, xfail, xpass, n;
+ 
