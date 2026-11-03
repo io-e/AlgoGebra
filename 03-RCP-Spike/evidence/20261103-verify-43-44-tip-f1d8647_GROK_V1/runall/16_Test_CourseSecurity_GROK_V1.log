@@ -1,0 +1,145 @@
+# Suite: 16_CourseSecurity
+# Started: 2026-11-03T09:36:25.8157274+01:00
+# Host: grok-bot-vm-419969949 / Debian GNU/Linux 13 (trixie) / pwsh 7.6.9
+
+# schema sha256=069e4cd62bf184cf7eca1f2f80ce904c686701f262d62243e34ddf3bb18eb12c /workspace/AlgoGebra/wt-verify-f1d8647/02-Cdc/Schema_Course_JSON_CLAUDE_V1.json
+ok 1 - [P0] SEC-00-manifest :: cases=62 (unique ids)
+ok 2 - [P1] SEC-01-T-10-size :: T-10 size=1066494 bytes
+ok 3 - [P0] SEC-02-archives-built :: built: clean.ggb, construction_execute.ggb, link_outside.ggb, macro_execute.ggb, script_ggbscript.ggb, script_js.ggb, script_onclick_js.ggb, script_onupdate.ggb
+ok 4 - [P1] SCH-T-01 :: schema valid=True expected=SCHEMA_VALID (Commands.Execute TABLE_SCRIPTING) sha256=2994aab14c77d6df
+ok 5 - [P1] SCH-T-02 :: schema valid=True expected=SCHEMA_VALID (fr Exécute -> Commands.Execute) sha256=5d4a869fcfd04bba
+ok 6 - [P1] SCH-T-03 :: schema valid=True expected=SCHEMA_VALID (nested Execute) sha256=301f1f20ab1bc226
+ok 7 - [P1] SCH-T-03b :: schema valid=True expected=SCHEMA_VALID (nested localized Execute) sha256=5ea37b07e73ff9c0
+ok 8 - [P1] SCH-T-03c :: schema valid=True expected=SCHEMA_VALID (case-insensitive Execute) sha256=f03819fa17c5178f
+ok 9 - [P1] SCH-T-15 :: schema valid=True expected=SCHEMA_VALID (Commands.RunClickScript TABLE_SCRIPTING) sha256=30f39ff8048b9bab
+ok 10 - [P1] SCH-T-16 :: schema valid=True expected=SCHEMA_VALID (Commands.RunUpdateScript TABLE_SCRIPTING) sha256=8050f5059922b7a2
+ok 11 - [P1] SCH-T-16b :: schema valid=True expected=SCHEMA_VALID (fr RunClickScript) sha256=feaa740008717d36
+ok 12 - [P1] SCH-T-17 :: schema valid=True expected=SCHEMA_VALID (Commands.PlaySound TABLE_SCRIPTING (URL fetch)) sha256=4412e850ae8bb7f0
+ok 13 - [P1] SCH-T-14 :: schema valid=True expected=SCHEMA_VALID (Commands.ExportImage TABLE_SCRIPTING) sha256=927eefb213305234
+ok 14 - [P1] SCH-T-18 :: schema valid=True expected=SCHEMA_VALID (Commands.SetValue TABLE_SCRIPTING on graded object) sha256=d46d57d342d18f8d
+ok 15 - [P1] SCH-T-12 :: schema valid=True expected=SCHEMA_VALID (Commands.Delete blocked) sha256=32970e3c18788f6f
+ok 16 - [P1] SCH-T-12b :: schema valid=True expected=SCHEMA_VALID (fr Delete) sha256=dce76b1214d9ffe1
+ok 17 - [P1] SCH-T-19 :: schema valid=True expected=SCHEMA_VALID (Commands.Rename blocked) sha256=63b34847fa8d62cf
+ok 18 - [P1] SCH-T-20 :: schema valid=True expected=SCHEMA_VALID (Commands.Repeat TABLE_SCRIPTING (runaway loop)) sha256=ff3c8c37954a0397
+ok 19 - [P1] SCH-T-21 :: schema valid=True expected=SCHEMA_VALID (runaway Sequence 1e9 iterations > 1000 per Sequence (owner Q3)) sha256=3a1c2903d2bb0082
+ok 20 - [P1] SCH-T-22 :: schema valid=True expected=SCHEMA_VALID (Commands.UpdateConstruction TABLE_SCRIPTING) sha256=439f04d4cd142314
+ok 21 - [P1] SCH-T-08 :: schema valid=True expected=SCHEMA_VALID (safe construction) sha256=5009897c4fc0a485
+ok 22 - [P1] SCH-T-09 :: schema valid=True expected=SCHEMA_VALID (allowed scripting SetColor) sha256=00bf4272530ed38f
+ok 23 - [P1] SCH-T-23 :: schema valid=True expected=SCHEMA_VALID (allowed scripting Slider) sha256=28ea03360317f2b8
+ok 24 - [P1] SCH-T-24 :: schema valid=True expected=SCHEMA_VALID (CAS directive same allow-list) sha256=795ba2c8cd0ee320
+ok 25 - [P1] SCH-T-04 :: schema valid=True expected=SCHEMA_VALID (path traversal + non-.ggb) sha256=1ab460e725a89949
+ok 26 - [P1] SCH-T-04b :: schema valid=True expected=SCHEMA_VALID (traversal after normalize) sha256=95273143fef4439b
+ok 27 - [P1] SCH-T-25 :: schema valid=True expected=SCHEMA_VALID (absolute path) sha256=09179b677d55ef7f
+ok 28 - [P1] SCH-T-13 :: schema valid=True expected=SCHEMA_VALID (absolute path + wrong extension) sha256=a1308fd07bad9fdc
+ok 29 - [P1] SCH-T-05 :: schema valid=True expected=SCHEMA_VALID (URL) sha256=85c3cc1e5f39b8d7
+ok 30 - [P1] SCH-T-05b :: schema valid=True expected=SCHEMA_VALID (protocol-relative URL) sha256=dacb644480539f32
+ok 31 - [P1] SCH-T-05c :: schema valid=True expected=SCHEMA_VALID (file URL) sha256=a7b1f4e27865db0c
+ok 32 - [P1] SCH-T-26 :: schema valid=True expected=SCHEMA_VALID (non-.ggb extension) sha256=c49cc30147be5c56
+ok 33 - [P1] SCH-T-27 :: schema valid=True expected=SCHEMA_VALID (symlink inside course dir pointing outside (normalize() alone does not catch it; needs toRealPath)) sha256=61a7e6df953868f5
+ok 34 - [P1] SCH-T-28 :: schema valid=True expected=SCHEMA_VALID (untrusted OPEN blocked pre-scanner (fail-closed, owner Q2); after the WP9-04 scanner a clean in-course .ggb may ACCEPT; trusted files need a visible warning) sha256=6cec9a82df34c416
+ok 35 - [P1] SCH-T-06 :: schema valid=True expected=SCHEMA_VALID (geogebra_javascript.js with ggbOnInit code) sha256=d9034ab0ccdafc9a
+ok 36 - [P1] SCH-T-07 :: schema valid=True expected=SCHEMA_VALID (per-object <javascript val=...> click script) sha256=08219c106c793aed
+ok 37 - [P1] SCH-T-29 :: schema valid=True expected=SCHEMA_VALID (per-object <ggbscript val="Execute(...)"> (spec 3.1 containsScriptElements misses '<ggbscript' with val=)) sha256=ca9f92a64cd838c1
+ok 38 - [P1] SCH-T-30 :: schema valid=True expected=SCHEMA_VALID (<ggbscript onUpdate=...>) sha256=de70f9a4ce6d9d4a
+ok 39 - [P1] SCH-T-31 :: schema valid=True expected=SCHEMA_VALID (Execute inside geogebra_macro.xml) sha256=2b74e2ebe76cee42
+ok 40 - [P1] SCH-T-32 :: schema valid=True expected=SCHEMA_VALID (<command name="Execute"> in geogebra.xml construction) sha256=09d26c2588e3fc96
+ok 41 - [P1] SCH-T-33 :: schema valid=True expected=SCHEMA_VALID (trustedGgb=true loads scripted file with a warning) sha256=a943180648ccea3e
+ok 42 - [P0] SCH-T-34 :: schema valid=False expected=SCHEMA_INVALID (unknown directive) sha256=fe01aa9d2ab4e8f7
+ok 43 - [P0] SCH-T-35 :: schema valid=False expected=SCHEMA_INVALID (additional property) sha256=51248cf3585a54f2
+ok 44 - [P0] SCH-T-36 :: schema valid=False expected=SCHEMA_INVALID (missing value) sha256=8fa20a37494671a3
+ok 45 - [P0] SCH-T-37 :: schema valid=False expected=SCHEMA_INVALID (wrong schemaVersion) sha256=d8fc93b0ffc1a48e
+ok 46 - [P0] SCH-T-38 :: schema valid=False expected=SCHEMA_INVALID (invalid target) sha256=71377b21d1c6748a
+ok 47 - [P0] SCH-T-39 :: schema valid=False expected=SCHEMA_INVALID (more than 20 actions in a step) sha256=6f4b09e06ec57a8d
+ok 48 - [P0] SCH-T-40 :: schema valid=False expected=SCHEMA_INVALID (empty tree) sha256=2964e98b3171c937
+ok 49 - [P0] SCH-T-41 :: schema valid=False expected=SCHEMA_INVALID (not JSON) sha256=f847b4d838be9774
+ok 50 - [P1] SCH-T-11 :: schema valid=True expected=SCHEMA_VALID (tree depth > 5 (schema does not enforce depth)) sha256=55ca09b74a4f9e18
+ok 51 - [P1] SCH-T-42 :: schema valid=True expected=SCHEMA_VALID (more than 500 total actions (600)) sha256=f0fe082fcfa743c7
+ok 52 - [P1] SCH-T-43 :: schema valid=True expected=SCHEMA_VALID (more than 10 OPEN actions) sha256=470664a1e75f191b
+ok 53 - [P1] SCH-T-44 :: schema valid=True expected=SCHEMA_VALID (trustedGgb on a non-OPEN action) sha256=b3edd33ae157fe29
+ok 54 - [P1] SCH-T-45 :: schema valid=True expected=SCHEMA_VALID (Sequence at the per-Sequence boundary (1000 iterations)) sha256=f96c202854e61557
+ok 55 - [P1] SCH-T-46 :: schema valid=True expected=SCHEMA_VALID (Sequence 1001 iterations > 1000 per Sequence) sha256=aa2ced73636d9b8f
+ok 56 - [P1] SCH-T-47 :: schema valid=True expected=SCHEMA_VALID (Sequence bound depends on an object (not statically provable)) sha256=eb3156bb4c68557c
+ok 57 - [P1] SCH-T-48 :: schema valid=True expected=SCHEMA_VALID (Sequence bound expression 10^12 (over budget; bounds must be literal/provable)) sha256=97e83c857ec3abbc
+ok 58 - [P1] SCH-T-49 :: schema valid=True expected=SCHEMA_VALID (nested Sequence 100x100 = 10000 items (directive budget boundary)) sha256=260027d7e06e0766
+ok 59 - [P1] SCH-T-50 :: schema valid=True expected=SCHEMA_VALID (nested Sequence 100x101 = 10100 items > 10000 per directive) sha256=3e42111c68f3e237
+ok 60 - [P1] SCH-T-51 :: schema valid=True expected=SCHEMA_VALID (10 Sequences of 1000 in one directive = 10000 items (boundary)) sha256=2f29af940b358beb
+ok 61 - [P1] SCH-T-52 :: schema valid=True expected=SCHEMA_VALID (11 Sequences of 1000 in one directive = 11000 items > 10000) sha256=bc8b921c2804c267
+ok 62 - [P1] SCH-T-53 :: schema valid=True expected=SCHEMA_VALID (short form Sequence(1001) > 1000 iterations) sha256=b489e75041c9ff5e
+ok 63 - [P1] SCH-T-54 :: schema valid=True expected=SCHEMA_VALID (Sequence step 0 (unbounded / non-terminating)) sha256=5ac6112a92b4da12
+ok 64 - [P1] SCH-T-55 :: schema valid=True expected=SCHEMA_VALID (trusted OPEN warning must not override a blocked command in the same step) sha256=0b5db7f3d52a0194
+ok 65 - [P1] SCH-T-10 :: schema valid=True expected=SCHEMA_VALID (course.json > 1 MB) sha256=021b89a62cd546af
+ok 66 - [P1] REF-T-04-open-path :: OPEN '../../etc/passwd' -> path rules REJECT (extension) expected REJECT; case verdict REJECT
+ok 67 - [P1] REF-T-04b-open-path :: OPEN 'sub/../../outside.ggb' -> path rules REJECT (traversal) expected REJECT; case verdict REJECT
+ok 68 - [P1] REF-T-25-open-path :: OPEN '/tmp/evil.ggb' -> path rules REJECT (absolute) expected REJECT; case verdict REJECT
+ok 69 - [P1] REF-T-13-open-path :: OPEN 'C:\Windows\System32\calc.exe' -> path rules REJECT (url-or-drive) expected REJECT; case verdict REJECT
+ok 70 - [P1] REF-T-05-open-path :: OPEN 'http://evil.example/payload.ggb' -> path rules REJECT (url-or-drive) expected REJECT; case verdict REJECT
+ok 71 - [P1] REF-T-05b-open-path :: OPEN '//evil.example/payload.ggb' -> path rules REJECT (url-or-drive) expected REJECT; case verdict REJECT
+ok 72 - [P1] REF-T-05c-open-path :: OPEN 'file:///etc/evil.ggb' -> path rules REJECT (url-or-drive) expected REJECT; case verdict REJECT
+ok 73 - [P1] REF-T-26-open-path :: OPEN 'exploit.jar' -> path rules REJECT (extension) expected REJECT; case verdict REJECT
+ok 74 - [P1] REF-T-27-open-path :: OPEN 'link_outside.ggb' -> path rules REJECT (symlink-escape) expected REJECT; case verdict REJECT
+ok 75 - [P1] REF-T-28-open-path :: OPEN 'clean.ggb' -> path rules ACCEPT () expected ACCEPT; case verdict REJECT
+ok 76 - [P1] REF-T-06-scan :: script_js.ggb: findings=[global-js] -> REJECT expected REJECT
+ok 77 - [P1] REF-T-07-scan :: script_onclick_js.ggb: findings=[object-script:javascript] -> REJECT expected REJECT
+ok 78 - [P1] REF-T-29-scan :: script_ggbscript.ggb: findings=[object-script:ggbscript] -> REJECT expected REJECT
+ok 79 - [P1] REF-T-30-scan :: script_onupdate.ggb: findings=[object-script:ggbscript] -> REJECT expected REJECT
+ok 80 - [P1] REF-T-31-scan :: macro_execute.ggb: findings=[blocked-command:Execute:geogebra_macro.xml] -> REJECT expected REJECT
+ok 81 - [P1] REF-T-32-scan :: construction_execute.ggb: findings=[blocked-command:Execute:geogebra.xml] -> REJECT expected REJECT
+ok 82 - [P1] REF-T-33-scan :: script_js.ggb: findings=[global-js] -> ACCEPT_WITH_WARNING expected ACCEPT_WITH_WARNING
+ok 83 - [P1] SPEC-GAP-1-naive-scan-misses-ggbscript # SKIP FINDING: spec 3.1 containsScriptElements() returns false for <ggbscript val="Execute(...)"/> (T-29); the scanner must match '<ggbscript' (GeoGebra ScriptType xml name) - report to Claude/Codex
+ok 84 - [P0] VAL-T-01 # SKIP pending WP9-02/04 (Codex): expected REJECT - Commands.Execute TABLE_SCRIPTING [spec 6 T-01]
+ok 85 - [P0] VAL-T-02 # SKIP pending WP9-02/04 (Codex): expected REJECT - fr Exécute -> Commands.Execute [spec 6 T-02]
+ok 86 - [P0] VAL-T-03 # SKIP pending WP9-02/04 (Codex): expected REJECT - nested Execute [spec 6 T-03]
+ok 87 - [P0] VAL-T-03b # SKIP pending WP9-02/04 (Codex): expected REJECT - nested localized Execute [spec 1.1]
+ok 88 - [P0] VAL-T-03c # SKIP pending WP9-02/04 (Codex): expected REJECT - case-insensitive Execute [spec 1.2]
+ok 89 - [P0] VAL-T-15 # SKIP pending WP9-02/04 (Codex): expected REJECT - Commands.RunClickScript TABLE_SCRIPTING [spec 1.2]
+ok 90 - [P0] VAL-T-16 # SKIP pending WP9-02/04 (Codex): expected REJECT - Commands.RunUpdateScript TABLE_SCRIPTING [spec 1.2]
+ok 91 - [P0] VAL-T-16b # SKIP pending WP9-02/04 (Codex): expected REJECT - fr RunClickScript [spec 1.1]
+ok 92 - [P0] VAL-T-17 # SKIP pending WP9-02/04 (Codex): expected REJECT - Commands.PlaySound TABLE_SCRIPTING (URL fetch) [spec 1.2]
+ok 93 - [P0] VAL-T-14 # SKIP pending WP9-02/04 (Codex): expected REJECT - Commands.ExportImage TABLE_SCRIPTING [spec 6 T-14]
+ok 94 - [P0] VAL-T-18 # SKIP pending WP9-02/04 (Codex): expected REJECT - Commands.SetValue TABLE_SCRIPTING on graded object [spec 1.2]
+ok 95 - [P0] VAL-T-12 # SKIP pending WP9-02/04 (Codex): expected REJECT - Commands.Delete blocked [spec 6 T-12]
+ok 96 - [P0] VAL-T-12b # SKIP pending WP9-02/04 (Codex): expected REJECT - fr Delete [spec 1.1]
+ok 97 - [P0] VAL-T-19 # SKIP pending WP9-02/04 (Codex): expected REJECT - Commands.Rename blocked [spec 1.2]
+ok 98 - [P0] VAL-T-20 # SKIP pending WP9-02/04 (Codex): expected REJECT - Commands.Repeat TABLE_SCRIPTING (runaway loop) [spec 1.2]
+ok 99 - [P0] VAL-T-21 # SKIP pending WP9-02/04 (Codex): expected REJECT - runaway Sequence 1e9 iterations > 1000 per Sequence (owner Q3) [owner Q3 issue #17]
+ok 100 - [P0] VAL-T-22 # SKIP pending WP9-02/04 (Codex): expected REJECT - Commands.UpdateConstruction TABLE_SCRIPTING [spec 1.2]
+ok 101 - [P0] VAL-T-08 # SKIP pending WP9-02/04 (Codex): expected ACCEPT - safe construction [spec 6 T-08]
+ok 102 - [P0] VAL-T-09 # SKIP pending WP9-02/04 (Codex): expected ACCEPT - allowed scripting SetColor [spec 6 T-09]
+ok 103 - [P0] VAL-T-23 # SKIP pending WP9-02/04 (Codex): expected ACCEPT - allowed scripting Slider [spec 1.2]
+ok 104 - [P0] VAL-T-24 # SKIP pending WP9-02/04 (Codex): expected REJECT - CAS directive same allow-list [spec 6.2]
+ok 105 - [P0] VAL-T-04 # SKIP pending WP9-02/04 (Codex): expected REJECT - path traversal + non-.ggb [spec 6 T-04]
+ok 106 - [P0] VAL-T-04b # SKIP pending WP9-02/04 (Codex): expected REJECT - traversal after normalize [spec 2.1]
+ok 107 - [P0] VAL-T-25 # SKIP pending WP9-02/04 (Codex): expected REJECT - absolute path [spec 2.2]
+ok 108 - [P0] VAL-T-13 # SKIP pending WP9-02/04 (Codex): expected REJECT - absolute path + wrong extension [spec 6 T-13]
+ok 109 - [P0] VAL-T-05 # SKIP pending WP9-02/04 (Codex): expected REJECT - URL [spec 6 T-05]
+ok 110 - [P0] VAL-T-05b # SKIP pending WP9-02/04 (Codex): expected REJECT - protocol-relative URL [spec 2.3]
+ok 111 - [P0] VAL-T-05c # SKIP pending WP9-02/04 (Codex): expected REJECT - file URL [spec 2.2]
+ok 112 - [P0] VAL-T-26 # SKIP pending WP9-02/04 (Codex): expected REJECT - non-.ggb extension [spec 2.2]
+ok 113 - [P1] VAL-T-27 # SKIP pending WP9-02/04 (Codex): expected REJECT - symlink inside course dir pointing outside (normalize() alone does not catch it; needs toRealPath) [SPEC-GAP-3]
+ok 114 - [P0] VAL-T-28 # SKIP pending WP9-02/04 (Codex): expected REJECT - untrusted OPEN blocked pre-scanner (fail-closed, owner Q2); after the WP9-04 scanner a clean in-course .ggb may ACCEPT; trusted files need a visible warning [owner Q2 issue #17]
+ok 115 - [P0] VAL-T-06 # SKIP pending WP9-02/04 (Codex): expected REJECT - geogebra_javascript.js with ggbOnInit code [spec 6 T-06]
+ok 116 - [P0] VAL-T-07 # SKIP pending WP9-02/04 (Codex): expected REJECT - per-object <javascript val=...> click script [spec 6 T-07]
+ok 117 - [P1] VAL-T-29 # SKIP pending WP9-02/04 (Codex): expected REJECT - per-object <ggbscript val="Execute(...)"> (spec 3.1 containsScriptElements misses '<ggbscript' with val=) [SPEC-GAP-1]
+ok 118 - [P0] VAL-T-30 # SKIP pending WP9-02/04 (Codex): expected REJECT - <ggbscript onUpdate=...> [spec 3]
+ok 119 - [P0] VAL-T-31 # SKIP pending WP9-02/04 (Codex): expected REJECT - Execute inside geogebra_macro.xml [spec 3]
+ok 120 - [P0] VAL-T-32 # SKIP pending WP9-02/04 (Codex): expected REJECT - <command name="Execute"> in geogebra.xml construction [spec 3]
+ok 121 - [P0] VAL-T-33 # SKIP pending WP9-02/04 (Codex): expected ACCEPT_WITH_WARNING - trustedGgb=true loads scripted file with a warning [spec 3.2; owner Q4 issue #17]
+ok 122 - [P0] VAL-T-11 # SKIP pending WP9-02/04 (Codex): expected REJECT - tree depth > 5 (schema does not enforce depth) [spec 6 T-11]
+ok 123 - [P0] VAL-T-42 # SKIP pending WP9-02/04 (Codex): expected REJECT - more than 500 total actions (600) [spec 5]
+ok 124 - [P0] VAL-T-43 # SKIP pending WP9-02/04 (Codex): expected REJECT - more than 10 OPEN actions [spec 5]
+ok 125 - [P0] VAL-T-44 # SKIP pending WP9-02/04 (Codex): expected REJECT - trustedGgb on a non-OPEN action [spec 3.2]
+ok 126 - [P0] VAL-T-45 # SKIP pending WP9-02/04 (Codex): expected ACCEPT - Sequence at the per-Sequence boundary (1000 iterations) [owner Q3/Q4 issue #17]
+ok 127 - [P0] VAL-T-46 # SKIP pending WP9-02/04 (Codex): expected REJECT - Sequence 1001 iterations > 1000 per Sequence [owner Q3/Q4 issue #17]
+ok 128 - [P0] VAL-T-47 # SKIP pending WP9-02/04 (Codex): expected REJECT - Sequence bound depends on an object (not statically provable) [owner Q3/Q4 issue #17]
+ok 129 - [P0] VAL-T-48 # SKIP pending WP9-02/04 (Codex): expected REJECT - Sequence bound expression 10^12 (over budget; bounds must be literal/provable) [owner Q3/Q4 issue #17]
+ok 130 - [P0] VAL-T-49 # SKIP pending WP9-02/04 (Codex): expected ACCEPT - nested Sequence 100x100 = 10000 items (directive budget boundary) [owner Q3/Q4 issue #17]
+ok 131 - [P0] VAL-T-50 # SKIP pending WP9-02/04 (Codex): expected REJECT - nested Sequence 100x101 = 10100 items > 10000 per directive [owner Q3/Q4 issue #17]
+ok 132 - [P0] VAL-T-51 # SKIP pending WP9-02/04 (Codex): expected ACCEPT - 10 Sequences of 1000 in one directive = 10000 items (boundary) [owner Q3/Q4 issue #17]
+ok 133 - [P0] VAL-T-52 # SKIP pending WP9-02/04 (Codex): expected REJECT - 11 Sequences of 1000 in one directive = 11000 items > 10000 [owner Q3/Q4 issue #17]
+ok 134 - [P0] VAL-T-53 # SKIP pending WP9-02/04 (Codex): expected REJECT - short form Sequence(1001) > 1000 iterations [owner Q3/Q4 issue #17]
+ok 135 - [P0] VAL-T-54 # SKIP pending WP9-02/04 (Codex): expected REJECT - Sequence step 0 (unbounded / non-terminating) [owner Q3/Q4 issue #17]
+ok 136 - [P0] VAL-T-55 # SKIP pending WP9-02/04 (Codex): expected REJECT - trusted OPEN warning must not override a blocked command in the same step [owner Q3/Q4 issue #17]
+ok 137 - [P0] VAL-T-10 # SKIP pending WP9-02/04 (Codex): expected REJECT - course.json > 1 MB [spec 6 T-10]
+
+PASS: 82 FAIL: 0 SKIP: 55
+# CSV: /workspace/AlgoGebra/wt-verify-f1d8647/03-RCP-Spike/tests/results/20261103_093242-grok-bot-vm-419969949/16_CourseSecurity_GROK_V1.csv

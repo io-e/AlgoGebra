@@ -13,7 +13,12 @@ function Tap([string]$Text, [string]$Id) { $l = @($Text -split "`r?`n" | Where-O
 # 1. renderer fonts
 $rj = Get-ChildItem (Join-Path $img 'bundles') -Filter 'org.geogebra.migration.desktop.renderer-*.jar' -EA SilentlyContinue | Select-Object -First 1
 $ttf = 0; if ($rj) { Add-Type -AssemblyName System.IO.Compression.FileSystem; $z = [IO.Compression.ZipFile]::OpenRead($rj.FullName); try { $ttf = @($z.Entries | Where-Object Name -like '*.ttf').Count } finally { $z.Dispose() } }
-$c['27-renderer-ttf'] = @(($ttf -gt 0), "$($rj.Name): $ttf .ttf")
+# #43 ships the fonts in a fragment (org.geogebra.plus.renderer.resources) attached to the renderer bundle; count both.
+$fj = Get-ChildItem (Join-Path $img 'host/build') -Filter 'org.geogebra.plus.renderer.resources_*.jar' -EA SilentlyContinue | Select-Object -First 1
+$fttf = 0; if ($fj) { Add-Type -AssemblyName System.IO.Compression.FileSystem; $z = [IO.Compression.ZipFile]::OpenRead($fj.FullName); try { $fttf = @($z.Entries | Where-Object Name -like '*.ttf').Count } finally { $z.Dispose() } }
+$bi = Join-Path $img 'configuration/org.eclipse.equinox.simpleconfigurator/bundles.info'
+$fragOk = $fj -and (Test-Path $bi) -and (Select-String -Path $bi -SimpleMatch 'org.geogebra.plus.renderer.resources,' -Quiet)
+$c['27-renderer-ttf'] = @((($ttf -gt 0) -or ($fttf -gt 0 -and $fragOk)), "$($rj.Name): $ttf .ttf; fragment $(if ($fj) { $fj.Name } else { 'none' }): $fttf .ttf, in bundles.info=$([bool]$fragOk)")
 # 2. scenarios P-02 + D-11 (one Run_All call)
 $runAll = Join-Path $here 'Run_All_GROK_V1.ps1'
 $cmd = if ($IsWindows) { @('pwsh', '-NoProfile', '-Command', "& '$runAll' -AllowForegroundInput -Only 'P-02','D-11'") } else { @('xvfb-run', '-a', 'pwsh', '-NoProfile', '-Command', "& '$runAll' -Only 'P-02','D-11'") }
