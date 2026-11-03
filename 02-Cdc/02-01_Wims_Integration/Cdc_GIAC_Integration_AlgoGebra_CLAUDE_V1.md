@@ -1,12 +1,12 @@
-<!-- CLAUDE_V1 -->
+<!-- CLAUDE_V1_1 -->
 # CDC — GIAC/Xcas Integration in AlgoGebra RCP
 
 | Field | Value |
 |---|---|
 | Document | `02-Cdc/Cdc_GIAC_Integration_AlgoGebra_CLAUDE_V1.md` |
-| Version | CLAUDE_V1 |
-| Status | Draft — needs owner review |
-| Date | 2026-10-29 |
+| Version | CLAUDE_V1_1 |
+| Status | **D-GIAC-01 accepted** (product-local loader). D-05 native loading PASS. G-02, G-05, G-06 open. |
+| Date | 2026-11-03 (updated from 2026-10-29) |
 | Supersedes | None (first GIAC-specific spec) |
 | Depends on | `Architecture_GeoGebraPlus_RCP_Web_Validation_GROK_V2.md` (scenarios D-05, X-04) |
 | Source pin | GeoGebra `375db7faf54`, `5.4.934.0` |
@@ -93,7 +93,7 @@ CASGiacBindingJre (implements CASGiacBinding)
 C++ GIAC engine: parse → evaluate → serialize
   │
   ▼
-Return string: "x^2+2*x+1"
+Return string: "x^2+2x+1"
   │
   ▼
 CASgiac: normalize, post-process, cache result
@@ -111,6 +111,8 @@ CASgiac: normalize, post-process, cache result
 2. **Fallback:** `System.loadLibrary("javagiac64")` — for WebStart/`java.library.path`
 
 **Key detail:** The upstream loader uses `ClassLoader.getSystemResourceAsStream()` — the **system/application classloader**, not the calling class's classloader. This works in a flat classpath but fails under OSGi because the system classloader doesn't see bundle-internal resources.
+
+**Deployment note:** The native classifier JARs (e.g. `javagiac-70501-natives-windows-amd64.jar`) are placed on the **application classloader** (Equinox `-cp` / app-loader classpath), not packaged inside an OSGi bundle. The `GiacNativeBootstrap` fragment extracts the DLL from these classpath JARs via the owning bundle's classloader chain.
 
 ### 2.4 Web path (Emscripten/WASM)
 
@@ -178,7 +180,7 @@ A **production-grade GIAC native loading mechanism** for the AlgoGebra RCP produ
 |---|---|---|
 | **G-01** | GIAC DLL loads in the `giac-jni` bundle's classloader without `java.library.path` or boot delegation | Log shows `System.load` with absolute path, no `-Djava.library.path`, no `-Dorg.osgi.framework.bootdelegation` |
 | **G-02** | `CASFactory.setPrototype` is called through a **supported mechanism** (not reflection on a private field) | Code review: either OSGi Declarative Services, bundle activator in `desktop` scope, or a host-owned factory registration |
-| **G-03** | CAS evaluation passes: `Expand[(x+1)^2]` → `x^2+2x+1` | Log assertion |
+| **G-03** | CAS evaluation passes: `Expand[(x+1)^2]` → `x^2+2x+1` (GIAC omits `*` for implicit multiplication) | Log assertion |
 | **G-04** | Direct GIAC smoke: `1+1` → `2` via `gen(expr, ctx).eval().print()` | Log assertion |
 | **G-05** | Thread-safe evaluation: two concurrent CAS requests return correct results | Test fixture with 2 threads, each evaluating a different expression |
 | **G-06** | Error handling: missing DLL produces a clear log message and `CASFactory` falls back to `CASFactoryDummy` (returns `?`) | Test with DLL removed from classpath |
@@ -197,13 +199,15 @@ A **production-grade GIAC native loading mechanism** for the AlgoGebra RCP produ
 
 ## 5. Architecture decisions required
 
-### D-GIAC-01: Accept product-local loader or require upstream path?
+### D-GIAC-01: Accept product-local loader or require upstream path? — **ACCEPTED (Option A)**
 
 **Context:** The spike's `GiacNativeBootstrap` does exactly what upstream's `NativeLibClassPathLoader` does — `getSystemResource` → extract to temp → `System.load`. The difference: it lives in a fragment of `giac-jni`, not in `desktop`.
 
+**Decision:** Option A accepted (owner review, 2026-10-29). D-05 native loading is **PASS** for GIAC on Windows x86_64.
+
 | Option | Pros | Cons |
 |---|---|---|
-| **A. Accept product-local loader** (recommended) | No `common`/`desktop` edit needed. Fragment is external packaging metadata. Functionally identical to upstream. | New code to maintain. Must track upstream if GeoGebra changes their loading. |
+| **A. Accept product-local loader** (**accepted**) | No `common`/`desktop` edit needed. Fragment is external packaging metadata. Functionally identical to upstream. | New code to maintain. Must track upstream if GeoGebra changes their loading. |
 | **B. Require upstream `NativeLibClassPathLoader`** | Uses proven upstream code path. | Requires `NativeLibClassPathLoader` to be visible from `giac-jni`'s classloader. It lives in `desktop` module → either edit `common` (forbidden) or complex OSGi import gymnastics. `AppD.WINDOWS`/`AppD.MAC_OS` platform flags are `desktop`-internal. |
 | **C. Copy `NativeLibClassPathLoader` into the fragment** | Uses upstream logic verbatim. | Needs `AppD` platform constants and `UtilD.delete` — deep `desktop` dependencies. Would need to strip or replace them. |
 
@@ -220,7 +224,7 @@ A **production-grade GIAC native loading mechanism** for the AlgoGebra RCP produ
 | **C. Desktop bundle's own Activator** | No host involvement. Desktop bundle activator calls `setPrototype(new CASFactoryD())` on `start()`. | Desktop bundle doesn't currently have an activator. New code in the desktop bundle wrapper. |
 | **D. Fragment of desktop with a `BundleActivator`** | Fragments can't have activators. | Not possible. |
 
-**Recommendation:** Option C. The desktop OSGi bundle wrapper gets a `BundleActivator` that calls `CASFactory.setPrototype(new CASFactoryD())`. This is the natural OSGi pattern — each bundle registers its own services/factories. The host doesn't need to know about CAS at all.
+**Recommendation:** Option C (accepted). The desktop OSGi bundle **wrapper** gets a `BundleActivator` that calls `CASFactory.setPrototype(new CASFactoryD())`. This is the natural OSGi pattern — each bundle registers its own services/factories. The host doesn't need to know about CAS at all. **Not host-side reflection** — the spike used reflection as a temporary adapter; the production path is the desktop-wrapper's own activator.
 
 ### D-GIAC-03: Temp file cleanup on Windows
 
@@ -273,7 +277,23 @@ A **production-grade GIAC native loading mechanism** for the AlgoGebra RCP produ
 
 ---
 
-## 7. MVP implementation plan
+## 7. Status summary — D-05 vs. remaining production tasks
+
+**D-05 (GIAC native loading) is PASS** for Windows x86_64. The spike proved G-01, G-03, G-04, G-07, G-08.
+
+**Still open for production:**
+
+| Criterion | Status | What remains |
+|---|---|---|
+| G-02 | **Open** | Desktop-wrapper `BundleActivator` replaces reflection adapter (D-GIAC-02 Option C) |
+| G-05 | **Open** | Thread-safety test fixture (concurrent CAS evaluation) |
+| G-06 | **Open** | Error handling: missing DLL → clear log + `CASFactoryDummy` fallback |
+
+These are **production hardening** tasks, not D-05 blockers. D-05 closure does not depend on them.
+
+---
+
+## 8. MVP implementation plan
 
 ### Phase 1: Native loader production-grade (Codex)
 
@@ -303,7 +323,7 @@ A **production-grade GIAC native loading mechanism** for the AlgoGebra RCP produ
 
 ---
 
-## 8. Risk register
+## 9. Risk register
 
 | Risk | Likelihood | Impact | Mitigation |
 |---|---|---|---|
@@ -315,7 +335,7 @@ A **production-grade GIAC native loading mechanism** for the AlgoGebra RCP produ
 
 ---
 
-## 9. Relation to other scenarios and documents
+## 10. Relation to other scenarios and documents
 
 | Scenario/Document | Relation |
 |---|---|

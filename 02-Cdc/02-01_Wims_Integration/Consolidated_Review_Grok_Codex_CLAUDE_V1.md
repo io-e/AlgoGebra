@@ -60,10 +60,19 @@ These are factual corrections both reviewers agree on. Claude applies them.
 
 ---
 
-## 4. Summary
+## 4. Owner decisions — CLOSED (2026-11-03)
 
-- **18 factual fixes** (F-01..F-18): Claude applies to both CDCs as V1_2 / updated GIAC
-- **4 owner decisions** (OD-1..OD-4): need answers before the WIMS CDC can be written
+| # | Decision | Owner answer |
+|---|---|---|
+| **OD-1** | Separate CDCs (engine-only V1_2 + WIMS CDC) | **Accepted.** Test files will be written manually. |
+| **OD-2** | Local engines supersede server-only | **Yes.** Supersedes `Decisions_GIAC_Complet_WIMS §1`. |
+| **OD-3** | Park PRs #40–#42 as Phase 2 | **Accepted.** Connected mode deferred. |
+| **OD-4** | GPL v2 obligations for WIMS-derived filter tables | **Deferred to Gate E (O-02).** Do not distribute until license inventory is complete. |
+
+## 5. Summary
+
+- **18 factual fixes** (F-01..F-18): applied in `Cdc_External_Engines_AlgoGebra_CLAUDE_V1_2.md` and `Cdc_GIAC_Integration_AlgoGebra_CLAUDE_V1.md` (bumped to V1_1)
+- **4 owner decisions** (OD-1..OD-4): all closed (2026-11-03)
 - **Both reviewers agree** the engine architecture is sound; the gaps are in WIMS integration scope, security filter completeness, and status accuracy
 
 ---
