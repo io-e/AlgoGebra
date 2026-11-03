@@ -1,0 +1,23 @@
+# Suite: 19_OefConverter
+# Started: 2026-11-03T09:51:56.3167077+01:00
+# Host: grok-bot-vm-419969949 / Debian GNU/Linux 13 (trixie) / pwsh 7.6.9
+
+ok 1 - [P0] OC-01-numeric-converts :: rc=0 
+ok 2 - [P0] OC-02-schema-valid :: /tmp/grok19-3431928/n1.json
+ok 3 - [P1] OC-03-metadata :: course=Line through two points locale=en
+ok 4 - [P0] OC-04-numeric-check-matches-random-params :: statement a,b=4,-2 expected=6 want=6
+ok 5 - [P2] OC-05-hint-in-description :: Type ans1 = <your answer> in the input bar, then press Check. Hint: Multiply first.
+ok 6 - [P1] OC-06-draw-to-safe-cmds :: cmds=d1 = Segment((0, -5), (0, 5)) ; d2 = Segment((-5, 0), (5, 0)) ; d3 = Point({4, -2})
+ok 7 - [P0] OC-07-deterministic-seed :: same seed -> identical bytes
+ok 8 - [P1] OC-08-nonnumeric-object-exists-warned :: out=warning: nonnumeric_GROK_V1.oef: answer 1 (menu) not numeric - emitted as object_exists
+ok 9 - [P0] OC-09-no-scripting-emitted :: actions=d1 = Segment((0, 0), (1, 1))
+ok 10 - [P0] OC-10-directory-input-multi-chapter :: chapters=3 out=warning: broken_GROK_V1.oef: skipped: unbalanced braces at offset 25 | warning: empty_GROK_V1.oef: skipped: no \statement and no \answer | warning: nonnumeric_GROK_V1.oef: answer 1 (menu) not numeric - emitted as object_exists
+ok 11 - [P1] OC-11-broken-65 :: rc=65
+ok 12 - [P1] OC-12-empty-65 :: rc=65
+ok 13 - [P1] OC-13-missing-66 :: rc=66
+ok 14 - [P1] OC-14-usage-64 :: rc=64
+ok 15 - [P2] OC-15-latin1-decoded :: course=Équation
+ok 16 - [P2] OC-16-corpus-schema-valid # SKIP SKIP reason: set OEF_CORPUS=<dir or .txt list> to sweep real OEF files
+
+PASS: 15 FAIL: 0 SKIP: 1
+# CSV: /workspace/AlgoGebra/wt-prod-2f24a7e/03-RCP-Spike/tests/results/20261103_094825-grok-bot-vm-419969949/19_OefConverter_GROK_V1.csv

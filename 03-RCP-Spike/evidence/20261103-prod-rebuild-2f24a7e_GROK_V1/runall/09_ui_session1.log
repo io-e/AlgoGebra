@@ -1,0 +1,180 @@
+Run 20261103-094904-3425985 log /workspace/AlgoGebra/image-prod-2f24a7e/GeoGebraPlus-RCP-0.1.0-linux-gtk-x86_64/logs/launch-20261103-094904-3425985.log
+WARNING: Using incubator modules: jdk.incubator.vector
+[GeoGebraPlus] Host bundle ACTIVE; id=67
+[GeoGebraPlus] Registered external engine pari; available=true
+[GeoGebraPlus] Registered external engine maxima; available=true
+[GeoGebraPlus] Registered external engine gnuplot; available=true
+[GeoGebraPlus] IApplication.start() — D-02 entry
+[GeoGebraPlus] Runtime: 25.0.5+8-LTS; OS=Linux/amd64
+[GeoGebraPlus] JogAmp boot delegation=null
+[GeoGebraPlus] Normalized lazy bundle to RESOLVED for D-02: com.sun.jna
+[GeoGebraPlus] D-02 D-03-set check: expected=50, found=50, ACTIVE=0, RESOLVED=50, unresolved/other=0, resolveBundles=true
+[GeoGebraPlus] D-02 PASS
+[GeoGebraPlus] GeoGebra desktop logger initialized for embedded AppD
+(java:3426016): dbind-WARNING **: 09:49:05.113: AT-SPI: Error retrieving accessibility bus address: org.freedesktop.DBus.Error.ServiceUnknown: The name org.a11y.Bus was not provided by any .service files
+[GeoGebraPlus] GIAC DLL loaded from product classpath: /tmp/geogebraplus-giac-7790702605502410181/libjavagiac64.so
+[GeoGebraPlus] D-05 GIAC natives preloaded in owning bundle class loader: org.eclipse.osgi.internal.loader.EquinoxClassLoader@284b5e1[org.geogebra.migration.shared.giac.jni:5.4.934.0(id=48)]
+[GeoGebraPlus] GlueGen native loaded from product classpath: /tmp/geogebraplus-gluegen-10665128938952844651/libgluegen_rt.so
+[GeoGebraPlus] D-05 GlueGen natives preloaded in owning bundle class loader: org.eclipse.osgi.internal.loader.EquinoxClassLoader@5fd56f6a[org.geogebra.migration.external.org.jogamp.gluegen.gluegen-rt:2.6.0(id=40)]
+[GeoGebraPlus] JOGL native loaded from product classpath: /tmp/geogebraplus-jogl-2593415618636715844/libnativewindow_awt.so
+[GeoGebraPlus] JOGL native loaded from product classpath: /tmp/geogebraplus-jogl-5492074745881090335/libnativewindow_x11.so
+[GeoGebraPlus] JOGL native loaded from product classpath: /tmp/geogebraplus-jogl-3735249758451537283/libnewt_head.so
+[GeoGebraPlus] JOGL native loaded from product classpath: /tmp/geogebraplus-jogl-18220280844988795859/libjogl_desktop.so
+[GeoGebraPlus] JOGL native loaded from product classpath: /tmp/geogebraplus-jogl-15393995130206183648/libjogl_mobile.so
+[GeoGebraPlus] D-05 JOGL natives preloaded in owning bundle class loader: org.eclipse.osgi.internal.loader.EquinoxClassLoader@69a5bbf5[org.geogebra.migration.external.org.jogamp.jogl.jogl-all:2.6.0(id=41)]
+[GeoGebraPlus] CAS factory prototype installed: org.geogebra.desktop.factories.CASFactoryD
+[GeoGebraPlus] System-loader GIAC DLL resource=null
+GeoGebra 5.4.934.0 20 October 2026 Java 25.0.5-64bit
+9:49:05.445 DEBUG: org.geogebra.desktop.main.AppD.<init>[457]: runningFromJar=false
+9:49:05.446 DEBUG: org.geogebra.desktop.main.AppD.<init>[462]: Not setting up logging via LogManager
+9:49:05.601 DEBUG: org.geogebra.common.kernel.Kernel.printAttachedViews[3732]: Registered views (1): 1
+9:49:05.637 DEBUG: org.geogebra.common.gui.Layout.initializeDefaultPerspectives[94]: CAS support: true
+9:49:05.688 DEBUG: org.geogebra.common.kernel.Kernel.printAttachedViews[3732]: Registered views (2): 1, 42
+9:49:05.725 DEBUG: org.geogebra.common.io.MyXMLHandler.startEuclidianView3DElement[747]: TODO : warn that it's a 3D file
+9:49:05.725 DEBUG: org.geogebra.common.io.MyXMLHandler.startEuclidianView3DElement[747]: TODO : warn that it's a 3D file
+9:49:05.725 DEBUG: org.geogebra.common.io.MyXMLHandler.startEuclidianView3DElement[747]: TODO : warn that it's a 3D file
+9:49:05.725 DEBUG: org.geogebra.common.io.MyXMLHandler.startEuclidianView3DElement[747]: TODO : warn that it's a 3D file
+9:49:05.726 DEBUG: org.geogebra.common.io.MyXMLHandler.startEuclidianView3DElement[747]: TODO : warn that it's a 3D file
+9:49:05.726 DEBUG: org.geogebra.common.io.MyXMLHandler.startEuclidianView3DElement[747]: TODO : warn that it's a 3D file
+9:49:05.726 DEBUG: org.geogebra.common.io.MyXMLHandler.startEuclidianView3DElement[747]: TODO : warn that it's a 3D file
+9:49:05.726 DEBUG: org.geogebra.common.io.MyXMLHandler.startEuclidianView3DElement[747]: TODO : warn that it's a 3D file
+9:49:05.726 DEBUG: org.geogebra.common.io.MyXMLHandler.startEuclidianView3DElement[747]: TODO : warn that it's a 3D file
+9:49:05.727 ERROR: org.geogebra.desktop.gui.layout.DockManagerD.applyPerspective[180]: Adding null panel
+9:49:05.909 DEBUG: org.geogebra.common.kernel.Kernel.printAttachedViews[3732]: Registered views (3): 1, 42, 2
+9:49:05.923 WARN: org.geogebra.desktop.main.AppD.setVersionCheckAllowed[895]: Option versionCheckAllow not recognized : 
+9:49:05.923 INFO: org.geogebra.desktop.main.GeoGebraPreferencesD.loadVersionCheckAllow[201]: No system preferences
+[GeoGebraPlus] D-04 embedded AppD full-GUI mode=true (spike adapter; GeoGebraPanel constructs AppD with minimal-GUI mode)
+[GeoGebraPlus] D-04 GeoGebraPanel embedded in SWT_AWT shell
+[GeoGebraPlus] D-05 CAS enabled=true; factory=org.geogebra.desktop.factories.CASFactoryD (test adapter uses reflection; not a proposed public API)
+[GeoGebraPlus] D-05 GIAC JNI host-loader native loaded=true
+9:49:06.113 DEBUG: org.geogebra.desktop.cas.giac.CASgiacD.<clinit>[44]: Loading Giac dynamic library
+9:49:06.113 DEBUG: org.geogebra.desktop.cas.giac.CASgiacD.<clinit>[59]: Loading Giac dynamic library: javagiac64
+9:49:06.115 WARN: org.geogebra.desktop.util.UtilD.delete[243]: Could not delete /tmp/libjavagiac640.3006810248986388.so
+9:49:06.279 DEBUG: org.geogebra.desktop.cas.giac.CASgiacD.<clinit>[85]: Giac dynamic library loaded
+============== restarted ===============
+9:49:06.286 DEBUG: org.geogebra.common.cas.giac.CASgiacB.debug[77]: giac evalRaw input: evalfa([[ggbexpandarg:=((x)+(1))^(2)],when(contains(ggbexpandarg,i),normal(real(ggbexpandarg))+normal(i*im(ggbexpandarg)),when(inString(string(simplify(ggbexpandarg)), "sqrt"),normal(expand(ggbfactor(ggbexpandarg,x,0,1))),normal(lnexpand(ggbexpandarg))))][1])
+9:49:06.287 DEBUG: org.geogebra.common.cas.giac.CASgiacB.debug[77]: giac evalRaw output: x^2+2*x+1
+[GeoGebraPlus] D-05 GIAC native loaded=true
+[GeoGebraPlus] D-05 CAS result: x² + 2x + 1
+============== restarted ===============
+9:49:06.291 DEBUG: org.geogebra.common.cas.giac.CASgiacB.debug[77]: giac evalRaw input: evalfa([[[ggbevalarg:=0/0],[ggbevalarg:=(1)+(1)],[ggbevalans:=regroup(normal(ggbevalarg))],[ggbevalans2:=regroup(ggbevalarg)]],when(length(""+ggbevalans)<=length(""+ggbevalans2),ggbevalans,ggbevalans2)][1])
+9:49:06.291 DEBUG: org.geogebra.common.cas.giac.CASgiacB.debug[77]: giac evalRaw output: 2
+[GeoGebraPlus] D-05 CAS smoke 1+1: 2
+============== restarted ===============
+9:49:06.292 DEBUG: org.geogebra.common.cas.giac.CASgiacB.debug[77]: giac evalRaw input: evalfa([[[ggbevalarg:=0/0],[ggbevalarg:=(x)+(1)],[ggbevalans:=regroup(normal(ggbevalarg))],[ggbevalans2:=regroup(ggbevalarg)]],when(length(""+ggbevalans)<=length(""+ggbevalans2),ggbevalans,ggbevalans2)][1])
+9:49:06.292 DEBUG: org.geogebra.common.cas.giac.CASgiacB.debug[77]: giac evalRaw output: x+1
+[GeoGebraPlus] D-05 CAS smoke x+1: x + 1
+9:49:06.297 DEBUG: org.geogebra.common.cas.giac.CASgiac.evaluateRaw[599]: input = 1+1
+============== restarted ===============
+9:49:06.297 DEBUG: org.geogebra.common.cas.giac.CASgiacB.debug[77]: giac evalRaw input: evalfa(1+1)
+9:49:06.297 DEBUG: org.geogebra.common.cas.giac.CASgiacB.debug[77]: giac evalRaw output: 2
+9:49:06.297 DEBUG: org.geogebra.common.cas.giac.CASgiac.evaluateRaw[624]: result = 2
+[GeoGebraPlus] D-05 direct GIAC smoke: org.geogebra.desktop.cas.giac.CASgiacD(1+1) -> 2
+[GeoGebraPlus] D-05 CAS ASSERTION PASS: normalized=x^2+2x+1
+GeoGebra 5.4.934.0 20 October 2026 Java 25.0.5-64bit
+9:49:06.306 DEBUG: org.geogebra.desktop.main.AppD.<init>[457]: runningFromJar=false
+9:49:06.306 DEBUG: org.geogebra.desktop.main.AppD.<init>[462]: Not setting up logging via LogManager
+9:49:06.348 DEBUG: org.geogebra.common.kernel.Kernel.printAttachedViews[3732]: Registered views (1): 1
+9:49:06.349 DEBUG: org.geogebra.common.gui.Layout.initializeDefaultPerspectives[94]: CAS support: true
+9:49:06.403 DEBUG: org.geogebra.common.kernel.Kernel.printAttachedViews[3732]: Registered views (2): 1, 42
+9:49:06.462 DEBUG: org.geogebra.common.kernel.Kernel.printAttachedViews[3732]: Registered views (3): 1, 42, 2
+9:49:06.466 WARN: org.geogebra.desktop.main.AppD.setVersionCheckAllowed[895]: Option versionCheckAllow not recognized : 
+9:49:06.466 INFO: org.geogebra.desktop.main.GeoGebraPreferencesD.loadVersionCheckAllow[201]: No system preferences
+9:49:06.525 WARN: org.geogebra.common.geogebra3D.euclidian3D.EuclidianView3D.logInited[373]: !!! 3D View being initialized !!!
+9:49:06.531 DEBUG: org.geogebra.desktop.geogebra3D.euclidian3D.opengl.RendererCheckGLVersionD.<init>[85]: create jogl -- use Canvas : true
+9:49:06.532 DEBUG: org.geogebra.desktop.geogebra3D.euclidian3D.opengl.RendererCheckGLVersionD.<init>[87]: create jogl -- default profile
+9:49:06.881 DEBUG: org.geogebra.desktop.geogebra3D.euclidian3D.opengl.RendererCheckGLVersionD.<init>[92]: create 3D component -- use Canvas : true
+9:49:06.887 DEBUG: org.geogebra.desktop.geogebra3D.euclidian3D.opengl.RendererCheckGLVersionD.<init>[96]: add gl event listener
+9:49:06.887 DEBUG: org.geogebra.desktop.geogebra3D.euclidian3D.opengl.RendererCheckGLVersionD.<init>[99]: create animator
+9:49:06.889 DEBUG: org.geogebra.desktop.geogebra3D.euclidian3D.opengl.RendererCheckGLVersionD.<init>[104]: start animator
+9:49:06.890 DEBUG: org.geogebra.common.kernel.Kernel.printAttachedViews[3732]: Registered views (4): 1, 42, 2, 512
+[GeoGebraPlus] D-05 3D point command accepted=true; 3D view initialized=true
+[GeoGebraPlus] D-05 3D note: GeoGebraPanel constructs the 2D AppD; the 3D proof uses an upstream App3D instance in the second SWT_AWT pane
+(SWT:3426016): Gdk-WARNING **: 09:49:06.963: XSetErrorHandler() called with a GDK error trap pushed. Don't do that.
+9:49:07.206 DEBUG: org.geogebra.desktop.geogebra3D.euclidian3D.opengl.RendererCheckGLVersionD.initCheckShaders[147]: Init on Thread[#51,AWT-EventQueue-0,6,main]
+Chosen GLCapabilities: GLCaps[glx vid 0x21, fbc 0x44: rgba 8/8/8/8, opaque, accum-rgba 0/0/0/0, dp/st/ms 24/8/0, dbl, mono  , sw, GLProfile[GL4bc/GL4bc.sw], on-scr[.]]
+double buffered: true
+stereo: false
+stencil: 8
+INIT GL IS: jogamp.opengl.gl4.GL4bcImpl
+GL_VENDOR: Mesa
+GL_RENDERER: llvmpipe (LLVM 19.1.7, 256 bits)
+GL_VERSION: 4.5 (Compatibility Profile) Mesa 25.0.7-2+deb13u1
+isGL2ES2: true
+9:49:07.207 DEBUG: org.geogebra.desktop.geogebra3D.euclidian3D.opengl.RendererCheckGLVersionD.initCheckShaders[166]: ==== GL version is 4.5 (Compatibility Profile) Mesa 25.0.7-2+deb13u1 which means GL>=4
+9:49:07.208 DEBUG: org.geogebra.desktop.geogebra3D.euclidian3D.opengl.RendererImplShadersD.<init>[65]: Renderer with shaders created (shaders checked ok)
+9:49:07.209 DEBUG: org.geogebra.desktop.geogebra3D.euclidian3D.opengl.RendererCheckGLVersionD.init[132]: openGL version : 4.5 (Compatibility Profile) Mesa 25.0.7-2+deb13u1, vbo supported : true
+9:49:07.220 DEBUG: org.geogebra.desktop.geogebra3D.euclidian3D.opengl.RendererImplShadersD.compileShadersProgram[107]: Vertex shader compiled
+9:49:07.220 DEBUG: org.geogebra.desktop.geogebra3D.euclidian3D.opengl.RendererImplShadersD.compileShadersProgram[128]: Fragment shader compiled
+(SWT:3426016): Gdk-WARNING **: 09:49:10.855: XSetErrorHandler() called with a GDK error trap pushed. Don't do that.
+9:49:10.855 DEBUG: org.geogebra.desktop.euclidian.event.MouseEventD.<init>[33]: possible missing release()
+9:49:12.032 DEBUG: org.geogebra.desktop.gui.inputbar.AlgebraInputD$AlgebraInputErrorLogger.log[544]: Preview:Please check your input
+9:49:12.062 DEBUG: org.geogebra.desktop.gui.inputbar.AlgebraInputD$AlgebraInputErrorLogger.log[544]: Preview:Please check your input
+9:49:12.124 DEBUG: org.geogebra.desktop.gui.inputbar.AlgebraInputD$AlgebraInputErrorLogger.log[544]: Preview:Please check your input
+9:49:12.257 DEBUG: org.geogebra.common.kernel.ScheduledPreviewFromInputBar.run[177]: preview for: A=(1,2)
+9:49:12.912 ERROR: org.geogebra.common.util.debug.Log.doRead[354]: Reading text: Point A = open parenthesis 1 comma 2 close parenthesis Press the arrow keys to move the object Press / to hide object Press enter to edit Press tab to select next object
+9:49:12.913 DEBUG: org.geogebra.common.kernel.ScheduledPreviewFromInputBar.setInput[104]: empty
+9:49:16.386 DEBUG: org.geogebra.desktop.gui.inputbar.AlgebraInputD$AlgebraInputErrorLogger.log[544]: Preview:Please check your input
+9:49:16.419 DEBUG: org.geogebra.desktop.gui.inputbar.AlgebraInputD$AlgebraInputErrorLogger.log[544]: Preview:Please check your input
+9:49:16.481 DEBUG: org.geogebra.desktop.gui.inputbar.AlgebraInputD$AlgebraInputErrorLogger.log[544]: Preview:Please check your input
+9:49:16.612 DEBUG: org.geogebra.common.kernel.ScheduledPreviewFromInputBar.run[177]: preview for: B=(3,4)
+9:49:17.257 ERROR: org.geogebra.common.util.debug.Log.doRead[354]: Reading text: Point B = open parenthesis 3 comma 4 close parenthesis Press the arrow keys to move the object Press / to hide object Press enter to edit Press tab to select next object
+9:49:17.257 DEBUG: org.geogebra.common.kernel.ScheduledPreviewFromInputBar.setInput[104]: empty
+9:49:20.806 DEBUG: org.geogebra.desktop.gui.inputbar.AlgebraInputD$AlgebraInputErrorLogger.log[544]: Preview:Please check your input
+9:49:20.864 DEBUG: org.geogebra.desktop.gui.inputbar.AlgebraInputD$AlgebraInputErrorLogger.log[544]: Preview:Please check your input
+9:49:20.997 DEBUG: org.geogebra.common.kernel.ScheduledPreviewFromInputBar.run[177]: preview for: f(x)=x^2
+[LaTeX] loadFont():fonts/latin/optional/jlm_cmssbx10.ttf
+9:49:21.673 ERROR: org.geogebra.common.util.debug.Log.doRead[354]: Reading text: Function f Press / to hide object Press enter to edit Press tab to select next object
+9:49:21.673 DEBUG: org.geogebra.common.kernel.ScheduledPreviewFromInputBar.setInput[104]: empty
+9:49:25.066 DEBUG: org.geogebra.desktop.gui.inputbar.AlgebraInputD$AlgebraInputErrorLogger.log[544]: Preview:Please check your input
+9:49:25.198 DEBUG: org.geogebra.common.kernel.ScheduledPreviewFromInputBar.run[177]: preview for: C=5
+9:49:25.818 ERROR: org.geogebra.common.util.debug.Log.doRead[354]: Reading text: Numeric C Press tab to select next object
+9:49:25.818 DEBUG: org.geogebra.common.kernel.ScheduledPreviewFromInputBar.setInput[104]: empty
+9:49:29.395 DEBUG: org.geogebra.desktop.gui.inputbar.AlgebraInputD$AlgebraInputErrorLogger.log[544]: Preview:Please check your input
+9:49:29.484 DEBUG: org.geogebra.desktop.gui.inputbar.AlgebraInputD$AlgebraInputErrorLogger.log[544]: Preview:Please check your input
+9:49:29.615 DEBUG: org.geogebra.common.kernel.ScheduledPreviewFromInputBar.run[177]: preview for: g(x)=2x+1
+9:49:30.237 ERROR: org.geogebra.common.util.debug.Log.doRead[354]: Reading text: Function g Press / to hide object Press enter to edit Press tab to select next object
+9:49:30.237 DEBUG: org.geogebra.common.kernel.ScheduledPreviewFromInputBar.setInput[104]: empty
+9:49:33.807 DEBUG: org.geogebra.desktop.gui.inputfield.AutoCompleteTextFieldD.getSyntaxes[771]: Can't find syntax for: org.geogebra.common.util.MatchedString@2e794a3b
+9:49:33.808 DEBUG: org.geogebra.desktop.gui.inputfield.AutoCompleteTextFieldD.getSyntaxes[771]: Can't find syntax for: org.geogebra.common.util.MatchedString@58f7a4f7
+9:49:33.837 DEBUG: org.geogebra.desktop.gui.inputfield.AutoCompleteTextFieldD.getSyntaxes[771]: Can't find syntax for: org.geogebra.common.util.MatchedString@61ba6045
+9:49:33.868 DEBUG: org.geogebra.desktop.gui.inputfield.AutoCompleteTextFieldD.getSyntaxes[771]: Can't find syntax for: org.geogebra.common.util.MatchedString@ed92364
+9:49:33.898 DEBUG: org.geogebra.desktop.gui.inputfield.AutoCompleteTextFieldD.getSyntaxes[771]: Can't find syntax for: org.geogebra.common.util.MatchedString@353045a2
+9:49:33.930 DEBUG: org.geogebra.desktop.gui.inputfield.AutoCompleteTextFieldD.getSyntaxes[771]: Can't find syntax for: org.geogebra.common.util.MatchedString@19bf8bb7
+9:49:34.010 DEBUG: org.geogebra.desktop.gui.inputbar.AlgebraInputD$AlgebraInputErrorLogger.log[544]: Preview:Please check your input
+9:49:34.142 DEBUG: org.geogebra.common.kernel.ScheduledPreviewFromInputBar.run[177]: preview for: Segment(A,B)
+9:49:34.879 ERROR: org.geogebra.common.util.debug.Log.doRead[354]: Reading text: Segment h Press / to hide object Press enter to edit Press tab to select next object
+9:49:34.880 DEBUG: org.geogebra.common.kernel.ScheduledPreviewFromInputBar.setInput[104]: empty
+9:49:38.403 DEBUG: org.geogebra.desktop.gui.inputbar.AlgebraInputD$AlgebraInputErrorLogger.log[544]: Preview:Please check your input
+9:49:38.437 DEBUG: org.geogebra.desktop.gui.inputbar.AlgebraInputD$AlgebraInputErrorLogger.log[544]: Preview:Lexical error at line 1, column 4.  Encountered: <EOF> after: ""
+9:49:38.467 DEBUG: org.geogebra.desktop.gui.inputbar.AlgebraInputD$AlgebraInputErrorLogger.log[544]: Preview:Lexical error at line 1, column 5.  Encountered: <EOF> after: ""
+9:49:38.498 DEBUG: org.geogebra.desktop.gui.inputbar.AlgebraInputD$AlgebraInputErrorLogger.log[544]: Preview:Lexical error at line 1, column 6.  Encountered: <EOF> after: "\"\u00e9\u00e0"
+9:49:38.530 DEBUG: org.geogebra.desktop.gui.inputbar.AlgebraInputD$AlgebraInputErrorLogger.log[544]: Preview:Lexical error at line 1, column 7.  Encountered: <EOF> after: "\"\u00e9\u00e0\u00fc"
+9:49:38.562 DEBUG: org.geogebra.desktop.gui.inputbar.AlgebraInputD$AlgebraInputErrorLogger.log[544]: Preview:Lexical error at line 1, column 8.  Encountered: <EOF> after: "\"\u00e9\u00e0\u00fc\u20ac"
+9:49:38.693 DEBUG: org.geogebra.common.kernel.ScheduledPreviewFromInputBar.run[177]: preview for: t="éàü€"
+9:49:39.316 ERROR: org.geogebra.common.util.debug.Log.doRead[354]: Reading text: éàü€ Press / to hide object Press enter to edit Press tab to select next object
+9:49:39.317 DEBUG: org.geogebra.common.kernel.ScheduledPreviewFromInputBar.setInput[104]: empty
+9:49:42.837 DEBUG: org.geogebra.desktop.gui.inputbar.AlgebraInputD$AlgebraInputErrorLogger.log[544]: Preview:Please check your input
+9:49:42.868 DEBUG: org.geogebra.desktop.gui.inputbar.AlgebraInputD$AlgebraInputErrorLogger.log[544]: Preview:Please check your input
+9:49:42.898 DEBUG: org.geogebra.desktop.gui.inputbar.AlgebraInputD$AlgebraInputErrorLogger.log[544]: Preview:Please check your input
+9:49:42.931 DEBUG: org.geogebra.desktop.gui.inputbar.AlgebraInputD$AlgebraInputErrorLogger.log[544]: Preview:Please check your input
+9:49:43.653 WARN: org.geogebra.common.main.error.ErrorHelper.handleException[51]: Parse exception: Unexpected next token: 
+9:49:56.952 DEBUG: org.geogebra.common.kernel.ScheduledPreviewFromInputBar.setInput[104]: empty
+9:49:57.478 DEBUG: org.geogebra.desktop.gui.inputbar.AlgebraInputD$AlgebraInputErrorLogger.log[544]: Preview:Please check your input
+9:49:57.509 DEBUG: org.geogebra.desktop.gui.inputbar.AlgebraInputD$AlgebraInputErrorLogger.log[544]: Preview:Please check your input
+9:49:57.571 DEBUG: org.geogebra.desktop.gui.inputbar.AlgebraInputD$AlgebraInputErrorLogger.log[544]: Preview:Please check your input
+9:49:57.702 DEBUG: org.geogebra.common.kernel.ScheduledPreviewFromInputBar.run[177]: preview for: P=(2,3)
+9:49:58.352 ERROR: org.geogebra.common.util.debug.Log.doRead[354]: Reading text: Point P = open parenthesis 2 comma 3 close parenthesis Press the arrow keys to move the object Press / to hide object Press enter to edit Press tab to select next object
+9:49:58.352 DEBUG: org.geogebra.common.kernel.ScheduledPreviewFromInputBar.setInput[104]: empty
+9:50:01.495 DEBUG: org.geogebra.desktop.gui.inputbar.AlgebraInputD$AlgebraInputErrorLogger.log[544]: Preview:Please check your input
+9:50:01.527 DEBUG: org.geogebra.desktop.gui.inputbar.AlgebraInputD$AlgebraInputErrorLogger.log[544]: Preview:Please check your input
+9:50:01.588 DEBUG: org.geogebra.desktop.gui.inputbar.AlgebraInputD$AlgebraInputErrorLogger.log[544]: Preview:Please check your input
+9:50:01.719 DEBUG: org.geogebra.common.kernel.ScheduledPreviewFromInputBar.run[177]: preview for: Q=(4,1)
+9:50:03.670 DEBUG: org.geogebra.common.kernel.ScheduledPreviewFromInputBar.setInput[104]: empty
+9:50:05.272 DEBUG: org.geogebra.common.kernel.ScheduledPreviewFromInputBar.run[177]: preview for: Q=(4,1)
+9:50:05.654 DEBUG: org.geogebra.common.kernel.Construction.has3DObjects[2691]: found 3D geo: point3d
+9:50:05.654 ERROR: org.geogebra.common.kernel.Kernel.getKernelXML[4471]: file has 3D objects
+9:50:05.656 DEBUG: org.geogebra.common.kernel.ScheduledPreviewFromInputBar.setInput[104]: empty
+X11Util.Display: Shutdown (JVM shutdown: true, open (no close attempt): 1/1, reusable (open, marked uncloseable): 0, pending (open in creation order): 1)
+X11Util: Open X11 Display Connections: 1
+X11Util: Open[0]: NamedX11Display[:97, 0x7f9afc88d900, refCount 1, unCloseable false]
