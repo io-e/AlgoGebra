@@ -337,7 +337,7 @@ step: {
 | Q-W9a | Which LLM? | **Both.** Local model (Ollama/llama.cpp) handles simple questions (low latency, no cost, offline). Harder questions are routed to a remote API (Claude, etc.). Routing heuristic: complexity of the question determines local vs. remote. | **Decided** |
 | Q-W9b | RAG source? | **Markdown course material with an index.** The teacher provides the course as Markdown files. The teacher specifies the relevant chapter/section **inside the OEF** (via a tag), so the RAG scope is per-exercise, not the entire corpus. | **Decided** |
 | Q-W9c | LLM/RAG phase? | **Phase 3.** The resolution tree + help JSON templates are MVP/Phase 2. LLM Q&A and RAG are Phase 3 — they add significant infrastructure (model hosting, embedding, retrieval) that does not block the core exercise flow. | **Decided** |
-| Q-W9d | Help JSON template format? | **CDC work.** The template can contain either a structured resolution process (step-by-step with variables) or plain text. Both forms must be supported. Schema to be defined in the WIMS CDC. | **Open — CDC work** |
+| Q-W9d | Help JSON template format? | **Schema defined:** `Schema_Help_Template_JSON_CLAUDE_V1.json`. Two content types: `"process"` (step-by-step resolution tree with per-node explanations, actions, engine commands, sub-steps) and `"text"` (flat multilingual text). Variables via `{{name}}` placeholders. Course schema extended with `help` and `engine` fields on steps. Example: `Example_Help_Template_CLAUDE_V1.json`. | **Done** |
 
 ---
 
@@ -354,7 +354,7 @@ step: {
 | Q-W6 Fallback | Exploration: fallback OK. Grading: error if engine missing | MVP | **Decided** |
 | Q-W7 wims4win | Local server for students (Shadow PC / CPGE) and teachers | MVP | **Decided** |
 | Q-W8 Scope | Protocol + engine contracts; course tree owns lifecycle | MVP | **Decided** |
-| Q-W9 Resolution process | Teacher provides resolution tree JSON; per-node help (multilingual + template + LLM/RAG); right panel → WIMS | MVP (tree + help templates), Phase 3 (LLM/RAG) | **Decided — Q-W9d (template schema) open for CDC** |
+| Q-W9 Resolution process | Teacher provides resolution tree JSON; per-node help (multilingual + template + LLM/RAG); right panel → WIMS | MVP (tree + help templates), Phase 3 (LLM/RAG) | **Decided — all sub-questions closed** |
 | Q-W9a LLM routing | Local for simple, remote (Claude) for hard questions | Phase 3 | **Decided** |
 | Q-W9b RAG source | Markdown course + index; teacher specifies chapter in OEF | Phase 3 | **Decided** |
 | Q-W9c LLM phase | Phase 3 | Phase 3 | **Decided** |

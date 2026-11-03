@@ -1,0 +1,194 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://geogebraplus.local/schemas/help-template/v1",
+  "$comment": "CLAUDE_V1 — GeoGebraPlus help template schema. Teacher-authored resolution process or text help, loaded by AlgoGebra from OEF \\help{file.json} tags. See QA_WIMS_Integration_Owner_ALF_V2.md Q-W9.",
+  "title": "GeoGebraPlus Help Template",
+  "description": "A help file linked from an OEF exercise. Contains either a structured resolution process (step-by-step) or plain text help. Variables use {{name}} placeholders injected from OEF random values, student context, and locale at conversion time and/or runtime.",
+  "type": "object",
+  "required": ["templateVersion", "content"],
+  "additionalProperties": false,
+  "properties": {
+    "templateVersion": {
+      "type": "string",
+      "const": "1.0"
+    },
+    "id": {
+      "type": "string",
+      "maxLength": 100,
+      "pattern": "^[a-zA-Z0-9_-]+$",
+      "description": "Template identifier. Matches the filename stem (e.g. 'aide_derivation' for aide_derivation.json). Used to reference shared library templates."
+    },
+    "title": {
+      "$ref": "#/$defs/i18nString",
+      "description": "Human-readable title for this help, displayed in the help panel header."
+    },
+    "variables": {
+      "type": "array",
+      "maxItems": 50,
+      "items": {
+        "type": "string",
+        "maxLength": 50,
+        "pattern": "^[a-zA-Z_][a-zA-Z0-9_]*$"
+      },
+      "description": "Declares which OEF variables this template uses as {{name}} placeholders. At conversion time, the converter injects seed-resolved values. At runtime, AlgoGebra re-injects session values. Undeclared variables in the template text are left as-is (safe default)."
+    },
+    "defaults": {
+      "type": "object",
+      "maxProperties": 50,
+      "additionalProperties": {
+        "oneOf": [
+          { "type": "string", "maxLength": 200 },
+          { "type": "number" }
+        ]
+      },
+      "description": "Default values for declared variables, baked in at conversion time. Runtime injection overrides these. Keys must match entries in the 'variables' array."
+    },
+    "content": {
+      "oneOf": [
+        { "$ref": "#/$defs/textContent" },
+        { "$ref": "#/$defs/processContent" }
+      ],
+      "description": "Help content: either plain text or a structured resolution process."
+    },
+    "courseRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "file": {
+          "type": "string",
+          "maxLength": 500,
+          "description": "Path to the Markdown course file (relative to exercise directory or shared library)."
+        },
+        "chapter": {
+          "type": "string",
+          "maxLength": 200,
+          "description": "Chapter or section identifier within the course file. Teacher specifies this in the OEF to scope RAG queries (Phase 3)."
+        },
+        "index": {
+          "type": "string",
+          "maxLength": 500,
+          "description": "Path to the course index file. Used by RAG to locate relevant sections (Phase 3)."
+        }
+      },
+      "description": "Reference to the student's course material for RAG (Phase 3). Declared now so the converter can populate it from OEF tags; ignored until LLM/RAG is implemented."
+    }
+  },
+  "$defs": {
+    "i18nString": {
+      "type": "object",
+      "minProperties": 1,
+      "maxProperties": 10,
+      "propertyNames": {
+        "pattern": "^[a-z]{2}(_[A-Z]{2})?$"
+      },
+      "additionalProperties": {
+        "type": "string",
+        "maxLength": 5000
+      },
+      "description": "Multilingual string. Keys are locale codes (e.g. 'fr', 'en', 'de'). {{variable}} placeholders are resolved at injection time. Supports LaTeX between \\( ... \\) delimiters for math rendering."
+    },
+    "textContent": {
+      "type": "object",
+      "required": ["type", "body"],
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "type": "string",
+          "const": "text"
+        },
+        "body": {
+          "$ref": "#/$defs/i18nString",
+          "description": "Help text displayed to the student. Supports {{variable}} placeholders and LaTeX math."
+        }
+      },
+      "description": "Plain text help content. Displayed in the help panel as formatted text with math rendering."
+    },
+    "processContent": {
+      "type": "object",
+      "required": ["type", "steps"],
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "type": "string",
+          "const": "process"
+        },
+        "steps": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 20,
+          "items": { "$ref": "#/$defs/helpStep" },
+          "description": "Resolution steps. Each is a transformation in the mathematical process. Displayed as a sub-tree in the help panel."
+        }
+      },
+      "description": "Structured resolution process. The teacher encodes the step-by-step method for solving this type of problem."
+    },
+    "helpStep": {
+      "type": "object",
+      "required": ["title", "explanation"],
+      "additionalProperties": false,
+      "properties": {
+        "title": {
+          "$ref": "#/$defs/i18nString",
+          "description": "Step title displayed in the help tree node."
+        },
+        "explanation": {
+          "$ref": "#/$defs/i18nString",
+          "description": "Teacher-authored explanation of this transformation step. Supports {{variable}} placeholders and LaTeX."
+        },
+        "hint": {
+          "$ref": "#/$defs/i18nString",
+          "description": "Additional hint, shown on demand (student clicks 'hint'). Less detailed than explanation."
+        },
+        "actions": {
+          "type": "array",
+          "maxItems": 10,
+          "items": { "$ref": "#/$defs/helpAction" },
+          "description": "GeoGebra commands to visualize this step in the workspace. Executed when the student clicks 'Show' on this help step. Subject to the same security validation as course actions (command allowlist, Sequence budget)."
+        },
+        "engine": {
+          "type": "string",
+          "enum": ["giac", "pari", "maxima", "gnuplot", "gap"],
+          "description": "Which computation engine to use for this step's actions and checks. Default: 'giac' (GeoGebra native CAS). Other engines require the binary on PATH (D-ENG-02)."
+        },
+        "engineCommand": {
+          "type": "string",
+          "maxLength": 2000,
+          "description": "Command to send to the named engine for this step. Supports {{variable}} placeholders. Subject to WIMS security filters (D-ENG-03). Result is displayed to the student as computed help."
+        },
+        "expectedResult": {
+          "$ref": "#/$defs/i18nString",
+          "description": "The expected result of this step, shown after the student attempts it. Supports {{variable}} placeholders. Example: 'f\\'(x) = 2x + {{a}}'."
+        },
+        "children": {
+          "type": "array",
+          "maxItems": 10,
+          "items": { "$ref": "#/$defs/helpStep" },
+          "description": "Sub-steps for this transformation. Maximum nesting depth: 3."
+        }
+      }
+    },
+    "helpAction": {
+      "type": "object",
+      "required": ["directive", "value"],
+      "additionalProperties": false,
+      "properties": {
+        "directive": {
+          "type": "string",
+          "enum": ["CMD", "CAS", "VAL"],
+          "description": "Action type. Same as course actions but restricted to CMD/CAS/VAL — no OPEN/SAVE/PNG in help context (help does not load files or export)."
+        },
+        "value": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2000,
+          "description": "Command string with {{variable}} placeholders. Validated through the same allowlist and security checks as course actions."
+        },
+        "target": {
+          "type": "string",
+          "enum": ["2d", "3d"],
+          "default": "2d"
+        }
+      }
+    }
+  }
+}

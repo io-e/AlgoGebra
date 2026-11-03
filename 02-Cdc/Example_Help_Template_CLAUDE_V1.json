@@ -1,0 +1,104 @@
+{
+  "$comment": "CLAUDE_V1 — Example help template for a derivation exercise. Linked from OEF via \\help{aide_derivation.json}. See Schema_Help_Template_JSON_CLAUDE_V1.json.",
+  "templateVersion": "1.0",
+  "id": "aide_derivation",
+  "title": {
+    "fr": "Méthode : dérivation d'un polynôme",
+    "en": "Method: polynomial derivation"
+  },
+  "variables": ["a", "b", "s"],
+  "defaults": {
+    "a": 3,
+    "b": -1,
+    "s": 5
+  },
+  "content": {
+    "type": "process",
+    "steps": [
+      {
+        "title": {
+          "fr": "Identifier la fonction",
+          "en": "Identify the function"
+        },
+        "explanation": {
+          "fr": "On a \\( f(x) = x^2 + {{a}}x + {{b}} \\). C'est un polynôme de degré 2.",
+          "en": "We have \\( f(x) = x^2 + {{a}}x + {{b}} \\). This is a degree-2 polynomial."
+        },
+        "actions": [
+          {"directive": "CMD", "value": "f(x) = x^2 + {{a}}*x + {{b}}"}
+        ]
+      },
+      {
+        "title": {
+          "fr": "Appliquer la règle de dérivation",
+          "en": "Apply the derivation rule"
+        },
+        "explanation": {
+          "fr": "Règle : \\( (x^n)' = n \\cdot x^{n-1} \\). On dérive terme par terme.",
+          "en": "Rule: \\( (x^n)' = n \\cdot x^{n-1} \\). Derive term by term."
+        },
+        "hint": {
+          "fr": "La dérivée d'une constante est 0.",
+          "en": "The derivative of a constant is 0."
+        },
+        "engine": "giac",
+        "engineCommand": "Derivative(x^2 + {{a}}*x + {{b}}, x)",
+        "expectedResult": {
+          "fr": "\\( f'(x) = 2x + {{a}} \\)",
+          "en": "\\( f'(x) = 2x + {{a}} \\)"
+        },
+        "children": [
+          {
+            "title": {
+              "fr": "Terme \\( x^2 \\)",
+              "en": "Term \\( x^2 \\)"
+            },
+            "explanation": {
+              "fr": "\\( (x^2)' = 2x \\)",
+              "en": "\\( (x^2)' = 2x \\)"
+            }
+          },
+          {
+            "title": {
+              "fr": "Terme \\( {{a}}x \\)",
+              "en": "Term \\( {{a}}x \\)"
+            },
+            "explanation": {
+              "fr": "\\( ({{a}}x)' = {{a}} \\)",
+              "en": "\\( ({{a}}x)' = {{a}} \\)"
+            }
+          },
+          {
+            "title": {
+              "fr": "Terme constant \\( {{b}} \\)",
+              "en": "Constant term \\( {{b}} \\)"
+            },
+            "explanation": {
+              "fr": "\\( ({{b}})' = 0 \\)",
+              "en": "\\( ({{b}})' = 0 \\)"
+            }
+          }
+        ]
+      },
+      {
+        "title": {
+          "fr": "Vérifier le résultat",
+          "en": "Verify the result"
+        },
+        "explanation": {
+          "fr": "On peut vérifier en calculant \\( f'(1) = 2(1) + {{a}} = {{s}} \\).",
+          "en": "We can verify by computing \\( f'(1) = 2(1) + {{a}} = {{s}} \\)."
+        },
+        "actions": [
+          {"directive": "CMD", "value": "g(x) = 2*x + {{a}}"},
+          {"directive": "CMD", "value": "A = Point({1, g(1)})"}
+        ]
+      }
+    ]
+  },
+  "courseRef": {
+    "file": "cours/analyse_L1.md",
+    "chapter": "3.2-derivation-polynomes",
+    "index": "cours/index.json"
+  }
+}

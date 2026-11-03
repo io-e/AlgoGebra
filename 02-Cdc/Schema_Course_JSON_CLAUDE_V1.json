@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://geogebraplus.local/schemas/course/v1",
-  "$comment": "CLAUDE_V1 — GeoGebraPlus course file schema. See Spec_Course_Security_CLAUDE_V1.md for security constraints.",
+  "$comment": "CLAUDE_V1_1 — GeoGebraPlus course file schema. See Spec_Course_Security_CLAUDE_V1_2.md for security constraints. V1_1 adds help and engine fields (Q-W9, GAP-1, GAP-2).",
   "title": "GeoGebraPlus Course",
   "description": "A hierarchical course definition for the GeoGebraPlus course tree panel (RCP and Web).",
   "type": "object",
@@ -96,6 +96,16 @@
           "maxItems": 50,
           "items": { "$ref": "#/$defs/step" },
           "description": "Sub-steps. Maximum nesting depth: 4 (chapter + 4 step levels = 5 total)."
+        },
+        "help": {
+          "$ref": "#/$defs/helpRef",
+          "description": "Help content for this step. Either inline text or a reference to an external help template JSON file (Schema_Help_Template_JSON_CLAUDE_V1.json). Displayed in the help panel when the student requests help on this step."
+        },
+        "engine": {
+          "type": "string",
+          "enum": ["giac", "pari", "maxima", "gnuplot", "gap"],
+          "default": "giac",
+          "description": "Which computation engine this step requires. 'giac' is the default (GeoGebra native CAS). Other engines are external (D-ENG-01..05): the binary must be on PATH, and the WIMS security filters apply."
         }
       }
     },
@@ -132,6 +142,46 @@
           "description": "Optional human-readable description of what this action does."
         }
       }
+    },
+    "helpRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "template": {
+          "type": "string",
+          "maxLength": 500,
+          "description": "Path to an external help template JSON file (relative to the course file). The file must conform to Schema_Help_Template_JSON_CLAUDE_V1.json. Example: 'aide_derivation.json'."
+        },
+        "inline": {
+          "type": "object",
+          "minProperties": 1,
+          "maxProperties": 10,
+          "propertyNames": {
+            "pattern": "^[a-z]{2}(_[A-Z]{2})?$"
+          },
+          "additionalProperties": {
+            "type": "string",
+            "maxLength": 5000
+          },
+          "description": "Inline multilingual help text. Keys are locale codes. Supports {{variable}} placeholders and LaTeX between \\( ... \\). Use this for simple text help; use 'template' for structured resolution processes."
+        },
+        "variables": {
+          "type": "object",
+          "maxProperties": 50,
+          "additionalProperties": {
+            "oneOf": [
+              { "type": "string", "maxLength": 200 },
+              { "type": "number" }
+            ]
+          },
+          "description": "Variable values to inject into the template or inline text. Overrides template defaults. Keys are variable names, values are the resolved OEF random values."
+        }
+      },
+      "oneOf": [
+        { "required": ["template"] },
+        { "required": ["inline"] }
+      ],
+      "description": "Help reference: either an external template file path or inline multilingual text. At least one of 'template' or 'inline' must be present."
     },
     "checkAction": {
       "type": "object",
