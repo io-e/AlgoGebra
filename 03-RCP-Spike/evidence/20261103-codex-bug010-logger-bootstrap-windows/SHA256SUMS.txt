@@ -1,0 +1,3 @@
+35fd6e3e0a35d03633dcb0ef209af67110a0916cc8e0da71d4d4344bbffecc88  host-logger-test.log
+5b4412738541184e84f6b2d7520d4f4a7c2a455f60650491464c61adcbbbdeb0  java-version.txt
+e4e6d3ed8ae1d3a021378f4c4ee6f3d98cdace2c9c8d47be6028a963db753a9d  SUMMARY.md
