@@ -1,0 +1,23 @@
+dc4eb77190ad260fe7b343e568f91a447b339c62e2e1fe27a40b37f3de81e2f3  host/build/org.geogebra.plus.compute.api_0.1.0.jar
+e4c6e0e278e40e8990c9b8d503ea9610ddb90f3206784552c3f8835201077115  host/build/org.geogebra.plus.compute.runtime_0.1.0.jar
+b80bff4af3ea0ef468268022dd66f6e246b410cad7c6ecc1e1bd4b9b463cda56  host/build/org.geogebra.plus.desktop.resources_0.1.0.jar
+ae358e4b3f6c0f869b8578628200cff62bb88b8ed2cab8d4abd770ac121c4818  host/build/org.geogebra.plus.engine.gnuplot_0.1.0.jar
+1920bb95e7df4ced514f5758c9e21f24784e2d4155458b013e95ac2648df8453  host/build/org.geogebra.plus.engine.maxima_0.1.0.jar
+d54b5b60c1c257203e1b1b4950c1946c70e82e5438d4ca7c1326c0dd14cce634  host/build/org.geogebra.plus.engine.pari_0.1.0.jar
+54e6863482b2c29cd03c9c5a76eafd13e3b8298fd01e0f97d302ad721ddd7b37  host/build/org.geogebra.plus.giac.native_0.1.0.jar
+32182bd998ca89463aede64905a47232c331ed87e60b36c374ed31b25ef6be45  host/build/org.geogebra.plus.gluegen.native_0.1.0.jar
+04102fe80ab3db98a7a7f0e56404637a1f3d3f7a97b9b632e6a6c8f72a55b29e  host/build/org.geogebra.plus.host_0.1.0.jar
+669816def46c525cee057b0584d3e6a8285e1357358a649a273b201a3a2b8b33  host/build/org.geogebra.plus.jogl.native_0.1.0.jar
+15c38cc8f42af93a5b7e7cd490c6c6b511611be272931259af60fe01934d12ec  host/build/org.geogebra.plus.renderer.resources_0.1.0.jar
+      899  2026-11-03 09:42   org/geogebra/plus/host/GeoGebraLoggerBootstrap.class
+org.geogebra.plus.host,0.1.0,host/build/org.geogebra.plus.host_0.1.0.jar,4,true
+org.geogebra.plus.desktop.resources,0.1.0,host/build/org.geogebra.plus.desktop.resources_0.1.0.jar,4,false
+org.geogebra.plus.renderer.resources,0.1.0,host/build/org.geogebra.plus.renderer.resources_0.1.0.jar,4,false
+org.geogebra.plus.giac.native,0.1.0,host/build/org.geogebra.plus.giac.native_0.1.0.jar,4,false
+org.geogebra.plus.gluegen.native,0.1.0,host/build/org.geogebra.plus.gluegen.native_0.1.0.jar,4,false
+org.geogebra.plus.jogl.native,0.1.0,host/build/org.geogebra.plus.jogl.native_0.1.0.jar,4,false
+org.geogebra.plus.compute.api,0.1.0,host/build/org.geogebra.plus.compute.api_0.1.0.jar,4,false
+org.geogebra.plus.compute.runtime,0.1.0,host/build/org.geogebra.plus.compute.runtime_0.1.0.jar,4,false
+org.geogebra.plus.engine.pari,0.1.0,host/build/org.geogebra.plus.engine.pari_0.1.0.jar,4,true
+org.geogebra.plus.engine.maxima,0.1.0,host/build/org.geogebra.plus.engine.maxima_0.1.0.jar,4,true
+org.geogebra.plus.engine.gnuplot,0.1.0,host/build/org.geogebra.plus.engine.gnuplot_0.1.0.jar,4,true

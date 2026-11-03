@@ -1,0 +1,7 @@
+suite,num,id,status,priority,detail,ts
+04_Gnuplot,1,GNU-engine-[plot sin(x)],PASS,P0,"kind=ART size=28230 dim=800x600",2026-11-03T09:32:48.8102157+01:00
+04_Gnuplot,2,GNU-cleanup-[plot sin(x)],PASS,P1,"deletedAfterClose=true path=/tmp/algogebra-gnuplot-171606329991960924/plot.png",2026-11-03T09:32:48.8134505+01:00
+04_Gnuplot,3,GNU-engine-[plot sin(x), cos(x)],PASS,P0,"kind=ART size=44643 dim=800x600",2026-11-03T09:32:48.9746999+01:00
+04_Gnuplot,4,GNU-cleanup-[plot sin(x), cos(x)],PASS,P1,"deletedAfterClose=true path=/tmp/algogebra-gnuplot-12680603135182442430/plot.png",2026-11-03T09:32:48.9757551+01:00
+04_Gnuplot,5,GNU-engine-[splot x*y],PASS,P0,"kind=ART size=30459 dim=800x600",2026-11-03T09:32:49.1426075+01:00
+04_Gnuplot,6,GNU-cleanup-[splot x*y],PASS,P1,"deletedAfterClose=true path=/tmp/algogebra-gnuplot-11552972818081754618/plot.png",2026-11-03T09:32:49.1438979+01:00
