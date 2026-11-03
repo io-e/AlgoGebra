@@ -1,0 +1,16 @@
+suite,num,id,status,priority,detail,ts
+15_WebBuild,1,WEB-01-web3d.nocache.js,PASS,P0,"/workspace/AlgoGebra/webwar/war/web3d/web3d.nocache.js size=6188 sha256=b4c7254f85388e015539d4c7f92f77eac62371a9674ec08bb44468cce78e6233",2026-11-03T15:07:07.3395292+01:00
+15_WebBuild,2,WEB-01-deployggb.js,PASS,P0,"/workspace/AlgoGebra/webwar/war/deployggb.js size=68604 sha256=3644dae55e8e1068036a4227a7f9709d63b44e0087310011d3331f1f561680d8",2026-11-03T15:07:07.3428372+01:00
+15_WebBuild,3,WEB-02-permutation,PASS,P0,"deferredjs permutations: 0C67C8A47F0579D49611F42F63B45791",2026-11-03T15:07:07.3485596+01:00
+15_WebBuild,4,WEB-03-deploy-merged,PASS,P0,"template placeholders replaced, permutation id present, setHTML5Codebase exported",2026-11-03T15:07:07.3564193+01:00
+15_WebBuild,5,WEB-04-size,PASS,P2,"war files=264 bytes=60189041",2026-11-03T15:07:07.3833065+01:00
+15_WebBuild,6,WEB-10-serve,PASS,P0,"http.server :8772 + google-chrome CDP :9772",2026-11-03T15:07:07.9544348+01:00
+15_WebBuild,7,WEB-11-applet-loaded,PASS,P0,"appletOnLoad fired=True after 1625 ms (wall 4s, probe timeout 90000 ms) error=",2026-11-03T15:07:11.7373987+01:00
+15_WebBuild,8,WEB-12-evalCommand,PASS,P0,"evalCommand A/f/m = True/True/True",2026-11-03T15:07:11.7404816+01:00
+15_WebBuild,9,WEB-13-getValueString-point,PASS,P0,"got=A = (1, 2)",2026-11-03T15:07:11.7498725+01:00
+15_WebBuild,10,WEB-14-getValueString-func,PASS,P0,"got=f(x) = x² - 2x",2026-11-03T15:07:11.7519078+01:00
+15_WebBuild,11,WEB-15-getValueString-matrix,PASS,P1,"got=m = {{1, 2}, {3, 4}}",2026-11-03T15:07:11.7537227+01:00
+15_WebBuild,12,WEB-16-getValue,PASS,P1,"getValue('x(A)')=1",2026-11-03T15:07:11.7567684+01:00
+15_WebBuild,13,WEB-17-CAS-giac-js,PASS,P1,"got=x² + 2x + 1",2026-11-03T15:07:11.7599229+01:00
+15_WebBuild,14,WEB-18-codebase-local,PASS,P0,"resources=17 external=",2026-11-03T15:07:11.7651248+01:00
+15_WebBuild,15,WEB-19-screenshot,PASS,P1,"/workspace/AlgoGebra/runs-s15/run2/webbuild/webbuild_probe.png sha256=ed0a90d9ec54b857a1dd597c426a232d735327edac64482c10cfe509d89e0549",2026-11-03T15:07:11.7683508+01:00
