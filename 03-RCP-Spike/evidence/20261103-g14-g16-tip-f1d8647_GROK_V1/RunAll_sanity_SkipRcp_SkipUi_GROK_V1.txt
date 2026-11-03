@@ -1,0 +1,26 @@
+# run id: 20261103_091455-grok-bot-vm-419969949 -> /workspace/AlgoGebra/wt-g16/03-RCP-Spike/tests/results/20261103_091455-grok-bot-vm-419969949
+  [BAIL] 01_Test_Engine_Discovery             0 pass   0 fail   0 skip (rc=2) verdict=NOT RUN
+  [BAIL] 02_Test_PARI                         0 pass   0 fail   0 skip (rc=2) verdict=NOT RUN
+  [BAIL] 03_Test_Maxima                       0 pass   0 fail   0 skip (rc=2) verdict=NOT RUN
+  [BAIL] 04_Test_Gnuplot                      0 pass   0 fail   0 skip (rc=2) verdict=NOT RUN
+  [BAIL] 05_Test_Sandbox                      0 pass   0 fail   0 skip (rc=2) verdict=NOT RUN
+  [BAIL] 06_Test_Encoding                     0 pass   0 fail   0 skip (rc=2) verdict=NOT RUN
+  [BAIL] 07_Test_CAS_Equivalence              0 pass   0 fail   0 skip (rc=2) verdict=NOT RUN
+SKIP 08_Test_RCP_Image (not selected)
+SKIP 09_Test_D04_UI (not selected)
+SKIP 10_Test_D05_Strict3D (not selected)
+SKIP 11_Test_Bundle_Build (not selected)
+  [BAIL] 12_Test_Engine_Robustness            0 pass   0 fail   0 skip (rc=2) verdict=NOT RUN
+SKIP 13_Test_GeoGebra_Baseline (not selected)
+  [PASS] 14_Test_UiGuard                      6 pass   0 fail   1 skip (rc=0) verdict=PASS guard-BLOCKED=1
+  [FAIL] 15_Test_WebBuild                     6 pass   9 fail   0 skip (rc=1) verdict=FAIL
+  [PASS] 16_Test_CourseSecurity              82 pass   0 fail  55 skip (rc=0) verdict=PARTIAL
+  [PASS] 17_Test_Launcher                    15 pass   0 fail   0 skip (rc=0) verdict=PASS
+  [PASS] 18_Test_LaunchCourse                20 pass   0 fail   2 skip (rc=0) verdict=PASS
+  [PASS] 19_Test_OefConverter                15 pass   0 fail   1 skip (rc=0) verdict=PASS
+  [FAIL] 20_Test_CourseValidatorJava          1 pass   1 fail   0 skip (rc=1) verdict=FAIL
+  [PASS] 21_Test_WimsTemplate                14 pass   0 fail   0 skip (rc=0) verdict=PASS
+  [PASS] 22_Test_WimsGradeClient             28 pass   0 fail   0 skip (rc=0) verdict=PASS
+  [PASS] 23_Test_WimsFullCycle               13 pass   0 fail   0 skip (rc=0) verdict=PASS
+TOTAL: 200 pass, 10 fail, 59 skip, 8 bail
+GATE: NOT MET
