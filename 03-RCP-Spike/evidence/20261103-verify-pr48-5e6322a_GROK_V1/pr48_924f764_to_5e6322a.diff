@@ -1,0 +1,75 @@
+diff --git a/03-RCP-Spike/host/src/org/geogebra/plus/host/GeoGebraPlusApplication.java b/03-RCP-Spike/host/src/org/geogebra/plus/host/GeoGebraPlusApplication.java
+index b6e795d..ca7c420 100644
+--- a/03-RCP-Spike/host/src/org/geogebra/plus/host/GeoGebraPlusApplication.java
++++ b/03-RCP-Spike/host/src/org/geogebra/plus/host/GeoGebraPlusApplication.java
+@@ -375,6 +375,7 @@ public final class GeoGebraPlusApplication implements IApplication {
+             System.out.println(LOG + "D-04 GeoGebraPanel embedded in SWT_AWT shell");
+             scenarioApi2d = panel.getGeoGebraAPI();
+             scenarioApp2d = getPanelApp(panel);
++            installInputFocusBridge("2D", scenarioApp2d);
+ 
+             try {
+                 boolean casEnabled = enableCasForSpike(panel);
+@@ -415,7 +416,7 @@ public final class GeoGebraPlusApplication implements IApplication {
+                 threeDFrame.add(threeDHost, BorderLayout.CENTER);
+                 threeDFrame.setVisible(true);
+                 threeDFrame.validate();
+-                install3dInputFocusBridge(threeDFrame, app3D);
++                installInputFocusBridge("3D", app3D);
+                 scenarioApi3d = app3D.getGgbApi();
+                 scenarioApp3d = app3D;
+                 boolean pointCreated = app3D.getGgbApi().evalCommand("A = (1, 2, 3)");
+@@ -435,30 +436,31 @@ public final class GeoGebraPlusApplication implements IApplication {
+     }
+ 
+     /**
+-     * SWT_AWT embeds the 3D AppD in a separate AWT Frame. On a 2D-to-3D
+-     * switch, the native activation click can be consumed before the embedded
+-     * algebra field owns keyboard focus. Re-request focus after a click in
+-     * that field so the first following keystroke is not lost.
++     * SWT_AWT hosts the 2D and 3D applications in separate embedded AWT frames.
++     * After clicking an algebra field, defer a field-only focus request until the
++     * native mouse event has completed. Do not request focus on the containing
++     * Frame: that can make XEmbeddedFrame itself the focus owner and steal focus
++     * from the text field.
+      */
+-    private static void install3dInputFocusBridge(Frame embeddedFrame, App3D app3D) {
+-        GuiManagerD guiManager = (GuiManagerD) app3D.getGuiManager();
++    private static void installInputFocusBridge(String pane, App app) {
++        GuiManagerD guiManager = (GuiManagerD) app.getGuiManager();
+         AlgebraInputD algebraInput = (AlgebraInputD) guiManager.getAlgebraInput();
+         AutoCompleteTextFieldD textField = algebraInput.getTextField();
+         textField.addMouseListener(new MouseAdapter() {
+             @Override
+             public void mouseReleased(MouseEvent event) {
+-                // The embedded AWT frame may not become the active window until the
+-                // current native mouse event has completed. Re-focus the input on a
+-                // subsequent EDT turn, after requesting activation of its frame.
++                // Let the native click / default focus processing finish first.
+                 SwingUtilities.invokeLater(() -> {
+-                    embeddedFrame.requestFocus();
++                    boolean alreadyFocused = textField.isFocusOwner();
++                    boolean focusAccepted = textField.requestFocusInWindow();
++                    // Observe the post-request state on the next EDT turn; the
++                    // actual FocusEvent may be queued behind this callback.
+                     SwingUtilities.invokeLater(() -> {
+-                        boolean focusAccepted = textField.requestFocusInWindow();
+                         if (Boolean.getBoolean("ggbplus.focusTrace")) {
+                             Component focusOwner = KeyboardFocusManager.getCurrentKeyboardFocusManager()
+                                     .getFocusOwner();
+-                            System.out.println(LOG + "D-04 3D input focus bridge: frameFocused="
+-                                    + embeddedFrame.isFocused() + "; accepted=" + focusAccepted
++                            System.out.println(LOG + "D-04 " + pane + " input focus bridge: requestAccepted="
++                                    + focusAccepted + "; alreadyFocusedBeforeRequest=" + alreadyFocused
+                                     + "; inputHasFocus=" + textField.hasFocus()
+                                     + "; owner=" + (focusOwner == null ? "null"
+                                             : focusOwner.getClass().getName()));
+@@ -467,7 +469,7 @@ public final class GeoGebraPlusApplication implements IApplication {
+                 });
+             }
+         });
+-        System.out.println(LOG + "D-04 3D input focus bridge installed");
++        System.out.println(LOG + "D-04 " + pane + " input focus bridge installed");
+     }
+ 
+     private static void prepareDesktopCasFactory() throws ReflectiveOperationException {

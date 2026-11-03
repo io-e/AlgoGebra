@@ -1,0 +1,8 @@
+ 03-RCP-Spike/build.ps1                             | 27 +++++++++++++++
+ 03-RCP-Spike/build.sh                              | 18 +++++++++-
+ .../bundles.info                                   |  1 +
+ 03-RCP-Spike/host/META-INF/MANIFEST.MF             |  1 +
+ .../host/common-jre-resources/META-INF/MANIFEST.MF |  7 ++++
+ .../plus/host/GeoGebraPlusApplication.java         | 39 ++++++++++++++++++++++
+ 03-RCP-Spike/product/geogebraplus.product          |  1 +
+ 7 files changed, 93 insertions(+), 1 deletion(-)

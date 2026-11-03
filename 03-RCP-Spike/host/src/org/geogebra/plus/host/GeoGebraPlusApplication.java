@@ -6,6 +6,7 @@ import java.awt.Robot;
 import java.awt.image.BufferedImage;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -25,6 +26,7 @@ import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
+import org.geogebra.common.jre.headless.LocalizationCommon;
 import org.geogebra.common.main.App;
 import org.geogebra.common.plugin.GgbAPI;
 import org.geogebra.desktop.CommandLineArguments;
@@ -368,6 +370,7 @@ public final class GeoGebraPlusApplication implements IApplication {
             System.out.println(LOG + "D-04 GeoGebraPanel embedded in SWT_AWT shell");
             scenarioApi2d = panel.getGeoGebraAPI();
             scenarioApp2d = getPanelApp(panel);
+            traceLocalization("2D", scenarioApp2d);
 
             try {
                 boolean casEnabled = enableCasForSpike(panel);
@@ -410,6 +413,7 @@ public final class GeoGebraPlusApplication implements IApplication {
                 threeDFrame.validate();
                 scenarioApi3d = app3D.getGgbApi();
                 scenarioApp3d = app3D;
+                traceLocalization("3D", scenarioApp3d);
                 boolean pointCreated = app3D.getGgbApi().evalCommand("A = (1, 2, 3)");
                 boolean threeDInitialized = app3D.isEuclidianView3Dinited();
                 System.out.println(LOG + "D-05 3D point command accepted=" + pointCreated
@@ -424,6 +428,41 @@ public final class GeoGebraPlusApplication implements IApplication {
             System.err.println(LOG + "D-04 EMBEDDING FAILED: " + error);
             error.printStackTrace(System.err);
         }
+    }
+
+    /**
+     * Optional OSGi probe: ResourceBundle lookup is called from LocalizationCommon,
+     * so inspect that bundle's class loader rather than the host or thread context loader.
+     */
+    private static void traceLocalization(String view, App app) {
+        if (!Boolean.getBoolean("ggbplus.localizationTrace")) {
+            return;
+        }
+        String propertiesPath = "org/geogebra/common/jre/properties/";
+        ClassLoader ownerLoader = LocalizationCommon.class.getClassLoader();
+        Bundle ownerBundle = FrameworkUtil.getBundle(LocalizationCommon.class);
+        StringBuilder resources = new StringBuilder();
+        for (String resource : new String[] { "menu.properties", "menu_fr.properties",
+                "command.properties", "symbols.properties" }) {
+            URL fromLoader = ownerLoader.getResource(propertiesPath + resource);
+            URL fromBundle = ownerBundle == null ? null : ownerBundle.getEntry(propertiesPath + resource);
+            if (resources.length() > 0) {
+                resources.append("; ");
+            }
+            resources.append(resource).append("={loader:").append(fromLoader)
+                    .append(", bundle:").append(fromBundle).append("}");
+        }
+        StringBuilder labels = new StringBuilder();
+        for (String key : new String[] { "AlgebraWindow", "DrawingPad", "InputLabel", "GraphicsView3D" }) {
+            if (labels.length() > 0) {
+                labels.append("; ");
+            }
+            labels.append(key).append("=").append(app.getLocalization().getMenu(key));
+        }
+        System.out.println(LOG + "Localization trace " + view + ": locale="
+                + app.getLocalization().getLanguageTag() + "; ownerBundle="
+                + (ownerBundle == null ? "null" : ownerBundle.getSymbolicName() + ":" + ownerBundle.getVersion())
+                + "; ownerLoader=" + ownerLoader + "; resources=[" + resources + "]; labels=[" + labels + "]");
     }
 
     private static void prepareDesktopCasFactory() throws ReflectiveOperationException {

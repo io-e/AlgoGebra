@@ -1,0 +1,24 @@
+# run id: 20261103_115223-grok-bot-vm-419969949 -> /workspace/AlgoGebra/wt-v50b/03-RCP-Spike/tests/results/20261103_115223-grok-bot-vm-419969949
+  [BAIL] 01_Test_Engine_Discovery             0 pass   0 fail   0 skip (rc=2) verdict=NOT RUN
+  [BAIL] 02_Test_PARI                         0 pass   0 fail   0 skip (rc=2) verdict=NOT RUN
+  [BAIL] 03_Test_Maxima                       0 pass   0 fail   0 skip (rc=2) verdict=NOT RUN
+  [BAIL] 04_Test_Gnuplot                      0 pass   0 fail   0 skip (rc=2) verdict=NOT RUN
+  [BAIL] 05_Test_Sandbox                      0 pass   0 fail   0 skip (rc=2) verdict=NOT RUN
+  [BAIL] 06_Test_Encoding                     0 pass   0 fail   0 skip (rc=2) verdict=NOT RUN
+  [BAIL] 07_Test_CAS_Equivalence              0 pass   0 fail   0 skip (rc=2) verdict=NOT RUN
+  [PASS] 08_Test_RCP_Image                    7 pass   0 fail   0 skip (rc=0) verdict=PASS
+  [FAIL] 09_Test_D04_UI                      19 pass   1 fail   0 skip (rc=1) verdict=FAIL
+  [PASS] 10_Test_D05_Strict3D                 5 pass   0 fail   0 skip (rc=0) verdict=PASS
+SKIP 11_Test_Bundle_Build (not selected)
+  [BAIL] 12_Test_Engine_Robustness            0 pass   0 fail   0 skip (rc=2) verdict=NOT RUN
+SKIP 13_Test_GeoGebra_Baseline (not selected)
+  [PASS] 14_Test_UiGuard                      6 pass   0 fail   1 skip (rc=0) verdict=PASS guard-BLOCKED=1
+  [PASS] 15_Test_WebBuild                    15 pass   0 fail   0 skip (rc=0) verdict=PASS
+  [PASS] 16_Test_CourseSecurity              82 pass   0 fail  55 skip (rc=0) verdict=PARTIAL
+  [PASS] 17_Test_Launcher                    15 pass   0 fail   0 skip (rc=0) verdict=PASS
+  [PASS] 18_Test_LaunchCourse                21 pass   0 fail   1 skip (rc=0) verdict=PASS
+  [PASS] 19_Test_OefConverter                15 pass   0 fail   1 skip (rc=0) verdict=PASS
+  [PASS] 20_Test_CourseValidatorJava         56 pass   0 fail   0 skip (rc=0) verdict=PASS
+TOTAL: 241 pass, 1 fail, 58 skip, 8 bail
+GATE: NOT MET
+rc=1
