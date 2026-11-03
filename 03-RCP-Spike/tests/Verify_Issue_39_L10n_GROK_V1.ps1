@@ -7,7 +7,10 @@ param([Parameter(Mandatory)][string]$Image, [Parameter(Mandatory)][string]$Out, 
       [int]$Display = 231, [string]$Python = '/workspace/ocrvenv/bin/python', [string[]]$Langs = @('en','fr'), [int]$Wait = 40)
 New-Item -ItemType Directory -Force $Out | Out-Null
 $ocr = Join-Path $PSScriptRoot 'tools/ocr_l10n_GROK_V1.py'
-$menus = @{ en = @(@{n='File';x=67;y=64}, @{n='Options';x=278;y=64}, @{n='File3D';x=937;y=64}); fr = @(@{n='File';x=67;y=64}, @{n='Options';x=278;y=64}, @{n='File3D';x=937;y=64}) }
+# Menu title coordinates (1600x1000 screen; EN/FR titles differ in width). Each menu is opened from a reset state
+# (Escape x2 + click on empty 2D graphics) - a click right after Escape on a Swing menubar does not reopen a menu.
+$menus = @{ en = @(@{n='File';x=67;y=64}, @{n='Options';x=206;y=64}, @{n='File3D';x=937;y=64}, @{n='Options3D';x=1075;y=64});
+            fr = @(@{n='File';x=67;y=64}, @{n='Options';x=280;y=64}, @{n='File3D';x=937;y=64}, @{n='Options3D';x=1148;y=64}) }
 $i = 0; $fails = 0
 foreach ($lang in $Langs) {
   $n = $Display + $i; $d = ":$n"; $id = "$Tag-$lang"
@@ -24,7 +27,7 @@ foreach ($lang in $Langs) {
     & xdotool mousemove $m.x $m.y click 1; Start-Sleep 2
     $png = Join-Path $Out "$id-menu-$($m.n).png"
     & $Python -c "from PIL import ImageGrab; ImageGrab.grab(xdisplay='$d').save('$png')"; $shots += $png
-    & xdotool key Escape; Start-Sleep 1
+    & xdotool key Escape; Start-Sleep 1; & xdotool key Escape; & xdotool mousemove 700 800 click 1; Start-Sleep 1
   }
   & pkill -P $p.Id 2>$null; Stop-Process -Id $p.Id -EA SilentlyContinue; Start-Sleep 2; Stop-Process -Id $x.Id -EA SilentlyContinue; Start-Sleep 1
   $r = (& $Python $ocr $lang (Join-Path $Out "$id-ocr.json") @shots) | Select-Object -Last 1

@@ -1,0 +1,51 @@
+{
+ "lang": "en",
+ "rawKeysFound": [],
+ "camelCaseTokens": [
+  "OptionsTools",
+  "TpuroHoMeTpu9"
+ ],
+ "expected": {
+  "Algebra": true,
+  "Graphics": true,
+  "Input": true,
+  "3D Graphics": true
+ },
+ "pass": true,
+ "texts": {
+  "G11-fixture-POSIX.png": [
+   "File Edit View OptionsTools window Help",
+   "File Edit View",
+   "Options",
+   "Tools",
+   "Trigonometrie—aβy/TpuroHoMeTpu9/三角",
+   "window",
+   "Help",
+   "函数",
+   "Move: Drag",
+   " 1. Le cercle unité (é é acu ce ≤)",
+   "or",
+   "> 2. Maths: V2 ≤ T ≥ ≥  J →± Y2",
+   "select object",
+   " Algebra",
+   " 3D Graphics",
+   "> 3. Sine and Cosine Values",
+   "Graphics",
+   "^Algebra",
+   "A = (1, 2 3)",
+   "> 4. Special Angles",
+   "> 5.Double Angle Formula",
+   "Build the unit circle, define sine and cosine,",
+   "and verify key identities. All commands are 2D",
+   "avoids functions, matrices, and 3D planes",
+   "(BUG-014 safe).",
+   "Run",
+   "Check",
+   "Next",
+   "Reset",
+   "Progress checks are formative only; WIMS",
+   "Input:",
+   "owns grading."
+  ]
+ }
+}

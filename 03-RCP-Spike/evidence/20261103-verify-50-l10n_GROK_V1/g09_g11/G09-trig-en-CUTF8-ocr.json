@@ -1,0 +1,48 @@
+{
+ "lang": "en",
+ "rawKeysFound": [],
+ "camelCaseTokens": [],
+ "expected": {
+  "Algebra": true,
+  "Graphics": true,
+  "Input": true,
+  "3D Graphics": true
+ },
+ "pass": true,
+ "texts": {
+  "G09-trig-en-CUTF8.png": [
+   "File Edit View Options Tools window Help",
+   "Introductionto Trigonometry",
+   "File Edit View",
+   "Options",
+   "Tools",
+   "window",
+   "Help",
+   " 1. The Unit Circle",
+   "Move: Drag",
+   " 2. Angle and Projections",
+   "or",
+   " 3. Sine and Cosine Values",
+   "select object",
+   " Algebra",
+   " 3D Graphics",
+   "Graphics",
+   "> 4. Special Angles",
+   "Algebra",
+   "A = (1, 2, 3)",
+   "> 5. Double Angle Formula",
+   "+4",
+   "Build the unit circle, define sine and cosine,",
+   "and verify key identities. All commands are 2D",
+   "avoids functions, matrices, and 3D planes",
+   "(BUG-014 safe).",
+   "Run",
+   "Check",
+   "Next",
+   "Reset",
+   "Progress checks are formative only; WIMS",
+   "Input:",
+   "owns grading."
+  ]
+ }
+}
