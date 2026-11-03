@@ -1,0 +1,7 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-SymbolicName: org.geogebra.plus.common.jre.resources
+Bundle-Version: 0.1.0
+Bundle-Name: GeoGebraPlus Common JRE Localization Resources
+Fragment-Host: org.geogebra.migration.shared.common.jre;bundle-version="
+ [5.4.934,5.4.935)"

@@ -18,7 +18,9 @@ $HostManifest = Join-Path $HostDir 'META-INF\MANIFEST.MF'
 $ResourceManifest = Join-Path $HostDir 'resources\META-INF\MANIFEST.MF'
 $DesktopResources = Join-Path $GeoGebraSourceRoot 'desktop\desktop\src\main\resources'
 $CommonResources = Join-Path $GeoGebraSourceRoot 'shared\common\src\main\resources'
+$CommonJreResources = Join-Path $GeoGebraSourceRoot 'shared\common-jre\src\main\resources'
 $ResourceFragmentJar = Join-Path $OutputDir 'org.geogebra.plus.desktop.resources_0.1.0.jar'
+$CommonJreResourceFragmentJar = Join-Path $OutputDir 'org.geogebra.plus.common.jre.resources_0.1.0.jar'
 $GiacFragmentSource = Join-Path $HostDir 'giac-native'
 $GiacFragmentClasses = Join-Path $OutputDir 'giac-native-classes'
 $GiacFragmentJar = Join-Path $OutputDir 'org.geogebra.plus.giac.native_0.1.0.jar'
@@ -103,6 +105,25 @@ if (-not (Test-Path $CommonResources)) { throw "Common resource source directory
 # resource paths, so the resource fragment overlays both source resource trees.
 & $JarTool cfm $ResourceFragmentJar $ResourceManifest -C $DesktopResources . -C $CommonResources .
 if ($LASTEXITCODE -ne 0) { throw "resource-fragment jar failed with exit code $LASTEXITCODE" }
+# LocalizationCommon in common-jre calls ResourceBundle; attach its resources to that bundle's loader.
+if (-not (Test-Path $CommonJreResources)) { throw "Common JRE resource source directory not found: $CommonJreResources" }
+$CommonJreResourceManifest = Join-Path $HostDir 'common-jre-resources\META-INF\MANIFEST.MF'
+& $JarTool cfm $CommonJreResourceFragmentJar $CommonJreResourceManifest -C $CommonJreResources .
+if ($LASTEXITCODE -ne 0) { throw "common-jre resource-fragment jar failed with exit code $LASTEXITCODE" }
+$RequiredCommonJreResources = @(
+    'org/geogebra/common/jre/properties/menu.properties',
+    'org/geogebra/common/jre/properties/menu_fr.properties',
+    'org/geogebra/common/jre/properties/command.properties',
+    'org/geogebra/common/jre/properties/command_fr.properties',
+    'org/geogebra/common/jre/properties/symbols.properties',
+    'org/geogebra/common/jre/properties/symbols_fr.properties'
+)
+$CommonJreResourceEntries = @(& $JarTool tf $CommonJreResourceFragmentJar)
+foreach ($resource in $RequiredCommonJreResources) {
+    if ($CommonJreResourceEntries -notcontains $resource) {
+        throw "Common JRE resource fragment is missing required entry: $resource"
+    }
+}
 
 # JNI libraries are associated with the class loader that calls System.load.
 # GeoGebra's CASgiacD is in the desktop bundle, while javagiac's SWIG wrapper
@@ -210,6 +231,12 @@ $ProductIds.Add($HostMeta.Bsn)
 $ResourceMeta = Read-BundleMetadata $ResourceFragmentJar
 $Rows.Add("$($ResourceMeta.Bsn),$($ResourceMeta.Version),host/build/$([IO.Path]::GetFileName($ResourceFragmentJar)),4,false")
 $ProductIds.Add($ResourceMeta.Bsn)
+$CommonJreResourceMeta = Read-BundleMetadata $CommonJreResourceFragmentJar
+if ($CommonJreResourceMeta.FragmentHost -ne 'org.geogebra.migration.shared.common.jre') {
+    throw "Common JRE resources must be a fragment of org.geogebra.migration.shared.common.jre; found: $($CommonJreResourceMeta.FragmentHost)"
+}
+$Rows.Add("$($CommonJreResourceMeta.Bsn),$($CommonJreResourceMeta.Version),host/build/$([IO.Path]::GetFileName($CommonJreResourceFragmentJar)),4,false")
+$ProductIds.Add($CommonJreResourceMeta.Bsn)
 $GiacMeta = Read-BundleMetadata $GiacFragmentJar
 $Rows.Add("$($GiacMeta.Bsn),$($GiacMeta.Version),host/build/$([IO.Path]::GetFileName($GiacFragmentJar)),4,false")
 $ProductIds.Add($GiacMeta.Bsn)

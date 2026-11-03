@@ -73,6 +73,7 @@
     <plugin id="org.geogebra.migration.shared.giac.jni"/>
     <plugin id="org.geogebra.migration.shared.keyboard.base"/>
     <plugin id="org.geogebra.migration.shared.renderer.base"/>
+    <plugin id="org.geogebra.plus.common.jre.resources"/>
     <plugin id="org.geogebra.plus.compute.api"/>
     <plugin id="org.geogebra.plus.compute.runtime"/>
     <plugin id="org.geogebra.plus.desktop.resources"/>
