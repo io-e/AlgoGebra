@@ -1,0 +1,3 @@
+{"method":"POST","ct":"application/x-www-form-urlencoded;charset=UTF-8","module":"adm/class/sheet","job":"getresult","exercise":"ok-trig-1","ans1Len":5884,"ans1Zip":true,"keys":["module","job","exercise","ans1"],"at":"2026-11-02T19:24:30.496Z"}
+{"method":"POST","ct":"application/x-www-form-urlencoded;charset=UTF-8","module":"adm/class/sheet","job":"getresult","exercise":"html-trig-1","ans1Len":5488,"ans1Zip":true,"keys":["module","job","exercise","ans1"],"at":"2026-11-02T19:24:33.960Z"}
+{"method":"POST","ct":"application/x-www-form-urlencoded;charset=UTF-8","module":"adm/class/sheet","job":"getresult","exercise":"xss-trig-1","ans1Len":5488,"ans1Zip":true,"keys":["module","job","exercise","ans1"],"at":"2026-11-02T19:24:36.875Z"}

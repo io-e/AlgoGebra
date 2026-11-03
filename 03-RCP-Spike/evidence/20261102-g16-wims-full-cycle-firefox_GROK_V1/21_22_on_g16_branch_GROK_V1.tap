@@ -1,0 +1,46 @@
+# Suite: 21_WimsTemplate
+# Started: 2026-11-02T20:24:41.3082524+01:00
+# Host: grok-bot-vm-419969949 / Debian GNU/Linux 13 (trixie) / pwsh 7.6.9
+
+ok 1 - [P0] WT-01-template-exists :: /workspace/AlgoGebra/wt-g16/wims/course-activity-template/course-activity_GROK_V1.html
+ok 2 - [P1] WT-02-readme-exists :: /workspace/AlgoGebra/wt-g16/wims/course-activity-template/README_GROK_V1.md
+ok 3 - [P0] WT-03-reuses-web-host :: course-tree.js/.css + role=tree tree root
+ok 4 - [P0] WT-04-grade-client-script :: includes the G-15 grade client
+ok 5 - [P0] WT-05-placeholders :: WIMS_CGI_URL / WIMS_EXERCISE_ID / COURSE_JSON_URL placeholders
+ok 6 - [P0] WT-06-default-endpoint-D-S01 :: default endpoint /wims/wims.cgi (D-S01)
+ok 7 - [P0] WT-07-local-codebase :: self-hosted WAR, no geogebra.org
+ok 8 - [P0] WT-08-no-external-assets :: external src/href count: 0
+ok 9 - [P0] WT-09-single-inject :: applet.inject count: 1
+ok 10 - [P1] WT-10-submit-a11y :: submit button disabled until attached, aria-label; result region aria-live
+ok 11 - [P1] WT-11-formative-note :: page states WIMS owns the grade
+ok 12 - [P0] WT-12-no-local-grade :: template computes no grade
+ok 13 - [P1] WT-13-readme-contract :: README documents the D-S01 request verbatim
+ok 14 - [P1] WT-14-readme-open-points :: README lists undecided points (session, HTML response, CORS)
+
+PASS: 14 FAIL: 0 SKIP: 0
+# CSV: /workspace/AlgoGebra/wt-g16/03-RCP-Spike/tests/results/21_WimsTemplate_GROK_V1.csv
+# Suite: 22_WimsGradeClient
+# Started: 2026-11-02T20:24:41.6631483+01:00
+# Host: grok-bot-vm-419969949 / Debian GNU/Linux 13 (trixie) / pwsh 7.6.9
+
+ok 1 - [P0] WG-00-client-exists :: /workspace/AlgoGebra/wt-g16/wims/course-activity-template/wims-grade-client_GROK_V1.js
+ok 2 - [P0] WG-GC-01-body-fields-D-S01 :: module=adm%2Fclass%2Fsheet&job=getresult&exercise=ok-1&ans1=UEsDBAEBAQ
+ok 3 - [P0] WG-GC-02-no-grade-field-sent :: module,job,exercise,ans1
+ok 4 - [P0] WG-GC-03-reject-bad-exercise :: 
+ok 5 - [P0] WG-GC-04-reject-bad-base64 :: 
+ok 6 - [P0] WG-GC-05-post-form-urlencoded :: application/x-www-form-urlencoded;charset=UTF-8
+ok 7 - [P0] WG-GC-06-ans1-is-ggb-zip :: 
+ok 8 - [P0] WG-GC-07-grade-from-wims :: {"ok":true,"grade":0.8,"feedback":"Construction received; 4 of 5 checks passed."}
+ok 9 - [P0] WG-GC-08-html-response-is-error :: WIMS answered HTML, not the D-S01 JSON result
+ok 10 - [P0] WG-GC-09-http-500-is-error :: WIMS answered HTTP 500
+ok 11 - [P0] WG-GC-10-grade-out-of-range-rejected :: WIMS grade missing or outside 0..1
+ok 12 - [P0] WG-GC-11-timeout :: WIMS did not answer in time
+ok 13 - [P0] WG-GC-12-network-error :: network error: fetch failed
+ok 14 - [P0] WG-GC-13-no-exercise-no-request :: 
+ok 15 - [P0] WG-GC-14-parse-non-object :: 
+ok 16 - [P0] WG-GC-15-no-innerHTML :: 
+ok 17 - [P0] WG-GC-16-no-local-grading :: client never assigns a grade
+ok 18 - [P0] WG-99-summary :: # grade client: 16 PASS, 0 FAIL
+
+PASS: 18 FAIL: 0 SKIP: 0
+# CSV: /workspace/AlgoGebra/wt-g16/03-RCP-Spike/tests/results/22_WimsGradeClient_GROK_V1.csv

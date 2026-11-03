@@ -1,0 +1,20 @@
+# Suite: 23_WimsFullCycle
+# Started: 2026-11-03T10:19:53.3556860+01:00
+# Host: grok-bot-vm-419969949 / Debian GNU/Linux 13 (trixie) / pwsh 7.6.9
+
+ok 1 - [P0] FC-01-tree-rendered :: 21 tree items
+ok 2 - [P0] FC-02-submit-enabled :: 
+ok 3 - [P0] FC-03-steps-ran :: O exists=true objects=2
+ok 4 - [P0] FC-04-check-formative :: status-bar: Check passed
+ok 5 - [P0] FC-05-grade-from-wims-shown :: Grade recorded by WIMS: 80% WIMS feedback (formative): Construction received; 4 of 5 checks passed.
+ok 6 - [P0] FC-06-request-D-S01 :: {"m":"adm/class/sheet","j":"getresult","e":"ok-trig-1","ct":"application/x-www-form-urlencoded;charset=UTF-8"}
+ok 7 - [P0] FC-07-ans1-is-live-ggb :: ans1 5884 base64 chars, zip=true
+ok 8 - [P0] FC-08-no-grade-sent-by-client :: module,job,exercise,ans1
+ok 9 - [P0] FC-09-stock-wims-html-is-error :: WIMS submission failed: WIMS answered HTML, not the D-S01 JSON result
+ok 10 - [P0] FC-10-feedback-not-executed :: xss=false img=0
+ok 11 - [P0] FC-11-no-exercise-submit-disabled :: WIMS submission failed: no WIMS exercise configured
+ok 12 - [P0] FC-12-no-external-requests :: 
+ok 13 - [P0] FC-99-summary :: # full cycle: 12 PASS, 0 FAIL
+
+PASS: 13 FAIL: 0 SKIP: 0
+# CSV: /workspace/AlgoGebra/wt-g16/03-RCP-Spike/tests/results/23_WimsFullCycle_GROK_V1.csv
