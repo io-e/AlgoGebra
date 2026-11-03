@@ -1,10 +1,10 @@
-<!-- ALF_V2_2 -->
+<!-- ALF_V2_3 -->
 # Owner Q&A — WIMS Integration CDC
 
 | Field | Value |
 |---|---|
 | Document | `02-Cdc/QA_WIMS_Integration_Owner_ALF_V2.md` |
-| Version | ALF_V2_2 (owner-revised, converter analysis, resolution process architecture) |
+| Version | ALF_V2_3 (Q-W9a..d closed, phasing finalized) |
 | Date | 2026-11-03 |
 | Context | Preparing the WIMS integration CDC; questions raised by Claude, answers and corrections given by owner |
 | Depends on | `Cdc_External_Engines_AlgoGebra_CLAUDE_V1_1.md`, `Decision_Open_Points_Sprint3_CLAUDE_V1.md` (S-01/S-02), `Spec_Course_Security_CLAUDE_V1_2.md` |
@@ -332,12 +332,12 @@ step: {
 
 ### 9.7 Open questions from Q-W9
 
-| # | Question | Status |
-|---|---|---|
-| Q-W9a | Which LLM? Local (Ollama/llama.cpp) or remote API (Claude, etc.)? | **Open** |
-| Q-W9b | RAG source: student's course PDF? Teacher-provided corpus? WIMS exercise bank? | **Open** |
-| Q-W9c | Is the LLM layer MVP or Phase 2? (Adds significant complexity) | **Open** |
-| Q-W9d | Help JSON template format: what fields are required? Need a schema. | **Open — CDC work** |
+| # | Question | Answer | Status |
+|---|---|---|---|
+| Q-W9a | Which LLM? | **Both.** Local model (Ollama/llama.cpp) handles simple questions (low latency, no cost, offline). Harder questions are routed to a remote API (Claude, etc.). Routing heuristic: complexity of the question determines local vs. remote. | **Decided** |
+| Q-W9b | RAG source? | **Markdown course material with an index.** The teacher provides the course as Markdown files. The teacher specifies the relevant chapter/section **inside the OEF** (via a tag), so the RAG scope is per-exercise, not the entire corpus. | **Decided** |
+| Q-W9c | LLM/RAG phase? | **Phase 3.** The resolution tree + help JSON templates are MVP/Phase 2. LLM Q&A and RAG are Phase 3 — they add significant infrastructure (model hosting, embedding, retrieval) that does not block the core exercise flow. | **Decided** |
+| Q-W9d | Help JSON template format? | **CDC work.** The template can contain either a structured resolution process (step-by-step with variables) or plain text. Both forms must be supported. Schema to be defined in the WIMS CDC. | **Open — CDC work** |
 
 ---
 
@@ -354,7 +354,10 @@ step: {
 | Q-W6 Fallback | Exploration: fallback OK. Grading: error if engine missing | MVP | **Decided** |
 | Q-W7 wims4win | Local server for students (Shadow PC / CPGE) and teachers | MVP | **Decided** |
 | Q-W8 Scope | Protocol + engine contracts; course tree owns lifecycle | MVP | **Decided** |
-| Q-W9 Resolution process | Teacher provides resolution tree JSON; per-node help (multilingual + template + LLM/RAG); right panel → WIMS | MVP (tree + help), Phase 2+ (LLM/RAG) | **Decided — open sub-questions Q-W9a..d** |
+| Q-W9 Resolution process | Teacher provides resolution tree JSON; per-node help (multilingual + template + LLM/RAG); right panel → WIMS | MVP (tree + help templates), Phase 3 (LLM/RAG) | **Decided — Q-W9d (template schema) open for CDC** |
+| Q-W9a LLM routing | Local for simple, remote (Claude) for hard questions | Phase 3 | **Decided** |
+| Q-W9b RAG source | Markdown course + index; teacher specifies chapter in OEF | Phase 3 | **Decided** |
+| Q-W9c LLM phase | Phase 3 | Phase 3 | **Decided** |
 
 ---
 
