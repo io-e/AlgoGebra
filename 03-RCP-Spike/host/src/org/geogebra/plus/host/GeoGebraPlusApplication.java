@@ -1,8 +1,12 @@
 package org.geogebra.plus.host;
 
 import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.Frame;
+import java.awt.KeyboardFocusManager;
 import java.awt.Robot;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -30,6 +34,9 @@ import org.geogebra.common.plugin.GgbAPI;
 import org.geogebra.desktop.CommandLineArguments;
 import org.geogebra.desktop.GeoGebraPanel;
 import org.geogebra.desktop.geogebra3D.App3D;
+import org.geogebra.desktop.gui.GuiManagerD;
+import org.geogebra.desktop.gui.inputbar.AlgebraInputD;
+import org.geogebra.desktop.gui.inputfield.AutoCompleteTextFieldD;
 import org.geogebra.plus.course.CourseModel;
 import org.geogebra.plus.course.CourseTreePanel;
 import org.osgi.framework.Bundle;
@@ -408,6 +415,7 @@ public final class GeoGebraPlusApplication implements IApplication {
                 threeDFrame.add(threeDHost, BorderLayout.CENTER);
                 threeDFrame.setVisible(true);
                 threeDFrame.validate();
+                install3dInputFocusBridge(threeDFrame, app3D);
                 scenarioApi3d = app3D.getGgbApi();
                 scenarioApp3d = app3D;
                 boolean pointCreated = app3D.getGgbApi().evalCommand("A = (1, 2, 3)");
@@ -424,6 +432,42 @@ public final class GeoGebraPlusApplication implements IApplication {
             System.err.println(LOG + "D-04 EMBEDDING FAILED: " + error);
             error.printStackTrace(System.err);
         }
+    }
+
+    /**
+     * SWT_AWT embeds the 3D AppD in a separate AWT Frame. On a 2D-to-3D
+     * switch, the native activation click can be consumed before the embedded
+     * algebra field owns keyboard focus. Re-request focus after a click in
+     * that field so the first following keystroke is not lost.
+     */
+    private static void install3dInputFocusBridge(Frame embeddedFrame, App3D app3D) {
+        GuiManagerD guiManager = (GuiManagerD) app3D.getGuiManager();
+        AlgebraInputD algebraInput = (AlgebraInputD) guiManager.getAlgebraInput();
+        AutoCompleteTextFieldD textField = algebraInput.getTextField();
+        textField.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseReleased(MouseEvent event) {
+                // The embedded AWT frame may not become the active window until the
+                // current native mouse event has completed. Re-focus the input on a
+                // subsequent EDT turn, after requesting activation of its frame.
+                SwingUtilities.invokeLater(() -> {
+                    embeddedFrame.requestFocus();
+                    SwingUtilities.invokeLater(() -> {
+                        boolean focusAccepted = textField.requestFocusInWindow();
+                        if (Boolean.getBoolean("ggbplus.focusTrace")) {
+                            Component focusOwner = KeyboardFocusManager.getCurrentKeyboardFocusManager()
+                                    .getFocusOwner();
+                            System.out.println(LOG + "D-04 3D input focus bridge: frameFocused="
+                                    + embeddedFrame.isFocused() + "; accepted=" + focusAccepted
+                                    + "; inputHasFocus=" + textField.hasFocus()
+                                    + "; owner=" + (focusOwner == null ? "null"
+                                            : focusOwner.getClass().getName()));
+                        }
+                    });
+                });
+            }
+        });
+        System.out.println(LOG + "D-04 3D input focus bridge installed");
     }
 
     private static void prepareDesktopCasFactory() throws ReflectiveOperationException {
