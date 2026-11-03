@@ -1,10 +1,10 @@
-<!-- ALF_V2 -->
+<!-- ALF_V2_1 -->
 # Owner Q&A — WIMS Integration CDC
 
 | Field | Value |
 |---|---|
 | Document | `02-Cdc/QA_WIMS_Integration_Owner_ALF_V2.md` |
-| Version | ALF_V2 (owner-revised from CLAUDE_V1) |
+| Version | ALF_V2_1 (owner-revised from CLAUDE_V1, converter analysis added) |
 | Date | 2026-11-03 |
 | Context | Preparing the WIMS integration CDC; questions raised by Claude, answers and corrections given by owner |
 | Depends on | `Cdc_External_Engines_AlgoGebra_CLAUDE_V1_1.md`, `Decision_Open_Points_Sprint3_CLAUDE_V1.md` (S-01/S-02), `Spec_Course_Security_CLAUDE_V1_2.md` |
@@ -61,7 +61,64 @@
 
 The CDC must define: the JSON schema that AlgoGebra expects, what OEF constructs map to which AlgoGebra behaviors, and what happens when an OEF feature has no AlgoGebra equivalent (graceful degradation or error).
 
-**Grok validation:** run suite 19 on tip, review the JSON output structure, and note which OEF fields are present vs. which AlgoGebra would need.
+### Converter analysis — current JSON output vs. CDC needs
+
+The converter (`oef2course_GROK_V1.py`) targets `Schema_Course_JSON_CLAUDE_V1.json` (schemaVersion `1.0`). Verified output from `numeric_GROK_V1.oef`:
+
+```json
+{
+  "schemaVersion": "1.0",
+  "course": "Line through two points",
+  "description": "Converted from WIMS OEF by oef2course_GROK_V1 (seed 1); formative checks only.",
+  "author": "Grok Bot fixture",
+  "locale": "en",
+  "tree": [
+    { "title": "Line through two points",
+      "children": [
+        { "title": "Statement",
+          "description": "Compute 2a+b for a=3 and b=1.\n [figure] \nAnswer: [input]",
+          "actions": [
+            {"directive": "CMD", "value": "d1 = Segment((0, -5), (0, 5))"},
+            {"directive": "CMD", "value": "d2 = Segment((-5, 0), (5, 0))"},
+            {"directive": "CMD", "value": "d3 = Point({3, 1})"}
+          ]
+        },
+        { "title": "1. Value of 2a+b",
+          "description": "Type ans1 = <your answer> in the input bar, then press Check. Hint: Multiply first.",
+          "check": {"type": "value_equals", "variable": "ans1", "expected": 7,
+                    "tolerance": 0.001,
+                    "feedback": {"pass": "Correct.", "fail": "Not yet - check your computation."}}
+        }
+      ]
+    }
+  ]
+}
+```
+
+**What the converter handles today:**
+
+| OEF construct | JSON mapping | Status |
+|---|---|---|
+| `\title`, `\language`, `\author` | `course`, `locale`, `author` | OK |
+| `\precision` | `check.tolerance` (1/precision) | OK |
+| `\integer`, `\real`, etc. with `random()` | Resolved at conversion time (deterministic seed) | OK |
+| `\statement` text | `step.description` (HTML stripped) | OK |
+| `\draw{}{}` primitives | `actions[]` with `directive: "CMD"` | OK — limited to `SAFE_EMIT` set (Segment, Line, Point, Circle, Polygon, Vector) |
+| `\answer` numeric | `check: {type: "value_equals", expected, tolerance}` | OK |
+| `\answer` non-numeric (menu, clickfill, draw, etc.) | `check: {type: "object_exists"}` + warning | Degraded — type information lost |
+| `\hint` | Appended as text in `step.description` | Flat text only, no structure |
+
+**5 gaps the WIMS CDC must fill:**
+
+| # | Gap | Impact | CDC action needed |
+|---|---|---|---|
+| **GAP-1** | **No cheat sheet construct.** `\hint` is inlined as text in the description. The Q-W5 "teacher cheat sheets" have no dedicated schema slot. | Cheat sheets cannot be displayed separately from the exercise instruction. | Extend schema: add a `hints` array to the `step` object (or a top-level `cheatSheet` on the chapter). |
+| **GAP-2** | **No engine routing.** The JSON has no field saying "this exercise needs Pari/GP" or "this answer needs Maxima." The engine selection from D-ENG-05 is absent. | AlgoGebra cannot know which engine to call for computation help. | Extend schema: add an `engine` field (per-chapter or per-step) with values like `"pari"`, `"maxima"`, `"gnuplot"`, `"giac"` (default). |
+| **GAP-3** | **No help/exploration request contract.** The JSON is one-shot formative check only. There is no contract for "student asks for computation help" (the bidirectional flow from Q-W4). | The interactive exploration flow (student types expression → engine computes → result displayed) has no schema representation. | Define a `computeRequest` contract: what the student can send, which engine processes it, how the result is displayed. This is runtime behavior, not static JSON — but the exercise must declare what is allowed. |
+| **GAP-4** | **No submission/session contract.** The JSON is local-only. No WIMS CGI endpoint or session reference for connected mode. | Phase 2 connected mode has no wire format. | Phase 2 — define `submission` object with endpoint, session ID, idempotency key. Not needed for offline MVP but the schema should reserve the namespace. |
+| **GAP-5** | **Check types are limited.** Schema allows only `value_equals`, `value_range`, `object_exists`, `cas_equals`. WIMS exercises use richer comparison types (regex match, set equality, ordered list, interval containment, etc.). | Many WIMS exercise types cannot be faithfully converted. The converter already warns and falls back to `object_exists` for non-numeric answers. | Extend `checkAction.type` enum or add an `engine_check` type that delegates evaluation to the named engine (bridges to GAP-2). |
+
+**Grok validation:** run suite 19 on tip, review the JSON output structure, confirm the 5 gaps above against the OEF corpus (300 exercises from `19_OefConverter_corpus300`), and report which gap blocks the most exercises.
 
 ---
 
@@ -194,8 +251,8 @@ The boundary: **the course tree calls the evaluation contract; the WIMS CDC defi
 |---|---|---|
 | GV-1 | wims4win CGI accepts same `job=`/`module=` params as institutional WIMS | `D:\ALF_ZGit\02-wims4win` |
 | GV-2 | Suites 21–23 alignment with offline-first assumption | `feat/grok-g14-wims-template`, `g15`, `g16` |
-| GV-3 | Suite 19 JSON output structure review (which OEF fields are present) | tip, `oef2course_GROK_V1.py` |
-| GV-4 | OEF hint/help/cheat-sheet directives (`\hint`, `\help`, `\feedback`) | OEF format spec + wims4win examples |
+| GV-3 | Suite 19 JSON output: confirm 5 gaps (GAP-1..GAP-5) against OEF corpus 300 — which gap blocks the most exercises? | tip, `oef2course_GROK_V1.py`, corpus 300 |
+| GV-4 | OEF hint/help/cheat-sheet directives (`\hint`, `\help`, `\feedback`) — what constructs exist in real OEF files? | OEF format spec + wims4win examples |
 | GV-5 | wims4win local HTTP service on Windows (Apache/CGI on localhost) | `D:\ALF_ZGit\02-wims4win` |
 
 ---
