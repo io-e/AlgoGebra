@@ -1,0 +1,52 @@
+suite,num,id,status,priority,detail,ts
+S_P-02,1,P02-00-both-ran,PASS,P0,"product=51 lines (/workspace/AlgoGebra/wt-v50b/03-RCP-Spike/tests/results/20261103_114956-grok-bot-vm-419969949/S_P-02_product.log); baseline=51 lines (/workspace/AlgoGebra/wt-v50b/03-RCP-Spike/tests/results/20261103_114956-grok-bot-vm-419969949/S_P-02.baseline.log)",2026-11-03T11:50:29.1986908+01:00
+S_P-02,2,P02-01-no-directive-error,PASS,P0,"ERR: ",2026-11-03T11:50:29.2081851+01:00
+S_P-02,3,P02-ALG-01,PASS,P0,"product=OK 'true' baseline=OK 'true'",2026-11-03T11:50:29.2168965+01:00
+S_P-02,4,P02-ALG-02,PASS,P0,"product=OK 'true' baseline=OK 'true'",2026-11-03T11:50:29.2175903+01:00
+S_P-02,5,P02-ALG-02v,PASS,P0,"product=OK 'b = 10' baseline=OK 'b = 10'",2026-11-03T11:50:29.2183892+01:00
+S_P-02,6,P02-ALG-03,PASS,P0,"product=OK 'true' baseline=OK 'true'",2026-11-03T11:50:29.2189342+01:00
+S_P-02,7,P02-ALG-03v,PASS,P0,"product=OK 'f(x) = x² - 2x' baseline=OK 'f(x) = x² - 2x'",2026-11-03T11:50:29.2194523+01:00
+S_P-02,8,P02-ALG-04,PASS,P0,"product=OK 'true' baseline=OK 'true'",2026-11-03T11:50:29.2200886+01:00
+S_P-02,9,P02-ALG-04v,PASS,P0,"product=OK 'r = (2, 0)' baseline=OK 'r = (2, 0)'",2026-11-03T11:50:29.2205436+01:00
+S_P-02,10,P02-ALG-05,PASS,P0,"product=OK 'true' baseline=OK 'true'",2026-11-03T11:50:29.2210496+01:00
+S_P-02,11,P02-ALG-06,PASS,P0,"product=OK 'true' baseline=OK 'true'",2026-11-03T11:50:29.2215733+01:00
+S_P-02,12,P02-ALG-06v,PASS,P0,"product=OK 'd = -2' baseline=OK 'd = -2'",2026-11-03T11:50:29.2221068+01:00
+S_P-02,13,P02-ALG-07,PASS,P0,"product=OK 'true' baseline=OK 'true'",2026-11-03T11:50:29.2226025+01:00
+S_P-02,14,P02-ALG-07v,PASS,P0,"product=OK 's = 385' baseline=OK 's = 385'",2026-11-03T11:50:29.2231950+01:00
+S_P-02,15,P02-ALG-08,PASS,P0,"product=OK 'true' baseline=OK 'true'",2026-11-03T11:50:29.2240006+01:00
+S_P-02,16,P02-ALG-08v,PASS,P0,"product=OK 'i = 0' baseline=OK 'i = 0'",2026-11-03T11:50:29.2245054+01:00
+S_P-02,17,P02-CAS-01,PASS,P0,"product=OK 'x³ + 3x² + 3x + 1' baseline=OK 'x³ + 3x² + 3x + 1'",2026-11-03T11:50:29.2249806+01:00
+S_P-02,18,P02-CAS-02,PASS,P0,"product=OK '(x - 2) (x - 3)' baseline=OK '(x - 2) (x - 3)'",2026-11-03T11:50:29.2255200+01:00
+S_P-02,19,P02-CAS-03,PASS,P0,"product=OK '{x = -2, x = 2}' baseline=OK '{x = -2, x = 2}'",2026-11-03T11:50:29.2261298+01:00
+S_P-02,20,P02-CAS-04,PASS,P0,"product=OK 'x cos(x) + sin(x)' baseline=OK 'x cos(x) + sin(x)'",2026-11-03T11:50:29.2265956+01:00
+S_P-02,21,P02-CAS-05,PASS,P0,"product=OK 'ln(abs(x)) + c_{1}' baseline=OK 'ln(abs(x)) + c_{1}'",2026-11-03T11:50:29.2270501+01:00
+S_P-02,22,P02-CAS-06,PASS,P0,"product=OK 'x + 1' baseline=OK 'x + 1'",2026-11-03T11:50:29.2274871+01:00
+S_P-02,23,P02-SPR-01,PASS,P0,"product=OK 'true' baseline=OK 'true'",2026-11-03T11:50:29.2279737+01:00
+S_P-02,24,P02-SPR-02,PASS,P0,"product=OK 'true' baseline=OK 'true'",2026-11-03T11:50:29.2284326+01:00
+S_P-02,25,P02-SPR-03,PASS,P0,"product=OK 'true' baseline=OK 'true'",2026-11-03T11:50:29.2288537+01:00
+S_P-02,26,P02-SPR-03v,PASS,P0,"product=OK 'B1 = 35' baseline=OK 'B1 = 35'",2026-11-03T11:50:29.2292461+01:00
+S_P-02,27,P02-SPR-04,PASS,P0,"product=OK 'true' baseline=OK 'true'",2026-11-03T11:50:29.2297619+01:00
+S_P-02,28,P02-SPR-04v,PASS,P0,"product=OK 'B2 = 12' baseline=OK 'B2 = 12'",2026-11-03T11:50:29.2301772+01:00
+S_P-02,29,P02-SPR-05,PASS,P0,"product=OK 'numeric' baseline=OK 'numeric'",2026-11-03T11:50:29.2305980+01:00
+S_P-02,30,P02-G2-01,PASS,P0,"product=OK 'true' baseline=OK 'true'",2026-11-03T11:50:29.2311161+01:00
+S_P-02,31,P02-G2-02,PASS,P0,"product=OK 'true' baseline=OK 'true'",2026-11-03T11:50:29.2316126+01:00
+S_P-02,32,P02-G2-03,PASS,P0,"product=OK 'true' baseline=OK 'true'",2026-11-03T11:50:29.2320612+01:00
+S_P-02,33,P02-G2-03v,PASS,P0,"product=OK 'l: -4x + 3y = 2' baseline=OK 'l: -4x + 3y = 2'",2026-11-03T11:50:29.2325964+01:00
+S_P-02,34,P02-G2-04,PASS,P0,"product=OK 'true' baseline=OK 'true'",2026-11-03T11:50:29.2331743+01:00
+S_P-02,35,P02-G2-04v,PASS,P0,"product=OK 'c: (x - 1)² + (y - 2)² = 25' baseline=OK 'c: (x - 1)² + (y - 2)² = 25'",2026-11-03T11:50:29.2337726+01:00
+S_P-02,36,P02-G2-05,PASS,P0,"product=OK 'true' baseline=OK 'true'",2026-11-03T11:50:29.2341796+01:00
+S_P-02,37,P02-G2-05v,PASS,P0,"product=OK 'dPQ = 5' baseline=OK 'dPQ = 5'",2026-11-03T11:50:29.2345847+01:00
+S_P-02,38,P02-G2-06,PASS,P0,"product=OK 'true' baseline=OK 'true'",2026-11-03T11:50:29.2349805+01:00
+S_P-02,39,P02-G2-06v,PASS,P0,"product=OK 'I1 = (4, 6)' baseline=OK 'I1 = (4, 6)'",2026-11-03T11:50:29.2354789+01:00
+S_P-02,40,P02-G2-07,PASS,P0,"product=OK 'circle' baseline=OK 'circle'",2026-11-03T11:50:29.2360270+01:00
+S_P-02,41,P02-G3-01,PASS,P0,"product=OK 'true' baseline=OK 'true'",2026-11-03T11:50:29.2364608+01:00
+S_P-02,42,P02-G3-02,PASS,P0,"product=OK 'true' baseline=OK 'true'",2026-11-03T11:50:29.2368594+01:00
+S_P-02,43,P02-G3-02v,PASS,P0,"product=OK 's3: (x - 1)² + (y - 2)² + (z - 3)² = 4' baseline=OK 's3: (x - 1)² + (y - 2)² + (z - 3)² = 4'",2026-11-03T11:50:29.2372453+01:00
+S_P-02,44,P02-G3-03,PASS,P0,"product=OK 'true' baseline=OK 'true'",2026-11-03T11:50:29.2378948+01:00
+S_P-02,45,P02-G3-03v,PASS,P0,"product=OK 'pl: 6x - 3y + 2z = 6' baseline=OK 'pl: 6x - 3y + 2z = 6'",2026-11-03T11:50:29.2383100+01:00
+S_P-02,46,P02-G3-04,PASS,P0,"product=OK 'true' baseline=OK 'true'",2026-11-03T11:50:29.2387385+01:00
+S_P-02,47,P02-G3-04v,PASS,P0,"product=OK 'dAB = 2.24' baseline=OK 'dAB = 2.24'",2026-11-03T11:50:29.2391608+01:00
+S_P-02,48,P02-NAMES-2D,PASS,P0,"product=OK 'A1,A2,B1,B2,I1,P,Q,a,b,c,c_{1},d,dPQ,f,i,l,m,r,s' baseline=OK 'A1,A2,B1,B2,I1,P,Q,a,b,c,c_{1},d,dPQ,f,i,l,m,r,s'",2026-11-03T11:50:29.2395742+01:00
+S_P-02,49,P02-NAMES-3D,PASS,P0,"product=OK 'A,B,dAB,pl,s3' baseline=OK 'A,B,dAB,pl,s3'",2026-11-03T11:50:29.2399396+01:00
+S_P-02,50,P02-COUNT-2D,PASS,P0,"product=OK '19' baseline=OK '19'",2026-11-03T11:50:29.2403064+01:00
+S_P-02,51,P02-W-web-gwt-war,SKIP,P1,"NOT RUN - blocked by: deferred: web phase (GWT war baseline, W-02)",2026-11-03T11:50:29.2425625+01:00
