@@ -1,0 +1,8 @@
+PASS: logger is installed when absent
+PASS: desktop LoggerD is installed
+PASS: logger uses console destination
+9:20:56.288 ERROR: org.geogebra.common.util.debug.Log.doRead[354]: GeoGebraPlus logger smoke
+PASS: Log.read no longer throws when the embedded logger is initialized
+PASS: second initialization preserves the existing logger
+PASS: existing logger instance is not replaced
+GeoGebraLoggerBootstrapTest: 6 PASS, 0 FAIL

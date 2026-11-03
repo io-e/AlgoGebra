@@ -72,6 +72,7 @@ public final class GeoGebraPlusApplication implements IApplication {
             throw new IllegalStateException("D-02 bundle resolution acceptance failed; see bundle states above");
         }
 
+        initializeGeoGebraLogger();
         if (Boolean.getBoolean("ggbplus.headless")) {
             System.out.println(LOG + "Headless D-02 smoke mode; UI was intentionally skipped");
             return EXIT_OK;
@@ -79,6 +80,18 @@ public final class GeoGebraPlusApplication implements IApplication {
 
         openSwtShellWithGeoGebra();
         return EXIT_OK;
+    }
+
+    /**
+     * GeoGebraFrame initializes this logger in the standalone launcher. The
+     * embedded GeoGebraPanel does not; Log.read() is not null-safe, so install
+     * the same desktop logger before constructing the panel.
+     */
+    private static void initializeGeoGebraLogger() {
+        boolean installed = GeoGebraLoggerBootstrap.initializeIfAbsent();
+        System.out.println(LOG + (installed
+                ? "GeoGebra desktop logger initialized for embedded AppD"
+                : "GeoGebra logger already initialized"));
     }
 
     private boolean resolveAndReportBundles() {
