@@ -1,0 +1,21 @@
+# Suite: 14_UiGuard
+# Started: 2026-11-03T12:06:58.6815415+01:00
+# Host: grok-bot-vm-419969949 / Debian GNU/Linux 13 (trixie) / pwsh 7.6.9
+
+# image=/workspace/AlgoGebra/image-pr50/GeoGebraPlus-RCP-0.1.0-linux-gtk-x86_64 optIn=False os=linux
+# foreground guard: click(10,10) refused - input-driven UI on a real desktop needs Run_All -AllowForegroundInput (GGB_UI_ALLOW_FOREGROUND=1)
+ok 1 - [P0] G-01-no-optin-blocked-no-input :: blocked='foreground guard: click(10,10) refused - input-driven UI on a real desktop needs Run_All -AllowForegroundInput (GGB_UI_ALLOW_FOREGROUND=1)' inputs=0 shot=(not captured: foreground guard: click(10,10) refused - input-driven UI on a real desktop needs Run_All -AllowForegroundInput (GGB_UI_ALLOW_FOREGROUND=1))
+# foreground guard: click(1,1) refused - input-driven UI on a real desktop needs Run_All -AllowForegroundInput (GGB_UI_ALLOW_FOREGROUND=1)
+ok 2 - [P2] G-02-probe-must-be-BLOCKED # SKIP BLOCKED foreground guard: click(1,1) refused - input-driven UI on a real desktop needs Run_All -AllowForegroundInput (GGB_UI_ALLOW_FOREGROUND=1)
+ok 3 - [P0] G-02-test-ok-recorded-as-blocked :: csv row: 14_UiGuard,2,G-02-probe-must-be-BLOCKED,BLOCKED,P2,"foreground guard: click(1,1) refused - input-driven UI on a real desktop needs Run_All -AllowForegroundInput (GGB_UI_ALLOW_FOREGROUND=1)",2026-11-03T12:06:58.7435416+01:00
+# foreground guard: click(10,10) refused - no GeoGebraPlus process (ggbplus.runId) under test
+ok 4 - [P0] G-03-optin-no-ggb-process-blocked :: blocked='foreground guard: click(10,10) refused - no GeoGebraPlus process (ggbplus.runId) under test' inputs=0
+Warning: Missing charsets in String to FontSet conversion
+# foreground guard: click(10,10) - foreground was '(no focused window)' pid=0; one activation attempt
+# foreground guard: click(10,10) refused - foreground title='(no focused window)' pid=0 (first seen '(no focused window)' pid=0); GeoGebraPlus pids=[3569288]; no input sent
+ok 5 - [P0] G-04-foreign-window-blocked-no-input :: focused='(no focused window)' pid=0; blocked='foreground guard: click(10,10) refused - foreground title='(no focused window)' pid=0 (first seen '(no focused window)' pid=0); GeoGebraPlus pids=[3569288]; no input sent' inputs=0
+ok 6 - [P1] G-05-real-ggb-allowed :: foreground='GeoGebraPlus — Eclipse RCP Integration Spike ' pid=3569362 ggb=[3569362] blocked='' log=/workspace/AlgoGebra/wt-v50b/03-RCP-Spike/tests/results/20261103_120352-grok-bot-vm-419969949/14_guard_ggb.log
+ok 7 - [P1] G-06-shot-is-window-rect :: shot=/workspace/AlgoGebra/wt-v50b/03-RCP-Spike/tests/results/20261103_120352-grok-bot-vm-419969949/screenshots/14_guard_ggb.png size=(1250, 723) shell=1250x723 (display 1280x800)
+
+PASS: 6 FAIL: 0 SKIP: 1
+# CSV: /workspace/AlgoGebra/wt-v50b/03-RCP-Spike/tests/results/20261103_120352-grok-bot-vm-419969949/14_UiGuard_GROK_V1.csv

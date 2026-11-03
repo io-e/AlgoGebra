@@ -1,0 +1,111 @@
+Run 20261103-120419-3564875 log /workspace/AlgoGebra/image-pr50/GeoGebraPlus-RCP-0.1.0-linux-gtk-x86_64/logs/launch-20261103-120419-3564875.log
+WARNING: Using incubator modules: jdk.incubator.vector
+[GeoGebraPlus] Host bundle ACTIVE; id=67
+[GeoGebraPlus] Registered external engine pari; available=true
+[GeoGebraPlus] Registered external engine maxima; available=true
+[GeoGebraPlus] Registered external engine gnuplot; available=true
+[GeoGebraPlus] IApplication.start() — D-02 entry
+[GeoGebraPlus] Runtime: 25.0.5+8-LTS; OS=Linux/amd64
+[GeoGebraPlus] JogAmp boot delegation=null
+[GeoGebraPlus] Normalized lazy bundle to RESOLVED for D-02: com.sun.jna
+[GeoGebraPlus] D-02 D-03-set check: expected=50, found=50, ACTIVE=0, RESOLVED=50, unresolved/other=0, resolveBundles=true
+[GeoGebraPlus] D-02 PASS
+[GeoGebraPlus] GeoGebra desktop logger initialized for embedded AppD
+(java:3564906): dbind-WARNING **: 12:04:20.037: AT-SPI: Error retrieving accessibility bus address: org.freedesktop.DBus.Error.ServiceUnknown: The name org.a11y.Bus was not provided by any .service files
+[GeoGebraPlus] GIAC DLL loaded from product classpath: /tmp/geogebraplus-giac-3287393379247573727/libjavagiac64.so
+[GeoGebraPlus] D-05 GIAC natives preloaded in owning bundle class loader: org.eclipse.osgi.internal.loader.EquinoxClassLoader@5cb7e9aa[org.geogebra.migration.shared.giac.jni:5.4.934.0(id=48)]
+[GeoGebraPlus] GlueGen native loaded from product classpath: /tmp/geogebraplus-gluegen-11375523937549258947/libgluegen_rt.so
+[GeoGebraPlus] D-05 GlueGen natives preloaded in owning bundle class loader: org.eclipse.osgi.internal.loader.EquinoxClassLoader@77c764d7[org.geogebra.migration.external.org.jogamp.gluegen.gluegen-rt:2.6.0(id=40)]
+[GeoGebraPlus] JOGL native loaded from product classpath: /tmp/geogebraplus-jogl-214523600382306252/libnativewindow_awt.so
+[GeoGebraPlus] JOGL native loaded from product classpath: /tmp/geogebraplus-jogl-16446244620714302253/libnativewindow_x11.so
+[GeoGebraPlus] JOGL native loaded from product classpath: /tmp/geogebraplus-jogl-10349240287703246444/libnewt_head.so
+[GeoGebraPlus] JOGL native loaded from product classpath: /tmp/geogebraplus-jogl-10049426558369472656/libjogl_desktop.so
+[GeoGebraPlus] JOGL native loaded from product classpath: /tmp/geogebraplus-jogl-4788590624582759929/libjogl_mobile.so
+[GeoGebraPlus] D-05 JOGL natives preloaded in owning bundle class loader: org.eclipse.osgi.internal.loader.EquinoxClassLoader@6c8f9f94[org.geogebra.migration.external.org.jogamp.jogl.jogl-all:2.6.0(id=41)]
+[GeoGebraPlus] CAS factory prototype installed: org.geogebra.desktop.factories.CASFactoryD
+[GeoGebraPlus] System-loader GIAC DLL resource=null
+GeoGebra 5.4.934.0 20 October 2026 Java 25.0.5-64bit
+12:04:20.503 DEBUG: org.geogebra.desktop.main.AppD.<init>[457]: runningFromJar=false
+12:04:20.505 DEBUG: org.geogebra.desktop.main.AppD.<init>[462]: Not setting up logging via LogManager
+12:04:20.693 DEBUG: org.geogebra.common.kernel.Kernel.printAttachedViews[3732]: Registered views (1): 1
+12:04:20.749 DEBUG: org.geogebra.common.gui.Layout.initializeDefaultPerspectives[94]: CAS support: true
+12:04:20.823 DEBUG: org.geogebra.common.kernel.Kernel.printAttachedViews[3732]: Registered views (2): 1, 42
+12:04:20.882 DEBUG: org.geogebra.common.io.MyXMLHandler.startEuclidianView3DElement[747]: TODO : warn that it's a 3D file
+12:04:20.882 DEBUG: org.geogebra.common.io.MyXMLHandler.startEuclidianView3DElement[747]: TODO : warn that it's a 3D file
+12:04:20.882 DEBUG: org.geogebra.common.io.MyXMLHandler.startEuclidianView3DElement[747]: TODO : warn that it's a 3D file
+12:04:20.883 DEBUG: org.geogebra.common.io.MyXMLHandler.startEuclidianView3DElement[747]: TODO : warn that it's a 3D file
+12:04:20.883 DEBUG: org.geogebra.common.io.MyXMLHandler.startEuclidianView3DElement[747]: TODO : warn that it's a 3D file
+12:04:20.883 DEBUG: org.geogebra.common.io.MyXMLHandler.startEuclidianView3DElement[747]: TODO : warn that it's a 3D file
+12:04:20.883 DEBUG: org.geogebra.common.io.MyXMLHandler.startEuclidianView3DElement[747]: TODO : warn that it's a 3D file
+12:04:20.883 DEBUG: org.geogebra.common.io.MyXMLHandler.startEuclidianView3DElement[747]: TODO : warn that it's a 3D file
+12:04:20.883 DEBUG: org.geogebra.common.io.MyXMLHandler.startEuclidianView3DElement[747]: TODO : warn that it's a 3D file
+12:04:20.885 ERROR: org.geogebra.desktop.gui.layout.DockManagerD.applyPerspective[180]: Adding null panel
+12:04:21.151 DEBUG: org.geogebra.common.kernel.Kernel.printAttachedViews[3732]: Registered views (3): 1, 42, 2
+12:04:21.168 WARN: org.geogebra.desktop.main.AppD.setVersionCheckAllowed[895]: Option versionCheckAllow not recognized : 
+12:04:21.168 INFO: org.geogebra.desktop.main.GeoGebraPreferencesD.loadVersionCheckAllow[201]: No system preferences
+[GeoGebraPlus] D-04 embedded AppD full-GUI mode=true (spike adapter; GeoGebraPanel constructs AppD with minimal-GUI mode)
+[GeoGebraPlus] D-04 GeoGebraPanel embedded in SWT_AWT shell
+[GeoGebraPlus] D-05 CAS enabled=true; factory=org.geogebra.desktop.factories.CASFactoryD (test adapter uses reflection; not a proposed public API)
+[GeoGebraPlus] D-05 GIAC JNI host-loader native loaded=true
+12:04:21.362 DEBUG: org.geogebra.desktop.cas.giac.CASgiacD.<clinit>[44]: Loading Giac dynamic library
+12:04:21.362 DEBUG: org.geogebra.desktop.cas.giac.CASgiacD.<clinit>[59]: Loading Giac dynamic library: javagiac64
+12:04:21.364 WARN: org.geogebra.desktop.util.UtilD.delete[243]: Could not delete /tmp/libjavagiac640.8564818110976065.so
+12:04:21.540 DEBUG: org.geogebra.desktop.cas.giac.CASgiacD.<clinit>[85]: Giac dynamic library loaded
+============== restarted ===============
+12:04:21.546 DEBUG: org.geogebra.common.cas.giac.CASgiacB.debug[77]: giac evalRaw input: evalfa([[ggbexpandarg:=((x)+(1))^(2)],when(contains(ggbexpandarg,i),normal(real(ggbexpandarg))+normal(i*im(ggbexpandarg)),when(inString(string(simplify(ggbexpandarg)), "sqrt"),normal(expand(ggbfactor(ggbexpandarg,x,0,1))),normal(lnexpand(ggbexpandarg))))][1])
+12:04:21.548 DEBUG: org.geogebra.common.cas.giac.CASgiacB.debug[77]: giac evalRaw output: x^2+2*x+1
+[GeoGebraPlus] D-05 GIAC native loaded=true
+[GeoGebraPlus] D-05 CAS result: x² + 2x + 1
+============== restarted ===============
+12:04:21.552 DEBUG: org.geogebra.common.cas.giac.CASgiacB.debug[77]: giac evalRaw input: evalfa([[[ggbevalarg:=0/0],[ggbevalarg:=(1)+(1)],[ggbevalans:=regroup(normal(ggbevalarg))],[ggbevalans2:=regroup(ggbevalarg)]],when(length(""+ggbevalans)<=length(""+ggbevalans2),ggbevalans,ggbevalans2)][1])
+12:04:21.552 DEBUG: org.geogebra.common.cas.giac.CASgiacB.debug[77]: giac evalRaw output: 2
+[GeoGebraPlus] D-05 CAS smoke 1+1: 2
+============== restarted ===============
+12:04:21.553 DEBUG: org.geogebra.common.cas.giac.CASgiacB.debug[77]: giac evalRaw input: evalfa([[[ggbevalarg:=0/0],[ggbevalarg:=(x)+(1)],[ggbevalans:=regroup(normal(ggbevalarg))],[ggbevalans2:=regroup(ggbevalarg)]],when(length(""+ggbevalans)<=length(""+ggbevalans2),ggbevalans,ggbevalans2)][1])
+12:04:21.553 DEBUG: org.geogebra.common.cas.giac.CASgiacB.debug[77]: giac evalRaw output: x+1
+[GeoGebraPlus] D-05 CAS smoke x+1: x + 1
+12:04:21.558 DEBUG: org.geogebra.common.cas.giac.CASgiac.evaluateRaw[599]: input = 1+1
+============== restarted ===============
+12:04:21.559 DEBUG: org.geogebra.common.cas.giac.CASgiacB.debug[77]: giac evalRaw input: evalfa(1+1)
+12:04:21.559 DEBUG: org.geogebra.common.cas.giac.CASgiacB.debug[77]: giac evalRaw output: 2
+12:04:21.559 DEBUG: org.geogebra.common.cas.giac.CASgiac.evaluateRaw[624]: result = 2
+[GeoGebraPlus] D-05 direct GIAC smoke: org.geogebra.desktop.cas.giac.CASgiacD(1+1) -> 2
+[GeoGebraPlus] D-05 CAS ASSERTION PASS: normalized=x^2+2x+1
+GeoGebra 5.4.934.0 20 October 2026 Java 25.0.5-64bit
+12:04:21.568 DEBUG: org.geogebra.desktop.main.AppD.<init>[457]: runningFromJar=false
+12:04:21.568 DEBUG: org.geogebra.desktop.main.AppD.<init>[462]: Not setting up logging via LogManager
+12:04:21.617 DEBUG: org.geogebra.common.kernel.Kernel.printAttachedViews[3732]: Registered views (1): 1
+12:04:21.619 DEBUG: org.geogebra.common.gui.Layout.initializeDefaultPerspectives[94]: CAS support: true
+12:04:21.681 DEBUG: org.geogebra.common.kernel.Kernel.printAttachedViews[3732]: Registered views (2): 1, 42
+12:04:21.756 DEBUG: org.geogebra.common.kernel.Kernel.printAttachedViews[3732]: Registered views (3): 1, 42, 2
+12:04:21.759 WARN: org.geogebra.desktop.main.AppD.setVersionCheckAllowed[895]: Option versionCheckAllow not recognized : 
+12:04:21.759 INFO: org.geogebra.desktop.main.GeoGebraPreferencesD.loadVersionCheckAllow[201]: No system preferences
+12:04:21.844 WARN: org.geogebra.common.geogebra3D.euclidian3D.EuclidianView3D.logInited[373]: !!! 3D View being initialized !!!
+12:04:21.854 DEBUG: org.geogebra.desktop.geogebra3D.euclidian3D.opengl.RendererCheckGLVersionD.<init>[85]: create jogl -- use Canvas : true
+12:04:21.856 DEBUG: org.geogebra.desktop.geogebra3D.euclidian3D.opengl.RendererCheckGLVersionD.<init>[87]: create jogl -- default profile
+12:04:22.369 DEBUG: org.geogebra.desktop.geogebra3D.euclidian3D.opengl.RendererCheckGLVersionD.<init>[92]: create 3D component -- use Canvas : true
+12:04:22.376 DEBUG: org.geogebra.desktop.geogebra3D.euclidian3D.opengl.RendererCheckGLVersionD.<init>[96]: add gl event listener
+12:04:22.376 DEBUG: org.geogebra.desktop.geogebra3D.euclidian3D.opengl.RendererCheckGLVersionD.<init>[99]: create animator
+12:04:22.379 DEBUG: org.geogebra.desktop.geogebra3D.euclidian3D.opengl.RendererCheckGLVersionD.<init>[104]: start animator
+12:04:22.380 DEBUG: org.geogebra.common.kernel.Kernel.printAttachedViews[3732]: Registered views (4): 1, 42, 2, 512
+[GeoGebraPlus] D-05 3D point command accepted=true; 3D view initialized=true
+[GeoGebraPlus] D-05 3D note: GeoGebraPanel constructs the 2D AppD; the 3D proof uses an upstream App3D instance in the second SWT_AWT pane
+(SWT:3564906): Gdk-WARNING **: 12:04:22.472: XSetErrorHandler() called with a GDK error trap pushed. Don't do that.
+12:04:22.751 DEBUG: org.geogebra.desktop.geogebra3D.euclidian3D.opengl.RendererCheckGLVersionD.initCheckShaders[147]: Init on Thread[#51,AWT-EventQueue-0,6,main]
+Chosen GLCapabilities: GLCaps[glx vid 0x21, fbc 0x44: rgba 8/8/8/8, opaque, accum-rgba 0/0/0/0, dp/st/ms 24/8/0, dbl, mono  , sw, GLProfile[GL4bc/GL4bc.sw], on-scr[.]]
+double buffered: true
+stereo: false
+stencil: 8
+INIT GL IS: jogamp.opengl.gl4.GL4bcImpl
+GL_VENDOR: Mesa
+GL_RENDERER: llvmpipe (LLVM 19.1.7, 256 bits)
+GL_VERSION: 4.5 (Compatibility Profile) Mesa 25.0.7-2+deb13u1
+isGL2ES2: true
+12:04:22.752 DEBUG: org.geogebra.desktop.geogebra3D.euclidian3D.opengl.RendererCheckGLVersionD.initCheckShaders[166]: ==== GL version is 4.5 (Compatibility Profile) Mesa 25.0.7-2+deb13u1 which means GL>=4
+12:04:22.754 DEBUG: org.geogebra.desktop.geogebra3D.euclidian3D.opengl.RendererImplShadersD.<init>[65]: Renderer with shaders created (shaders checked ok)
+12:04:22.754 DEBUG: org.geogebra.desktop.geogebra3D.euclidian3D.opengl.RendererCheckGLVersionD.init[132]: openGL version : 4.5 (Compatibility Profile) Mesa 25.0.7-2+deb13u1, vbo supported : true
+12:04:22.763 DEBUG: org.geogebra.desktop.geogebra3D.euclidian3D.opengl.RendererImplShadersD.compileShadersProgram[107]: Vertex shader compiled
+12:04:22.763 DEBUG: org.geogebra.desktop.geogebra3D.euclidian3D.opengl.RendererImplShadersD.compileShadersProgram[128]: Fragment shader compiled
+X11Util.Display: Shutdown (JVM shutdown: true, open (no close attempt): 1/1, reusable (open, marked uncloseable): 0, pending (open in creation order): 1)
+X11Util: Open X11 Display Connections: 1
+X11Util: Open[0]: NamedX11Display[:95, 0x7fadfc8692e0, refCount 1, unCloseable false]

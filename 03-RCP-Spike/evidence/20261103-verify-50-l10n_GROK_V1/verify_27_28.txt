@@ -1,0 +1,12 @@
+info-#33-FOCUS-01    FAIL  tracked by #33, excluded from #28 verdict
+27-renderer-ttf      PASS  org.geogebra.migration.desktop.renderer-5.4.934.0.jar: 0 .ttf; fragment org.geogebra.plus.renderer.resources_0.1.0.jar: 46 .ttf, in bundles.info=True
+27-P-02              PASS  50/0/1
+27-D-11              PASS  8/0/0
+27-suite09-font      PASS  D04-FONT-01=True
+28-valid-inputs      PASS  failing: none (suite 09 19/1/0)
+28-invalid-dialog    PASS  KBD-08 invalid input '((((' still shows its error dialog
+28-no-dead-input     PASS  keys-reach-input failures: 0
+VERDICT #27: PASS
+VERDICT #28: PASS
+# image=/workspace/AlgoGebra/image-pr50/GeoGebraPlus-RCP-0.1.0-linux-gtk-x86_64 scenarios=/workspace/AlgoGebra/wt-v50b/03-RCP-Spike/tests/results/20261103_114956-grok-bot-vm-419969949
+rc=0

@@ -1,0 +1,64 @@
+# Suite: 20_CourseValidatorJava
+# Started: 2026-11-03T12:07:30.7838777+01:00
+# Host: grok-bot-vm-419969949 / Debian GNU/Linux 13 (trixie) / pwsh 7.6.9
+
+ok 1 - [P0] JV-00-compile :: javac rc=0 
+ok 2 - [P0] JV-T-01 :: REJECT Course command is not allowed: Execute
+ok 3 - [P0] JV-T-02 :: REJECT Course command is not allowed: Exécute
+ok 4 - [P0] JV-T-03 :: REJECT Course command is not allowed: Execute
+ok 5 - [P0] JV-T-03b :: REJECT Course command is not allowed: Séquence
+ok 6 - [P0] JV-T-03c :: REJECT Course command is not allowed: Execute
+ok 7 - [P0] JV-T-15 :: REJECT Course command is not allowed: RunClickScript
+ok 8 - [P0] JV-T-16 :: REJECT Course command is not allowed: RunUpdateScript
+ok 9 - [P0] JV-T-16b :: REJECT Course command is not allowed: LanceScriptClic
+ok 10 - [P0] JV-T-17 :: REJECT Course command is not allowed: PlaySound
+ok 11 - [P0] JV-T-14 :: REJECT Course command is not allowed: ExportImage
+ok 12 - [P0] JV-T-18 :: REJECT Course command is not allowed: SetValue
+ok 13 - [P0] JV-T-12 :: REJECT Course command is not allowed: Delete
+ok 14 - [P0] JV-T-12b :: REJECT Course command is not allowed: Effacer
+ok 15 - [P0] JV-T-19 :: REJECT Course command is not allowed: Rename
+ok 16 - [P0] JV-T-20 :: REJECT Course command is not allowed: Repeat
+ok 17 - [P0] JV-T-21 :: REJECT Sequence exceeds the maximum of 1000 iterations.
+ok 18 - [P0] JV-T-22 :: REJECT Course command is not allowed: UpdateConstruction
+ok 19 - [P0] JV-T-08 :: ACCEPT
+ok 20 - [P0] JV-T-09 :: ACCEPT
+ok 21 - [P0] JV-T-23 :: ACCEPT
+ok 22 - [P0] JV-T-24 :: REJECT Course command is not allowed: Execute
+ok 23 - [P0] JV-T-04 :: REJECT OPEN is blocked for untrusted .ggb files until script scanning is available.
+ok 24 - [P0] JV-T-04b :: REJECT OPEN is blocked for untrusted .ggb files until script scanning is available.
+ok 25 - [P0] JV-T-25 :: REJECT OPEN is blocked for untrusted .ggb files until script scanning is available.
+ok 26 - [P0] JV-T-13 :: REJECT OPEN is blocked for untrusted .ggb files until script scanning is available.
+ok 27 - [P0] JV-T-05 :: REJECT OPEN is blocked for untrusted .ggb files until script scanning is available.
+ok 28 - [P0] JV-T-05b :: REJECT OPEN is blocked for untrusted .ggb files until script scanning is available.
+ok 29 - [P0] JV-T-05c :: REJECT OPEN is blocked for untrusted .ggb files until script scanning is available.
+ok 30 - [P0] JV-T-26 :: REJECT OPEN is blocked for untrusted .ggb files until script scanning is available.
+ok 31 - [P0] JV-T-27 :: REJECT OPEN is blocked for untrusted .ggb files until script scanning is available.
+ok 32 - [P0] JV-T-28 :: REJECT OPEN is blocked for untrusted .ggb files until script scanning is available.
+ok 33 - [P0] JV-T-06 :: REJECT OPEN is blocked for untrusted .ggb files until script scanning is available.
+ok 34 - [P0] JV-T-07 :: REJECT OPEN is blocked for untrusted .ggb files until script scanning is available.
+ok 35 - [P0] JV-T-29 :: REJECT OPEN is blocked for untrusted .ggb files until script scanning is available.
+ok 36 - [P0] JV-T-30 :: REJECT OPEN is blocked for untrusted .ggb files until script scanning is available.
+ok 37 - [P0] JV-T-31 :: REJECT OPEN is blocked for untrusted .ggb files until script scanning is available.
+ok 38 - [P0] JV-T-32 :: REJECT OPEN is blocked for untrusted .ggb files until script scanning is available.
+ok 39 - [P0] JV-T-33 :: ACCEPT_WITH_WARNING This .ggb file is explicitly trusted but its embedded scripts are not scanned; scripts may execute when it is opened.
+ok 40 - [P0] JV-T-11 :: REJECT IOException: Invalid course file: $.tree[0].children[0].children[0].children[0].children[0].children[0] step nesting exceeds four levels below a chapter
+ok 41 - [P0] JV-T-42 :: REJECT IOException: Invalid course file: $.tree[8].children[20].actions course exceeds the maximum of 500 actions
+ok 42 - [P0] JV-T-43 :: REJECT OPEN is blocked for untrusted .ggb files until script scanning is available.
+ok 43 - [P0] JV-T-44 :: REJECT IOException: Invalid course file: $.tree[0].children[0].actions[0].trustedGgb is valid only for OPEN actions
+ok 44 - [P0] JV-T-45 :: ACCEPT
+ok 45 - [P0] JV-T-46 :: REJECT Sequence exceeds the maximum of 1000 iterations.
+ok 46 - [P0] JV-T-47 :: REJECT Sequence end bound must be a static numeric constant.
+ok 47 - [P0] JV-T-48 :: REJECT Sequence exceeds the maximum of 1000 iterations.
+ok 48 - [P0] JV-T-49 :: ACCEPT
+ok 49 - [P0] JV-T-50 :: REJECT Course directive exceeds the total Sequence output budget of 10000 items.
+ok 50 - [P0] JV-T-51 :: ACCEPT
+ok 51 - [P0] JV-T-52 :: REJECT Course directive exceeds the total Sequence output budget of 10000 items.
+ok 52 - [P0] JV-T-53 :: REJECT Sequence requires explicit start and end bounds in a course command.
+ok 53 - [P0] JV-T-54 :: REJECT Sequence bounds must be finite and the step must be non-zero.
+ok 54 - [P0] JV-T-55 :: REJECT Course command is not allowed: Execute
+ok 55 - [P0] JV-T-10 :: REJECT IOException: Course file exceeds the 1 MiB limit: 1066493 bytes
+# CourseCorpusRealValidatorTest_GROK_V1: 54 PASS, 0 FAIL, 0 XFAIL, 0 XPASS
+ok 56 - [P0] JV-99-summary :: CourseCorpusRealValidatorTest_GROK_V1: 54 PASS, 0 FAIL, 0 XFAIL, 0 XPASS
+
+PASS: 56 FAIL: 0 SKIP: 0
+# CSV: /workspace/AlgoGebra/wt-v50b/03-RCP-Spike/tests/results/20261103_120352-grok-bot-vm-419969949/20_CourseValidatorJava_GROK_V1.csv
