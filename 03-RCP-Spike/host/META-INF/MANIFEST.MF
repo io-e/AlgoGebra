@@ -17,10 +17,12 @@ Import-Package: org.eclipse.equinox.app;version="[1.1,2.0)",
  org.geogebra.common.kernel.commands,
  org.geogebra.common.main,
  org.geogebra.common.plugin,
+ org.geogebra.common.util.debug,
  org.geogebra.desktop,
  org.geogebra.desktop.geogebra3D,
  org.geogebra.desktop.main,
  org.geogebra.desktop.plugin,
+ org.geogebra.desktop.util,
  org.osgi.framework;version="[1.10,2.0)",
  org.osgi.framework.wiring;version="[1.2,2.0)"
 
