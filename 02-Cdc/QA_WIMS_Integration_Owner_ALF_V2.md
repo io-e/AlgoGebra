@@ -1,10 +1,10 @@
-<!-- ALF_V2_1 -->
+<!-- ALF_V2_2 -->
 # Owner Q&A — WIMS Integration CDC
 
 | Field | Value |
 |---|---|
 | Document | `02-Cdc/QA_WIMS_Integration_Owner_ALF_V2.md` |
-| Version | ALF_V2_1 (owner-revised from CLAUDE_V1, converter analysis added) |
+| Version | ALF_V2_2 (owner-revised, converter analysis, resolution process architecture) |
 | Date | 2026-11-03 |
 | Context | Preparing the WIMS integration CDC; questions raised by Claude, answers and corrections given by owner |
 | Depends on | `Cdc_External_Engines_AlgoGebra_CLAUDE_V1_1.md`, `Decision_Open_Points_Sprint3_CLAUDE_V1.md` (S-01/S-02), `Spec_Course_Security_CLAUDE_V1_2.md` |
@@ -229,6 +229,118 @@ The boundary: **the course tree calls the evaluation contract; the WIMS CDC defi
 
 ---
 
+## Q-W9 — Resolution process and student help architecture
+
+**Question:** How does the student help system work? What is the structure of the help content?
+
+**Answer (owner, 2026-11-03):** The teacher provides a **resolution process** as a JSON file, linked from OEF via tags. This is the core pedagogical structure.
+
+### 9.1 Resolution process tree
+
+The resolution process JSON is loaded into the **course tree (left panel)**. Each node is a **transformation step** in the resolution — not just text, but an active step that changes the mathematical state.
+
+```
+Course Tree (left panel)                    GeoGebra Workspace (right panel)
+─────────────────────────                   ──────────────────────────────────
+Exercise: Dérivation de x²+3x              Student experiments here:
+├─ Étape 1: Identifier f(x)                 - replay the current step
+│   ├─ [explication FR/EN]                   - test another function
+│   ├─ [aide JSON → variables injectées]     - modify random values
+│   └─ [LLM Q&A / RAG sur le cours]         - try a different approach
+├─ Étape 2: Appliquer la règle              
+│   ├─ [explication FR/EN]                  Student work on the right panel
+│   ├─ [aide JSON]                          is sent back to WIMS for
+│   └─ [LLM / RAG]                         evaluation.
+├─ Étape 3: Simplifier                     
+│   └─ ...                                 
+└─ Étape 4: Vérifier le résultat           
+    └─ ...                                 
+```
+
+### 9.2 Each node has three help layers
+
+| Layer | Source | Content | When |
+|---|---|---|---|
+| **1. Explanations** | Teacher-authored, in the resolution JSON | Multilingual text (FR/EN/...) explaining the transformation at this step | Always available, static |
+| **2. Help JSON** | Teacher-authored template, linked from OEF via `\help{file.json}` tag | Populated at conversion time (seed-based defaults) AND at runtime (student's actual random values, context, language) | On demand — student clicks "help" |
+| **3. LLM assistance** | AI model (local or remote) | Answers student questions about this step; can do RAG on the student's course material | On demand — student asks a question |
+
+### 9.3 Help JSON template mechanism
+
+**Tags in OEF:** The OEF file contains `\help{aide_derivation.json}` tags that reference external JSON files.
+
+**File location:** Both models supported:
+- **Exercise-specific:** `aide_xxx.json` alongside the `.oef` file (teacher creates them for this exercise)
+- **Shared library:** reusable templates referenced by name (e.g. `aide_derivation.json` used by many exercises). Exercise-specific overrides shared.
+
+**Variable injection:** The help JSON is a **template**. It is populated with:
+- **Random variable values** from the OEF (`\integer{a=random(2..5)}` → `"a": 3`)
+- **Student context** (current step, previous answers, error history)
+- **Language** (student's locale preference)
+
+**Injection timing:** Both:
+- **At conversion time:** the converter resolves random variables with the seed and bakes default values into the JSON (reproducible, works offline)
+- **At runtime:** AlgoGebra re-injects values when the student opens the exercise (adapts to session seed, student locale, student progress)
+
+### 9.4 Right panel: student workspace → WIMS
+
+The GeoGebra workspace (right panel) is where the student **replays, tests, and experiments**:
+- **Replay:** execute the current resolution step in the construction
+- **Test:** try a different approach or different values
+- **Experiment:** modify the construction freely
+
+The student's workspace interactions are **sent back to WIMS** for evaluation. This is the submission path: the right panel produces the construction state that WIMS evaluates.
+
+### 9.5 Impact on schema gaps
+
+This architecture resolves and redefines the 5 gaps identified in Q-W3:
+
+| Gap | Original | New status |
+|---|---|---|
+| **GAP-1** (cheat sheets) | No structured help in schema | **Resolved by Q-W9:** help is a full resolution tree with per-node explanations + linked JSON templates. Schema needs `help` array on each step node. |
+| **GAP-2** (engine routing) | No engine field | **Still needed:** each resolution step may call a different engine. Add `engine` field per step. |
+| **GAP-3** (help/exploration) | No bidirectional contract | **Resolved by Q-W9:** right panel interactions → WIMS. Plus LLM/RAG layer for Q&A. Three distinct channels: teacher help, engine compute, LLM Q&A. |
+| **GAP-4** (submission) | No wire format | **Clarified:** right panel construction state is the submission payload. Phase 2 for connected mode. |
+| **GAP-5** (check types) | Limited check types | **Still needed.** Resolution steps may need richer checks (intermediate results, not just final answer). |
+
+### 9.6 New schema elements needed
+
+The `Schema_Course_JSON_CLAUDE_V1.json` must be extended with:
+
+```
+step: {
+  ...existing fields...
+  "help": {                          ← NEW
+    "explanations": {                  multilingual teacher text
+      "fr": "...",
+      "en": "..."
+    },
+    "template": "aide_derivation.json",  linked help JSON template
+    "llm": {                           LLM/RAG configuration
+      "enabled": true,
+      "ragSource": "course"            RAG on student's course material
+    }
+  },
+  "engine": "maxima",                ← NEW (GAP-2)
+  "transform": {                     ← NEW: what this step does
+    "input": "expression from previous step",
+    "operation": "derive",
+    "output": "variable to check"
+  }
+}
+```
+
+### 9.7 Open questions from Q-W9
+
+| # | Question | Status |
+|---|---|---|
+| Q-W9a | Which LLM? Local (Ollama/llama.cpp) or remote API (Claude, etc.)? | **Open** |
+| Q-W9b | RAG source: student's course PDF? Teacher-provided corpus? WIMS exercise bank? | **Open** |
+| Q-W9c | Is the LLM layer MVP or Phase 2? (Adds significant complexity) | **Open** |
+| Q-W9d | Help JSON template format: what fields are required? Need a schema. | **Open — CDC work** |
+
+---
+
 ## Summary of decisions
 
 | Question | Decision | Phase | Status |
@@ -242,6 +354,7 @@ The boundary: **the course tree calls the evaluation contract; the WIMS CDC defi
 | Q-W6 Fallback | Exploration: fallback OK. Grading: error if engine missing | MVP | **Decided** |
 | Q-W7 wims4win | Local server for students (Shadow PC / CPGE) and teachers | MVP | **Decided** |
 | Q-W8 Scope | Protocol + engine contracts; course tree owns lifecycle | MVP | **Decided** |
+| Q-W9 Resolution process | Teacher provides resolution tree JSON; per-node help (multilingual + template + LLM/RAG); right panel → WIMS | MVP (tree + help), Phase 2+ (LLM/RAG) | **Decided — open sub-questions Q-W9a..d** |
 
 ---
 
@@ -254,6 +367,8 @@ The boundary: **the course tree calls the evaluation contract; the WIMS CDC defi
 | GV-3 | Suite 19 JSON output: confirm 5 gaps (GAP-1..GAP-5) against OEF corpus 300 — which gap blocks the most exercises? | tip, `oef2course_GROK_V1.py`, corpus 300 |
 | GV-4 | OEF hint/help/cheat-sheet directives (`\hint`, `\help`, `\feedback`) — what constructs exist in real OEF files? | OEF format spec + wims4win examples |
 | GV-5 | wims4win local HTTP service on Windows (Apache/CGI on localhost) | `D:\ALF_ZGit\02-wims4win` |
+| GV-6 | OEF exercises with `\help` or equivalent tags — do any exist in the WIMS exercise bank? What format? | wims4win OEF corpus, WIMS documentation |
+| GV-7 | Resolution process JSON: review if any existing WIMS/XWims format already encodes step-by-step resolution | WIMS source, XWims docs |
 
 ---
 
