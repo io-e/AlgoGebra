@@ -1,0 +1,6 @@
+BASH_SYNTAX: PASS
+JAR_FRAGMENT: PASS; ttf=46; required fonts present
+R12_FONT_CONTENTS_MATCH: PASS; 46/46 SHA-256 identical
+Fragment host: org.geogebra.migration.desktop.renderer [5.4.934,5.4.935)
+Artifact size: 608609 bytes
+NOTE: Linux build.sh / Equinox on Linux not run here (WSL distro unavailable).
