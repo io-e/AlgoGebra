@@ -1,0 +1,53 @@
+{
+ "lang": "fr",
+ "rawKeysFound": [],
+ "camelCaseTokens": [],
+ "expected": {
+  "Algèbre": true,
+  "Graphique": true,
+  "Saisie": true,
+  "Graphique 3D": true
+ },
+ "pass": true,
+ "texts": {
+  "G09-trig-fr-CUTF8.png": [
+   "Introductionto Trigonometry",
+   "Editer",
+   "Affichage",
+   "Aide",
+   "Fichier",
+   "Options",
+   "Qutils",
+   "Fenetre",
+   "Fichier",
+   "Editer Affichage",
+   "Options",
+   "Qutils",
+   "Fenetre",
+   "Aide",
+   " 1. The Unit Circle",
+   "Deplacer",
+   " 2. Angle and Projections",
+   " 3. Sine and Cosine Values",
+   "Graphique",
+   " Algebre",
+   "^Algebre",
+   " Graphique 3D",
+   "> 4. Special Angles",
+   "A = (1, 2 3)",
+   " 5. Double Angle Formula",
+   "Build the unit circle, define sine and cosine,",
+   "and verify key identities. All commands are 2D",
+   "avoids functions, matrices, and 3D planes",
+   "(BUG-014 safe).",
+   "Run",
+   "Check",
+   "Next",
+   "Reset",
+   "Progress checks are formative only; WIMS",
+   "Saisie:",
+   "Saisie:",
+   "owns grading."
+  ]
+ }
+}

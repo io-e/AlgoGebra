@@ -37,3 +37,27 @@ OCR note: `AffichageOptions` in FR is two adjacent menu titles merged by OCR, no
 
 `runall_console_attempt1_bail-no-engine-jars.txt`: first attempt bailed suites 01–07/12 because the fresh worktree had no `host/build` engine jars; copied unchanged engine/compute jars from the 2f24a7e worktree (not touched by #50) and reran.
 Not run: legacy `Run_G09_G11_GROK_V1.ps1` (hard-coded displays :140–:143 which have sockets on the shared box); the new script covers the G-11 label checks in EN/FR.
+
+## Addendum 2026-11-03 12:45 (Europe/Paris) — gaps closed (owner-approved)
+### Options menus (`l10n-v2/`, private displays :266/:267)
+Root cause of the earlier miss: a click on a Swing menubar title right after `Escape` does not reopen a menu. `Verify_Issue_39_L10n_GROK_V1.ps1` now resets (Escape ×2 + click on empty 2D graphics) before each menu and opens File + Options in both the 2D and 3D panes, with per-language title coordinates (FR titles are wider). `ocr_l10n_GROK_V1.py` checks Options items per screenshot.
+
+| Lang | 2D Options | 3D Options | Raw keys | Verdict |
+|---|---|---|---|---|
+| EN | Rounding, Labeling, Font Size, Language (+ Advanced…, Save Settings, Restore Default Settings) | same | none | PASS |
+| FR | Arrondi, Étiquetage, Taille des caractères, Langue (+ Avancé…, Sauvegarder la configuration, Configuration par défaut) | same | none | PASS |
+
+Screenshots: `l10n-v2/pr50-{en,fr}-menu-{File,Options,File3D,Options3D}.png`, `l10n-v2/pr50-{en,fr}-main.png`; results `l10n-v2/summary.tsv`, `*-ocr.json`. `summary_attempt1_wrong-fr-regex.tsv` / `attempt1-*`: first run expected "Taille de police"; GeoGebra's FR string is "Taille des caractères" (test bug, regex fixed).
+
+### G-09 / G-11 course tree (`g09_g11/`, displays :270–:273, :275)
+`tests/Run_G09_G11_GROK_V1.ps1` (copy of the 2026-11-02 evidence script, original left unchanged): new `-DisplayBase` (default 140 = old behaviour), refuses a display whose X socket exists, adds case `G09-trig-fr-CUTF8`, fixture moved to `tests/fixtures/course_locale_fixture_GROK_V1.json`. Screenshots OCR-checked (`g09_g11/ocr_summary.txt`).
+
+| Case | Course tree | GeoGebra labels | Raw keys | Errors in log |
+|---|---|---|---|---|
+| G09-trig-en-CUTF8 | trigonometry_intro, 5 chapters | Algebra/Graphics/Input/3D Graphics | none | 0 |
+| G09-trig-fr-CUTF8 | same | Algèbre/Graphique/Saisie/Graphique 3D | none | 0 |
+| G11-fixture-CUTF8-en | Unicode fixture: "Trigonométrie — αβγ / Тригонометрия / 三角函数", "√2 ≤ π ≥ ∑ ∞ ∫ → ± ½", "é è à ç ù œ « »" render correctly | EN | none | 0 |
+| G11-fixture-CUTF8-fr | same Unicode rendering | FR | none | 0 |
+| G11-fixture-POSIX (LANG=C) | same | EN | none | 0 |
+
+OCR noise in camelCase list: `TpuroHoMeTpu9` = Cyrillic "Тригонометрия" read as Latin; `OptionsTools`/`AffichageOptions` = adjacent menu titles merged. Observation (not #39): host course-panel buttons (Run/Check/Next/Reset) and footer stay English in FR — host strings, not GeoGebra localization.
