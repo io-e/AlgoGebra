@@ -1,0 +1,77 @@
+diff --git a/03-RCP-Spike/host/src/org/geogebra/plus/host/GeoGebraPlusApplication.java b/03-RCP-Spike/host/src/org/geogebra/plus/host/GeoGebraPlusApplication.java
+index b6e795d..dca08da 100644
+--- a/03-RCP-Spike/host/src/org/geogebra/plus/host/GeoGebraPlusApplication.java
++++ b/03-RCP-Spike/host/src/org/geogebra/plus/host/GeoGebraPlusApplication.java
+@@ -247,6 +247,7 @@ public final class GeoGebraPlusApplication implements IApplication {
+         Frame threeDFrame = SWT_AWT.new_Frame(threeDComposite);
+         twoDFrame.setLayout(new BorderLayout());
+         threeDFrame.setLayout(new BorderLayout());
++        installSwtAwtFocusBridge(display, twoDComposite, twoDFrame, threeDComposite, threeDFrame);
+         shell.addListener(SWT.Resize, event -> SwingUtilities.invokeLater(() -> {
+             twoDFrame.validate();
+             threeDFrame.validate();
+@@ -415,7 +416,6 @@ public final class GeoGebraPlusApplication implements IApplication {
+                 threeDFrame.add(threeDHost, BorderLayout.CENTER);
+                 threeDFrame.setVisible(true);
+                 threeDFrame.validate();
+-                install3dInputFocusBridge(threeDFrame, app3D);
+                 scenarioApi3d = app3D.getGgbApi();
+                 scenarioApp3d = app3D;
+                 boolean pointCreated = app3D.getGgbApi().evalCommand("A = (1, 2, 3)");
+@@ -470,6 +470,56 @@ public final class GeoGebraPlusApplication implements IApplication {
+         System.out.println(LOG + "D-04 3D input focus bridge installed");
+     }
+ 
++    /**
++     * GROK_V1 reference (evidence only): under SWT_AWT/XEmbed the X keyboard focus stays with the
++     * GTK widget that SWT considers focused. A click inside an embedded AWT frame does not move SWT
++     * focus to its EMBEDDED composite, so keys go to the previously focused pane until a second click.
++     * Fix both directions: on any AWT mouse press, give SWT focus to the owning composite, then
++     * re-request AWT focus on the clicked text component.
++     */
++    private static void installSwtAwtFocusBridge(Display display, Composite c2d, Frame f2d, Composite c3d, Frame f3d) {
++        java.awt.Toolkit.getDefaultToolkit().addAWTEventListener(event -> {
++            if (event.getID() != MouseEvent.MOUSE_PRESSED) {
++                return;
++            }
++            Component src = (Component) event.getSource();
++            java.awt.Window w = SwingUtilities.getWindowAncestor(src);
++            Composite target = w == f2d ? c2d : w == f3d ? c3d : null;
++            if (target == null || display.isDisposed()) {
++                return;
++            }
++            display.asyncExec(() -> {
++                if (!target.isDisposed()) {
++                    target.setFocus();
++                }
++                SwingUtilities.invokeLater(() -> {
++                    Frame active = target == c3d ? f3d : f2d;
++                    Frame other = active == f3d ? f2d : f3d;
++                    synthesizeActivation(other, false);
++                    synthesizeActivation(active, true);
++                    if (src instanceof javax.swing.text.JTextComponent) {
++                        src.requestFocusInWindow();
++                    }
++                    if (Boolean.getBoolean("ggbplus.focusTrace")) {
++                        System.out.println(LOG + "D-04 SWT_AWT focus bridge: pane=" + (target == c3d ? "3D" : "2D")
++                                + "; inputHasFocus=" + src.hasFocus());
++                    }
++                });
++            });
++        }, java.awt.AWTEvent.MOUSE_EVENT_MASK);
++        System.out.println(LOG + "D-04 SWT_AWT focus bridge installed (2D+3D)");
++    }
++
++    /** sun.awt.EmbeddedFrame#synthesizeWindowActivation (java.desktop/sun.awt is exported by launch.sh). */
++    private static void synthesizeActivation(Frame frame, boolean active) {
++        try {
++            Method m = Class.forName("sun.awt.EmbeddedFrame").getMethod("synthesizeWindowActivation", boolean.class);
++            m.invoke(frame, active);
++        } catch (ReflectiveOperationException | RuntimeException error) {
++            System.out.println(LOG + "D-04 synthesizeWindowActivation unavailable: " + error);
++        }
++    }
++
+     private static void prepareDesktopCasFactory() throws ReflectiveOperationException {
+         ClassLoader desktopLoader = GeoGebraPanel.class.getClassLoader();
+         Class<?> factoryType = desktopLoader.loadClass("org.geogebra.common.factories.CASFactory");
