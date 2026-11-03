@@ -1,0 +1,26 @@
+# Suite: probe_focus
+# Started: 2026-11-03T13:23:41.3403725+01:00
+# Host: grok-bot-vm-419969949 / Debian GNU/Linux 13 (trixie) / pwsh 7.6.9
+
+# start xfocus=2097163 name=GeoGebraPlus — Eclipse RCP Integration Spike 
+# after-click-2D xfocus=2097163 name=GeoGebraPlus — Eclipse RCP Integration Spike 
+# after-click-3D xfocus=2097163 name=GeoGebraPlus — Eclipse RCP Integration Spike 
+# after-click-3D+1s xfocus=2097163 name=GeoGebraPlus — Eclipse RCP Integration Spike 
+# 3D lost=True
+# second-click-3D xfocus=2097163 name=GeoGebraPlus — Eclipse RCP Integration Spike 
+# 3D 2nd-click lost=False
+
+[GeoGebraPlus] D-04 embedded AppD full-GUI mode=true (spike adapter; GeoGebraPa
+nel constructs AppD with minimal-GUI mode)
+[GeoGebraPlus] D-04 GeoGebraPanel embedded in SWT_AWT shell
+[GeoGebraPlus] D-04 2D input focus bridge installed
+[GeoGebraPlus] D-04 3D input focus bridge installed
+[GeoGebraPlus] D-04 2D input focus bridge: requestAccepted=false; alreadyFocuse
+dBeforeRequest=true; inputHasFocus=true; owner=org.geogebra.desktop.gui.inputfi
+eld.AutoCompleteTextFieldD
+[GeoGebraPlus] D-04 3D input focus bridge: requestAccepted=false; alreadyFocuse
+dBeforeRequest=false; inputHasFocus=false; owner=org.geogebra.desktop.euclidian
+.EuclidianViewJPanelD
+[GeoGebraPlus] D-04 3D input focus bridge: requestAccepted=false; alreadyFocuse
+dBeforeRequest=false; inputHasFocus=false; owner=null
+
