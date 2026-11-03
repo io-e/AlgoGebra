@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://geogebraplus.local/schemas/course/v1",
-  "$comment": "CLAUDE_V1_1 — GeoGebraPlus course file schema. See Spec_Course_Security_CLAUDE_V1_2.md for security constraints. V1_1 adds help and engine fields (Q-W9, GAP-1, GAP-2).",
+  "$comment": "CLAUDE_V1_1 — GeoGebraPlus course file schema. See Spec_Course_Security_CLAUDE_V1_2.md for security constraints. V1_1 adds help and engine fields (Q-W9, GAP-1, GAP-2). schemaVersion stays '1.0': new fields are additive (optional on step), existing 1.0 files remain valid.",
   "title": "GeoGebraPlus Course",
   "description": "A hierarchical course definition for the GeoGebraPlus course tree panel (RCP and Web).",
   "type": "object",

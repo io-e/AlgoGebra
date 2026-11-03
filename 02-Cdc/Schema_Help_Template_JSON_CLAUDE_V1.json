@@ -1,13 +1,17 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://geogebraplus.local/schemas/help-template/v1",
-  "$comment": "CLAUDE_V1 — GeoGebraPlus help template schema. Teacher-authored resolution process or text help, loaded by AlgoGebra from OEF \\help{file.json} tags. See QA_WIMS_Integration_Owner_ALF_V2.md Q-W9.",
+  "$comment": "CLAUDE_V1_1 — GeoGebraPlus help template schema. Teacher-authored resolution process or text help, loaded by AlgoGebra from OEF \\help{file.json} tags. See QA_WIMS_Integration_Owner_ALF_V2.md Q-W9. V1_1: allow $comment property.",
   "title": "GeoGebraPlus Help Template",
   "description": "A help file linked from an OEF exercise. Contains either a structured resolution process (step-by-step) or plain text help. Variables use {{name}} placeholders injected from OEF random values, student context, and locale at conversion time and/or runtime.",
   "type": "object",
   "required": ["templateVersion", "content"],
   "additionalProperties": false,
   "properties": {
+    "$comment": {
+      "type": "string",
+      "description": "Optional JSON Schema comment for documentation."
+    },
     "templateVersion": {
       "type": "string",
       "const": "1.0"
