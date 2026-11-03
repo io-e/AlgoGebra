@@ -28,6 +28,18 @@ r = await C.submit({ endpoint: ep, exercise: '', base64: ggb }); ok('GC-13-no-ex
 ok('GC-14-parse-non-object', !C.parseResult(200, 'application/json', '[1]').ok && !C.parseResult(200, 'application/json', '{"grade":"0.5"}').ok);
 const src = fs.readFileSync(path.join(repo, 'wims/course-activity-template/wims-grade-client_GROK_V1.js'), 'utf8');
 ok('GC-15-no-innerHTML', !/\.innerHTML\s*=/.test(src));
-ok('GC-16-no-local-grading', !/grade\s*=\s*[^=]/.test(src.replace(/\/\/.*$/gm, '')), 'client never assigns a grade');
+ok('GC-16-no-local-grading', !/(?<![-\w])grade\s*=\s*[^=]/.test(src.replace(/\/\/.*$/gm, '')), 'client never assigns a grade');
+// GC-17..GC-25: hardening (HTML adapter proposal Q-W1, size limit Q-W3, error paths)
+r = await C.submit({ endpoint: ep, exercise: 'html-1', base64: ggb, htmlAdapter: true }); ok('GC-17-adapter-html-no-marker-is-error', !r.ok && /marker/.test(r.error), r.error);
+r = await C.submit({ endpoint: ep, exercise: 'htmljson-1', base64: ggb, htmlAdapter: true }); ok('GC-18-adapter-json-marker', r.ok && r.grade === 0.6 && r.via === 'html-adapter' && /3 of 5/.test(r.feedback), JSON.stringify(r));
+r = await C.submit({ endpoint: ep, exercise: 'htmldata-1', base64: ggb, htmlAdapter: true }); ok('GC-19-adapter-data-attrs', r.ok && r.grade === 0.4 && r.feedback === '2 & 5 <ok>', JSON.stringify(r));
+r = await C.submit({ endpoint: ep, exercise: 'htmljson-1', base64: ggb }); ok('GC-20-adapter-off-by-default', !r.ok && /HTML/.test(r.error), r.error);
+ok('GC-21-adapter-validates-range', !C.parseResult(200, 'text/html', '<div id="wims-result" data-grade="7"></div>', { htmlAdapter: true }).ok);
+ok('GC-22-adapter-no-prose-scraping', C.extractFromHtml('<p>grade 0.9</p>') === null);
+const big = 'A'.repeat(C.DEFAULT_MAX_ANS_BYTES + 4);
+r = await C.submit({ endpoint: ep, exercise: 'ok-1', base64: big }); ok('GC-23-oversized-default-limit-no-request', !r.ok && /too large/.test(r.error), r.error.slice(0, 80));
+r = await C.submit({ endpoint: ep, exercise: 'ok-1', base64: ggb, maxAnsBytes: 8 }); ok('GC-24-limit-configurable', !r.ok && /> 8 bytes/.test(r.error), r.error);
+r = await C.submit({ endpoint: ep, exercise: 'big-1', base64: ggb }); ok('GC-25-http-413-message', !r.ok && /413/.test(r.error) && /too large/.test(r.error), r.error);
+r = await C.submit({ endpoint: ep, exercise: 'ok-1', base64: ggb, maxAnsBytes: big.length + 10 }); ok('GC-26-raised-limit-still-ok', r.ok && r.via === 'json', JSON.stringify(r));
 srv.close(); fs.rmSync(log, { force: true });
 console.log(`# grade client: ${n - fail} PASS, ${fail} FAIL`); process.exit(fail ? 1 : 0);

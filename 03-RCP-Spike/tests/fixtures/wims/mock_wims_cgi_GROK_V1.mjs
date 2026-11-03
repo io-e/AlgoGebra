@@ -4,6 +4,8 @@
 //   html-*    : 200 text/html (what a stock wims.cgi returns)
 //   e500-*    : HTTP 500         slow-*: answers after 3 s        bad-*: grade 7 (out of range)
 //   xss-*     : feedback contains <img onerror> markup
+//   htmljson-*: 200 text/html with <script type=application/json id=wims-result> marker (HTML adapter proposal)
+//   htmldata-*: 200 text/html with <div id=wims-result data-grade data-feedback>     big-*: HTTP 413
 // Every request is appended as JSON to $WIMS_MOCK_LOG (if set). Exports start(port) for in-process use.
 import http from 'node:http'; import fs from 'node:fs';
 export function handler(req, res, next) {
@@ -19,6 +21,9 @@ export function handler(req, res, next) {
     if (req.method !== 'POST') return json({ error: 'POST only' }, 405);
     if (p.get('module') !== 'adm/class/sheet' || p.get('job') !== 'getresult') return json({ error: 'bad module/job' }, 400);
     if (ex.startsWith('html-')) { res.writeHead(200, { 'Content-Type': 'text/html' }); return res.end('<html><body>WIMS page</body></html>'); }
+    if (ex.startsWith('htmljson-')) { res.writeHead(200, { 'Content-Type': 'text/html' }); return res.end('<html><body><p>Score 99/100</p><script type="application/json" id="wims-result">{"grade":0.6,"feedback":"3 of 5 checks"}</script></body></html>'); }
+    if (ex.startsWith('htmldata-')) { res.writeHead(200, { 'Content-Type': 'text/html' }); return res.end('<html><body><div id="wims-result" data-grade="0.4" data-feedback="2 &amp; 5 &lt;ok&gt;"></div></body></html>'); }
+    if (ex.startsWith('big-')) return json({ error: 'too large' }, 413);
     if (ex.startsWith('e500-')) return json({ error: 'boom' }, 500);
     if (ex.startsWith('bad-')) return json({ grade: 7, feedback: 'x' });
     if (ex.startsWith('xss-')) return json({ grade: 0.5, feedback: '<img src=x onerror="window.__xss=1">' });
