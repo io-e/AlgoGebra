@@ -1,0 +1,10 @@
+suite,num,id,status,priority,detail,ts
+06_Encoding,1,ENC-01-pari-direct,PASS,P1,"got=2",2026-11-03T09:32:58.2632882+01:00
+06_Encoding,2,ENC-01-pari-engine,PASS,P0,"got=2",2026-11-03T09:32:58.3722614+01:00
+06_Encoding,3,ENC-02-pari-direct,PASS,P1,"got="éàü€"",2026-11-03T09:32:58.3952919+01:00
+06_Encoding,4,ENC-02-pari-engine,PASS,P0,"got="éàü€"",2026-11-03T09:32:58.4953769+01:00
+06_Encoding,5,ENC-03-maxima-direct,PASS,P1,"got=1",2026-11-03T09:32:58.6029178+01:00
+06_Encoding,6,ENC-03-maxima-engine,PASS,P0,"got=1",2026-11-03T09:32:58.7662361+01:00
+06_Encoding,7,ENC-04-maxima-direct,PASS,P1,"got="éàü€"",2026-11-03T09:32:58.8090421+01:00
+06_Encoding,8,ENC-04-maxima-engine,PASS,P0,"got="éàü€"",2026-11-03T09:32:58.9185868+01:00
+06_Encoding,9,ENC-10-gnuplot-accented-title,PASS,P1,"kind=ART dim=800x600",2026-11-03T09:32:59.0680757+01:00
