@@ -1,4 +1,4 @@
-<!-- CLAUDE_V5_2 -->
+<!-- CLAUDE_V5_3 -->
 # CLAUDE.md
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
@@ -91,28 +91,63 @@ Installed image: `D:\ALF_ZGit\G1_Geogebra_Migration\bin\GeoGebraPlus-RCP-0.1.0-w
 
 **Owner accepted** the fragment bootstrap approach as architecture (`Decisions_D05_Fragment_Bootstrap_CLAUDE_V1.md`). D-05 is PASS.
 
+### Phase 1b — Codex deliveries (2026-11-04)
+
+PR: [#63 `feat/d06-extension-mgmt`](https://github.com/io-e/AlgoGebra/pull/63) — **draft**, pending Debian validation + owner review.
+
+**D-06 — Extension bundle lifecycle (Windows):**
+Evidence: `03-RCP-Spike/evidence/20261104-windows-d06-cca0cc8/`
+
+| Check | Result |
+|---|---|
+| Allowlisted bundle install + start | **PASS** — reached ACTIVE, service registered |
+| ServiceTracker discovery | **PASS** — host invoked extension Runnable |
+| Stop removes service + uninstall | **PASS** — UNINSTALLED without framework restart |
+| Unapproved BSN rejected | **PASS** — rejected before `BundleContext.installBundle()` |
+| Unresolved bundle isolated | **PASS** — remained INSTALLED, 50 core bundles unaffected |
+| Core bundle set preserved | **PASS** — 50/50 RESOLVED/ACTIVE before and after |
+| Full D-06 | **7/0/0** on Windows r12. **Debian NOT RUN** — Grok pending. |
+
+Implementation: `ExtensionBundleManager.java` — BSN-based allowlist, `ServiceTracker<Runnable, Runnable>` for discovery, `uninstallQuietly()` cleanup. This is a prototype; publisher authentication and artifact integrity are Gate E scope.
+
+**P-02–P-05 — Gate A desktop corpus (Windows):**
+Evidence: `03-RCP-Spike/evidence/20261104-windows-gate-a-p02-p05/`
+
+| Scenario | PASS | FAIL | SKIP | Notes |
+|---|---|---|---|---|
+| P-02 views | 50 | 0 | 1 | Algebra, CAS, Spreadsheet, 2D, 3D all matched baseline. Skip: web/GWT parity. |
+| P-03 tools | 3 | 0 | 2 | 71 2D toolbar modes matched. Skips: 3D toolbar, web parity. |
+| P-04 save/reopen | 15 | 0 | 1 | Round-trip PASS. Unicode text probe → U+FFFD in both product AND baseline (encoding gap, not regression). Skip: web. |
+| P-05 scripts/export | 7 | 0 | 5 | Script effects + PNG/SVG export PASS. Skips: 4 automation gaps, web parity. |
+| **Total** | **75** | **0** | **9** | Windows desktop only. |
+
+**P-04 caveat:** `Text("é à ü € α")` produces replacement characters in both the RCP product and the vanilla desktop baseline. This is a test harness / GeoGebra encoding issue, not a regression. P-04 PASS means save/reopen parity, not Unicode fidelity.
+
+**Offline MVP:** `CourseModel` (9/0 tests), `StepValidator` (18/0 tests), `CourseTreePanel` already implemented. No separate Help subsystem yet.
+
 ### Scenario status summary (45 total)
 
-- **PASS:** D-02, D-03, D-04 (core), D-05, W-01 (5)
+- **PASS:** D-02, D-03, D-04 (core), D-05, D-06 (Windows), W-01 (6)
+- **PASS (desktop only, web pending):** P-02, P-03, P-04, P-05 (4)
 - **PARTIAL:** P-08 (1)
-- **NOT RUN:** All remaining P (01–07, 09), D (01, 06–10), W (02–08), X (01–07), S (01–07), O (01–05) — 39 scenarios
+- **NOT RUN:** P (01, 06–07, 09), D (01, 07–10), W (02–08), X (01–07), S (01–07), O (01–05) — 34 scenarios
 
 ### Gates
 
 | Gate | Requirement | Status |
 |---|---|---|
-| A | P-02–P-05 exist for desktop build and GWT war | NOT MET |
-| B | D-02–D-06 pass, natives load, no `common` diff | **IN PROGRESS** (D-02–D-05 PASS; D-06 NOT RUN — Codex handoff ready) |
-| C | W-01 scored, GWT stays until W-02 passes | **IN PROGRESS** (W-01 PASS: GWT retained. W-02 met by existing GWT baseline once P-02/P-03 corpus exists) |
+| A | P-02–P-05 exist for desktop build and GWT war | **PARTIAL** — Windows desktop 75/0/9. Debian + web/GWT NOT RUN (Grok deferred). |
+| B | D-02–D-06 pass, natives load, no `common` diff | **PARTIAL** — D-02–D-06 PASS on Windows. D-06 Debian NOT RUN. No `common` diff. |
+| C | W-01 scored, GWT stays until W-02 passes | **IN PROGRESS** (W-01 PASS. W-02 met by GWT baseline once web P-02/P-03 done.) |
 | D | X-01–06 + S-01–05 on both hosts for 1 schema + 1 algorithm | NOT STARTED |
 | E | O-02, O-03, D-09, W-04 pass (security, license, SBOM) | NOT STARTED |
 
 ### Next steps
 
-1. **D-06:** Extension bundle management — Codex handoff ready (`Handoff_Codex_D06_Extension_Mgmt_CLAUDE_V1.md`). Closes Gate B.
-2. **Codex C-3:** OSGi service registration for engines (`Handoff_Codex_C3_OSGi_Service_Registration_CLAUDE_V1.md`).
-3. **Codex C-4/C-5/C-6:** CourseModel V1_2 + CheckEvaluator + Help loader (`Handoff_Codex_CourseModel_V1_2_CLAUDE_V1.md`).
-4. **Gate A:** P-02–P-05 corpus (desktop build + GWT war evidence).
+1. **Grok: D-06 + Gate A on Debian** — validate extension lifecycle and P-02–P-05 on Debian. Closes Gates A + B.
+2. **Owner review of PR #63** — once Grok validates, merge to close Windows evidence.
+3. **WA-8 L2-1 JSON hook** — handoff delivered to `D:\ALF_ZGit\02-wims4win\AlgoGebra_Wims_Integration/`. Unblocks Track 4 (connected WIMS mode).
+4. **Gate E:** SBOM, security review, GPL analysis — starts once Tracks 1+3 have code.
 5. **All 5 contract specs delivered:** activity manifest, capability descriptor, external computation, state adapter, submission.
 
 ## Agent roles
