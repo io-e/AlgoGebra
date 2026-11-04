@@ -9,6 +9,11 @@ import org.geogebra.plus.compute.api.ExternalComputeException.Code;
 
 public final class PariEngineTests {
 
+    private static final String[] EXPECTED_WIMS_ILLPART = { "plot", "write", "help" };
+    private static final String[] EXPECTED_AGB_ILLEGAL = {
+            "system", "extern", "externstr", "fileextern", "install", "eval"
+    };
+
     private PariEngineTests() {
     }
 
@@ -21,17 +26,10 @@ public final class PariEngineTests {
         }
         assertTrue(PariGPEngine.parseOutput("? x\n%1 = 1.2300\n? quit\nGood bye!\n").equals("1.23"),
                 "PARI parser should strip trailing decimal zeros");
-        assertRejected(new PariGPEngine(), "plot(sin(x))", "WIMS plot filter");
-        assertRejected(new PariGPEngine(), "2+2\n\\quit", "GP escape-command filter");
-        assertRejected(new PariGPEngine(), "\\quit", "leading GP escape-command filter");
-        // BUG-006: validateCommand runs before the gp executable is resolved, so COMMAND_REJECTED proves gp is never reached.
-        for (String blocked : new String[] { "system(\"id\")", "extern(\"id\")", "externstr(\"id\")",
-                "fileextern(\"id\")", "install(\"getpid\",\"l\")", "alias(s,system); s(\"id\")", "SYSTEM(\"id\")",
-                "1+1\nsystem (\"id\")", "eval(Str(\"ins\",\"tall(\\\"getpid\\\",\\\"l\\\")\"))" }) {
-            assertRejected(new PariGPEngine(), blocked, "BUG-006 filter: " + blocked);
-        }
-        assertTrue(new PariGPEngine().validateCommand("systematic=1; installed=2; externality=3; evaluate=4").contains("systematic"),
-                "BUG-006 filter must match whole words only");
+        testAlgoGebraForbiddenCommands();
+        testWimsForbiddenTermsAndEscapes();
+        testWholeWordAndDynamicNameFilters();
+        testEmptySuccessfulOutputRejected();
 
         PariGPEngine engine = new PariGPEngine();
         if (!engine.isAvailable()) {
@@ -56,6 +54,53 @@ public final class PariEngineTests {
                     "BUG-015 expected INVALID_OUTPUT/PROCESS_FAILED, got " + expected.code());
             System.out.println("PASS: BUG-015 malformed factor(( -> " + expected.code());
         }
+    }
+
+    private static void testAlgoGebraForbiddenCommands() throws Exception {
+        PariGPEngine engine = new PariGPEngine();
+        // BUG-006: validateCommand runs before executable lookup; COMMAND_REJECTED proves gp is never reached.
+        assertTrue(java.util.Arrays.equals(PariGPEngine.AGB_ILLEGAL, EXPECTED_AGB_ILLEGAL),
+                "T-PARI-01 AGB_ILLEGAL list differs from the approved six-command filter");
+        for (String blocked : EXPECTED_AGB_ILLEGAL) {
+            assertRejected(engine, blocked + "(\"test\")", "T-PARI-01 AGB_ILLEGAL: " + blocked);
+        }
+        System.out.println("PASS: T-PARI-01 all AGB_ILLEGAL commands rejected before gp launch");
+
+        assertRejected(engine, "alias(s,system); s(\"id\")", "T-PARI-02 alias to system");
+        assertRejected(engine, "SYSTEM(\"id\")", "T-PARI-02 case-insensitive command");
+        System.out.println("PASS: T-PARI-02 alias and case variants are rejected");
+
+        assertRejected(engine, "1+1\n  system (\"id\")", "T-PARI-03 multiline/indented command");
+        System.out.println("PASS: T-PARI-03 multiline command injection is rejected");
+    }
+
+    private static void testWimsForbiddenTermsAndEscapes() throws Exception {
+        PariGPEngine engine = new PariGPEngine();
+        assertTrue(java.util.Arrays.equals(PariGPEngine.WIMS_ILLPART, EXPECTED_WIMS_ILLPART),
+                "T-PARI-04 PARI WIMS_ILLPART list changed unexpectedly");
+        for (String blocked : EXPECTED_WIMS_ILLPART) {
+            assertRejected(engine, blocked + "(sin(x))", "T-PARI-04 WIMS illpart: " + blocked);
+        }
+        assertRejected(engine, "2+2\n\\quit", "T-PARI-04 GP escape-command filter");
+        assertRejected(engine, "\\quit", "T-PARI-04 leading GP escape-command filter");
+        System.out.println("PASS: T-PARI-04 WIMS denied terms and GP escape commands are rejected");
+    }
+
+    private static void testWholeWordAndDynamicNameFilters() throws Exception {
+        PariGPEngine engine = new PariGPEngine();
+        assertRejected(engine, "eval(Str(\"ins\",\"tall(\\\"getpid\\\",\\\"l\\\")\"))",
+                "T-PARI-05 dynamic reconstruction via eval");
+        String safe = engine.validateCommand("systematic=1; installed=2; externality=3; evaluate=4");
+        assertTrue(safe.contains("systematic"), "T-PARI-05 filter must match whole words only");
+        System.out.println("PASS: T-PARI-05 dynamic reconstruction rejected; longer identifiers remain allowed");
+    }
+
+    private static void testEmptySuccessfulOutputRejected() throws Exception {
+        PariGPEngine engine = new PariGPEngine();
+        assertTrue(engine.validateCommand("1+1").equals("1+1"), "T-PARI-06 fixture must be valid input");
+        assertInvalidOutput(() -> PariGPEngine.requireNonEmptyOutput(""), "empty PARI payload");
+        assertInvalidOutput(() -> PariGPEngine.requireNonEmptyOutput(" \r\n\t"), "whitespace-only PARI payload");
+        System.out.println("PASS: T-PARI-06 valid request with empty successful output returns INVALID_OUTPUT");
     }
 
     private static void assertFactorization(String value) {
@@ -86,6 +131,16 @@ public final class PariEngineTests {
             throw new AssertionError(label + " should be unavailable");
         } catch (ExternalComputeException expected) {
             assertTrue(expected.code() == Code.ENGINE_UNAVAILABLE, "missing binary must be an error, not fallback");
+        }
+    }
+
+    private static void assertInvalidOutput(CheckedRunnable call, String label) throws Exception {
+        try {
+            call.run();
+            throw new AssertionError(label + " should fail with INVALID_OUTPUT");
+        } catch (ExternalComputeException expected) {
+            assertTrue(expected.code() == Code.INVALID_OUTPUT,
+                    label + " returned " + expected.code() + " instead of INVALID_OUTPUT");
         }
     }
 

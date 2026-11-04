@@ -84,6 +84,13 @@ public final class GnuplotEngine extends SubprocessEngine {
     @Override
     protected Request prepareRequest(Path executable, String validatedCommand,
             ComputeContext context) throws ExternalComputeException {
+        PreparedPlot plot = createPlotRequest(validatedCommand, context);
+        return request(executable, executableArguments(), plot.stdin(), plot.artifact(), plot.artifactDirectory());
+    }
+
+    /** Package-visible request builder so the host-owned output policy can be verified without launching Gnuplot. */
+    static PreparedPlot createPlotRequest(String validatedCommand, ComputeContext context)
+            throws ExternalComputeException {
         try {
             Path root = context.tempDirectory().toAbsolutePath().normalize();
             Files.createDirectories(root);
@@ -96,22 +103,22 @@ public final class GnuplotEngine extends SubprocessEngine {
                     + validatedCommand + "\n"
                     + "unset output\n"
                     + "exit\n";
-            return request(executable, executableArguments(), script, artifact, artifactDirectory);
+            return new PreparedPlot(script, artifact, artifactDirectory);
         } catch (IOException failure) {
             throw new ExternalComputeException(Code.PROCESS_START_FAILED,
                     "Could not create Gnuplot output directory: " + failure.getMessage(), failure);
         }
     }
 
+    record PreparedPlot(String stdin, Path artifact, Path artifactDirectory) {
+    }
+
     @Override
     protected ComputeResult createResult(Request request, ProcessOutput output, Duration elapsed)
             throws ExternalComputeException {
         Path png = request.artifact();
+        requirePngArtifact(png);
         try {
-            if (png == null || !Files.isRegularFile(png) || Files.size(png) < 24) {
-                throw new ExternalComputeException(Code.INVALID_OUTPUT,
-                        "Gnuplot exited successfully but did not produce a PNG file");
-            }
             byte[] header = new byte[24];
             try (var input = Files.newInputStream(png)) {
                 if (input.read(header) != header.length) {
@@ -140,6 +147,22 @@ public final class GnuplotEngine extends SubprocessEngine {
         } catch (IOException failure) {
             throw new ExternalComputeException(Code.INVALID_OUTPUT,
                     "Could not read Gnuplot PNG output: " + failure.getMessage(), failure);
+        }
+    }
+
+    static void requirePngArtifact(Path png) throws ExternalComputeException {
+        if (png == null || !Files.isRegularFile(png)) {
+            throw new ExternalComputeException(Code.INVALID_OUTPUT,
+                    "Gnuplot exited successfully but did not produce a PNG file");
+        }
+        try {
+            if (Files.size(png) < 24) {
+                throw new ExternalComputeException(Code.INVALID_OUTPUT,
+                        "Gnuplot exited successfully but did not produce a PNG file");
+            }
+        } catch (IOException failure) {
+            throw new ExternalComputeException(Code.INVALID_OUTPUT,
+                    "Could not inspect Gnuplot output file: " + failure.getMessage(), failure);
         }
     }
 
