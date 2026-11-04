@@ -373,14 +373,40 @@
    "id": "P-28",
    "engine": "pari",
    "input": "read(\"/etc/hostname\")",
-   "kind": "strict",
+   "kind": "reject",
    "expected": {
     "value": null,
     "normalization": null
    },
-   "expected_rejection": false,
+   "expected_rejection": true,
    "sentinel": null,
-   "note": "file read: Java must be at least as strict as WIMS"
+   "note": "must-REJECT after 02-Cdc/Decisions_PARI_Forbidden_GROK_V1_1.md (BUG-006 V1_1); expected FAIL until Codex adds read/readvec/readstr to AGB_ILLEGAL on #60"
+  },
+  {
+   "id": "P-29",
+   "engine": "pari",
+   "input": "readvec(\"/etc/hostname\")",
+   "kind": "reject",
+   "expected": {
+    "value": null,
+    "normalization": null
+   },
+   "expected_rejection": true,
+   "sentinel": null,
+   "note": "must-REJECT after 02-Cdc/Decisions_PARI_Forbidden_GROK_V1_1.md (BUG-006 V1_1); expected FAIL until Codex adds read/readvec/readstr to AGB_ILLEGAL on #60"
+  },
+  {
+   "id": "P-30",
+   "engine": "pari",
+   "input": "readstr(\"/etc/hostname\")",
+   "kind": "reject",
+   "expected": {
+    "value": null,
+    "normalization": null
+   },
+   "expected_rejection": true,
+   "sentinel": null,
+   "note": "must-REJECT after 02-Cdc/Decisions_PARI_Forbidden_GROK_V1_1.md (BUG-006 V1_1); expected FAIL until Codex adds read/readvec/readstr to AGB_ILLEGAL on #60"
   },
   {
    "id": "M-01",
