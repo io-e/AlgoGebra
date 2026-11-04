@@ -1,0 +1,23 @@
+Code under test: 2b46d7c8600a411a99687e7a43e59c2e35375459
+Fixture source: PR #61 head 7b2f3c64d86f6de40cd39e2249be18afa2ef53f5
+Scope: all PARI kind=reject rows in the latest fixture set F; the Java service must return COMMAND_REJECTED before gp launch.
+PASS P-17 :: plot(sin(x)) => ERR|COMMAND_REJECTED
+PASS P-18 :: write("/tmp/ee_p2_pw",1) => ERR|COMMAND_REJECTED
+PASS P-19 :: help(factor) => ERR|COMMAND_REJECTED
+PASS P-20 :: system("id") => ERR|COMMAND_REJECTED
+PASS P-21 :: extern("id") => ERR|COMMAND_REJECTED
+PASS P-22 :: externstr("id") => ERR|COMMAND_REJECTED
+PASS P-23 :: fileextern("id") => ERR|COMMAND_REJECTED
+PASS P-24 :: install("getpid","l") => ERR|COMMAND_REJECTED
+PASS P-25 :: eval("system(\"id\")") => ERR|COMMAND_REJECTED
+PASS P-26 :: alias(s,system); s("id") => ERR|COMMAND_REJECTED
+PASS P-27 :: 2+2\n\quit => ERR|COMMAND_REJECTED
+PASS P-28 :: read("/etc/hostname") => ERR|COMMAND_REJECTED
+PASS P-29 :: readvec("/etc/hostname") => ERR|COMMAND_REJECTED
+PASS P-30 :: readstr("/etc/hostname") => ERR|COMMAND_REJECTED
+PASS EXTRA :: READ("/etc/hostname") => ERR|COMMAND_REJECTED
+PASS EXTRA :: READVEC("/etc/hostname") => ERR|COMMAND_REJECTED
+PASS EXTRA :: READSTR("/etc/hostname") => ERR|COMMAND_REJECTED
+PASS EXTRA :: alias(r,read); r("/etc/hostname") => ERR|COMMAND_REJECTED
+PARI_FIXTURE_REJECTS=14/14 PASS
+EXTRA_CASES=4/4 PASS

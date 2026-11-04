@@ -18,3 +18,7 @@ SBX-16	pari	fileextern("id")	REJECT
 SBX-17	pari	install("getpid","l")	REJECT
 SBX-18	pari	alias(s,system); s("id")	REJECT
 SBX-19	pari	eval(Str("ins","tall(\"getpid\",\"l\")"))	REJECT
+SBX-20	pari	read("/tmp/algogebra_sbx_read")	REJECT
+SBX-21	pari	readvec("/tmp/algogebra_sbx_readvec")	REJECT
+SBX-22	pari	readstr("/tmp/algogebra_sbx_readstr")	REJECT
+SBX-23	pari	read("/etc/hostname")	REJECT

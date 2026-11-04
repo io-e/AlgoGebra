@@ -1,0 +1,8 @@
+Code under test: 2b46d7c8600a411a99687e7a43e59c2e35375459
+PASS read("/tmp/algogebra_sbx_read") => ERR|COMMAND_REJECTED
+PASS readvec("/tmp/algogebra_sbx_readvec") => ERR|COMMAND_REJECTED
+PASS readstr("/tmp/algogebra_sbx_readstr") => ERR|COMMAND_REJECTED
+PASS read("/etc/hostname") => ERR|COMMAND_REJECTED
+PASS READ("/etc/hostname") => ERR|COMMAND_REJECTED
+PASS alias(r,read); r("/etc/hostname") => ERR|COMMAND_REJECTED
+PARI_READ_CASES=6/6 PASS

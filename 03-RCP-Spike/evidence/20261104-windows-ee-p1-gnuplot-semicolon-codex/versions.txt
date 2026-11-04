@@ -1,0 +1,10 @@
+Date: 2026-11-04
+Host: SHADOW-TB64BO9R
+OS: Windows 11 x64, build 26100
+PowerShell: 7.6.9
+Java: Temurin 21.0.12.1+1 LTS
+PARI/GP: 2.19.0 (C:\Program Files (x86)\Pari64-2-19-0\gp.exe)
+Maxima: 5.49.0 (C:\maxima-5.49.0\bin\maxima.bat)
+Gnuplot: 6.0 patchlevel 3 (C:\maxima-5.49.0\gnuplot\bin\gnuplot.exe)
+PATH modification: current test process only; system/user environment unchanged
+Fixture set F source: PR #61 head 7b2f3c64d86f6de40cd39e2249be18afa2ef53f5
