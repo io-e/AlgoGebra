@@ -1,0 +1,19 @@
+127.0.0.1 - - [04/Nov/2026 10:52:44] "GET /webbuild_probe_GROK_V1.html HTTP/1.1" 200 -
+127.0.0.1 - - [04/Nov/2026 10:52:45] "GET /webbuild_probe_GROK_V1.html HTTP/1.1" 200 -
+127.0.0.1 - - [04/Nov/2026 10:52:45] "GET /webbuild_probe_GROK_V1.html HTTP/1.1" 200 -
+127.0.0.1 - - [04/Nov/2026 10:52:46] "GET /webbuild_probe_GROK_V1.html HTTP/1.1" 200 -
+127.0.0.1 - - [04/Nov/2026 10:52:46] "GET /webbuild_probe_GROK_V1.html HTTP/1.1" 200 -
+127.0.0.1 - - [04/Nov/2026 10:52:46] "GET /war/deployggb.js HTTP/1.1" 200 -
+127.0.0.1 - - [04/Nov/2026 10:52:46] "GET /war/web3d/web3d.nocache.js HTTP/1.1" 200 -
+127.0.0.1 - - [04/Nov/2026 10:52:46] "GET /war/web3d/0C67C8A47F0579D49611F42F63B45791.cache.js HTTP/1.1" 200 -
+127.0.0.1 - - [04/Nov/2026 10:52:46] code 404, message File not found
+127.0.0.1 - - [04/Nov/2026 10:52:46] "GET /favicon.ico HTTP/1.1" 404 -
+127.0.0.1 - - [04/Nov/2026 10:52:46] "GET /war/css/bundles/simple-bundle.css HTTP/1.1" 200 -
+127.0.0.1 - - [04/Nov/2026 10:52:46] "GET /war/css/bundles/bundle.css HTTP/1.1" 200 -
+127.0.0.1 - - [04/Nov/2026 10:52:46] "GET /war/css/keyboard-styles.css HTTP/1.1" 200 -
+127.0.0.1 - - [04/Nov/2026 10:52:46] "GET /war/css/fonts.css HTTP/1.1" 200 -
+127.0.0.1 - - [04/Nov/2026 10:52:46] "GET /war/css/greek-font.css HTTP/1.1" 200 -
+127.0.0.1 - - [04/Nov/2026 10:52:47] "GET /war/web3d/deferredjs/0C67C8A47F0579D49611F42F63B45791/14.cache.js?autoRetry=1 HTTP/1.1" 200 -
+127.0.0.1 - - [04/Nov/2026 10:52:47] "GET /war/web3d/deferredjs/0C67C8A47F0579D49611F42F63B45791/3.cache.js HTTP/1.1" 200 -
+127.0.0.1 - - [04/Nov/2026 10:54:16] code 404, message File not found
+127.0.0.1 - - [04/Nov/2026 10:54:16] "GET /__probe_result?d=%7B%22start%22%3A1793785966441%2C%22timeout%22%3Atrue%2C%22ms%22%3A90002%2C%22resources%22%3A%5B%22http%3A%2F%2F127.0.0.1%3A8795%2Fwar%2Fdeployggb.js%22%2C%22http%3A%2F%2F127.0.0.1%3A8795%2Fwar%2Fweb3d%2Fweb3d.nocache.js%22%2C%22http%3A%2F%2F127.0.0.1%3A8795%2Ffavicon.ico%22%2C%22http%3A%2F%2F127.0.0.1%3A8795%2Fwar%2Fcss%2Fbundles%2Fsimple-bundle.css%22%2C%22http%3A%2F%2F127.0.0.1%3A8795%2Fwar%2Fcss%2Fbundles%2Fbundle.css%22%2C%22http%3A%2F%2F127.0.0.1%3A8795%2Fwar%2Fcss%2Fkeyboard-styles.css%22%2C%22http%3A%2F%2F127.0.0.1%3A8795%2Fwar%2Fcss%2Ffonts.css%22%2C%22http%3A%2F%2F127.0.0.1%3A8795%2Fwar%2Fcss%2Fgreek-font.css%22%2C%22http%3A%2F%2F127.0.0.1%3A8795%2Fwar%2Fweb3d%2Fdeferredjs%2F0C67C8A47F0579D49611F42F63B45791%2F14.cache.js%22%2C%22http%3A%2F%2F127.0.0.1%3A8795%2Fwar%2Fweb3d%2Fdeferredjs%2F0C67C8A47F0579D49611F42F63B45791%2F6.cache.js%22%2C%22http%3A%2F%2F127.0.0.1%3A8795%2Fwar%2Fweb3d%2Fdeferredjs%2F0C67C8A47F0579D49611F42F63B45791%2F9.cache.js%22%2C%22http%3A%2F%2F127.0.0.1%3A8795%2Fwar%2Fweb3d%2Fdeferredjs%2F0C67C8A47F0579D49611F42F63B45791%2F5.cache.js%22%2C%22http%3A%2F%2F127.0.0.1%3A8795%2Fwar%2Fweb3d%2Fdeferredjs%2F0C67C8A47F0579D49611F42F63B45791%2F8.cache.js%22%2C%22http%3A%2F%2F127.0.0.1%3A8795%2Fwar%2Fweb3d%2Fdeferredjs%2F0C67C8A47F0579D49611F42F63B45791%2F7.cache.js%22%2C%22http%3A%2F%2F127.0.0.1%3A8795%2Fwar%2Fweb3d%2Fdeferredjs%2F0C67C8A47F0579D49611F42F63B45791%2F10.cache.js%22%2C%22http%3A%2F%2F127.0.0.1%3A8795%2Fwar%2Fweb3d%2Fdeferredjs%2F0C67C8A47F0579D49611F42F63B45791%2F14.cache.js%3FautoRetry%3D1%22%2C%22http%3A%2F%2F127.0.0.1%3A8795%2Fwar%2Fweb3d%2Fdeferredjs%2F0C67C8A47F0579D49611F42F63B45791%2F3.cache.js%22%5D%2C%22external%22%3A%5B%5D%7D HTTP/1.1" 404 -

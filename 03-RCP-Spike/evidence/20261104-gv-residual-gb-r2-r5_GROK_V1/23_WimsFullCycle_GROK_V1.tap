@@ -1,0 +1,9 @@
+# Suite: 23_WimsFullCycle
+# Started: 2026-11-04T10:15:12.7040059+01:00
+# Host: grok-bot-vm-419969949 / Debian GNU/Linux 13 (trixie) / pwsh 7.4.6
+
+not ok 1 - [P0] FC-EXC :: TimeoutError: page.waitForFunction: Timeout 90000ms exceeded.
+not ok 2 - [P0] FC-99-summary :: # full cycle: 0 PASS, 1 FAIL
+
+PASS: 0 FAIL: 2 SKIP: 0
+# CSV: /workspace/grok-g1/gv_g16/03-RCP-Spike/tests/results/23_WimsFullCycle_GROK_V1.csv

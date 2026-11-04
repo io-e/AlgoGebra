@@ -1,0 +1,1 @@
+curl -s -D headers -o body 'http://127.0.0.1:18431/wims/wims.cgi?module=adm/raw&job=getinfoserver'  # 2026-11-04T10:53:00+01:00

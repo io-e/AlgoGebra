@@ -1,0 +1,11 @@
+metric	count	files
+steps	2140	300
+value_equals	16	13
+object_exists	1824	281
+other_checks	0	0
+hint_steps	38	8
+engine_steps	0	0
+unresolved_dollar_steps	9	9
+warn_not_numeric	1824	281
+warn_other	0	0
+convert_failures	0	0
