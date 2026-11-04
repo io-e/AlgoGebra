@@ -54,8 +54,9 @@ without summary as FAIL, and reports BAIL separately (Codex 689d4b4). 09/10 driv
 
 ### D-06 extension lifecycle proof
 
-Build the image first, then run `launch.ps1 -Headless -NoBuild -D06` on Windows or `launch.sh --headless --d06` on Linux. The proof is opt-in and
-headless-only. It installs the exact allowlisted test extension at runtime, uses `ServiceTracker` to find/call its `Runnable`, stops/uninstalls it,
+Build the image first, then run `launch.ps1 -Headless -NoBuild -D06` on Windows or `launch.sh --headless --d06` on Linux. For the Linux image builder,
+set `INCLUDE_D06_FIXTURES=1` to copy the fixtures into the development image; the Windows installer equivalent is `install-product.ps1 -IncludeD06Fixtures`.
+The proof is opt-in and headless-only. It installs the exact allowlisted test extension at runtime, uses `ServiceTracker` to find/call its `Runnable`, stops/uninstalls it,
 rejects an unapproved symbolic name before installation, rejects a fixture with a missing mandatory import, and confirms the 50 D-03 core bundles remain
 resolved/active. The three fixture JARs live under `test-extension/build/` and are intentionally excluded from `bundles.info`; they are never installed
 at normal startup. `install-product.ps1 -IncludeD06Fixtures` copies these test-only artifacts into an isolated development image; omit the switch for a

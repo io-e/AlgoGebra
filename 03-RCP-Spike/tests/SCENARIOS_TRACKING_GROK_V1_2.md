@@ -51,6 +51,12 @@ Failures: P-02/P-04 (BUG-014), O-02 (47 JARs lack license metadata), P-08 (older
 ## Windows r12 packaging (2026-10-30)
 Suite 11: **111 PASS / 0 FAIL / 2 SKIP** (53 bundles including `org.geogebra.plus.renderer.resources`). BUG-011 ReTeX fonts FIXED at classloader level. GUI/CAS smoke log `…/r12/logs/rcp-20261030-114443-16464-d8a36709.log` PASS (no font parse errors). Attended suite 09 still NOT RUN.
 
+## Windows r12 Gate A desktop run (2026-11-04)
+P-02..P-05 were rerun on the installed r12 image against the pinned upstream desktop baseline: **75 PASS / 0 FAIL / 9 SKIP** total (P-02 50/0/1; P-03 3/0/2; P-04 15/0/1; P-05 7/0/5). Evidence and hashes: `03-RCP-Spike/evidence/20261104-windows-gate-a-p02-p05/`. This is the Windows desktop portion only; do not change the spec-level scenario statuses yet because the Debian refresh, web parity, and listed automation gaps remain open. The P-04 Text literal `é à ü € α` is recorded as U+FFFD in both product and baseline; the existing assertion checks reopen equality rather than the expected literal. See the evidence report before treating P-04 as Unicode fidelity proof.
+
+## Windows D-06 product proof (2026-11-04)
+Commit `cca0cc8` runs the opt-in headless extension lifecycle proof: **7 PASS / 0 FAIL / 0 SKIP**. The allowlisted bundle was installed, started, discovered/called/stopped through `ServiceTracker`, and uninstalled; an unapproved BSN was rejected before install, an unresolved bundle remained INSTALLED, and the 50 D-03 core bundles stayed RESOLVED/ACTIVE. Evidence: `03-RCP-Spike/evidence/20261104-windows-d06-cca0cc8/`. D-06 remains PARTIAL at scenario level until Grok's Debian validation and owner review.
+
 ## Table
 | ID | Gate | Scenario | Client | Status | Debian desktop | Script | Priority |
 |---|---|---|---|---|---|---|---|
@@ -67,7 +73,7 @@ Suite 11: **111 PASS / 0 FAIL / 2 SKIP** (53 bundles including `org.geogebra.plu
 | D-03 | B | Package-ownership report | desktop | **PASS** | PASS | `11_Test_Bundle_Build_GROK_V1.ps1 (suite)` | P0 |
 | D-04 | B | Swing GeoGebra inside an RCP shell | desktop | **PARTIAL** | FAIL | `09_Test_D04_UI_GROK_V1.ps1 (suite)` | P0 |
 | D-05 | B | CAS and 3D from the RCP product | desktop | **PASS** | PASS | `10_Test_D05_Strict3D_GROK_V1.ps1 (suite)` | P0 |
-| D-06 | B | One good and one bad extension bundle at startup | desktop | **PARTIAL** | PARTIAL | `S_D-06_ExtensionRegistry_GROK_V1.ps1` | P0 |
+| D-06 | B | Runtime extension install/start/service/stop/uninstall | desktop | **PARTIAL** | PARTIAL | `S_D-06_ExtensionRegistry_GROK_V1.ps1` | P0 |
 | D-07 | B | Change the set, restart | desktop | **PARTIAL** | PARTIAL | `S_D-07_EnableDisable_GROK_V1.ps1` | P1 |
 | D-08 | B | Incompatible version ranges | desktop | **PARTIAL** | PARTIAL | `S_D-08_IncompatibleExtension_GROK_V1.ps1` | P1 |
 | D-09 | E | Unsigned or unapproved jar | desktop | **NOT RUN** | NOT RUN | `S_D-09_SignatureChannel_GROK_V1.ps1` | P0 |
@@ -191,12 +197,13 @@ Suite 11: **111 PASS / 0 FAIL / 2 SKIP** (53 bundles including `org.geogebra.plu
 - Automation: suite 10 + suite 08.
 - Blockers / findings: Windows strict 3D visual screenshot still open (Debian evidence is software-OpenGL).
 
-### D-06 — One good and one bad extension bundle at startup
-- Gate B; client desktop; priority P0; status **PARTIAL**; Debian desktop: PARTIAL.
-- Acceptance (spec): Good one registered once; bad one reported; core stays up.
-- Automation: Equinox resolver probe: good test bundle RESOLVED, bad one INSTALLED + UNRESOLVED_BUNDLE, core count unchanged.
-- Blockers / findings: product extension registry not implemented.
-- Script: `03-RCP-Spike/tests/scenarios/S_D-06_ExtensionRegistry_GROK_V1.ps1`; log: `03-RCP-Spike/evidence/20261029-linux-scenarios-20261029_171259-grok-bot-vm-419969949/S_D-06_ExtensionRegistry_GROK_V1.log`.
+### D-06 — Runtime extension install/start/service/stop/uninstall
+- Gate B; client desktop; priority P0; status **PARTIAL**; Debian desktop: PARTIAL; Windows product proof: **PASS 7/0/0** on `cca0cc8`.
+- Acceptance (spec): install, start, discover services, stop, uninstall without restart; reject a bad/unapproved extension; preserve all core bundles.
+- Automation: Windows headless product proof uses an exact test-BSN allowlist, `BundleContext.installBundle()` and `ServiceTracker`; it checks service invocation/removal, unapproved-BSN rejection before install, mandatory missing-import rejection, and 50/50 D-03 core integrity.
+- Blockers / findings: Grok Debian validation and owner review pending. The allowlist is a D-06 development spike, not publisher authentication, artifact integrity, or the Gate E signing policy.
+- Windows evidence: `03-RCP-Spike/evidence/20261104-windows-d06-cca0cc8/`; prior Debian resolver-only evidence: `03-RCP-Spike/evidence/20261029-linux-scenarios-20261029_171259-grok-bot-vm-419969949/S_D-06_ExtensionRegistry_GROK_V1.log`.
+- Script: `03-RCP-Spike/tests/scenarios/S_D-06_ExtensionRegistry_GROK_V1.ps1`.
 
 ### D-07 — Change the set, restart
 - Gate B; client desktop; priority P1; status **PARTIAL**; Debian desktop: PARTIAL.

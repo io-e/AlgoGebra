@@ -1,0 +1,36 @@
+Launching GeoGebraPlus RCP spike; Java: D:\ALF_ZGit\G2_Eclipse\01_src\eclipse\plugins\org.eclipse.justj.openjdk.hotspot.jre.full.win32.x86_64_25.0.4.v20260826-0822\jre\bin\java.exe
+Run id: 20261104-164315-17732-0b1ee2c7
+Log: D:\ALF_Agents\_worktrees\codex-d06-extension-mgmt\03-RCP-Spike\logs\rcp-20261104-164315-17732-0b1ee2c7.log
+Unique, persistent Equinox configuration/storage: D:\ALF_Agents\_worktrees\codex-d06-extension-mgmt\03-RCP-Spike\configuration\runtime-20261104-164315-17732-0b1ee2c7
+Native mode: product classpath loaders / no native-path override
+Existing framework storage and build outputs will not be removed.
+[GeoGebraPlus] Host bundle ACTIVE; id=67
+[GeoGebraPlus] Registered external engine pari; available=false
+[GeoGebraPlus] Registered external engine maxima; available=false
+[GeoGebraPlus] Registered external engine gnuplot; available=false
+[GeoGebraPlus] IApplication.start() � D-02 entry
+[GeoGebraPlus] Runtime: 25.0.4.1+1-LTS; OS=Windows 11/amd64
+[GeoGebraPlus] JogAmp boot delegation=null
+[GeoGebraPlus] Normalized lazy bundle to RESOLVED for D-02: com.sun.jna
+[GeoGebraPlus] D-02 D-03-set check: expected=50, found=50, ACTIVE=0, RESOLVED=50, unresolved/other=0, resolveBundles=true
+[GeoGebraPlus] D-02 PASS
+[GeoGebraPlus] GeoGebra desktop logger initialized for embedded AppD
+[GeoGebraPlus] D-06 core integrity before D-06: resolved-or-active=50/50; expected=50
+[GeoGebraPlus] D-06 REJECTED bundle before installation: not allowlisted: org.geogebra.plus.test.unauthorized at D:\ALF_Agents\_worktrees\codex-d06-extension-mgmt\03-RCP-Spike\test-extension\build\org.geogebra.plus.test.unauthorized_1.0.0.jar
+[GeoGebraPlus] D-06-05 unapproved extension rejected before install: org.geogebra.plus.test.unauthorized
+[GeoGebraPlus] D-06 allowlisted bundle installed: org.geogebra.plus.test.extension at file:///D:/ALF_Agents/_worktrees/codex-d06-extension-mgmt/03-RCP-Spike/test-extension/build/org.geogebra.plus.test.extension_1.0.0.jar
+[GeoGebraPlus] D-06-01 extension installed: org.geogebra.plus.test.extension location=file:///D:/ALF_Agents/_worktrees/codex-d06-extension-mgmt/03-RCP-Spike/test-extension/build/org.geogebra.plus.test.extension_1.0.0.jar
+[TEST-EXT] D-06 extension started and service registered
+[TEST-EXT] D-06 Runnable service invoked
+[GeoGebraPlus] D-06-02 ServiceTracker discovered the allowlisted extension service
+[TEST-EXT] D-06 extension stopped
+[GeoGebraPlus] D-06-03 ServiceTracker confirmed service removal after stop
+[GeoGebraPlus] D-06-04 allowlisted extension uninstalled without framework restart
+[GeoGebraPlus] D-06 allowlisted bundle installed: org.geogebra.plus.test.extension at file:///D:/ALF_Agents/_worktrees/codex-d06-extension-mgmt/03-RCP-Spike/test-extension/build/org.geogebra.plus.test.extension.bad-import_1.0.1.jar
+[GeoGebraPlus] D-06-06 unresolved allowlisted extension rejected at resolve/start: org.geogebra.plus.test.extension; state=INSTALLED
+[GeoGebraPlus] D-06 core integrity after D-06: resolved-or-active=50/50; expected=50
+[GeoGebraPlus] D-06 PASS: install/start/ServiceTracker/stop/uninstall; bad bundles rejected; core=50/50
+[GeoGebraPlus] Headless RCP smoke mode; UI was intentionally skipped
+[GeoGebraPlus] Host bundle stopping
+Equinox exit code: 0
+

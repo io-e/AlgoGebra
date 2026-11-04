@@ -1,0 +1,94 @@
+No build script is present; using the prebuilt installed product image.
+Launching GeoGebraPlus RCP spike; Java: D:\ALF_ZGit\G1_Geogebra_Migration\bin\GeoGebraPlus-RCP-0.1.0-win32-x86_64-r12\jre\bin\java.exe
+Run id: 20261104-162740-8632-5516bf0d
+Log: D:\ALF_ZGit\G1_Geogebra_Migration\bin\GeoGebraPlus-RCP-0.1.0-win32-x86_64-r12\logs\rcp-20261104-162740-8632-5516bf0d.log
+Unique, persistent Equinox configuration/storage: D:\ALF_ZGit\G1_Geogebra_Migration\bin\GeoGebraPlus-RCP-0.1.0-win32-x86_64-r12\configuration\runtime-20261104-162740-8632-5516bf0d
+Native mode: product classpath loaders / no native-path override
+Existing framework storage and build outputs will not be removed.
+Picked up JAVA_TOOL_OPTIONS: -Dggbplus.scenario=D:\ALF_Agents\_worktrees\codex-d06-extension-mgmt\03-RCP-Spike\tests\results\gate-a-20261104\S_P-04_session1.directives.tsv -Dggbplus.scenarioExit=true
+[GeoGebraPlus] Host bundle ACTIVE; id=67
+[GeoGebraPlus] Registered external engine pari; available=false
+[GeoGebraPlus] Registered external engine maxima; available=false
+[GeoGebraPlus] Registered external engine gnuplot; available=false
+[GeoGebraPlus] IApplication.start() — D-02 entry
+[GeoGebraPlus] Runtime: 25.0.4.1+1-LTS; OS=Windows 11/amd64
+[GeoGebraPlus] JogAmp boot delegation=null
+[GeoGebraPlus] Normalized lazy bundle to RESOLVED for D-02: com.sun.jna
+[GeoGebraPlus] D-02 D-03-set check: expected=50, found=50, ACTIVE=0, RESOLVED=50, unresolved/other=0, resolveBundles=true
+[GeoGebraPlus] D-02 PASS
+[GeoGebraPlus] GIAC DLL loaded from product classpath: C:\Users\Shadow\AppData\Local\Temp\geogebraplus-giac-13474808484271312661\javagiac64.dll
+[GeoGebraPlus] D-05 GIAC natives preloaded in owning bundle class loader: org.eclipse.osgi.internal.loader.EquinoxClassLoader@268c8b9d[org.geogebra.migration.shared.giac.jni:5.4.934.0(id=48)]
+[GeoGebraPlus] GlueGen native loaded from product classpath: C:\Users\Shadow\AppData\Local\Temp\geogebraplus-gluegen-10393563241800099703\gluegen_rt.dll
+[GeoGebraPlus] D-05 GlueGen natives preloaded in owning bundle class loader: org.eclipse.osgi.internal.loader.EquinoxClassLoader@518ba090[org.geogebra.migration.external.org.jogamp.gluegen.gluegen-rt:2.6.0(id=40)]
+[GeoGebraPlus] JOGL native loaded from product classpath: C:\Users\Shadow\AppData\Local\Temp\geogebraplus-jogl-5726705955672092415\nativewindow_awt.dll
+[GeoGebraPlus] JOGL native loaded from product classpath: C:\Users\Shadow\AppData\Local\Temp\geogebraplus-jogl-8875186460349087053\nativewindow_win32.dll
+[GeoGebraPlus] JOGL native loaded from product classpath: C:\Users\Shadow\AppData\Local\Temp\geogebraplus-jogl-15211771359180527787\newt_head.dll
+[GeoGebraPlus] JOGL native loaded from product classpath: C:\Users\Shadow\AppData\Local\Temp\geogebraplus-jogl-15025849659180497625\jogl_desktop.dll
+[GeoGebraPlus] JOGL native loaded from product classpath: C:\Users\Shadow\AppData\Local\Temp\geogebraplus-jogl-8290785550785492930\jogl_mobile.dll
+[GeoGebraPlus] D-05 JOGL natives preloaded in owning bundle class loader: org.eclipse.osgi.internal.loader.EquinoxClassLoader@490948a[org.geogebra.migration.external.org.jogamp.jogl.jogl-all:2.6.0(id=41)]
+[GeoGebraPlus] CAS factory prototype installed: org.geogebra.desktop.factories.CASFactoryD
+[GeoGebraPlus] System-loader GIAC DLL resource=jar:file:/D:/ALF_ZGit/G1_Geogebra_Migration/bin/GeoGebraPlus-RCP-0.1.0-win32-x86_64-r12/natives/javagiac-70501-natives-windows-amd64.jar!/javagiac64.dll
+GeoGebra 5.4.934.0 20 October 2026 Java 25.0.4.1-64bit
+
+nov. 04, 2026 4:27:45 PM java.util.prefs.WindowsPreferences <init>
+WARNING: Could not open/create prefs root node Software\JavaSoft\Prefs at root 0xffffffff80000002. Windows RegCreateKeyEx(...) returned error code 5.
+nov. 04, 2026 4:27:45 PM java.util.prefs.WindowsPreferences WindowsRegOpenKey1
+WARNING: Trying to recreate Windows registry node Software\JavaSoft\Prefs at root 0xffffffff80000002.
+nov. 04, 2026 4:27:45 PM java.util.prefs.WindowsPreferences openKey
+WARNING: Could not open windows registry node Software\JavaSoft\Prefs at root 0xffffffff80000002. Windows RegOpenKey(...) returned error code 2.
+[GeoGebraPlus] D-04 embedded AppD full-GUI mode=true (spike adapter; GeoGebraPanel constructs AppD with minimal-GUI mode)
+[GeoGebraPlus] D-04 GeoGebraPanel embedded in SWT_AWT shell
+[GeoGebraPlus] D-05 CAS enabled=true; factory=org.geogebra.desktop.factories.CASFactoryD (test adapter uses reflection; not a proposed public API)
+[GeoGebraPlus] D-05 GIAC JNI host-loader native loaded=true
+============== restarted ===============
+[GeoGebraPlus] D-05 GIAC native loaded=true
+[GeoGebraPlus] D-05 CAS result: x² + 2x + 1
+============== restarted ===============
+[GeoGebraPlus] D-05 CAS smoke 1+1: 2
+============== restarted ===============
+[GeoGebraPlus] D-05 CAS smoke x+1: x + 1
+============== restarted ===============
+[GeoGebraPlus] D-05 direct GIAC smoke: org.geogebra.desktop.cas.giac.CASgiacD(1+1) -> 2
+[GeoGebraPlus] D-05 CAS ASSERTION PASS: normalized=x^2+2x+1
+GeoGebra 5.4.934.0 20 October 2026 Java 25.0.4.1-64bit
+
+[GeoGebraPlus] D-05 3D point command accepted=true; 3D view initialized=true
+[GeoGebraPlus] D-05 3D note: GeoGebraPanel constructs the 2D AppD; the 3D proof uses an upstream App3D instance in the second SWT_AWT pane
+[GeoGebraPlus] SCN	_BEGIN	OK	S_P-04_session1.directives.tsv	34 lines
+[GeoGebraPlus] SCN	B-01	OK	true
+[LaTeX] loadFont():fonts/latin/optional/jlm_cmssbx10.ttf
+[LaTeX] loadFont():fonts/maths/jlm_cmbsy10.ttf
+[GeoGebraPlus] SCN	B-02	OK	true
+[GeoGebraPlus] SCN	B-03	OK	true
+[GeoGebraPlus] SCN	B-04	OK	true
+[GeoGebraPlus] SCN	B-05	OK	true
+[GeoGebraPlus] SCN	B-06	OK	true
+[GeoGebraPlus] SCN	B-07	OK	true
+[GeoGebraPlus] SCN	B-08	OK	true
+[GeoGebraPlus] SCN	N-before	OK	A1,L,P,a,c,f,sl,t
+[GeoGebraPlus] SCN	X-before	OK	ec304d2d53c43ac96fd7479317f8dc4ebadf92acd1e177232869279af0bb2760
+[GeoGebraPlus] SCN	V1-a	OK	a = 2.5
+[GeoGebraPlus] SCN	V1-f	OK	f(x) = 2.5 x² - 1
+[GeoGebraPlus] SCN	V1-P	OK	P = (1, 3)
+[GeoGebraPlus] SCN	V1-c	OK	c: (x - 1)² + (y - 3)² = 6.25
+[GeoGebraPlus] SCN	V1-t	OK	é à ü € ?
+[GeoGebraPlus] SCN	V1-A1	OK	A1 = 42
+[GeoGebraPlus] SCN	V1-L	OK	L = {1, 2, 3, 2.5}
+[GeoGebraPlus] SCN	V1-sl	OK	sl = 0
+[GeoGebraPlus] SCN	SAVE	OK	3604 bytes sha256=c0d459fae937684003c3f0870667586ba01a55b3dd536e42e11de99e565b4cf7
+[GeoGebraPlus] SCN	NEW	OK	0
+[GeoGebraPlus] SCN	N-afternew	OK	
+[GeoGebraPlus] SCN	OPEN	OK	objects=8
+[GeoGebraPlus] SCN	N-reopen	OK	A1,L,P,a,c,f,sl,t
+[GeoGebraPlus] SCN	X-reopen	OK	3dc8c696bc70fddde446d9f54aaa51527fd4c0ff64bcd30b75d5117ed308e6fd
+[GeoGebraPlus] SCN	V2-a	OK	a = 2.5
+[GeoGebraPlus] SCN	V2-f	OK	f(x) = 2.5 x² - 1
+[GeoGebraPlus] SCN	V2-P	OK	P = (1, 3)
+[GeoGebraPlus] SCN	V2-c	OK	c: (x - 1)² + (y - 3)² = 6.25
+[GeoGebraPlus] SCN	V2-t	OK	é à ü € ?
+[GeoGebraPlus] SCN	V2-A1	OK	A1 = 42
+[GeoGebraPlus] SCN	V2-L	OK	L = {1, 2, 3, 2.5}
+[GeoGebraPlus] SCN	V2-sl	OK	sl = 0
+[GeoGebraPlus] SCN	_END	OK	done
+[GeoGebraPlus] Host bundle stopping
+Equinox exit code: 0

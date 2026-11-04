@@ -1,0 +1,6 @@
+# GROK_V1 evidence MANIFEST - immutable: do not edit files in this folder; add a new run folder instead
+# run: Codex, Shadow PC Windows build 26100, 2026-11-04; code cca0cc8; D-06 headless lifecycle; outcome 7/0/0
+# columns: path<TAB>bytes<TAB>sha256
+REPORT.md	2648	eaf1f7b34d246f923293b681c7d160033f259011fde3531e8bc23c96db6d958c
+S_D-06_GROK_V1.csv	1298	5146bb5912e7831a905e451f74e922fe77575fb71752071ec4b497031964a637
+S_D-06.product-headless.log	3275	a717582215f0453e2911ee6e0f422a4e8f1c4bb36a0cc004c1c4f8bae62721cc
