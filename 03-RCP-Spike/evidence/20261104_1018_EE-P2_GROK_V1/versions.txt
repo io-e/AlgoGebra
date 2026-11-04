@@ -1,0 +1,8 @@
+pari: [0;35m[2, 17, 2][0m
+Maxima 5.47.0
+gnuplot 6.0 patchlevel 2
+gap: 4.14.0 (source build, /workspace/scratch_ee_p2/gap-4.14.0)
+openjdk version "21.0.13" 2026-10-20 LTS
+wims C interfaces: stock WIMS src/Interfaces from /workspace/wims-full, rebuilt in /workspace/grok-g1/ee_wims
+pr60_head: 60fc43e7c8036d30bb0ff42dac03ffa855da8e98
+Linux 6.12.94+
