@@ -1,4 +1,4 @@
-<!-- CLAUDE_V5 -->
+<!-- CLAUDE_V5_1 -->
 # CLAUDE.md
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
@@ -89,30 +89,30 @@ Installed image: `D:\ALF_ZGit\G1_Geogebra_Migration\bin\GeoGebraPlus-RCP-0.1.0-w
 - `GeoGebraPlusGlueGenNativeBootstrap` (fragment of GlueGen bundle) — loads `gluegen_rt.dll`
 - `GeoGebraPlusJoglNativeBootstrap` (fragment of JOGL bundle) — loads 5 DLLs (nativewindow_awt, nativewindow_win32, newt_head, jogl_desktop, jogl_mobile)
 
-**Owner review pending:** The GIAC loader is a product-local replacement, not the upstream `NativeLibClassPathLoader`. Accept as architecture or require upstream-path proof.
+**Owner accepted** the fragment bootstrap approach as architecture (`Decisions_D05_Fragment_Bootstrap_CLAUDE_V1.md`). D-05 is PASS.
 
 ### Scenario status summary (45 total)
 
-- **PASS:** D-02, D-03 (2)
-- **PARTIAL:** D-04, D-05, P-08 (3)
-- **NOT RUN:** All remaining P (01–07, 09), D (01, 06–10), W (01–08), X (01–07), S (01–07), O (01–05) — 40 scenarios
+- **PASS:** D-02, D-03, D-04 (core), D-05, W-01 (5)
+- **PARTIAL:** P-08 (1)
+- **NOT RUN:** All remaining P (01–07, 09), D (01, 06–10), W (02–08), X (01–07), S (01–07), O (01–05) — 39 scenarios
 
 ### Gates
 
 | Gate | Requirement | Status |
 |---|---|---|
 | A | P-02–P-05 exist for desktop build and GWT war | NOT MET |
-| B | D-02–D-06 pass, natives load, no `common` diff | **IN PROGRESS** (D-02 + D-03 PASS; D-04/D-05 PARTIAL; D-06 NOT RUN) |
-| C | W-01 scored, GWT stays until W-02 passes | NOT STARTED |
+| B | D-02–D-06 pass, natives load, no `common` diff | **IN PROGRESS** (D-02–D-05 PASS; D-06 NOT RUN — Codex handoff ready) |
+| C | W-01 scored, GWT stays until W-02 passes | **IN PROGRESS** (W-01 PASS: GWT retained. W-02 met by existing GWT baseline once P-02/P-03 corpus exists) |
 | D | X-01–06 + S-01–05 on both hosts for 1 schema + 1 algorithm | NOT STARTED |
 | E | O-02, O-03, D-09, W-04 pass (security, license, SBOM) | NOT STARTED |
 
 ### Next steps
 
-1. **D-05 owner review:** Accept or reject the product-local fragment bootstrap approach as architecture for GIAC native loading (replaces upstream `NativeLibClassPathLoader`). If accepted, capture strict-mode 3D screenshot and close D-05.
-2. **D-04 input/focus investigation:** Record exact keystrokes and command that triggered "Please check your input". Test clean SWT↔AWT focus transfer, clipboard, high-DPI.
-3. **D-06:** Extension bundle management (depends on D-02–D-05 closure).
-4. **Parallel work (Claude):** W-01 (web technology scored study), 5 contract specs (activity, capability, compute, state, submission).
+1. **D-06:** Extension bundle management — Codex handoff ready (`Handoff_Codex_D06_Extension_Mgmt_CLAUDE_V1.md`). Closes Gate B.
+2. **Codex C-4/C-5/C-6:** CourseModel V1_2 + CheckEvaluator + Help loader (`Handoff_Codex_CourseModel_V1_2_CLAUDE_V1.md`).
+3. **Claude remaining:** 3 contract specs (capability, compute, submission). Activity and state contracts delivered.
+4. **Gate A:** P-02–P-05 corpus (desktop build + GWT war evidence).
 
 ## Agent roles
 
