@@ -1,5 +1,5 @@
 {
-  "$comment": "CLAUDE_V1 — Example help template for a derivation exercise. Linked from OEF via \\help{aide_derivation.json}. See Schema_Help_Template_JSON_CLAUDE_V1.json.",
+  "$comment": "CLAUDE_V1_1 — Example help template for a derivation exercise. Linked from OEF via \\text{algogebra_help=aide_derivation.json}. See Schema_Help_Template_JSON_CLAUDE_V1.json. V1_1: giac renamed to geogebra-cas (A-32), link tag corrected (A-04).",
   "templateVersion": "1.0",
   "id": "aide_derivation",
   "title": {
@@ -41,7 +41,7 @@
           "fr": "La dérivée d'une constante est 0.",
           "en": "The derivative of a constant is 0."
         },
-        "engine": "giac",
+        "engine": "geogebra-cas",
         "engineCommand": "Derivative(x^2 + {{a}}*x + {{b}}, x)",
         "expectedResult": {
           "fr": "\\( f'(x) = 2x + {{a}} \\)",
