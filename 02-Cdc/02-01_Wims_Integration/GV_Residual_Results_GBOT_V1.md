@@ -91,3 +91,15 @@ Suite 23 cause = environment, not template drift: the pinned Debian GeoGebra WAR
 ## Out of scope / not done
 
 GB-R6 (P2) not run. G-A1/G-A7 handled by the EE-P2 worker. No spec/schema edits; #40–#42 untouched.
+
+## Addendum (2026-11-04 ~10:45 Paris) — G-A5 closed: suite 23 with the rebuilt pinned WAR
+
+**G-A5 / GB-R4 → PASS** (21 = 14/0/0, 22 = 28/0/0, 23 = 13/0/0 ×2).
+
+- **WAR rebuilt** under `/workspace/grok-g1/gv_war_375db7f/` from upstream `geogebra/geogebra` @ `375db7faf5407390bb322165f2414415da8faeda` (shallow fetch), G-T2 recipe: `./gradlew -p source/web :web:gwtCompile :web:copyHtml :web:mergeDeploy --no-daemon`, Temurin 21.0.13+9, Gradle wrapper 9.4.1 → BUILD SUCCESSFUL in 7m35s (63 tasks executed). `GGB_WAR_DIR=.../geogebra/source/web/web/war`.
+- **Layout check vs G-T2** (`20261101-143847-gt2-war-debian`): 741 files, same as before; **737/741 byte-identical**, including `deployggb.js` (`55bfe441…`) and `web3d/web3d.nocache.js` (`b4c7254f…`). Only the 4 `*/sworker-locked.js` files differ (build-specific service-worker values).
+- **Suite 23** on `feat/grok-g16-wims-full-cycle` @ `c9a6dd5` (detached worktree, read-only), mock CGI, Playwright 1.64.1 / Firefox r1555 headless (no X display needed):
+  - run 1: **PASS 13 / FAIL 0 / SKIP 0**
+  - run 2: **PASS 13 / FAIL 0 / SKIP 0**
+- So the earlier 0/2/0 was caused by the substitute bundle, not by template drift.
+- Evidence: `ga5_suite23_war375db7f/` (2 TAPs, build log, full WAR manifest).
