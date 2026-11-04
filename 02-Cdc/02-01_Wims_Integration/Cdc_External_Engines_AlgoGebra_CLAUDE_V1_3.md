@@ -1,16 +1,16 @@
-<!-- CLAUDE_V1_3 -->
+<!-- CLAUDE_V1_3_1 -->
 # CDC — External Computation Engines for AlgoGebra
 
 | Field | Value |
 |---|---|
 | Document | `02-Cdc/02-01_Wims_Integration/Cdc_External_Engines_AlgoGebra_CLAUDE_V1_3.md` |
-| Version | CLAUDE_V1_3 |
+| Version | CLAUDE_V1_3_1 |
 | Scope | **Engine layer only** (offline subprocess execution). WIMS integration (grading, submission, help templates, resolution tree) is in `Cdc_WIMS_Integration_AlgoGebra_CLAUDE_V2.md`. |
 | Status | **Post-audit revision** — incorporates Grok audit findings A-18, A-22, A-23, A-24, A-27 and owner decisions Q5–Q7 |
 | Date | 2026-11-04 |
 | Supersedes | `Cdc_External_Engines_AlgoGebra_CLAUDE_V1_2.md` |
 | Reviews | Grok Bot PR #59, Codex review at `63f2190`, consolidated in `Consolidated_Review_Grok_Codex_CLAUDE_V1.md`, Grok audit `Audit_Specs_Wims_GBOT_v1.md` |
-| Decisions | `Decisions_External_Engines_GROK_V1.md` (D-ENG-01..05, all closed), `Decisions_PARI_Forbidden_GROK_V1.md` (BUG-006), `Decision_Open_Points_Sprint3_CLAUDE_V1.md` (D-S01/D-S02), `QA_WIMS_Integration_Owner_ALF_V2.md` (Q-W1..Q-W9, OD-1..OD-4) |
+| Decisions | `Decisions_External_Engines_GROK_V1.md` (D-ENG-01..05, all closed), `Decisions_PARI_Forbidden_GROK_V1.md` (BUG-006) + `Decisions_PARI_Forbidden_GROK_V1_1.md` (file-read API extension), `Decision_Open_Points_Sprint3_CLAUDE_V1.md` (D-S01/D-S02), `QA_WIMS_Integration_Owner_ALF_V2.md` (Q-W1..Q-W9, OD-1..OD-4) |
 | Depends on | V2 scenario X-04, `Cdc_GIAC_Integration_AlgoGebra_CLAUDE_V1.md` |
 | Source ref | `D:\ALF_ZGit\02-wims4win\src\Interfaces\` (WIMS C interface wrappers) |
 | JVM baseline | Java 21 (RQ-1, Debian RCPTT/AUT); Java 25 tested on Windows. `ProcessBuilder` usage is 21-compatible. |
@@ -217,7 +217,7 @@ Connected mode (WIMS server grading) is **deferred** pending the WIMS integratio
 | Binary | `gp -f -q` (Windows: `gp.exe -f -q`). Pin version: Debian 2.17.x, Windows from pari.math.u-bordeaux.fr. |
 | Header | WIMS `pari.c` header: 30 aliases (ln→log, pi→Pi, sec, csc, lg, etc.) + `default(secure,1)` |
 | Dynamic setup | `\p <precision>`, `\ps <serieslength>`, `setrand(<seed>)` |
-| Security filter | **Full AGB_ILLEGAL list** (aligned with `Decisions_PARI_Forbidden_GROK_V1.md`, BUG-006): block `plot`, `plotinit`, `write`, `writebin`, `help`, `system`, `extern`, `externstr`, `fileextern`, `install`, `eval`. Block escape commands (`\` except `\\`, `\v`, `\p`). Whole-word match, applied before process spawn. Returns `COMMAND_REJECTED` on match. |
+| Security filter | **Full AGB_ILLEGAL list** (aligned with `Decisions_PARI_Forbidden_GROK_V1.md` BUG-006 + `Decisions_PARI_Forbidden_GROK_V1_1.md` file-read extension): block `plot`, `plotinit`, `write`, `writebin`, `help`, `system`, `extern`, `externstr`, `fileextern`, `install`, `eval`, `read`, `readvec`, `readstr`. Block escape commands (`\` except `\\`, `\v`, `\p`). Whole-word match, applied before process spawn. Returns `COMMAND_REJECTED` on match. |
 | Output parsing | Strip `? ` prompts, strip `Good bye!`, one-line per result, remove `Mat()` / `Vecsmall()` wrapping, strip trailing zeros. Output is **after the output parser** (post-cleanup). |
 | Quit | `\nquit\n` |
 | Test command | `factor(2^64-1)` → `[3, 1; 5, 1; 17, 1; 257, 1; 641, 1; 65537, 1; 6700417, 1]` (after output parser, pinned gp version) |
@@ -278,7 +278,7 @@ Connected mode (WIMS server grading) is **deferred** pending the WIMS integratio
 | ID | Deliverable | Done when |
 |---|---|---|
 | EE-P1a | `SubprocessEngine` abstract class: Java `ProcessBuilder`, stdin/stdout pipe, timeout, process kill | Unit test with a mock engine: start, send command, receive output, timeout kills process |
-| EE-P1b | `PariGPEngine` with full AGB_ILLEGAL filter + header + output parser | `factor(2^64-1)` returns correct post-parser result. `system("ls")` returns `COMMAND_REJECTED`. Empty-output on valid input = error. |
+| EE-P1b | `PariGPEngine` with full AGB_ILLEGAL filter + header + output parser | `factor(2^64-1)` returns correct post-parser result. `system("ls")` returns `COMMAND_REJECTED`. `read("/etc/passwd")` returns `COMMAND_REJECTED` (V1_1 extension). Empty-output on valid input = error. |
 | EE-P1c | `MaximaEngine` with WIMS header + full `illegal[]`/`illpart[]` filter + output parser | `diff(sin(x^2), x)` returns `2*x*cos(x^2)`. Blocked commands rejected. |
 | EE-P1d | `GnuplotEngine` with host-controlled PNG output | `plot sin(x)` produces valid PNG (magic bytes). `set output "/etc/passwd"` rejected. |
 | EE-P1e | Engine discovery: check if binary exists on PATH | `isAvailable()` returns true/false per engine. Missing binary = error message naming the engine. |
@@ -373,6 +373,7 @@ All five engine decisions were closed on 2026-10-29. Full rationale in `Decision
 | `Cdc_WIMS_Integration_AlgoGebra_CLAUDE_V2.md` | WIMS integration layer. References this CDC for engine invocation. |
 | `Decisions_External_Engines_GROK_V1.md` | Owner decisions D-ENG-01..05 (all closed). |
 | `Decisions_PARI_Forbidden_GROK_V1.md` | BUG-006 Pari security filter (AGB_ILLEGAL list, SBX-14..19). |
+| `Decisions_PARI_Forbidden_GROK_V1_1.md` | BUG-006 extension: `read`, `readvec`, `readstr` added to AGB_ILLEGAL (file-read APIs). |
 | `QA_WIMS_Integration_Owner_ALF_V2.md` | Owner decisions Q-W1..Q-W9, OD-1..OD-4 (2026-11-03). |
 | `Decision_Open_Points_Sprint3_CLAUDE_V1.md` | D-S01 (withdrawn — replaced by L2-1 hook), D-S02 (Lean 4 = batch). |
 | `Schema_Course_JSON_CLAUDE_V1_2.json` | Course schema with extended check types, `engine` field, `gradable`, `variants[]`. |
