@@ -1,4 +1,4 @@
-<!-- CLAUDE_V5_1 -->
+<!-- CLAUDE_V5_2 -->
 # CLAUDE.md
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
@@ -110,9 +110,10 @@ Installed image: `D:\ALF_ZGit\G1_Geogebra_Migration\bin\GeoGebraPlus-RCP-0.1.0-w
 ### Next steps
 
 1. **D-06:** Extension bundle management — Codex handoff ready (`Handoff_Codex_D06_Extension_Mgmt_CLAUDE_V1.md`). Closes Gate B.
-2. **Codex C-4/C-5/C-6:** CourseModel V1_2 + CheckEvaluator + Help loader (`Handoff_Codex_CourseModel_V1_2_CLAUDE_V1.md`).
-3. **Claude remaining:** 3 contract specs (capability, compute, submission). Activity and state contracts delivered.
+2. **Codex C-3:** OSGi service registration for engines (`Handoff_Codex_C3_OSGi_Service_Registration_CLAUDE_V1.md`).
+3. **Codex C-4/C-5/C-6:** CourseModel V1_2 + CheckEvaluator + Help loader (`Handoff_Codex_CourseModel_V1_2_CLAUDE_V1.md`).
 4. **Gate A:** P-02–P-05 corpus (desktop build + GWT war evidence).
+5. **All 5 contract specs delivered:** activity manifest, capability descriptor, external computation, state adapter, submission.
 
 ## Agent roles
 
