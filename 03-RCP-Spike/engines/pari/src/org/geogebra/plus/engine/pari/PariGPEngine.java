@@ -4,6 +4,7 @@
  * Antipolis. The original file is licensed under GNU GPL version 2 or (at
  * your option) any later version. See engines/licenses/WIMS-INTERFACES.md.
  */
+/* GROK_V1 — EE-P1: reject empty PARI payload (BUG-015 / X-06). */
 package org.geogebra.plus.engine.pari;
 
 import java.nio.file.Path;
@@ -161,8 +162,13 @@ public final class PariGPEngine extends SubprocessEngine {
     protected ComputeResult createResult(Request request, ProcessOutput output, Duration elapsed)
             throws ExternalComputeException {
         // WIMS readresult(): parse only the slice between the last start marker and the end marker.
-        return ComputeResult.text(getEngineId(),
-                parseOutput(extractOrFail(output.stdout(), request.markers())), elapsed);
+        // BUG-015 / EE-R7: markers present with empty/malformed payload must not look like success.
+        String text = parseOutput(extractOrFail(output.stdout(), request.markers()));
+        if (text == null || text.isBlank()) {
+            throw new ExternalComputeException(Code.INVALID_OUTPUT,
+                    "PARI/GP produced empty output for a completed process (BUG-015)");
+        }
+        return ComputeResult.text(getEngineId(), text, elapsed);
     }
 
     static String parseOutput(String stdout) {

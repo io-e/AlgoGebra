@@ -26,6 +26,9 @@ public final class MaximaEngineTests {
                 .equals("X, x"), "Maxima parser must preserve case-sensitive symbol names");
         assertRejected(new MaximaEngine(), "system(\"calc\")", "system filter");
         assertRejected(new MaximaEngine(), "plot2d(sin(x),[x,-1,1])", "plot filter");
+        assertRejected(new MaximaEngine(), "load(\"/etc/passwd\")", "load filter");
+        assertRejected(new MaximaEngine(), "save(\"out.lisp\", all)", "save filter");
+        assertRejected(new MaximaEngine(), "batch(\"evil.mac\")", "batch filter");
 
         MaximaEngine engine = new MaximaEngine();
         if (!engine.isAvailable()) {

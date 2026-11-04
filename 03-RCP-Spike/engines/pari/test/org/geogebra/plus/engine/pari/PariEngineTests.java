@@ -45,6 +45,17 @@ public final class PariEngineTests {
             assertFactorization(result.text());
             System.out.println("PASS: PARI factor(2^64-1) = " + result.text());
         }
+        // BUG-015 / T-PARI empty-output: malformed input must not return successful empty text.
+        try {
+            engine.eval("factor((", new ComputeContext(
+                    Duration.ofSeconds(60), 20, 8, 1, 800, 600,
+                    java.nio.file.Path.of(System.getProperty("java.io.tmpdir"))));
+            throw new AssertionError("BUG-015: malformed PARI input should not succeed");
+        } catch (ExternalComputeException expected) {
+            assertTrue(expected.code() == Code.INVALID_OUTPUT || expected.code() == Code.PROCESS_FAILED,
+                    "BUG-015 expected INVALID_OUTPUT/PROCESS_FAILED, got " + expected.code());
+            System.out.println("PASS: BUG-015 malformed factor(( -> " + expected.code());
+        }
     }
 
     private static void assertFactorization(String value) {

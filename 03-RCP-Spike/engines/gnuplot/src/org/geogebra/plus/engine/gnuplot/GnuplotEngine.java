@@ -1,3 +1,4 @@
+/* GROK_V1 — EE-P1: pngcairo header; block call/backticks (EE-12 / F-09). */
 package org.geogebra.plus.engine.gnuplot;
 
 import java.io.IOException;
@@ -26,8 +27,10 @@ public final class GnuplotEngine extends SubprocessEngine {
     };
     private static final Pattern FORBIDDEN_COMMAND = Pattern.compile(
             "(?i)(?:^|[;\\s])(?:system|shell)\\s*(?:\\(|\\b)");
+    // EE-12 / F-09: also block call and backtick command substitution; host forces terminal/output.
     private static final Pattern FORBIDDEN_IO = Pattern.compile(
-            "(?i)(?:^|[;\\s])(?:load|save|cd)\\b|\\bset\\s+(?:output|terminal|print)\\b");
+            "(?i)(?:^|[;\\s])(?:load|call|save|cd)\\b|\\bset\\s+(?:output|terminal|print)\\b");
+    private static final Pattern BACKTICK_ESCAPE = Pattern.compile("`");
     private static final Pattern PLOT_COMMAND = Pattern.compile("(?im)^\\s*(?:plot|splot)\\b");
     private static final Pattern PROCESS_INPUT = Pattern.compile("(?i)\\b(?:plot|splot)\\s+[\"'][|<]");
     private static final Pattern SHELL_ESCAPE = Pattern.compile("(?m)(?:^|[;\\n])\\s*!");
@@ -54,6 +57,10 @@ public final class GnuplotEngine extends SubprocessEngine {
         if (SHELL_ESCAPE.matcher(normalized).find()) {
             throw new ExternalComputeException(Code.COMMAND_REJECTED,
                     "Gnuplot shell escape commands beginning with ! are blocked");
+        }
+        if (BACKTICK_ESCAPE.matcher(normalized).find()) {
+            throw new ExternalComputeException(Code.COMMAND_REJECTED,
+                    "Gnuplot backtick command substitution is blocked");
         }
         if (FORBIDDEN_COMMAND.matcher(lower).find()) {
             throw new ExternalComputeException(Code.COMMAND_REJECTED,
@@ -83,7 +90,8 @@ public final class GnuplotEngine extends SubprocessEngine {
             Path artifactDirectory = Files.createTempDirectory(root, "algogebra-gnuplot-");
             Path artifact = artifactDirectory.resolve("plot.png");
             String quotedOutput = quoteGnuplotPath(artifact);
-            String script = "set terminal png size " + context.plotWidth() + "," + context.plotHeight() + "\n"
+            // EE-12: host-owned header uses pngcairo; student commands cannot override terminal/output.
+            String script = "set terminal pngcairo size " + context.plotWidth() + "," + context.plotHeight() + "\n"
                     + "set output \"" + quotedOutput + "\"\n"
                     + validatedCommand + "\n"
                     + "unset output\n"

@@ -4,6 +4,7 @@
  * Antipolis. The original file is licensed under GNU GPL version 2 or (at
  * your option) any later version. See engines/licenses/WIMS-INTERFACES.md.
  */
+/* GROK_V1 — EE-P1: reject empty Maxima payload after successful process exit. */
 package org.geogebra.plus.engine.maxima;
 
 import java.nio.file.Path;
@@ -125,8 +126,13 @@ public final class MaximaEngine extends SubprocessEngine {
     protected ComputeResult createResult(Request request, ProcessOutput output, Duration elapsed)
             throws ExternalComputeException {
         // WIMS readresult(): parse only the slice between the last start marker and the end marker.
-        return ComputeResult.text(getEngineId(),
-                parseOutput(extractOrFail(output.stdout(), request.markers())), elapsed);
+        // EE-11 / EE-R7: empty parsed payload after a successful exit is an error, not a blank answer.
+        String text = parseOutput(extractOrFail(output.stdout(), request.markers()));
+        if (text == null || text.isBlank()) {
+            throw new ExternalComputeException(Code.INVALID_OUTPUT,
+                    "Maxima produced empty output for a completed process");
+        }
+        return ComputeResult.text(getEngineId(), text, elapsed);
     }
 
     static String parseOutput(String stdout) {

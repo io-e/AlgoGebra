@@ -22,6 +22,10 @@ public final class GnuplotEngineTests {
         assertRejected(engine, "plot sin(x); !echo nope", "inline ! prefix filter");
         assertRejected(engine, "plot system(\"calc\")", "system filter");
         assertRejected(engine, "plot sin(x); set output \"other.png\"", "output redirection filter");
+        assertRejected(engine, "plot sin(x); set print \"/tmp/evil.txt\"", "set print filter");
+        assertRejected(engine, "plot sin(x); call \"evil.gp\"", "call filter");
+        assertRejected(engine, "plot sin(x); load \"evil.gp\"", "load filter");
+        assertRejected(engine, "plot `dir`", "backtick filter");
 
         if (!engine.isAvailable()) {
             try {
