@@ -1,0 +1,17 @@
+signal	calls	files
+wims	1979	208
+slib	117	95
+pari	18	16
+maxima	3	2
+octave	0	0
+yacas	0	0
+gap	0	0
+m2	0	0
+scilab	0	0
+gp_file	0	0
+draw	43	33
+shuffle	270	140
+pari_kw	0	0
+maxima_kw	0	0
+ANY_named_CAS	-	18
+ANY_runtime_param(wims/slib/CAS)	-	214

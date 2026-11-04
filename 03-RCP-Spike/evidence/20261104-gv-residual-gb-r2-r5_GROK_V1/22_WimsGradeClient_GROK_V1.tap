@@ -1,0 +1,35 @@
+# Suite: 22_WimsGradeClient
+# Started: 2026-11-04T10:14:17.3397973+01:00
+# Host: grok-bot-vm-419969949 / Debian GNU/Linux 13 (trixie) / pwsh 7.4.6
+
+ok 1 - [P0] WG-00-client-exists :: /workspace/grok-g1/gv_g15/wims/course-activity-template/wims-grade-client_GROK_V1.js
+ok 2 - [P0] WG-GC-01-body-fields-D-S01 :: module=adm%2Fclass%2Fsheet&job=getresult&exercise=ok-1&ans1=UEsDBAEBAQ
+ok 3 - [P0] WG-GC-02-no-grade-field-sent :: module,job,exercise,ans1
+ok 4 - [P0] WG-GC-03-reject-bad-exercise :: 
+ok 5 - [P0] WG-GC-04-reject-bad-base64 :: 
+ok 6 - [P0] WG-GC-05-post-form-urlencoded :: application/x-www-form-urlencoded;charset=UTF-8
+ok 7 - [P0] WG-GC-06-ans1-is-ggb-zip :: 
+ok 8 - [P0] WG-GC-07-grade-from-wims :: {"ok":true,"grade":0.8,"feedback":"Construction received; 4 of 5 checks passed.","via":"json"}
+ok 9 - [P0] WG-GC-08-html-response-is-error :: WIMS answered HTML, not the D-S01 JSON result
+ok 10 - [P0] WG-GC-09-http-500-is-error :: WIMS answered HTTP 500
+ok 11 - [P0] WG-GC-10-grade-out-of-range-rejected :: WIMS grade missing or outside 0..1
+ok 12 - [P0] WG-GC-11-timeout :: WIMS did not answer in time
+ok 13 - [P0] WG-GC-12-network-error :: network error: fetch failed
+ok 14 - [P0] WG-GC-13-no-exercise-no-request :: 
+ok 15 - [P0] WG-GC-14-parse-non-object :: 
+ok 16 - [P0] WG-GC-15-no-innerHTML :: 
+ok 17 - [P0] WG-GC-16-no-local-grading :: client never assigns a grade
+ok 18 - [P0] WG-GC-17-adapter-html-no-marker-is-error :: WIMS answered HTML without a wims-result marker (HTML adapter)
+ok 19 - [P0] WG-GC-18-adapter-json-marker :: {"ok":true,"grade":0.6,"feedback":"3 of 5 checks","via":"html-adapter"}
+ok 20 - [P0] WG-GC-19-adapter-data-attrs :: {"ok":true,"grade":0.4,"feedback":"2 & 5 <ok>","via":"html-adapter"}
+ok 21 - [P0] WG-GC-20-adapter-off-by-default :: WIMS answered HTML, not the D-S01 JSON result
+ok 22 - [P0] WG-GC-21-adapter-validates-range :: 
+ok 23 - [P0] WG-GC-22-adapter-no-prose-scraping :: 
+ok 24 - [P0] WG-GC-23-oversized-default-limit-no-request :: construction too large for submission (1048580 > 1048576 bytes)
+ok 25 - [P0] WG-GC-24-limit-configurable :: construction too large for submission (92 > 8 bytes)
+ok 26 - [P0] WG-GC-25-http-413-message :: WIMS rejected the construction as too large (HTTP 413)
+ok 27 - [P0] WG-GC-26-raised-limit-still-ok :: {"ok":true,"grade":0.8,"feedback":"Construction received; 4 of 5 checks passed.","via":"json"}
+ok 28 - [P0] WG-99-summary :: # grade client: 26 PASS, 0 FAIL
+
+PASS: 28 FAIL: 0 SKIP: 0
+# CSV: /workspace/grok-g1/gv_g15/03-RCP-Spike/tests/results/22_WimsGradeClient_GROK_V1.csv

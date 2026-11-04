@@ -1,0 +1,6 @@
+127.0.0.1 - - [04/Nov/2026 10:17:25] "GET /wims/wims.cgi HTTP/1.1" 200 -
+127.0.0.1 - - [04/Nov/2026 10:17:32] "GET /wims/wims.cgi?lang=fr&cmd=new&module=H6/test/oef2html.fr&exo=00072&qnum=1&scoredelay=&seedrepeat=0&qcmlevel=1 HTTP/1.1" 200 -
+127.0.0.1 - - [04/Nov/2026 10:17:42] "GET /wims/wims.cgi?session=5IA2102324.1&cmd=reply&reply1=15.9%2ax%2b20.55 HTTP/1.1" 200 -
+127.0.0.1 - - [04/Nov/2026 10:17:46] "GET /wims/wims.cgi?lang=fr&cmd=new&module=H6/test/oef2html.fr&exo=00072&qnum=1 HTTP/1.1" 200 -
+127.0.0.1 - - [04/Nov/2026 10:17:47] "GET /wims/wims.cgi?session=9GA20620A9.1&cmd=reply&reply1=x%2b1 HTTP/1.1" 200 -
+127.0.0.1 - - [04/Nov/2026 10:17:47] "GET /wims/wims.cgi?session=9GA20620A9.1&cmd=getresult HTTP/1.1" 450 -
