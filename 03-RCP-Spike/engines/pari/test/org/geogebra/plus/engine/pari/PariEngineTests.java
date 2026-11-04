@@ -11,7 +11,7 @@ public final class PariEngineTests {
 
     private static final String[] EXPECTED_WIMS_ILLPART = { "plot", "write", "help" };
     private static final String[] EXPECTED_AGB_ILLEGAL = {
-            "system", "extern", "externstr", "fileextern", "install", "eval"
+            "system", "extern", "externstr", "fileextern", "install", "eval", "read", "readvec", "readstr"
     };
 
     private PariEngineTests() {
@@ -60,11 +60,15 @@ public final class PariEngineTests {
         PariGPEngine engine = new PariGPEngine();
         // BUG-006: validateCommand runs before executable lookup; COMMAND_REJECTED proves gp is never reached.
         assertTrue(java.util.Arrays.equals(PariGPEngine.AGB_ILLEGAL, EXPECTED_AGB_ILLEGAL),
-                "T-PARI-01 AGB_ILLEGAL list differs from the approved six-command filter");
+                "T-PARI-01 AGB_ILLEGAL list differs from the approved nine-command filter");
         for (String blocked : EXPECTED_AGB_ILLEGAL) {
             assertRejected(engine, blocked + "(\"test\")", "T-PARI-01 AGB_ILLEGAL: " + blocked);
         }
-        System.out.println("PASS: T-PARI-01 all AGB_ILLEGAL commands rejected before gp launch");
+        for (String blocked : new String[] { "read", "readvec", "readstr" }) {
+            assertRejected(engine, blocked.toUpperCase(java.util.Locale.ROOT) + "(\"test\")",
+                    "T-PARI-07 mixed-case file read: " + blocked);
+        }
+        System.out.println("PASS: T-PARI-01 all nine AGB_ILLEGAL commands rejected before gp launch");
 
         assertRejected(engine, "alias(s,system); s(\"id\")", "T-PARI-02 alias to system");
         assertRejected(engine, "SYSTEM(\"id\")", "T-PARI-02 case-insensitive command");
@@ -90,9 +94,14 @@ public final class PariEngineTests {
         PariGPEngine engine = new PariGPEngine();
         assertRejected(engine, "eval(Str(\"ins\",\"tall(\\\"getpid\\\",\\\"l\\\")\"))",
                 "T-PARI-05 dynamic reconstruction via eval");
-        String safe = engine.validateCommand("systematic=1; installed=2; externality=3; evaluate=4");
+        assertRejected(engine, "alias(r,read); r(\"/etc/hostname\")", "T-PARI-07 alias to read");
+        String safe = engine.validateCommand("factor(2^64-1); systematic=1; installed=2; externality=3; "
+                + "evaluate=4; reader=5; readable=6");
         assertTrue(safe.contains("systematic"), "T-PARI-05 filter must match whole words only");
-        System.out.println("PASS: T-PARI-05 dynamic reconstruction rejected; longer identifiers remain allowed");
+        assertTrue(safe.contains("factor(2^64-1)"), "T-PARI-07 benign math must remain allowed");
+        assertTrue(safe.contains("reader") && safe.contains("readable"),
+                "T-PARI-07 longer identifiers must remain allowed");
+        System.out.println("PASS: T-PARI-05/07 dynamic read/eval blocked; benign math and longer names remain allowed");
     }
 
     private static void testEmptySuccessfulOutputRejected() throws Exception {

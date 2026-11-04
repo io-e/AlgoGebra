@@ -1,0 +1,1582 @@
+{
+ "name": "EE fixture set F",
+ "version": "GROK_V1",
+ "owner_lane": "Grok Bot (Debian) — shared with Codex (C-A2)",
+ "comparison": "D-WIMS-T01 soft parity (definition as relayed 2026-11-04; decision text not yet on GitHub): value cases must give the same normalized value on WIMS C and Java (and equal expected.value when set); error cases must error on both; reject cases must be rejected by Java without side effects; strict cases: Java must reject whenever WIMS blocks. Byte-identical output is NOT required.",
+ "normalization": {
+  "ws-collapse": "remove all whitespace/CR/\\\\n; WIMS pari.c trailing-zero stripping is part of the WIMS output",
+  "numeric": "ws-collapse, then exact-zero float tokens 0.E-<n> are rewritten to 0.0 (numerically equal)"
+ },
+ "kinds": {
+  "value": "positive",
+  "error": "malformed input",
+  "png": "valid PNG (magic bytes) 800x600",
+  "reject": "must be rejected (security negative)",
+  "strict": "Java at least as strict as WIMS"
+ },
+ "engines_without_java_adapter": [
+  "gap"
+ ],
+ "cases": [
+  {
+   "id": "P-01",
+   "engine": "pari",
+   "input": "factor(2^64-1)",
+   "kind": "value",
+   "expected": {
+    "value": "3,1;5,1;17,1;257,1;641,1;65537,1;6700417,1",
+    "normalization": "ws-collapse"
+   },
+   "expected_rejection": false,
+   "sentinel": null,
+   "note": ""
+  },
+  {
+   "id": "P-02",
+   "engine": "pari",
+   "input": "nextprime(10^20)",
+   "kind": "value",
+   "expected": {
+    "value": "100000000000000000039",
+    "normalization": "ws-collapse"
+   },
+   "expected_rejection": false,
+   "sentinel": null,
+   "note": ""
+  },
+  {
+   "id": "P-03",
+   "engine": "pari",
+   "input": "1.2300",
+   "kind": "value",
+   "expected": {
+    "value": "1.23",
+    "normalization": "ws-collapse"
+   },
+   "expected_rejection": false,
+   "sentinel": null,
+   "note": ""
+  },
+  {
+   "id": "P-04",
+   "engine": "pari",
+   "input": "gcd(12,18)",
+   "kind": "value",
+   "expected": {
+    "value": "6",
+    "normalization": "ws-collapse"
+   },
+   "expected_rejection": false,
+   "sentinel": null,
+   "note": ""
+  },
+  {
+   "id": "P-05",
+   "engine": "pari",
+   "input": "2^100",
+   "kind": "value",
+   "expected": {
+    "value": "1267650600228229401496703205376",
+    "normalization": "ws-collapse"
+   },
+   "expected_rejection": false,
+   "sentinel": null,
+   "note": ""
+  },
+  {
+   "id": "P-06",
+   "engine": "pari",
+   "input": "isprime(2^61-1)",
+   "kind": "value",
+   "expected": {
+    "value": "1",
+    "normalization": "ws-collapse"
+   },
+   "expected_rejection": false,
+   "sentinel": null,
+   "note": ""
+  },
+  {
+   "id": "P-07",
+   "engine": "pari",
+   "input": "sum(k=1,100,k)",
+   "kind": "value",
+   "expected": {
+    "value": "5050",
+    "normalization": "ws-collapse"
+   },
+   "expected_rejection": false,
+   "sentinel": null,
+   "note": ""
+  },
+  {
+   "id": "P-08",
+   "engine": "pari",
+   "input": "binomial(10,3)",
+   "kind": "value",
+   "expected": {
+    "value": "120",
+    "normalization": "ws-collapse"
+   },
+   "expected_rejection": false,
+   "sentinel": null,
+   "note": ""
+  },
+  {
+   "id": "P-09",
+   "engine": "pari",
+   "input": "1/3+1/6",
+   "kind": "value",
+   "expected": {
+    "value": "1/2",
+    "normalization": "ws-collapse"
+   },
+   "expected_rejection": false,
+   "sentinel": null,
+   "note": ""
+  },
+  {
+   "id": "P-10",
+   "engine": "pari",
+   "input": "deriv(x^3)",
+   "kind": "value",
+   "expected": {
+    "value": "3*x^2",
+    "normalization": "ws-collapse"
+   },
+   "expected_rejection": false,
+   "sentinel": null,
+   "note": ""
+  },
+  {
+   "id": "P-11",
+   "engine": "pari",
+   "input": "Mod(3,7)^-1",
+   "kind": "value",
+   "expected": {
+    "value": null,
+    "normalization": "ws-collapse"
+   },
+   "expected_rejection": false,
+   "sentinel": null,
+   "note": ""
+  },
+  {
+   "id": "P-12",
+   "engine": "pari",
+   "input": "factor(x^2-1)",
+   "kind": "value",
+   "expected": {
+    "value": null,
+    "normalization": "ws-collapse"
+   },
+   "expected_rejection": false,
+   "sentinel": null,
+   "note": ""
+  },
+  {
+   "id": "P-13",
+   "engine": "pari",
+   "input": "sqrt(2)",
+   "kind": "value",
+   "expected": {
+    "value": null,
+    "normalization": "numeric"
+   },
+   "expected_rejection": false,
+   "sentinel": null,
+   "note": ""
+  },
+  {
+   "id": "P-14",
+   "engine": "pari",
+   "input": "polroots(x^2-2)",
+   "kind": "value",
+   "expected": {
+    "value": null,
+    "normalization": "numeric"
+   },
+   "expected_rejection": false,
+   "sentinel": null,
+   "note": ""
+  },
+  {
+   "id": "P-15",
+   "engine": "pari",
+   "input": "factor((",
+   "kind": "error",
+   "expected": {
+    "value": null,
+    "normalization": null
+   },
+   "expected_rejection": false,
+   "sentinel": null,
+   "note": "BUG-015 malformed"
+  },
+  {
+   "id": "P-16",
+   "engine": "pari",
+   "input": "1/0",
+   "kind": "error",
+   "expected": {
+    "value": null,
+    "normalization": null
+   },
+   "expected_rejection": false,
+   "sentinel": null,
+   "note": ""
+  },
+  {
+   "id": "P-17",
+   "engine": "pari",
+   "input": "plot(sin(x))",
+   "kind": "reject",
+   "expected": {
+    "value": null,
+    "normalization": null
+   },
+   "expected_rejection": true,
+   "sentinel": null,
+   "note": "WIMS illpart plot"
+  },
+  {
+   "id": "P-18",
+   "engine": "pari",
+   "input": "write(\"/tmp/ee_p2_pw\",1)",
+   "kind": "reject",
+   "expected": {
+    "value": null,
+    "normalization": null
+   },
+   "expected_rejection": true,
+   "sentinel": "/tmp/ee_p2_pw",
+   "note": "WIMS illpart write"
+  },
+  {
+   "id": "P-19",
+   "engine": "pari",
+   "input": "help(factor)",
+   "kind": "reject",
+   "expected": {
+    "value": null,
+    "normalization": null
+   },
+   "expected_rejection": true,
+   "sentinel": null,
+   "note": "WIMS illpart help"
+  },
+  {
+   "id": "P-20",
+   "engine": "pari",
+   "input": "system(\"id\")",
+   "kind": "reject",
+   "expected": {
+    "value": null,
+    "normalization": null
+   },
+   "expected_rejection": true,
+   "sentinel": null,
+   "note": "AGB_ILLEGAL"
+  },
+  {
+   "id": "P-21",
+   "engine": "pari",
+   "input": "extern(\"id\")",
+   "kind": "reject",
+   "expected": {
+    "value": null,
+    "normalization": null
+   },
+   "expected_rejection": true,
+   "sentinel": null,
+   "note": "AGB_ILLEGAL"
+  },
+  {
+   "id": "P-22",
+   "engine": "pari",
+   "input": "externstr(\"id\")",
+   "kind": "reject",
+   "expected": {
+    "value": null,
+    "normalization": null
+   },
+   "expected_rejection": true,
+   "sentinel": null,
+   "note": "AGB_ILLEGAL"
+  },
+  {
+   "id": "P-23",
+   "engine": "pari",
+   "input": "fileextern(\"id\")",
+   "kind": "reject",
+   "expected": {
+    "value": null,
+    "normalization": null
+   },
+   "expected_rejection": true,
+   "sentinel": null,
+   "note": "AGB_ILLEGAL"
+  },
+  {
+   "id": "P-24",
+   "engine": "pari",
+   "input": "install(\"getpid\",\"l\")",
+   "kind": "reject",
+   "expected": {
+    "value": null,
+    "normalization": null
+   },
+   "expected_rejection": true,
+   "sentinel": null,
+   "note": "AGB_ILLEGAL; WIMS hangs on prompt"
+  },
+  {
+   "id": "P-25",
+   "engine": "pari",
+   "input": "eval(\"system(\\\"id\\\")\")",
+   "kind": "reject",
+   "expected": {
+    "value": null,
+    "normalization": null
+   },
+   "expected_rejection": true,
+   "sentinel": null,
+   "note": "AGB_ILLEGAL eval"
+  },
+  {
+   "id": "P-26",
+   "engine": "pari",
+   "input": "alias(s,system); s(\"id\")",
+   "kind": "reject",
+   "expected": {
+    "value": null,
+    "normalization": null
+   },
+   "expected_rejection": true,
+   "sentinel": null,
+   "note": "alias bypass"
+  },
+  {
+   "id": "P-27",
+   "engine": "pari",
+   "input": "2+2\\n\\quit",
+   "kind": "reject",
+   "expected": {
+    "value": null,
+    "normalization": null
+   },
+   "expected_rejection": true,
+   "sentinel": null,
+   "note": "gp escape"
+  },
+  {
+   "id": "P-28",
+   "engine": "pari",
+   "input": "read(\"/etc/hostname\")",
+   "kind": "reject",
+   "expected": {
+    "value": null,
+    "normalization": null
+   },
+   "expected_rejection": true,
+   "sentinel": null,
+   "note": "must-REJECT after 02-Cdc/Decisions_PARI_Forbidden_GROK_V1_1.md (BUG-006 V1_1); expected FAIL until Codex adds read/readvec/readstr to AGB_ILLEGAL on #60"
+  },
+  {
+   "id": "P-29",
+   "engine": "pari",
+   "input": "readvec(\"/etc/hostname\")",
+   "kind": "reject",
+   "expected": {
+    "value": null,
+    "normalization": null
+   },
+   "expected_rejection": true,
+   "sentinel": null,
+   "note": "must-REJECT after 02-Cdc/Decisions_PARI_Forbidden_GROK_V1_1.md (BUG-006 V1_1); expected FAIL until Codex adds read/readvec/readstr to AGB_ILLEGAL on #60"
+  },
+  {
+   "id": "P-30",
+   "engine": "pari",
+   "input": "readstr(\"/etc/hostname\")",
+   "kind": "reject",
+   "expected": {
+    "value": null,
+    "normalization": null
+   },
+   "expected_rejection": true,
+   "sentinel": null,
+   "note": "must-REJECT after 02-Cdc/Decisions_PARI_Forbidden_GROK_V1_1.md (BUG-006 V1_1); expected FAIL until Codex adds read/readvec/readstr to AGB_ILLEGAL on #60"
+  },
+  {
+   "id": "M-01",
+   "engine": "maxima",
+   "input": "diff(sin(x^2), x)",
+   "kind": "value",
+   "expected": {
+    "value": "2*x*cos(x^2)",
+    "normalization": "ws-collapse"
+   },
+   "expected_rejection": false,
+   "sentinel": null,
+   "note": ""
+  },
+  {
+   "id": "M-02",
+   "engine": "maxima",
+   "input": "integrate(x^2, x)",
+   "kind": "value",
+   "expected": {
+    "value": "x^3/3",
+    "normalization": "ws-collapse"
+   },
+   "expected_rejection": false,
+   "sentinel": null,
+   "note": ""
+  },
+  {
+   "id": "M-03",
+   "engine": "maxima",
+   "input": "factor(x^2-1)",
+   "kind": "value",
+   "expected": {
+    "value": "(x-1)*(x+1)",
+    "normalization": "ws-collapse"
+   },
+   "expected_rejection": false,
+   "sentinel": null,
+   "note": ""
+  },
+  {
+   "id": "M-04",
+   "engine": "maxima",
+   "input": "expand((x+1)^3)",
+   "kind": "value",
+   "expected": {
+    "value": "x^3+3*x^2+3*x+1",
+    "normalization": "ws-collapse"
+   },
+   "expected_rejection": false,
+   "sentinel": null,
+   "note": ""
+  },
+  {
+   "id": "M-05",
+   "engine": "maxima",
+   "input": "solve(x^2=4,x)",
+   "kind": "value",
+   "expected": {
+    "value": "x = -2,x = 2",
+    "normalization": "ws-collapse"
+   },
+   "expected_rejection": false,
+   "sentinel": null,
+   "note": ""
+  },
+  {
+   "id": "M-06",
+   "engine": "maxima",
+   "input": "limit(sin(x)/x,x,0)",
+   "kind": "value",
+   "expected": {
+    "value": "1",
+    "normalization": "ws-collapse"
+   },
+   "expected_rejection": false,
+   "sentinel": null,
+   "note": ""
+  },
+  {
+   "id": "M-07",
+   "engine": "maxima",
+   "input": "2^100",
+   "kind": "value",
+   "expected": {
+    "value": "1267650600228229401496703205376",
+    "normalization": "ws-collapse"
+   },
+   "expected_rejection": false,
+   "sentinel": null,
+   "note": ""
+  },
+  {
+   "id": "M-08",
+   "engine": "maxima",
+   "input": "gcd(12,18)",
+   "kind": "value",
+   "expected": {
+    "value": "6",
+    "normalization": "ws-collapse"
+   },
+   "expected_rejection": false,
+   "sentinel": null,
+   "note": ""
+  },
+  {
+   "id": "M-09",
+   "engine": "maxima",
+   "input": "sum(k,k,1,100)",
+   "kind": "value",
+   "expected": {
+    "value": "5050",
+    "normalization": "ws-collapse"
+   },
+   "expected_rejection": false,
+   "sentinel": null,
+   "note": ""
+  },
+  {
+   "id": "M-10",
+   "engine": "maxima",
+   "input": "trigsimp(sin(x)^2+cos(x)^2)",
+   "kind": "value",
+   "expected": {
+    "value": "1",
+    "normalization": "ws-collapse"
+   },
+   "expected_rejection": false,
+   "sentinel": null,
+   "note": ""
+  },
+  {
+   "id": "M-11",
+   "engine": "maxima",
+   "input": "ratsimp(1/x+1/y)",
+   "kind": "value",
+   "expected": {
+    "value": null,
+    "normalization": "ws-collapse"
+   },
+   "expected_rejection": false,
+   "sentinel": null,
+   "note": ""
+  },
+  {
+   "id": "M-12",
+   "engine": "maxima",
+   "input": "float(1/3)",
+   "kind": "value",
+   "expected": {
+    "value": null,
+    "normalization": "ws-collapse"
+   },
+   "expected_rejection": false,
+   "sentinel": null,
+   "note": ""
+  },
+  {
+   "id": "M-13",
+   "engine": "maxima",
+   "input": "determinant(matrix([1,2],[3,4]))",
+   "kind": "value",
+   "expected": {
+    "value": "-2",
+    "normalization": "ws-collapse"
+   },
+   "expected_rejection": false,
+   "sentinel": null,
+   "note": ""
+  },
+  {
+   "id": "M-14",
+   "engine": "maxima",
+   "input": "diff(sin(x),",
+   "kind": "error",
+   "expected": {
+    "value": null,
+    "normalization": null
+   },
+   "expected_rejection": false,
+   "sentinel": null,
+   "note": ""
+  },
+  {
+   "id": "M-15",
+   "engine": "maxima",
+   "input": "system(\"id\")",
+   "kind": "reject",
+   "expected": {
+    "value": null,
+    "normalization": null
+   },
+   "expected_rejection": true,
+   "sentinel": null,
+   "note": "WIMS maxima.c illegal[]"
+  },
+  {
+   "id": "M-16",
+   "engine": "maxima",
+   "input": "describe(sin)",
+   "kind": "reject",
+   "expected": {
+    "value": null,
+    "normalization": null
+   },
+   "expected_rejection": true,
+   "sentinel": null,
+   "note": "WIMS maxima.c illegal[]"
+  },
+  {
+   "id": "M-17",
+   "engine": "maxima",
+   "input": "example(diff)",
+   "kind": "reject",
+   "expected": {
+    "value": null,
+    "normalization": null
+   },
+   "expected_rejection": true,
+   "sentinel": null,
+   "note": "WIMS maxima.c illegal[]"
+  },
+  {
+   "id": "M-18",
+   "engine": "maxima",
+   "input": "save(\"/tmp/ee_p2_ms\",all)",
+   "kind": "reject",
+   "expected": {
+    "value": null,
+    "normalization": null
+   },
+   "expected_rejection": true,
+   "sentinel": "/tmp/ee_p2_ms",
+   "note": "WIMS maxima.c illegal[]"
+  },
+  {
+   "id": "M-19",
+   "engine": "maxima",
+   "input": "fassave(\"/tmp/ee_p2_ms\",all)",
+   "kind": "reject",
+   "expected": {
+    "value": null,
+    "normalization": null
+   },
+   "expected_rejection": true,
+   "sentinel": "/tmp/ee_p2_ms",
+   "note": "WIMS maxima.c illegal[]"
+  },
+  {
+   "id": "M-20",
+   "engine": "maxima",
+   "input": "stringout(\"/tmp/ee_p2_ms\",1)",
+   "kind": "reject",
+   "expected": {
+    "value": null,
+    "normalization": null
+   },
+   "expected_rejection": true,
+   "sentinel": "/tmp/ee_p2_ms",
+   "note": "WIMS maxima.c illegal[]"
+  },
+  {
+   "id": "M-21",
+   "engine": "maxima",
+   "input": "batcon(1)",
+   "kind": "reject",
+   "expected": {
+    "value": null,
+    "normalization": null
+   },
+   "expected_rejection": true,
+   "sentinel": null,
+   "note": "WIMS maxima.c illegal[]"
+  },
+  {
+   "id": "M-22",
+   "engine": "maxima",
+   "input": "batcount:1",
+   "kind": "reject",
+   "expected": {
+    "value": null,
+    "normalization": null
+   },
+   "expected_rejection": true,
+   "sentinel": null,
+   "note": "WIMS maxima.c illegal[]"
+  },
+  {
+   "id": "M-23",
+   "engine": "maxima",
+   "input": "cursordisp:false",
+   "kind": "reject",
+   "expected": {
+    "value": null,
+    "normalization": null
+   },
+   "expected_rejection": true,
+   "sentinel": null,
+   "note": "WIMS maxima.c illegal[]"
+  },
+  {
+   "id": "M-24",
+   "engine": "maxima",
+   "input": "direc",
+   "kind": "reject",
+   "expected": {
+    "value": null,
+    "normalization": null
+   },
+   "expected_rejection": true,
+   "sentinel": null,
+   "note": "WIMS maxima.c illegal[]"
+  },
+  {
+   "id": "M-25",
+   "engine": "maxima",
+   "input": "readonly(1)",
+   "kind": "reject",
+   "expected": {
+    "value": null,
+    "normalization": null
+   },
+   "expected_rejection": true,
+   "sentinel": null,
+   "note": "WIMS maxima.c illegal[]"
+  },
+  {
+   "id": "M-26",
+   "engine": "maxima",
+   "input": "with_stdout(\"/tmp/ee_p2_ms\", print(1))",
+   "kind": "reject",
+   "expected": {
+    "value": null,
+    "normalization": null
+   },
+   "expected_rejection": true,
+   "sentinel": "/tmp/ee_p2_ms",
+   "note": "WIMS maxima.c illegal[]"
+  },
+  {
+   "id": "M-27",
+   "engine": "maxima",
+   "input": "pscom:1",
+   "kind": "reject",
+   "expected": {
+    "value": null,
+    "normalization": null
+   },
+   "expected_rejection": true,
+   "sentinel": null,
+   "note": "WIMS maxima.c illegal[]"
+  },
+  {
+   "id": "M-28",
+   "engine": "maxima",
+   "input": "demo(\"x\")",
+   "kind": "reject",
+   "expected": {
+    "value": null,
+    "normalization": null
+   },
+   "expected_rejection": true,
+   "sentinel": null,
+   "note": "WIMS maxima.c illegal[]"
+  },
+  {
+   "id": "M-29",
+   "engine": "maxima",
+   "input": "ttyintfun:1",
+   "kind": "reject",
+   "expected": {
+    "value": null,
+    "normalization": null
+   },
+   "expected_rejection": true,
+   "sentinel": null,
+   "note": "WIMS maxima.c illegal[]"
+  },
+  {
+   "id": "M-30",
+   "engine": "maxima",
+   "input": "bug_report()",
+   "kind": "reject",
+   "expected": {
+    "value": null,
+    "normalization": null
+   },
+   "expected_rejection": true,
+   "sentinel": null,
+   "note": "WIMS maxima.c illegal[]"
+  },
+  {
+   "id": "M-31",
+   "engine": "maxima",
+   "input": "printfile(\"/etc/hostname\")",
+   "kind": "reject",
+   "expected": {
+    "value": null,
+    "normalization": null
+   },
+   "expected_rejection": true,
+   "sentinel": null,
+   "note": "WIMS maxima.c illpart[]"
+  },
+  {
+   "id": "M-32",
+   "engine": "maxima",
+   "input": "debugmode(true)",
+   "kind": "reject",
+   "expected": {
+    "value": null,
+    "normalization": null
+   },
+   "expected_rejection": true,
+   "sentinel": null,
+   "note": "WIMS maxima.c illpart[]"
+  },
+  {
+   "id": "M-33",
+   "engine": "maxima",
+   "input": "plot2d(sin(x),[x,0,1])",
+   "kind": "reject",
+   "expected": {
+    "value": null,
+    "normalization": null
+   },
+   "expected_rejection": true,
+   "sentinel": null,
+   "note": "WIMS maxima.c illpart[]"
+  },
+  {
+   "id": "M-34",
+   "engine": "maxima",
+   "input": "load(\"foo\")",
+   "kind": "reject",
+   "expected": {
+    "value": null,
+    "normalization": null
+   },
+   "expected_rejection": true,
+   "sentinel": null,
+   "note": "WIMS maxima.c illpart[]"
+  },
+  {
+   "id": "M-35",
+   "engine": "maxima",
+   "input": "storex:1",
+   "kind": "reject",
+   "expected": {
+    "value": null,
+    "normalization": null
+   },
+   "expected_rejection": true,
+   "sentinel": null,
+   "note": "WIMS maxima.c illpart[]"
+  },
+  {
+   "id": "M-36",
+   "engine": "maxima",
+   "input": "batch(\"/tmp/x.mac\")",
+   "kind": "reject",
+   "expected": {
+    "value": null,
+    "normalization": null
+   },
+   "expected_rejection": true,
+   "sentinel": null,
+   "note": "WIMS maxima.c illpart[]"
+  },
+  {
+   "id": "M-37",
+   "engine": "maxima",
+   "input": ":lisp (run-shell-command \"touch /tmp/ee_p2_ml\")",
+   "kind": "strict",
+   "expected": {
+    "value": null,
+    "normalization": null
+   },
+   "expected_rejection": false,
+   "sentinel": "/tmp/ee_p2_ml",
+   "note": "lisp escape, not in WIMS lists"
+  },
+  {
+   "id": "M-38",
+   "engine": "maxima",
+   "input": "?system(\"id\")",
+   "kind": "strict",
+   "expected": {
+    "value": null,
+    "normalization": null
+   },
+   "expected_rejection": false,
+   "sentinel": null,
+   "note": "lisp-level function via ?"
+  },
+  {
+   "id": "N-01",
+   "engine": "gnuplot",
+   "input": "plot sin(x)",
+   "kind": "png",
+   "expected": {
+    "value": "PNG 800x600",
+    "normalization": null
+   },
+   "expected_rejection": false,
+   "sentinel": null,
+   "note": ""
+  },
+  {
+   "id": "N-02",
+   "engine": "gnuplot",
+   "input": "plot x**2",
+   "kind": "png",
+   "expected": {
+    "value": "PNG 800x600",
+    "normalization": null
+   },
+   "expected_rejection": false,
+   "sentinel": null,
+   "note": ""
+  },
+  {
+   "id": "N-03",
+   "engine": "gnuplot",
+   "input": "splot x*y",
+   "kind": "png",
+   "expected": {
+    "value": "PNG 800x600",
+    "normalization": null
+   },
+   "expected_rejection": false,
+   "sentinel": null,
+   "note": ""
+  },
+  {
+   "id": "N-04",
+   "engine": "gnuplot",
+   "input": "set xrange [0:1]; plot x",
+   "kind": "png",
+   "expected": {
+    "value": "PNG 800x600",
+    "normalization": null
+   },
+   "expected_rejection": false,
+   "sentinel": null,
+   "note": ""
+  },
+  {
+   "id": "N-05",
+   "engine": "gnuplot",
+   "input": "plot cos(x) title \"c\"",
+   "kind": "png",
+   "expected": {
+    "value": "PNG 800x600",
+    "normalization": null
+   },
+   "expected_rejection": false,
+   "sentinel": null,
+   "note": ""
+  },
+  {
+   "id": "N-06",
+   "engine": "gnuplot",
+   "input": "set grid; plot sin(x)",
+   "kind": "png",
+   "expected": {
+    "value": "PNG 800x600",
+    "normalization": null
+   },
+   "expected_rejection": false,
+   "sentinel": null,
+   "note": ""
+  },
+  {
+   "id": "N-07",
+   "engine": "gnuplot",
+   "input": "plot [0:10] exp(-x)",
+   "kind": "png",
+   "expected": {
+    "value": "PNG 800x600",
+    "normalization": null
+   },
+   "expected_rejection": false,
+   "sentinel": null,
+   "note": ""
+  },
+  {
+   "id": "N-08",
+   "engine": "gnuplot",
+   "input": "set samples 50; plot sin(x)",
+   "kind": "png",
+   "expected": {
+    "value": "PNG 800x600",
+    "normalization": null
+   },
+   "expected_rejection": false,
+   "sentinel": null,
+   "note": ""
+  },
+  {
+   "id": "N-09",
+   "engine": "gnuplot",
+   "input": "set key left; plot sin(x), cos(x)",
+   "kind": "png",
+   "expected": {
+    "value": "PNG 800x600",
+    "normalization": null
+   },
+   "expected_rejection": false,
+   "sentinel": null,
+   "note": ""
+  },
+  {
+   "id": "N-10",
+   "engine": "gnuplot",
+   "input": "set xrange [0:1]\\nplot x",
+   "kind": "png",
+   "expected": {
+    "value": "PNG 800x600",
+    "normalization": null
+   },
+   "expected_rejection": false,
+   "sentinel": null,
+   "note": ""
+  },
+  {
+   "id": "N-11",
+   "engine": "gnuplot",
+   "input": "set grid\\nplot sin(x)",
+   "kind": "png",
+   "expected": {
+    "value": "PNG 800x600",
+    "normalization": null
+   },
+   "expected_rejection": false,
+   "sentinel": null,
+   "note": ""
+  },
+  {
+   "id": "N-12",
+   "engine": "gnuplot",
+   "input": "set samples 50\\nplot sin(x)",
+   "kind": "png",
+   "expected": {
+    "value": "PNG 800x600",
+    "normalization": null
+   },
+   "expected_rejection": false,
+   "sentinel": null,
+   "note": ""
+  },
+  {
+   "id": "N-13",
+   "engine": "gnuplot",
+   "input": "set key left\\nplot sin(x), cos(x)",
+   "kind": "png",
+   "expected": {
+    "value": "PNG 800x600",
+    "normalization": null
+   },
+   "expected_rejection": false,
+   "sentinel": null,
+   "note": ""
+  },
+  {
+   "id": "N-14",
+   "engine": "gnuplot",
+   "input": "!echo nope",
+   "kind": "reject",
+   "expected": {
+    "value": null,
+    "normalization": null
+   },
+   "expected_rejection": true,
+   "sentinel": null,
+   "note": "shell escape"
+  },
+  {
+   "id": "N-15",
+   "engine": "gnuplot",
+   "input": "plot system(\"id\")",
+   "kind": "reject",
+   "expected": {
+    "value": null,
+    "normalization": null
+   },
+   "expected_rejection": true,
+   "sentinel": null,
+   "note": "system()"
+  },
+  {
+   "id": "N-16",
+   "engine": "gnuplot",
+   "input": "system \"id\"",
+   "kind": "reject",
+   "expected": {
+    "value": null,
+    "normalization": null
+   },
+   "expected_rejection": true,
+   "sentinel": null,
+   "note": "system cmd"
+  },
+  {
+   "id": "N-17",
+   "engine": "gnuplot",
+   "input": "shell",
+   "kind": "reject",
+   "expected": {
+    "value": null,
+    "normalization": null
+   },
+   "expected_rejection": true,
+   "sentinel": null,
+   "note": "shell"
+  },
+  {
+   "id": "N-18",
+   "engine": "gnuplot",
+   "input": "plot `id`",
+   "kind": "reject",
+   "expected": {
+    "value": null,
+    "normalization": null
+   },
+   "expected_rejection": true,
+   "sentinel": null,
+   "note": "backtick"
+  },
+  {
+   "id": "N-19",
+   "engine": "gnuplot",
+   "input": "plot sin(x); set output \"/tmp/ee_p2_go.png\"",
+   "kind": "reject",
+   "expected": {
+    "value": null,
+    "normalization": null
+   },
+   "expected_rejection": true,
+   "sentinel": "/tmp/ee_p2_go.png",
+   "note": "set output"
+  },
+  {
+   "id": "N-20",
+   "engine": "gnuplot",
+   "input": "set terminal dumb; plot sin(x)",
+   "kind": "reject",
+   "expected": {
+    "value": null,
+    "normalization": null
+   },
+   "expected_rejection": true,
+   "sentinel": null,
+   "note": "set terminal"
+  },
+  {
+   "id": "N-21",
+   "engine": "gnuplot",
+   "input": "call \"evil.gp\"",
+   "kind": "reject",
+   "expected": {
+    "value": null,
+    "normalization": null
+   },
+   "expected_rejection": true,
+   "sentinel": null,
+   "note": "call"
+  },
+  {
+   "id": "N-22",
+   "engine": "gnuplot",
+   "input": "load \"evil.gp\"",
+   "kind": "reject",
+   "expected": {
+    "value": null,
+    "normalization": null
+   },
+   "expected_rejection": true,
+   "sentinel": null,
+   "note": "load"
+  },
+  {
+   "id": "N-23",
+   "engine": "gnuplot",
+   "input": "save \"/tmp/ee_p2_gs.gp\"",
+   "kind": "reject",
+   "expected": {
+    "value": null,
+    "normalization": null
+   },
+   "expected_rejection": true,
+   "sentinel": "/tmp/ee_p2_gs.gp",
+   "note": "save"
+  },
+  {
+   "id": "N-24",
+   "engine": "gnuplot",
+   "input": "cd \"/tmp\"",
+   "kind": "reject",
+   "expected": {
+    "value": null,
+    "normalization": null
+   },
+   "expected_rejection": true,
+   "sentinel": null,
+   "note": "cd"
+  },
+  {
+   "id": "N-25",
+   "engine": "gnuplot",
+   "input": "plot \"< id\"",
+   "kind": "reject",
+   "expected": {
+    "value": null,
+    "normalization": null
+   },
+   "expected_rejection": true,
+   "sentinel": null,
+   "note": "process input <"
+  },
+  {
+   "id": "N-26",
+   "engine": "gnuplot",
+   "input": "plot '| id'",
+   "kind": "reject",
+   "expected": {
+    "value": null,
+    "normalization": null
+   },
+   "expected_rejection": true,
+   "sentinel": null,
+   "note": "process input |"
+  },
+  {
+   "id": "N-27",
+   "engine": "gnuplot",
+   "input": "set print \"/tmp/ee_p2_gp\"; print 1",
+   "kind": "reject",
+   "expected": {
+    "value": null,
+    "normalization": null
+   },
+   "expected_rejection": true,
+   "sentinel": "/tmp/ee_p2_gp",
+   "note": "set print"
+  },
+  {
+   "id": "N-28",
+   "engine": "gnuplot",
+   "input": "print system(\"id\")",
+   "kind": "reject",
+   "expected": {
+    "value": null,
+    "normalization": null
+   },
+   "expected_rejection": true,
+   "sentinel": null,
+   "note": "print system"
+  },
+  {
+   "id": "G-01",
+   "engine": "gap",
+   "input": "Size(SymmetricGroup(5))",
+   "kind": "value",
+   "expected": {
+    "value": "120",
+    "normalization": "ws-collapse"
+   },
+   "expected_rejection": false,
+   "sentinel": null,
+   "note": ""
+  },
+  {
+   "id": "G-02",
+   "engine": "gap",
+   "input": "Factorial(10)",
+   "kind": "value",
+   "expected": {
+    "value": "3628800",
+    "normalization": "ws-collapse"
+   },
+   "expected_rejection": false,
+   "sentinel": null,
+   "note": ""
+  },
+  {
+   "id": "G-03",
+   "engine": "gap",
+   "input": "Gcd(12,18)",
+   "kind": "value",
+   "expected": {
+    "value": "6",
+    "normalization": "ws-collapse"
+   },
+   "expected_rejection": false,
+   "sentinel": null,
+   "note": ""
+  },
+  {
+   "id": "G-04",
+   "engine": "gap",
+   "input": "IsPrime(97)",
+   "kind": "value",
+   "expected": {
+    "value": "true",
+    "normalization": "ws-collapse"
+   },
+   "expected_rejection": false,
+   "sentinel": null,
+   "note": ""
+  },
+  {
+   "id": "G-05",
+   "engine": "gap",
+   "input": "2^100",
+   "kind": "value",
+   "expected": {
+    "value": "1267650600228229401496703205376",
+    "normalization": "ws-collapse"
+   },
+   "expected_rejection": false,
+   "sentinel": null,
+   "note": ""
+  },
+  {
+   "id": "G-06",
+   "engine": "gap",
+   "input": "Size(AlternatingGroup(5))",
+   "kind": "value",
+   "expected": {
+    "value": "60",
+    "normalization": "ws-collapse"
+   },
+   "expected_rejection": false,
+   "sentinel": null,
+   "note": ""
+  },
+  {
+   "id": "G-07",
+   "engine": "gap",
+   "input": "Factors(360)",
+   "kind": "value",
+   "expected": {
+    "value": "[ 2, 2, 2, 3, 3, 5 ]",
+    "normalization": "ws-collapse"
+   },
+   "expected_rejection": false,
+   "sentinel": null,
+   "note": ""
+  },
+  {
+   "id": "G-08",
+   "engine": "gap",
+   "input": "Sum([1..100])",
+   "kind": "value",
+   "expected": {
+    "value": "5050",
+    "normalization": "ws-collapse"
+   },
+   "expected_rejection": false,
+   "sentinel": null,
+   "note": ""
+  },
+  {
+   "id": "G-09",
+   "engine": "gap",
+   "input": "Binomial(10,3)",
+   "kind": "value",
+   "expected": {
+    "value": "120",
+    "normalization": "ws-collapse"
+   },
+   "expected_rejection": false,
+   "sentinel": null,
+   "note": ""
+  },
+  {
+   "id": "G-10",
+   "engine": "gap",
+   "input": "NrConjugacyClasses(SymmetricGroup(5))",
+   "kind": "value",
+   "expected": {
+    "value": "7",
+    "normalization": "ws-collapse"
+   },
+   "expected_rejection": false,
+   "sentinel": null,
+   "note": ""
+  },
+  {
+   "id": "G-11",
+   "engine": "gap",
+   "input": "Phi(100)",
+   "kind": "value",
+   "expected": {
+    "value": "40",
+    "normalization": "ws-collapse"
+   },
+   "expected_rejection": false,
+   "sentinel": null,
+   "note": ""
+  },
+  {
+   "id": "G-12",
+   "engine": "gap",
+   "input": "Length(Primes)",
+   "kind": "value",
+   "expected": {
+    "value": "168",
+    "normalization": "ws-collapse"
+   },
+   "expected_rejection": false,
+   "sentinel": null,
+   "note": ""
+  },
+  {
+   "id": "G-13",
+   "engine": "gap",
+   "input": "Size(SymmetricGroup(5)",
+   "kind": "error",
+   "expected": {
+    "value": null,
+    "normalization": null
+   },
+   "expected_rejection": false,
+   "sentinel": null,
+   "note": ""
+  },
+  {
+   "id": "G-14",
+   "engine": "gap",
+   "input": "Exec(\"id\")",
+   "kind": "reject",
+   "expected": {
+    "value": null,
+    "normalization": null
+   },
+   "expected_rejection": true,
+   "sentinel": null,
+   "note": "illegal Exec"
+  },
+  {
+   "id": "G-15",
+   "engine": "gap",
+   "input": "Process(DirectoryCurrent(), Filename(DirectoriesSystemPrograms(),\"id\"), InputTextNone(), OutputTextUser(), [])",
+   "kind": "reject",
+   "expected": {
+    "value": null,
+    "normalization": null
+   },
+   "expected_rejection": true,
+   "sentinel": null,
+   "note": "illegal Process"
+  },
+  {
+   "id": "G-16",
+   "engine": "gap",
+   "input": "Reread(\"/tmp/x.g\")",
+   "kind": "reject",
+   "expected": {
+    "value": null,
+    "normalization": null
+   },
+   "expected_rejection": true,
+   "sentinel": null,
+   "note": "illegal Reread"
+  },
+  {
+   "id": "G-17",
+   "engine": "gap",
+   "input": "SaveWorkspace(\"/tmp/ee_p2_gw\")",
+   "kind": "reject",
+   "expected": {
+    "value": null,
+    "normalization": null
+   },
+   "expected_rejection": true,
+   "sentinel": "/tmp/ee_p2_gw",
+   "note": "illegal SaveWorkspace"
+  },
+  {
+   "id": "G-18",
+   "engine": "gap",
+   "input": "Filename(DirectoriesSystemPrograms(),\"id\")",
+   "kind": "reject",
+   "expected": {
+    "value": null,
+    "normalization": null
+   },
+   "expected_rejection": true,
+   "sentinel": null,
+   "note": "illegal Filename"
+  },
+  {
+   "id": "G-19",
+   "engine": "gap",
+   "input": "PrintTo(\"/tmp/ee_p2_gt\",1)",
+   "kind": "reject",
+   "expected": {
+    "value": null,
+    "normalization": null
+   },
+   "expected_rejection": true,
+   "sentinel": "/tmp/ee_p2_gt",
+   "note": "illpart To"
+  },
+  {
+   "id": "G-20",
+   "engine": "gap",
+   "input": "AppendTo(\"/tmp/ee_p2_gt\",1)",
+   "kind": "reject",
+   "expected": {
+    "value": null,
+    "normalization": null
+   },
+   "expected_rejection": true,
+   "sentinel": "/tmp/ee_p2_gt",
+   "note": "illpart To"
+  },
+  {
+   "id": "G-21",
+   "engine": "gap",
+   "input": "Read(\"/tmp/x.g\")",
+   "kind": "reject",
+   "expected": {
+    "value": null,
+    "normalization": null
+   },
+   "expected_rejection": true,
+   "sentinel": null,
+   "note": "illpart Read"
+  },
+  {
+   "id": "G-22",
+   "engine": "gap",
+   "input": "InputTextFile(\"/etc/hostname\")",
+   "kind": "reject",
+   "expected": {
+    "value": null,
+    "normalization": null
+   },
+   "expected_rejection": true,
+   "sentinel": null,
+   "note": "illpart File"
+  },
+  {
+   "id": "G-23",
+   "engine": "gap",
+   "input": "DirectoriesSystemPrograms()",
+   "kind": "reject",
+   "expected": {
+    "value": null,
+    "normalization": null
+   },
+   "expected_rejection": true,
+   "sentinel": null,
+   "note": "illpart Path? (Directories)"
+  },
+  {
+   "id": "G-24",
+   "engine": "gap",
+   "input": "LoadPackage(\"io\"); IO_fork()",
+   "kind": "reject",
+   "expected": {
+    "value": null,
+    "normalization": null
+   },
+   "expected_rejection": true,
+   "sentinel": null,
+   "note": "IO package"
+  }
+ ]
+}
