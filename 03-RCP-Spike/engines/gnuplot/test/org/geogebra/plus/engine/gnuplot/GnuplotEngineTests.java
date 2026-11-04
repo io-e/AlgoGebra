@@ -21,6 +21,7 @@ public final class GnuplotEngineTests {
         GnuplotEngine engine = new GnuplotEngine();
         testHostOwnedOutputPath();
         testEmptyValidPlotRejected();
+        testPlotAfterSemicolon();
         assertRejected(engine, "!echo nope", "! prefix filter");
         assertRejected(engine, "plot sin(x); !echo nope", "inline ! prefix filter");
         assertRejected(engine, "plot system(\"calc\")", "system filter");
@@ -61,6 +62,26 @@ public final class GnuplotEngineTests {
             assertTrue(!Files.exists(png), "Closing a plot result should delete the temporary PNG");
             System.out.println("PASS: T-GNU-02 Gnuplot produced a valid " + width + "x" + height + " PNG magic bytes");
         }
+    }
+
+    private static void testPlotAfterSemicolon() throws Exception {
+        GnuplotEngine engine = new GnuplotEngine();
+        for (String command : List.of(
+                "set xrange [0:1]; plot x",
+                "set grid; plot sin(x)",
+                "set samples 50; plot sin(x)",
+                "set key left; plot sin(x), cos(x)")) {
+            assertTrue(engine.validateCommand(command).equals(command),
+                    "Gnuplot must accept setup commands followed by plot after ';': " + command);
+        }
+        try {
+            engine.validateCommand("set grid; print 1");
+            throw new AssertionError("A request without plot/splot must be rejected");
+        } catch (ExternalComputeException expected) {
+            assertTrue(expected.code() == Code.INVALID_REQUEST,
+                    "A request without plot/splot returned " + expected.code());
+        }
+        System.out.println("PASS: Gnuplot accepts setup + plot separated by semicolon; non-plot remains invalid");
     }
 
     private static void testHostOwnedOutputPath() throws Exception {

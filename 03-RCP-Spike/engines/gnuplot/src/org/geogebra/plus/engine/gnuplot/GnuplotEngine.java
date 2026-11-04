@@ -31,7 +31,10 @@ public final class GnuplotEngine extends SubprocessEngine {
     private static final Pattern FORBIDDEN_IO = Pattern.compile(
             "(?i)(?:^|[;\\s])(?:load|call|save|cd)\\b|\\bset\\s+(?:output|terminal|print)\\b");
     private static final Pattern BACKTICK_ESCAPE = Pattern.compile("`");
-    private static final Pattern PLOT_COMMAND = Pattern.compile("(?im)^\\s*(?:plot|splot)\\b");
+    // Accept a plot command at the start of a line or after a Gnuplot semicolon command separator.
+    // This permits safe setup + plot scripts such as "set grid; plot sin(x)" while still requiring
+    // an actual plot/splot command in the submitted request.
+    private static final Pattern PLOT_COMMAND = Pattern.compile("(?im)(?:^|;)\\s*(?:plot|splot)\\b");
     private static final Pattern PROCESS_INPUT = Pattern.compile("(?i)\\b(?:plot|splot)\\s+[\"'][|<]");
     private static final Pattern SHELL_ESCAPE = Pattern.compile("(?m)(?:^|[;\\n])\\s*!");
 
