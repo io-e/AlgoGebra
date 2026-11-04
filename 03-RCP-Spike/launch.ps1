@@ -11,6 +11,7 @@ $ManualNativeFallback = $false
 $BootDelegateJogAmp = $false
 $CaptureEvidenceScreenshot = $false
 $NoBuild = $false
+$D06 = $false
 $JavaHome = $null
 $CourseInput = $null
 $CourseFlagSeen = $false
@@ -96,6 +97,7 @@ for ($i = 0; $i -lt $args.Count; $i++) {
         '^(?:-BootDelegateJogAmp|--boot-delegate-jogamp)$' { $BootDelegateJogAmp = $true; continue }
         '^(?:-CaptureEvidenceScreenshot|--capture-evidence-screenshot)$' { $CaptureEvidenceScreenshot = $true; continue }
         '^(?:-NoBuild|--no-build)$' { $NoBuild = $true; continue }
+        '^(?:-D06|--d06)$' { $D06 = $true; continue }
         '^(?:-JavaHome|--java-home)$' {
             if ($i + 1 -ge $args.Count -or ([string]$args[$i + 1]) -match '^(?:-[A-Za-z]|--[A-Za-z])') {
                 Write-UsageFailure "$argument requires a path."
@@ -138,6 +140,9 @@ for ($i = 0; $i -lt $args.Count; $i++) {
 if (-not $CourseFlagSeen -and -not [string]::IsNullOrWhiteSpace($env:GGBPLUS_COURSE)) {
     $CourseInput = $env:GGBPLUS_COURSE
 }
+if ($D06 -and -not $Headless) {
+    Write-UsageFailure '-D06 is a headless-only proof; combine it with -Headless.'
+}
 $CourseRealPath = $null
 if ($CourseInput) {
     $CourseRealPath = Resolve-CoursePath $CourseInput
@@ -178,6 +183,20 @@ if (-not $NoBuild -and -not $DryRun) {
     }
 }
 
+$D06FixturePaths = @{}
+if ($D06) {
+    $D06FixturePaths = @{
+        extension = Join-Path $Root 'test-extension\build\org.geogebra.plus.test.extension_1.0.0.jar'
+        unresolved = Join-Path $Root 'test-extension\build\org.geogebra.plus.test.extension.bad-import_1.0.1.jar'
+        unapproved = Join-Path $Root 'test-extension\build\org.geogebra.plus.test.unauthorized_1.0.0.jar'
+    }
+    foreach ($fixture in $D06FixturePaths.GetEnumerator()) {
+        if (-not (Test-Path -LiteralPath $fixture.Value -PathType Leaf)) {
+            throw "D-06 fixture missing: $($fixture.Value). Build the spike first or omit -NoBuild."
+        }
+    }
+}
+
 $Framework = Get-ChildItem (Join-Path $Root 'bundles') -Filter 'org.eclipse.osgi_*.jar' -File -ErrorAction SilentlyContinue |
     Select-Object -First 1
 $Launcher = Get-ChildItem (Join-Path $Root 'launcher') -Filter 'org.eclipse.equinox.launcher_*.jar' -File -ErrorAction SilentlyContinue |
@@ -214,6 +233,12 @@ $JvmArgs = @(
     "-Dggbplus.headless=$HeadlessValue"
 )
 if ($CourseRealPath) { $JvmArgs += "-Dggbplus.course=$CourseRealPath" }
+if ($D06) {
+    $JvmArgs += '-Dggbplus.d06=true'
+    $JvmArgs += "-Dggbplus.d06.extension=$($D06FixturePaths.extension)"
+    $JvmArgs += "-Dggbplus.d06.unresolved=$($D06FixturePaths.unresolved)"
+    $JvmArgs += "-Dggbplus.d06.unapproved=$($D06FixturePaths.unapproved)"
+}
 if ($CaptureEvidenceScreenshot) { $JvmArgs += '-Dggbplus.captureEvidenceScreenshot=true' }
 if ($ManualNativeFallback) {
     $JvmArgs += "-Djava.library.path=$NativeExtractDir"

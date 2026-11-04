@@ -2,7 +2,8 @@
 param(
     [string]$DestinationRoot = 'D:\ALF_ZGit\G1_Geogebra_Migration\bin',
     [string]$ProductDirectoryName = 'GeoGebraPlus-RCP-0.1.0-win32-x86_64-r8',
-    [string]$JavaPluginPattern = 'org.eclipse.justj.openjdk.hotspot.jre.full.win32.x86_64_25.0.4*'
+    [string]$JavaPluginPattern = 'org.eclipse.justj.openjdk.hotspot.jre.full.win32.x86_64_25.0.4*',
+    [switch]$IncludeD06Fixtures
 )
 
 $ErrorActionPreference = 'Stop'
@@ -57,7 +58,10 @@ New-Item -ItemType Directory -Path $ProductJre -Force | Out-Null
 function Copy-Jars([string]$RelativeSource, [string]$RelativeTarget) {
     $source = Join-Path $SourceRoot $RelativeSource
     $destination = Join-Path $Target $RelativeTarget
-    $jars = @(Get-ChildItem -LiteralPath $source -Filter '*.jar' -File)
+    # Test extensions never ride in the product host payload; the opt-in
+    # -IncludeD06Fixtures path copies them into a separate directory below.
+    $jars = @(Get-ChildItem -LiteralPath $source -Filter '*.jar' -File |
+        Where-Object Name -notlike 'org.geogebra.plus.test.*')
     if ($jars.Count -eq 0) { throw "No JAR files found in $source" }
     foreach ($jar in $jars) { Copy-Item -LiteralPath $jar.FullName -Destination $destination }
     return $jars.Count
@@ -68,6 +72,26 @@ $PlatformJarCount = Copy-Jars 'platform' 'platform'
 $LauncherJarCount = Copy-Jars 'launcher' 'launcher'
 $HostJarCount = Copy-Jars 'host\build' 'host\build'
 $NativeJarCount = Copy-Jars 'natives' 'natives'
+$D06FixtureJarCount = 0
+if ($IncludeD06Fixtures) {
+    $D06Source = Join-Path $SourceRoot 'test-extension\build'
+    $D06Target = Join-Path $Target 'test-extension\build'
+    $RequiredD06Fixtures = @(
+        'org.geogebra.plus.test.extension_1.0.0.jar',
+        'org.geogebra.plus.test.extension.bad-import_1.0.1.jar',
+        'org.geogebra.plus.test.unauthorized_1.0.0.jar'
+    )
+    foreach ($fixture in $RequiredD06Fixtures) {
+        if (-not (Test-Path -LiteralPath (Join-Path $D06Source $fixture) -PathType Leaf)) {
+            throw "Requested D-06 fixture is missing; run build.ps1 first: $(Join-Path $D06Source $fixture)"
+        }
+    }
+    New-Item -ItemType Directory -Path $D06Target -Force | Out-Null
+    foreach ($fixture in $RequiredD06Fixtures) {
+        Copy-Item -LiteralPath (Join-Path $D06Source $fixture) -Destination $D06Target
+    }
+    $D06FixtureJarCount = $RequiredD06Fixtures.Count
+}
 Copy-Item -LiteralPath (Join-Path $SourceRoot 'configuration\config.ini') -Destination (Join-Path $Target 'configuration\config.ini')
 Copy-Item -LiteralPath (Join-Path $SourceRoot 'configuration\org.eclipse.equinox.simpleconfigurator\bundles.info') `
     -Destination (Join-Path $Target 'configuration\org.eclipse.equinox.simpleconfigurator\bundles.info')
@@ -130,6 +154,7 @@ Run logs, per-run Equinox configurations/workspaces, and the diagnostic workarou
 - D-03 inputs: $BundleJarCount bundle JARs including the system framework; D-03 installable set is 50 bundles.
 - Eclipse platform JARs: $PlatformJarCount; launcher JARs: $LauncherJarCount; host/native-fragment/external-engine JARs: $HostJarCount.
 - Native classifier/API JARs: $NativeJarCount (Windows x86_64 payload).
+- D-06 test fixtures: $D06FixtureJarCount (development-only; opt in with ``-IncludeD06Fixtures``; never in ``bundles.info``).
 - Local Java: $($JrePlugin.Name).
 - D-03 installable-bundle SHA-256: $((Get-Content (Join-Path $Target 'bnd-input-set.sha256') -Raw).Trim()).
 - Pari/Maxima/Gnuplot executables are not bundled; each is discovered on PATH. Missing executables raise an explicit unavailable-engine error (no CAS fallback).
@@ -147,6 +172,9 @@ $ManifestFiles = @(
     Get-ChildItem (Join-Path $Target 'natives') -Filter '*.jar' -File
     Get-Item (Join-Path $Target 'jre\bin\java.exe')
 )
+if ($IncludeD06Fixtures) {
+    $ManifestFiles += @(Get-ChildItem (Join-Path $Target 'test-extension\build') -Filter '*.jar' -File)
+}
 $ManifestRows = foreach ($file in $ManifestFiles) {
     $hash = (Get-FileHash -LiteralPath $file.FullName -Algorithm SHA256).Hash.ToLowerInvariant()
     $relative = $file.FullName.Substring($Target.Length + 1).Replace('\', '/')

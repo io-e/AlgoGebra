@@ -185,6 +185,31 @@ Build-EngineBundle 'engine-pari' 'pari\src' 'pari\META-INF\MANIFEST.MF' $PariEng
 Build-EngineBundle 'engine-maxima' 'maxima\src' 'maxima\META-INF\MANIFEST.MF' $MaximaEngineJar $EngineCompileClasspath
 Build-EngineBundle 'engine-gnuplot' 'gnuplot\src' 'gnuplot\META-INF\MANIFEST.MF' $GnuplotEngineJar $EngineCompileClasspath
 
+# D-06 runtime-install fixtures are built outside the product bundle set and
+# deliberately omitted from bundles.info: the proof installs them via OSGi.
+$D06FixtureDir = Join-Path $Root 'test-extension'
+$D06BuildDir = Join-Path $D06FixtureDir 'build'
+$D06ClassesDir = Join-Path $OutputDir 'd06-test-extension-classes'
+$D06GoodJar = Join-Path $D06BuildDir 'org.geogebra.plus.test.extension_1.0.0.jar'
+$D06UnresolvedJar = Join-Path $D06BuildDir 'org.geogebra.plus.test.extension.bad-import_1.0.1.jar'
+$D06UnapprovedJar = Join-Path $D06BuildDir 'org.geogebra.plus.test.unauthorized_1.0.0.jar'
+New-Item -ItemType Directory -Path $D06BuildDir -Force | Out-Null
+New-Item -ItemType Directory -Path $D06ClassesDir -Force | Out-Null
+$D06Sources = @(Get-ChildItem (Join-Path $D06FixtureDir 'src') -Filter '*.java' -Recurse -File |
+    ForEach-Object FullName)
+if ($D06Sources.Count -eq 0) { throw 'D-06 test-extension source is missing.' }
+& $Javac -encoding UTF-8 --release 21 -cp $Classpath -d $D06ClassesDir @D06Sources
+if ($LASTEXITCODE -ne 0) { throw "D-06 fixture javac failed with exit code $LASTEXITCODE" }
+& $JarTool cfm $D06GoodJar (Join-Path $D06FixtureDir 'META-INF\MANIFEST.MF') -C $D06ClassesDir .
+if ($LASTEXITCODE -ne 0) { throw "D-06 fixture jar failed with exit code $LASTEXITCODE" }
+$EmptyFixtureClasses = Join-Path $OutputDir 'd06-empty-fixture-classes'
+New-Item -ItemType Directory -Path $EmptyFixtureClasses -Force | Out-Null
+& $JarTool cfm $D06UnresolvedJar (Join-Path $D06FixtureDir 'bad-import.MF') -C $EmptyFixtureClasses .
+if ($LASTEXITCODE -ne 0) { throw "D-06 unresolved fixture jar failed with exit code $LASTEXITCODE" }
+& $JarTool cfm $D06UnapprovedJar (Join-Path $D06FixtureDir 'unapproved.MF') -C $EmptyFixtureClasses .
+if ($LASTEXITCODE -ne 0) { throw "D-06 unapproved fixture jar failed with exit code $LASTEXITCODE" }
+Write-Host 'Built D-06 runtime-install fixtures under test-extension/build (not installed by default).' -ForegroundColor Green
+
 # Preserve the 50 D-03 inputs as-is. The Equinox framework jar is the system
 # bundle and the new host jar is a separate spike output, not one of the inputs.
 $Installables = @(

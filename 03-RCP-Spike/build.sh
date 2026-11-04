@@ -78,6 +78,13 @@ eb api org.geogebra.plus.compute.api_0.1.0.jar "$OSGI"
 eb runtime org.geogebra.plus.compute.runtime_0.1.0.jar "$OUT/org.geogebra.plus.compute.api_0.1.0.jar"
 ECP="$OUT/org.geogebra.plus.compute.api_0.1.0.jar:$OUT/org.geogebra.plus.compute.runtime_0.1.0.jar:$CP"
 for e in pari maxima gnuplot; do eb $e org.geogebra.plus.engine.${e}_0.1.0.jar "$ECP"; done
+# D-06 runtime-install fixtures are built outside host/build and bundles.info;
+# the host loads them from a separate dev-only folder in the opt-in proof.
+D06="$ROOT/test-extension"; mkdir -p "$T/d06-good" "$T/d06-empty" "$D06/build"
+"$JAVAC" -encoding UTF-8 --release 21 -cp "$CP" -d "$T/d06-good" $(find "$D06/src" -name '*.java')
+"$JAR" cfm "$D06/build/org.geogebra.plus.test.extension_1.0.0.jar" "$D06/META-INF/MANIFEST.MF" -C "$T/d06-good" .
+"$JAR" cfm "$D06/build/org.geogebra.plus.test.extension.bad-import_1.0.1.jar" "$D06/bad-import.MF" -C "$T/d06-empty" .
+"$JAR" cfm "$D06/build/org.geogebra.plus.test.unauthorized_1.0.0.jar" "$D06/unapproved.MF" -C "$T/d06-empty" .
 meta() { unzip -p "$1" META-INF/MANIFEST.MF | tr -d '\r' | sed -e ':a;N;$!ba;s/\n //g'; }
 bsn() { meta "$1" | sed -n 's/^Bundle-SymbolicName: *\([^;]*\).*/\1/p' | head -1 | xargs; }
 ver() { meta "$1" | sed -n 's/^Bundle-Version: *//p' | head -1 | xargs; }

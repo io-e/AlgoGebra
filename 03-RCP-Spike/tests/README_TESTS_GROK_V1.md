@@ -52,6 +52,15 @@ pwsh -File Run_All_GROK_V1.ps1 -Scenarios | -Gate A | -Only P-02,D-06   # scenar
 Same command on Debian (`pwsh -File Run_All_GROK_V1.ps1 -WithBuild -WithBaseline`). Run_All refuses an empty suite list (exit 2), counts a suite
 without summary as FAIL, and reports BAIL separately (Codex 689d4b4). 09/10 drive the desktop: on Windows run them only in an attended session.
 
+### D-06 extension lifecycle proof
+
+Build the image first, then run `launch.ps1 -Headless -NoBuild -D06` on Windows or `launch.sh --headless --d06` on Linux. The proof is opt-in and
+headless-only. It installs the exact allowlisted test extension at runtime, uses `ServiceTracker` to find/call its `Runnable`, stops/uninstalls it,
+rejects an unapproved symbolic name before installation, rejects a fixture with a missing mandatory import, and confirms the 50 D-03 core bundles remain
+resolved/active. The three fixture JARs live under `test-extension/build/` and are intentionally excluded from `bundles.info`; they are never installed
+at normal startup. `install-product.ps1 -IncludeD06Fixtures` copies these test-only artifacts into an isolated development image; omit the switch for a
+normal image. The D-06 scenario `S_D-06_ExtensionRegistry_GROK_V1.ps1` invokes this proof and stores its product log under the run results directory.
+
 ## Foreground-window guard (BUG-019, branch `feat/ui-foreground-guard`)
 Every UI driver action (click, keystroke, paste, screenshot, pixel read) calls `Assert-GgbForeground` (lib/UiDriver_GROK_V1.ps1):
 the foreground window must belong to the GeoGebraPlus java/javaw process (`ggbplus.runId`) and have a GeoGebra title. One

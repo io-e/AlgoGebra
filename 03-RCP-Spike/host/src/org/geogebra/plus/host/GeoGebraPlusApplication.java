@@ -75,13 +75,34 @@ public final class GeoGebraPlusApplication implements IApplication {
         }
 
         initializeGeoGebraLogger();
+        if (Boolean.getBoolean("ggbplus.d06")) {
+            runD06ExtensionProof(context);
+        }
         if (Boolean.getBoolean("ggbplus.headless")) {
-            System.out.println(LOG + "Headless D-02 smoke mode; UI was intentionally skipped");
+            System.out.println(LOG + "Headless RCP smoke mode; UI was intentionally skipped");
             return EXIT_OK;
         }
 
         openSwtShellWithGeoGebra();
         return EXIT_OK;
+    }
+
+    private static void runD06ExtensionProof(BundleContext context) throws Exception {
+        if (!Boolean.getBoolean("ggbplus.headless")) {
+            throw new IllegalArgumentException("D-06 is a headless-only proof; pass -Headless with -D06.");
+        }
+        Path goodBundle = requiredD06Fixture("ggbplus.d06.extension");
+        Path unresolvedBundle = requiredD06Fixture("ggbplus.d06.unresolved");
+        Path unapprovedBundle = requiredD06Fixture("ggbplus.d06.unapproved");
+        ExtensionBundleManager.runProof(context, goodBundle, unresolvedBundle, unapprovedBundle);
+    }
+
+    private static Path requiredD06Fixture(String property) {
+        String value = System.getProperty(property);
+        if (value == null || value.isBlank()) {
+            throw new IllegalArgumentException("Missing required D-06 fixture property: " + property);
+        }
+        return Paths.get(value);
     }
 
     /**
