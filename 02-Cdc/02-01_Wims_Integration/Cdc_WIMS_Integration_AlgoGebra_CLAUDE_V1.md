@@ -180,11 +180,15 @@ The `courseRef` field in the help template schema (`Schema_Help_Template_JSON_CL
 
 **Source:** Grok code audit (`Implementation_WIMS_AlgoGebra_from_wims4win_GROK_V1.md` §3.2).
 
-Stock WIMS CGI (`wims.cgi` / `wims.exe`) renders **HTML** via `html.c` / templates. There is **no built-in JSON grade API** matching the D-S01 assumption (`POST job=getresult → {"grade": 0..1, "feedback": "..."}`).
+Stock WIMS CGI (`wims.cgi` / `wims.exe`) renders **HTML** via `html.c` / templates. There is **no built-in JSON grade API**.
 
-The `getscore*` builtins are **calc/exec** builtins for module authors, not a public HTTP contract. `job=getresult` on `adm/class/sheet` is **unverified** in the wims4win codebase.
+**Live probe evidence (GV-1, 2026-11-04):** Grok tested wims4win `wims.cgi.exe` directly (WIMS 4.33a). Results:
+- `job=getresult` on `adm/class/sheet` → **ignored** (returns worksheet HTML, 200). `job=` is a module-local switch, not a CGI verb.
+- `cmd=getresult` → **rejected** (450: "The command 'getresult' is not valid. Valid commands are: new, renew, reply, help, hint, config").
+- Every response was `text/html; charset=windows-1252`. No `application/json` was returned in any probe.
+- Evidence: `03-RCP-Spike/evidence/20261104-gv1-wims-cgi-probe_GROK_V1/`
 
-**Consequence:** Connected mode requires a **WIMS-side adapter module** that accepts the D-S01 POST and returns JSON. Until this adapter exists, D-S01 is unimplemented.
+**Consequence:** Connected mode requires a **WIMS-side adapter module** that accepts a grade request and returns JSON. The D-S01 wire format (`job=getresult`) is a **design target for the adapter**, not a description of existing WIMS behavior. The adapter must use the stock `cmd=` verb namespace or implement a new WIMS module. Until L2-1 adapter exists, D-S01 is unimplemented.
 
 ### WI-21: Adapter build sequence
 
@@ -200,12 +204,14 @@ The `getscore*` builtins are **calc/exec** builtins for module authors, not a pu
 
 ### WI-22: Wire format (target, not implemented)
 
+**Note:** Stock WIMS uses `cmd=` for CGI verbs and `job=` for module-internal switches. The wire format below is for the **L2-1 adapter module**, not stock CGI. The adapter defines its own `cmd=` or `job=` verb.
+
 ```
 AlgoGebra POST /wims/wims.cgi
   Content-Type: application/x-www-form-urlencoded
   
-  module=adm/class/sheet
-  &job=getresult
+  module=<adapter_module>       ← L2-1 adapter, not adm/class/sheet
+  &cmd=getresult                ← adapter-defined verb (cmd= namespace)
   &exercise=<id>
   &ans1=<value_or_base64>
   &ans2=<value_or_base64>
