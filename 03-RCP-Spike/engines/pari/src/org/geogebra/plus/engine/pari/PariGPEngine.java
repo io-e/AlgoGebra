@@ -163,12 +163,16 @@ public final class PariGPEngine extends SubprocessEngine {
             throws ExternalComputeException {
         // WIMS readresult(): parse only the slice between the last start marker and the end marker.
         // BUG-015 / EE-R7: markers present with empty/malformed payload must not look like success.
-        String text = parseOutput(extractOrFail(output.stdout(), request.markers()));
+        String text = requireNonEmptyOutput(parseOutput(extractOrFail(output.stdout(), request.markers())));
+        return ComputeResult.text(getEngineId(), text, elapsed);
+    }
+
+    static String requireNonEmptyOutput(String text) throws ExternalComputeException {
         if (text == null || text.isBlank()) {
             throw new ExternalComputeException(Code.INVALID_OUTPUT,
                     "PARI/GP produced empty output for a completed process (BUG-015)");
         }
-        return ComputeResult.text(getEngineId(), text, elapsed);
+        return text;
     }
 
     static String parseOutput(String stdout) {

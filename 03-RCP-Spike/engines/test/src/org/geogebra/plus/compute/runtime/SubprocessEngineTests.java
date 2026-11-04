@@ -5,6 +5,9 @@ import java.time.Duration;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.UUID;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.TimeUnit;
 
 import org.geogebra.plus.compute.api.ComputeCapability;
 import org.geogebra.plus.compute.api.ComputeContext;
@@ -21,6 +24,8 @@ public final class SubprocessEngineTests {
     public static void run() throws Exception {
         testPathDiscovery();
         testPipesAndTimeout();
+        testTimeoutKillsDescendants();
+        testMissingBinaryDiagnostics();
         testWimsMarkerExtraction();
     }
 
@@ -113,7 +118,89 @@ public final class SubprocessEngineTests {
         } catch (ExternalComputeException expected) {
             assertTrue(expected.code() == Code.PROCESS_TIMEOUT, "timeout should report PROCESS_TIMEOUT");
         }
-        System.out.println("PASS: ProcessBuilder pipes and timeout/process-tree kill");
+        System.out.println("PASS: T-BASE-01 stdin/stdout pipes and timeout reporting");
+    }
+
+    private static void testTimeoutKillsDescendants() throws Exception {
+        Path temp = java.nio.file.Files.createTempDirectory("ggbplus-process-tree-test-");
+        Path childPidFile = temp.resolve("child.pid");
+        Path markerFile = temp.resolve("child-finished.txt");
+        ProbeEngine probe = new ProbeEngine();
+        long childPid = -1;
+        try {
+            String javaCommand = javaExecutable().toString();
+            String classPath = System.getProperty("java.class.path");
+            List<String> parentCommand = List.of(javaCommand, "-cp", classPath,
+                    SubprocessEngineTestChild.class.getName(), "parent",
+                    childPidFile.toString(), markerFile.toString());
+            CompletableFuture<ExternalComputeException> result = CompletableFuture.supplyAsync(() -> {
+                try {
+                    probe.run(parentCommand, "", Duration.ofSeconds(5));
+                    return null;
+                } catch (ExternalComputeException failure) {
+                    return failure;
+                } catch (java.io.IOException failure) {
+                    throw new java.util.concurrent.CompletionException(failure);
+                }
+            });
+
+            long deadline = System.nanoTime() + TimeUnit.SECONDS.toNanos(10);
+            while ((!java.nio.file.Files.exists(childPidFile)
+                    || java.nio.file.Files.size(childPidFile) == 0) && !result.isDone()
+                    && System.nanoTime() < deadline) {
+                Thread.sleep(50);
+            }
+            assertTrue(java.nio.file.Files.exists(childPidFile) && java.nio.file.Files.size(childPidFile) > 0,
+                    "T-BASE-02 helper child did not publish its PID before timeout");
+            childPid = Long.parseLong(java.nio.file.Files.readString(childPidFile).strip());
+            ExternalComputeException failure = result.get(12, TimeUnit.SECONDS);
+            assertTrue(failure != null && failure.code() == Code.PROCESS_TIMEOUT,
+                    "T-BASE-02 parent should time out and be terminated");
+            assertTrue(failure.getMessage().contains("process tree was killed"),
+                    "T-BASE-02 timeout diagnostics should state that the tree was killed");
+
+            long killDeadline = System.nanoTime() + TimeUnit.SECONDS.toNanos(5);
+            while (isAlive(childPid) && System.nanoTime() < killDeadline) {
+                Thread.sleep(50);
+            }
+            assertTrue(!isAlive(childPid), "T-BASE-02 timeout must terminate the descendant process");
+            assertTrue(!java.nio.file.Files.exists(markerFile),
+                    "T-BASE-02 descendant must not continue and write its completion marker");
+        } finally {
+            if (childPid > 0 && isAlive(childPid)) {
+                ProcessHandle.of(childPid).ifPresent(ProcessHandle::destroyForcibly);
+            }
+            java.nio.file.Files.deleteIfExists(childPidFile);
+            java.nio.file.Files.deleteIfExists(markerFile);
+            java.nio.file.Files.deleteIfExists(temp);
+        }
+        System.out.println("PASS: T-BASE-02 timeout kills the child process tree");
+    }
+
+    private static void testMissingBinaryDiagnostics() throws Exception {
+        String candidate = "ggbplus-missing-" + UUID.randomUUID().toString().replace("-", "")
+                + (isWindows() ? ".exe" : "");
+        ProbeEngine missing = new ProbeEngine(candidate);
+        try {
+            missing.eval("1+1", ComputeContext.defaults());
+            throw new AssertionError("T-BASE-03 missing executable must not fall back");
+        } catch (ExternalComputeException failure) {
+            assertTrue(failure.code() == Code.ENGINE_UNAVAILABLE,
+                    "T-BASE-03 expected ENGINE_UNAVAILABLE, got " + failure.code());
+            assertTrue(failure.getMessage().contains(missing.getEngineId())
+                    && failure.getMessage().contains(candidate),
+                    "T-BASE-03 message must name engine and checked executable: " + failure.getMessage());
+        }
+        System.out.println("PASS: T-BASE-03 missing binary reports engine and searched candidate");
+    }
+
+    private static Path javaExecutable() {
+        return Path.of(System.getProperty("java.home"), "bin", isWindows() ? "java.exe" : "java")
+                .toAbsolutePath().normalize();
+    }
+
+    private static boolean isAlive(long pid) {
+        return ProcessHandle.of(pid).map(ProcessHandle::isAlive).orElse(false);
     }
 
     private static boolean isWindows() {
@@ -128,6 +215,16 @@ public final class SubprocessEngineTests {
 
     private static final class ProbeEngine extends SubprocessEngine {
 
+        private final List<String> candidates;
+
+        private ProbeEngine() {
+            this("powershell.exe");
+        }
+
+        private ProbeEngine(String candidate) {
+            candidates = List.of(candidate);
+        }
+
         @Override
         public String getEngineId() {
             return "probe";
@@ -140,7 +237,7 @@ public final class SubprocessEngineTests {
 
         @Override
         protected List<String> executableCandidates() {
-            return List.of("powershell.exe");
+            return candidates;
         }
 
         @Override

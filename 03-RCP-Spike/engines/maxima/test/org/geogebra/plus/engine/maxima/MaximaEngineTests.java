@@ -10,6 +10,13 @@ import org.geogebra.plus.compute.api.ExternalComputeException.Code;
 
 public final class MaximaEngineTests {
 
+    private static final String[] EXPECTED_WIMS_ILLEGAL = {
+            "system", "describe", "example", "save", "fassave", "stringout", "batcon",
+            "batcount", "cursordisp", "direc", "readonly", "with_stdout", "pscom",
+            "demo", "ttyintfun", "bug"
+    };
+    private static final String[] EXPECTED_WIMS_ILLPART = { "file", "debug", "plot", "load", "store", "batch" };
+
     private MaximaEngineTests() {
     }
 
@@ -24,16 +31,13 @@ public final class MaximaEngineTests {
                 .equals("1.23E-4"), "Maxima parser should normalize b-exponents");
         assertTrue(MaximaEngine.parseOutput("(%i1) [X, x];\n(%o1) [X, x]\n(%i2) quit();\n")
                 .equals("X, x"), "Maxima parser must preserve case-sensitive symbol names");
-        assertRejected(new MaximaEngine(), "system(\"calc\")", "system filter");
-        assertRejected(new MaximaEngine(), "plot2d(sin(x),[x,-1,1])", "plot filter");
-        assertRejected(new MaximaEngine(), "load(\"/etc/passwd\")", "load filter");
-        assertRejected(new MaximaEngine(), "save(\"out.lisp\", all)", "save filter");
-        assertRejected(new MaximaEngine(), "batch(\"evil.mac\")", "batch filter");
+        testCompleteWimsFilter();
+        testEmptySuccessfulOutputRejected();
 
         MaximaEngine engine = new MaximaEngine();
         if (!engine.isAvailable()) {
             expectUnavailable(() -> engine.eval("diff(sin(x^2), x)", ComputeContext.defaults()));
-            System.out.println("SKIP: Maxima derivative acceptance; maxima/maxima.bat is not on PATH (missing binary correctly errors)");
+            System.out.println("SKIP: T-MAX-03 derivative acceptance; maxima/maxima.bat is not on PATH (missing binary correctly errors)");
             return;
         }
         try (ComputeResult result = engine.eval("diff(sin(x^2), x)", new ComputeContext(
@@ -41,8 +45,35 @@ public final class MaximaEngineTests {
                 Path.of(System.getProperty("java.io.tmpdir"))))) {
             String normalized = result.text().replaceAll("\\s+", "").toLowerCase(java.util.Locale.ROOT);
             assertTrue(normalized.equals("2*x*cos(x^2)"), "Unexpected Maxima derivative: " + result.text());
-            System.out.println("PASS: Maxima derivative = " + result.text());
+            System.out.println("PASS: T-MAX-03 diff(sin(x^2),x) = " + result.text());
         }
+    }
+
+    private static void testCompleteWimsFilter() throws Exception {
+        MaximaEngine engine = new MaximaEngine();
+        assertTrue(java.util.Arrays.equals(MaximaEngine.WIMS_ILLEGAL, EXPECTED_WIMS_ILLEGAL),
+                "T-MAX-01 WIMS_ILLEGAL list is incomplete or changed");
+        for (String blocked : EXPECTED_WIMS_ILLEGAL) {
+            assertRejected(engine, blocked + "(x)", "T-MAX-01 WIMS illegal: " + blocked);
+        }
+        assertRejected(engine, "SYSTEM(\"calc\")", "T-MAX-01 case-insensitive system filter");
+        System.out.println("PASS: T-MAX-01 all WIMS_ILLEGAL commands rejected");
+
+        assertTrue(java.util.Arrays.equals(MaximaEngine.WIMS_ILLPART, EXPECTED_WIMS_ILLPART),
+                "T-MAX-02 WIMS_ILLPART list is incomplete or changed");
+        for (String blocked : EXPECTED_WIMS_ILLPART) {
+            assertRejected(engine, "x:" + blocked + "(x)", "T-MAX-02 WIMS illpart: " + blocked);
+        }
+        System.out.println("PASS: T-MAX-02 all WIMS_ILLPART terms rejected");
+    }
+
+    private static void testEmptySuccessfulOutputRejected() throws Exception {
+        MaximaEngine engine = new MaximaEngine();
+        assertTrue(engine.validateCommand("1+1").equals("1+1;"), "T-MAX-04 fixture must be valid input");
+        assertInvalidOutput(() -> MaximaEngine.requireNonEmptyOutput(""), "empty Maxima payload");
+        assertInvalidOutput(() -> MaximaEngine.requireNonEmptyOutput(" \r\n\t"),
+                "whitespace-only Maxima payload");
+        System.out.println("PASS: T-MAX-04 valid request with empty successful output returns INVALID_OUTPUT");
     }
 
     private static void assertRejected(MaximaEngine engine, String command, String label) throws Exception {
@@ -61,6 +92,16 @@ public final class MaximaEngineTests {
         } catch (ExternalComputeException expected) {
             assertTrue(expected.code() == Code.ENGINE_UNAVAILABLE,
                     "missing Maxima binary must be an error, not a fallback");
+        }
+    }
+
+    private static void assertInvalidOutput(CheckedRunnable call, String label) throws Exception {
+        try {
+            call.run();
+            throw new AssertionError(label + " should fail with INVALID_OUTPUT");
+        } catch (ExternalComputeException expected) {
+            assertTrue(expected.code() == Code.INVALID_OUTPUT,
+                    label + " returned " + expected.code() + " instead of INVALID_OUTPUT");
         }
     }
 
