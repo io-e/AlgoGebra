@@ -6,7 +6,7 @@
 | Document | `Handoff_GrokBot_WIMS_CDC_Validation_GROK_V1.md` |
 | Author | Grok Bot |
 | Date | 2026-11-04 (Europe/Paris) |
-| Base | `feat/grok-sprint3-plan-v1-1` @ `49d98f9` (PR #56) |
+| Base | `feat/grok-sprint3-plan-v1-1` @ `49d98f9ca973f45c5b8ec27a8b141c5302db9fc8` (PR #56) — re-fetched 2026-11-04 07:40 CET: still the tip. The announced move to `02-Cdc/02-01_Wims_Integration/` is **not on origin** (no remote branch contains that folder) and no CDC V1_2 exists on any remote branch, so the report stays at repo root as the handoff specifies and validates CDC V1_1 / the four files above. |
 | Files validated (sha256 prefix) | `02-Cdc/QA_WIMS_Integration_Owner_ALF_V2.md` ALF_V2_3 (`28abfe19`), `02-Cdc/Schema_Help_Template_JSON_CLAUDE_V1.json` (`14dda883`), `02-Cdc/Schema_Course_JSON_CLAUDE_V1.json` V1_1 (`22f75355`), `02-Cdc/Example_Help_Template_CLAUDE_V1.json` (`960e939f`) |
 | Related | PR #59 `02-Cdc/Review_Cdc_External_Engines_V1_1_GROK_V1.md` (CDC V1_1 review, findings reused here, not redone) |
 | Evidence | `03-RCP-Spike/evidence/20261104-gv-validation-wims-cdc_GROK_V1/` (+ `SHA256SUMS`) |
@@ -119,6 +119,37 @@ No offline scorer, no engine subprocess, no per-answer result. Recommendation (n
 
 - **GAP-5 blocks the most exercises** (281/300 = 94 %); 265 of those do not involve an external engine, i.e. they are choice/fill types (clickfill 334, dragfill 261, case 181, menu 135, puzzle 44 answers) that need new non-numeric check types, not an `engine_check`.
 - Suggest a GAP-6 "server-side parameter computation" in the CDC (or an explicit "offline = seed-resolved by a WIMS run at conversion time" rule).
+
+### GV-3 addendum (owner task 3) — suite 19 on tip `49d98f9` + GAP-5 by check type
+- Rerun on `feat/grok-sprint3-plan-v1-1` @ `49d98f9` (this branch base; converter/suite identical paths `03-RCP-Spike/tools/oef2course_GROK_V1.py`, `03-RCP-Spike/tests/19_Test_OefConverter_GROK_V1.ps1`), `OEF_CORPUS`=corpus 300: **PASS 16 / FAIL 0 / SKIP 0**, OC-16 `files=300 converted=300 schema-valid=300` (`19_OefConverter_corpus300_tip49d98f9_GROK_V1.log`). No production file touched.
+- GAP-5 = answers emitted as `object_exists` (the only degraded check type; 1 824 answers in 281 files). Breakdown by the OEF answer type the converter reports (`gap5_by_type_GROK_V1.py` → `gap5_by_type_corpus300_GROK_V1.csv`, per file in `gap5_per_file_GROK_V1.csv`):
+
+| OEF answer type (literal) | Answers | Files | Files where it is the only GAP-5 type |
+|---|---|---|---|
+| clickfill | 330 | 24 | 24 |
+| `\format` (type held in a variable) | 267 | 23 | 18 |
+| dragfill | 258 | 29 | 29 |
+| case | 181 | 17 | 17 |
+| menu | 129 | 10 | 9 |
+| `\atype` (variable) | 80 | 14 | 14 |
+| puzzle | 44 | 8 | 8 |
+| number | 39 | 9 | 9 |
+| `\types[1..20]` (variable, 20 entries) | 240 | 12 | 0 |
+| flashcard / numeric / default / checkbox / correspond / numexp / mark | 25 / 21 / 16 / 14+9 / 13+1 / 13 / 12 | 5 / 6 / 6 / 12+3 / 13+1 / 3 / 12 | — |
+| others (radio, formal, vector, crossword, jsxgraph, chem*, units, set, matrix, …) | < 10 each | | |
+
+By family (files overlap):
+
+| Family | Answers | Files |
+|---|---|---|
+| Type not resolvable at conversion (`\format`, `\atype`, `\types[n]`, `\anstype`, `\type`) | 616 | 63 |
+| Fill: clickfill + dragfill | 588 | 53 |
+| Choice: menu/radio/checkbox/case/mark/correspond/reorder/puzzle/flashcard/crossword/click | 459 | **107** |
+| Numeric but expected value not computable offline (number/numeric/numexp/default; values from `wims()`/`slib()`) | 89 | 24 |
+| Symbolic (formal/algexp/function/set/matrix/vector/range/units/coord) | 38 | 17 |
+| Other (draw, jsxgraph, chem, jmol, time, clock, raw, compose) | 34 | 25 |
+
+**Answer:** by single literal type, **clickfill** blocks the most answers (330) and **dragfill** the most exercises (29 files, all with no other GAP-5 type); by family, **choice-type checks** block the most exercises (107/300) and fill-type the most answers among resolvable types. 63 files hide the type behind a variable, which the converter cannot resolve without evaluating the OEF (links to the parameter-computation gap). An `engine_check` would only help the symbolic + numeric-not-resolved families (≈ 41 files); a `choice_equals` / `fill_equals` check pair would cover the bulk.
 
 ### GV-4 (P0) — hint/help/feedback constructs in real OEF — PASS
 Official semantics (`wims-full/public_html/scripts/help/en/oefcommand`, `oefadv.phtml`; public `introProgOEF.pdf`):

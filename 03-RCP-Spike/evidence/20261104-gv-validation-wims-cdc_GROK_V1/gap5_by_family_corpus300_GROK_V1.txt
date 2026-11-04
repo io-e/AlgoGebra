@@ -1,0 +1,6 @@
+unresolved-type-variable: answers=616 files=63
+fill (clickfill/dragfill): answers=588 files=53
+choice (menu/radio/checkbox/case/mark/multipleclick/click): answers=459 files=107
+numeric-not-resolved (number/numeric/numexp/default): answers=89 files=24
+symbolic (formal/algexp/function/set/fset/matrix/vector/range/units): answers=38 files=17
+other (draw/jsx/chem/jmol/time/clock/raw/compose): answers=34 files=25

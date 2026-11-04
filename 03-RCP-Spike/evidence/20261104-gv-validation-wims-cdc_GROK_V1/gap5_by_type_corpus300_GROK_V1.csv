@@ -1,0 +1,77 @@
+type,answers_object_exists,files_affected,files_where_only_blocker
+clickfill,330,24,24
+\format,267,23,18
+dragfill,258,29,29
+case,181,17,17
+menu,129,10,9
+\atype,80,14,14
+puzzle,44,8,8
+number,39,9,9
+flashcard,25,5,5
+numeric,21,6,5
+default,16,6,3
+checkbox,14,12,12
+correspond,13,13,13
+numexp,13,3,3
+\types[1],12,12,0
+\types[2],12,12,0
+\types[3],12,12,0
+\types[4],12,12,0
+\types[5],12,12,0
+\types[6],12,12,0
+\types[7],12,12,0
+\types[8],12,12,0
+\types[9],12,12,0
+\types[10],12,12,0
+\types[11],12,12,0
+\types[12],12,12,0
+\types[13],12,12,0
+\types[14],12,12,0
+\types[15],12,12,0
+\types[16],12,12,0
+\types[17],12,12,0
+\types[18],12,12,0
+\types[19],12,12,0
+\types[20],12,12,0
+mark,12,12,12
+type = checkbox,9,3,3
+raw,8,2,2
+radio,8,5,5
+multipleclick,6,5,5
+vector,5,5,2
+nocase,5,4,4
+formal,5,5,2
+\anstype,5,5,5
+crossword,5,5,5
+\format0,5,5,0
+\format1,5,5,0
+\format2,5,5,0
+\format3,5,5,0
+time,4,4,0
+\type,4,4,0
+jsxgraphcurve,4,4,4
+function,4,4,1
+units,4,2,2
+jmolclick,4,4,4
+chemdraw,4,4,4
+chemformula,3,1,1
+coord,3,3,3
+set,3,3,0
+fset,3,3,0
+algexp,3,3,0
+matrix,3,3,0
+draw,3,3,3
+type = vector,2,1,1
+reorder,2,2,2
+click,2,2,2
+compose,2,1,1
+range,1,1,1
+clicktile,1,1,1
+jsxgraph,1,1,1
+type = radio,1,1,1
+type = matrix,1,1,1
+type = click,1,1,1
+sigunits,1,1,1
+clock,1,1,1
+type = correspond,1,1,1
+TOTAL answers 1824 files 281
