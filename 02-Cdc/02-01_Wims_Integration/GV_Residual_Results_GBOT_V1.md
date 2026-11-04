@@ -103,3 +103,12 @@ GB-R6 (P2) not run. G-A1/G-A7 handled by the EE-P2 worker. No spec/schema edits;
   - run 2: **PASS 13 / FAIL 0 / SKIP 0**
 - So the earlier 0/2/0 was caused by the substitute bundle, not by template drift.
 - Evidence: `ga5_suite23_war375db7f/` (2 TAPs, build log, full WAR manifest).
+
+## Addendum (2026-11-04 ~11:00 Paris): G-B5 adm/raw spot-check and G-B6 suite 15
+
+**G-B5: `adm/raw` getinfoserver returns JSON (Y).** Debian WIMS 4.31b copy behind `gv_wims_cgi_server.py` on `127.0.0.1:18431`. `GET /wims/wims.cgi?module=adm/raw&job=getinfoserver` (no ident/passwd) returned HTTP 200, `Content-Type: application/json ; charset=iso-8859-1`, and a body that parses as JSON: `status=OK, job=getinfoserver, server_version=4.31b, compilation_date=2026-10-25, wims_session, format, site_manager`. This job works without `.connections` auth; class jobs still need it. Server and wimslogd were stopped afterwards. Evidence: `gb5_adm_raw_getinfoserver/` (raw headers, body, command).
+
+**G-B6: suite 15 web probe with `GGB_WEB_WAR=/workspace/grok-g1/gv_war_375db7f/geogebra/source/web/web/war`** (upstream 375db7fa). Suite 15 drives headless Chromium over CDP, not Playwright/Firefox; I used google-chrome 156.0.8078.47 headless with no X display, Node 20.19.2 and pwsh 7.4.6.
+- run 1: PASS 6 / FAIL 9. The static checks WEB-01..04 and serve passed. The applet's `appletOnLoad` did not fire within 90 s (probe `timeout:true`; a deferred fragment `14.cache.js?autoRetry=1` was re-fetched). I read this as a transient load timeout.
+- run 2, back to back with no changes: **PASS 15 / FAIL 0 / SKIP 0**.
+- Result: green, with one flaky timeout in two runs. Evidence: `gb6_suite15_war375db7f/` (both TAPs, probe results, run-1 HTTP log).

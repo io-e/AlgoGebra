@@ -1,0 +1,23 @@
+# Suite: 15_WebBuild
+# Started: 2026-11-04T10:52:43.8086112+01:00
+# Host: grok-bot-vm-419969949 / Debian GNU/Linux 13 (trixie) / pwsh 7.4.6
+
+# war=/workspace/grok-g1/gv_war_375db7f/geogebra/source/web/web/war upstream=375db7fa
+ok 1 - [P0] WEB-01-web3d.nocache.js :: /workspace/grok-g1/gv_war_375db7f/geogebra/source/web/web/war/web3d/web3d.nocache.js size=6188 sha256=b4c7254f85388e015539d4c7f92f77eac62371a9674ec08bb44468cce78e6233
+ok 2 - [P0] WEB-01-deployggb.js :: /workspace/grok-g1/gv_war_375db7f/geogebra/source/web/web/war/deployggb.js size=68636 sha256=55bfe441dc97bcbbeaa6fc9fc924cf11f2533d1f1610436276c501dc13056d97
+ok 3 - [P0] WEB-02-permutation :: deferredjs permutations: 0C67C8A47F0579D49611F42F63B45791
+ok 4 - [P0] WEB-03-deploy-merged :: template placeholders replaced, permutation id present, setHTML5Codebase exported
+ok 5 - [P2] WEB-04-size :: war files=741 bytes=207993095
+ok 6 - [P0] WEB-10-serve :: http.server :8795 + google-chrome CDP :9795
+not ok 7 - [P0] WEB-11-applet-loaded :: appletOnLoad fired= after  ms (wall 92s) error=
+not ok 8 - [P0] WEB-12-evalCommand :: evalCommand A/f/m = //
+not ok 9 - [P0] WEB-13-getValueString-point :: expected=A = (1, 2) got=
+not ok 10 - [P0] WEB-14-getValueString-func :: expected=f(x) = x² - 2x got=
+not ok 11 - [P1] WEB-15-getValueString-matrix :: expected=m = {{1, 2}, {3, 4}} got=
+not ok 12 - [P1] WEB-16-getValue :: getValue('x(A)')=
+not ok 13 - [P1] WEB-17-CAS-giac-js :: expected=x² + 2x + 1 got=
+not ok 14 - [P0] WEB-18-codebase-local :: resources=1 external=
+not ok 15 - [P1] WEB-19-screenshot :: /workspace/grok-g1/gv_residual/03-RCP-Spike/tests/results/webbuild/webbuild_probe.png 
+
+PASS: 6 FAIL: 9 SKIP: 0
+# CSV: /workspace/grok-g1/gv_residual/03-RCP-Spike/tests/results/15_WebBuild_GROK_V1.csv
