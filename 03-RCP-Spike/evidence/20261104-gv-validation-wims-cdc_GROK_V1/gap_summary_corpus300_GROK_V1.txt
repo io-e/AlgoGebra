@@ -1,0 +1,36 @@
+files 300 rc0 300
+gap1 53
+gap2 18
+gap3 30
+gap4 300
+gap5 281
+value_equals 16 object_exists 1824
+files with >=1 value_equals 13 files all-numeric 9
+directives (occurrences / files):
+  \hint: 16 / 16
+  \help: 2 / 2
+  \feedback: 56 / 36
+  \solution: 6 / 6
+  \remark: 0 / 0
+  \condition: 210 / 21
+  \conditions: 12 / 12
+  \steps: 93 / 93
+  \nextstep: 32 / 32
+  \embed: 407 / 256
+  \reply: 5 / 5
+  \choice: 15 / 6
+  \answer: 1888 / 290
+  \plot: 0 / 0
+  \draw: 3 / 3
+  \precision: 59 / 59
+  \computeanswer: 48 / 48
+  \format: 44 / 44
+  \statement: 303 / 300
+engine calls (occ / files):
+  wims(): 1979 / 208
+  shuffle(): 270 / 140
+  slib(): 117 / 95
+  draw(): 43 / 33
+  pari(): 18 / 16
+  maxima(): 3 / 2
+answer types: {'clickfill': 334, 'dragfill': 261, 'case': 181, 'menu': 135, 'puzzle': 44, 'number': 41, 'flashcard': 25, 'numeric': 24, 'checkbox': 23, 'default': 17, 'correspond': 15, 'mark': 13, 'numexp': 13, 'radio': 11, 'multipleclick': 8, 'raw': 8, 'chemformula': 6, 'formal': 6, 'draw': 6, 'vector': 5, 'nocase': 5, 'jsxgraphcurve': 5, 'crossword': 5, 'time': 4, 'function': 4, 'units': 4, 'jmolclick': 4, 'chemdraw': 4, 'compose': 4, 'coord': 3, 'set': 3, 'fset': 3, 'algexp': 3, 'matrix': 3, 'reorder': 3, 'click': 3, 'clicktile': 2, 'jsxgraph': 2, 'clock': 2, 'range': 1, 'sigunits': 1}

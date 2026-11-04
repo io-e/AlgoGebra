@@ -1,0 +1,22 @@
+unique oef files 1479
+\hint: occ=43 files=43
+\help: occ=2 files=2
+\feedback: occ=4984 files=543
+\solution: occ=11 files=11
+\condition: occ=537 files=114
+\conditions: occ=14 files=14
+\steps: occ=127 files=126
+\nextstep: occ=36 files=36
+\embed: occ=1880 files=1108
+\answer: occ=4702 files=1336
+\choice: occ=18 files=8
+\reply: occ=6 files=6
+\computeanswer: occ=81 files=81
+\format: occ=77 files=77
+\draw: occ=5 files=5
+\css: occ=49 files=49
+\matrix: occ=1007 files=300
+\function: occ=13 files=6
+calls (occ,files): [('wims', 8412, 684), ('pari', 951, 110), ('evalue', 476, 55), ('slib', 154, 128), ('diff', 57, 20), ('draw', 52, 40), ('maxima', 42, 12), ('simplify', 11, 6)]
+answer types: [('numeric', 1512), ('radio', 464), ('clickfill', 344), ('dragfill', 272), ('case', 269), ('menu', 155), ('formal', 70), ('correspond', 66), ('puzzle', 55), ('checkbox', 55), ('number', 42), ('reorder', 26), ('flashcard', 25), ('default', 23), ('mark', 15), ('numexp', 13), ('multipleclick', 9), ('raw', 8), ('jsxgraphcurve', 7), ('vector', 6), ('draw', 6), ('chemformula', 6), ('function', 5), ('item', 5), ('wims', 5), ('time', 5), ('nocase', 5), ('crossword', 5), ('set', 4), ('fset', 4), ('algexp', 4), ('matrix', 4), ('compose', 4), ('units', 4), ('jmolclick', 4), ('chemdraw', 4), ('coord', 4), ('click', 3), ('jsxgraph', 2), ('clicktile', 2), ('clock', 2), ('range', 1), ('sigunits', 1), ('randitem', 1)]
+answers/file max 54 p95 20 files>20 24 files>10 98

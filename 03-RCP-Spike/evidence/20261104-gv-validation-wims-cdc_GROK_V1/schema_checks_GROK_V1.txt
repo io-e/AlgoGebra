@@ -1,0 +1,16 @@
+both schemas are valid draft 2020-12
+E1 example as committed: INVALID [": Additional properties are not allowed ('$comment' was unexpected)"]
+E2 example without $comment: VALID []
+E3 BCP47 key fr-FR: INVALID ["title: 'fr-FR' does not match '^[a-z]{2}(_[A-Z]{2})?$'"]
+E4 helpStep nested 7 levels (doc says max 3): VALID []
+E5 defaults key not in variables: VALID []
+E6 matrix-valued OEF variable: INVALID ['defaults/M: [[1, 2], [3, 4]] is not valid under any of the given schemas']
+E7 helpAction arbitrary command (allowlist not in schema): VALID []
+C1 step help template only: VALID []
+C2 step help template+inline (description says "at least one"): INVALID ["tree/0/children/0/help: {'template': 'aide.json', 'inline': {'fr': 'x'}} is valid under each of {'required': ['inline']}, {'required':"]
+C3 step help variables only: INVALID ["tree/0/children/0/help: {'variables': {'a': 3}} is not valid under any of the given schemas"]
+C4 step engine octave (wims4win has octave): INVALID ["tree/0/children/0/engine: 'octave' is not one of ['giac', 'pari', 'maxima', 'gnuplot', 'gap']"]
+C5 step help.explanations/llm per Q-W9 §9.6: INVALID ["tree/0/children/0/help: Additional properties are not allowed ('explanations' was unexpected)"]
+C6 step transform per Q-W9 §9.6: INVALID ["tree/0/children/0: Additional properties are not allowed ('transform' was unexpected)"]
+C7 check type engine_check (GAP-5): INVALID ["tree/0/children/0/check/type: 'engine_check' is not one of ['value_equals', 'value_range', 'object_exists', 'cas_equals']"]
+C8 corpus300 converter outputs valid against Course schema V1_1: 300/300
