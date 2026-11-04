@@ -1,0 +1,8 @@
+PASS: PATH discovery (including Windows PATHEXT)
+PASS: ProcessBuilder pipes and timeout/process-tree kill
+PASS: WIMS start/end marker extraction (header noise, CRLF, foreign markers, last start, missing end)
+PASS: PARI factor(2^64-1) = 3,1;5,1;17,1;257,1;641,1;65537,1;6700417,1
+PASS: BUG-015 malformed factor(( -> INVALID_OUTPUT
+PASS: Maxima derivative = 2*x*cos(x^2)
+PASS: Gnuplot produced a valid 800x600 PNG
+External engine tests completed; any unavailable-binary acceptance is explicitly marked SKIP.

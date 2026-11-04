@@ -1,0 +1,123 @@
+P-01  pari    value  PASS     
+P-02  pari    value  PASS     
+P-03  pari    value  PASS     
+P-04  pari    value  PASS     
+P-05  pari    value  PASS     
+P-06  pari    value  PASS     
+P-07  pari    value  PASS     
+P-08  pari    value  PASS     
+P-09  pari    value  PASS     
+P-10  pari    value  PASS     
+P-11  pari    value  PASS     
+P-12  pari    value  PASS     
+P-13  pari    value  PASS     
+P-14  pari    value  PASS     equal under numeric (text differs)
+P-15  pari    error  PASS     wims_error=True
+P-16  pari    error  PASS     wims_error=True
+P-17  pari    reject PASS     both block
+P-18  pari    reject PASS     both block
+P-19  pari    reject PASS     both block
+P-20  pari    reject PASS     both block
+P-21  pari    reject PASS     both block
+P-22  pari    reject PASS     both block
+P-23  pari    reject PASS     both block
+P-24  pari    reject PASS     both block
+P-25  pari    reject PASS     both block
+P-26  pari    reject PASS     both block
+P-27  pari    reject PASS     both block
+P-28  pari    strict PASS     wims_blocked=False wims_executed=False java=OK
+M-01  maxima  value  PASS     
+M-02  maxima  value  PASS     
+M-03  maxima  value  PASS     
+M-04  maxima  value  PASS     
+M-05  maxima  value  PASS     
+M-06  maxima  value  PASS     
+M-07  maxima  value  PASS     
+M-08  maxima  value  PASS     
+M-09  maxima  value  PASS     
+M-10  maxima  value  PASS     
+M-11  maxima  value  PASS     
+M-12  maxima  value  PASS     
+M-13  maxima  value  PASS     
+M-14  maxima  error  PASS     wims_error=True
+M-15  maxima  reject PASS     WIMS neutralised (token mangled / no effect)
+M-16  maxima  reject PASS     WIMS neutralised (token mangled / no effect)
+M-17  maxima  reject PASS     WIMS neutralised (token mangled / no effect)
+M-18  maxima  reject PASS     WIMS neutralised (token mangled / no effect)
+M-19  maxima  reject PASS     WIMS neutralised (token mangled / no effect)
+M-20  maxima  reject PASS     WIMS neutralised (token mangled / no effect)
+M-21  maxima  reject PASS     WIMS neutralised (token mangled / no effect)
+M-22  maxima  reject PASS     WIMS neutralised (token mangled / no effect)
+M-23  maxima  reject PASS     WIMS neutralised (token mangled / no effect)
+M-24  maxima  reject PASS     WIMS neutralised (token mangled / no effect)
+M-25  maxima  reject PASS     WIMS neutralised (token mangled / no effect)
+M-26  maxima  reject PASS     WIMS neutralised (token mangled / no effect)
+M-27  maxima  reject PASS     WIMS neutralised (token mangled / no effect)
+M-28  maxima  reject PASS     WIMS neutralised (token mangled / no effect)
+M-29  maxima  reject PASS     WIMS neutralised (token mangled / no effect)
+M-30  maxima  reject PASS     WIMS neutralised (token mangled / no effect)
+M-31  maxima  reject PASS     WIMS neutralised (token mangled / no effect)
+M-32  maxima  reject PASS     WIMS neutralised (token mangled / no effect)
+M-33  maxima  reject PASS     WIMS neutralised (token mangled / no effect)
+M-34  maxima  reject PASS     WIMS neutralised (token mangled / no effect)
+M-35  maxima  reject PASS     WIMS neutralised (token mangled / no effect)
+M-36  maxima  reject PASS     WIMS neutralised (token mangled / no effect)
+M-37  maxima  strict PASS     wims_blocked=True wims_executed=False java=ERR
+M-38  maxima  strict PASS     wims_blocked=False wims_executed=False java=ERR
+N-01  gnuplot png    PASS     
+N-02  gnuplot png    PASS     
+N-03  gnuplot png    PASS     
+N-04  gnuplot png    FAIL     
+N-05  gnuplot png    PASS     
+N-06  gnuplot png    FAIL     
+N-07  gnuplot png    PASS     
+N-08  gnuplot png    FAIL     
+N-09  gnuplot png    FAIL     
+N-10  gnuplot png    PASS     
+N-11  gnuplot png    PASS     
+N-12  gnuplot png    PASS     
+N-13  gnuplot png    PASS     
+N-14  gnuplot reject PASS     WIMS neutralised (token mangled / no effect)
+N-15  gnuplot reject PASS     Java stricter (WIMS executed)
+N-16  gnuplot reject PASS     Java stricter (WIMS executed)
+N-17  gnuplot reject PASS     both block
+N-18  gnuplot reject PASS     both block
+N-19  gnuplot reject PASS     Java stricter (WIMS executed)
+N-20  gnuplot reject PASS     both block
+N-21  gnuplot reject PASS     WIMS neutralised (token mangled / no effect)
+N-22  gnuplot reject PASS     WIMS neutralised (token mangled / no effect)
+N-23  gnuplot reject PASS     Java stricter (WIMS executed)
+N-24  gnuplot reject PASS     both block
+N-25  gnuplot reject PASS     WIMS neutralised (token mangled / no effect)
+N-26  gnuplot reject PASS     WIMS neutralised (token mangled / no effect)
+N-27  gnuplot reject PASS     Java stricter (WIMS executed)
+N-28  gnuplot reject PASS     Java stricter (WIMS executed)
+G-01  gap     value  REF-PASS 
+G-02  gap     value  REF-PASS 
+G-03  gap     value  REF-PASS 
+G-04  gap     value  REF-PASS 
+G-05  gap     value  REF-PASS 
+G-06  gap     value  REF-PASS 
+G-07  gap     value  REF-PASS 
+G-08  gap     value  REF-PASS 
+G-09  gap     value  REF-PASS 
+G-10  gap     value  REF-PASS 
+G-11  gap     value  REF-PASS 
+G-12  gap     value  REF-PASS 
+G-13  gap     error  REF-PASS 
+G-14  gap     reject REF-PASS wims_blocked=True
+G-15  gap     reject REF-PASS wims_blocked=True
+G-16  gap     reject REF-PASS wims_blocked=True
+G-17  gap     reject REF-PASS wims_blocked=True
+G-18  gap     reject REF-PASS wims_blocked=True
+G-19  gap     reject REF-PASS wims_blocked=True
+G-20  gap     reject REF-PASS wims_blocked=True
+G-21  gap     reject REF-PASS wims_blocked=True
+G-22  gap     reject REF-PASS wims_blocked=True
+G-23  gap     reject REF-PASS wims_blocked=False
+G-24  gap     reject REF-PASS wims_blocked=True
+ENGINE gap     cases 24 pass 24 fail 0
+ENGINE gnuplot cases 28 pass 24 fail 4
+ENGINE maxima  cases 38 pass 38 fail 0
+ENGINE pari    cases 28 pass 28 fail 0
+TOTAL 118 PASS 114 FAIL 4
