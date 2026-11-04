@@ -1,0 +1,746 @@
+Status: 200 OK
+Expires:Sat, 26 Jul 1990 05:00:00 GMT
+Server: WIMS 4.33a (WWW Interactive Multipurpose Server)
+Content-type: text/html; charset=windows-1252
+
+
+
+
+
+
+<!DOCTYPE html>    
+<html lang="en"><head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <!--begin of standard/htmlheader.phtml-->
+<meta charset="windows-1252">
+<title>WWW Interactive Multipurpose Server</title>
+<meta name="GENERATOR" content="wims [en]">
+<meta name="description" content="interactive exercises, mathematical tools, interactive puzzles, teaching documents interactive exercises, online calculators and plotters, mathematical recreation and games">
+<meta name="keywords" content="interactive mathematics, interactive math, server side interactivity, , ">
+<meta name="Author" content="XIAO Gang">
+
+<!-- makes browsers render all elements more consistently -->
+<link rel="stylesheet" href="scripts/js/external/normalize.min.css">
+
+<!-- Foundation Accordion -->
+<link rel="stylesheet" href="html/themes/_css/foundation_accordion.css">
+
+<link href="html/themes/standard/css.css?ver=4.33a" rel="stylesheet"><link href="gifs/themes/default/icon-min.css?ver=4.33a" rel="stylesheet">
+
+<!-- METAS iOS : -->
+<link rel="apple-touch-icon" href="gifs/wims_logo.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+<!-- prevents links from apps from opening in mobile safari>
+<script src="scripts/js/external/safari_mobile_links/compressed.js"></script-->
+
+<!-- Librairies JQUERY -->
+  <script src="scripts/js/external/jquery/jquery.min.js"></script>
+  <link rel="stylesheet" href="scripts/js/external/jquery-ui/themes/smoothness/jquery-ui.min.css">
+  <script src="scripts/js/external/jquery-ui/jquery-ui.min.js"></script>
+
+<!-- JQUERY pour autocompletion -->
+  <script src="scripts/js/interface/autocomplete.js"></script>
+
+<!-- Style pour impression -->
+  <link rel="stylesheet" media="print" href="html/themes/_css/print.css">
+
+<style>
+
+:root {
+  --wims_bgcolor: #F6F6F6;
+  --wims_link_color: #1468A0;
+  --wims_vlink_color: #1779BA;
+  --wims_hlink_color: #004077;
+  --wims_ref_menucolor: #FFFFFF;
+  --wims_ref_bgcolor: #676767;
+  --wims_ref_button_color: #FFFFFF;
+  --wims_ref_button_bgcolor: #666666;
+  --wims_ref_button_help_bgcolor: #008f00;
+  --wims_ref_button_help_color: #FFFFFF;
+}
+
+#wimspagebox{
+  background-color: #F6F6F6;
+  
+}
+body.main_body {}
+
+a, .ui-widget-content a{color:#1468A0;}
+/*a:visited {color:#1779BA;}*/
+a:hover, a:focus {color:#004077;}
+
+.wimsmanager a {color:#FFFFFF;}
+
+#wimsmenubox,#wimsmenumodubox { color: #FFFFFF; background-color: #676767;}
+#wimstopbox { background-color: #676767;}
+
+.property_fields{border-color: #676767;}
+.property_fields legend{background-color: #676767;}
+.property_fields legend,.property_fields legend>a{color:#FFFFFF;}
+
+.container h4{ background-color:#676767; color:#FFFFFF;}
+#menu_pendant,#menu_html { background-color:#676767; color:#FFFFFF;}
+#menu_avant,#menu_apres {  background-color:#666666; color:#FFFFFF;}
+.infobulle{ background-color: #666666; color: #FFFFFF;}
+
+#wimstopbox { color: #FFFFFF;}
+
+/* Foundation dropdown custom css */
+.dropdown.menu > li.is-dropdown-submenu-parent > a::after { border-top-color: var(--wims_ref_menucolor);}
+.dropdown.menu > li.is-dropdown-submenu-parent:hover > a::after { border-top-color: var(--wims_ref_menucolor);}
+.dropdown.menu > li.is-dropdown-submenu-parent.is-active > a::after{ border-top-color: var(--wims_ref_bgcolor);}
+#wimstopbox>.dropdown.menu > li.is-active>a{
+  background-color: var(--wims_ref_menucolor);color:var(--wims_ref_bgcolor)}
+.menu a:hover,#wimsbodybox .menu a:hover{
+  background-color: var(--wims_ref_bgcolor);color:var(--wims_ref_menucolor)}
+
+
+#wimstopbox>.menu>.menuitem>a:hover,
+#wimsmenubox>.menu a:hover,
+#wimsmenumodubox a:hover,
+#wimsmenumodubox .menu a:hover{
+  color: #676767;
+  background-color:#FFFFFF;
+}
+
+/* Breadcrumb */
+.breadcrumbs>li>a{color:#676767}
+
+
+.wims_emph {color:#676767;}
+
+#wimstopbox .menuitem:not(.is-submenu-item)>a,
+#wimsmenumodubox a,
+#wimsmenubox .menuitem>a
+ { color: #FFFFFF;}
+
+/* Tables */
+.wimstable th {background-color: #676767; color:#FFFFFF;}
+.wimstable th a {color: #FFFFFF;}
+.wimstable caption, .wims_title_seq,
+.wims_widget_box .title_box{background-color: #676767;color: #FFFFFF;}
+.wimstable>caption a {color: #FFFFFF;}
+.wimstable>caption .wims_button{background-color: #666666;color: #FFFFFF;}
+.wimstable th .wims_button{background-color: #666666;color: #FFFFFF;}
+
+input[type="submit"],input[type="button"],.main_body .wims_button{
+    background-color:#666666;
+    color:#FFFFFF;
+}
+.main_body .wims_button_help{
+    background-color:#008f00;
+    color:#FFFFFF;
+}
+
+.legend {background-color: #676767;color:#FFFFFF;}
+
+.wims_color1 {
+   background-color: #676767;
+   color:#FFFFFF;
+}
+.wims_color2 {
+  background-color:#666666;
+  color:#FFFFFF;
+}
+.wims_color3 {
+  background-color:#008f00;
+  color:#FFFFFF;
+}
+
+
+</style>
+<!--end standard/htmlheader.phtml-->
+
+
+<script>/*<![CDATA[*/function wims_mathml_zoom(id){var math = document.getElementById(id);if(math.getAttribute("mathsize") == "100%"){  math.setAttribute("mathsize","200%");}else{  math.setAttribute("mathsize","100%");};};window.addEventListener("load", function() {  var ua = navigator.userAgent.toLowerCase();  var gecko = ua.indexOf("gecko") > -1 && ua.indexOf("khtml") === -1 && ua.indexOf("trident") === -1;  if(! gecko ){    var script = document.createElement("script");    script.src  = "scripts/js/mathjax/mml-chtml.js";    document.head.appendChild(script);  };});/*]]>*/</script>
+
+<script>reload_mathML=function(){var t=document.getElementsByClassName("wims_mathml");Array.prototype.filter.call(t,function(t){var e=t.style.display;t.style.display="none",t.style.opacity="0",setTimeout(function(){t.style.display=e},1e3),setTimeout(function(){t.style.opacity="1"},1100)})},document.onreadystatechange=function(){"complete"===document.readyState&&(/^((?!chrome|android).)*safari/i.test(navigator.userAgent)&&reload_mathML())};</script></head>
+<body class="main_body" dir="ltr"  >
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- begin of standard/header.phtml -->
+
+
+
+
+
+
+
+
+
+
+
+<!-- end of standard/header.phtml -->
+
+
+
+  <div class="wimstrap">
+<!-- END of html/headmenu -->
+
+
+<!-- <a href="http://127.0.0.1/wims/wims.cgi?lang=en&+session=ZZ8069DD1D.1&+module=adm%2Ftrap"   >Robot trapper, do not click!</a> --><div class='wimstrap hide' aria-hidden='true'><a href="http://127.0.0.1/wims/wims.cgi?lang=en&+session=ZZ8069DD1D.1&+module=adm%2Ftrap"   ><span lang='en'>Robot trapper, do not go there!</span></a></div>
+
+
+
+
+<!-- begin of standard/visitor.phtml -->
+
+</div>
+<div id="wimsfrontpage">
+
+  <div id="wimstopbox">
+<!-- _widgets/institution_logo.phtml -->
+<!-- END _widgets/institution_logo.phtml -->
+
+
+
+
+<!-- widget user_links -->
+<ul class="wimsmenu dropdown menu" data-dropdown-menu data-options="data-autoclose:true;">
+
+
+
+<!-- _widgets/headmenu.phtml -->
+  <li class="menuitem aboutw">
+
+
+<a href="http://127.0.0.1/wims/wims.cgi?wims_window=new&+session=ZZ8069DD1D_mhelp&+lang=en&+cmd=help&+special_parm=about" target="wims_help" onclick="wims_help=window.open('','wims_help','status=no,toolbar=no,location=no,menubar=no,scrollbars=yes,resizable=yes')"   class="aboutw" ><span class="text_item">About WIMS </span></a>  </li>
+<!-- end _widgets/headmenu.phtml -->
+
+
+        <li id="language_selector" class="language_selector menuitem is-dropdown-submenu-parent">
+          <a href="#lang_list" class="lang">
+            <span><img src="gifs/en.gif" alt="English"> Language</span>
+          </a>
+
+<!-- begin of _widgets/language_selector.phtml -->
+<ul id="lang_list" class="language_selector menu">
+    <li class="menuitem
+        disabled">
+        <a class="current"><img src="gifs/en.gif" alt="" class="vignette"><span class="legende"> English</span> <span class="smaller">(current)</span></a>
+    </li>
+    <li class="menuitem
+        ">
+<a href="http://127.0.0.1/wims/wims.cgi?lang=fr&+session=ZZ8069DD1D.1&+module=home"   ><img src="gifs/fr.gif" alt="" class="vignette"><span class="legende"> Franþais</span></a>    </li>
+    <li class="menuitem
+        ">
+<a href="http://127.0.0.1/wims/wims.cgi?lang=es&+session=ZZ8069DD1D.1&+module=home"   ><img src="gifs/es.gif" alt="" class="vignette"><span class="legende"> Espa±ol</span></a>    </li>
+    <li class="menuitem
+        ">
+<a href="http://127.0.0.1/wims/wims.cgi?lang=it&+session=ZZ8069DD1D.1&+module=home"   ><img src="gifs/it.gif" alt="" class="vignette"><span class="legende"> Italiano</span></a>    </li>
+    <li class="menuitem
+        ">
+<a href="http://127.0.0.1/wims/wims.cgi?lang=nl&+session=ZZ8069DD1D.1&+module=home"   ><img src="gifs/nl.gif" alt="" class="vignette"><span class="legende"> Nederlands</span></a>    </li>
+    <li class="menuitem
+        ">
+<a href="http://127.0.0.1/wims/wims.cgi?lang=ca&+session=ZZ8069DD1D.1&+module=home"   ><img src="gifs/ca.gif" alt="" class="vignette"><span class="legende"> CatalÓ</span></a>    </li>
+    <li class="menuitem
+        ">
+<a href="http://127.0.0.1/wims/wims.cgi?lang=si&+session=ZZ8069DD1D.1&+module=home"   ><img src="gifs/si.gif" alt="" class="vignette"><span class="legende"> Slovincina</span></a>    </li>
+    <li class="menuitem
+        ">
+<a href="http://127.0.0.1/wims/wims.cgi?lang=de&+session=ZZ8069DD1D.1&+module=home"   ><img src="gifs/de.gif" alt="" class="vignette"><span class="legende"> Deutsch</span></a>    </li>
+    <li class="menuitem
+        ">
+<a href="http://127.0.0.1/wims/wims.cgi?lang=cn&+session=ZZ8069DD1D.1&+module=home"   ><img src="gifs/cn.gif" alt="" class="vignette"><span class="legende"> Chinese gb</span></a>    </li>
+</ul>
+<!-- end of _widgets/language_selector.phtml -->
+
+        </li>
+</ul>
+<!-- end widget user_links -->
+
+
+    <div class="wimsmenu menu">
+
+
+
+    </div><!--wimsmenu-->
+  </div>
+
+
+
+
+<!-- _widgets/ariane.phtml -->
+<nav aria-label="You are here:">
+  <ul class="breadcrumbs">
+    <li class="home menuitem">
+
+
+ <span class="text_item home">WIMS Home </span>
+        <span class="show-for-sr">(Current)</span>
+    </li>
+  </ul>
+</nav>
+<!-- end of _widgets/ariane.phtml -->
+
+  <div id="wimsbodybox">
+    <div id="wimspagebox">
+      <div class="wimsbody">
+<!-- _widgets/site_title-->
+<div id="wims_title">
+  <div class="wimslogo">
+<a href="http://127.0.0.1/wims/wims.cgi?session=ZZ8069DD1D.1&+lang=en&+module=home&+special_parm=logo"   ><img src="gifs/logo.gif" alt="WIMS logo"></a>  </div>
+  <h1 class="wims_title">WIMS
+    <span class="smaller wims_subtitle">
+    WWW Interactive Multipurpose Server at <a href="/">127.0.0.1</a>
+    </span>
+  </h1>
+</div>
+<!--end _widgets/site_title-->
+
+
+<!-- adm/search_engine/form.phtml -->
+
+
+<fieldset class="wims_search_engine" id="searchform">
+  <legend><label for="search_keywords">Search Engine</label></legend>
+
+<form action="http://127.0.0.1/wims/wims.cgi#searchform" method="post"  >
+<div class='wims_form'><input type="hidden" name="session" value="ZZ8069DD1D.1">
+<input type="hidden" name="lang" value="en">
+<input type="hidden" name="cmd" value="new">
+    <input type="hidden" name="module" value="home">
+
+
+<a href="http://127.0.0.1/wims/wims.cgi?session=ZZ8069DD1D.1&+lang=en&+module=adm%2Flight&+phtml=search_engine.phtml.en"   class="wims_button_help float_right" role="button" >Tips for searching</a>
+    <div class="field search_field">
+      <input size="25"
+             type="search"
+             name="search_keywords"
+             value=""
+             class="wims_home_form multicomplete"
+             placeholder="Enter keywords"
+             results="5"
+             autosave="search_keywords"
+             id="search_keywords"><button class="wims_button icon_button"
+                       type="submit"><span class="Searching">Search</span></button>
+      <span style="margin-left:2em;display:inline-block;">
+<a href="http://127.0.0.1/wims/wims.cgi?session=ZZ8069DD1D.1&+lang=en&+module=adm%2Fbrowse"   class="text_icon browse" >Other browsing methods</a>      </span>
+    </div>
+
+
+      <script>
+        jQuery(function($){
+          // Get in sessionStorage if affined_search was previously uncollapsed
+          var affined_search_state = sessionStorage.getItem("affined_search_state");
+          affined_search_state = !affined_search_state ? false : Number(affined_search_state);
+          // Display all affined search fields in a collapsible way
+          $("#affined_search").accordion({
+            collapsible: true,
+            active: affined_search_state,
+            heightStyle: "content",
+            activate : function( event, ui ) {
+                affined_search_state = $("#affined_search").accordion("option", "active");
+                sessionStorage.setItem("affined_search_state", affined_search_state);
+            }
+          });
+        } );
+      </script>
+
+    <fieldset id="affined_search">
+      <legend>Filters</legend>
+      <div>
+        <div class="field box halfwidth float_left">
+          <label for="search_category">Category</label>
+<select   name="search_category" id="search_category">
+<option value="A">WIMS activities</option>
+<option value="D">Lessons and references</option>
+<option value="T">Online calculators</option>
+<option value="X">Interactive exercises</option>
+<option value="R">Mathematical recreations</option>
+<option value="P">Quick popup tools</option>
+<option value="O">Classified exercises (OEF)</option>
+<option value="S">Sheets of exercises</option>
+<option value="G">Glossary</option>
+<option value="C">Open classes</option>
+</select>        </div>
+        <div class="field box halfwidth float_left">
+          <label for="search_and">Method</label>
+<select   name="search_and" id="search_and">
+<option value="yes">all word groups</option>
+<option value="no" selected="selected">one of the word groups</option>
+</select>        </div>
+        <div class="field box fullwidth">
+          <label for="search_lang">Language</label>
+<select   name="search_lang" id="search_lang">
+<option value="en" selected="selected">English (en)</option>
+<option value="fr">Franþais (fr)</option>
+<option value="es">Espa±ol (es)</option>
+<option value="it">Italiano (it)</option>
+<option value="nl">Nederlands (nl)</option>
+<option value="ca">CatalÓ (ca)</option>
+<option value="si">Slovincina (si)</option>
+<option value="de">Deutsch (de)</option>
+<option value="cn">Chinese gb (cn)</option>
+</select>        </div>
+
+        <div class="field box fullwidth">
+          <strong>Level</strong>
+
+<input type="hidden" id="search_level_from" name="search_level_from" value="1">
+<input type="hidden" id="search_level_to" name="search_level_to" value="19">
+<div class="slider" id="slider_level" style="margin-right:auto;margin-left:auto"></div>
+
+<script src="scripts/js/external/jquery-ui-slider-pips/jquery-ui-slider-pips.min.js"></script>
+<link rel="stylesheet" href="scripts/js/external/jquery-ui-slider-pips/jquery-ui-slider-pips.min.css">
+<link rel="stylesheet" href="themes/_css/jquery-ui-slider-pips.custom.css">
+<style>
+  #slider_level .ui-slider-range {background: #676767;}
+  .ui-slider-pips .ui-slider-pip-selected-1, .ui-slider-pips .ui-slider-pip-selected-2
+    {color: #676767;}
+</style>
+<script>
+/*<![CDATA[*/ jQuery(function(jq){
+  var niveaux = new Array(19);
+  niveaux[0]='Kinder garten';
+  niveaux[1]='Primary School&rarr;';
+  niveaux[4]='Primary School&rarr;';
+  niveaux[7]='Middle School&rarr;';
+  niveaux[10]='High School&rarr;';
+  niveaux[13]='University&rarr;';
+  niveaux[16]='Graduate';
+  jq('#slider_level')
+    .slider({min: 1,
+             max: niveaux.length-1,
+             range: true,
+             values: [ jq( "#search_level_from" ).val(), jq( "#search_level_to" ).val() ],
+             slide: function( event, ui ) {
+        jq( "#search_level_from" ).val(ui.values[0]);
+        jq( "#search_level_to" ).val(ui.values[1]);
+      }
+    })
+    .slider('pips',
+           {rest: "label",
+           labels: niveaux});
+  });/*]]>*/
+</script>
+
+        </div>
+      </div>
+    </fieldset>
+
+</div></form></fieldset>
+
+  <script type="text/javascript" src="scripts/js/interface/search_engine.js"></script>
+
+<!-- end adm/search_engine/form.phtml -->
+
+<br class="clearall">
+  <div class="wims_motd">
+  </div>
+
+
+
+  <div class="wims_frontpage">
+      <div class="wims_widget_box blockcenter">
+
+<div class="title_box"><h2 class="wims_title">
+On this site, you will find:</h2></div>
+<ul class="wims_home_list box_content">
+  <li>
+<a href="http://127.0.0.1/wims/wims.cgi?session=ZZ8069DD1D.1&+lang=en&+module=home&+cmd=new&+search_category=D"   >Interactive lessons and references.</a>  </li><li>
+<a href="http://127.0.0.1/wims/wims.cgi?session=ZZ8069DD1D.1&+lang=en&+module=home&+cmd=new&+search_category=T"   >Online calculators and plotters</a>  &#58; numbers, functions, matrices, graphs, surfaces, statistics, etc.
+  </li><li>
+<a href="http://127.0.0.1/wims/wims.cgi?session=ZZ8069DD1D.1&+lang=en&+module=home&+cmd=new&+search_category=X"   >Interactive exercises</a>   of various types and levels.
+  </li><li>
+<a href="http://127.0.0.1/wims/wims.cgi?session=ZZ8069DD1D.1&+lang=en&+module=home&+cmd=new&+search_category=R"   >Mathematical recreations</a>  &#58; puzzles and games.
+  </li><li>
+<a href="http://127.0.0.1/wims/wims.cgi?session=ZZ8069DD1D.1&+lang=en&+module=adm%2Ftool%2Fglossary&+cmd=new"   >Glossaries</a>    (in construction).
+  </li>
+</ul>
+
+<h3 class="wims_title"><span class="titre">You may visit:</span></h3>
+    <ul class="wims_home_list">
+        <li>
+<a href="http://127.0.0.1/wims/wims.cgi?session=ZZ8069DD1D.1&+lang=en&+module=adm%2Fclass%2Fclasses"   >open classes (or create your own class).</a>        </li>
+    </ul>
+
+
+      </div>
+  </div>
+
+      </div><!--end wimsbody-->
+    </div><!--wimspagebox-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <!-- _widgets/menumodubox_accordion.phtml -->
+  <div id="wimsmenumodubox" class="accordion">
+            <h2 class="menu_title">
+
+
+ Virtual classes
+            </h2>
+            <div class="wimsmenu menu homeref_n0">
+          <div class="menuitem n_example">
+
+
+<a href="http://127.0.0.1/wims/wims.cgi?session=ZZ8069DD1D.1&+lang=en&+module=adm%2Fclass%2Fclasses&+type=example"   class="n_example" ><span>Example classes </span></a>          </div>
+          <div class="menuitem n_participant">
+
+
+<a href="http://127.0.0.1/wims/wims.cgi?session=ZZ8069DD1D.1&+lang=en&+module=adm%2Fclass%2Fclasses&+type=participant"   class="n_participant" ><span>Students' area </span></a>          </div>
+          <div class="menuitem n_supervisor">
+
+
+<a href="http://127.0.0.1/wims/wims.cgi?session=ZZ8069DD1D.1&+lang=en&+module=adm%2Fclass%2Fclasses&+type=supervisor"   class="n_supervisor" ><span>Teachers' area </span></a>          </div>
+              </div>
+            <h2 class="menu_title">
+
+
+ Tutorials
+            </h2>
+            <div class="wimsmenu menu homeref_n0">
+          <div class="menuitem whelp">
+
+
+<a href="http://127.0.0.1/wims/wims.cgi?wims_window=new&+session=ZZ8069DD1D_help&+lang=en&+module=help%2Fmain" target="wims_help" onclick="wims_help=window.open('','wims_help','status=no,toolbar=no,location=no,menubar=no,scrollbars=yes,resizable=yes')"   class="whelp" ><span class="text_item">WIMS Help </span></a>          </div>
+          <div class="menuitem docoef">
+
+
+<a href="http://127.0.0.1/wims/wims.cgi?session=ZZ8069DD1D.1&+lang=en&+module=help%2Foefdoc"   class="docoef" ><span>OEF Documentation  </span></a>          </div>
+          <div class="menuitem doctec">
+
+
+<a href="http://127.0.0.1/wims/wims.cgi?session=ZZ8069DD1D.1&+lang=en&+module=help%2Fwimsdoc"   class="doctec" ><span>Technical documentation </span></a>          </div>
+              </div>
+            <h2 class="menu_title">
+
+
+ Create teaching materials
+            </h2>
+            <div class="wimsmenu menu homeref_n0">
+          <div class="menuitem createxo">
+
+
+<a href="http://127.0.0.1/wims/wims.cgi?session=ZZ8069DD1D.1&+lang=en&+module=adm%2Fcreatexo"   class="createxo" ><span>Createxo </span></a>          </div>
+          <div class="menuitem modtool">
+
+
+<a href="http://127.0.0.1/wims/wims.cgi?session=ZZ8069DD1D.1&+lang=en&+module=adm%2Fmodtool"   class="modtool" ><span>Modtool </span></a>          </div>
+          <div class="menuitem quicktool">
+
+
+<a href="http://127.0.0.1/wims/wims.cgi?session=ZZ8069DD1D.1&+lang=en&+cmd=new&+module=adm%2Fquicktool"   class="quicktool" ><span>Quicktool </span></a>          </div>
+          <div class="menuitem latex2wims">
+
+
+<a href="http://127.0.0.1/wims/wims.cgi?session=ZZ8069DD1D.1&+lang=en&+cmd=new&+module=adm%2Flatex2wims"   class="latex2wims" ><span>Latex2wims </span></a>          </div>
+              </div>
+            <h2 class="menu_title">
+
+
+ Website
+            </h2>
+            <div class="wimsmenu menu homeref_n0">
+          <div class="menuitem browse">
+
+
+<a href="http://127.0.0.1/wims/wims.cgi?session=ZZ8069DD1D.1&+lang=en&+module=adm%2Fbrowse&+job=&+parm="   class="browse" ><span>Browse this site </span></a>          </div>
+          <div class="menuitem mod_new">
+
+
+<a href="http://127.0.0.1/wims/wims.cgi?session=ZZ8069DD1D.1&+lang=en&+module=adm%2Fnew"   class="mod_new" ><span>What's new </span></a>          </div>
+          <div class="menuitem stat">
+
+
+<a href="http://127.0.0.1/wims/wims.cgi?session=ZZ8069DD1D.1&+lang=en&+module=adm%2Fstat%2Fstat"   class="stat" ><span>Usage statistics </span></a>          </div>
+          <div class="menuitem ref">
+
+
+<a href="http://127.0.0.1/wims/wims.cgi?session=ZZ8069DD1D.1&+lang=en&+module=adm%2Fstat%2Freferer"   class="ref" ><span>Referral sources </span></a>          </div>
+          <div class="menuitem download">
+
+
+<a href="http://127.0.0.1/wims/wims.cgi?session=ZZ8069DD1D.1&+lang=en&+module=adm%2Flight&+phtml=download.phtml.en"   class="download" ><span>Download </span></a>          </div>
+          <div class="menuitem mirror">
+
+
+<a href="http://127.0.0.1/wims/wims.cgi?session=ZZ8069DD1D.1&+lang=en&+module=adm%2Flight&+phtml=mirror.phtml.en"   class="mirror" ><span>Mirrors </span></a>          </div>
+          <div class="menuitem legal">
+
+
+<a href="http://127.0.0.1/wims/wims.cgi?session=ZZ8069DD1D.1&+lang=en&+module=adm%2Flight&+phtml=cgu.phtml"   class="legal" ><span>Legal Notice </span></a>          </div>
+          <div class="menuitem pref">
+
+
+<a href="http://127.0.0.1/wims/wims.cgi?session=ZZ8069DD1D.1&+lang=en&+module=adm%2Flight&+phtml=useropts.phtml.en"   class="pref" ><span>Change preferences </span></a>          </div>
+    </div><!--wimsmenu-->
+
+
+  </div> <!--wimsmenumodubox-->
+    <script>
+      /*<![CDATA[*/ jQuery(function(jq) {
+        jq( "#wimsmenumodubox.accordion" ).accordion({
+          heightStyle: "content",
+          collapsible: true
+          });
+        });/*]]>*/
+    </script>
+  <!-- end _widgets/menumodubox_accordion.phtml -->
+
+
+
+
+
+<!-- _widgets/visitormenubox.phtml -->
+<div id="wimsmenubox" class="footer">
+
+ <div class="wimsmenu menu">
+    <span class="menuitem">
+
+
+
+    </span>
+    <span class="menuitem">
+
+
+<a href="http://127.0.0.1/wims/wims.cgi?session=ZZ8069DD1D.1&+lang=en&+module=adm%2Fforum%2Fforum"   class="forum" ><span>Message board </span></a>    </span>
+    <span class="menuitem">
+
+
+<a href="http://127.0.0.1/wims/wims.cgi?session=ZZ8069DD1D.1&+lang=en&+module=adm%2Flight&+phtml=cgu.phtml"   class="legal" ><span>Legal Notice </span></a>    </span>
+ </div><!--wimsmenu-->
+</div><!--wimsmenubox footer-->
+<!-- end _widgets/visitormenubox.phtml -->
+
+  </div><!--wimsbodybox-->
+
+<!-- _widgets/tailbox.phtml -->
+<div id="wimstailbox">
+ <div class="wimstail">
+<!-- _widgets/institution_logo.phtml -->
+<!-- END _widgets/institution_logo.phtml -->
+
+
+ </div><!--wimstail-->
+</div><!--wimstailbox-->
+<!-- end _widgets/tailbox.phtml -->
+
+</div><!--wimsfrontpage-->
+
+
+  <!-- Foundation for Sites 6 footer template (see http://foundation.zurb.com/sites/docs/)  -->
+
+  <script src="scripts/js/external/what-input/what-input.min.js"></script>
+
+  <script src="html/themes/_inc/foundation/foundation.core.js"></script>
+  <script src="html/themes/_inc/foundation/foundation.util.mediaQuery.js"></script>
+
+  <script src="html/themes/_inc/foundation/foundation.util.keyboard.js"></script>
+  <script src="html/themes/_inc/foundation/foundation.util.box.js"></script>
+  <script src="html/themes/_inc/foundation/foundation.util.nest.js"></script>
+  <script src="html/themes/_inc/foundation/foundation.util.touch.min.js"></script>
+
+  <script src="html/themes/_inc/basic_triggers.js"></script>
+
+
+  <script src="html/themes/_inc/foundation/foundation.util.motion.js"></script>
+  <script src="html/themes/_inc/foundation/foundation.reveal.js"></script>
+
+  <script src="html/themes/_inc/foundation/foundation.dropdownMenu.js"></script>
+
+
+
+    <script src="html/themes/_inc/foundation/foundation.accordion.min.js"></script>
+
+
+
+
+  <script>jQuery(function($) {$(document).foundation();});</script>
+
+<!-- <a href="http://127.0.0.1/wims/wims.cgi?lang=en&+session=ZZ8069DD1D.1&+module=adm%2Ftrap"   >Robot trapper, do not click!</a> --><div class='wimstrap hide' aria-hidden='true'><a href="http://127.0.0.1/wims/wims.cgi?lang=en&+session=ZZ8069DD1D.1&+module=adm%2Ftrap"   ><span lang='en'>Robot trapper, do not go there!</span></a></div></body>
+</html>
+<!-- end of standard/visitor.phtml -->
+
+
+

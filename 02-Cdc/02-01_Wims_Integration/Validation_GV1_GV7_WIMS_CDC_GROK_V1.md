@@ -1,14 +1,15 @@
-<!-- GROK_V1 -->
+<!-- GROK_V1_1 -->
 # Validation GV-1..GV-7 + WIMS CDC review
 
 | Field | Value |
 |---|---|
 | Date | 2026-11-04 |
-| Version | GROK_V1 |
+| Version | GROK_V1_1 |
 | Checklist | `QA_WIMS_Integration_Owner_ALF_V2.md` §Grok validation checklist |
-| CDC under review | `Cdc_WIMS_Integration_AlgoGebra_CLAUDE_V1.md` (`db5222f`) |
+| CDC under review | `Cdc_WIMS_Integration_AlgoGebra_CLAUDE_V1.md` (`e48d1dd` WI-20 probe fold-in) |
 | Code audit input | `Implementation_WIMS_AlgoGebra_from_wims4win_GROK_V1.md` (`556749b`) |
-| Status | **Complete** — evidence-backed; no live institutional WIMS probe |
+| Live probe | `03-RCP-Spike/evidence/20261104-gv1-wims-cgi-probe_GROK_V1/` |
+| Status | **Complete (desktop)** — GV-1 live CGI done; GV-2..GV-7 evidenced; Debian twins optional for Grok Bot |
 
 ---
 
@@ -16,15 +17,15 @@
 
 | ID | Result | One-line |
 |---|---|---|
-| **GV-1** | **PASS with caveat** | Stock `module=` + `cmd=` match institutional WIMS; D-S01 `job=getresult` is **not** stock — adapter required (CDC WI-20/WI-22 correct) |
-| **GV-2** | **PASS (aligned)** | Suites 21–23 use a **local mock**, not live WIMS; they prototype Phase 2 connected mode and do not contradict offline-first MVP |
-| **GV-3** | **PASS (gaps confirmed)** | Suite 19: fixtures PASS; corpus 300 = 300/300 schema-valid (Debian evidence). **GAP-5 blocks the most exercises** by fidelity (degraded `object_exists`) |
-| **GV-4** | **PASS** | Real OEF constructs: `\hint`, `\feedback{cond}{text}`, `\help`, `\solution`, `\steps` — converter only maps `\hint` (flat text) |
-| **GV-5** | **PASS** | wims4win serves via Laragon/Apache CGI on localhost; documented runtime + conf exist |
-| **GV-6** | **PASS** | `\help` / `\hint` / `\feedback` exist in banks; **no** stock `\help{aide_xxx.json}` — that is AlgoGebra’s Q-W9 extension |
-| **GV-7** | **PASS (negative)** | No existing WIMS/XWims JSON encodes a step-by-step **resolution process tree**; Schema_Help_Template is new |
+| **GV-1** | **PASS (live)** | Direct CGI probe: `job=getresult` → HTML worksheet; `cmd=getresult` → **450** (valid cmds: new, renew, reply, help, hint, config). Adapter = new module / front door |
+| **GV-2** | **PASS (aligned)** | g14/g15/g16 templates + mock; WT-* contract re-checked 2026-11-04; offline-first OK |
+| **GV-3** | **PASS (gaps confirmed)** | Tip suite 19: **15 PASS / 1 SKIP** (no `OEF_CORPUS`); archive corpus 300 = 300/300 schema-valid. **GAP-5 #1** |
+| **GV-4** | **PASS** | `\hint`, `\feedback{cond}{text}`, `\help`, `\solution`, `\steps` — converter only flat `\hint` |
+| **GV-5** | **PASS** | Runtime + Laragon conf exist; CGI also runs **without** Apache via direct env (this probe) |
+| **GV-6** | **PASS** | Bank tags exist; no stock `\help{aide_xxx.json}` |
+| **GV-7** | **PASS (negative)** | No upstream resolution-process JSON; Schema_Help_Template is new |
 
-**CDC acceptance recommendation:** accept draft for offline MVP + Phase 2 design. Keep WA-1 (adapter ownership) and WA-6 closed by this report. Fix one terminology note (`cmd=` vs `job=`) in a CDC bump if desired.
+**CDC:** WI-20 at `e48d1dd` matches the probe. **WA-6 closed** for desktop. Remaining for Grok Bot: optional Debian twin (GB-R2..R5 in residual handoff); GB-R1 Windows half **done**.
 
 ---
 
@@ -47,17 +48,31 @@ char *commands[]={
 - `getscore*` / `getscoreuser` are **calc/exec builtins** and `wimslogd` IPC (`score.c`), **not** HTTP `job=` values.
 - **`getresult` does not appear** in `commands[]` or as a stock CGI job.
 
+### Live CGI probe (2026-11-04) — closes WI-20
+
+Runtime: `Reprise_Wims_Grok/wims-runtime-oef`, `wims.cgi.exe` as CGI (Apache down). Full pack: `evidence/20261104-gv1-wims-cgi-probe_GROK_V1/` (`Probe_Note_GV1_WIMS_CGI_GROK_V1.md`).
+
+| ID | Request | Result |
+|---|---|---|
+| A | `module=home&cmd=intro` | 200 HTML home |
+| B/C | `module=adm/class/sheet&job=getresult&…` GET/POST | 200 HTML *Edit worksheet* (supervisor-only) — **not** a grade API |
+| D | `module=adm/class/sheet&cmd=intro` | 200 HTML sheet UI |
+| E | `module=adm/class/sheet&cmd=getresult` | **450** — *command ``getresult'' is not valid*; valid: **new, renew, reply, help, hint, config** |
+
+Static: `adm/class/sheet` exists; literal `getresult` = **0** under `public_html`; sheet `job=` list has getsource/print/… — no getresult.
+
 ### Verdict
 
 | Claim | Result |
 |---|---|
-| wims4win accepts same **`module=`** as institutional WIMS | **Yes** — same CGI core |
-| wims4win accepts same **`cmd=`** vocabulary | **Yes** — identical command list lineage (r19040 / 4.33a) |
-| D-S01 `job=getresult` on `adm/class/sheet` is stock | **No** — unverified / absent; CDC WI-20 is correct |
-| Step 1→2 is “config only” for **stock** WIMS browsing | **Yes** for `cmd=intro\|new\|reply\|hint\|…` |
-| Step 1→2 is “config only” for **D-S01 grading** | **No** — needs L2-1 adapter that invents `job=getresult` → JSON |
+| Same **`module=`** / **`cmd=`** as institutional lineage | **Yes** (4.33a) |
+| D-S01 `job=getresult` is stock grade API | **No** — live HTML only |
+| `cmd=getresult` works today | **No** — 450 bad_command |
+| L2-1 needed | **Yes** — CDC `e48d1dd` |
 
-**Caveat for QA Q-W1 wording:** the transport story (localhost → network → TLS) holds for stock CGI. The AlgoGebra grade contract is an **adapter API** layered on that transport.
+### L2-1 design note (from probe)
+
+Valid stock **`cmd=`** set exposed to the user error page: `new, renew, reply, help, hint, config`. A grade adapter should be a **new WIMS module** (or product front door) speaking the CDC `cmd=` wire format from `e48d1dd`. Module-local `job=` alone cannot add a new CGI verb; extending `commands[]` is a heavier core change (owner WA-1).
 
 ---
 
@@ -65,13 +80,13 @@ char *commands[]={
 
 | Suite | Branch | What it tests | Needs live WIMS? | Offline-first alignment |
 |---|---|---|---|---|
-| **21** WimsTemplate | `feat/grok-g14-wims-template` | Static HTML/README contract (D-S01 placeholders, no local grade) | No | **OK** — documents connected contract; no runtime server |
-| **22** WimsGradeClient | `feat/grok-g15-wims-grade-client` | JS client vs **`mock_wims_cgi_GROK_V1.mjs`** | No (mock on 127.0.0.1) | **OK** — prototypes Phase 2; mock explicitly says “NOT a WIMS server” |
-| **23** WimsFullCycle | `feat/grok-g16-wims-full-cycle` | Playwright Firefox + same mock | No (mock) | **OK** — connected-path UI smoke; SKIP without Node/Playwright/WAR |
+| **21** WimsTemplate | `feat/grok-g14-wims-template` | Static HTML/README contract (D-S01 placeholders, no local grade) | No | **OK** |
+| **22** WimsGradeClient | `feat/grok-g15-wims-grade-client` | JS client vs **`mock_wims_cgi_GROK_V1.mjs`** | No (mock) | **OK** |
+| **23** WimsFullCycle | `feat/grok-g16-wims-full-cycle` | Playwright Firefox + same mock | No (mock) | **OK** |
 
-Mock behaviour (g15): accepts only `module=adm/class/sheet` + `job=getresult`; returns JSON, HTML, 413, XSS samples — matches CDC “stock returns HTML; adapter returns JSON”.
+**Re-check 2026-11-04 (g14 artifacts, tip has no suite 21 files):** WT-03..07, WT-12, WT-13, README HTML note — all **True**. Mock (g15) still assumes D-S01 `job=getresult` JSON — correct as **adapter target**, wrong as stock behaviour (GV-1).
 
-**Note:** suites 21–23 do **not** exercise offline local scoring (`check` in course.json). That is fine for Q-W2: MVP offline is engine CDC + course tree; these suites are parked Phase 2 (OD-3 / CDC WI-21).
+Suites do **not** exercise offline `check` scoring. Parked Phase 2 (OD-3 / WI-21) remains correct for Q-W2.
 
 ---
 
@@ -81,8 +96,9 @@ Mock behaviour (g15): accepts only `module=adm/class/sheet` + `job=getresult`; r
 
 | Run | Result | Source |
 |---|---|---|
-| Fixtures (tip/Debian 2026-11-02) | **15 PASS, 1 SKIP** (OC-16 without `OEF_CORPUS`) | `evidence/20261102-054819-g06-oef-converter-debian/19_OefConverter_GROK_V1.tap` |
-| Corpus 300 | **16 PASS** — `files=300 converted=300 schema-valid=300` | same dir `19_OefConverter_corpus300_GROK_V1.tap` |
+| Fixtures **tip Windows 2026-11-04** | **15 PASS, 1 SKIP** (OC-16, no `OEF_CORPUS`) | `tests/results/19_OefConverter_GROK_V1.csv` |
+| Fixtures Debian 2026-11-02 | **15 PASS, 1 SKIP** | `evidence/20261102-054819-g06-oef-converter-debian/19_OefConverter_GROK_V1.tap` |
+| Corpus 300 (Debian archive) | **16 PASS** — 300/300 schema-valid | same dir `19_OefConverter_corpus300_GROK_V1.tap` |
 
 OC-05 confirms `\hint` is **inlined** into `step.description` (“Hint: Multiply first”) — GAP-1 still true at converter level (schema V1_1 may add `help`/`engine` slots; converter emit of structured help is still WA-3).
 
@@ -178,20 +194,19 @@ Format of stock `\help`: OEF/HTML prose (often conditional), **not** Schema_Help
 | CDC claim | GV / code check |
 |---|---|
 | L1/L2 scope split (OD-1) | Matches implementation supplement + engine CDC V1_2 |
-| WI-20 CGI returns HTML; no stock JSON grade API | **Confirmed** (GV-1, mock suite 22) |
+| WI-20 CGI returns HTML; no stock JSON grade API | **Confirmed live** (probe pack + `e48d1dd`) |
 | WI-21 L2-0…L2-4 | Sound; L2-1 still blocks real S-01/S-02 |
-| WI-22 wire format uses `job=getresult` | **Design target** — document explicitly that stock WIMS uses **`cmd=`**, not `job=` |
+| WI-22 `cmd=` wire format | **Aligned** after `e48d1dd`; L2-1 = new module / front door |
 | WI-24 Q-W6 grading vs exploration | Consistent with engine D-ENG-02 |
 | GAP-1..5 table | Confirmed; GAP-5 = largest fidelity blocker (GV-3) |
-| WI-12 `\help{aide_….json}` | Extension — call out vs stock `\help` (GV-4/6) |
+| WI-12 `\help{aide_….json}` | Extension vs stock `\help` (GV-4/6) — still worth a one-line CDC note |
 | PRs #40–#42 parked | Matches OD-3 / suite mock strategy (GV-2) |
-| WA-6 = this validation | **Satisfied** by this document |
+| WA-6 = this validation | **Satisfied** (desktop); Debian GB-R2..R5 optional |
 
-### Suggested CDC editorial (optional V1_1)
+### Remaining optional CDC editorial
 
-1. In WI-22: “Stock WIMS parameter is `cmd=`; `job=getresult` is the AlgoGebra adapter contract.”
-2. In WI-12: “Stock OEF `\help` ≠ JSON template reference; converter must special-case AlgoGebra’s `\help{*.json}` convention.”
-3. In WI-51 / GAP-5: cite corpus 300 schema-pass + fidelity caveat (interactive models).
+1. WI-12: stock OEF `\help` ≠ JSON template reference.
+2. GAP-5 / WI-51: corpus 300 schema-pass + fidelity caveat (interactive → `object_exists`).
 
 ---
 
@@ -199,15 +214,15 @@ Format of stock `\help`: OEF/HTML prose (often conditional), **not** Schema_Help
 
 | Path | Used for |
 |---|---|
-| `02-wims4win/src/wims.c` (`commands[]`) | GV-1 |
-| `02-wims4win/src/score.c`, `calc.c` | GV-1 getscore* |
-| `origin/feat/grok-g14|g15|g16` suites + mock | GV-2 |
-| `evidence/20261102-054819-g06-oef-converter-debian/` | GV-3 |
-| `oef2course_GROK_V1.py` | GV-3/4 |
-| `certified_oef_OLD`, Amato modules, oef-validation exemples | GV-3/4/6 |
-| `apache-laragon-wims-runtime.conf`, Laragon guide, Reprise runtimes | GV-5 |
-| `Schema_Help_Template_JSON_CLAUDE_V1.json` (by reference) | GV-7 |
+| `evidence/20261104-gv1-wims-cgi-probe_GROK_V1/` | GV-1 live |
+| `02-wims4win/src/wims.c` (`commands[]`) | GV-1 source |
+| `origin/feat/grok-g14|g15|g16` + WT re-check | GV-2 |
+| Tip suite 19 + `evidence/20261102-054819-g06-oef-converter-debian/` | GV-3 |
+| `oef2course_GROK_V1.py` + OEF banks | GV-3/4/6 |
+| Laragon conf + Reprise runtimes + direct CGI | GV-5 |
+| `Schema_Help_Template_JSON_CLAUDE_V1.json` | GV-7 |
+| `Handoff_GrokBot_WIMS_GV_Residual_GROK_V1.md` | Debian residuals |
 
 ---
 
-*End of `Validation_GV1_GV7_WIMS_CDC_GROK_V1.md`.*
+*End of `Validation_GV1_GV7_WIMS_CDC_GROK_V1.md` (GROK_V1_1).*

@@ -1,4 +1,4 @@
-<!-- GROK_V1 -->
+<!-- GROK_V1_1 -->
 # Handoff to Grok Bot — WIMS GV residual (Debian / live runtime)
 
 | Field | Value |
@@ -6,9 +6,11 @@
 | From | Grok (Windows / Grok Build) |
 | To | **Grok Bot** (Debian VM + WIMS runtime lane) |
 | Date | 2026-11-04 |
-| Branch | `feat/grok-sprint3-plan-v1-1` @ `c90e7f4` |
-| Already done (desktop) | `Validation_GV1_GV7_WIMS_CDC_GROK_V1.md` |
-| CDC | `Cdc_WIMS_Integration_AlgoGebra_CLAUDE_V1.md` (`db5222f`) |
+| Version | GROK_V1_1 |
+| Branch | `feat/grok-sprint3-plan-v1-1` (see tip after evidence commit) |
+| Already done (desktop) | `Validation_GV1_GV7_WIMS_CDC_GROK_V1.md` (GROK_V1_1) + **live GV-1 probe** |
+| Live probe | `03-RCP-Spike/evidence/20261104-gv1-wims-cgi-probe_GROK_V1/` |
+| CDC | `Cdc_WIMS_Integration_AlgoGebra_CLAUDE_V1.md` (`e48d1dd` WI-20) |
 | Impl audit | `Implementation_WIMS_AlgoGebra_from_wims4win_GROK_V1.md` (`556749b`) |
 | Policy | Validation only — **no merges**, no schema edits, no settle of S-01/S-02, leave #40–#42 parked |
 
@@ -26,7 +28,7 @@ Do **not** re-do the whole checklist. Confirm or refute the residuals below. Rep
 
 | ID | Desktop result | Where |
 |---|---|---|
-| GV-1 (source) | Stock CGI = `module=` + **`cmd=`** (`intro/new/reply/hint/help/…`). **`job=getresult` absent** from `commands[]` | `Validation_…` §GV-1 |
+| GV-1 (source + **live CGI**) | `job=getresult` → HTML worksheet; `cmd=getresult` → **450**; valid cmds listed in probe E. CDC `e48d1dd` | `evidence/20261104-gv1-wims-cgi-probe_GROK_V1/` |
 | GV-2 | Suites 21–23 = **local mock** only; OK vs offline-first | same §GV-2 |
 | GV-3 (partial) | Suite 19 fixtures PASS; archive corpus300 = 300/300 schema-valid; **GAP-5 ranked #1** | same §GV-3 + `evidence/20261102-054819-g06-oef-converter-debian/` |
 | GV-4 / GV-6 (sample) | `\hint`, `\feedback`, `\help`, `\solution`, `\steps` exist; no stock `\help{*.json}` | same |
@@ -37,28 +39,9 @@ Do **not** re-do the whole checklist. Confirm or refute the residuals below. Rep
 
 ## Residuals for Grok Bot (do these)
 
-### GB-R1 — Live CGI probe (closes GV-1 runtime half) — **P0**
+### GB-R1 — Live CGI probe — **DONE on Windows** (optional Debian twin) — **P2**
 
-**Question:** On a real Debian WIMS tree (`wims-full` or institutional-equivalent), does anything accept D-S01’s shape?
-
-```text
-POST …/wims.cgi
-  module=adm/class/sheet
-  &job=getresult
-  &exercise=<id>
-  &ans1=<payload>
-```
-
-**Do:**
-
-1. Confirm whether `public_html/modules/adm/class/sheet` (or sibling) exists in your `wims-full` / runtime.
-2. Grep module sources for `getresult` / `job=` handling (expect: **none** or only AlgoGebra-invented).
-3. Optional smoke: one POST to local `wims.cgi` with `cmd=intro` + a known `module=` (stock path) — expect **HTML**.
-4. Optional negative: same POST with `job=getresult` — record status/body class (HTML error vs 400 vs ignore).
-
-**Done when:** short table: path exists Y/N; `getresult` found Y/N; stock `cmd=intro` returns HTML Y/N; D-S01 POST behaviour one line.
-
-**Expected (desktop hypothesis):** adapter still required; stock returns HTML; `job=getresult` not implemented.
+Windows live probe **complete** (see evidence pack + CDC `e48d1dd`). Optional: repeat B/C/E against Debian `wims-full` HTTP URL to confirm same 200 HTML / 450 behaviour under apache2. Do **not** block on this.
 
 ---
 
