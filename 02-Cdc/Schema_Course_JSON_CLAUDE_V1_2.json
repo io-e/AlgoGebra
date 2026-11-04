@@ -1,0 +1,293 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://geogebraplus.local/schemas/course/v1",
+  "$comment": "CLAUDE_V1_2 — GeoGebraPlus course file schema. See Spec_Course_Security_CLAUDE_V1_2.md for security constraints. V1_2: extended checkAction.type enum (GAP-5 closure), giac renamed to geogebra-cas, gradable flag, variants[] for GAP-6, yacas/m2/scilab in engine enum. schemaVersion stays '1.0': new fields are additive (optional on step), existing 1.0 files remain valid.",
+  "title": "GeoGebraPlus Course",
+  "description": "A hierarchical course definition for the GeoGebraPlus course tree panel (RCP and Web).",
+  "type": "object",
+  "required": ["schemaVersion", "course", "tree"],
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": {
+      "type": "string",
+      "const": "1.0",
+      "description": "Schema version. Must be '1.0' for this schema."
+    },
+    "course": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 200,
+      "description": "Course title displayed in the tree panel header."
+    },
+    "description": {
+      "type": "string",
+      "maxLength": 2000,
+      "description": "Optional course description shown in the tree panel."
+    },
+    "author": {
+      "type": "string",
+      "maxLength": 200,
+      "description": "Course author name."
+    },
+    "locale": {
+      "type": "string",
+      "pattern": "^[a-z]{2}(_[A-Z]{2})?$",
+      "default": "en",
+      "description": "Locale for GeoGebra command names in this course (e.g., 'fr' for French commands). Commands are validated after GeoGebra's parser resolves them to internal names. Pattern uses underscore convention (fr_FR); BCP 47 (fr-FR) is not accepted."
+    },
+    "variants": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 100,
+      "items": {
+        "type": "object",
+        "required": ["seed"],
+        "additionalProperties": true,
+        "properties": {
+          "seed": {
+            "type": "integer",
+            "description": "Random seed used to generate this variant's parameter values."
+          }
+        }
+      },
+      "description": "Frozen parameter variants generated at conversion time (GAP-6). Each variant contains pre-evaluated values for wims()/slib()/pari()/maxima() calls. AlgoGebra picks a random variant at session start. Absent means the exercise has no dynamic parameters beyond random/randint."
+    },
+    "tree": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 50,
+      "items": { "$ref": "#/$defs/chapter" },
+      "description": "Top-level chapters of the course."
+    }
+  },
+  "$defs": {
+    "chapter": {
+      "type": "object",
+      "required": ["title", "children"],
+      "additionalProperties": false,
+      "properties": {
+        "title": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "description": {
+          "type": "string",
+          "maxLength": 2000
+        },
+        "children": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 100,
+          "items": { "$ref": "#/$defs/step" }
+        }
+      }
+    },
+    "step": {
+      "type": "object",
+      "required": ["title"],
+      "additionalProperties": false,
+      "properties": {
+        "title": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "description": {
+          "type": "string",
+          "maxLength": 2000,
+          "description": "Instruction text shown to the student when this step is selected."
+        },
+        "actions": {
+          "type": "array",
+          "maxItems": 20,
+          "items": { "$ref": "#/$defs/action" },
+          "description": "Actions executed when the student clicks 'Run Step'. If empty or absent, the step is informational only."
+        },
+        "check": {
+          "$ref": "#/$defs/checkAction",
+          "description": "Optional validation action executed when the student clicks 'Check'. Returns formative pass/fail."
+        },
+        "children": {
+          "type": "array",
+          "maxItems": 50,
+          "items": { "$ref": "#/$defs/step" },
+          "description": "Sub-steps. Maximum nesting depth: 4 (chapter + 4 step levels = 5 total)."
+        },
+        "help": {
+          "$ref": "#/$defs/helpRef",
+          "description": "Help content for this step. Either inline text or a reference to an external help template JSON file (Schema_Help_Template_JSON_CLAUDE_V1.json). Displayed in the help panel when the student requests help on this step."
+        },
+        "engine": {
+          "type": "string",
+          "enum": ["geogebra-cas", "pari", "maxima", "gnuplot", "gap", "octave", "yacas", "m2", "scilab"],
+          "default": "geogebra-cas",
+          "description": "Which computation engine this step requires. 'geogebra-cas' is the default (GeoGebra native CAS via Ggb2giac.java — commands use GeoGebra syntax like Derivative(), not raw GIAC diff()). Other engines are external (D-ENG-01..05): the binary must be on PATH, and the WIMS security filters apply. yacas/m2/scilab are accepted but produce gradable:false offline."
+        },
+        "gradable": {
+          "type": "boolean",
+          "default": true,
+          "description": "Whether this step can be graded offline. Set to false by the converter when the answer type is not mappable to any offline check type, or when the engine (yacas/m2/scilab) is not available. The step still works in exploration mode."
+        }
+      }
+    },
+    "action": {
+      "type": "object",
+      "required": ["directive", "value"],
+      "additionalProperties": false,
+      "properties": {
+        "directive": {
+          "type": "string",
+          "enum": ["CMD", "CAS", "VAL", "OPEN", "SAVE", "PNG"],
+          "description": "Action type. CMD: evalCommand. CAS: evalCommandCAS. VAL: read/display value. OPEN: load .ggb file. SAVE: save construction. PNG: export screenshot."
+        },
+        "value": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2000,
+          "description": "The command string, expression, variable name, or file path depending on the directive."
+        },
+        "target": {
+          "type": "string",
+          "enum": ["2d", "3d"],
+          "default": "2d",
+          "description": "Which GeoGebra instance to target. RCP has separate 2D/3D APIs; web uses a single applet (3D commands work if 3D view is open)."
+        },
+        "trustedGgb": {
+          "type": "boolean",
+          "default": false,
+          "description": "For OPEN actions only. If true, the .ggb file is loaded even if it contains embedded scripts. Teacher must vouch for the file. See security spec §3.2."
+        },
+        "description": {
+          "type": "string",
+          "maxLength": 500,
+          "description": "Optional human-readable description of what this action does."
+        }
+      }
+    },
+    "helpRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "template": {
+          "type": "string",
+          "maxLength": 500,
+          "description": "Path to an external help template JSON file (relative to the course file). The file must conform to Schema_Help_Template_JSON_CLAUDE_V1.json. Example: 'aide_derivation.json'."
+        },
+        "inline": {
+          "type": "object",
+          "minProperties": 1,
+          "maxProperties": 10,
+          "propertyNames": {
+            "pattern": "^[a-z]{2}(_[A-Z]{2})?$"
+          },
+          "additionalProperties": {
+            "type": "string",
+            "maxLength": 5000
+          },
+          "description": "Inline multilingual help text. Keys are locale codes. Supports {{variable}} placeholders and LaTeX between \\( ... \\). Use this for simple text help; use 'template' for structured resolution processes."
+        },
+        "variables": {
+          "type": "object",
+          "maxProperties": 50,
+          "additionalProperties": {
+            "oneOf": [
+              { "type": "string", "maxLength": 200 },
+              { "type": "number" }
+            ]
+          },
+          "description": "Variable values to inject into the template or inline text. Overrides template defaults. Keys are variable names, values are the resolved OEF random values."
+        }
+      },
+      "oneOf": [
+        { "required": ["template"] },
+        { "required": ["inline"] }
+      ],
+      "description": "Help reference: either an external template file path or inline multilingual text. At least one of 'template' or 'inline' must be present."
+    },
+    "checkAction": {
+      "type": "object",
+      "required": ["type"],
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["value_equals", "value_range", "object_exists", "cas_equals", "choice_equals", "sequence_equals", "set_equals", "engine_check"],
+          "description": "Check type. value_equals: numeric comparison with tolerance. value_range: min/max bounds. object_exists: GeoGebra object name check. cas_equals: symbolic equality via GeoGebra CAS (GIAC). choice_equals: selected option(s) match (single/multi). sequence_equals: ordered list match. set_equals: unordered set match. engine_check: delegate to named external engine."
+        },
+        "variable": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200,
+          "description": "GeoGebra object name or answer variable to check."
+        },
+        "expected": {
+          "description": "Expected value. String for cas_equals/engine_check, number for value_equals/value_range, array of strings for choice_equals/sequence_equals/set_equals, ignored for object_exists.",
+          "oneOf": [
+            { "type": "string" },
+            { "type": "number" },
+            {
+              "type": "object",
+              "required": ["min", "max"],
+              "properties": {
+                "min": { "type": "number" },
+                "max": { "type": "number" }
+              },
+              "additionalProperties": false
+            },
+            {
+              "type": "array",
+              "items": { "type": "string" },
+              "minItems": 1,
+              "maxItems": 50
+            }
+          ]
+        },
+        "tolerance": {
+          "type": "number",
+          "minimum": 0,
+          "default": 0.001,
+          "description": "Numeric tolerance for value_equals checks."
+        },
+        "mode": {
+          "type": "string",
+          "enum": ["absolute", "relative"],
+          "default": "absolute",
+          "description": "For value_equals: 'absolute' = |actual - expected| <= tolerance; 'relative' = |actual - expected| / |expected| <= tolerance."
+        },
+        "precision": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 20,
+          "description": "Number of significant figures to compare. Used with value_equals when the exercise specifies sig-fig grading."
+        },
+        "engineCommand": {
+          "type": "string",
+          "maxLength": 2000,
+          "description": "For engine_check only: command to send to the named engine. The student's answer is substituted for the {{answer}} placeholder. Subject to WIMS security filters."
+        },
+        "target": {
+          "type": "string",
+          "enum": ["2d", "3d"],
+          "default": "2d"
+        },
+        "feedback": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "pass": {
+              "type": "string",
+              "maxLength": 500,
+              "description": "Message shown to the student on success."
+            },
+            "fail": {
+              "type": "string",
+              "maxLength": 500,
+              "description": "Message shown to the student on failure."
+            }
+          }
+        }
+      }
+    }
+  }
+}

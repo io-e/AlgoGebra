@@ -1,9 +1,9 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://geogebraplus.local/schemas/help-template/v1",
-  "$comment": "CLAUDE_V1_1 — GeoGebraPlus help template schema. Teacher-authored resolution process or text help, loaded by AlgoGebra from OEF \\help{file.json} tags. See QA_WIMS_Integration_Owner_ALF_V2.md Q-W9. V1_1: allow $comment property.",
+  "$comment": "CLAUDE_V1_2 — GeoGebraPlus help template schema. Teacher-authored resolution process or text help, loaded by AlgoGebra via \\text{algogebra_help=file.json} OEF tags (not \\help{} which collides with OEF built-in). See QA_WIMS_Integration_Owner_ALF_V2.md Q-W9. V1_1: allow $comment property. V1_2: giac renamed to geogebra-cas (A-32), locale pattern note (A-33).",
   "title": "GeoGebraPlus Help Template",
-  "description": "A help file linked from an OEF exercise. Contains either a structured resolution process (step-by-step) or plain text help. Variables use {{name}} placeholders injected from OEF random values, student context, and locale at conversion time and/or runtime.",
+  "description": "A help file linked from an OEF exercise via \\text{algogebra_help=file.json}. Contains either a structured resolution process (step-by-step) or plain text help. Variables use {{name}} placeholders injected from OEF random values, student context, and locale at conversion time and/or runtime.",
   "type": "object",
   "required": ["templateVersion", "content"],
   "additionalProperties": false,
@@ -151,8 +151,8 @@
         },
         "engine": {
           "type": "string",
-          "enum": ["giac", "pari", "maxima", "gnuplot", "gap"],
-          "description": "Which computation engine to use for this step's actions and checks. Default: 'giac' (GeoGebra native CAS). Other engines require the binary on PATH (D-ENG-02)."
+          "enum": ["geogebra-cas", "pari", "maxima", "gnuplot", "gap"],
+          "description": "Which computation engine to use for this step's actions and checks. Default: 'geogebra-cas' (GeoGebra native CAS via Ggb2giac.java — commands use GeoGebra syntax like Derivative(), not raw GIAC diff()). Other engines require the binary on PATH (D-ENG-02)."
         },
         "engineCommand": {
           "type": "string",
