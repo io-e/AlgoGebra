@@ -1,0 +1,52 @@
+Code under test: 2b46d7c8600a411a99687e7a43e59c2e35375459
+Fixture set source: PR #61 head 7b2f3c64d86f6de40cd39e2249be18afa2ef53f5
+Fixture file: 120 cases; per engine: pari 30, maxima 38, gnuplot 28, gap 24. GAP has no Java adapter.
+Run scope: Java-side value/png/error rows for PARI, Maxima, Gnuplot. Reject/strict rows excluded here and covered by EngineAcceptanceTest + PariFileReadRejection.log.
+WIMS reference baseline: 118-case Debian results snapshot from PR #61 (latest three PARI read* reject additions are separately verified on Java only; no WIMS rerun claimed on Windows).
+PASS P-01 pari value :: expected=3,1;5,1;17,1;257,1;641,1;65537,1;6700417,1 actual=3,1;5,1;17,1;257,1;641,1;65537,1;6700417,1
+PASS P-02 pari value :: expected=100000000000000000039 actual=100000000000000000039
+PASS P-03 pari value :: expected=1.23 actual=1.23
+PASS P-04 pari value :: expected=6 actual=6
+PASS P-05 pari value :: expected=1267650600228229401496703205376 actual=1267650600228229401496703205376
+PASS P-06 pari value :: expected=1 actual=1
+PASS P-07 pari value :: expected=5050 actual=5050
+PASS P-08 pari value :: expected=120 actual=120
+PASS P-09 pari value :: expected=1/2 actual=1/2
+PASS P-10 pari value :: expected=3*x^2 actual=3*x^2
+PASS P-11 pari value :: expected=Mod(5,7) actual=Mod(5,7)
+PASS P-12 pari value :: expected=x-1,1;x+1,1 actual=x-1,1;x+1,1
+PASS P-13 pari value :: expected=1.4142135623730950488 actual=1.4142135623730950488
+PASS P-14 pari value :: expected=[-1.4142135623730950488+0.0*I,1.4142135623730950488+0.0*I]~ actual=[-1.4142135623730950488+0.E-38*I,1.4142135623730950488+0.E-38*I]~
+PASS P-15 pari error :: ERR|INVALID_OUTPUT
+PASS P-16 pari error :: ERR|INVALID_OUTPUT
+PASS M-01 maxima value :: expected=2*x*cos(x^2) actual=2*x*cos(x^2)
+PASS M-02 maxima value :: expected=x^3/3 actual=x^3/3
+PASS M-03 maxima value :: expected=(x-1)*(x+1) actual=(x-1)*(x+1)
+PASS M-04 maxima value :: expected=x^3+3*x^2+3*x+1 actual=x^3+3*x^2+3*x+1
+PASS M-05 maxima value :: expected=x = -2,x = 2 actual=x = -2,x = 2
+PASS M-06 maxima value :: expected=1 actual=1
+PASS M-07 maxima value :: expected=1267650600228229401496703205376 actual=1267650600228229401496703205376
+PASS M-08 maxima value :: expected=6 actual=6
+PASS M-09 maxima value :: expected=5050 actual=5050
+PASS M-10 maxima value :: expected=1 actual=1
+PASS M-11 maxima value :: expected=(y+x)/(x*y) actual=(y+x)/(x*y)
+PASS M-12 maxima value :: expected=0.3333333333333333 actual=0.3333333333333333
+PASS M-13 maxima value :: expected=-2 actual=-2
+PASS M-14 maxima error :: ERR|INVALID_OUTPUT
+PASS N-01 gnuplot png :: expected=PNG 800x600 actual=PNG 800x600
+PASS N-02 gnuplot png :: expected=PNG 800x600 actual=PNG 800x600
+PASS N-03 gnuplot png :: expected=PNG 800x600 actual=PNG 800x600
+PASS N-04 gnuplot png :: expected=PNG 800x600 actual=PNG 800x600
+PASS N-05 gnuplot png :: expected=PNG 800x600 actual=PNG 800x600
+PASS N-06 gnuplot png :: expected=PNG 800x600 actual=PNG 800x600
+PASS N-07 gnuplot png :: expected=PNG 800x600 actual=PNG 800x600
+PASS N-08 gnuplot png :: expected=PNG 800x600 actual=PNG 800x600
+PASS N-09 gnuplot png :: expected=PNG 800x600 actual=PNG 800x600
+PASS N-10 gnuplot png :: expected=PNG 800x600 actual=PNG 800x600
+PASS N-11 gnuplot png :: expected=PNG 800x600 actual=PNG 800x600
+PASS N-12 gnuplot png :: expected=PNG 800x600 actual=PNG 800x600
+PASS N-13 gnuplot png :: expected=PNG 800x600 actual=PNG 800x600
+WINDOWS gnuplot: 13/13 safe value/png/error fixtures PASS
+WINDOWS maxima: 14/14 safe value/png/error fixtures PASS
+WINDOWS pari: 16/16 safe value/png/error fixtures PASS
+WINDOWS TOTAL: 43/43 PASS; 0 FAIL; GAP + reject/strict rows not run

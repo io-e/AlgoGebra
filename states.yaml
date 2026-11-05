@@ -150,7 +150,7 @@ scenarios:
   X-03: {status: "NOT RUN", client: both, gate: "D", debian_desktop: "PASS (precheck)", script: "03-RCP-Spike/tests/scenarios/S_X-03_WriteBack_GROK_V1.ps1", blockers: "state adapter / allow-list not implemented"}
   X-04: {status: "NOT RUN", client: both, gate: "D", debian_desktop: "PASS (precheck)", script: "03-RCP-Spike/tests/scenarios/S_X-04_SaveUndo_GROK_V1.ps1", blockers: "no path writes engine output into the construction"}
   X-05: {status: "PARTIAL", client: both, gate: "D", debian_desktop: "PASS (desktop half)", script: "03-RCP-Spike/tests/scenarios/S_X-05_CapabilityArtifacts_GROK_V1.ps1", blockers: "web module does not exist"}
-  X-06: {status: "FAIL", client: both, gate: "D", debian_desktop: "FAIL", script: "03-RCP-Spike/tests/scenarios/S_X-06_TimeoutBadOutput_GROK_V1.ps1", blockers: "BUG-015 (malformed PARI input returns OK with empty text); construction path not integrated"}
+  X-06: {status: "FAIL", client: both, gate: "D", debian_desktop: "FAIL", script: "03-RCP-Spike/tests/scenarios/S_X-06_TimeoutBadOutput_GROK_V1.ps1", blockers: "BUG-015 engine-layer FIXED_PENDING_REVIEW on feat/engine-subprocess-p1 (unit harness PASS); scenario pack + construction path still need image rebuild/re-run"}
   X-07: {status: "PASS", client: desktop, gate: "-", debian_desktop: "PASS", windows_r11: "PASS", script: "03-RCP-Spike/tests/scenarios/S_X-07_LeanAbsent_GROK_V1.ps1", blockers: "-"}
   S-01: {status: "NOT RUN", client: both, gate: "D", debian_desktop: "NOT RUN", script: "03-RCP-Spike/tests/scenarios/S_S-01_SchemaCapability_GROK_V1.ps1", blockers: "no Wims activity/submission contract, client or test server"}
   S-02: {status: "NOT RUN", client: both, gate: "D", debian_desktop: "NOT RUN", script: "03-RCP-Spike/tests/scenarios/S_S-02_SubmitOnce_GROK_V1.ps1", blockers: "no Wims activity/submission contract, client or test server"}
@@ -266,8 +266,9 @@ bugs:
     title: "PARI engine returns OK with empty text for malformed input factor(( instead of a typed error"
     component: engines/pari
     severity: medium
-    status: OPEN
+    status: FIXED_PENDING_REVIEW
     evidence: "same run, S_X-06_TimeoutBadOutput_GROK_V1.log X06-04"
+    fix_2026-11-04: "feat/engine-subprocess-p1: PariGPEngine.createResult rejects blank payload with INVALID_OUTPUT; PariEngineTests PASS on Windows (gp 2.19); report 03-RCP-Spike/evidence/Engine_Subprocess_P1_Report_GROK_V1.md"
   - id: BUG-016
     title: "Clean rebuild not byte-identical (11 files: product jars, config.ini)"
     component: build.sh (jar timestamps)

@@ -1,0 +1,28 @@
+P-01  pari    pos  PASS
+P-02  pari    err  PASS
+P-03  pari    pos  PASS
+P-04  pari    neg  PASS
+P-05  pari    neg  PASS
+P-06  pari    neg  PASS
+P-07  pari    neg  PASS
+P-08  pari    neg  PASS
+P-09  pari    neg  PASS
+P-10  pari    neg  PASS
+P-11  pari    neg  PASS
+P-12  pari    pos  PASS
+M-01  maxima  pos  PASS
+M-02  maxima  pos  PASS
+M-03  maxima  neg  PASS
+M-04  maxima  neg  PASS
+M-05  maxima  neg  PASS
+M-06  maxima  neg  PASS
+G-01  gap     pos  PASS (WIMS only)
+G-02  gap     neg  PASS (WIMS only)
+G-03  gap     neg  PASS (WIMS only)
+N-01  gnuplot png  PASS
+N-02  gnuplot neg  PASS
+N-03  gnuplot neg  PASS
+N-04  gnuplot neg  PASS
+N-05  gnuplot neg  PASS
+N-06  gnuplot neg  PASS
+TOTAL 27 PASS 27 FAIL 0
