@@ -35,7 +35,7 @@ Done with a Python equivalent of `install_algogebra_hook_GROK_V1.ps1` (same rege
 
 | File (under `gv_wimsrt/public_html/`) | Before SHA256 | After SHA256 | Backup |
 |---|---|---|---|
-| `scripts/oef/answer.phtml` | `7b96041f…b837b0a` | `a3ce338e…e837b0a9e0` | `answer.phtml.bak_pre_algogebra` |
+| `scripts/oef/answer.phtml` | `7b96041f…eb24cae2` | `a3ce338e…cf0ea9e0` | `answer.phtml.bak_pre_algogebra` |
 | `scripts/oef/algogebra_json.phtml` | absent | `8174221d…0444743e837b0a` (= wims4win `928d383`) | n/a (new) |
 | `modules/H6/test/oef2html.fr/def/00006.def`, `00076.def` | absent | see `sha256_after.txt` | n/a (new) |
 | `modules/H6/test/oef2html.fr/Exindex` | `1e66c39b…` | rewritten per case, **restored** to original at end | `Exindex.bak_pre_algogebra` |
