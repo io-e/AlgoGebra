@@ -75,7 +75,8 @@ public final class PariGPEngine extends SubprocessEngine {
     // Matched as whole words, so alias(s,system) is also rejected. "eval" is blocked too: eval(Str("ins","tall(..)"))
     // rebuilds a blocked name at run time, and in secure mode gp only *asks* before install(), the next stdin line
     // confirms it (reproduced 2026-10-29 with gp 2.17.2 through the engine: native getpid loaded). Not a sandbox claim (D-ENG-03).
-    static final String[] AGB_ILLEGAL = { "system", "extern", "externstr", "fileextern", "install", "eval" };
+    static final String[] AGB_ILLEGAL = { "system", "extern", "externstr", "fileextern", "install", "eval",
+            "read", "readvec", "readstr" };
 
     @Override
     public String getEngineId() {

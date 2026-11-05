@@ -31,6 +31,9 @@ public final class GnuplotEngine extends SubprocessEngine {
     private static final Pattern PLOT_COMMAND = Pattern.compile("(?im)^\\s*(?:plot|splot)\\b");
     private static final Pattern PROCESS_INPUT = Pattern.compile("(?i)\\b(?:plot|splot)\\s+[\"'][|<]");
     private static final Pattern SHELL_ESCAPE = Pattern.compile("(?m)(?:^|[;\\n])\\s*!");
+    private static final Pattern BACKTICK = Pattern.compile("`");
+    private static final Pattern FORBIDDEN_EVAL = Pattern.compile(
+            "(?i)(?:^|[;\\s])eval(?:uate)?\\b");
 
     @Override
     public String getEngineId() {
@@ -51,9 +54,17 @@ public final class GnuplotEngine extends SubprocessEngine {
     protected String validateCommand(String command) throws ExternalComputeException {
         String normalized = normalizeControls(command).strip();
         String lower = normalized.toLowerCase(Locale.ROOT);
+        if (BACKTICK.matcher(normalized).find()) {
+            throw new ExternalComputeException(Code.COMMAND_REJECTED,
+                    "Gnuplot backtick command substitution is blocked");
+        }
         if (SHELL_ESCAPE.matcher(normalized).find()) {
             throw new ExternalComputeException(Code.COMMAND_REJECTED,
                     "Gnuplot shell escape commands beginning with ! are blocked");
+        }
+        if (FORBIDDEN_EVAL.matcher(lower).find()) {
+            throw new ExternalComputeException(Code.COMMAND_REJECTED,
+                    "Gnuplot eval/evaluate commands are blocked");
         }
         if (FORBIDDEN_COMMAND.matcher(lower).find()) {
             throw new ExternalComputeException(Code.COMMAND_REJECTED,
