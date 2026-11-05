@@ -1,13 +1,15 @@
-<!-- GROK_V1 -->
+<!-- GROK_V1_1 -->
 # Implementation notes — AlgoGebra ↔ WIMS (from wims4win code)
 
 | Field | Value |
 |---|---|
-| Date | 2026-11-04 |
-| Completes | `Cdc_External_Engines_AlgoGebra_CLAUDE_V1_1.md` (engine slice) + Claude WIMS Q&A / schemas on `feat/grok-sprint3-plan-v1-1` |
+| Date | 2026-11-05 |
+| Version | GROK_V1_1 |
+| Completes | `Cdc_External_Engines_AlgoGebra_CLAUDE_V1_3.md` (engine slice) + WIMS CDC |
 | Source of truth (code) | `D:\ALF_ZGit\02-wims4win` (native Windows port of WIMS ~4.33a / r19040 lineage) |
 | Related product code | `03-RCP-Spike/engines/{pari,maxima,gnuplot,api}/`, `wims/course-activity-template/` (PRs #40–#42) |
-| Status | **Implementation guide** — not a merge of #40–#42; respects Planning V1_1 / offline-first (Q-W2) |
+| Status | **Implementation guide** — filter tables synced to security commit `e7f1ad4` |
+| Security sync | `e7f1ad4` — Gnuplot backtick/eval; PARI `read`/`readvec`/`readstr` (`Decisions_PARI_Forbidden_GROK_V1_1.md`) |
 
 This document fills what Claude’s CDC leaves abstract by pinning **concrete WIMS behaviours** from the C interfaces and CGI. It does **not** replace GV-1…GV-7 or the owner pedagogy review.
 
@@ -67,9 +69,9 @@ From `src/Interfaces/common.c` + `Platform/`:
 | `illegal[]` | **empty** in upstream WIMS |
 | `illpart[]` | `plot`, `write`, `help` |
 | `check_parm` | `_` → `K`; escapes after newline limited |
-| AlgoGebra extra (owner BUG-006) | `AGB_ILLEGAL`: `system`, `extern`, `externstr`, `fileextern`, `install`, **`eval`** (whole word) — keep; WIMS empty `illegal[]` is **not** enough |
+| AlgoGebra extra (BUG-006 + V1_1) | `AGB_ILLEGAL` whole-word: `system`, `extern`, `externstr`, `fileextern`, `install`, **`eval`**, **`read`**, **`readvec`**, **`readstr`** — WIMS empty `illegal[]` + `default(secure,1)` are **not** enough (`secure` does not block file-read APIs; `e7f1ad4`) |
 
-Reference implementation: `PariGPEngine.java`.
+Reference implementation: `PariGPEngine.java` (`Decisions_PARI_Forbidden_GROK_V1.md` + `_V1_1.md`).
 
 #### Maxima (`maxima.c`)
 
@@ -94,7 +96,18 @@ Reference: `MaximaEngine.java` (must stay verbatim lists).
 
 #### Gnuplot (D-ENG-04 — **not** a WIMS `Interfaces/*.c` twin)
 
-Host forces PNG output path; block at least: `system`, `shell`, `!`, backticks, `set output`, `set print`, `load`, `call`, `save` (see Grok review m-2 on CDC V1_1).
+Host forces PNG output path. Block at least (see `GnuplotEngine.java` / CDC V1_3 + `e7f1ad4`):
+
+| Pattern | Why |
+|---|---|
+| `system` / `shell` | Process escape |
+| `!` shell escape (line/`;`-prefixed) | Same |
+| **Backtick `` ` ``** (**HIGH**, `e7f1ad4`) | Command substitution, e.g. `plot sin(x) title \`cat /etc/passwd\`` — bypasses word filters |
+| **`eval` / `evaluate`** (**MEDIUM**, `e7f1ad4`) | Builds blocked commands via string concat |
+| `set output`, `set print`, `load`, `call`, `save` | Arbitrary file I/O / script include |
+| `plot`/`splot` with `"|…"` / `"<…"` process input | Shell via gnuplot data source |
+
+Reject with `COMMAND_REJECTED` **before** spawn.
 
 ### 2.4 `find_illegal` semantics (port carefully)
 
@@ -221,4 +234,12 @@ Ask Claude (or fold into `Cdc_WIMS_Integration_…_CLAUDE_V1.md`):
 
 ---
 
-*End of `Implementation_WIMS_AlgoGebra_from_wims4win_GROK_V1.md`.*
+### Doc drift note (for Claude)
+
+`Cdc_External_Engines_AlgoGebra_CLAUDE_V1_3.md` EE-12 already lists backticks; add **`eval` / `evaluate`** explicitly to match `e7f1ad4`. PARI `read`/`readvec`/`readstr` already present in V1_3 / `Decisions_PARI_Forbidden_GROK_V1_1.md`.
+
+Optional follow-up: unit/SBX cases for `` title `…` ``, `eval "system …"`, and `read("/etc/passwd")` if not already covered.
+
+---
+
+*End of `Implementation_WIMS_AlgoGebra_from_wims4win_GROK_V1.md` (GROK_V1_1).*
