@@ -1,15 +1,16 @@
-<!-- GROK_V1_1 -->
+<!-- GROK_V1_2 -->
 # Implementation notes — AlgoGebra ↔ WIMS (from wims4win code)
 
 | Field | Value |
 |---|---|
 | Date | 2026-11-05 |
-| Version | GROK_V1_1 |
-| Completes | `Cdc_External_Engines_AlgoGebra_CLAUDE_V1_3.md` (engine slice) + WIMS CDC |
+| Version | GROK_V1_2 |
+| Completes | `Cdc_External_Engines_AlgoGebra_CLAUDE_V1_3.md` (engine slice) + WIMS CDC GROK_V2_2 |
 | Source of truth (code) | `D:\ALF_ZGit\02-wims4win` (native Windows port of WIMS ~4.33a / r19040 lineage) |
 | Related product code | `03-RCP-Spike/engines/{pari,maxima,gnuplot,api}/`, `wims/course-activity-template/` (PRs #40–#42) |
-| Status | **Implementation guide** — filter tables synced to security commit `e7f1ad4` |
-| Security sync | `e7f1ad4` — Gnuplot backtick/eval; PARI `read`/`readvec`/`readstr` (`Decisions_PARI_Forbidden_GROK_V1_1.md`) |
+| Status | **Implementation guide** — L1 filters + **L2-1 JSON hook prototype** |
+| Security sync | `e7f1ad4` — Gnuplot backtick/eval; PARI `read`/`readvec`/`readstr` |
+| Hook commit | wims4win `bb929e3` on `feat/algogebra-wims-integration` |
 
 This document fills what Claude’s CDC leaves abstract by pinning **concrete WIMS behaviours** from the C interfaces and CGI. It does **not** replace GV-1…GV-7 or the owner pedagogy review.
 
@@ -133,52 +134,51 @@ Align with CDC Phase 1; IDs for tracking:
 
 ## 3. L2 — WIMS CGI (connected / local wims4win)
 
-### 3.1 What D-S01 says (Claude decision)
+### 3.1 Locked design (D-WIMS-G01) — not D-S01
+
+D-S01 (`job=getresult` on `adm/class/sheet`) is **withdrawn**. Primary grade path:
 
 ```
-POST /wims/wims.cgi
-  module=adm/class/sheet
-  &job=getresult
-  &exercise=<id>
-  &ans1=<construction_base64>
-→ { "grade": 0..1, "feedback": "..." }
+cmd=new  → session + reply/choice fields in HTML
+cmd=reply + special_parm=algogebra_json + replyN=… → HTML + ALGOGEBRA_JSON block
 ```
 
-Client: `wims-grade-client_GROK_V1.js` (PR #41). **WIMS owns the grade.**
+Client target: rebase `wims-grade-client_GROK_V1.js` / PRs #40–#42 (**WA-9**). **WIMS owns the grade.**
 
-### 3.2 What the WIMS **codebase** actually implies
+### 3.2 What the WIMS **codebase** implies (updated)
 
 | Topic | Finding from wims4win | Implementation impact |
 |---|---|---|
-| Entry | CGI binary is `wims.cgi` / Windows `wims.exe` (`config.c`: `cgi_name="wims.cgi"`) | Endpoint path configurable; default `/wims/wims.cgi` OK |
-| Response | Modules render **HTML** via `html.c` / templates — **no built-in JSON grade API** matching D-S01 | Need a **WIMS-side adapter module** (preferred) or opt-in HTML marker (`htmlAdapter`, default OFF) |
-| Session | Grades go through `score.c` / `wimslogd` with `wims_user`, `wims_class`, `wims_session` | D-S01 sends **no** `session=`; rely on **same-origin cookie** until confirmed (open Q-GC2 / Q-W1 family) |
-| Score API | `getscore*` are **calc/exec** builtins for **module authors**, not a public `job=getresult` HTTP contract | **`job=getresult` on `adm/class/sheet` is unverified** in this tree — treat as **adapter contract to implement**, not as stock WIMS |
-| Auth | `auth.c` thresholds for anonymous / new session | MVP Q-W1: local wims4win, no auth — still need a session directory for scoring |
-| Engines behind CGI | Same `Interfaces/*.c` binaries under WIMS | L2 exploration fallback uses **server-installed** engines, not AlgoGebra’s Java wrappers |
+| Entry | CGI binary `wims.cgi` / Windows `wims.cgi.exe` | Default `/wims/wims.cgi` OK |
+| Response | OEF modules render **HTML**; JSON is an **additive HTML comment** when the hook is installed | Parse `ALGOGEBRA_JSON_BEGIN`…`END`; ignore surrounding HTML for grade UI |
+| Hook files | `scripts/oef/answer.phtml` (injection) + `algogebra_json.phtml` (body) | No `reply.phtml` on verified runtime |
+| Field names | Form fields `replyN` / `choiceN` | Never invent `ansN` |
+| Scores | Live: `m_sc_replyN`, `module_score` (0–10 → `grade=module_score/10`); session file uses `w_*` | See `OEF_Variable_Map_GROK_V1.md` |
+| Trigger | `special_parm=algogebra_json` on **reply only** | On `new`, OEF `select.phtml` would set `exo=$special_parm` |
+| Auth | Anonymous local OK for Q-W1 MVP | Still needs a writable `sessions/` tree |
+| Engines behind CGI | Same `Interfaces/*.c` | L2 exploration uses **server** engines |
 
-### 3.3 Recommended L2 build sequence
+### 3.3 L2 build sequence (status)
 
-| Step | Owner / who | Work |
-|---|---|---|
-| L2-0 | Owner | Settle JSON-vs-HTML (prefer WIMS adapter) and session cookie rules — rename Grok draft Q-W1…4 to **Q-GC1…4** to avoid clash with owner Q-W1…9 |
-| L2-1 | WIMS / Grok | Small module or wrapper that accepts D-S01 POST and returns JSON `{grade, feedback}` (later `{answers:[…]}` per Q-W4) |
-| L2-2 | Grok | Point suites 21–23 at **real** wims4win once adapter exists; keep mocks for CI |
-| L2-3 | Codex | Desktop `HttpClient` twin of the JS client (same body fields) |
-| L2-4 | Claude | WIMS CDC: per-answer result schema; reserve `submission` for Phase 2 idempotency (S-03) |
+| Step | Owner / who | Work | Status |
+|---|---|---|---|
+| L2-0 | Owner | D-WIMS-G01 locked | **Done** |
+| L2-1 | Grok / wims4win | JSON hook on Windows runtime + smoke test | **Done (Windows)** `bb929e3`; residual packaging/Debian |
+| L2-2 | Grok | Point suites 21–23 at real wims4win; keep mocks for CI | **Open** |
+| L2-3 | Codex | Desktop `HttpClient` twin | **Open** (WA-9 unblocked) |
+| L2-4 | Claude / Grok | Schema polish (`feedback`, checkbox `expected` trim, S-03 key) | **Open** |
 
-Until L2-1 exists, **do not** claim D-S01 works against stock CGI.
-
-### 3.4 Payload / deployment defaults (from Grok client — OK to keep)
+### 3.4 Client defaults (keep)
 
 | Setting | Default |
 |---|---|
-| Max `ans1` base64 | 1 MiB (`maxAnsBytes`) |
+| Max reply body | 1 MiB |
 | Timeout | 15 s |
 | Credentials | `same-origin` |
 | Redirects | refuse |
 | Grade domain | number in `[0,1]` |
 | Feedback render | `textContent` only |
+| JSON extract | regex/comment parse of `ALGOGEBRA_JSON_BEGIN`…`END` |
 
 ---
 
@@ -195,16 +195,15 @@ Converter still lacks GAP-3…5 (computeRequest, submission, rich checks) — do
 
 ---
 
-## 5. What to add to Claude’s docs (editorial)
+## 5. Doc fold-in status (GROK_V1_2)
 
-Ask Claude (or fold into `Cdc_WIMS_Integration_…_CLAUDE_V1.md`):
-
-1. Split status: **“Engine layer ready for Codex”** vs **“WIMS CGI not ready until adapter”**.
-2. Patch Q-W6 into D-ENG-02 wording (grading error vs exploration remote).
-3. Replace “Perl required OEF reader” with **Python converter at build time**.
-4. Link this file + `WIMS-INTERFACES.md` + `pari.c`/`maxima.c`/`gap.c` paths.
-5. Align Q-W4 multi-answer object with a future bump of `wims-grade-client` (single `grade` today).
-6. Example JSON: allow or remove `$comment`.
+| Item | Status |
+|---|---|
+| Canonical WIMS CDC | `Cdc_WIMS_Integration_AlgoGebra_GROK_V2_2.md` |
+| Client protocol | `Spec_WIMS_Message_Integration_GROK_V1_1.md` |
+| WA-9 unblock | `02-01_Wims_Integration/Handoff_WA9_Mock_Rebase_GROK_V1.md` |
+| Engine layer ready for Codex | Still true (L1) |
+| WIMS CGI JSON hook | Windows prototype ready; client rebase = WA-9 |
 
 ---
 
