@@ -19,7 +19,9 @@ $script:Image = if ($env:IMAGE) { $env:IMAGE } elseif ($IsWindows) { 'D:\ALF_ZGi
 $script:ToolsOut = [IO.Path]::Combine($script:SpikeDir, 'host', 'build', 'test-tools-ps1')
 $script:TestPassCount = 0; $script:TestFailCount = 0; $script:TestSkipCount = 0; $script:TestNumber = 0
 function Initialize-TestSuite([string]$Name) {
-    $script:Suite = $Name; $script:Csv = Join-Path $script:Res "${Name}_GROK_V1.csv"
+    $script:Suite = $Name
+    $artifactSuffix = if ($script:ArtifactSuffix) { $script:ArtifactSuffix } else { 'GROK_V1' }
+    $script:Csv = Join-Path $script:Res "${Name}_${artifactSuffix}.csv"
     'suite,num,id,status,priority,detail,ts' | Set-Content $script:Csv -Encoding UTF8
     Write-Host "# Suite: $Name"; Write-Host "# Started: $(Get-Date -Format o)"
     Write-Host "# Host: $([Environment]::MachineName) / $([Runtime.InteropServices.RuntimeInformation]::OSDescription) / pwsh $($PSVersionTable.PSVersion)"; Write-Host ''
