@@ -1,0 +1,15 @@
+suite,num,id,status,priority,detail,ts
+21_WimsTemplate,1,WT-01-template-exists,PASS,P0,"/workspace/mw-algogebra/ag/wims/course-activity-template/course-activity_GROK_V1.html",2026-11-05T14:14:28.1704094+01:00
+21_WimsTemplate,2,WT-02-readme-exists,PASS,P1,"/workspace/mw-algogebra/ag/wims/course-activity-template/README_GROK_V1.md",2026-11-05T14:14:28.1731455+01:00
+21_WimsTemplate,3,WT-03-reuses-web-host,PASS,P0,"course-tree.js/.css + role=tree tree root",2026-11-05T14:14:28.1788938+01:00
+21_WimsTemplate,4,WT-04-grade-client-script,PASS,P0,"includes the G-15 grade client",2026-11-05T14:14:28.1799629+01:00
+21_WimsTemplate,5,WT-05-placeholders,PASS,P0,"WIMS_CGI_URL / WIMS_EXERCISE_ID / COURSE_JSON_URL placeholders",2026-11-05T14:14:28.1808667+01:00
+21_WimsTemplate,6,WT-06-default-endpoint-D-S01,PASS,P0,"default endpoint /wims/wims.cgi (D-S01)",2026-11-05T14:14:28.1815742+01:00
+21_WimsTemplate,7,WT-07-local-codebase,PASS,P0,"self-hosted WAR, no geogebra.org",2026-11-05T14:14:28.1823265+01:00
+21_WimsTemplate,8,WT-08-no-external-assets,PASS,P0,"external src/href count: 0",2026-11-05T14:14:28.1868528+01:00
+21_WimsTemplate,9,WT-09-single-inject,PASS,P0,"applet.inject count: 1",2026-11-05T14:14:28.1887086+01:00
+21_WimsTemplate,10,WT-10-submit-a11y,PASS,P1,"submit button disabled until attached, aria-label; result region aria-live",2026-11-05T14:14:28.1896406+01:00
+21_WimsTemplate,11,WT-11-formative-note,PASS,P1,"page states WIMS owns the grade",2026-11-05T14:14:28.1903890+01:00
+21_WimsTemplate,12,WT-12-no-local-grade,PASS,P0,"template computes no grade",2026-11-05T14:14:28.1915899+01:00
+21_WimsTemplate,13,WT-13-readme-contract,PASS,P1,"README documents the D-S01 request verbatim",2026-11-05T14:14:28.1925038+01:00
+21_WimsTemplate,14,WT-14-readme-open-points,PASS,P1,"README lists undecided points (session, HTML response, CORS)",2026-11-05T14:14:28.1932344+01:00

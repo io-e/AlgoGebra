@@ -1,0 +1,568 @@
+Status: 200 OK
+Expires:Sat, 26 Jul 1990 05:00:00 GMT
+Server: WIMS 4.33a (WWW Interactive Multipurpose Server)
+Content-type: text/html; charset=windows-1252
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>    
+<html lang="en"><head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <!--begin of standard/htmlheader.phtml-->
+<meta charset="windows-1252">
+<title>Worksheet</title>
+<meta name="GENERATOR" content="wims [en]">
+<meta name="description" content="Worksheet edition. interactive exercises, online calculators and plotters, mathematical recreation and games">
+<meta name="keywords" content="interactive mathematics, interactive math, server side interactivity, , ">
+<meta name="Author" content="Gang, XIAO">
+
+<!-- makes browsers render all elements more consistently -->
+<link rel="stylesheet" href="scripts/js/external/normalize.min.css">
+
+<!-- Foundation Accordion -->
+<link rel="stylesheet" href="html/themes/_css/foundation_accordion.css">
+
+<link href="html/themes/standard/css.css?ver=4.33a" rel="stylesheet"><link href="gifs/themes/default/icon-min.css?ver=4.33a" rel="stylesheet">
+
+<!-- METAS iOS : -->
+<link rel="apple-touch-icon" href="gifs/wims_logo.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+<!-- prevents links from apps from opening in mobile safari>
+<script src="scripts/js/external/safari_mobile_links/compressed.js"></script-->
+
+<!-- Librairies JQUERY -->
+  <script src="scripts/js/external/jquery/jquery.min.js"></script>
+  <link rel="stylesheet" href="scripts/js/external/jquery-ui/themes/smoothness/jquery-ui.min.css">
+  <script src="scripts/js/external/jquery-ui/jquery-ui.min.js"></script>
+
+<!-- JQUERY pour autocompletion -->
+  <script src="scripts/js/interface/autocomplete.js"></script>
+
+<!-- Style pour impression -->
+  <link rel="stylesheet" media="print" href="html/themes/_css/print.css">
+
+<style>
+
+:root {
+  --wims_bgcolor: #F6F6F6;
+  --wims_link_color: #1468A0;
+  --wims_vlink_color: #1779BA;
+  --wims_hlink_color: #004077;
+  --wims_ref_menucolor: #FFFFFF;
+  --wims_ref_bgcolor: #676767;
+  --wims_ref_button_color: #FFFFFF;
+  --wims_ref_button_bgcolor: #666666;
+  --wims_ref_button_help_bgcolor: #008f00;
+  --wims_ref_button_help_color: #FFFFFF;
+}
+
+#wimspagebox{
+  background-color: #F6F6F6;
+  
+}
+body.main_body {}
+
+a, .ui-widget-content a{color:#1468A0;}
+/*a:visited {color:#1779BA;}*/
+a:hover, a:focus {color:#004077;}
+
+.wimsmanager a {color:#FFFFFF;}
+
+#wimsmenubox,#wimsmenumodubox { color: #FFFFFF; background-color: #676767;}
+#wimstopbox { background-color: #676767;}
+
+.property_fields{border-color: #676767;}
+.property_fields legend{background-color: #676767;}
+.property_fields legend,.property_fields legend>a{color:#FFFFFF;}
+
+.container h4{ background-color:#676767; color:#FFFFFF;}
+#menu_pendant,#menu_html { background-color:#676767; color:#FFFFFF;}
+#menu_avant,#menu_apres {  background-color:#666666; color:#FFFFFF;}
+.infobulle{ background-color: #666666; color: #FFFFFF;}
+
+#wimstopbox { color: #FFFFFF;}
+
+/* Foundation dropdown custom css */
+.dropdown.menu > li.is-dropdown-submenu-parent > a::after { border-top-color: var(--wims_ref_menucolor);}
+.dropdown.menu > li.is-dropdown-submenu-parent:hover > a::after { border-top-color: var(--wims_ref_menucolor);}
+.dropdown.menu > li.is-dropdown-submenu-parent.is-active > a::after{ border-top-color: var(--wims_ref_bgcolor);}
+#wimstopbox>.dropdown.menu > li.is-active>a{
+  background-color: var(--wims_ref_menucolor);color:var(--wims_ref_bgcolor)}
+.menu a:hover,#wimsbodybox .menu a:hover{
+  background-color: var(--wims_ref_bgcolor);color:var(--wims_ref_menucolor)}
+
+
+#wimstopbox>.menu>.menuitem>a:hover,
+#wimsmenubox>.menu a:hover,
+#wimsmenumodubox a:hover,
+#wimsmenumodubox .menu a:hover{
+  color: #676767;
+  background-color:#FFFFFF;
+}
+
+/* Breadcrumb */
+.breadcrumbs>li>a{color:#676767}
+
+
+.wims_emph {color:#676767;}
+
+#wimstopbox .menuitem:not(.is-submenu-item)>a,
+#wimsmenumodubox a,
+#wimsmenubox .menuitem>a
+ { color: #FFFFFF;}
+
+/* Tables */
+.wimstable th {background-color: #676767; color:#FFFFFF;}
+.wimstable th a {color: #FFFFFF;}
+.wimstable caption, .wims_title_seq,
+.wims_widget_box .title_box{background-color: #676767;color: #FFFFFF;}
+.wimstable>caption a {color: #FFFFFF;}
+.wimstable>caption .wims_button{background-color: #666666;color: #FFFFFF;}
+.wimstable th .wims_button{background-color: #666666;color: #FFFFFF;}
+
+input[type="submit"],input[type="button"],.main_body .wims_button{
+    background-color:#666666;
+    color:#FFFFFF;
+}
+.main_body .wims_button_help{
+    background-color:#008f00;
+    color:#FFFFFF;
+}
+
+.legend {background-color: #676767;color:#FFFFFF;}
+
+.wims_color1 {
+   background-color: #676767;
+   color:#FFFFFF;
+}
+.wims_color2 {
+  background-color:#666666;
+  color:#FFFFFF;
+}
+.wims_color3 {
+  background-color:#008f00;
+  color:#FFFFFF;
+}
+
+
+</style>
+<!--end standard/htmlheader.phtml-->
+
+<script src="scripts/js/external/tinymce/tinymce.min.js"></script>
+  <style>.hidden_btn{display:none}.wysiwyg_btns{text-align:right;font-size:.6em}</style>
+  <script>
+  document.addEventListener("DOMContentLoaded", function() {
+    /* Insert "enable/disable editor" buttons */
+    var ed_instances = document.querySelectorAll(".iEdit");
+    ed_instances.forEach(function(ed) {
+      if(ed.id){
+        var div = document.createElement('div');
+        div.classList.add('wysiwyg_btns');
+        var a1 = document.createElement('a');
+        var linkText = document.createTextNode("Disable editor");
+        a1.appendChild(linkText);
+        a1.setAttribute("onclick","javascript:tinymce.execCommand('mceRemoveEditor',true,'"+ed.id+"');this.classList.add('hidden_btn');this.nextElementSibling.classList.remove('hidden_btn');");
+        div.appendChild(a1);
+        var a2 = document.createElement('a');
+        var linkText = document.createTextNode("Activate editor");
+        a2.appendChild(linkText);
+        a2.setAttribute("onclick","javascript:tinymce.execCommand('mceAddEditor',true,'"+ed.id+"');this.classList.add('hidden_btn');this.previousElementSibling.classList.remove('hidden_btn');");
+        a2.classList.add("hidden_btn");
+        div.appendChild(a2);
+        /* insert just after editor */
+        ed.parentNode.insertBefore(div, ed.nextSibling);
+      }
+    });
+    /* Initialize editors */
+    // RegExp du texte a chercher
+    var find1 = '\\\\imagedir\/';
+    var re1 = new RegExp(find1, 'g');
+    // texte de remplacement
+    var replace1 = '\\imagedir\/';
+    var replace2 = 'wims.cgi?cmd=getfile&amp;session=5ADB015A3E&amp;special_parm=oefimg/';
+    // convertit l'url de remplacement en RegExp
+    var find2 = replace2.replace(/\//g, '\\/');
+    var find2 = find2.replace(/\./g, '\\.');
+    var find2 = find2.replace(/\?/g, '\\?');
+    var re2 = new RegExp(find2, 'g');
+    tinymce.init({
+      selector:'.iEdit',
+      plugins: 'code help link lists',
+      block_formats : tinymce.translate('Paragraph')+'=p;' +tinymce.translate('Heading 1')+'=h2;'+tinymce.translate('Heading 2')+'=h3;' +tinymce.translate('Heading 3')+'=h4;' +tinymce.translate('Heading 4')+'=h5;' +tinymce.translate('Heading 5')+'=h6;' +tinymce.translate('Preformatted')+'=pre;' +tinymce.translate('Blockquote')+'=blockquote;',
+      menubar: false,
+      branding: false,
+      toolbar: 'undo redo | blocks aligncenter | bold italic strikethrough | subscript superscript | hr link | bullist numlist | removeformat | code | help',
+      
+      
+      convert_urls : false,
+      entities : '160,nbsp,162,cent,8364,euro,163,pound',
+      content_css : 'html/themes/standard/css.css',
+      body_class: 'main_body',
+      content_style : ':root{--wims_bgcolor: #F6F6F6;--wims_link_color: #1468A0;--wims_vlink_color: #1779BA;--wims_hlink_color: #004077;--wims_ref_menucolor: #FFFFFF;--wims_ref_bgcolor: #676767;--wims_ref_button_color: #FFFFFF;--wims_ref_button_bgcolor: #666666;}a, .ui-widget-content a{color:#1468A0}a:hover, a:focus {color:#004077}table.wimstable th{background-color: #676767;color: #FFFFFF}table.wimstable th a{color: #FFFFFF}.wimstable caption a{color: #FFFFFF}.wims_emph {color:#676767}input[type="submit"],input[type="button"],.main_body .wims_button{background-color:#666666;color:#FFFFFF}.main_body .wims_button_help{background-color:#008f00;color:#FFFFFF}.property_fields{border-color:#676767}.property_fields legend{background-color: #676767}.property_fields legend,.property_fields legend>a{color:#FFFFFF}.wims_color1 {background-color: #676767;color:#FFFFFF}.wims_color2 {background-color:#666666;color:#FFFFFF}.wims_color3 {background-color:#008f00;color:#FFFFFF}',
+      init_instance_callback: function(editor) {
+        editor.on('PostProcess', function (e) {
+          // Avant d'afficher le code source
+          e.content = e.content.replace(re2, replace1);
+        });
+        editor.on('BeforeSetContent', function (e) {
+          // Lors de l'enregistrement du code source
+          e.content = e.content.replace(re1, replace2);
+        });
+        // refresh content, searching for 'imagedir'
+        editor.setContent(editor.getContent());
+      }
+    });
+  });</script>
+
+<script>/*<![CDATA[*/function wims_mathml_zoom(id){var math = document.getElementById(id);if(math.getAttribute("mathsize") == "100%"){  math.setAttribute("mathsize","200%");}else{  math.setAttribute("mathsize","100%");};};window.addEventListener("load", function() {  var ua = navigator.userAgent.toLowerCase();  var gecko = ua.indexOf("gecko") > -1 && ua.indexOf("khtml") === -1 && ua.indexOf("trident") === -1;  if(! gecko ){    var script = document.createElement("script");    script.src  = "scripts/js/mathjax/mml-chtml.js";    document.head.appendChild(script);  };});/*]]>*/</script>
+
+<script>reload_mathML=function(){var t=document.getElementsByClassName("wims_mathml");Array.prototype.filter.call(t,function(t){var e=t.style.display;t.style.display="none",t.style.opacity="0",setTimeout(function(){t.style.display=e},1e3),setTimeout(function(){t.style.opacity="1"},1100)})},document.onreadystatechange=function(){"complete"===document.readyState&&(/^((?!chrome|android).)*safari/i.test(navigator.userAgent)&&reload_mathML())};</script></head>
+<body class="main_body" dir="ltr"  >
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- begin of standard/header.phtml -->
+
+
+
+
+
+
+    <div id="wimstopbox">
+    <div class="wimsmenu menu float_left">
+<!-- _widgets/headhome.phtml -->
+ <span class="menuitem home">
+
+
+<a href="wims.cgi?lang=en&+session=5ADB015A3E.1"   class="home" ><span>WIMS Home </span></a> </span>
+<!-- end _widgets/headhome.phtml -->
+
+    </div>
+
+
+<!-- widget user_links -->
+<ul class="wimsmenu dropdown menu" data-dropdown-menu data-options="data-autoclose:true;">
+
+
+
+<!-- _widgets/headmenu.phtml -->
+  <li class="menuitem help">
+
+
+<a href="wims.cgi?wims_window=new&+session=5ADB015A3E_mhelp&+lang=en&+module=adm%2Fclass%2Fsheet&+cmd=help&+special_parm=" target="wims_help" onclick="wims_help=window.open('','wims_help','status=no,toolbar=no,location=no,menubar=no,scrollbars=yes,resizable=yes')"   class="help" ><span class="text_item">Help </span></a>  </li>
+  <li class="menuitem about">
+
+
+<a href="wims.cgi?wims_window=new&+session=5ADB015A3E_mhelp&+lang=en&+module=adm%2Fclass%2Fsheet&+cmd=help&+special_parm=about" target="wims_help" onclick="wims_help=window.open('','wims_help','status=no,toolbar=no,location=no,menubar=no,scrollbars=yes,resizable=yes')"   class="about" ><span class="text_item">About this module / this exercise </span></a>  </li>
+<!-- end _widgets/headmenu.phtml -->
+
+
+        <li id="language_selector" class="language_selector menuitem is-dropdown-submenu-parent">
+          <a href="#lang_list" class="lang">
+            <span><img src="gifs/en.gif" alt="English"> Language</span>
+          </a>
+
+<!-- begin of _widgets/language_selector.phtml -->
+<ul id="lang_list" class="language_selector menu">
+    <li class="menuitem
+        disabled">
+        <a class="current"><img src="gifs/en.gif" alt="" class="vignette"><span class="legende"> English</span> <span class="smaller">(current)</span></a>
+    </li>
+    <li class="menuitem
+        ">
+<a href="wims.cgi?lang=fr&+session=5ADB015A3E.1&+module=adm%2Fclass%2Fsheet"   ><img src="gifs/fr.gif" alt="" class="vignette"><span class="legende"> Français</span></a>    </li>
+    <li class="menuitem
+        ">
+<a href="wims.cgi?lang=es&+session=5ADB015A3E.1&+module=adm%2Fclass%2Fsheet"   ><img src="gifs/es.gif" alt="" class="vignette"><span class="legende"> Español</span></a>    </li>
+    <li class="menuitem
+        ">
+<a href="wims.cgi?lang=it&+session=5ADB015A3E.1&+module=adm%2Fclass%2Fsheet"   ><img src="gifs/it.gif" alt="" class="vignette"><span class="legende"> Italiano</span></a>    </li>
+    <li class="menuitem
+        ">
+<a href="wims.cgi?lang=nl&+session=5ADB015A3E.1&+module=adm%2Fclass%2Fsheet"   ><img src="gifs/nl.gif" alt="" class="vignette"><span class="legende"> Nederlands</span></a>    </li>
+    <li class="menuitem
+        ">
+<a href="wims.cgi?lang=ca&+session=5ADB015A3E.1&+module=adm%2Fclass%2Fsheet"   ><img src="gifs/ca.gif" alt="" class="vignette"><span class="legende"> Català</span></a>    </li>
+    <li class="menuitem
+        ">
+<a href="wims.cgi?lang=si&+session=5ADB015A3E.1&+module=adm%2Fclass%2Fsheet"   ><img src="gifs/si.gif" alt="" class="vignette"><span class="legende"> Slovincina</span></a>    </li>
+    <li class="menuitem
+        ">
+<a href="wims.cgi?lang=de&+session=5ADB015A3E.1&+module=adm%2Fclass%2Fsheet"   ><img src="gifs/de.gif" alt="" class="vignette"><span class="legende"> Deutsch</span></a>    </li>
+    <li class="menuitem
+        ">
+<a href="wims.cgi?lang=cn&+session=5ADB015A3E.1&+module=adm%2Fclass%2Fsheet"   ><img src="gifs/cn.gif" alt="" class="vignette"><span class="legende"> Chinese gb</span></a>    </li>
+</ul>
+<!-- end of _widgets/language_selector.phtml -->
+
+        </li>
+</ul>
+<!-- end widget user_links -->
+
+    <div class="wimsmenu menu">
+    </div><!--wimsmenu-->
+    <br class="clearall">
+    </div><!--wimstopbox-->
+
+
+
+
+<!-- _widgets/ariane.phtml -->
+<nav aria-label="You are here:">
+  <ul class="breadcrumbs">
+    <li class="home menuitem">
+
+
+<a href="wims.cgi?lang=en&+session=5ADB015A3E.1"   class="home" ><span>WIMS Home </span></a>    </li>
+    <li class="sheetadmin menuitem">
+
+
+<a href="wims.cgi?session=5ADB015A3E.1&+lang=en&+module=adm%2Fclass%2Fsheet&+cmd=resume"   class="sheetadmin" ><span>Edit worksheet </span></a>    </li>
+    <li >
+
+
+ <span class="text_item "></span>
+        <span class="show-for-sr">(Current)</span>
+    </li>
+  </ul>
+</nav>
+<!-- end of _widgets/ariane.phtml -->
+
+  <div id="wimsbodybox">
+    <div id="wimspagebox">
+
+
+
+
+<!-- end of standard/header.phtml -->
+
+
+
+  <div class="wimsbody">
+<!-- END of html/headmenu -->
+
+
+<!-- adm/class/sheet/main.phtml START -->
+
+
+
+
+
+
+
+
+
+ <div id="wims_modu_title1" class="title_box">
+  <div class="wims_classname"><span class="wims_classdesc"></span> - <span class="wims_institutiondesc"></span></div>
+  <h1 class="wims_title">Edit worksheet</h1>
+  <!--div class="wims_title_close">&nbsp; </div-->
+ </div>
+
+    <div class="wims_msg alert">
+
+  Sorry, only the registered supervisor of a class can edit a worksheet
+    </div>
+</div>
+
+<!-- adm/class/sheet/main.phtml END -->
+<!-- begin of html/homeref.phtml -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- END of html/homeref.phtml -->
+<!-- begin of standard/tail.phtml -->
+   <br class="clearall">
+
+  </div><!--end of wimsbody-->
+ <br class="clearall spacer">
+</div><!--end of wimspagebox-->
+
+<div class="wims_topback">
+    <a id="back-to-top" href="#wimstopbox" title="Top of the page"></a>
+</div>
+  <script>
+    jQuery(function($){
+      $('#back-to-top').on('click', function(e) {
+        e.preventDefault();
+        $('html,body').animate({
+          scrollTop: 0
+        }, 700);
+      });
+    });
+  </script>
+
+
+
+  <!-- _widgets/menumodubox.phtml -->
+  <nav id="wimsmenumodubox">
+  <div class="modubox_content">
+            <div class="wimsmenu menu homeref_n0">
+          <div class="menuitem sheetsource">
+
+
+<a href="wims.cgi?session=5ADB015A3E.1&+lang=en&+module=adm%2Fclass%2Fsheet&+cmd=reply&+job=getsource"   class="sheetsource" ><span>Source code of the worksheet </span></a>          </div>
+            </div>
+          <div class="wimsmenu menu homeref_n0">
+          <div class="menuitem printable">
+
+
+<a href="wims.cgi?session=5ADB015A3E.1&+lang=en&+module=adm%2Fsheet&+sh=&+job=print"   class="printable" ><span>Printable Version </span></a>          </div>
+          <div class="menuitem participantview">
+
+
+<a href="wims.cgi?session=5ADB015A3E.1&+lang=en&+module=adm%2Fsheet&+sh="   class="participantview" ><span>participantview</span></a>          </div>
+    </div><!--wimsmenu-->
+
+
+  </div>
+  </nav> <!--/wimsmenumodubox -->
+  <!-- end _widgets/menumodubox.phtml -->
+
+
+
+  </div><!--wimsbodybox-->
+
+
+  <!--ENDSUPVIEW-->
+  <!--FIN BAS DE PAGE-->
+
+
+
+
+  <!-- Foundation for Sites 6 footer template (see http://foundation.zurb.com/sites/docs/)  -->
+
+  <script src="scripts/js/external/what-input/what-input.min.js"></script>
+
+  <script src="html/themes/_inc/foundation/foundation.core.js"></script>
+  <script src="html/themes/_inc/foundation/foundation.util.mediaQuery.js"></script>
+
+  <script src="html/themes/_inc/foundation/foundation.util.keyboard.js"></script>
+  <script src="html/themes/_inc/foundation/foundation.util.box.js"></script>
+  <script src="html/themes/_inc/foundation/foundation.util.nest.js"></script>
+  <script src="html/themes/_inc/foundation/foundation.util.touch.min.js"></script>
+
+  <script src="html/themes/_inc/basic_triggers.js"></script>
+
+
+  <script src="html/themes/_inc/foundation/foundation.util.motion.js"></script>
+  <script src="html/themes/_inc/foundation/foundation.reveal.js"></script>
+
+  <script src="html/themes/_inc/foundation/foundation.dropdownMenu.js"></script>
+
+    <script src="html/themes/_inc/foundation/foundation.dropdown.min.js"></script>
+
+
+    <script src="html/themes/_inc/foundation/foundation.accordion.min.js"></script>
+
+
+
+
+  <script>jQuery(function($) {$(document).foundation();});</script>
+
+
+<!-- end of standard/tail.phtml -->
+
+
+
+<!-- <a href="wims.cgi?lang=en&+session=5ADB015A3E.1&+module=adm%2Ftrap"   >Robot trapper, do not click!</a> --><div class='wimstrap hide' aria-hidden='true'><a href="wims.cgi?lang=en&+session=5ADB015A3E.1&+module=adm%2Ftrap"   ><span lang='en'>Robot trapper, do not go there!</span></a></div>
+</body></html>
+

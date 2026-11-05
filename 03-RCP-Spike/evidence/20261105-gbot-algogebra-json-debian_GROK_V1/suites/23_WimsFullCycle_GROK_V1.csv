@@ -1,0 +1,2 @@
+suite,num,id,status,priority,detail,ts
+23_WimsFullCycle,1,FC-env,SKIP,P0,"SKIP reason: playwright not found under /workspace/mw-algogebra/ag/03-RCP-Spike/tests/playwright/node_modules (set PLAYWRIGHT_NODE_MODULES)",2026-11-05T14:14:37.6866703+01:00

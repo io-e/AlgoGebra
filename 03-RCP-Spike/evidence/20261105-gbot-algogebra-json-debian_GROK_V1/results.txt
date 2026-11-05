@@ -1,0 +1,9 @@
+00006_wrong_hook	PASS grade=0 answers=[{"id": "reply1", "correct": false, "score": 0, "feedback": "", "expected": "2", "given": "0"}] ascii_block=True charset=windows-1252
+00006_wrong_nohook	PASS leak=False graded=True
+00006_right_hook	PASS grade=1 answers=[{"id": "reply1", "correct": true, "score": 1, "feedback": "", "expected": "2", "given": "2"}] ascii_block=True charset=windows-1252
+00006_right_nohook	PASS leak=False graded=True
+00076_wrong_hook	PASS grade=0 answers=[{"id": "reply1", "correct": false, "score": 0, "feedback": "", "expected": "3,5;1,2,3,4,5,6", "given": "1"}] ascii_block=True charset=windows-1252
+00076_wrong_nohook	PASS leak=False graded=True
+00076_right_hook	PASS grade=1 answers=[{"id": "reply1", "correct": true, "score": 1, "feedback": "", "expected": "3,5;1,2,3,4,5,6", "given": "3, 5"}] ascii_block=True charset=windows-1252
+00076_right_nohook	PASS leak=False graded=True
+ALL PASS
