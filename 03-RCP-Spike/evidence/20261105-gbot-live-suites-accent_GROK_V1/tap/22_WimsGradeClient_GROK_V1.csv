@@ -1,0 +1,29 @@
+suite,num,id,status,priority,detail,ts
+22_WimsGradeClient,1,WG-00-client-exists,PASS,P0,"/workspace/grok-g1/wt-live-s22/wims/course-activity-template/wims-grade-client_GROK_V1.js",2026-11-05T17:44:31.6664611+01:00
+22_WimsGradeClient,2,WG-GC-01-body-fields-D-S01,PASS,P0,"module=adm%2Fclass%2Fsheet&job=getresult&exercise=ok-1&ans1=UEsDBAEBAQ",2026-11-05T17:44:32.0545984+01:00
+22_WimsGradeClient,3,WG-GC-02-no-grade-field-sent,PASS,P0,"module,job,exercise,ans1",2026-11-05T17:44:32.0559574+01:00
+22_WimsGradeClient,4,WG-GC-03-reject-bad-exercise,PASS,P0,"",2026-11-05T17:44:32.0572527+01:00
+22_WimsGradeClient,5,WG-GC-04-reject-bad-base64,PASS,P0,"",2026-11-05T17:44:32.0580492+01:00
+22_WimsGradeClient,6,WG-GC-05-post-form-urlencoded,PASS,P0,"application/x-www-form-urlencoded;charset=UTF-8",2026-11-05T17:44:32.0586557+01:00
+22_WimsGradeClient,7,WG-GC-06-ans1-is-ggb-zip,PASS,P0,"",2026-11-05T17:44:32.0592469+01:00
+22_WimsGradeClient,8,WG-GC-07-grade-from-wims,FAIL,P0,"{"ok":false,"error":"WIMS answered HTML, not the D-S01 JSON result"}",2026-11-05T17:44:32.0600702+01:00
+22_WimsGradeClient,9,WG-GC-08-html-response-is-error,PASS,P0,"WIMS answered HTML, not the D-S01 JSON result",2026-11-05T17:44:32.0607293+01:00
+22_WimsGradeClient,10,WG-GC-09-http-500-is-error,FAIL,P0,"WIMS answered HTML, not the D-S01 JSON result",2026-11-05T17:44:32.0613364+01:00
+22_WimsGradeClient,11,WG-GC-10-grade-out-of-range-rejected,FAIL,P0,"WIMS answered HTML, not the D-S01 JSON result",2026-11-05T17:44:32.0619352+01:00
+22_WimsGradeClient,12,WG-GC-11-timeout,FAIL,P0,"WIMS answered HTML, not the D-S01 JSON result",2026-11-05T17:44:32.0625595+01:00
+22_WimsGradeClient,13,WG-GC-12-network-error,PASS,P0,"network error: fetch failed",2026-11-05T17:44:32.0632054+01:00
+22_WimsGradeClient,14,WG-GC-13-no-exercise-no-request,PASS,P0,"",2026-11-05T17:44:32.0638853+01:00
+22_WimsGradeClient,15,WG-GC-14-parse-non-object,PASS,P0,"",2026-11-05T17:44:32.0645015+01:00
+22_WimsGradeClient,16,WG-GC-15-no-innerHTML,PASS,P0,"",2026-11-05T17:44:32.0650095+01:00
+22_WimsGradeClient,17,WG-GC-16-no-local-grading,PASS,P0,"client never assigns a grade",2026-11-05T17:44:32.0655227+01:00
+22_WimsGradeClient,18,WG-GC-17-adapter-html-no-marker-is-error,PASS,P0,"WIMS answered HTML without a wims-result marker (HTML adapter)",2026-11-05T17:44:32.0662276+01:00
+22_WimsGradeClient,19,WG-GC-18-adapter-json-marker,FAIL,P0,"{"ok":false,"error":"WIMS answered HTML without a wims-result marker (HTML adapter)"}",2026-11-05T17:44:32.0668687+01:00
+22_WimsGradeClient,20,WG-GC-19-adapter-data-attrs,FAIL,P0,"{"ok":false,"error":"WIMS answered HTML without a wims-result marker (HTML adapter)"}",2026-11-05T17:44:32.0675213+01:00
+22_WimsGradeClient,21,WG-GC-20-adapter-off-by-default,PASS,P0,"WIMS answered HTML, not the D-S01 JSON result",2026-11-05T17:44:32.0682545+01:00
+22_WimsGradeClient,22,WG-GC-21-adapter-validates-range,PASS,P0,"",2026-11-05T17:44:32.0688791+01:00
+22_WimsGradeClient,23,WG-GC-22-adapter-no-prose-scraping,PASS,P0,"",2026-11-05T17:44:32.0693826+01:00
+22_WimsGradeClient,24,WG-GC-23-oversized-default-limit-no-request,PASS,P0,"construction too large for submission (1048580 > 1048576 bytes)",2026-11-05T17:44:32.0699534+01:00
+22_WimsGradeClient,25,WG-GC-24-limit-configurable,PASS,P0,"construction too large for submission (92 > 8 bytes)",2026-11-05T17:44:32.0704740+01:00
+22_WimsGradeClient,26,WG-GC-25-http-413-message,FAIL,P0,"WIMS answered HTML, not the D-S01 JSON result",2026-11-05T17:44:32.0709759+01:00
+22_WimsGradeClient,27,WG-GC-26-raised-limit-still-ok,FAIL,P0,"{"ok":false,"error":"WIMS answered HTML, not the D-S01 JSON result"}",2026-11-05T17:44:32.0714675+01:00
+22_WimsGradeClient,28,WG-99-summary,FAIL,P0,"# grade client: 18 PASS, 8 FAIL",2026-11-05T17:44:32.0747123+01:00

@@ -1,0 +1,18 @@
+diff --git a/03-RCP-Spike/tests/fixtures/wims/serve_wims_cycle_GROK_V1.mjs b/03-RCP-Spike/tests/fixtures/wims/serve_wims_cycle_GROK_V1.mjs
+index 54ed163..6676efb 100644
+--- a/03-RCP-Spike/tests/fixtures/wims/serve_wims_cycle_GROK_V1.mjs
++++ b/03-RCP-Spike/tests/fixtures/wims/serve_wims_cycle_GROK_V1.mjs
+@@ -20,6 +20,13 @@ export function start(port = 0) {
+   return new Promise(r => {
+     const s = http.createServer((req, res) => {
+       if (req.url.includes('..')) { res.writeHead(400).end(); return; }
++      const live = process.env.WIMS_LIVE_EP; // LOCAL GB-W7 override: proxy /wims/wims.cgi to live WIMS, log like the mock
++      if (live && req.url.startsWith('/wims/wims.cgi')) { let b = []; req.on('data', c => b.push(c)); req.on('end', async () => { const body = Buffer.concat(b);
++        const p = new URLSearchParams(body.toString('latin1')); const ans = p.get('ans1') || '';
++        if (process.env.WIMS_MOCK_LOG) fs.appendFileSync(process.env.WIMS_MOCK_LOG, JSON.stringify({ method: req.method, ct: req.headers['content-type'] || '', module: p.get('module'), job: p.get('job'), exercise: p.get('exercise'), ans1Len: ans.length, ans1Zip: Buffer.from(ans, 'base64').subarray(0, 2).toString('latin1') === 'PK', keys: [...p.keys()], live: true }) + '\n');
++        try { const r = await fetch(live, { method: req.method, headers: { 'Content-Type': req.headers['content-type'] || '' }, body: req.method === 'POST' ? body : undefined });
++          const t = Buffer.from(await r.arrayBuffer()); if (process.env.OUT_DIR) fs.writeFileSync(path.join(process.env.OUT_DIR, 'live_' + (p.get('exercise') || 'x') + '.html'), t);
++          res.writeHead(r.status, { 'Content-Type': r.headers.get('content-type') || '' }); res.end(t); } catch (e) { res.writeHead(502).end(String(e)); } }); return; }
+       wims(req, res, () => {
+         const f = pick(req.url); if (!f) { res.writeHead(404).end('not found'); return; }
+         res.writeHead(200, { 'Content-Type': types[path.extname(f)] || 'application/octet-stream' }); fs.createReadStream(f).pipe(res);

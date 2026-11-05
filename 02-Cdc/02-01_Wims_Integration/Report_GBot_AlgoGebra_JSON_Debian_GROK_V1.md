@@ -97,3 +97,62 @@ python3 /workspace/grok-g1/gv_wims_cgi_server.py /workspace/grok-g1/gv_wimsrt/pu
 python3 03-RCP-Spike/evidence/20261105-gbot-algogebra-json-debian_GROK_V1/smoke_gbw3_w4_GROK_V1.py <outdir-with-raw/-and-json/>
 # stop: pkill -f gv_wims_cgi_server.py; pkill -f bin/wimslogd
 ```
+
+---
+
+## Addendum A (2026-11-05 17:40 UTC+1) — GB-W5 installer check, GB-W7 live suites, GB-W8 accented answer
+
+Evidence: `03-RCP-Spike/evidence/20261105-gbot-live-suites-accent_GROK_V1/` (SHA256SUMS). Owner client rules (accepted): JSON present = OK; no JSON + `answer_analysis` = hook off; no JSON + "Êtes-vous sûr"/retry UI = incomplete; decode cp1252 → extract → `json.loads`; `grade` numeric (int OK); `given` normalised.
+
+### A.1 GB-W5 installer parity (wims4win `4ae4d86`, read-only)
+
+`install_algogebra_hook_GROK_V1.sh` run on a scratch copy of the pristine Debian `answer.phtml.bak_pre_algogebra`: output `answer.phtml` SHA256 `a3ce338e…cf0ea9e0` and `algogebra_json.phtml` `8174221d…e837b0a` — **byte-identical** to my manual install. Nothing pushed to wims4win.
+
+### A.2 GB-W7 — suites 21–23 against LIVE Debian WIMS + hook
+
+Fresh detached worktrees at PR heads: #40 `0222ce1` (21), #41 `a30f8ec` (22), #42 `c9a6dd5` (23). Server `http://127.0.0.1:18431/wims/wims.cgi`. The suites have no URL switch (the mock is started in-process on a random port), so I made **local, uncommitted, test-only** overrides keyed on `WIMS_LIVE_EP` (diffs in `overrides/`):
+- s22: `grade_client_test_GROK_V1.mjs` imports an untracked `live_proxy_GROK_V1.mjs` (same `start()` API as the mock, forwards to live WIMS, writes the same request log). A first attempt that only swapped the endpoint crashed because the test reads the mock's log (`tap/suite22_attempt1_…`).
+- s23: `serve_wims_cycle_GROK_V1.mjs` proxies `/wims/wims.cgi` to live WIMS with the same logging.
+- No product code (`wims/course-activity-template/*`) touched.
+
+| Suite | Mock (earlier) | **Live** | Notes |
+|---|---|---|---|
+| 21 template (static) | 14/0/0 | **14/0/0** | Never contacts WIMS; passes, but WT-06/WT-13 enshrine D-S01 |
+| 22 grade client | 28/0/0 | **19/9/0** | All 8 node FAILs (+summary) are cases needing mock behaviour (JSON grade, 500, 413, out-of-range, slow, wims-result markers) |
+| 23 full cycle (Firefox) | 13/0/0 | **4/2/0** | FC-01..04 pass (tree, applet, steps, check); FC-05 times out: client shows error, no grade; rest not reached |
+
+Live WIMS reply to the client's POST `module=adm/class/sheet&job=getresult&exercise=…&ans1=…` is a 200 `text/html; charset=windows-1252` "Worksheet / Edit worksheet" page (no class session), **no JSON**, no `answer_analysis` (`s23_out/live_ok-trig-1.html`, `raw/s22/`). `cmd=getresult` still → HTTP 450.
+
+### A.3 Gap list for Codex (WA-9)
+
+| # | Area | Client / suite assumes (mock) | Real WIMS + hook |
+|---|---|---|---|
+| G1 | cmd flow | single POST `module=adm/class/sheet&job=getresult` | two steps: `cmd=new` (module+exo) → session → `cmd=reply&session=…` |
+| G2 | session | none | must parse `name="session" value="…"` from `cmd=new` page and resend |
+| G3 | field names | `exercise`, `ans1` (base64 .ggb) | `exo`, `replyN` / `choiceN`; no `ansN`; a `.ggb` base64 is not a gradable OEF reply |
+| G4 | trigger | none | `special_parm=algogebra_json` on reply only |
+| G5 | response | raw JSON body `{grade,feedback}` (or `wims-result` script/div adapter) | HTML page, JSON inside `<!-- ALGOGEBRA_JSON_BEGIN … END -->`; schema `{grade,seed,answers[],feedback}` |
+| G6 | missing JSON | "HTML ⇒ error" only | 3-way rule: JSON / `answer_analysis` (hook off) / retry UI (incomplete) |
+| G7 | encoding | `Content-Type …charset=UTF-8`, `JSON.parse(text)` | page cp1252; reply must be sent **cp1252**-encoded (see A.4) |
+| G8 | HTTP errors | 413, 500, timeouts, out-of-range grades produced by mock | WIMS answers 200 HTML for all of these; tests GC-09/10/11/25 cannot be reproduced live and must stay mock-only |
+| G9 | suite 21 | WT-06/WT-13 assert D-S01 README text | must be re-worded for `cmd=new`/`reply` contract |
+| G10 | suite 23 | FC-06 asserts `module=adm/class/sheet`, `job=getresult` | rewrite to assert `cmd=reply`, `special_parm`, `replyN` |
+
+### A.4 GB-W8 — accented correct answer (closed)
+
+Exercise `gbw8acc.oef` (cp1252 source, `\answer{Saison}{\sol}{type=nocase}`, `sol=été`), compiled with Debian `bin/oef2wims` (rc 0) into `modules/H6/test/oef2html.fr/def/gbw8acc.def` (left installed; `Exindex` restored). Flow `cmd=new` → `cmd=reply&special_parm=algogebra_json&reply1=…`; page decoded cp1252 → comment extracted → `json.loads`.
+
+| Case | Sent bytes | Parses | grade/correct | `given` bytes | `expected` bytes |
+|---|---|---|---|---|---|
+| right, cp1252 `été` | `e9 74 e9` | Y | 1 / true | `e9 74 e9` | `e9 74 e9` |
+| right, cp1252 `ÉTÉ` (nocase) | `c9 54 c9` | Y | 1 / true | `c9 54 c9` | `e9 74 e9` |
+| wrong, cp1252 `février` | `66 e9 76 72 69 65 72` | Y | 0 / false | same | `e9 74 e9` |
+| **right, UTF-8 `été` (GET)** | `c3 a9 74 c3 a9` | Y | **0 / false** | `c3 a9 74 c3 a9` (→ `Ã©tÃ©`) | `e9 74 e9` |
+| wrong, UTF-8 `février` | `66 c3 a9 …` | Y | 0 / false | raw UTF-8 bytes | `e9 74 e9` |
+| **right, UTF-8 POST** (`charset=UTF-8` header) | `c3 a9 74 c3 a9` | Y | **0 / false** | raw UTF-8 bytes | `e9 74 e9` |
+
+Findings: the JSON block carries **raw cp1252 bytes** (no `\u` escaping) and parses correctly after cp1252 decoding. WIMS does **not** honour a UTF-8 form charset: a correct accented answer sent as UTF-8 is graded **wrong**. **Proposal (Spec §5 / WA-9):** the client must percent-encode `replyN` in windows-1252 (and refuse/flag characters outside cp1252), not UTF-8 as `Spec_WIMS_Message_Integration_GROK_V1_1.md` §5 currently states. This is an owner/Claude spec correction; no hook change needed.
+
+### A.5 Processes
+
+Server PID 3953069 and the wimslogd it spawned (PID 3953086) stopped; no wimslogd was running before this run (`wimslogd_pids_before.txt`).

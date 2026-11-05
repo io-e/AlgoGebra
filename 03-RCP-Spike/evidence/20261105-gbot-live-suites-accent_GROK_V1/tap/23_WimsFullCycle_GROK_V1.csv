@@ -1,0 +1,7 @@
+suite,num,id,status,priority,detail,ts
+23_WimsFullCycle,1,FC-01-tree-rendered,PASS,P0,"21 tree items",2026-11-05T17:44:02.5683621+01:00
+23_WimsFullCycle,2,FC-02-submit-enabled,PASS,P0,"",2026-11-05T17:44:02.5720147+01:00
+23_WimsFullCycle,3,FC-03-steps-ran,PASS,P0,"O exists=true objects=2",2026-11-05T17:44:02.5730889+01:00
+23_WimsFullCycle,4,FC-04-check-formative,PASS,P0,"status-bar: Check passed",2026-11-05T17:44:02.5739685+01:00
+23_WimsFullCycle,5,FC-EXC,FAIL,P0,"TimeoutError: locator.waitFor: Timeout 20000ms exceeded.",2026-11-05T17:44:02.5749366+01:00
+23_WimsFullCycle,6,FC-99-summary,FAIL,P0,"# full cycle: 4 PASS, 1 FAIL",2026-11-05T17:44:02.5784045+01:00

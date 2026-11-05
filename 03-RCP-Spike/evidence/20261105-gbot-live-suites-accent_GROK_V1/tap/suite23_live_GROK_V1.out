@@ -1,0 +1,13 @@
+# Suite: 23_WimsFullCycle
+# Started: 2026-11-05T17:43:32.9235917+01:00
+# Host: grok-bot-vm-419969949 / Debian GNU/Linux 13 (trixie) / pwsh 7.4.6
+
+ok 1 - [P0] FC-01-tree-rendered :: 21 tree items
+ok 2 - [P0] FC-02-submit-enabled :: 
+ok 3 - [P0] FC-03-steps-ran :: O exists=true objects=2
+ok 4 - [P0] FC-04-check-formative :: status-bar: Check passed
+not ok 5 - [P0] FC-EXC :: TimeoutError: locator.waitFor: Timeout 20000ms exceeded.
+not ok 6 - [P0] FC-99-summary :: # full cycle: 4 PASS, 1 FAIL
+
+PASS: 4 FAIL: 2 SKIP: 0
+# CSV: /workspace/grok-g1/wt-live-s23/03-RCP-Spike/tests/results/23_WimsFullCycle_GROK_V1.csv

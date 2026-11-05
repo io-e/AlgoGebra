@@ -1,0 +1,20 @@
+ok 1 - GC-01-body-fields-D-S01 :: module=adm%2Fclass%2Fsheet&job=getresult&exercise=ok-1&ans1=UEsDBAEBAQ
+ok 2 - GC-02-no-grade-field-sent :: module,job,exercise,ans1
+ok 3 - GC-03-reject-bad-exercise
+ok 4 - GC-04-reject-bad-base64
+node:fs:448
+    return binding.readFileUtf8(path, stringToFlags(options.flag));
+                   ^
+
+Error: ENOENT: no such file or directory, open '/tmp/wims-mock-3954691.jsonl'
+    at Object.readFileSync (node:fs:448:20)
+    at last (file:///workspace/grok-g1/wt-live-s22/03-RCP-Spike/tests/fixtures/wims/grade_client_test_GROK_V1.mjs:10:34)
+    at file:///workspace/grok-g1/wt-live-s22/03-RCP-Spike/tests/fixtures/wims/grade_client_test_GROK_V1.mjs:18:9
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/tmp/wims-mock-3954691.jsonl'
+}
+
+Node.js v20.19.2

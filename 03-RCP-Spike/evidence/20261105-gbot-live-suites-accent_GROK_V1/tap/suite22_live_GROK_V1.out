@@ -1,0 +1,35 @@
+# Suite: 22_WimsGradeClient
+# Started: 2026-11-05T17:44:31.6538832+01:00
+# Host: grok-bot-vm-419969949 / Debian GNU/Linux 13 (trixie) / pwsh 7.4.6
+
+ok 1 - [P0] WG-00-client-exists :: /workspace/grok-g1/wt-live-s22/wims/course-activity-template/wims-grade-client_GROK_V1.js
+ok 2 - [P0] WG-GC-01-body-fields-D-S01 :: module=adm%2Fclass%2Fsheet&job=getresult&exercise=ok-1&ans1=UEsDBAEBAQ
+ok 3 - [P0] WG-GC-02-no-grade-field-sent :: module,job,exercise,ans1
+ok 4 - [P0] WG-GC-03-reject-bad-exercise :: 
+ok 5 - [P0] WG-GC-04-reject-bad-base64 :: 
+ok 6 - [P0] WG-GC-05-post-form-urlencoded :: application/x-www-form-urlencoded;charset=UTF-8
+ok 7 - [P0] WG-GC-06-ans1-is-ggb-zip :: 
+not ok 8 - [P0] WG-GC-07-grade-from-wims :: {"ok":false,"error":"WIMS answered HTML, not the D-S01 JSON result"}
+ok 9 - [P0] WG-GC-08-html-response-is-error :: WIMS answered HTML, not the D-S01 JSON result
+not ok 10 - [P0] WG-GC-09-http-500-is-error :: WIMS answered HTML, not the D-S01 JSON result
+not ok 11 - [P0] WG-GC-10-grade-out-of-range-rejected :: WIMS answered HTML, not the D-S01 JSON result
+not ok 12 - [P0] WG-GC-11-timeout :: WIMS answered HTML, not the D-S01 JSON result
+ok 13 - [P0] WG-GC-12-network-error :: network error: fetch failed
+ok 14 - [P0] WG-GC-13-no-exercise-no-request :: 
+ok 15 - [P0] WG-GC-14-parse-non-object :: 
+ok 16 - [P0] WG-GC-15-no-innerHTML :: 
+ok 17 - [P0] WG-GC-16-no-local-grading :: client never assigns a grade
+ok 18 - [P0] WG-GC-17-adapter-html-no-marker-is-error :: WIMS answered HTML without a wims-result marker (HTML adapter)
+not ok 19 - [P0] WG-GC-18-adapter-json-marker :: {"ok":false,"error":"WIMS answered HTML without a wims-result marker (HTML adapter)"}
+not ok 20 - [P0] WG-GC-19-adapter-data-attrs :: {"ok":false,"error":"WIMS answered HTML without a wims-result marker (HTML adapter)"}
+ok 21 - [P0] WG-GC-20-adapter-off-by-default :: WIMS answered HTML, not the D-S01 JSON result
+ok 22 - [P0] WG-GC-21-adapter-validates-range :: 
+ok 23 - [P0] WG-GC-22-adapter-no-prose-scraping :: 
+ok 24 - [P0] WG-GC-23-oversized-default-limit-no-request :: construction too large for submission (1048580 > 1048576 bytes)
+ok 25 - [P0] WG-GC-24-limit-configurable :: construction too large for submission (92 > 8 bytes)
+not ok 26 - [P0] WG-GC-25-http-413-message :: WIMS answered HTML, not the D-S01 JSON result
+not ok 27 - [P0] WG-GC-26-raised-limit-still-ok :: {"ok":false,"error":"WIMS answered HTML, not the D-S01 JSON result"}
+not ok 28 - [P0] WG-99-summary :: # grade client: 18 PASS, 8 FAIL
+
+PASS: 19 FAIL: 9 SKIP: 0
+# CSV: /workspace/grok-g1/wt-live-s22/03-RCP-Spike/tests/results/22_WimsGradeClient_GROK_V1.csv
