@@ -47,7 +47,6 @@ import org.osgi.framework.wiring.FrameworkWiring;
 public final class GeoGebraPlusApplication implements IApplication {
 
     private static final String LOG = "[GeoGebraPlus] ";
-    private static final int EXPECTED_GGB_EXTERNAL_BUNDLES = 50;
 
     private volatile Display display;
     private volatile Shell shell;
@@ -75,13 +74,34 @@ public final class GeoGebraPlusApplication implements IApplication {
         }
 
         initializeGeoGebraLogger();
+        if (Boolean.getBoolean("ggbplus.d06")) {
+            runD06ExtensionProof(context);
+        }
         if (Boolean.getBoolean("ggbplus.headless")) {
-            System.out.println(LOG + "Headless D-02 smoke mode; UI was intentionally skipped");
+            System.out.println(LOG + "Headless RCP smoke mode; UI was intentionally skipped");
             return EXIT_OK;
         }
 
         openSwtShellWithGeoGebra();
         return EXIT_OK;
+    }
+
+    private static void runD06ExtensionProof(BundleContext context) throws Exception {
+        if (!Boolean.getBoolean("ggbplus.headless")) {
+            throw new IllegalArgumentException("D-06 is a headless-only proof; pass -Headless with -D06.");
+        }
+        Path goodBundle = requiredD06Fixture("ggbplus.d06.extension");
+        Path unresolvedBundle = requiredD06Fixture("ggbplus.d06.unresolved");
+        Path unapprovedBundle = requiredD06Fixture("ggbplus.d06.unapproved");
+        ExtensionBundleManager.runProof(context, goodBundle, unresolvedBundle, unapprovedBundle);
+    }
+
+    private static Path requiredD06Fixture(String property) {
+        String value = System.getProperty(property);
+        if (value == null || value.isBlank()) {
+            throw new IllegalArgumentException("Missing required D-06 fixture property: " + property);
+        }
+        return Paths.get(value);
     }
 
     /**
@@ -108,7 +128,7 @@ public final class GeoGebraPlusApplication implements IApplication {
 
         for (Bundle bundle : all) {
             String name = bundle.getSymbolicName();
-            if (!isExpectedGeoGebraOrExternal(name)) {
+            if (!CoreBundleCatalog.isExpectedGeoGebraOrExternal(name)) {
                 continue;
             }
             expectedCount++;
@@ -127,18 +147,18 @@ public final class GeoGebraPlusApplication implements IApplication {
                 resolved++;
             } else {
                 unresolved++;
-                problems.add(bundle.getSymbolicName() + ": " + stateName(state));
+                problems.add(bundle.getSymbolicName() + ": " + CoreBundleCatalog.stateName(state));
             }
         }
 
         System.out.println(LOG + "D-02 D-03-set check: expected="
-                + EXPECTED_GGB_EXTERNAL_BUNDLES + ", found=" + expectedCount
+                + CoreBundleCatalog.EXPECTED_CORE_BUNDLES + ", found=" + expectedCount
                 + ", ACTIVE=" + active + ", RESOLVED=" + resolved
                 + ", unresolved/other=" + unresolved + ", resolveBundles=" + resolverResult);
         for (String problem : problems) {
             System.err.println(LOG + "UNRESOLVED " + problem);
         }
-        boolean pass = expectedCount == EXPECTED_GGB_EXTERNAL_BUNDLES && unresolved == 0;
+        boolean pass = expectedCount == CoreBundleCatalog.EXPECTED_CORE_BUNDLES && unresolved == 0;
         System.out.println(LOG + "D-02 " + (pass ? "PASS" : "FAIL"));
         return pass;
     }
@@ -183,36 +203,6 @@ public final class GeoGebraPlusApplication implements IApplication {
                 Thread.currentThread().interrupt();
                 return;
             }
-        }
-    }
-
-    private static boolean isExpectedGeoGebraOrExternal(String symbolicName) {
-        if (symbolicName == null) {
-            return false;
-        }
-        return symbolicName.startsWith("org.geogebra.migration.")
-                || symbolicName.equals("com.sun.jna")
-                || symbolicName.equals("org.jspecify.jspecify")
-                || symbolicName.equals("org.jsr-305")
-                || symbolicName.equals("spotbugs-annotations");
-    }
-
-    private static String stateName(int state) {
-        switch (state) {
-        case Bundle.UNINSTALLED:
-            return "UNINSTALLED";
-        case Bundle.INSTALLED:
-            return "INSTALLED";
-        case Bundle.RESOLVED:
-            return "RESOLVED";
-        case Bundle.STARTING:
-            return "STARTING";
-        case Bundle.STOPPING:
-            return "STOPPING";
-        case Bundle.ACTIVE:
-            return "ACTIVE";
-        default:
-            return "UNKNOWN(" + state + ")";
         }
     }
 

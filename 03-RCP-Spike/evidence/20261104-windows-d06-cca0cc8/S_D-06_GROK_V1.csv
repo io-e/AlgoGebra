@@ -1,0 +1,8 @@
+suite,num,id,status,priority,detail,ts
+S_D-06,1,D06-01-product-starts-and-runs-lifecycle,PASS,P0,"exit=0; log=D:\ALF_Agents\_worktrees\codex-d06-extension-mgmt\03-RCP-Spike\tests\results\d06-product-proof\S_D-06.product-headless.log",2026-11-04T16:43:18.1924035+01:00
+S_D-06,2,D06-02-allowlisted-bundle-installed-and-started,PASS,P0,"allowlisted test extension reached ACTIVE and registered its service",2026-11-04T16:43:18.1968117+01:00
+S_D-06,3,D06-03-ServiceTracker-discovers-service,PASS,P0,"host discovered and called the extension Runnable through ServiceTracker",2026-11-04T16:43:18.2056221+01:00
+S_D-06,4,D06-04-stop-removes-service-and-uninstall-completes,PASS,P0,"service disappeared on stop; extension reached UNINSTALLED",2026-11-04T16:43:18.2118070+01:00
+S_D-06,5,D06-05-unapproved-bundle-rejected-before-install,PASS,P0,"allowlist rejected the unapproved bundle before BundleContext.installBundle",2026-11-04T16:43:18.2185194+01:00
+S_D-06,6,D06-06-unresolved-bundle-isolated-and-rejected,PASS,P0,"bad fixture remained INSTALLED and all 50 D-03 core bundles stayed usable",2026-11-04T16:43:18.2253707+01:00
+S_D-06,7,D06-07-core-bundle-set-unchanged,PASS,P0,"the existing 50-bundle D-03 set remained resolved/active before and after the proof",2026-11-04T16:43:18.2319269+01:00

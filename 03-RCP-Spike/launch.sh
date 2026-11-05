@@ -7,15 +7,16 @@
 #   validator (toRealPath on OPEN targets) stays authoritative.
 # Exit codes: 3 no image, 69 no Java >= MIN (EX_UNAVAILABLE, BUG-017; same as launch.ps1, owner Q1 2026-11-02), 64 usage, 65 not .json / > 1 MB, 66 missing/unreadable/not a file, 77 outside root.
 set -euo pipefail
-HEADLESS=false; BOOT=false; PRINT_JAVA=false; COURSE=""; COURSE_SET=false
+HEADLESS=false; BOOT=false; PRINT_JAVA=false; D06=false; COURSE=""; COURSE_SET=false
 die() { echo "launch.sh: $2" >&2; exit "$1"; }
 set_course() { $COURSE_SET && die 64 "-Course given more than once"; [ -n "$1" ] || die 64 "-Course needs a value"; COURSE="$1"; COURSE_SET=true; }
 while (($#)); do case "$1" in
-  --headless) HEADLESS=true;; --boot-delegate-jogamp) BOOT=true;; --print-java) PRINT_JAVA=true;;
+  --headless) HEADLESS=true;; --boot-delegate-jogamp) BOOT=true;; --print-java) PRINT_JAVA=true;; --d06) D06=true;;
   -Course|--course) (($# >= 2)) || die 64 "$1 needs a value"; set_course "$2"; shift;;
   --course=*) set_course "${1#--course=}";;
   *) echo "launch.sh: warning: ignoring unknown argument '$1'" >&2;;
 esac; shift; done
+$D06 && ! $HEADLESS && die 64 "--d06 is a headless-only proof; combine it with --headless"
 $COURSE_SET || { [ -n "${GGBPLUS_COURSE:-}" ] && COURSE="$GGBPLUS_COURSE" && COURSE_SET=true; } || true
 COURSE_REAL=""
 if $COURSE_SET; then
@@ -66,6 +67,16 @@ ARGS=(--add-exports java.base/java.lang=ALL-UNNAMED --add-exports java.desktop/s
   -Declipse.product=org.geogebra.plus.host.geogebraplus "-Dggbplus.runId=$RUN" "-Dggbplus.headless=$HEADLESS")
 $BOOT && ARGS+=(-Dorg.osgi.framework.bootdelegation=com.jogamp.*,jogamp.* -Dosgi.parentClassloader=app -Dggbplus.jogampBootDelegation=true)
 [ -n "$COURSE_REAL" ] && ARGS+=("-Dggbplus.course=$COURSE_REAL")
+if $D06; then
+  D06_GOOD="$IMAGE/test-extension/build/org.geogebra.plus.test.extension_1.0.0.jar"
+  D06_UNRESOLVED="$IMAGE/test-extension/build/org.geogebra.plus.test.extension.bad-import_1.0.1.jar"
+  D06_UNAPPROVED="$IMAGE/test-extension/build/org.geogebra.plus.test.unauthorized_1.0.0.jar"
+  for fixture in "$D06_GOOD" "$D06_UNRESOLVED" "$D06_UNAPPROVED"; do
+    [ -f "$fixture" ] || die 66 "D-06 fixture missing: $fixture (rebuild the image)"
+  done
+  ARGS+=(-Dggbplus.d06=true "-Dggbplus.d06.extension=$D06_GOOD"
+    "-Dggbplus.d06.unresolved=$D06_UNRESOLVED" "-Dggbplus.d06.unapproved=$D06_UNAPPROVED")
+fi
 CMD=("$JAVA" "${ARGS[@]}" -cp "$CP" org.eclipse.equinox.launcher.Main -configuration "$CFG" -data "$IMAGE/workspace-$RUN"
   -application org.geogebra.plus.host.geogebraplusApp -consoleLog -noSplash)
 if [ "$DRY" = 1 ]; then echo "DRYRUN argc=${#CMD[@]}"; printf 'ARG %s\n' "${CMD[@]}"; exit 0; fi

@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-SymbolicName: org.geogebra.plus.test.extension
+Bundle-Version: 1.0.1
+Bundle-Name: GeoGebraPlus D-06 Deliberately Unresolvable Fixture
+Bundle-RequiredExecutionEnvironment: JavaSE-21
+Import-Package: org.geogebra.plus.d06.missing;version="[1.0.0,2.0.0)"
+

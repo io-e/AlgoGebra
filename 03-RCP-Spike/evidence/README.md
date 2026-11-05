@@ -27,6 +27,8 @@ Mutable run output goes to `tests/results/<runid>/` (git-ignored); export a revi
 | `20261029-windows-codex-689d4b4` | Codex Windows suites 01-07, 75/0/3 |
 | `20261029-windows-codex-r9-e3e8a82` | Codex Windows r9 image: 01-08 + 12 = 95/0/3, suite 13 |
 | `20261029-linux-debian-grokbot-bug006-20261029_160937-grok-bot-vm-419969949` | Debian Run_All -SkipUi after the BUG-006 fix, 101/0/3 |
+| `20261104-windows-gate-a-p02-p05` | Windows r12 desktop corpus P-02..P-05: 75/0/9; web and listed automation gaps remain skipped. P-04 text fidelity has a logged U+FFFD caveat; see `REPORT.md`. |
+| `20261104-windows-d06-cca0cc8` | D-06 runtime bundle proof on `cca0cc8`: 7/0/0, headless; awaits Debian validation and owner review. |
 
 Files here are stored byte-exact (`.gitattributes`: `-text`), so the manifest hashes hold on Windows checkouts.
 
