@@ -1,0 +1,54 @@
+{
+  "host": "windows-cgi-direct",
+  "runtime": "D:\\ALF_ZGit\\43-wims-paris-saclay_fr\\Reprise_Wims_Grok\\wims-runtime-oef",
+  "wimslogd_running": false,
+  "wimslogd_policy": "STOPPED — recorded; do not restart unless owner confirms needed",
+  "page_charset": "windows-1252",
+  "json_decode": "1) Decode CGI body with Content-Type charset (observed windows-1252). 2) Locate <!-- ALGOGEBRA_JSON_BEGIN ... ALGOGEBRA_JSON_END -->. 3) json.loads the inner text (ASCII keys/numbers; strings may use \\u escapes).",
+  "grade_wrong": {
+    "python_type": "int",
+    "value": 0,
+    "json_fragment": "{\"grade\": 0}"
+  },
+  "grade_right": {
+    "python_type": "int",
+    "value": 1,
+    "json_fragment": "{\"grade\": 1}"
+  },
+  "grade_client_rule": "Preserve observed integer values 0 and 1. Client must accept JSON numbers (int or float) — do not require decimal literals (0.0) and do not require string \"0\"/\"1\".",
+  "given": {
+    "student_typed": "  2  ",
+    "json_given": "2",
+    "rule": "WIMS normalizes via !singlespace (and escape passes) before emit. Do not present answers[].given as the exact text the student typed."
+  },
+  "invalid_answer_vs_missing_hook": {
+    "invalid_or_incomplete_with_special_parm": {
+      "json_block_present": false,
+      "answer_analysis_present": false,
+      "sure_or_incomplete_ui": true
+    },
+    "graded_reply_without_special_parm": {
+      "json_block_present": false,
+      "answer_analysis_present": true,
+      "sure_or_incomplete_ui": false
+    },
+    "client_distinction_without_new_status": "Do NOT add a JSON status field without approval. 1) If ALGOGEBRA_JSON_BEGIN present → hook fired (use grade/answers). 2) If absent and answer_analysis present → reply graded but hook missing/off (special_parm absent or not installed). 3) If absent and sure/incomplete UI (e.g. h1 Êtes-vous sûr / exo_formCheck) → WIMS did not finish grading this POST; treat as retry/incomplete page, not as a missing-hook grade result.",
+    "no_new_status_block": true
+  },
+  "accented_probe": {
+    "typed": "été",
+    "query_encoding": "urllib.parse.quote UTF-8 percent-encoding",
+    "page_charset": "windows-1252",
+    "classification": {
+      "json_block_present": false,
+      "answer_analysis_present": false,
+      "sure_or_incomplete_ui": true
+    },
+    "status": "accented_correct_answer_UNVERIFIED — fixtures 00006/00076 are numeric/checkbox; non-numeric reply hits incomplete/sure UI and emits no JSON. Encoding path for successful JSON remains: decode page as windows-1252 then json.loads comment body."
+  },
+  "suites_21_23": {
+    "windows_this_run": "hook CGI probes only (not Playwright full cycle)",
+    "live_debian": "DEFERRED to GBot box — run suites 21-23 vs Debian+hook; keep mocks green separately",
+    "mock_baseline": "prior GBot GV residual: suite21/22 PASS on #40/#41; suite23 env-sensitive"
+  }
+}
