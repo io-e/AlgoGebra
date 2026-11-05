@@ -1,10 +1,12 @@
-<!-- GROK_V1 -->
+<!-- GROK_V1_1 -->
 # Planning — Grok Bot next actions
+
+> **Superseded for active queue:** use `Planning_GBot_Codex_Next_GROK_V1.md` (GB-W1…W8 closed via #64). This file remains historical P0 context.
 
 | Field | Value |
 |---|---|
 | Date | 2026-11-05 |
-| Version | GROK_V1 |
+| Version | GROK_V1_1 (superseded) |
 | Audience | **Grok Bot** (Debian VM + WIMS HTTP + evidence PRs) |
 | Tip (product) | `origin/feat/external-engines` @ `9d67b57` (+ #49, #60, #61) |
 | Context | Codex lanes **unblocked** to finish (#48/#33, #63, engines). GBot stays off those product branches. |

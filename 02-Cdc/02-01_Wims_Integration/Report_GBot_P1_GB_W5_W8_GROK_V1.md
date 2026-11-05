@@ -1,15 +1,17 @@
-<!-- GROK_V1 -->
+<!-- GROK_V1_1 -->
 # Report — GBot P1: GB-W5, GB-W7, GB-W8, GB-E1
 
 | Field | Value |
 |---|---|
 | Date | 2026-11-05 |
-| Version | GROK_V1 |
-| Executor | Grok Build (Windows CGI + wims4win draft); Debian live suites deferred |
-| Policy | Draft only — **no merges** |
+| Version | GROK_V1_1 |
+| Executor | Grok Build (Windows CGI + wims4win) + **Grok Bot Debian** ([#64](https://github.com/io-e/AlgoGebra/pull/64)) |
+| Policy | Draft / evidence only — **no merges** |
 | wims4win | `feat/algogebra-wims-integration` @ `4ae4d86` |
-| Evidence | `03-RCP-Spike/evidence/20261105-gbot-p1-gb-w5-w8_GROK_V1/` |
-| Probe JSON | `out_probe_gbot_p1_report_GROK_V1.json` (also under wims4win `AlgoGebra_Wims_Integration/tests/`) |
+| Debian evidence PR | **#64** @ `da6d1a4` (`grok/gbot-algogebra-json-debian`) |
+| Windows evidence | `03-RCP-Spike/evidence/20261105-gbot-p1-gb-w5-w8_GROK_V1/` |
+| Debian evidence | `…/20261105-gbot-algogebra-json-debian_GROK_V1/` + `…/20261105-gbot-live-suites-accent_GROK_V1/` |
+| Companion | `Report_GBot_AlgoGebra_JSON_Debian_GROK_V1.md` (on #64) |
 
 ---
 
@@ -17,10 +19,10 @@
 
 | ID | Result | Notes |
 |---|---|---|
-| **GB-W5** | **DONE (draft)** | `tools/build-runtime-tree.sh` installs hook via `install_algogebra_hook_GROK_V1.sh` |
-| **GB-W7** | **PARTIAL** | Windows CGI probes + client rules recorded; **live Debian suites 21–23 still for GBot box** |
-| **GB-W8** | **DONE (partial accent)** | Charset `windows-1252` + decode path recorded; accented-**correct** answer **UNVERIFIED** |
-| **GB-E1** | **DONE** | #57 / #58 rechecked vs tip `9d67b57` — both **behind**; comments posted; no merge |
+| **GB-W5** | **DONE (draft)** | Installer + `build-runtime-tree.sh`; Debian parity byte-identical (#64 A.1) |
+| **GB-W7** | **DONE on Debian** | Live suites 21–23 (#64 A.2). Codex gaps **G1–G10** in A.3 / § below |
+| **GB-W8** | **VERIFIED** | Accented correct on Debian (`été` cp1252 → grade 1). UTF-8 submit wrong (#64 A.4) |
+| **GB-E1** | **DONE** | #57 / #58 behind tip; comments posted; no merge |
 
 **wimslogd:** **stopped** (`wimslogd_running: false`). **Not restarted.** Do not start unless owner confirms it is needed.
 
@@ -83,13 +85,38 @@ Runtime: `…/Reprise_Wims_Grok/wims-runtime-oef`, WIMS **4.33a**, hook in `answ
 
 **Rule:** WIMS applies `!singlespace` (then escapes). **Do not** present `given` as the exact text the student typed.
 
-### Suites 21–23
+### Suites 21–23 — **DONE on Debian** (see #64)
 
-| Scope | Status |
+| Suite | Live result | Notes |
+|---|---|---|
+| **21** template | **14/0/0** | Static; still asserts D-S01 wording (Codex G9) |
+| **22** grade client | **19/9/0** | Live HTML ≠ mock JSON; fails are WA-9 contract gaps (G1–G8) |
+| **23** full cycle | **4/2/0** | FC-01..04 pass; FC-05 timeout — client still posts D-S01 `job=getresult` (G10) |
+
+Evidence: `03-RCP-Spike/evidence/20261105-gbot-live-suites-accent_GROK_V1/tap/` on **PR #64**.
+
+### GB-W8 accent — **VERIFIED** on Debian (#64 A.4)
+
+| Case | Result |
 |---|---|
-| This Windows run | Hook CGI probes only (not Playwright full cycle) |
-| Live Debian + hook | **Deferred** to GBot Debian box (GB-W7 remainder) |
-| Mock baseline | Prior residual: suite 21/22 PASS on #40/#41; suite 23 env-sensitive |
+| `été` / `ÉTÉ` sent as **cp1252** | grade **1**, JSON present, `given`/`expected` raw cp1252 bytes |
+| `été` sent as **UTF-8** (GET or POST) | grade **0** (mojibake `Ã©tÃ©`) — WIMS does not honour UTF-8 form charset |
+| Client rule | Percent-encode `replyN` in **windows-1252**; Spec §5 UTF-8 claim needs Claude correction |
+
+### Codex gap list from GB-W7 (WA-9) — copy of #64 A.3
+
+| # | Mock / suite assumes | Real WIMS + hook |
+|---|---|---|
+| G1 | `job=getresult` single POST | `cmd=new` → session → `cmd=reply` |
+| G2 | no session | parse + resend `session` |
+| G3 | `exercise` / `ans1` | `exo` / `replyN`/`choiceN` |
+| G4 | no trigger | `special_parm=algogebra_json` on reply only |
+| G5 | raw JSON body | HTML + `ALGOGEBRA_JSON_*` comment; `{grade,seed,answers[],feedback}` |
+| G6 | HTML ⇒ error only | 3-way: JSON / `answer_analysis` / retry UI |
+| G7 | UTF-8 JSON.parse | page + reply **cp1252** |
+| G8 | mock 413/500/timeouts | stay mock-only |
+| G9 | suite 21 D-S01 README asserts | reword for `new`/`reply` |
+| G10 | suite 23 asserts `adm/class/sheet` | assert `cmd=reply` + `special_parm` + `replyN` |
 
 ---
 
@@ -106,14 +133,17 @@ Comments posted on both PRs with this status.
 
 ---
 
-## Follow-ups for Debian GBot
+## Follow-ups
 
-1. Pull wims4win `4ae4d86`; install hook on `wims-full` if not already.  
-2. Re-run GB-W3/W4 smokes on `http://127.0.0.1:18431/wims/wims.cgi`.  
-3. Finish **GB-W7**: suites 21–23 vs **live** hook; list WA-9 gaps.  
-4. Optional: one OEF with accented **correct** answer for GB-W8 closure.  
-5. Keep **wimslogd stopped** unless owner asks otherwise.
+| Who | Action |
+|---|---|
+| Owner | Review **#64** (evidence-only; no merge required to consume gaps) |
+| Codex | WA-9 client rebase using G1–G10 above |
+| Claude | Spec §5: reply encoding = **cp1252**, not UTF-8; document integer `grade` |
+| GBot | Idle on W5–W8; next board = `Planning_GBot_Codex_Next_GROK_V1.md` |
+
+Keep **wimslogd stopped** unless owner confirms it is needed.
 
 ---
 
-*End of `Report_GBot_P1_GB_W5_W8_GROK_V1.md`.*
+*End of `Report_GBot_P1_GB_W5_W8_GROK_V1.md` (GROK_V1_1 — GB-W7/W8 closed via #64).*
