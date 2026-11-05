@@ -1,14 +1,16 @@
-<!-- GROK_V1 -->
+<!-- GROK_V1_1 -->
 # Planning — next actions (GBot + Codex)
 
 | Field | Value |
 |---|---|
 | Date | 2026-11-05 |
-| Version | GROK_V1 |
+| Version | GROK_V1_1 |
 | Supersedes | `Planning_GBot_Next_Actions_GROK_V1.md` P0/P1 (GB-W1…W8 / GB-E1 closed) |
 | Tip product | `origin/feat/external-engines` @ `9d67b57` |
-| Tip docs | `feat/grok-sprint3-plan-v1-1` (this commit wave) |
-| Debian evidence | **PR [#64](https://github.com/io-e/AlgoGebra/pull/64)** — GB-W1…W8 done; **do not merge** unless owner wants archive on tip |
+| Tip docs | `feat/grok-sprint3-plan-v1-1` |
+| WA-9 client | **`codex/wims-wa9-client` @ `9177a5a`** (pushed; **no PR yet**) — fixture suites green; live SKIP until GBot |
+| Debian evidence | **PR [#64](https://github.com/io-e/AlgoGebra/pull/64)** — GB-W1…W8 done |
+| Live re-smoke brief | `Handoff_GBot_WA9_Live_Resmoke_GROK_V1.md` |
 | Reports | `Report_GBot_P1_GB_W5_W8_GROK_V1.md` (GROK_V1_1), `Report_GBot_AlgoGebra_JSON_Debian_GROK_V1.md` (#64) |
 
 ---
@@ -26,50 +28,45 @@
 
 ---
 
-## 1. Codex — ordered plan (primary now)
+## 1. Codex — status after `9177a5a`
 
-### P0 — WA-9 grade client (blocks connected WIMS)
+| ID | Status |
+|---|---|
+| **CX-W1…W8** | **DONE** on `codex/wims-wa9-client` @ `9177a5a` (fixture/replay green; no PR opened) |
+| Live proof | **Pending GBot GB-N3** (suite 23 skip until `GGB_WIMS_LIVE_ENDPOINT`) |
 
-Rebase product client off D-S01 mock onto real hook contract. Source of truth: **#64 Addendum A.3** (also copied in P1 report V1_1).
-
-| ID | Action | Done when |
-|---|---|---|
-| **CX-W1** | Implement `cmd=new` → parse `session` → `cmd=reply&special_parm=algogebra_json&replyN=…` | Unit/integration against recorded Debian HTML fixtures from #64 |
-| **CX-W2** | Extract `<!-- ALGOGEBRA_JSON_BEGIN…END -->`; accept `{grade,seed,answers[],feedback}` | Parses #64 `json/*.json` |
-| **CX-W3** | 3-way HTML handling (no new status field unless owner approves): JSON / `answer_analysis` / sure-retry UI | Matches owner rules |
-| **CX-W4** | Encode `replyN` as **windows-1252** percent-encoding (not UTF-8) | Accent fixture: `été` → grade 1 |
-| **CX-W5** | Accept JSON **number** grades `0` and `1` (int OK; no require `0.0`) | Fixture assert |
-| **CX-W6** | UI: do not show `answers[].given` as exact student keystrokes | Copy / a11y note |
-| **CX-W7** | Update suites **22** (+ **23** asserts): live path green for happy path; keep 413/500/timeout **mock-only** (G8) | TAP: live happy path PASS; mock edge PASS |
-| **CX-W8** | Reword suite **21** WT-06/WT-13 away from D-S01 `job=getresult` | 21 still 14/0/0 with new contract text |
-
-**Out of CX scope:** merging #40–#42 as-is; inventing `adm/raw` grade; editing `common`.
-
-### P1 — RCP product (parallel if owner keeps them unblocked)
+### P1 — still open for Codex
 
 | ID | Action | Notes |
 |---|---|---|
-| **CX-R1** | Finish **#48 / #33** 3D focus | Owner already launched Codex lane |
-| **CX-R2** | Land **#63** D-06 after `-Headless -D06` re-smoke | Includes `CoreBundleCatalog` `1e48358` |
-| **CX-R3** | Optional: engine regression tests for `e7f1ad4` (backtick / eval / `read*`) | If not already covered |
+| **CX-R1** | Finish **#48 / #33** 3D focus | Separate lane |
+| **CX-R2** | Land **#63** D-06 after `-Headless -D06` re-smoke | Includes `CoreBundleCatalog` |
+| **CX-R3** | Optional: engine regression tests for `e7f1ad4` | If not already covered |
+| **CX-W9** | After GBot live PASS: open PR for WA-9 (or stack on owner base); do not merge alone | Owner review |
 
 ### Codex — do not
 
-- Merge #64 / #40–#42 / #57–#58 without owner  
-- Assume UTF-8 form bodies to WIMS  
-- Treat “HTML response” as a single error class  
+- Merge #64 / #40–#42 / #57–#58 / WA-9 without owner  
+- Claim live-server PASS from fixture replay alone  
 
 ---
 
-## 2. Grok Bot — ordered plan (after Codex or idle-support)
+## 2. Grok Bot — ordered plan (**GB-N3 is now P0**)
 
-### P0 — support Codex WA-9 (on request)
+### P0 — live re-smoke WA-9
 
 | ID | Action | Done when |
 |---|---|---|
-| **GB-N1** | Publish **fixture pack** from #64 for CI: wrong/right 00006/00076 + `gbw8acc` HTML/JSON (+ SHA256) under `03-RCP-Spike/tests/fixtures/wims-live/` on a **draft** PR | Files + README; no merge |
-| **GB-N2** | Keep Debian WIMS+hook up for Codex smoke; **wimslogd stay stopped** unless owner asks | URL note in PR comment |
-| **GB-N3** | After CX-W7 push: re-run suites 22/23 live; attach TAP | Evidence folder |
+| **GB-N3** | Follow `Handoff_GBot_WA9_Live_Resmoke_GROK_V1.md`: checkout `9177a5a`, live `test-wims-live.ps1` + suite 23 with `GGB_WIMS_LIVE_ENDPOINT` | Evidence folder + short report; W4-live **not** SKIP |
+| **GB-N2** | Keep Debian WIMS+hook up for that run; tear down CGI (+ auto wimslogd) after | URL in report |
+
+### P1 — after live green / hygiene
+
+| ID | Action | Done when |
+|---|---|---|
+| **GB-N1** | Optional: note that Codex already vendored sanitized fixtures under `tests/fixtures/wims-live/` — only add extras if live finds gaps | Skip if nothing new |
+| **GB-N4** | Rebase **#57**, **#58** onto tip when free | Comments; no merge |
+| **GB-N5** | Comment on **#64** / WA-9 that live re-smoke used `9177a5a` | Link evidence |
 
 ### P1 — hygiene / evidence PRs
 
@@ -106,16 +103,17 @@ Update `Spec_WIMS_Message_Integration` / CDC: reply field encoding = **windows-1
 ## 4. Critical path
 
 ```
-#64 evidence (done)
-        │
-        ▼
-Codex CX-W1…W8  (WA-9 client + suites)  ══parallel══  Codex CX-R1/R2 (#48, #63)
-        │
-        ▼
-GBot GB-N3 live re-smoke 22/23
-        │
-        ▼
-Owner: merge client PR; park or rewrite #40–#42; decide #64 archive merge
+#64 evidence (done)  →  Codex WA-9 @ 9177a5a (fixture green, done)
+                              │
+                              ▼
+                    GBot GB-N3 live re-smoke  ◄── P0 now
+                              │
+          ┌───────────────────┼───────────────────┐
+          ▼                   ▼                   ▼
+   evidence report      Codex CX-W9 PR      Codex CX-R1/R2 (#48,#63)
+          │
+          ▼
+Owner: merge WA-9 after live PASS; park #40–#42; archive #64
 ```
 
 ---
@@ -124,11 +122,11 @@ Owner: merge client PR; park or rewrite #40–#42; decide #64 archive merge
 
 ### GBot
 
-> P0 closed (W1–W8). Next: on request, fixture pack from #64 for Codex (GB-N1); keep hook server up, wimslogd stopped; after Codex WA-9 push, re-smoke suites 22/23 live (GB-N3). Rebase #57/#58 when free. No merges.
+> **P0 = GB-N3.** Checkout `codex/wims-wa9-client` @ `9177a5a`. Read `Handoff_GBot_WA9_Live_Resmoke_GROK_V1.md`. With WIMS+hook on `:18431`, run `test-wims-live.ps1` (00006 right/wrong) and suite 23 with `GGB_WIMS_LIVE_ENDPOINT` set. Optional `gbw8acc`/`été`. Evidence folder; no merges. wimslogd: don’t start manually.
 
 ### Codex
 
-> Primary: WA-9 rebase using #64 gaps G1–G10 — `cmd=new`/`reply` + `special_parm`, HTML comment JSON, cp1252 encode, int grades, 3-way HTML classify. Update suites 21–23. Parallel: finish #48 and #63 re-smoke. Do not merge #40–#42 unchanged.
+> WA-9 fixture work done @ `9177a5a`. Wait for GBot live PASS, then open PR (CX-W9). Parallel: #48 / #63. Do not claim live-server evidence from fixture replay.
 
 ---
 
