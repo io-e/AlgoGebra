@@ -25,7 +25,6 @@ final class ExtensionBundleManager {
     private static final String SERVICE_TOKEN_KEY = "ggbplus.d06.token";
     private static final String SERVICE_TOKEN = "d06-service-v1";
     private static final long SERVICE_TIMEOUT_MILLIS = 10_000;
-    private static final int EXPECTED_CORE_BUNDLES = 50;
     private static final Set<String> ALLOWLIST = Set.of(ALLOWED_TEST_BSN);
 
     private final BundleContext context;
@@ -49,7 +48,7 @@ final class ExtensionBundleManager {
             goodBundle = installAllowlisted(goodBundlePath);
             if (goodBundle.getState() != Bundle.INSTALLED) {
                 throw new IllegalStateException("New extension should initially be INSTALLED, got "
-                        + stateName(goodBundle.getState()));
+                        + CoreBundleCatalog.stateName(goodBundle.getState()));
             }
             System.out.println(LOG + "D-06-01 extension installed: " + goodBundle.getSymbolicName()
                     + " location=" + goodBundle.getLocation());
@@ -62,7 +61,7 @@ final class ExtensionBundleManager {
                 goodBundle.start();
                 if (goodBundle.getState() != Bundle.ACTIVE) {
                     throw new IllegalStateException("Extension did not become ACTIVE: "
-                            + stateName(goodBundle.getState()));
+                            + CoreBundleCatalog.stateName(goodBundle.getState()));
                 }
                 Runnable service = tracker.waitForService(SERVICE_TIMEOUT_MILLIS);
                 if (service == null) {
@@ -77,7 +76,7 @@ final class ExtensionBundleManager {
                 goodBundle.stop();
                 if (goodBundle.getState() != Bundle.RESOLVED) {
                     throw new IllegalStateException("Extension did not become RESOLVED after stop: "
-                            + stateName(goodBundle.getState()));
+                            + CoreBundleCatalog.stateName(goodBundle.getState()));
                 }
                 if (tracker.getServiceReference() != null || tracker.getService() != null) {
                     throw new IllegalStateException("Extension service remained visible after bundle stop");
@@ -90,7 +89,7 @@ final class ExtensionBundleManager {
             goodBundle.uninstall();
             if (goodBundle.getState() != Bundle.UNINSTALLED) {
                 throw new IllegalStateException("Extension did not become UNINSTALLED: "
-                        + stateName(goodBundle.getState()));
+                        + CoreBundleCatalog.stateName(goodBundle.getState()));
             }
             goodBundle = null;
             System.out.println(LOG + "D-06-04 allowlisted extension uninstalled without framework restart");
@@ -102,7 +101,8 @@ final class ExtensionBundleManager {
                         + baselineCoreCount + ", after=" + finalCoreCount);
             }
             System.out.println(LOG + "D-06 PASS: install/start/ServiceTracker/stop/uninstall;"
-                    + " bad bundles rejected; core=" + finalCoreCount + "/" + EXPECTED_CORE_BUNDLES);
+                    + " bad bundles rejected; core=" + finalCoreCount + "/"
+                    + CoreBundleCatalog.EXPECTED_CORE_BUNDLES);
         } catch (Exception | Error failure) {
             System.err.println(LOG + "D-06 FAIL: " + failure.getClass().getSimpleName() + ": "
                     + failure.getMessage());
@@ -154,10 +154,11 @@ final class ExtensionBundleManager {
             } catch (BundleException expected) {
                 if (badBundle.getState() != Bundle.INSTALLED) {
                     throw new IllegalStateException("Unresolved extension must remain INSTALLED, got "
-                            + stateName(badBundle.getState()), expected);
+                            + CoreBundleCatalog.stateName(badBundle.getState()), expected);
                 }
                 System.out.println(LOG + "D-06-06 unresolved allowlisted extension rejected at resolve/start: "
-                        + badBundle.getSymbolicName() + "; state=" + stateName(badBundle.getState()));
+                        + badBundle.getSymbolicName() + "; state="
+                        + CoreBundleCatalog.stateName(badBundle.getState()));
             }
         } finally {
             uninstallQuietly(badBundle);
@@ -168,7 +169,7 @@ final class ExtensionBundleManager {
         long seen = 0;
         long usable = 0;
         for (Bundle bundle : context.getBundles()) {
-            if (!isCoreBundle(bundle.getSymbolicName())) {
+            if (!CoreBundleCatalog.isExpectedGeoGebraOrExternal(bundle.getSymbolicName())) {
                 continue;
             }
             seen++;
@@ -177,20 +178,13 @@ final class ExtensionBundleManager {
             }
         }
         System.out.println(LOG + "D-06 core integrity " + phase + ": resolved-or-active=" + usable
-                + "/" + seen + "; expected=" + EXPECTED_CORE_BUNDLES);
-        if (seen != EXPECTED_CORE_BUNDLES || usable != EXPECTED_CORE_BUNDLES) {
+                + "/" + seen + "; expected=" + CoreBundleCatalog.EXPECTED_CORE_BUNDLES);
+        if (seen != CoreBundleCatalog.EXPECTED_CORE_BUNDLES
+                || usable != CoreBundleCatalog.EXPECTED_CORE_BUNDLES) {
             throw new IllegalStateException("D-03 core bundle set was not preserved " + phase
                     + ": resolved-or-active=" + usable + ", seen=" + seen);
         }
         return usable;
-    }
-
-    private static boolean isCoreBundle(String symbolicName) {
-        return symbolicName != null && (symbolicName.startsWith("org.geogebra.migration.")
-                || symbolicName.equals("com.sun.jna")
-                || symbolicName.equals("org.jspecify.jspecify")
-                || symbolicName.equals("org.jsr-305")
-                || symbolicName.equals("spotbugs-annotations"));
     }
 
     private Bundle findByLocation(String location) {
@@ -239,15 +233,4 @@ final class ExtensionBundleManager {
         }
     }
 
-    private static String stateName(int state) {
-        return switch (state) {
-        case Bundle.UNINSTALLED -> "UNINSTALLED";
-        case Bundle.INSTALLED -> "INSTALLED";
-        case Bundle.RESOLVED -> "RESOLVED";
-        case Bundle.STARTING -> "STARTING";
-        case Bundle.STOPPING -> "STOPPING";
-        case Bundle.ACTIVE -> "ACTIVE";
-        default -> "UNKNOWN(" + state + ")";
-        };
-    }
 }
