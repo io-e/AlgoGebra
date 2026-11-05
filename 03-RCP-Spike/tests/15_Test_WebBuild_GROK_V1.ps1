@@ -59,11 +59,11 @@ try {
     while ((Get-Date) -lt $deadline -and -not $up1) { Start-Sleep -Milliseconds 500
         try { Invoke-WebRequest "http://127.0.0.1:$port/webbuild_probe_GROK_V1.html" -UseBasicParsing -TimeoutSec 2 | Out-Null; Invoke-WebRequest "http://127.0.0.1:$cdpPort/json/version" -UseBasicParsing -TimeoutSec 2 | Out-Null; $up1 = $true } catch { } }
     Test-Ok 'WEB-10-serve' $up1 "http.server :$port + $(Split-Path $br.Source -Leaf) CDP :$cdpPort" 'P0'
-    $png = Join-Path $out 'webbuild_probe.png'; $sw = [Diagnostics.Stopwatch]::StartNew()
-    $raw = & $node.Source --experimental-websocket --no-warnings (Join-Path $fixWeb 'cdp_probe_GROK_V1.mjs') "$cdpPort" "http://127.0.0.1:$port/webbuild_probe_GROK_V1.html" $png 90000 2>&1 | Out-String
+    $probeMs = if ($env:GGB_WEB_PROBE_TIMEOUT_MS) { [int]$env:GGB_WEB_PROBE_TIMEOUT_MS } else { 90000 }; $png = Join-Path $out 'webbuild_probe.png'; $sw = [Diagnostics.Stopwatch]::StartNew()
+    $raw = & $node.Source --experimental-websocket --no-warnings (Join-Path $fixWeb 'cdp_probe_GROK_V1.mjs') "$cdpPort" "http://127.0.0.1:$port/webbuild_probe_GROK_V1.html" $png $probeMs 2>&1 | Out-String
     $raw | Set-Content (Join-Path $out 'probe-result.txt') -Encoding utf8
     $R = $null; if ($raw -match 'RESULT (\{.*\})') { $R = $Matches[1] | ConvertFrom-Json }
-    Test-Ok 'WEB-11-applet-loaded' ($R -and $R.loaded -and -not $R.error) "appletOnLoad fired=$($R.loaded) after $($R.ms) ms (wall $([int]$sw.Elapsed.TotalSeconds)s) error=$($R.error)" 'P0'
+    Test-Ok 'WEB-11-applet-loaded' ($R -and $R.loaded -and -not $R.error) "appletOnLoad fired=$($R.loaded) after $($R.ms) ms (wall $([int]$sw.Elapsed.TotalSeconds)s, probe timeout $probeMs ms) error=$($R.error)" 'P0'
     Test-Ok 'WEB-12-evalCommand' ($R -and $R.evalPoint -and $R.evalFunc -and $R.evalMatrix) "evalCommand A/f/m = $($R.evalPoint)/$($R.evalFunc)/$($R.evalMatrix)" 'P0'
     Test-Eq 'WEB-13-getValueString-point' "$($R.valPoint)" 'A = (1, 2)' 'P0'
     Test-Eq 'WEB-14-getValueString-func' "$($R.valFunc)" 'f(x) = x² - 2x' 'P0'

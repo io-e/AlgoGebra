@@ -1,0 +1,23 @@
+# Suite: 15_WebBuild
+# Started: 2026-11-03T15:07:33.5130866+01:00
+# Host: grok-bot-vm-419969949 / Debian GNU/Linux 13 (trixie) / pwsh 7.6.9
+
+# war=/workspace/AlgoGebra/webwar/war upstream=375db7f
+ok 1 - [P0] WEB-01-web3d.nocache.js :: /workspace/AlgoGebra/webwar/war/web3d/web3d.nocache.js size=6188 sha256=b4c7254f85388e015539d4c7f92f77eac62371a9674ec08bb44468cce78e6233
+ok 2 - [P0] WEB-01-deployggb.js :: /workspace/AlgoGebra/webwar/war/deployggb.js size=68604 sha256=3644dae55e8e1068036a4227a7f9709d63b44e0087310011d3331f1f561680d8
+ok 3 - [P0] WEB-02-permutation :: deferredjs permutations: 0C67C8A47F0579D49611F42F63B45791
+ok 4 - [P0] WEB-03-deploy-merged :: template placeholders replaced, permutation id present, setHTML5Codebase exported
+ok 5 - [P2] WEB-04-size :: war files=264 bytes=60189041
+ok 6 - [P0] WEB-10-serve :: http.server :8774 + google-chrome CDP :9774
+ok 7 - [P0] WEB-11-applet-loaded :: appletOnLoad fired=True after 3866 ms (wall 7s, probe timeout 90000 ms) error=
+ok 8 - [P0] WEB-12-evalCommand :: evalCommand A/f/m = True/True/True
+ok 9 - [P0] WEB-13-getValueString-point :: got=A = (1, 2)
+ok 10 - [P0] WEB-14-getValueString-func :: got=f(x) = x² - 2x
+ok 11 - [P1] WEB-15-getValueString-matrix :: got=m = {{1, 2}, {3, 4}}
+ok 12 - [P1] WEB-16-getValue :: getValue('x(A)')=1
+ok 13 - [P1] WEB-17-CAS-giac-js :: got=x² + 2x + 1
+ok 14 - [P0] WEB-18-codebase-local :: resources=17 external=
+ok 15 - [P1] WEB-19-screenshot :: /workspace/AlgoGebra/runs-s15/run4-cpu16/webbuild/webbuild_probe.png sha256=ed0a90d9ec54b857a1dd597c426a232d735327edac64482c10cfe509d89e0549
+
+PASS: 15 FAIL: 0 SKIP: 0
+# CSV: /workspace/AlgoGebra/runs-s15/run4-cpu16/15_WebBuild_GROK_V1.csv
