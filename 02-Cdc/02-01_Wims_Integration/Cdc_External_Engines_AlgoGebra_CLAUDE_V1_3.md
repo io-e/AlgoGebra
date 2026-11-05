@@ -1,10 +1,10 @@
-<!-- CLAUDE_V1_3_1 -->
+<!-- CLAUDE_V1_3_2 -->
 # CDC — External Computation Engines for AlgoGebra
 
 | Field | Value |
 |---|---|
 | Document | `02-Cdc/02-01_Wims_Integration/Cdc_External_Engines_AlgoGebra_CLAUDE_V1_3.md` |
-| Version | CLAUDE_V1_3_1 |
+| Version | CLAUDE_V1_3_2 |
 | Scope | **Engine layer only** (offline subprocess execution). WIMS integration (grading, submission, help templates, resolution tree) is in `Cdc_WIMS_Integration_AlgoGebra_CLAUDE_V2.md`. |
 | Status | **Post-audit revision** — incorporates Grok audit findings A-18, A-22, A-23, A-24, A-27 and owner decisions Q5–Q7 |
 | Date | 2026-11-04 |
@@ -250,7 +250,7 @@ Connected mode (WIMS server grading) is **deferred** pending the WIMS integratio
 | Binary | `gnuplot` |
 | Header | `set terminal pngcairo size 800,600` (configurable). Output path forced by host. |
 | Dynamic setup | Output filename (host-controlled temp dir), ranges, style |
-| Security filter | Block: `system`, `shell`, `!` prefix, `set output`, `set print`, `load`, `call`, `save`, backticks. The host forces the output path — the student cannot redirect output to arbitrary files. |
+| Security filter | Block: `system`, `shell`, `!` prefix, `set output`, `set print`, `load`, `call`, `save`, backticks (`` ` ``), `eval`/`evaluate`. The host forces the output path — the student cannot redirect output to arbitrary files. (`e7f1ad4`: backtick and eval filters added after security review.) |
 | Output | PNG file written to host-controlled temp directory. AlgoGebra reads the image and validates PNG magic bytes (D-ENG-04). GeoGebra's own 2D/3D views stay GeoGebra. |
 | Quit | `\nexit\n` |
 | Test command | `plot sin(x)` → produces valid PNG file (magic bytes check) |
