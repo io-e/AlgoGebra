@@ -1,0 +1,5 @@
+G09-trig-en-CUTF8 {"lang": "en", "rawKeysFound": [], "camelCaseTokens": [], "expected": {"Algebra": true, "Graphics": true, "Input": true, "3D Graphics": true}, "pass": true}
+G09-trig-fr-CUTF8 {"lang": "fr", "rawKeysFound": [], "camelCaseTokens": [], "expected": {"Algèbre": true, "Graphique": true, "Saisie": true, "Graphique 3D": true}, "pass": true}
+G11-fixture-CUTF8-en {"lang": "en", "rawKeysFound": [], "camelCaseTokens": ["OptionsTools", "TpuroHoMeTpu9"], "expected": {"Algebra": true, "Graphics": true, "Input": true, "3D Graphics": true}, "pass": true}
+G11-fixture-CUTF8-fr {"lang": "fr", "rawKeysFound": [], "camelCaseTokens": ["TpuroHoMeTpW9"], "expected": {"Algèbre": true, "Graphique": true, "Saisie": true, "Graphique 3D": true}, "pass": true}
+G11-fixture-POSIX {"lang": "en", "rawKeysFound": [], "camelCaseTokens": ["OptionsTools", "TpuroHoMeTpu9"], "expected": {"Algebra": true, "Graphics": true, "Input": true, "3D Graphics": true}, "pass": true}
