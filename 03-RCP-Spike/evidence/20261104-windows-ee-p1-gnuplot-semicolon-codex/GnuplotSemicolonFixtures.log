@@ -1,0 +1,7 @@
+Code under test: 2b46d7c8600a411a99687e7a43e59c2e35375459
+Gnuplot version: 6.0 patchlevel 3
+PASS: set xrange [0:1]; plot x => ART	C:\Users\Shadow\AppData\Local\Temp\algogebra-gnuplot-3867389360840775264\plot.png	16386	800x600	true
+PASS: set grid; plot sin(x) => ART	C:\Users\Shadow\AppData\Local\Temp\algogebra-gnuplot-18036591261530137250\plot.png	36891	800x600	true
+PASS: set samples 50; plot sin(x) => ART	C:\Users\Shadow\AppData\Local\Temp\algogebra-gnuplot-10756383245257056233\plot.png	33356	800x600	true
+PASS: set key left; plot sin(x), cos(x) => ART	C:\Users\Shadow\AppData\Local\Temp\algogebra-gnuplot-10780071122706790811\plot.png	54899	800x600	true
+GNUPLOT_SEMICOLON_CASES=4/4 PASS

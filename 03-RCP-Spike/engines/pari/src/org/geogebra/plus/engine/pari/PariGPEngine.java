@@ -4,6 +4,7 @@
  * Antipolis. The original file is licensed under GNU GPL version 2 or (at
  * your option) any later version. See engines/licenses/WIMS-INTERFACES.md.
  */
+/* GROK_V1 — EE-P1: reject empty PARI payload (BUG-015 / X-06). */
 package org.geogebra.plus.engine.pari;
 
 import java.nio.file.Path;
@@ -69,13 +70,17 @@ public final class PariGPEngine extends SubprocessEngine {
     static final String[] WIMS_ILLEGAL = {};
     static final String[] WIMS_ILLPART = { "plot", "write", "help" };
     static final String WIMS_QUIT = "\nquit\n";
-    // BUG-006 (user decision 2026-10-29, 02-Cdc/Decisions_PARI_Forbidden_GROK_V1.md): deliberate deviation from WIMS
-    // (illegal[] empty). Defence in depth on top of default(secure,1), which stays in the header: gp functions that run
-    // shell commands or load native code. Verified with '?name' in gp 2.17.2 (systemstr does not exist).
+    // BUG-006 (owner decisions 2026-10-29 and 2026-11-04, Decisions_PARI_Forbidden_GROK_V1_1.md): deliberate
+    // deviation from WIMS (illegal[] empty). Defence in depth on top of default(secure,1), which stays in the header:
+    // gp functions that run shell commands, load native code, or read arbitrary files. The read* names were added
+    // after EE-P2 showed read("/etc/hostname") returned host contents in both WIMS and AlgoGebra.
     // Matched as whole words, so alias(s,system) is also rejected. "eval" is blocked too: eval(Str("ins","tall(..)"))
     // rebuilds a blocked name at run time, and in secure mode gp only *asks* before install(), the next stdin line
-    // confirms it (reproduced 2026-10-29 with gp 2.17.2 through the engine: native getpid loaded). Not a sandbox claim (D-ENG-03).
-    static final String[] AGB_ILLEGAL = { "system", "extern", "externstr", "fileextern", "install", "eval" };
+    // confirms it (reproduced 2026-10-29 with gp 2.17.2 through the engine: native getpid loaded). This is not a
+    // sandbox claim (D-ENG-03).
+    static final String[] AGB_ILLEGAL = {
+            "system", "extern", "externstr", "fileextern", "install", "eval", "read", "readvec", "readstr"
+    };
 
     @Override
     public String getEngineId() {
@@ -161,8 +166,17 @@ public final class PariGPEngine extends SubprocessEngine {
     protected ComputeResult createResult(Request request, ProcessOutput output, Duration elapsed)
             throws ExternalComputeException {
         // WIMS readresult(): parse only the slice between the last start marker and the end marker.
-        return ComputeResult.text(getEngineId(),
-                parseOutput(extractOrFail(output.stdout(), request.markers())), elapsed);
+        // BUG-015 / EE-R7: markers present with empty/malformed payload must not look like success.
+        String text = requireNonEmptyOutput(parseOutput(extractOrFail(output.stdout(), request.markers())));
+        return ComputeResult.text(getEngineId(), text, elapsed);
+    }
+
+    static String requireNonEmptyOutput(String text) throws ExternalComputeException {
+        if (text == null || text.isBlank()) {
+            throw new ExternalComputeException(Code.INVALID_OUTPUT,
+                    "PARI/GP produced empty output for a completed process (BUG-015)");
+        }
+        return text;
     }
 
     static String parseOutput(String stdout) {

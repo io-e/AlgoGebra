@@ -37,7 +37,9 @@ $n1 = ([regex]::Matches((Get-Content $log -Raw), 'Log\.logger" is null')).Count
 Test-Ok 'D04-CTRLA-01-no-npe' ($n1 -eq $n0) "ctrl+a in 2D input bar: NPE 'Log.logger is null' (ScreenReaderAdapterD.readText -> Log.read) count $n0 -> $n1" 'P1'
 $f0 = ([regex]::Matches((Get-Content $log -Raw), "jlm_cmr10\.ttf'\. Error message: Problem reading font data")).Count
 $rj = @(Get-ChildItem (Join-Path $script:Image 'bundles') -Filter '*desktop.renderer*.jar' -EA SilentlyContinue | Select-Object -First 1); $ttf = if ($rj -and -not $IsWindows) { @((& unzip -l $rj.FullName 2>$null) -match '\.ttf').Count } else { -1 }
-Test-Ok 'D04-FONT-01-latex-fonts' ($f0 -eq 0) "ReTeX FontLoaderD fonts/latin/jlm_cmr10.ttf 'Problem reading font data': $f0 occurrence(s); renderer bundle $($rj.Name) contains $ttf .ttf$(if ($ttf -eq 0) { ' (KNOWN: Linux image renderer bundle has no ReTeX fonts - see 02-Cdc/BUG-014_Debian_Analysis_GROK_V1.md)' })" 'P1'
+# GROK_V1: since #43 (#27) the ReTeX fonts ship in the separate fragment org.geogebra.plus.renderer.resources (46 .ttf); the renderer jar itself has 0 .ttf by design
+$fj = @(Get-ChildItem $script:Image -Recurse -Filter 'org.geogebra.plus.renderer.resources*.jar' -EA SilentlyContinue | Select-Object -First 1); $fttf = if ($fj -and -not $IsWindows) { @((& unzip -l $fj.FullName 2>$null) -match '\.ttf').Count } else { -1 }
+Test-Ok 'D04-FONT-01-latex-fonts' ($f0 -eq 0) "ReTeX FontLoaderD fonts/latin/jlm_cmr10.ttf 'Problem reading font data': $f0 occurrence(s); fonts fragment $(if ($fj) { $fj.Name } else { '(org.geogebra.plus.renderer.resources not found)' }) contains $fttf .ttf (expected 46); renderer jar $($rj.Name) contains $ttf .ttf (0 expected: fonts are in the fragment since #43)$(if ($fttf -eq 0 -or -not $fj) { ' (fonts fragment missing/empty - see #27, 02-Cdc/BUG-014_Debian_Analysis_GROK_V1.md)' })" 'P1'
 $r = @(Invoke-Input $p3 'E=(1,1,1)')[-1]; $shot = Save-UiShot '09_focus_3d'
 Test-Ok 'D04-FOCUS-01-2d-to-3d' ((-not $r.Dialog) -and $r.Changed) "3D bar E=(1,1,1): lost=$($r.Lost) dialog=$($r.Dialog) algebra3DChanged=$($r.Changed) shot=$shot" 'P0'; Close-UiErrorDialog
 $r = @(Invoke-Input $p2 'P=(2,3)')[-1]; $shot = Save-UiShot '09_focus_back_2d'
@@ -53,8 +55,8 @@ Close-UiErrorDialog; Stop-UiApp
 $log2 = Start-UiApp '09_ui_session2'; $panes = Get-PaneLayout; $p2 = $panes[0]; $p3 = $panes[1]
 $r = @(Invoke-Input $p2 'f(x)=x^2')[-1]; Test-Ok 'D04-ORDER-01-fx-first-input' (-not $r.Dialog) "fresh session, first input f(x)=x^2: dialog=$($r.Dialog) shot=$(Save-UiShot '09_session2_fx_first')" 'P0'; Close-UiErrorDialog
 $r = @(Invoke-Input $p2 'A=(1,2)')[-1]; Test-Ok 'D04-ORDER-02-point-second-input' (-not $r.Dialog) "second input A=(1,2): lost=$($r.Lost) dialog=$($r.Dialog) changed=$($r.Changed) shot=$(Save-UiShot '09_session2_A_second')" 'P0'; Close-UiErrorDialog
-$r = @(Invoke-Input $p3 'h(x)=x^2')[-1]; Test-Ok 'D04-ORDER-03-function-in-3d-pane' (-not $r.Dialog) "3D input h(x)=x^2: lost=$($r.Lost) dialog=$($r.Dialog) shot=$(Save-UiShot '09_session2_fx_3d')" 'P1'; Close-UiErrorDialog
-$r = @(Invoke-Input $p2 'k(x)=x+1')[-1]; Test-Ok 'D04-ORDER-04-function-2d-after-3d' (-not $r.Dialog) "2D input k(x)=x+1 after 3D: lost=$($r.Lost) dialog=$($r.Dialog) shot=$(Save-UiShot '09_session2_fx_2d_after_3d')" 'P1'; Close-UiErrorDialog
+$r = @(Invoke-Input $p3 'h(x)=x^2')[-1]; Test-Ok 'D04-ORDER-03-function-in-3d-pane' ((-not $r.Dialog) -and (-not $r.Lost) -and $r.Changed) "3D input h(x)=x^2: lost=$($r.Lost) dialog=$($r.Dialog) changed=$($r.Changed)$(if ($r.Lost) { ' (keystrokes lost in 3D input bar - see #33 D04-FOCUS-01)' }) shot=$(Save-UiShot '09_session2_fx_3d')" 'P1'; Close-UiErrorDialog
+$r = @(Invoke-Input $p2 'k(x)=x+1')[-1]; Test-Ok 'D04-ORDER-04-function-2d-after-3d' ((-not $r.Dialog) -and (-not $r.Lost) -and $r.Changed) "2D input k(x)=x+1 after 3D: lost=$($r.Lost) dialog=$($r.Dialog) changed=$($r.Changed) shot=$(Save-UiShot '09_session2_fx_2d_after_3d')" 'P1'; Close-UiErrorDialog
 Stop-UiDisplay
 # HiDPI
 if ($IsWindows) { Skip-Test 'D04-HIDPI-01-startup' 'Windows HiDPI = display scaling of the desktop session; run manually at 200 % and use Save-UiShot' }

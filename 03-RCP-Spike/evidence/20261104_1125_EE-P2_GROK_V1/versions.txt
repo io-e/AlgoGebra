@@ -1,0 +1,9 @@
+pari: [0;35m[2, 17, 2][0m
+Maxima 5.47.0
+gnuplot 6.0 patchlevel 2
+gap: 4.14.0 (source build, /workspace/scratch_ee_p2/gap-4.14.0, gap.sh via -ExtraPath /workspace/scratch_ee_p2/bin)
+openjdk version "21.0.13" 2026-10-20 LTS
+wims C interfaces: /workspace/grok-g1/ee_wims/src/Interfaces
+pr60_head: f46466083f18dedb1f8a5fefdd29a2d95f23dad9
+branch merge commit: 5d33e641ce385e8bc4d45e522100e8369cc561fe
+Linux 6.12.94+

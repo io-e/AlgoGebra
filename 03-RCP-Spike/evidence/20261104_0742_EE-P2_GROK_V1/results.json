@@ -1,0 +1,272 @@
+[
+  {
+    "id": "P-01",
+    "engine": "pari",
+    "kind": "pos",
+    "command": "factor(2^64-1)",
+    "wims": "3,1;5,1;17,1;257,1;641,1;65537,1;6700417,1",
+    "java": "OK|3,1;5,1;17,1;257,1;641,1;65537,1;6700417,1",
+    "wims_executed": false,
+    "match": true
+  },
+  {
+    "id": "P-02",
+    "engine": "pari",
+    "kind": "err",
+    "command": "factor((",
+    "wims": "***   syntax error, unexpected end of file, expecting )-> or ',' or ')': \\n  ***   factor((\\n  ***          ^-",
+    "java": "ERR|INVALID_OUTPUT",
+    "wims_executed": false,
+    "match": true
+  },
+  {
+    "id": "P-03",
+    "engine": "pari",
+    "kind": "pos",
+    "command": "nextprime(10^20)",
+    "wims": "100000000000000000039",
+    "java": "OK|100000000000000000039",
+    "wims_executed": false,
+    "match": true
+  },
+  {
+    "id": "P-04",
+    "engine": "pari",
+    "kind": "neg",
+    "command": "plot(sin(x))",
+    "wims": "***   at top-level: pJot(sin(x))\\n  ***                 ^------------\\n  ***   not a function in function call",
+    "java": "ERR|COMMAND_REJECTED",
+    "wims_executed": false,
+    "match": true
+  },
+  {
+    "id": "P-05",
+    "engine": "pari",
+    "kind": "neg",
+    "command": "system(\"id\")",
+    "wims": "***   at top-level: system(\"id\")\\n  ***                 ^------------\\n  *** system: [secure mode]: system commands not allowed\\nTried to run 'id'.",
+    "java": "ERR|COMMAND_REJECTED",
+    "wims_executed": false,
+    "match": true
+  },
+  {
+    "id": "P-06",
+    "engine": "pari",
+    "kind": "neg",
+    "command": "extern(\"id\")",
+    "wims": "***   at top-level: extern(\"id\")\\n  ***                 ^------------\\n  *** extern: [secure mode]: system commands not allowed\\nTried to run 'id'.",
+    "java": "ERR|COMMAND_REJECTED",
+    "wims_executed": false,
+    "match": true
+  },
+  {
+    "id": "P-07",
+    "engine": "pari",
+    "kind": "neg",
+    "command": "externstr(\"id\")",
+    "wims": "***   at top-level: externstr(\"id\")\\n  ***                 ^---------------\\n  *** externstr: [secure mode]: system commands not allowed\\nTried to run 'id'.",
+    "java": "ERR|COMMAND_REJECTED",
+    "wims_executed": false,
+    "match": true
+  },
+  {
+    "id": "P-08",
+    "engine": "pari",
+    "kind": "neg",
+    "command": "install(\"getpid\",\"l\")",
+    "wims": "[secure mode]: about to install 'getpid'. OK ? (^C if not)\\npari: execution error or time out.",
+    "java": "ERR|COMMAND_REJECTED",
+    "wims_executed": false,
+    "match": true
+  },
+  {
+    "id": "P-09",
+    "engine": "pari",
+    "kind": "neg",
+    "command": "alias(s,system); s(\"id\")",
+    "wims": "***   at top-level: alias(s,system);s(\"id\")\\n  ***                                 ^-------\\n  ***   attempt to change built-in s.",
+    "java": "ERR|COMMAND_REJECTED",
+    "wims_executed": false,
+    "match": true
+  },
+  {
+    "id": "P-10",
+    "engine": "pari",
+    "kind": "neg",
+    "command": "2+2\\n\\quit",
+    "wims": "***   syntax error, unexpected variable name, expecting end of file: .quit\\n  ***                                                                      ^-\\n4",
+    "java": "ERR|COMMAND_REJECTED",
+    "wims_executed": false,
+    "match": true
+  },
+  {
+    "id": "P-11",
+    "engine": "pari",
+    "kind": "neg",
+    "command": "write(\"/tmp/ee_p2_x\",1)",
+    "wims": "***   at top-level: wJite(\"/tmp/eeKp2Kx\",1)\\n  ***                 ^-----------------------\\n  ***   not a function in function call",
+    "java": "ERR|COMMAND_REJECTED",
+    "wims_executed": false,
+    "match": true
+  },
+  {
+    "id": "P-12",
+    "engine": "pari",
+    "kind": "pos",
+    "command": "1.2300",
+    "wims": "1.23",
+    "java": "OK|1.23",
+    "wims_executed": false,
+    "match": true
+  },
+  {
+    "id": "M-01",
+    "engine": "maxima",
+    "kind": "pos",
+    "command": "diff(sin(x^2), x)",
+    "wims": "2*x*cos(x^2)",
+    "java": "OK|2*x*cos(x^2)",
+    "wims_executed": false,
+    "match": true
+  },
+  {
+    "id": "M-02",
+    "engine": "maxima",
+    "kind": "pos",
+    "command": "integrate(x^2, x)",
+    "wims": "x^3/3",
+    "java": "OK|x^3/3",
+    "wims_executed": false,
+    "match": true
+  },
+  {
+    "id": "M-03",
+    "engine": "maxima",
+    "kind": "neg",
+    "command": "system(\"id\")",
+    "wims": "sjstem(\"id\")",
+    "java": "ERR|COMMAND_REJECTED",
+    "wims_executed": false,
+    "match": true
+  },
+  {
+    "id": "M-04",
+    "engine": "maxima",
+    "kind": "neg",
+    "command": "load(\"foo\")",
+    "wims": "ljad(\"foo\")",
+    "java": "ERR|COMMAND_REJECTED",
+    "wims_executed": false,
+    "match": true
+  },
+  {
+    "id": "M-05",
+    "engine": "maxima",
+    "kind": "neg",
+    "command": "plot2d(sin(x),[x,0,1])",
+    "wims": "pjot2d(sin(x),[x,0,1])",
+    "java": "ERR|COMMAND_REJECTED",
+    "wims_executed": false,
+    "match": true
+  },
+  {
+    "id": "M-06",
+    "engine": "maxima",
+    "kind": "neg",
+    "command": "with_stdout(\"/tmp/ee_p2_y\", print(1))",
+    "wims": "withkstdout(\"/tmp/eekp2ky\",1)",
+    "java": "ERR|COMMAND_REJECTED",
+    "wims_executed": false,
+    "match": true
+  },
+  {
+    "id": "G-01",
+    "engine": "gap",
+    "kind": "pos/wims-only",
+    "command": "Size(SymmetricGroup(5))",
+    "wims": "Error, PrintTo: cannot open '/nodir/.gap_hist' for output\\n120",
+    "java": "NA|no Java adapter for gap",
+    "wims_executed": false,
+    "match": true
+  },
+  {
+    "id": "G-02",
+    "engine": "gap",
+    "kind": "neg/wims-only",
+    "command": "Exec(\"id\")",
+    "wims": "Error, Variable: 'EJec' must have a value\\nError, PrintTo: cannot open '/nodir/.gap_hist' for output",
+    "java": "NA|no Java adapter for gap",
+    "wims_executed": false,
+    "match": true
+  },
+  {
+    "id": "G-03",
+    "engine": "gap",
+    "kind": "neg/wims-only",
+    "command": "Process(DirectoryCurrent(), Filename(DirectoriesSystemPrograms(),\"id\"), InputTextNone(), OutputTextUser(), [])",
+    "wims": "Error, Variable: 'PJocess' must have a value\\nError, PrintTo: cannot open '/nodir/.gap_hist' for output",
+    "java": "NA|no Java adapter for gap",
+    "wims_executed": false,
+    "match": true
+  },
+  {
+    "id": "N-01",
+    "engine": "gnuplot",
+    "kind": "png",
+    "command": "plot sin(x)",
+    "wims": "PNG 800x600",
+    "java": "OK|PNG 800x600",
+    "wims_executed": false,
+    "match": true
+  },
+  {
+    "id": "N-02",
+    "engine": "gnuplot",
+    "kind": "neg",
+    "command": "!echo nope",
+    "wims": "PNG 0x0 | nope",
+    "java": "ERR|COMMAND_REJECTED",
+    "wims_executed": false,
+    "match": true
+  },
+  {
+    "id": "N-03",
+    "engine": "gnuplot",
+    "kind": "neg",
+    "command": "plot system(\"id\")",
+    "wims": "PNG 0x0 | line 0: warning: Cannot find or open file \"uid=1000(box) gid=1000(box) groups=1000(box),998(orbitd)\"\n         line 0: No data in plot",
+    "java": "ERR|COMMAND_REJECTED",
+    "wims_executed": true,
+    "match": true
+  },
+  {
+    "id": "N-04",
+    "engine": "gnuplot",
+    "kind": "neg",
+    "command": "plot sin(x); set output \"other.png\"",
+    "wims": "PNG 800x600",
+    "java": "ERR|COMMAND_REJECTED",
+    "wims_executed": false,
+    "match": true
+  },
+  {
+    "id": "N-05",
+    "engine": "gnuplot",
+    "kind": "neg",
+    "command": "plot sin(x); call \"evil.gp\"",
+    "wims": "PNG 800x600 | line 0: Cannot load input from 'evil.gp'",
+    "java": "ERR|COMMAND_REJECTED",
+    "wims_executed": false,
+    "match": true
+  },
+  {
+    "id": "N-06",
+    "engine": "gnuplot",
+    "kind": "neg",
+    "command": "plot `id`",
+    "wims": "PNG 0x0 | line 0: undefined variable: box",
+    "java": "ERR|COMMAND_REJECTED",
+    "wims_executed": false,
+    "match": true
+  }
+]
