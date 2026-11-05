@@ -1,0 +1,335 @@
+{
+ "version": "GROK_V1",
+ "generated": "2026-11-05",
+ "server": "Debian WIMS 4.31b + algogebra_json hook (wims4win 928d383 / installer 4ae4d86 identical)",
+ "base_url": "http://127.0.0.1:18431/wims/wims.cgi",
+ "cases": [
+  {
+   "id": "00006_wrong",
+   "exo": "00006",
+   "module": "H6/test/oef2html.fr",
+   "special_parm_on_reply": true,
+   "special_parm_on_new": false,
+   "fields": {
+    "reply1": "0"
+   },
+   "reply_encoding": "cp1252",
+   "reply1_bytes_hex": "30",
+   "response_charset": "windows-1252",
+   "classification": "json",
+   "session_from_new": "XXC1788F71.1",
+   "files": {
+    "new_query": "request_new.query",
+    "reply_body": "request_reply.body",
+    "new_html": "response_new.html",
+    "reply_html": "response_reply.html",
+    "json": "extracted.json"
+   },
+   "source": "03-RCP-Spike/evidence/20261105-gbot-algogebra-json-debian_GROK_V1/raw/00006_wrong_reply.html",
+   "expected_grade": 0,
+   "expected_answers": [
+    {
+     "id": "reply1",
+     "correct": false,
+     "score": 0,
+     "feedback": "",
+     "expected": "2",
+     "given": "0"
+    }
+   ]
+  },
+  {
+   "id": "00006_right",
+   "exo": "00006",
+   "module": "H6/test/oef2html.fr",
+   "special_parm_on_reply": true,
+   "special_parm_on_new": false,
+   "fields": {
+    "reply1": "2"
+   },
+   "reply_encoding": "cp1252",
+   "reply1_bytes_hex": "32",
+   "response_charset": "windows-1252",
+   "classification": "json",
+   "session_from_new": "S7C1788F5D.1",
+   "files": {
+    "new_query": "request_new.query",
+    "reply_body": "request_reply.body",
+    "new_html": "response_new.html",
+    "reply_html": "response_reply.html",
+    "json": "extracted.json"
+   },
+   "source": "03-RCP-Spike/evidence/20261105-gbot-algogebra-json-debian_GROK_V1/raw/00006_right_reply.html",
+   "expected_grade": 1,
+   "expected_answers": [
+    {
+     "id": "reply1",
+     "correct": true,
+     "score": 1,
+     "feedback": "",
+     "expected": "2",
+     "given": "2"
+    }
+   ]
+  },
+  {
+   "id": "00076_checkbox_wrong",
+   "exo": "00076",
+   "module": "H6/test/oef2html.fr",
+   "special_parm_on_reply": true,
+   "special_parm_on_new": false,
+   "fields": {
+    "reply1": "1"
+   },
+   "reply_encoding": "cp1252",
+   "reply1_bytes_hex": "31",
+   "response_charset": "windows-1252",
+   "classification": "json",
+   "session_from_new": "F7C1788F20.1",
+   "files": {
+    "new_query": "request_new.query",
+    "reply_body": "request_reply.body",
+    "new_html": "response_new.html",
+    "reply_html": "response_reply.html",
+    "json": "extracted.json"
+   },
+   "source": "03-RCP-Spike/evidence/20261105-gbot-algogebra-json-debian_GROK_V1/raw/00076_wrong_reply.html",
+   "expected_grade": 0,
+   "expected_answers": [
+    {
+     "id": "reply1",
+     "correct": false,
+     "score": 0,
+     "feedback": "",
+     "expected": "3,5;1,2,3,4,5,6",
+     "given": "1"
+    }
+   ]
+  },
+  {
+   "id": "00076_checkbox_right",
+   "exo": "00076",
+   "module": "H6/test/oef2html.fr",
+   "special_parm_on_reply": true,
+   "special_parm_on_new": false,
+   "fields": {
+    "reply1": "3, 5"
+   },
+   "reply_encoding": "cp1252",
+   "reply1_bytes_hex": "332c2035",
+   "response_charset": "windows-1252",
+   "classification": "json",
+   "session_from_new": "48C1788F2A.1",
+   "files": {
+    "new_query": "request_new.query",
+    "reply_body": "request_reply.body",
+    "new_html": "response_new.html",
+    "reply_html": "response_reply.html",
+    "json": "extracted.json"
+   },
+   "source": "03-RCP-Spike/evidence/20261105-gbot-algogebra-json-debian_GROK_V1/raw/00076_right_reply.html",
+   "expected_grade": 1,
+   "expected_answers": [
+    {
+     "id": "reply1",
+     "correct": true,
+     "score": 1,
+     "feedback": "",
+     "expected": "3,5;1,2,3,4,5,6",
+     "given": "3, 5"
+    }
+   ]
+  },
+  {
+   "id": "00006_hook_off_no_special_parm",
+   "exo": "00006",
+   "module": "H6/test/oef2html.fr",
+   "special_parm_on_reply": false,
+   "special_parm_on_new": false,
+   "fields": {
+    "reply1": "2"
+   },
+   "reply_encoding": "cp1252",
+   "reply1_bytes_hex": "32",
+   "response_charset": "windows-1252",
+   "classification": "hook_off",
+   "session_from_new": "HEC1788F14.1",
+   "files": {
+    "new_query": "request_new.query",
+    "reply_body": "request_reply.body",
+    "new_html": "response_new.html",
+    "reply_html": "response_reply.html"
+   },
+   "source": "03-RCP-Spike/evidence/20261105-gbot-algogebra-json-debian_GROK_V1/raw/neg_00006_reply.html"
+  },
+  {
+   "id": "00006_retry_unparsable",
+   "exo": "00006",
+   "module": "H6/test/oef2html.fr",
+   "special_parm_on_reply": true,
+   "special_parm_on_new": false,
+   "fields": {
+    "reply1": "é \"x\" -- a\\b"
+   },
+   "reply_encoding": "cp1252",
+   "reply1_bytes_hex": "e920227822202d2d20615c62",
+   "response_charset": "windows-1252",
+   "classification": "retry",
+   "session_from_new": "LBC16E8F9B.1",
+   "files": {
+    "new_query": "request_new.query",
+    "reply_body": "request_reply.body",
+    "new_html": "response_new.html",
+    "reply_html": "response_reply.html"
+   },
+   "source": "03-RCP-Spike/evidence/20261105-gbot-algogebra-json-debian_GROK_V1/raw/w8_reply_cp1252.html"
+  },
+  {
+   "id": "gbw8acc_ete_cp1252_right",
+   "exo": "gbw8acc",
+   "module": "H6/test/oef2html.fr",
+   "special_parm_on_reply": true,
+   "special_parm_on_new": false,
+   "fields": {
+    "reply1": "été"
+   },
+   "reply_encoding": "cp1252",
+   "reply1_bytes_hex": "e974e9",
+   "response_charset": "windows-1252",
+   "classification": "json",
+   "session_from_new": "GRE8B6CF9D.1",
+   "files": {
+    "new_query": "request_new.query",
+    "reply_body": "request_reply.body",
+    "new_html": "response_new.html",
+    "reply_html": "response_reply.html",
+    "json": "extracted.json"
+   },
+   "source": "03-RCP-Spike/evidence/20261105-gbot-live-suites-accent_GROK_V1/raw/w8acc_right_cp1252_reply.html",
+   "expected_grade": 1,
+   "expected_answers": [
+    {
+     "id": "reply1",
+     "correct": true,
+     "score": 1,
+     "feedback": "",
+     "expected": "été",
+     "given": "été"
+    }
+   ]
+  },
+  {
+   "id": "gbw8acc_ETE_upper_cp1252_right",
+   "exo": "gbw8acc",
+   "module": "H6/test/oef2html.fr",
+   "special_parm_on_reply": true,
+   "special_parm_on_new": false,
+   "fields": {
+    "reply1": "ÉTÉ"
+   },
+   "reply_encoding": "cp1252",
+   "reply1_bytes_hex": "c954c9",
+   "response_charset": "windows-1252",
+   "classification": "json",
+   "session_from_new": "OAE8B6CF81.1",
+   "files": {
+    "new_query": "request_new.query",
+    "reply_body": "request_reply.body",
+    "new_html": "response_new.html",
+    "reply_html": "response_reply.html",
+    "json": "extracted.json"
+   },
+   "source": "03-RCP-Spike/evidence/20261105-gbot-live-suites-accent_GROK_V1/raw/w8acc_right_cp1252_upper_reply.html",
+   "expected_grade": 1,
+   "expected_answers": [
+    {
+     "id": "reply1",
+     "correct": true,
+     "score": 1,
+     "feedback": "",
+     "expected": "été",
+     "given": "ÉTÉ"
+    }
+   ]
+  },
+  {
+   "id": "gbw8acc_fevrier_cp1252_wrong",
+   "exo": "gbw8acc",
+   "module": "H6/test/oef2html.fr",
+   "special_parm_on_reply": true,
+   "special_parm_on_new": false,
+   "fields": {
+    "reply1": "février"
+   },
+   "reply_encoding": "cp1252",
+   "reply1_bytes_hex": "66e97672696572",
+   "response_charset": "windows-1252",
+   "classification": "json",
+   "session_from_new": "UDE8B7CF85.1",
+   "files": {
+    "new_query": "request_new.query",
+    "reply_body": "request_reply.body",
+    "new_html": "response_new.html",
+    "reply_html": "response_reply.html",
+    "json": "extracted.json"
+   },
+   "source": "03-RCP-Spike/evidence/20261105-gbot-live-suites-accent_GROK_V1/raw/w8acc_wrong_cp1252_reply.html",
+   "expected_grade": 0,
+   "expected_answers": [
+    {
+     "id": "reply1",
+     "correct": false,
+     "score": 0,
+     "feedback": "",
+     "expected": "été",
+     "given": "février"
+    }
+   ]
+  },
+  {
+   "id": "gbw8acc_ete_utf8_graded_wrong",
+   "exo": "gbw8acc",
+   "module": "H6/test/oef2html.fr",
+   "special_parm_on_reply": true,
+   "special_parm_on_new": false,
+   "fields": {
+    "reply1": "été"
+   },
+   "reply_encoding": "utf-8",
+   "reply1_bytes_hex": "c3a974c3a9",
+   "response_charset": "windows-1252",
+   "classification": "json",
+   "session_from_new": "LME8B7CF89.1",
+   "files": {
+    "new_query": "request_new.query",
+    "reply_body": "request_reply.body",
+    "new_html": "response_new.html",
+    "reply_html": "response_reply.html",
+    "json": "extracted.json"
+   },
+   "source": "03-RCP-Spike/evidence/20261105-gbot-live-suites-accent_GROK_V1/raw/w8acc_right_utf8_reply.html",
+   "expected_grade": 0,
+   "expected_answers": [
+    {
+     "id": "reply1",
+     "correct": false,
+     "score": 0,
+     "feedback": "",
+     "expected": "été",
+     "given": "Ã©tÃ©"
+    }
+   ]
+  },
+  {
+   "id": "client_reject_unrepresentable_cp1252",
+   "classification": "client_reject",
+   "wims_call": false,
+   "fields": {
+    "reply1": "été ≥ 2 – 😀"
+   },
+   "files": {
+    "expectation": "expectation.json"
+   }
+  }
+ ]
+}

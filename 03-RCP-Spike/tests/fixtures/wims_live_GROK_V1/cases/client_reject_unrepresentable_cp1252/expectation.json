@@ -1,0 +1,10 @@
+{
+ "input_reply1": "été ≥ 2 – 😀",
+ "cp1252_representable": false,
+ "offending": [
+  "≥",
+  "😀"
+ ],
+ "expected_client_behaviour": "reject or flag before any HTTP request; do not send UTF-8 or '?' substitutes",
+ "wims_call": null
+}
