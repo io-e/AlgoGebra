@@ -1,0 +1,182 @@
+{
+ "rows": [
+  {
+   "case": "00006_wrong",
+   "sid": "XXC1788F71.1",
+   "present": true,
+   "valid": true,
+   "grade_ok": true,
+   "ids_ok": true,
+   "echo_ok": true,
+   "correct_ok": true,
+   "ascii": true,
+   "json": {
+    "grade": 0,
+    "seed": 1,
+    "answers": [
+     {
+      "id": "reply1",
+      "correct": false,
+      "score": 0,
+      "feedback": "",
+      "expected": "2",
+      "given": "0"
+     }
+    ],
+    "feedback": ""
+   }
+  },
+  {
+   "case": "00006_right",
+   "sid": "S7C1788F5D.1",
+   "present": true,
+   "valid": true,
+   "grade_ok": true,
+   "ids_ok": true,
+   "echo_ok": true,
+   "correct_ok": true,
+   "ascii": true,
+   "json": {
+    "grade": 1,
+    "seed": 1,
+    "answers": [
+     {
+      "id": "reply1",
+      "correct": true,
+      "score": 1,
+      "feedback": "",
+      "expected": "2",
+      "given": "2"
+     }
+    ],
+    "feedback": ""
+   }
+  },
+  {
+   "case": "00076_wrong",
+   "sid": "F7C1788F20.1",
+   "present": true,
+   "valid": true,
+   "grade_ok": true,
+   "ids_ok": true,
+   "echo_ok": true,
+   "correct_ok": true,
+   "ascii": true,
+   "json": {
+    "grade": 0,
+    "seed": 1,
+    "answers": [
+     {
+      "id": "reply1",
+      "correct": false,
+      "score": 0,
+      "feedback": "",
+      "expected": "3,5;1,2,3,4,5,6",
+      "given": "1"
+     }
+    ],
+    "feedback": ""
+   }
+  },
+  {
+   "case": "00076_right",
+   "sid": "48C1788F2A.1",
+   "present": true,
+   "valid": true,
+   "grade_ok": true,
+   "ids_ok": true,
+   "echo_ok": true,
+   "correct_ok": true,
+   "ascii": true,
+   "json": {
+    "grade": 1,
+    "seed": 1,
+    "answers": [
+     {
+      "id": "reply1",
+      "correct": true,
+      "score": 1,
+      "feedback": "",
+      "expected": "3,5;1,2,3,4,5,6",
+      "given": "3, 5"
+     }
+    ],
+    "feedback": ""
+   }
+  }
+ ],
+ "neg": [
+  {
+   "case": "neg_00006",
+   "marker_absent": true,
+   "graded": true
+  },
+  {
+   "case": "neg_00076",
+   "marker_absent": true,
+   "graded": true
+  }
+ ],
+ "http": [
+  [
+   "00006_wrong_new",
+   "http://127.0.0.1:18431/wims/wims.cgi?module=H6%2Ftest%2Foef2html.fr&cmd=new&exo=00006&qnum=1&qcmlevel=1&intro_expert=yes&intro_sol=1&intro_good=1&intro_feed=1&lang=fr",
+   "text/html; charset=windows-1252"
+  ],
+  [
+   "00006_wrong_reply",
+   "http://127.0.0.1:18431/wims/wims.cgi?session=XXC1788F71.1&cmd=reply&module=H6%2Ftest%2Foef2html.fr&special_parm=algogebra_json&reply1=0",
+   "text/html; charset=windows-1252"
+  ],
+  [
+   "00006_right_new",
+   "http://127.0.0.1:18431/wims/wims.cgi?module=H6%2Ftest%2Foef2html.fr&cmd=new&exo=00006&qnum=1&qcmlevel=1&intro_expert=yes&intro_sol=1&intro_good=1&intro_feed=1&lang=fr",
+   "text/html; charset=windows-1252"
+  ],
+  [
+   "00006_right_reply",
+   "http://127.0.0.1:18431/wims/wims.cgi?session=S7C1788F5D.1&cmd=reply&module=H6%2Ftest%2Foef2html.fr&special_parm=algogebra_json&reply1=2",
+   "text/html; charset=windows-1252"
+  ],
+  [
+   "00076_wrong_new",
+   "http://127.0.0.1:18431/wims/wims.cgi?module=H6%2Ftest%2Foef2html.fr&cmd=new&exo=00076&qnum=1&qcmlevel=1&intro_expert=yes&intro_sol=1&intro_good=1&intro_feed=1&lang=fr",
+   "text/html; charset=windows-1252"
+  ],
+  [
+   "00076_wrong_reply",
+   "http://127.0.0.1:18431/wims/wims.cgi?session=F7C1788F20.1&cmd=reply&module=H6%2Ftest%2Foef2html.fr&special_parm=algogebra_json&reply1=1",
+   "text/html; charset=windows-1252"
+  ],
+  [
+   "00076_right_new",
+   "http://127.0.0.1:18431/wims/wims.cgi?module=H6%2Ftest%2Foef2html.fr&cmd=new&exo=00076&qnum=1&qcmlevel=1&intro_expert=yes&intro_sol=1&intro_good=1&intro_feed=1&lang=fr",
+   "text/html; charset=windows-1252"
+  ],
+  [
+   "00076_right_reply",
+   "http://127.0.0.1:18431/wims/wims.cgi?session=48C1788F2A.1&cmd=reply&module=H6%2Ftest%2Foef2html.fr&special_parm=algogebra_json&reply1=3%2C+5",
+   "text/html; charset=windows-1252"
+  ],
+  [
+   "neg_00006_new",
+   "http://127.0.0.1:18431/wims/wims.cgi?module=H6%2Ftest%2Foef2html.fr&cmd=new&exo=00006&qnum=1&qcmlevel=1&intro_expert=yes&intro_sol=1&intro_good=1&intro_feed=1&lang=fr",
+   "text/html; charset=windows-1252"
+  ],
+  [
+   "neg_00006",
+   "http://127.0.0.1:18431/wims/wims.cgi?session=HEC1788F14.1&cmd=reply&module=H6%2Ftest%2Foef2html.fr&reply1=2",
+   "text/html; charset=windows-1252"
+  ],
+  [
+   "neg_00076_new",
+   "http://127.0.0.1:18431/wims/wims.cgi?module=H6%2Ftest%2Foef2html.fr&cmd=new&exo=00076&qnum=1&qcmlevel=1&intro_expert=yes&intro_sol=1&intro_good=1&intro_feed=1&lang=fr",
+   "text/html; charset=windows-1252"
+  ],
+  [
+   "neg_00076",
+   "http://127.0.0.1:18431/wims/wims.cgi?session=F3C1788FFB.1&cmd=reply&module=H6%2Ftest%2Foef2html.fr&reply1=3%2C+5",
+   "text/html; charset=windows-1252"
+  ]
+ ]
+}

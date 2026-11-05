@@ -1,0 +1,15 @@
+--- ../gv_wimsrt/public_html/scripts/oef/answer.phtml.bak_pre_algogebra	2026-11-05 16:05:03.484980637 +0100
++++ ../gv_wimsrt/public_html/scripts/oef/answer.phtml	2026-11-05 16:05:03.516978321 +0100
+@@ -114,6 +114,12 @@
+ </div>
+ !!end of .answer_analysis
+ </div>
++!! GROK_V1 AlgoGebra JSON hook (special_parm=algogebra_json)
++!if $special_parm=algogebra_json
++<!-- ALGOGEBRA_JSON_BEGIN
++!read oef/algogebra_json.phtml
++ALGOGEBRA_JSON_END -->
++!endif
+ !!presentsol=1 deprecated
+ !! givesol=1: always if $score=10 or at the last try of all versions
+ !if $solution!=$empty and ($givesol=$empty or (($presentsol=1 and $score<10)\

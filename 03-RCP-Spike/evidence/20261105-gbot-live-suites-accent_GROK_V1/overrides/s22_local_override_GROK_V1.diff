@@ -1,0 +1,25 @@
+diff --git a/03-RCP-Spike/tests/fixtures/wims/grade_client_test_GROK_V1.mjs b/03-RCP-Spike/tests/fixtures/wims/grade_client_test_GROK_V1.mjs
+index a0eaaff..f18fced 100644
+--- a/03-RCP-Spike/tests/fixtures/wims/grade_client_test_GROK_V1.mjs
++++ b/03-RCP-Spike/tests/fixtures/wims/grade_client_test_GROK_V1.mjs
+@@ -1,6 +1,6 @@
+ // GROK_V1 — G-15 unit/contract tests for wims-grade-client_GROK_V1.js against the local D-S01 mock. Output: TAP-like lines.
+ import { createRequire } from 'node:module'; import path from 'node:path'; import fs from 'node:fs'; import os from 'node:os';
+-import { fileURLToPath } from 'node:url'; import { start } from './mock_wims_cgi_GROK_V1.mjs';
++import { fileURLToPath } from 'node:url'; const { start } = await import(process.env.WIMS_LIVE_EP ? './live_proxy_GROK_V1.mjs' : './mock_wims_cgi_GROK_V1.mjs'); // LOCAL GB-W7 override
+ const here = path.dirname(fileURLToPath(import.meta.url)); const repo = path.resolve(here, '../../../..');
+ const C = createRequire(import.meta.url)(path.join(repo, 'wims/course-activity-template/wims-grade-client_GROK_V1.js'));
+ const log = path.join(os.tmpdir(), 'wims-mock-' + process.pid + '.jsonl'); process.env.WIMS_MOCK_LOG = log;
+--- untracked file:
+// GROK_V1 LOCAL GB-W7 override (untracked): same start() API as the mock, but forwards /wims/wims.cgi to $WIMS_LIVE_EP
+// and appends the same request record to $WIMS_MOCK_LOG. Response bodies saved to $LIVE_RAW_DIR if set.
+import http from 'node:http'; import fs from 'node:fs'; import path from 'node:path';
+let k = 0;
+export function start(port = 0) { return new Promise(r => { const s = http.createServer((req, res) => {
+  const b = []; req.on('data', c => b.push(c)); req.on('end', async () => { const body = Buffer.concat(b);
+    const p = new URLSearchParams(body.toString('latin1')); const ans = p.get('ans1') || '';
+    if (process.env.WIMS_MOCK_LOG) fs.appendFileSync(process.env.WIMS_MOCK_LOG, JSON.stringify({ method: req.method, ct: req.headers['content-type'] || '', module: p.get('module'), job: p.get('job'), exercise: p.get('exercise'), ans1Len: ans.length, ans1Zip: Buffer.from(ans, 'base64').subarray(0, 2).toString('latin1') === 'PK', keys: [...p.keys()], live: true }) + '\n');
+    try { const rr = await fetch(process.env.WIMS_LIVE_EP, { method: req.method, headers: { 'Content-Type': req.headers['content-type'] || '' }, body: req.method === 'POST' ? body : undefined });
+      const t = Buffer.from(await rr.arrayBuffer()); if (process.env.LIVE_RAW_DIR) fs.writeFileSync(path.join(process.env.LIVE_RAW_DIR, `s22_${++k}_${p.get('exercise') || 'x'}.html`), t);
+      res.writeHead(rr.status, { 'Content-Type': rr.headers.get('content-type') || '' }); res.end(t); } catch (e) { res.writeHead(502).end(String(e)); } }); });
+  s.listen(port, '127.0.0.1', () => r(s)); }); }

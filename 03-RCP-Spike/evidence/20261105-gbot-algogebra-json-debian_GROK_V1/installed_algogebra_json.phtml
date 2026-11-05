@@ -1,0 +1,59 @@
+!! GROK_V1
+!! AlgoGebra JSON hook body — emit one JSON object (no comment markers).
+!! Caller (answer.phtml) wraps with ALGOGEBRA_JSON_BEGIN / END when
+!! special_parm=algogebra_json.
+!! Escape policy (V1): singlespace + escape \ and " + neutralize -- for HTML comments.
+!! See Discovery_Variable_Dump_GROK_V1.md
+
+!default module_score=0
+!default replycnt=0
+!default choicecnt=0
+!default wims_seed=0
+
+!set ag_grade=$[$module_score/10]
+!set ag_sep=
+
+{"grade":$ag_grade,"seed":$wims_seed,"answers":[
+!for i=1 to $replycnt
+  !default m_sc_reply$i=0
+  !default diareply$i=bad
+  !default reply$i=
+  !default replygood$i=
+  !set ag_given=!singlespace $(reply$i)
+  !set ag_expected=!singlespace $(replygood$i)
+  !set ag_given=!replace internal \ by \\ in $ag_given
+  !set ag_given=!replace internal " by \" in $ag_given
+  !set ag_given=!replace internal -- by \u002d\u002d in $ag_given
+  !set ag_expected=!replace internal \ by \\ in $ag_expected
+  !set ag_expected=!replace internal " by \" in $ag_expected
+  !set ag_expected=!replace internal -- by \u002d\u002d in $ag_expected
+  !ifval $(m_sc_reply$i)>=1
+    !set ag_correct=true
+  !else
+    !set ag_correct=false
+  !endif
+  $ag_sep{"id":"reply$i","correct":$ag_correct,"score":$(m_sc_reply$i),"feedback":"","expected":"$ag_expected","given":"$ag_given"}
+  !set ag_sep=,
+!next i
+!for i=1 to $choicecnt
+  !default m_sc_choice$i=0
+  !default diachoice$i=bad
+  !default choice$i=
+  !default choicegood$i=
+  !set ag_given=!singlespace $(choice$i)
+  !set ag_expected=!singlespace $(choicegood$i)
+  !set ag_given=!replace internal \ by \\ in $ag_given
+  !set ag_given=!replace internal " by \" in $ag_given
+  !set ag_given=!replace internal -- by \u002d\u002d in $ag_given
+  !set ag_expected=!replace internal \ by \\ in $ag_expected
+  !set ag_expected=!replace internal " by \" in $ag_expected
+  !set ag_expected=!replace internal -- by \u002d\u002d in $ag_expected
+  !ifval $(m_sc_choice$i)>=1
+    !set ag_correct=true
+  !else
+    !set ag_correct=false
+  !endif
+  $ag_sep{"id":"choice$i","correct":$ag_correct,"score":$(m_sc_choice$i),"feedback":"","expected":"$ag_expected","given":"$ag_given"}
+  !set ag_sep=,
+!next i
+],"feedback":""}

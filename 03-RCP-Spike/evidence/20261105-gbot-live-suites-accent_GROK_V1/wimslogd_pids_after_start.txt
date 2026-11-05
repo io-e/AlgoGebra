@@ -1,0 +1,2 @@
+3953086 ../bin/wimslogd
+3953088 tee /workspace/grok-g1/ev_live/wimslogd_pids_after_start.txt

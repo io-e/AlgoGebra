@@ -1,0 +1,6 @@
+\title{GB-W8 accent}
+\language{fr}
+\text{sol=été}
+\statement{Quelle saison vient après le printemps ? (réponse : été)}
+\answer{Saison}{\sol}{type=nocase}
+\feedback{1=1}{Très bien, l'été arrive en février ? Non.}

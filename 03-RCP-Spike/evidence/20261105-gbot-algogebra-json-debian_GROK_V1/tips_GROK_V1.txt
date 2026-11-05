@@ -1,0 +1,3 @@
+wims4win feat/algogebra-wims-integration 928d383587f2fdc276c6f8ad25b8c294cf8f2760
+AlgoGebra base 29f7771a080a1cffff8c880df92559687a90cb77
+WIMS 4.31b

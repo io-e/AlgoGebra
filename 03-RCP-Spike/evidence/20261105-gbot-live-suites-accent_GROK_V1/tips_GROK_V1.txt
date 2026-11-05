@@ -1,0 +1,6 @@
+wims4win 4ae4d861dc4cd0c8dd0b8181777a359729be477c (GB-W5 installer)
+suite21 #40 0222ce1837c85fb36ec8a289187b033e77677be0
+suite22 #41 a30f8ec49c76baf4abb55f9acedaeefa959423fe
+suite23 #42 c9a6dd5bb8c2749076ccae2364a23cc01cfe00b1
+installer answer.phtml sha256 a3ce338ec7600366dca0b7f915d85f1e06b9a4cccc89ba4c8fe2d7cdcf0ea9e0 == manual install (identical)
+installer algogebra_json.phtml sha256 8174221d81c90b7dd33b93594773ce40464891af26c741e0630444743e837b0a == manual
