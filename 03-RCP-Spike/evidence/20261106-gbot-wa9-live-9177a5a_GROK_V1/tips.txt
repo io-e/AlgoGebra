@@ -1,0 +1,5 @@
+client tip 9177a5a90f06158968f69f3ea7f5cb9fb3239609
+server pid 3966079
+wimslogd (auto-spawned by wims.cgi) 3988139
+endpoint http://127.0.0.1:18431/wims/wims.cgi
+JAVA_HOME /workspace/grok-g1/gv_jdk21/jdk-21.0.13+9

@@ -1,0 +1,2 @@
+3966079 python3 /workspace/grok-g1/gv_wims_cgi_server.py /workspace/grok-g1/gv_wimsrt/public_html 18431
+3988139 ../bin/wimslogd

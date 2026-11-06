@@ -1,0 +1,4 @@
+ok 1 - live-session-and-reply
+ok 2 - live-grade-is-numeric
+ok 3 - live-grade-matches-expected
+# WIMS live smoke: 3 PASS, 0 FAIL
