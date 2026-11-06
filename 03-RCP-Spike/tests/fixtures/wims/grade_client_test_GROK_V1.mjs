@@ -52,6 +52,14 @@ try {
   const sc = await C.createSession({ endpoint, module, exo: '00076', lang: 'fr' });
   const checkbox = await C.submitAnswers(sc, { reply1: ['3', '5'] }); rec = last();
   ok('WA9-checkbox-multiple-values', checkbox.grade === 1 && checkbox.answers[0].given === '3,5' && rec.values.reply1.join(',') === '3,5');
+  ok('WA9-00076-discovers-reply-field', sc.answerFields.includes('reply1'));
+  const checkboxWrong = await C.submitAnswers(sc, { reply1: ['3'] });
+  ok('WA9-00076-wrong-selection-grade-zero', checkboxWrong.grade === 0 && !checkboxWrong.answers[0].correct);
+
+  const choice = await C.createSession({ endpoint, module, exo: '00077', lang: 'fr' });
+  ok('WA9-choice1-discovered', choice.answerFields.includes('choice1'));
+  const choiceGrade = await C.submitAnswers(choice, { choice1: ['A', 'B'] }); rec = last();
+  ok('WA9-choiceN-hook-answer-id', choiceGrade.grade === 1 && choiceGrade.answers[0].id === 'choice1' && rec.values.choice1.join(',') === 'A,B');
 
   const noHookSession = await C.createSession({ endpoint, module, exo: '00006', lang: 'fr' });
   const noHookBody = C.formEncode([['session', noHookSession.sessionId], ['module', module], ['cmd', 'reply'], ['reply1', '2']]);

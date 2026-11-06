@@ -49,10 +49,13 @@ export function handler(req, res, next) {
       if (module !== 'H6/test/oef2html.fr') return html(res, '<html>unknown OEF module</html>', 400);
       if (cmd === 'new' && req.method === 'GET') {
         const sid = 'MOCKSESSION' + String(nextSession++).padStart(4, '0') + '.1';
+        const answerField = exo === '00077' ? 'choice1' : 'reply1';
         const fields = exo === '00076'
           ? '<input type="checkbox" name="reply1" value="3"><input type="checkbox" name="reply1" value="5">'
-          : '<input type="text" name="reply1" value="">';
-        sessions.set(sid, { module, exo, fields: ['reply1'] });
+          : exo === '00077'
+            ? '<input type="checkbox" name="choice1" value="A"><input type="checkbox" name="choice1" value="B">'
+            : '<input type="text" name="reply1" value="">';
+        sessions.set(sid, { module, exo, fields: [answerField] });
         return html(res, '<html><form name="replyform"><input type="hidden" name="session" value="' + sid +
           '"><input type="hidden" name="module" value="' + module + '">' + fields + '</form></html>');
       }
@@ -62,7 +65,7 @@ export function handler(req, res, next) {
       const submitted = [...params.keys()].filter(k => /^(reply|choice)[1-9][0-9]*$/.test(k));
       if (!submitted.length || submitted.some(k => !session.fields.includes(k))) return html(res, '<html>invalid answer field</html>', 400);
       const values = submitted.flatMap(k => params.get(k));
-      const expected = session.exo === '00076' ? ['3', '5'] : ['2'];
+      const expected = session.exo === '00076' ? ['3', '5'] : session.exo === '00077' ? ['A', 'B'] : ['2'];
       const correct = values.length === expected.length && values.every((v, i) => v === expected[i]);
       const answer = { id: submitted[0], correct, score: correct ? 1 : 0, feedback: '',
         expected: expected.join(','), given: values.join(',') };
