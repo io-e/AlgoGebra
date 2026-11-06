@@ -1,45 +1,97 @@
-// GROK_V1 — G-15 unit/contract tests for wims-grade-client_GROK_V1.js against the local D-S01 mock. Output: TAP-like lines.
-import { createRequire } from 'node:module'; import path from 'node:path'; import fs from 'node:fs'; import os from 'node:os';
-import { fileURLToPath } from 'node:url'; import { start } from './mock_wims_cgi_GROK_V1.mjs';
-const here = path.dirname(fileURLToPath(import.meta.url)); const repo = path.resolve(here, '../../../..');
+// WA-9 contract tests: the loopback mock speaks cmd=new/reply plus the WIMS JSON-comment hook.
+import { createRequire } from 'node:module';
+import path from 'node:path';
+import fs from 'node:fs';
+import os from 'node:os';
+import http from 'node:http';
+import { fileURLToPath } from 'node:url';
+import { start } from './mock_wims_cgi_GROK_V1.mjs';
+const here = path.dirname(fileURLToPath(import.meta.url));
+const repo = path.resolve(here, '../../../..');
 const C = createRequire(import.meta.url)(path.join(repo, 'wims/course-activity-template/wims-grade-client_GROK_V1.js'));
-const log = path.join(os.tmpdir(), 'wims-mock-' + process.pid + '.jsonl'); process.env.WIMS_MOCK_LOG = log;
-const srv = await start(0); const ep = 'http://127.0.0.1:' + srv.address().port + '/wims/wims.cgi';
-const ggb = Buffer.concat([Buffer.from('PK\x03\x04', 'latin1'), Buffer.alloc(64, 1)]).toString('base64');
-let n = 0, fail = 0; const ok = (id, c, d = '') => { n++; if (!c) fail++; console.log(`${c ? 'ok' : 'not ok'} ${n} - ${id}${d ? ' :: ' + d : ''}`); };
-const last = () => JSON.parse(fs.readFileSync(log, 'utf8').trim().split('\n').pop());
+const log = path.join(os.tmpdir(), 'wims-mock-' + process.pid + '.jsonl');
+process.env.WIMS_MOCK_LOG = log;
+const server = await start(0);
+const endpoint = 'http://127.0.0.1:' + server.address().port + '/wims/wims.cgi';
+const module = 'H6/test/oef2html.fr';
+// Use short-lived HTTP/1.1 sockets in this Windows test harness; Node's global
+// undici keep-alive teardown can trip a libuv assertion when the mock closes.
+globalThis.fetch = (url, init = {}) => new Promise((resolve, reject) => {
+  const req = http.request(url, { method: init.method || 'GET', headers: init.headers, agent: false }, res => {
+    const chunks = [];
+    res.on('data', c => chunks.push(c));
+    res.on('end', () => {
+      const body = Buffer.concat(chunks);
+      resolve({ status: res.statusCode, headers: { get: name => res.headers[String(name).toLowerCase()] || null },
+        arrayBuffer: async () => body.buffer.slice(body.byteOffset, body.byteOffset + body.byteLength),
+        text: async () => body.toString('utf8') });
+    });
+  });
+  req.on('error', reject);
+  if (init.body) req.write(init.body);
+  req.end();
+});
+let n = 0, fail = 0;
+const ok = (id, condition, detail = '') => { n++; if (!condition) fail++; console.log(`${condition ? 'ok' : 'not ok'} ${n} - ${id}${detail ? ' :: ' + detail : ''}`); };
+const entries = () => fs.existsSync(log) ? fs.readFileSync(log, 'utf8').trim().split('\n').filter(Boolean).map(JSON.parse) : [];
+const last = () => entries().at(-1);
+try {
+  const s = await C.createSession({ endpoint, module, exo: '00006', lang: 'fr' });
+  let rec = last();
+  ok('WA9-new-session-and-reply-field', !!s.sessionId && s.answerFields.includes('reply1'));
+  ok('WA9-new-command-no-hook', rec.method === 'GET' && rec.cmd === 'new' && rec.module === module && rec.exo === '00006' && !rec.special_parm, JSON.stringify(rec));
 
-let b = C.buildBody('ok-1', ggb); const q = new URLSearchParams(b);
-ok('GC-01-body-fields-D-S01', q.get('module') === 'adm/class/sheet' && q.get('job') === 'getresult' && q.get('exercise') === 'ok-1' && q.get('ans1') === ggb, b.slice(0, 70));
-ok('GC-02-no-grade-field-sent', ![...q.keys()].some(k => /grade|score|note/i.test(k)), [...q.keys()].join(','));
-ok('GC-03-reject-bad-exercise', (() => { try { C.buildBody('a b&c', ggb); return false; } catch { return true; } })());
-ok('GC-04-reject-bad-base64', (() => { try { C.buildBody('ok-1', '###'); return false; } catch { return true; } })());
-let r = await C.submit({ endpoint: ep, exercise: 'ok-1', base64: ggb });
-let m = last();
-ok('GC-05-post-form-urlencoded', m.method === 'POST' && /application\/x-www-form-urlencoded/.test(m.ct), m.ct);
-ok('GC-06-ans1-is-ggb-zip', m.ans1Zip === true && m.ans1Len === ggb.length);
-ok('GC-07-grade-from-wims', r.ok && r.grade === 0.8 && /4 of 5/.test(r.feedback), JSON.stringify(r));
-r = await C.submit({ endpoint: ep, exercise: 'html-1', base64: ggb }); ok('GC-08-html-response-is-error', !r.ok && /HTML/.test(r.error), r.error);
-r = await C.submit({ endpoint: ep, exercise: 'e500-1', base64: ggb }); ok('GC-09-http-500-is-error', !r.ok && /500/.test(r.error), r.error);
-r = await C.submit({ endpoint: ep, exercise: 'bad-1', base64: ggb }); ok('GC-10-grade-out-of-range-rejected', !r.ok && /0\.\.1/.test(r.error), r.error);
-r = await C.submit({ endpoint: ep, exercise: 'slow-1', base64: ggb, timeoutMs: 500 }); ok('GC-11-timeout', !r.ok && /in time/.test(r.error), r.error);
-r = await C.submit({ endpoint: 'http://127.0.0.1:1/wims/wims.cgi', exercise: 'ok-1', base64: ggb }); ok('GC-12-network-error', !r.ok && /network/.test(r.error), r.error);
-r = await C.submit({ endpoint: ep, exercise: '', base64: ggb }); ok('GC-13-no-exercise-no-request', !r.ok && /exercise/.test(r.error));
-ok('GC-14-parse-non-object', !C.parseResult(200, 'application/json', '[1]').ok && !C.parseResult(200, 'application/json', '{"grade":"0.5"}').ok);
-const src = fs.readFileSync(path.join(repo, 'wims/course-activity-template/wims-grade-client_GROK_V1.js'), 'utf8');
-ok('GC-15-no-innerHTML', !/\.innerHTML\s*=/.test(src));
-ok('GC-16-no-local-grading', !/(?<![-\w])grade\s*=\s*[^=]/.test(src.replace(/\/\/.*$/gm, '')), 'client never assigns a grade');
-// GC-17..GC-25: hardening (HTML adapter proposal Q-W1, size limit Q-W3, error paths)
-r = await C.submit({ endpoint: ep, exercise: 'html-1', base64: ggb, htmlAdapter: true }); ok('GC-17-adapter-html-no-marker-is-error', !r.ok && /marker/.test(r.error), r.error);
-r = await C.submit({ endpoint: ep, exercise: 'htmljson-1', base64: ggb, htmlAdapter: true }); ok('GC-18-adapter-json-marker', r.ok && r.grade === 0.6 && r.via === 'html-adapter' && /3 of 5/.test(r.feedback), JSON.stringify(r));
-r = await C.submit({ endpoint: ep, exercise: 'htmldata-1', base64: ggb, htmlAdapter: true }); ok('GC-19-adapter-data-attrs', r.ok && r.grade === 0.4 && r.feedback === '2 & 5 <ok>', JSON.stringify(r));
-r = await C.submit({ endpoint: ep, exercise: 'htmljson-1', base64: ggb }); ok('GC-20-adapter-off-by-default', !r.ok && /HTML/.test(r.error), r.error);
-ok('GC-21-adapter-validates-range', !C.parseResult(200, 'text/html', '<div id="wims-result" data-grade="7"></div>', { htmlAdapter: true }).ok);
-ok('GC-22-adapter-no-prose-scraping', C.extractFromHtml('<p>grade 0.9</p>') === null);
-const big = 'A'.repeat(C.DEFAULT_MAX_ANS_BYTES + 4);
-r = await C.submit({ endpoint: ep, exercise: 'ok-1', base64: big }); ok('GC-23-oversized-default-limit-no-request', !r.ok && /too large/.test(r.error), r.error.slice(0, 80));
-r = await C.submit({ endpoint: ep, exercise: 'ok-1', base64: ggb, maxAnsBytes: 8 }); ok('GC-24-limit-configurable', !r.ok && /> 8 bytes/.test(r.error), r.error);
-r = await C.submit({ endpoint: ep, exercise: 'big-1', base64: ggb }); ok('GC-25-http-413-message', !r.ok && /413/.test(r.error) && /too large/.test(r.error), r.error);
-r = await C.submit({ endpoint: ep, exercise: 'ok-1', base64: ggb, maxAnsBytes: big.length + 10 }); ok('GC-26-raised-limit-still-ok', r.ok && r.via === 'json', JSON.stringify(r));
-srv.close(); fs.rmSync(log, { force: true });
-console.log(`# grade client: ${n - fail} PASS, ${fail} FAIL`); process.exit(fail ? 1 : 0);
+  let result = await C.submitAnswers(s, { reply1: '2' }); rec = last();
+  ok('WA9-right-grade-one', result.grade === 1 && result.answers[0].correct && result.answers[0].id === 'reply1', JSON.stringify(result));
+  ok('WA9-reply-only-hook-and-session', rec.method === 'POST' && rec.cmd === 'reply' && rec.special_parm === 'algogebra_json' && rec.session === s.sessionId);
+  ok('WA9-real-reply-field-not-ans1', rec.values.reply1[0] === '2' && !Object.hasOwn(rec.values, 'ans1'), JSON.stringify(rec.keys));
+
+  const wrong = await C.submitAnswers(s, { reply1: '0' });
+  ok('WA9-wrong-grade-zero', wrong.grade === 0 && !wrong.answers[0].correct && wrong.answers[0].given === '0');
+
+  const sc = await C.createSession({ endpoint, module, exo: '00076', lang: 'fr' });
+  const checkbox = await C.submitAnswers(sc, { reply1: ['3', '5'] }); rec = last();
+  ok('WA9-checkbox-multiple-values', checkbox.grade === 1 && checkbox.answers[0].given === '3,5' && rec.values.reply1.join(',') === '3,5');
+
+  const noHookSession = await C.createSession({ endpoint, module, exo: '00006', lang: 'fr' });
+  const noHookBody = C.formEncode([['session', noHookSession.sessionId], ['module', module], ['cmd', 'reply'], ['reply1', '2']]);
+  const noHook = await fetch(endpoint, { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=windows-1252' }, body: noHookBody });
+  const noHookHtml = await noHook.text();
+  ok('WA9-no-hook-no-leak', !noHookHtml.includes('ALGOGEBRA_JSON_BEGIN'));
+  let noJson = false; try { C.parseHookResponse(200, noHookHtml); } catch (e) { noJson = /NO_JSON_BLOCK/.test(e.message); }
+  ok('WA9-missing-marker-is-explicit-error', noJson);
+
+  ok('WA9-windows1252-form-encoding', C.formEncode([['reply1', 'été']]) === 'reply1=%E9t%E9');
+  ok('WA9-unrepresentable-character-rejected', (() => { try { C.formEncode([['reply1', '→']]); return false; } catch { return true; } })());
+  ok('WA9-unknown-field-rejected-before-post', await (async () => {
+    const before = entries().length; try { await C.submitAnswers(s, { ans1: '2' }); return false; }
+    catch (e) { return /unknown WIMS answer field/.test(e.message) && entries().length === before; }
+  })());
+  ok('WA9-module-traversal-rejected', await (async () => {
+    try { await C.createSession({ endpoint, module: '../adm/raw', exo: '00006' }); return false; }
+    catch (e) { return /module/.test(e.message); }
+  })());
+
+  let malformed = false; try { C.parseHookResponse(200, '<!-- ALGOGEBRA_JSON_BEGIN {"grade":1 ALGOGEBRA_JSON_END -->'); }
+  catch { malformed = true; }
+  ok('WA9-malformed-json-rejected', malformed);
+  let badGrade = false; try { C.parseHookResponse(200, '<!-- ALGOGEBRA_JSON_BEGIN {"grade":2,"answers":[]} ALGOGEBRA_JSON_END -->'); }
+  catch { badGrade = true; }
+  ok('WA9-grade-range-enforced', badGrade);
+  let badAnswer = false; try { C.parseHookResponse(200, '<!-- ALGOGEBRA_JSON_BEGIN {"grade":1,"answers":[{"id":"ans1","correct":true,"score":1}]} ALGOGEBRA_JSON_END -->'); }
+  catch { badAnswer = true; }
+  ok('WA9-answer-id-schema-enforced', badAnswer);
+
+  const source = fs.readFileSync(path.join(repo, 'wims/course-activity-template/wims-grade-client_GROK_V1.js'), 'utf8');
+  ok('WA9-safe-text-rendering', !/\.innerHTML\s*=/.test(source) && /textContent/.test(source));
+  ok('WA9-no-local-grading', !/(?<![-\w])grade\s*=\s*[^=]/.test(source.replace(/\/\/.*$/gm, '')));
+} catch (e) {
+  ok('WA9-test-exception', false, e.stack || String(e));
+} finally {
+  const closed = new Promise(resolve => server.close(resolve));
+  if (server.closeAllConnections) server.closeAllConnections();
+  await closed;
+  fs.rmSync(log, { force: true });
+}
+console.log(`# grade client: ${n - fail} PASS, ${fail} FAIL`);
+process.exit(fail ? 1 : 0);
