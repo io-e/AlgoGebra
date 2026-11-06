@@ -1,5 +1,5 @@
 # GROK_V1 - Run_All aggregator, single cross-platform runner (pwsh 7 on Windows and Linux; cf. Claude Run_All_Tests_CLAUDE_V1.ps1).
-# Suites 01-20 (auto-discovered NN_Test_*_GROK_V1.ps1; 20 = GeoGebra-backed Java corpus test, auto-SKIP without JDK/image jars). -SkipRcp skips 08; -SkipUi skips 09/10 (they drive the desktop); 11 (bnd build) and 13 (GeoGebra Gradle baseline) are heavy: opt-in -WithBuild / -WithBaseline.
+# Suites 01-23 (auto-discovered NN_Test_*_(GROK|CODEX)_V1.ps1; 20 = GeoGebra-backed Java corpus test, auto-SKIP without JDK/image jars). -SkipRcp skips 08; -SkipUi skips 09/10 (they drive the desktop); 11 (bnd build) and 13 (GeoGebra Gradle baseline) are heavy: opt-in -WithBuild / -WithBaseline.
 # Output: results/<runid>/ (git-ignored, runid = yyyyMMdd_HHmmss-<host>). -ExportEvidence <name> copies the run to
 # ../evidence/<yyyyMMdd>-<os>-<name>-<runid>/ with MANIFEST_GROK_V1.tsv (commit, date, OS, path/bytes/sha256) for reviewed runs.
 # Scenarios (spec section 5): -Scenarios runs scenarios/S_*_GROK_V1.ps1 instead of the suites; -Gate A|B|C|D|E keeps the gate's
@@ -20,16 +20,17 @@ else { $env:GGB_UI_ALLOW_FOREGROUND = $null }
 $here = $PSScriptRoot; $ts = Get-Date -Format 'yyyyMMdd_HHmmss'; $runId = "$ts-$([Environment]::MachineName)"
 $res = Join-Path (Join-Path $here 'results') $runId; New-Item -ItemType Directory -Force $res | Out-Null; $env:RESULTS_DIR = $res; Write-Host "# run id: $runId -> $res"
  $rows = @(); $tp = 0; $tf = 0; $tk = 0; $tb = 0
-$suites = @(Get-ChildItem $here -File | Where-Object { $_.Name -match '^\d\d_Test_.*_GROK_V1\.ps1$' } | Sort-Object Name)
+$suites = @(Get-ChildItem $here -File | Where-Object { $_.Name -match '^\d\d_Test_.*_(?:GROK|CODEX)_V1\.ps1$' } | Sort-Object Name)
 if ($Scenarios -or $Gate -or $Only) { $Scenarios = $true
     $want = @(if ($Gate) { $gates[$Gate] }) + @($Only | Where-Object { $_ }); if ($want.Count -gt 0) { Write-Host "# scenario filter: $($want -join ', ')" }
     $sc = @(Get-ChildItem (Join-Path $here 'scenarios') -File -Filter 'S_*_GROK_V1.ps1' | Where-Object { $want.Count -eq 0 -or ($_.Name -replace '^S_([A-Z]-\d\d)_.*', '$1') -in $want } | Sort-Object Name)
     $su = @($suites | Where-Object { $p = $_.Name.Substring(0, 3); $want.Count -gt 0 -and @($want | Where-Object { $scnSuites[$_] -eq $p }).Count -gt 0 })
     $suites = $sc + $su; Write-Host "# selected: $($suites.Count) scripts" }
-if ($suites.Count -eq 0) { Write-Error 'No GROK_V1 test suites found; refusing to report an empty run as passing.'; exit 2 }
+if ($suites.Count -eq 0) { Write-Error 'No test suites found; refusing to report an empty run as passing.'; exit 2 }
 foreach ($s in $suites) {
-    $n = $s.BaseName -replace '_GROK_V1$', ''; if (-not $Scenarios -and (($SkipRcp -and $n -like '08_*') -or ($SkipUi -and $n -match '^(09|10)_') -or (-not $WithBuild -and $n -like '11_*') -or (-not $WithBaseline -and $n -like '13_*'))) { Write-Host "SKIP $n (not selected)"; continue }
-    $log = Join-Path $res "${n}_GROK_V1.log"; & pwsh -NoProfile -ExecutionPolicy Bypass -File $s.FullName *> $log; $rc = $LASTEXITCODE
+    $n = $s.BaseName -replace '_(?:GROK|CODEX)_V1$', ''; if (-not $Scenarios -and (($SkipRcp -and $n -like '08_*') -or ($SkipUi -and $n -match '^(09|10)_') -or (-not $WithBuild -and $n -like '11_*') -or (-not $WithBaseline -and $n -like '13_*'))) { Write-Host "SKIP $n (not selected)"; continue }
+    $suffix = if ($s.BaseName -match '_CODEX_V1$') { 'CODEX_V1' } else { 'GROK_V1' }
+    $log = Join-Path $res "${n}_${suffix}.log"; & pwsh -NoProfile -ExecutionPolicy Bypass -File $s.FullName *> $log; $rc = $LASTEXITCODE
     $p = 0; $f = 0; $k = 0; $summary = Get-Content $log -Raw
     if ($summary -match 'PASS:\s*(\d+)\s+FAIL:\s*(\d+)\s+SKIP:\s*(\d+)') { $p = [int]$Matches[1]; $f = [int]$Matches[2]; $k = [int]$Matches[3] }
     else { $f = 1; Write-Warning "No test summary in $log (suite crashed or did not complete)." }

@@ -6,7 +6,7 @@ Modelled on Claude's WIMS4win pack (`tests-win_ALF/*_CLAUDE_V1.ps1`, `lib/TestFr
 `Run_All_Tests_CLAUDE_V1.ps1`, `tests-win/run_equiv_pc.ps1`), the WA-OEF2IPYNB Maxima tier and `test_unicode_E2.ps1`.
 
 ## Layout
-- **Single runner: PowerShell 7 (`pwsh`) on Windows and Linux.** `NN_Test_<Area>_GROK_V1.ps1` suites 01-13 are cross-platform (`$IsWindows`/`$IsLinux`).
+- **Single runner: PowerShell 7 (`pwsh`) on Windows and Linux.** Suites 01-20 are the existing engine/RCP/course pack; suites 21-23 are the WA-9 protocol/client additions described below.
 - `lib/TestFramework_GROK_V1.ps1` — framework, engine driver, WIMS-style direct references (OS-aware paths, `Get-JavaTool`, natives).
 - `lib/UiDriver_GROK_V1.ps1` — UI driver for 08-10. Linux: Xvfb + xdotool + python3-PIL screenshots. Windows: user32 SetCursorPos/mouse_event, WinForms SendKeys/Clipboard, System.Drawing CopyFromScreen (Windows UI path syntax-checked only, NOT RUN).
 - The former bash twins of suites 01-08 (`*.sh`, `lib/tf_GROK_V1.sh`, `Run_All_GROK_V1.sh`) moved to `03-RCP-Spike/linux-tests/`, next to the project scripts (`build.sh`, `launch.sh`, `test-engines.sh` stay in `03-RCP-Spike/` beside their `.ps1` twins). They are kept for reference/cross-check only; `tests/` holds only `.ps1`, tools and fixtures. No new suites are written in bash.
@@ -51,6 +51,22 @@ pwsh -File Run_All_GROK_V1.ps1 -Scenarios | -Gate A | -Only P-02,D-06   # scenar
 ```
 Same command on Debian (`pwsh -File Run_All_GROK_V1.ps1 -WithBuild -WithBaseline`). Run_All refuses an empty suite list (exit 2), counts a suite
 without summary as FAIL, and reports BAIL separately (Codex 689d4b4). 09/10 drive the desktop: on Windows run them only in an attended session.
+
+## WIMS JSON-hook client (WA-9, suites 21-23)
+`host/src/org/geogebra/plus/wims/HttpWimsClient.java` implements the stock `cmd=new` → `cmd=reply` flow,
+with `special_parm=algogebra_json` only on replies. It reads the `replyN`/`choiceN` names from the OEF form,
+supports repeated checkbox values, encodes form fields as strict Windows-1252, decodes responses by the declared
+charset, accepts numeric integer grades, and classifies JSON / missing-hook / retry-page responses separately.
+The DTO names the WIMS `given` field `normalizedGiven`; it is a normalized value, not a transcript of keystrokes.
+
+- Suite 21 checks the protocol source, redacted #64 fixtures, and SHA-256 manifest.
+- Suite 22 exercises parser, encoding, error classification, limits, and timeout behavior against a local mock.
+- Suite 23 replays recorded Debian responses for 00006, 00076, and accented `été` through a loopback mock. It is
+  **not** live-server evidence. An optional real-server smoke runs only when `GGB_WIMS_LIVE_ENDPOINT` is set;
+  defaults are module `H6/test/oef2html.fr`, exercise `00006`, field `reply1`, answer `2`, expected grade `1`.
+  Use only a dedicated test WIMS module; never put credentials in environment values or logs.
+- Standalone checks: `pwsh -File 03-RCP-Spike/host/test-wims-client.ps1 -Mode all` (offline fixtures only), or
+  `pwsh -File 03-RCP-Spike/host/test-wims-live.ps1 -Endpoint <cgi-url> -Module <module> -Exercise <id> -Field <replyN> -Answer <answer>` (explicit live network call).
 
 ## Foreground-window guard (BUG-019, branch `feat/ui-foreground-guard`)
 Every UI driver action (click, keystroke, paste, screenshot, pixel read) calls `Assert-GgbForeground` (lib/UiDriver_GROK_V1.ps1):
