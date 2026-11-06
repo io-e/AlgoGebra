@@ -61,6 +61,8 @@
         'appletOnLoad': function () { ggbOnInit('ggbApplet'); },
         'width': 900, 'height': 600,
         'showToolBar': true, 'showAlgebraInput': true, 'showMenuBar': true,
+        // Keep GeoGebra's optional material/API fetch on the same-origin, self-hosted WAR.
+        'tubeurl': 'GeoGebra/',
         'html5codebase': 'GeoGebra/web3d/'
       };
       var applet = new GGBApplet(parameters, '5.0', 'applet1');

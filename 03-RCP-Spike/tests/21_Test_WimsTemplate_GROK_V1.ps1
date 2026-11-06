@@ -13,6 +13,7 @@ Test-Ok 'WT-04-grade-client-script' ($h -match 'src="wims-grade-client_GROK_V1\.
 Test-Ok 'WT-05-placeholders' ($h -match '\{\{WIMS_CGI_URL\}\}' -and $h -match '\{\{WIMS_MODULE_ID\}\}' -and $h -match '\{\{WIMS_EXO_ID\}\}' -and $h -match '\{\{COURSE_JSON_URL\}\}') 'CGI / OEF module / exercise / course URL placeholders' 'P0'
 Test-Ok 'WT-06-default-endpoint' ($h -match "'/wims/wims\.cgi'") 'default endpoint /wims/wims.cgi' 'P0'
 Test-Ok 'WT-07-local-codebase' ($h -match "html5codebase'\s*:\s*'GeoGebra/web3d/'" -and $h -notmatch 'geogebra\.org') 'self-hosted WAR, no geogebra.org' 'P0'
+Test-Ok 'WT-16-local-tube-url' ($h -match "tubeurl'\s*:\s*'GeoGebra/'") 'GeoGebra material/tube API requests stay on the self-hosted origin' 'P0'
 $ext = [regex]::Matches($h, '(?:src|href)="(https?:)?//[^"]+"').Count
 Test-Ok 'WT-08-no-external-assets' ($ext -eq 0) "external src/href count: $ext" 'P0'
 $inj = [regex]::Matches($h, 'applet\.inject').Count
