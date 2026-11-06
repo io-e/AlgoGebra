@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<!-- GROK_V1 — G-14 WIMS course activity template (WP7-01). Owner decision D-WIMS-G01:
+     WIMS grades OEF replyN/choiceN answers through cmd=new/reply and the JSON output hook.
+     Deployment: copy this file + wims-grade-client_GROK_V1.js next to web-host/ (course-tree.js, course-tree.css, GeoGebra/ WAR),
+     then substitute the {{...}} placeholders (see README_GROK_V1.md). The layout reuses web-host/course-host.html (Claude) unchanged. -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GeoGebraPlus — WIMS activity</title>
+  <link rel="stylesheet" href="course-tree.css">
+</head>
+<body>
+  <div id="app-container"
+       data-wims-endpoint="{{WIMS_CGI_URL}}"
+       data-wims-module="{{WIMS_MODULE_ID}}"
+       data-wims-exo="{{WIMS_EXO_ID}}"
+       data-course-url="{{COURSE_JSON_URL}}">
+    <nav id="course-tree" aria-label="Course navigation">
+      <h2 id="course-title">Loading…</h2>
+      <ul id="tree-root" role="tree" aria-label="Course steps"></ul>
+      <div id="step-description" role="status" aria-live="polite"></div>
+      <div id="button-bar">
+        <button id="btn-run" disabled aria-label="Run current step">Run Step</button>
+        <button id="btn-check" disabled aria-label="Check current step">Check</button>
+        <button id="btn-next" aria-label="Go to next step">Next &#x25B6;</button>
+        <button id="btn-reset" aria-label="Reset construction">Reset</button>
+      </div>
+      <div id="status-bar" role="status" aria-live="polite"></div>
+      <section id="wims-panel" aria-label="WIMS submission">
+        <button id="btn-wims-submit" disabled aria-label="Submit mapped answers to WIMS">Submit to WIMS</button>
+        <div id="wims-result" role="status" aria-live="polite"></div>
+        <p class="wims-note">Checks in the course tree are formative only. OEF answers are graded by WIMS.</p>
+      </section>
+    </nav>
+    <article id="ggb-host">
+      <div id="applet1"></div>
+    </article>
+  </div>
+
+  <script src="GeoGebra/deployggb.js"></script>
+  <script src="course-tree.js"></script>
+  <script src="wims-grade-client_GROK_V1.js"></script>
+  <script>
+    (function () {
+      var box = document.getElementById('app-container');
+      function cfg(name, fallback) {
+        var v = box.getAttribute(name) || '';
+        var q = new URLSearchParams(window.location.search);
+        var qk = name.replace('data-', '').replace(/-/g, '_');
+        if (q.get(qk)) { return q.get(qk); }
+        return /^\{\{.*\}\}$/.test(v) || !v ? fallback : v;
+      }
+      var endpoint = cfg('data-wims-endpoint', '/wims/wims.cgi');
+      var module = cfg('data-wims-module', '');
+      var exo = cfg('data-wims-exo', '');
+      var courseUrl = cfg('data-course-url', 'courses/trigonometry_intro.json');
+
+      var parameters = {
+        'appName': 'classic', 'id': 'ggbApplet',
+        'appletOnLoad': function () { ggbOnInit('ggbApplet'); },
+        'width': 900, 'height': 600,
+        'showToolBar': true, 'showAlgebraInput': true, 'showMenuBar': true,
+        // Keep GeoGebra's optional material/API fetch on the same-origin, self-hosted WAR.
+        'tubeurl': 'GeoGebra/',
+        'html5codebase': 'GeoGebra/web3d/'
+      };
+      var applet = new GGBApplet(parameters, '5.0', 'applet1');
+      applet.setHTML5Codebase('GeoGebra/web3d/');
+
+      window.ggbOnInit = function () {
+        var api = document.ggbApplet || applet.getAppletObject();
+        courseTree.setApi(api);
+        courseTree.verifyCasReady(api, function () {
+          courseTree.loadCourse(courseUrl);
+          courseTree.enable();
+          if (window.WimsGradeClient) {
+            WimsGradeClient.attach({
+              api: api, endpoint: endpoint, module: module, exo: exo,
+              answerProvider: window.GeoGebraWimsAnswerProvider,
+              button: document.getElementById('btn-wims-submit'),
+              output: document.getElementById('wims-result')
+            });
+          }
+        });
+      };
+
+      window.addEventListener('load', function () { applet.inject('applet1'); });
+    })();
+  </script>
+</body>
+</html>
