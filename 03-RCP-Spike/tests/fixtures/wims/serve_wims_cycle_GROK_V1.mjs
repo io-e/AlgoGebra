@@ -11,7 +11,16 @@ const types = { '.html': 'text/html', '.js': 'text/javascript', '.mjs': 'text/ja
 function pick(u) {
   const rel = decodeURIComponent(u.split('?')[0]).replace(/^\/+/, '') || 'course-activity_GROK_V1.html';
   const c = [];
-  if (rel.startsWith('GeoGebra/') && process.env.GGB_WAR_DIR) c.push(path.join(process.env.GGB_WAR_DIR, rel.slice(9)));
+  if (process.env.GGB_WAR_DIR) {
+    const root = process.env.GGB_WAR_DIR;
+    if (rel.startsWith('GeoGebra/web3d/')) {
+      c.push(path.join(root, rel.slice(9)), path.join(root, 'geogebraweb', rel.slice('GeoGebra/'.length)));
+    } else if (rel.startsWith('scripts/js/geogebra/geogebraweb/')) {
+      c.push(path.join(root, 'geogebraweb', rel.slice('scripts/js/geogebra/geogebraweb/'.length)));
+    } else if (rel.startsWith('GeoGebra/')) {
+      c.push(path.join(root, rel.slice(9)));
+    }
+  }
   c.push(path.join(tpl, rel), path.join(web, rel));
   if (rel.startsWith('courses/')) c.push(path.join(repo, rel));
   return c.find(f => { try { return fs.statSync(f).isFile(); } catch { return false; } });
