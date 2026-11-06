@@ -13,6 +13,8 @@ This template follows owner decision **D-WIMS-G01**: WIMS grades OEF answers thr
 
 Deploy beside `course-tree.js`, `course-tree.css` and the self-hosted `GeoGebra/` assets. Replace placeholders or use query overrides:
 
+The applet's `tubeurl` and HTML5 codebase both point to `GeoGebra/`; the page does not rely on `www.geogebra.org` for applet materials or resources.
+
 | Placeholder | Query parameter | Meaning |
 |---|---|---|
 | `{{WIMS_CGI_URL}}` | `wims_endpoint` | CGI endpoint; default `/wims/wims.cgi`. |
