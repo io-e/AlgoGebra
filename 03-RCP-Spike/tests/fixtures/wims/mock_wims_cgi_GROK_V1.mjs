@@ -67,8 +67,10 @@ export function handler(req, res, next) {
       const answer = { id: submitted[0], correct, score: correct ? 1 : 0, feedback: '',
         expected: expected.join(','), given: values.join(',') };
       const score = correct ? 1 : 0;
+      if (session.exo === '00099') return html(res, '<html><div class="answer_analysis">hook not installed</div></html>');
       if (first(params, 'special_parm') !== 'algogebra_json') return html(res, '<html><div class="answer_analysis">graded by WIMS</div></html>');
-      const payload = { grade: score, seed: 1, answers: [answer], feedback: '' };
+      const feedback = session.exo === '00007' ? '<img src=x onerror="window.__xss=1">' : '';
+      const payload = { grade: score, seed: 1, answers: [answer], feedback };
       return html(res, '<html><div class="answer_analysis">WIMS grading</div><!-- ALGOGEBRA_JSON_BEGIN\n' +
         JSON.stringify(payload) + '\nALGOGEBRA_JSON_END --></html>');
     } catch (e) { return html(res, '<html>bad form: ' + String(e.message) + '</html>', 400); }

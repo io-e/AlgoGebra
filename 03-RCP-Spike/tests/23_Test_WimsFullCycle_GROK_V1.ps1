@@ -1,4 +1,4 @@
-# GROK_V1 - G-16 (WP7-04) full WIMS exercise cycle in Firefox (Playwright library) against a LOCAL MOCK of the D-S01 WIMS CGI.
+# WA-9 - G-16 (WP7-04) full WIMS exercise cycle in Firefox (Playwright) against the loopback OEF hook mock.
 # Template (G-14) + grade client (G-15) + web-host course tree + self-hosted GeoGebra WAR, all same-origin on 127.0.0.1.
 # Env: GGB_WAR_DIR (WAR dir with deployggb.js + web3d/), PLAYWRIGHT_NODE_MODULES (node_modules containing playwright; default
 #      tests/playwright/node_modules), Playwright Firefox installed (npx playwright install firefox). SKIP when missing.
