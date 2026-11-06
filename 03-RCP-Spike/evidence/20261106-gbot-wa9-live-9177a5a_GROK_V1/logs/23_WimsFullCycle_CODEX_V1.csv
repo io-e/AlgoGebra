@@ -1,0 +1,31 @@
+suite,num,id,status,priority,detail,ts
+23_WimsFullCycle,1,W7-cycle-W1-cmd-new-session,PASS,P0,"W1-cmd-new-session",2026-11-06T09:22:50.2840142+01:00
+23_WimsFullCycle,2,W7-cycle-W2-integer-grade-one,PASS,P0,"W2-integer-grade-one",2026-11-06T09:22:50.2883781+01:00
+23_WimsFullCycle,3,W7-cycle-W2-per-answer-data,PASS,P0,"W2-per-answer-data",2026-11-06T09:22:50.2895485+01:00
+23_WimsFullCycle,4,W7-cycle-W1-W2-real-capture-cycle,PASS,P0,"W1-W2-real-capture-cycle",2026-11-06T09:22:50.2904394+01:00
+23_WimsFullCycle,5,W7-cycle-W1-new-does-not-send-json-hook,PASS,P0,"W1-new-does-not-send-json-hook",2026-11-06T09:22:50.2912569+01:00
+23_WimsFullCycle,6,W7-cycle-W2-reply-hook-only,PASS,P0,"W2-reply-hook-only",2026-11-06T09:22:50.2919900+01:00
+23_WimsFullCycle,7,W7-cycle-W1-session-carried-forward,PASS,P0,"W1-session-carried-forward",2026-11-06T09:22:50.2928959+01:00
+23_WimsFullCycle,8,W7-cycle-W2-no-invented-ansN,PASS,P0,"W2-no-invented-ansN",2026-11-06T09:22:50.2936311+01:00
+23_WimsFullCycle,9,W7-cycle-W1-form-post-windows1252,PASS,P0,"W1-form-post-windows1252",2026-11-06T09:22:50.2945830+01:00
+23_WimsFullCycle,10,W7-cycle-W5-integer-grade-zero,PASS,P0,"W5-integer-grade-zero",2026-11-06T09:22:50.2953349+01:00
+23_WimsFullCycle,11,W7-cycle-W1-checkbox-field-discovered,PASS,P0,"W1-checkbox-field-discovered",2026-11-06T09:22:50.2961109+01:00
+23_WimsFullCycle,12,W7-cycle-W1-checkbox-values-repeat-form-name,PASS,P0,"W1-checkbox-values-repeat-form-name",2026-11-06T09:22:50.2969482+01:00
+23_WimsFullCycle,13,W7-cycle-W6-given-is-normalized-not-keystrokes,PASS,P0,"W6-given-is-normalized-not-keystrokes",2026-11-06T09:22:50.2977303+01:00
+23_WimsFullCycle,14,W7-cycle-W5-checkbox-grade-number,PASS,P0,"W5-checkbox-grade-number",2026-11-06T09:22:50.2985010+01:00
+23_WimsFullCycle,15,W7-cycle-W4-ete-percent-encoded-as-cp1252,PASS,P0,"W4-ete-percent-encoded-as-cp1252",2026-11-06T09:22:50.2992850+01:00
+23_WimsFullCycle,16,W7-cycle-W4-response-decoded-as-cp1252,PASS,P0,"W4-response-decoded-as-cp1252",2026-11-06T09:22:50.3000045+01:00
+23_WimsFullCycle,17,W7-cycle-W4-accented-live-capture-grade,PASS,P0,"W4-accented-live-capture-grade",2026-11-06T09:22:50.3012730+01:00
+23_WimsFullCycle,18,W7-cycle-W4-unrepresentable-character-rejected,PASS,P0,"W4-unrepresentable-character-rejected",2026-11-06T09:22:50.3020306+01:00
+23_WimsFullCycle,19,W7-cycle-W4-rejected-before-network,PASS,P0,"W4-rejected-before-network",2026-11-06T09:22:50.3027597+01:00
+23_WimsFullCycle,20,W7-cycle-W4-form-control-characters-escaped,PASS,P0,"W4-form-control-characters-escaped",2026-11-06T09:22:50.3035939+01:00
+23_WimsFullCycle,21,W7-cycle-W4-form-answer-cannot-inject-fields,PASS,P0,"W4-form-answer-cannot-inject-fields",2026-11-06T09:22:50.3045456+01:00
+23_WimsFullCycle,22,W7-cycle-W1-ansN-rejected,PASS,P0,"W1-ansN-rejected",2026-11-06T09:22:50.3054041+01:00
+23_WimsFullCycle,23,W7-cycle-W1-unsignalled-field-rejected,PASS,P0,"W1-unsignalled-field-rejected",2026-11-06T09:22:50.3061889+01:00
+23_WimsFullCycle,24,W7-cycle-W1-invalid-fields-never-post,PASS,P0,"W1-invalid-fields-never-post",2026-11-06T09:22:50.3069723+01:00
+23_WimsFullCycle,25,W1-cycle-process-exit,PASS,P0,"test-wims-client.ps1 exit=0",2026-11-06T09:22:50.3088322+01:00
+23_WimsFullCycle,26,W1-cycle-summary,PASS,P0,"fixture-backed WIMS transaction cycle completed",2026-11-06T09:22:50.3099509+01:00
+23_WimsFullCycle,27,W4-live-live-session-and-reply,PASS,P0,"live-session-and-reply",2026-11-06T09:22:52.1075426+01:00
+23_WimsFullCycle,28,W4-live-live-grade-is-numeric,PASS,P0,"live-grade-is-numeric",2026-11-06T09:22:52.1090789+01:00
+23_WimsFullCycle,29,W4-live-live-grade-matches-expected,PASS,P0,"live-grade-matches-expected",2026-11-06T09:22:52.1099343+01:00
+23_WimsFullCycle,30,W4-live-smoke-exit,PASS,P0,"live smoke exit=0",2026-11-06T09:22:52.1107880+01:00

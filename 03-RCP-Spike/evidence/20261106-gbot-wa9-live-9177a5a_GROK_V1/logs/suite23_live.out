@@ -1,0 +1,37 @@
+# Suite: 23_WimsFullCycle
+# Started: 2026-11-06T09:22:48.1959527+01:00
+# Host: grok-bot-vm-419969949 / Debian GNU/Linux 13 (trixie) / pwsh 7.4.6
+
+ok 1 - [P0] W7-cycle-W1-cmd-new-session :: W1-cmd-new-session
+ok 2 - [P0] W7-cycle-W2-integer-grade-one :: W2-integer-grade-one
+ok 3 - [P0] W7-cycle-W2-per-answer-data :: W2-per-answer-data
+ok 4 - [P0] W7-cycle-W1-W2-real-capture-cycle :: W1-W2-real-capture-cycle
+ok 5 - [P0] W7-cycle-W1-new-does-not-send-json-hook :: W1-new-does-not-send-json-hook
+ok 6 - [P0] W7-cycle-W2-reply-hook-only :: W2-reply-hook-only
+ok 7 - [P0] W7-cycle-W1-session-carried-forward :: W1-session-carried-forward
+ok 8 - [P0] W7-cycle-W2-no-invented-ansN :: W2-no-invented-ansN
+ok 9 - [P0] W7-cycle-W1-form-post-windows1252 :: W1-form-post-windows1252
+ok 10 - [P0] W7-cycle-W5-integer-grade-zero :: W5-integer-grade-zero
+ok 11 - [P0] W7-cycle-W1-checkbox-field-discovered :: W1-checkbox-field-discovered
+ok 12 - [P0] W7-cycle-W1-checkbox-values-repeat-form-name :: W1-checkbox-values-repeat-form-name
+ok 13 - [P0] W7-cycle-W6-given-is-normalized-not-keystrokes :: W6-given-is-normalized-not-keystrokes
+ok 14 - [P0] W7-cycle-W5-checkbox-grade-number :: W5-checkbox-grade-number
+ok 15 - [P0] W7-cycle-W4-ete-percent-encoded-as-cp1252 :: W4-ete-percent-encoded-as-cp1252
+ok 16 - [P0] W7-cycle-W4-response-decoded-as-cp1252 :: W4-response-decoded-as-cp1252
+ok 17 - [P0] W7-cycle-W4-accented-live-capture-grade :: W4-accented-live-capture-grade
+ok 18 - [P0] W7-cycle-W4-unrepresentable-character-rejected :: W4-unrepresentable-character-rejected
+ok 19 - [P0] W7-cycle-W4-rejected-before-network :: W4-rejected-before-network
+ok 20 - [P0] W7-cycle-W4-form-control-characters-escaped :: W4-form-control-characters-escaped
+ok 21 - [P0] W7-cycle-W4-form-answer-cannot-inject-fields :: W4-form-answer-cannot-inject-fields
+ok 22 - [P0] W7-cycle-W1-ansN-rejected :: W1-ansN-rejected
+ok 23 - [P0] W7-cycle-W1-unsignalled-field-rejected :: W1-unsignalled-field-rejected
+ok 24 - [P0] W7-cycle-W1-invalid-fields-never-post :: W1-invalid-fields-never-post
+ok 25 - [P0] W1-cycle-process-exit :: test-wims-client.ps1 exit=0
+ok 26 - [P0] W1-cycle-summary :: fixture-backed WIMS transaction cycle completed
+ok 27 - [P0] W4-live-live-session-and-reply :: live-session-and-reply
+ok 28 - [P0] W4-live-live-grade-is-numeric :: live-grade-is-numeric
+ok 29 - [P0] W4-live-live-grade-matches-expected :: live-grade-matches-expected
+ok 30 - [P0] W4-live-smoke-exit :: live smoke exit=0
+
+PASS: 30 FAIL: 0 SKIP: 0
+# CSV: /workspace/grok-g1/wt-wa9-live/03-RCP-Spike/tests/results/23_WimsFullCycle_CODEX_V1.csv
