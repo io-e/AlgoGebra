@@ -28,7 +28,7 @@ The host must define `window.GeoGebraWimsAnswerProvider(api, session)`, which re
 2. `POST` form-urlencoded to the same CGI with `module`, `cmd=reply`, `session`, `special_parm=algogebra_json`, and the selected real answer fields (`replyN` / `choiceN`). Never invent `ansN`; never send the hook trigger on `cmd=new`.
 3. Extract the JSON between `ALGOGEBRA_JSON_BEGIN` and `ALGOGEBRA_JSON_END` in the HTML comment. It contains the overall grade and per-answer `answers[]` data. Missing marker, malformed JSON, or invalid grades are errors—not grades.
 
-Form bodies use Windows-1252, matching WIMS's declared response charset. JSON from the hook is ASCII-safe. The client renders server feedback using text nodes, never HTML injection. Same-origin hosting is required by default; remote HTTP endpoints are rejected by the companion client.
+Form bodies use Windows-1252, matching WIMS's declared response charset. JSON from the hook is ASCII-safe. The client renders server feedback using text nodes, never HTML injection. Deploy same-origin by default; cross-origin hosting needs an explicit CORS and authentication policy.
 
 ## Test
 
