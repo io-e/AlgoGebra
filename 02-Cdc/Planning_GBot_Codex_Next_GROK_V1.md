@@ -1,11 +1,13 @@
-<!-- GROK_V1_3 -->
+<!-- GROK_V1_4 -->
 # Planning — next actions (GBot + Codex)
+
+> **Phase shift (owner 2026-11-05):** AlgoGebra-side WIMS client **devs finished**. Active backlog moves to **`02-Cdc/02-01_Wims_Integration/Planning_Migration_Wims_Phase_GROK_V1.md`**. This file keeps RCP leftovers (#48/#63) and WA-9 merge status only.
 
 | Field | Value |
 |---|---|
 | Date | 2026-11-05 |
-| Version | GROK_V1_3 |
-| Supersedes | GROK_V1_2 (CX-W9 was “open PR”) |
+| Version | GROK_V1_4 |
+| Supersedes | GROK_V1_3; **active WIMS work → Migration_Wims phase board** |
 | Tip product | `origin/feat/external-engines` @ `9d67b57` |
 | Tip docs | `feat/grok-sprint3-plan-v1-1` |
 | WA-9 client PR | **[#67](https://github.com/io-e/AlgoGebra/pull/67)** → `feat/external-engines` (cites #66) — **OPEN, not merged** |
@@ -101,8 +103,10 @@ Still useful: Spec §5 reply encoding = **windows-1252**; integer `grade` 0/1; p
    connected WIMS client            #48 / #63 when owner assigns
 ```
 
-**Owner ball:** merge or request changes on **#67**. GBot/Codex otherwise idle on WA-9.
+**Owner ball (AlgoGebra):** merge or park **#67** (and evidence #64–#66).  
+
+**Active engineering:** **Migration into WIMS** — see `Planning_Migration_Wims_Phase_GROK_V1.md` (MW-P1…P4).
 
 ---
 
-*End of `Planning_GBot_Codex_Next_GROK_V1.md` (GROK_V1_3).*
+*End of `Planning_GBot_Codex_Next_GROK_V1.md` (GROK_V1_4).*
