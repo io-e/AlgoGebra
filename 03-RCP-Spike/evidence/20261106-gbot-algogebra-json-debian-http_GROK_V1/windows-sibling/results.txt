@@ -1,0 +1,10 @@
+00006_wrong_hook	PASS grade=0 id=reply1
+00006_wrong_nohook	PASS leak=False graded=True
+00006_right_hook	PASS grade=1 id=reply1
+00006_right_nohook	PASS leak=False graded=True
+00076_wrong_hook	PASS grade=0 id=reply1
+00076_wrong_nohook	PASS leak=False graded=True
+00076_right_hook	PASS grade=1 id=reply1
+00076_right_nohook	PASS leak=False graded=True
+CAS	PASS selftest exit=0; PASS pari via ch..root -> 4
+ALL PASS

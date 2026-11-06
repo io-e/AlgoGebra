@@ -1,0 +1,618 @@
+
+
+
+
+
+
+
+
+<!DOCTYPE html>    
+<html lang="fr"><head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <!--begin of standard/htmlheader.phtml-->
+<meta charset="windows-1252">
+<title>OEF ...</title>
+<meta name="GENERATOR" content="wims [fr]">
+<meta name="description" content="collection d'exercices sur ... interactive exercises, online calculators and plotters, mathematical recreation and games">
+<meta name="keywords" content="interactive mathematics, interactive math, server side interactivity, algebra, ">
+<meta name="Author" content="Marina, Cazzola">
+
+<!-- makes browsers render all elements more consistently -->
+<link rel="stylesheet" href="scripts/js/external/normalize.min.css">
+
+<!-- Foundation Accordion -->
+<link rel="stylesheet" href="html/themes/_css/foundation_accordion.css">
+
+<link href="html/themes/standard/css.css?ver=4.33a" rel="stylesheet"><link href="gifs/themes/default/icon-min.css?ver=4.33a" rel="stylesheet">
+
+<!-- METAS iOS : -->
+<link rel="apple-touch-icon" href="gifs/wims_logo.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+<!-- prevents links from apps from opening in mobile safari>
+<script src="scripts/js/external/safari_mobile_links/compressed.js"></script-->
+
+<!-- Librairies JQUERY -->
+  <script src="scripts/js/external/jquery/jquery.min.js"></script>
+  <link rel="stylesheet" href="scripts/js/external/jquery-ui/themes/smoothness/jquery-ui.min.css">
+  <script src="scripts/js/external/jquery-ui/jquery-ui.min.js"></script>
+
+<!-- JQUERY pour autocompletion -->
+  <script src="scripts/js/interface/autocomplete.js"></script>
+
+<!-- Style pour impression -->
+  <link rel="stylesheet" media="print" href="html/themes/_css/print.css">
+
+<style>
+
+:root {
+  --wims_bgcolor: #F6F6F6;
+  --wims_link_color: #1468A0;
+  --wims_vlink_color: #1779BA;
+  --wims_hlink_color: #004077;
+  --wims_ref_menucolor: #FFFFFF;
+  --wims_ref_bgcolor: #676767;
+  --wims_ref_button_color: #FFFFFF;
+  --wims_ref_button_bgcolor: #666666;
+  --wims_ref_button_help_bgcolor: #008f00;
+  --wims_ref_button_help_color: #FFFFFF;
+}
+
+#wimspagebox{
+  background-color: #F6F6F6;
+  
+}
+body.main_body {}
+
+a, .ui-widget-content a{color:#1468A0;}
+/*a:visited {color:#1779BA;}*/
+a:hover, a:focus {color:#004077;}
+
+.wimsmanager a {color:#FFFFFF;}
+
+#wimsmenubox,#wimsmenumodubox { color: #FFFFFF; background-color: #676767;}
+#wimstopbox { background-color: #676767;}
+
+.property_fields{border-color: #676767;}
+.property_fields legend{background-color: #676767;}
+.property_fields legend,.property_fields legend>a{color:#FFFFFF;}
+
+.container h4{ background-color:#676767; color:#FFFFFF;}
+#menu_pendant,#menu_html { background-color:#676767; color:#FFFFFF;}
+#menu_avant,#menu_apres {  background-color:#666666; color:#FFFFFF;}
+.infobulle{ background-color: #666666; color: #FFFFFF;}
+
+#wimstopbox { color: #FFFFFF;}
+
+/* Foundation dropdown custom css */
+.dropdown.menu > li.is-dropdown-submenu-parent > a::after { border-top-color: var(--wims_ref_menucolor);}
+.dropdown.menu > li.is-dropdown-submenu-parent:hover > a::after { border-top-color: var(--wims_ref_menucolor);}
+.dropdown.menu > li.is-dropdown-submenu-parent.is-active > a::after{ border-top-color: var(--wims_ref_bgcolor);}
+#wimstopbox>.dropdown.menu > li.is-active>a{
+  background-color: var(--wims_ref_menucolor);color:var(--wims_ref_bgcolor)}
+.menu a:hover,#wimsbodybox .menu a:hover{
+  background-color: var(--wims_ref_bgcolor);color:var(--wims_ref_menucolor)}
+
+
+#wimstopbox>.menu>.menuitem>a:hover,
+#wimsmenubox>.menu a:hover,
+#wimsmenumodubox a:hover,
+#wimsmenumodubox .menu a:hover{
+  color: #676767;
+  background-color:#FFFFFF;
+}
+
+/* Breadcrumb */
+.breadcrumbs>li>a{color:#676767}
+
+
+.wims_emph {color:#676767;}
+
+#wimstopbox .menuitem:not(.is-submenu-item)>a,
+#wimsmenumodubox a,
+#wimsmenubox .menuitem>a
+ { color: #FFFFFF;}
+
+/* Tables */
+.wimstable th {background-color: #676767; color:#FFFFFF;}
+.wimstable th a {color: #FFFFFF;}
+.wimstable caption, .wims_title_seq,
+.wims_widget_box .title_box{background-color: #676767;color: #FFFFFF;}
+.wimstable>caption a {color: #FFFFFF;}
+.wimstable>caption .wims_button{background-color: #666666;color: #FFFFFF;}
+.wimstable th .wims_button{background-color: #666666;color: #FFFFFF;}
+
+input[type="submit"],input[type="button"],.main_body .wims_button{
+    background-color:#666666;
+    color:#FFFFFF;
+}
+.main_body .wims_button_help{
+    background-color:#008f00;
+    color:#FFFFFF;
+}
+
+.legend {background-color: #676767;color:#FFFFFF;}
+
+.wims_color1 {
+   background-color: #676767;
+   color:#FFFFFF;
+}
+.wims_color2 {
+  background-color:#666666;
+  color:#FFFFFF;
+}
+.wims_color3 {
+  background-color:#008f00;
+  color:#FFFFFF;
+}
+
+
+</style>
+<!--end standard/htmlheader.phtml-->
+
+<script>
+function emptyfield() {
+ alert("Veuillez compléter votre réponse avant de l'envoyer."); return false;
+}
+function formcheck() {
+  var nb_default=0;
+  if(document.forms['replyform'].reply1.value.length==0) return emptyfield();
+  if(nb_default>0){
+    if("jQuery" in window){jQuery("#exo_formCheck").foundation('open');return false;}
+    {return window.confirm("Vous n'avez pas entièrement complété cet exercice. Êtes-vous sûr de vouloir le valider ?");}
+  }
+  return true;
+}
+function verify_checkboxes(box_name) {
+  var checkedValue = null;
+  var inputElements = document.getElementsByName(box_name);
+  for(var i=0; inputElements[i]; ++i){
+    if(inputElements[i].checked){
+      checkedValue = inputElements[i].value;
+      break;
+    }
+  }
+  return checkedValue;
+}
+</script>
+
+<script>/*<![CDATA[*/function wims_mathml_zoom(id){var math = document.getElementById(id);if(math.getAttribute("mathsize") == "100%"){  math.setAttribute("mathsize","200%");}else{  math.setAttribute("mathsize","100%");};};window.addEventListener("load", function() {  var ua = navigator.userAgent.toLowerCase();  var gecko = ua.indexOf("gecko") > -1 && ua.indexOf("khtml") === -1 && ua.indexOf("trident") === -1;  if(! gecko ){    var script = document.createElement("script");    script.src  = "scripts/js/mathjax/mml-chtml.js";    document.head.appendChild(script);  };});/*]]>*/</script>
+
+<script>reload_mathML=function(){var t=document.getElementsByClassName("wims_mathml");Array.prototype.filter.call(t,function(t){var e=t.style.display;t.style.display="none",t.style.opacity="0",setTimeout(function(){t.style.display=e},1e3),setTimeout(function(){t.style.opacity="1"},1100)})},document.onreadystatechange=function(){"complete"===document.readyState&&(/^((?!chrome|android).)*safari/i.test(navigator.userAgent)&&reload_mathML())};</script></head>
+<body class="main_body" dir="ltr"  >
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- begin of standard/header.phtml -->
+
+
+
+
+
+
+    <div id="wimstopbox">
+    <div class="wimsmenu menu float_left">
+<!-- _widgets/headhome.phtml -->
+ <span class="menuitem home">
+
+
+<a href="http://127.0.0.1:18441/wims/wims.cgi?lang=fr&+session=UFC3A2A344.1"   class="home"  title="Page d'accueil du serveur"><span>Accueil WIMS </span></a> </span>
+<!-- end _widgets/headhome.phtml -->
+
+    </div>
+
+
+<!-- widget user_links -->
+<ul class="wimsmenu dropdown menu" data-dropdown-menu data-options="data-autoclose:true;">
+
+
+
+<!-- _widgets/headmenu.phtml -->
+  <li class="menuitem help">
+
+
+<a href="http://127.0.0.1:18441/wims/wims.cgi?wims_window=new&+session=UFC3A2A344_mhelp&+lang=fr&+module=H6%2Ftest%2Foef2html.fr&+cmd=help&+special_parm=" target="wims_help" onclick="wims_help=window.open('','wims_help','status=no,toolbar=no,location=no,menubar=no,scrollbars=yes,resizable=yes')"   class="help" ><span class="text_item">Aide </span></a>  </li>
+  <li class="menuitem about">
+
+
+<a href="http://127.0.0.1:18441/wims/wims.cgi?wims_window=new&+session=UFC3A2A344_mhelp&+lang=fr&+module=H6%2Ftest%2Foef2html.fr&+cmd=help&+special_parm=about" target="wims_help" onclick="wims_help=window.open('','wims_help','status=no,toolbar=no,location=no,menubar=no,scrollbars=yes,resizable=yes')"   class="about"  title="Pour des informations sur le module H6/test/oef2html.fr, son auteur, la version ..."><span class="text_item">À propos </span></a>  </li>
+<!-- end _widgets/headmenu.phtml -->
+
+
+        <li id="language_selector" class="language_selector menuitem is-dropdown-submenu-parent">
+          <a href="#lang_list" class="lang">
+            <span><img src="gifs/fr.gif" alt="Français"> Langue</span>
+          </a>
+
+<!-- begin of _widgets/language_selector.phtml -->
+<ul id="lang_list" class="language_selector menu">
+    <li class="menuitem
+        ">
+<a href="http://127.0.0.1:18441/wims/wims.cgi?lang=en&+session=UFC3A2A344.1&+module=H6%2Ftest%2Foef2html.fr"   ><img src="gifs/en.gif" alt="" class="vignette"><span class="legende"> English</span></a>    </li>
+    <li class="menuitem
+        disabled">
+        <a class="current"><img src="gifs/fr.gif" alt="" class="vignette"><span class="legende"> Français</span> <span class="smaller">(actuel)</span></a>
+    </li>
+    <li class="menuitem
+        ">
+<a href="http://127.0.0.1:18441/wims/wims.cgi?lang=es&+session=UFC3A2A344.1&+module=H6%2Ftest%2Foef2html.fr"   ><img src="gifs/es.gif" alt="" class="vignette"><span class="legende"> Español</span></a>    </li>
+    <li class="menuitem
+        ">
+<a href="http://127.0.0.1:18441/wims/wims.cgi?lang=it&+session=UFC3A2A344.1&+module=H6%2Ftest%2Foef2html.fr"   ><img src="gifs/it.gif" alt="" class="vignette"><span class="legende"> Italiano</span></a>    </li>
+    <li class="menuitem
+        ">
+<a href="http://127.0.0.1:18441/wims/wims.cgi?lang=nl&+session=UFC3A2A344.1&+module=H6%2Ftest%2Foef2html.fr"   ><img src="gifs/nl.gif" alt="" class="vignette"><span class="legende"> Nederlands</span></a>    </li>
+    <li class="menuitem
+        ">
+<a href="http://127.0.0.1:18441/wims/wims.cgi?lang=ca&+session=UFC3A2A344.1&+module=H6%2Ftest%2Foef2html.fr"   ><img src="gifs/ca.gif" alt="" class="vignette"><span class="legende"> Català</span></a>    </li>
+    <li class="menuitem
+        ">
+<a href="http://127.0.0.1:18441/wims/wims.cgi?lang=si&+session=UFC3A2A344.1&+module=H6%2Ftest%2Foef2html.fr"   ><img src="gifs/si.gif" alt="" class="vignette"><span class="legende"> Slovincina</span></a>    </li>
+    <li class="menuitem
+        ">
+<a href="http://127.0.0.1:18441/wims/wims.cgi?lang=de&+session=UFC3A2A344.1&+module=H6%2Ftest%2Foef2html.fr"   ><img src="gifs/de.gif" alt="" class="vignette"><span class="legende"> Deutsch</span></a>    </li>
+    <li class="menuitem
+        ">
+<a href="http://127.0.0.1:18441/wims/wims.cgi?lang=cn&+session=UFC3A2A344.1&+module=H6%2Ftest%2Foef2html.fr"   ><img src="gifs/cn.gif" alt="" class="vignette"><span class="legende"> Chinese gb</span></a>    </li>
+</ul>
+<!-- end of _widgets/language_selector.phtml -->
+
+        </li>
+</ul>
+<!-- end widget user_links -->
+
+    <div class="wimsmenu menu">
+    </div><!--wimsmenu-->
+    <br class="clearall">
+    </div><!--wimstopbox-->
+
+
+
+
+<!-- _widgets/ariane.phtml -->
+<nav aria-label="You are here:">
+  <ul class="breadcrumbs">
+    <li class="home menuitem">
+
+
+<a href="http://127.0.0.1:18441/wims/wims.cgi?lang=fr&+session=UFC3A2A344.1"   class="home"  title="Page d'accueil du serveur"><span>Accueil WIMS </span></a>    </li>
+    <li class="intro menuitem">
+
+
+<a href="http://127.0.0.1:18441/wims/wims.cgi?session=UFC3A2A344.1&+lang=fr&+module=H6%2Ftest%2Foef2html.fr&+cmd=intro&+special_parm=&+special_parm2=&+special_parm3=intro_check=%3Brandom=1%3Bexo=00006%3Bqnum=1%3Bqcmlevel=1%3Bintro_expert=yes%3Bintro_sol=1%3Bintro_good=1%3Bintro_feed=1&+special_parm4="   class="intro" ><span>Intro/Config </span></a>        <span class="show-for-sr">(Current)</span>
+    </li>
+  </ul>
+</nav>
+<!-- end of _widgets/ariane.phtml -->
+
+  <div id="wimsbodybox">
+    <div id="wimspagebox">
+
+
+
+
+<!-- end of standard/header.phtml -->
+
+
+
+  <div class="wimsbody">
+<!-- END of html/headmenu -->
+
+
+
+
+  <h1 class="oeftitle">
+    Tangente
+</h1>
+
+
+
+
+<div class="oefform">
+
+
+<!-- Begin oef/present.phtml -->
+
+<div class="oefstatement">
+
+
+	Quanto vale la tangente dell'angolo 
+<span class="wims_mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mstyle id="wims_mathml553411" mathsize="110%"><mi>a</mi></mstyle></math></span>	<div class="wimscenter">	<img src="http://127.0.0.1:18441/wims/wims.gif?cmd=getins&+session=UFC3A2A344.1&+special_parm=insert-1.gif&+modif=1793956254">	</div>	
+
+
+  <br class="clearall">
+</div>
+
+<!-- End oef/present.phtml -->
+
+
+
+
+    <div id="oef_helphint">
+<a href="http://127.0.0.1:18441/wims/wims.cgi?session=UFC3A2A344.1&+lang=fr&+module=H6%2Ftest%2Foef2html.fr&+cmd=hint"  id="oef_hint"  class="wims_button_help" role="button" >Indication</a>      
+    </div> <!-- id oef_helphint-->
+
+
+<!-- Begin oef/form.phtml-->
+  <fieldset class="oefform">
+
+
+<legend class="oef_enterreply">
+  Entrez votre réponse&nbsp;:
+</legend>
+
+  <datalist id="emptylist"><option value="??"></datalist>
+<form action="http://127.0.0.1:18441/wims/wims.cgi" method="get" name="replyform" onsubmit="return formcheck();" id="a_oefform" autocomplete="off" spellcheck="false" >
+<div class='wims_form'><input type="hidden" name="session" value="UFC3A2A344.1">
+<input type="hidden" name="lang" value="fr">
+<input type="hidden" name="cmd" value="reply">
+<input type="hidden" name="module" value="H6/test/oef2html.fr">
+
+
+<table class="oefnoembed">
+  <tr><td><label for="reply1">Valore della tangente di <span class="wims_mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mstyle id="wims_mathml554900" mathsize="110%"><mi>a</mi></mstyle></math></span></label>&nbsp;=</td><td>
+
+
+
+
+<input list="emptylist" id="reply1" size="30" name="reply1" value="" autocapitalize="none" >
+  </td></tr>
+
+
+</table> <!-- end table oefnoembed -->
+
+  <div class="send_answer">
+      <input type="submit"  value="Envoyer la réponse">
+      <div class="reveal" id="exo_formCheck" data-reveal>
+        <h1>Êtes-vous sûr ?</h1>
+        <div class="wims_msg info small">Vous n'avez pas entièrement complété cet exercice. Êtes-vous sûr de vouloir le valider ?</div>
+        <button class="close-button" data-close aria-label="Close modal" type="button">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <div class="wimscenter">
+          <button class="submit wims_button" onclick="document.getElementById('a_oefform').submit();">Oui</button>
+          <button type="button" class="wims_button wims_secondary_button" data-close>Non</button>
+        </div>
+      </div>
+  </div>
+
+
+</div></form>  </fieldset>
+
+
+  <div id="oef_actions">
+        <script>
+        /*<![CDATA[*/
+          jQuery(function(jq){
+            jq("#exo_giveup").dialog({
+              autoOpen: false,
+              modal: true,
+              buttons: {
+                "Oui": function() {window.location = '?session=UFC3A2A344.1&cmd=renew&worksheet=&exo=00006&qnum=1&qcmlevel=1&intro_expert=yes&intro_sol=1&intro_good=1&intro_feed=1';},
+                "Non": function() {jq(this).dialog("close");}
+              }
+            });
+            jq("#exo_giveup_opener").on("click", function() {
+              jq("#exo_giveup").dialog("open");
+            });
+          });
+        /*]]>*/
+        </script>
+        <button class="wims_button wims_secondary_button" type="button" data-toggle="exo_giveup" id="exo_giveup_opener">Abandonner</button>
+      <div class="dropdown-pane wims_msg info small" id="exo_giveup" title="Abandonner" data-dropdown>
+        <div>
+            Cliquer sur le bouton Abandonner fait apparaitre un nouvel énoncé du même exercice ; le travail déjà fait sur l'exercice sera alors perdu.
+        </div>
+          <p>Confirmez-vous l'abandon ?</p>
+      </div>
+
+    
+  </div><!-- #oef_actions -->
+
+
+<div id="oef_endhook">
+
+
+</div>
+</div> <!-- .oefform -->
+
+<!--fin oef Main.phtml-->
+<!-- begin of html/homeref.phtml -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- END of html/homeref.phtml -->
+<!-- begin of standard/tail.phtml -->
+   <br class="clearall">
+
+  </div><!--end of wimsbody-->
+ <br class="clearall spacer">
+</div><!--end of wimspagebox-->
+
+<div class="wims_topback">
+    <a id="back-to-top" href="#wimstopbox" title="Haut de page"></a>
+</div>
+  <script>
+    jQuery(function($){
+      $('#back-to-top').on('click', function(e) {
+        e.preventDefault();
+        $('html,body').animate({
+          scrollTop: 0
+        }, 700);
+      });
+    });
+  </script>
+
+
+
+  <!-- _widgets/menumodubox.phtml -->
+  <nav id="wimsmenumodubox">
+  <div class="modubox_content">
+          <div class="wimsmenu menu homeref_n0">
+          <div class="menuitem prev">
+
+
+<a href="http://127.0.0.1:18441/wims/wims.cgi?session=UFC3A2A344.1&+lang=fr&+cmd=new&+module=H6%2Ftest%2Foef2html.fr&+exo=00076&+wims_seedcnt=0&+special_parm=&+special_parm2=&+special_parm3=intro_check=%3Brandom=1%3Bexo=00006%3Bqnum=1%3Bqcmlevel=1%3Bintro_expert=yes%3Bintro_sol=1%3Bintro_good=1%3Bintro_feed=1&+special_parm4="   class="prev" ><span>Exercice précédent </span></a>          </div>
+          <div class="menuitem next">
+
+
+<a href="http://127.0.0.1:18441/wims/wims.cgi?session=UFC3A2A344.1&+lang=fr&+cmd=new&+module=H6%2Ftest%2Foef2html.fr&+exo=00076&+wims_seedcnt=0&+special_parm=&+special_parm2=&+special_parm3=intro_check=%3Brandom=1%3Bexo=00006%3Bqnum=1%3Bqcmlevel=1%3Bintro_expert=yes%3Bintro_sol=1%3Bintro_good=1%3Bintro_feed=1&+special_parm4="   class="next" ><span>Exercice suivant </span></a>          </div>
+    </div><!--wimsmenu-->
+
+
+  </div>
+  </nav> <!--/wimsmenumodubox -->
+  <!-- end _widgets/menumodubox.phtml -->
+
+
+
+  </div><!--wimsbodybox-->
+
+
+  <!--ENDSUPVIEW-->
+  <!--FIN BAS DE PAGE-->
+
+
+
+
+  <!-- Foundation for Sites 6 footer template (see http://foundation.zurb.com/sites/docs/)  -->
+
+  <script src="scripts/js/external/what-input/what-input.min.js"></script>
+
+  <script src="html/themes/_inc/foundation/foundation.core.js"></script>
+  <script src="html/themes/_inc/foundation/foundation.util.mediaQuery.js"></script>
+
+  <script src="html/themes/_inc/foundation/foundation.util.keyboard.js"></script>
+  <script src="html/themes/_inc/foundation/foundation.util.box.js"></script>
+  <script src="html/themes/_inc/foundation/foundation.util.nest.js"></script>
+  <script src="html/themes/_inc/foundation/foundation.util.touch.min.js"></script>
+
+  <script src="html/themes/_inc/basic_triggers.js"></script>
+
+
+  <script src="html/themes/_inc/foundation/foundation.util.motion.js"></script>
+  <script src="html/themes/_inc/foundation/foundation.reveal.js"></script>
+
+  <script src="html/themes/_inc/foundation/foundation.dropdownMenu.js"></script>
+
+
+
+
+
+
+
+  <script>jQuery(function($) {$(document).foundation();});</script>
+
+
+<!-- end of standard/tail.phtml -->
+
+
+
+<!-- <a href="http://127.0.0.1:18441/wims/wims.cgi?lang=fr&+session=UFC3A2A344.1&+module=adm%2Ftrap"   >Robot trapper, do not click!</a> --><div class='wimstrap hide' aria-hidden='true'><a href="http://127.0.0.1:18441/wims/wims.cgi?lang=fr&+session=UFC3A2A344.1&+module=adm%2Ftrap"   ><span lang='en'>Robot trapper, do not go there!</span></a></div>
+</body></html>
+
+
