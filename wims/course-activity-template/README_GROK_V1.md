@@ -13,7 +13,7 @@ This template follows owner decision **D-WIMS-G01**: WIMS grades OEF answers thr
 
 Deploy beside `course-tree.js`, `course-tree.css` and the self-hosted `GeoGebra/` assets. Replace placeholders or use query overrides:
 
-The applet's `tubeurl` and HTML5 codebase both point to `GeoGebra/`; the page does not rely on `www.geogebra.org` for applet materials or resources.
+The applet's `tubeurl` and HTML5 codebase both point to `GeoGebra/`. A `connect-src 'self'` policy also blocks external XHR/fetch connections from the applet (the bundled GeoGebra runtime includes an optional upstream API probe); applet and WIMS connections remain same-origin. The page does not load applet assets from `www.geogebra.org`.
 
 | Placeholder | Query parameter | Meaning |
 |---|---|---|
