@@ -1,5 +1,5 @@
-# GROK_V1 - G-15 (WP7-03) WIMS grade callback client: contract tests against a LOCAL MOCK of the D-S01 WIMS CGI
-# (02-Cdc/Decision_Open_Points_Sprint3_CLAUDE_V1.md). Needs node >= 18 (SKIP otherwise). No real WIMS server is contacted.
+# WA-9 - G-15 (WP7-03) WIMS grade client: contract tests against a loopback mock of OEF cmd=new/reply + JSON hook.
+# Needs node >= 18 (SKIP otherwise). No real WIMS server is contacted.
 . (Join-Path $PSScriptRoot 'lib/TestFramework_GROK_V1.ps1')
 Initialize-TestSuite '22_WimsGradeClient'
 $repo = Split-Path $script:SpikeDir -Parent

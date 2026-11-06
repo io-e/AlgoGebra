@@ -1,129 +1,200 @@
-// GROK_V1 — G-15 (WP7-03) WIMS grade callback client, owner decision D-S01 (02-Cdc/Decision_Open_Points_Sprint3_CLAUDE_V1.md).
-// Sends the construction to the WIMS CGI by HTTP POST; WIMS computes and records the grade (server-side only).
-// The client never computes, rounds into, or sends a grade: it only shows WIMS's answer as formative feedback.
-// Request (verbatim D-S01): POST <endpoint>, application/x-www-form-urlencoded,
-//   module=adm/class/sheet&job=getresult&exercise=<id>&ans1=<construction_base64>
-// Response (D-S01): JSON { "grade": <number 0..1>, "feedback": "<text>" }. Anything else is an error, never a grade.
-// Works in browsers (window.WimsGradeClient) and Node >= 18 (module.exports) for tests; fetch is injectable.
+// WA-9 / G-15 — WIMS OEF client. WIMS owns evaluation; this client never grades.
+// Flow: cmd=new -> discover session + replyN/choiceN form fields -> cmd=reply
+// with special_parm=algogebra_json -> extract the JSON comment emitted by the hook.
 (function (root, factory) {
   var api = factory();
-  if (typeof module === 'object' && module.exports) { module.exports = api; } else { root.WimsGradeClient = api; }
+  if (typeof module === 'object' && module.exports) { module.exports = api; }
+  else { root.WimsGradeClient = api; }
 })(typeof self !== 'undefined' ? self : this, function () {
   'use strict';
   var DEFAULT_ENDPOINT = '/wims/wims.cgi';
   var DEFAULT_TIMEOUT_MS = 15000;
-  // Proposed default (open question Q-W3, 02-Cdc/WIMS_Open_Questions_GROK_V1.md): 1 MiB of base64. Configurable per call (maxAnsBytes).
-  var DEFAULT_MAX_ANS_BYTES = 1024 * 1024;
-  var B64_RE = /^[A-Za-z0-9+/]*={0,2}$/;
-  var EXERCISE_RE = /^[A-Za-z0-9_.\-\/]{1,128}$/;
+  var MODULE_RE = /^[A-Za-z0-9_.\-/]{1,160}$/;
+  var EXO_RE = /^[A-Za-z0-9_.-]{1,64}$/;
+  var FIELD_RE = /^(?:reply|choice)[1-9][0-9]*$/;
 
-  function buildBody(exercise, base64, maxAnsBytes) {
-    var max = typeof maxAnsBytes === 'number' && maxAnsBytes > 0 ? maxAnsBytes : DEFAULT_MAX_ANS_BYTES;
-    if (!EXERCISE_RE.test(String(exercise || ''))) { throw new Error('WIMS exercise id missing or invalid'); }
-    var b = String(base64 || '').replace(/\s+/g, '');
-    if (!b || !B64_RE.test(b) || b.length % 4 !== 0) { throw new Error('construction is not valid base64'); }
-    if (b.length > max) { throw new Error('construction too large for submission (' + b.length + ' > ' + max + ' bytes)'); }
-    var p = new URLSearchParams();
-    p.set('module', 'adm/class/sheet'); p.set('job', 'getresult'); p.set('exercise', String(exercise)); p.set('ans1', b);
-    return p.toString();
+  function cp1252Byte(ch) {
+    var n = ch.codePointAt(0);
+    if (n <= 0x7f || (n >= 0xa0 && n <= 0xff)) { return n; }
+    var special = { 0x20ac:0x80,0x201a:0x82,0x0192:0x83,0x201e:0x84,0x2026:0x85,0x2020:0x86,
+      0x2021:0x87,0x02c6:0x88,0x2030:0x89,0x0160:0x8a,0x2039:0x8b,0x0152:0x8c,0x017d:0x8e,
+      0x2018:0x91,0x2019:0x92,0x201c:0x93,0x201d:0x94,0x2022:0x95,0x2013:0x96,0x2014:0x97,
+      0x02dc:0x98,0x2122:0x99,0x0161:0x9a,0x203a:0x9b,0x0153:0x9c,0x017e:0x9e,0x0178:0x9f };
+    if (Object.prototype.hasOwnProperty.call(special, n)) { return special[n]; }
+    throw new Error('answer contains a character not representable in Windows-1252');
   }
-
-  // ---- HTML ADAPTER (GROK_V1, PROPOSAL — open question Q-W1, NOT part of D-S01) ----
-  // Stock wims.cgi answers HTML. Until the owner decides on a WIMS-side JSON adapter, the client can OPTIONALLY
-  // (opts.htmlAdapter === true; default OFF) read the D-S01 result from a machine-readable marker in the HTML page:
-  //   <script type="application/json" id="wims-result">{"grade":0.8,"feedback":"..."}</script>
-  // or <div id="wims-result" data-grade="0.8" data-feedback="..."></div>.
-  // No marker => error, never a guessed grade (no scraping of free text / scores in prose).
-  function decodeEntities(t) {
-    return String(t).replace(/&quot;/g, '"').replace(/&#39;/g, "'").replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&amp;/g, '&');
-  }
-  function extractFromHtml(text) {
-    var m = /<script[^>]*\bid=["']wims-result["'][^>]*>([\s\S]*?)<\/script>/i.exec(text || '');
-    if (m && /type=["']application\/json["']/i.test(m[0])) { try { return JSON.parse(m[1]); } catch (e) { return null; } }
-    var d = /<[a-z]+[^>]*\bid=["']wims-result["'][^>]*>/i.exec(text || '');
-    if (!d) { return null; }
-    var g = /\bdata-grade=["']([^"']*)["']/i.exec(d[0]); var f = /\bdata-feedback=["']([^"']*)["']/i.exec(d[0]);
-    if (!g || !/^\s*-?\d+(\.\d+)?\s*$/.test(g[1])) { return null; }
-    return { grade: Number(g[1]), feedback: f ? decodeEntities(f[1]) : '' };
-  }
-  // ---- end HTML ADAPTER ----
-
-  function parseResult(status, contentType, text, opts) {
-    if (status === 413) { return { ok: false, error: 'WIMS rejected the construction as too large (HTTP 413)' }; }
-    if (status < 200 || status >= 300) { return { ok: false, error: 'WIMS answered HTTP ' + status }; }
-    var data;
-    try { data = JSON.parse(text); } catch (e) {
-      if (opts && opts.htmlAdapter === true) {
-        data = extractFromHtml(text);
-        if (!data) { return { ok: false, error: 'WIMS answered HTML without a wims-result marker (HTML adapter)' }; }
-        return validate(data, 'html-adapter');
+  function formEncode(pairs) {
+    function enc(s) {
+      var out = '';
+      for (var ch of String(s)) {
+        if (ch === ' ') { out += '+'; continue; }
+        var b = cp1252Byte(ch);
+        out += (b >= 0x41 && b <= 0x5a) || (b >= 0x61 && b <= 0x7a) ||
+          (b >= 0x30 && b <= 0x39) || [0x2a,0x2d,0x2e,0x5f].includes(b)
+          ? String.fromCharCode(b) : '%' + b.toString(16).toUpperCase().padStart(2, '0');
       }
-      var kind = /html/i.test(contentType || '') || /^\s*</.test(text || '') ? 'HTML' : 'non-JSON';
-      return { ok: false, error: 'WIMS answered ' + kind + ', not the D-S01 JSON result' };
+      return out;
     }
-    return validate(data, 'json');
+    return pairs.map(function (p) { return enc(p[0]) + '=' + enc(p[1]); }).join('&');
   }
-
-  function validate(data, via) {
-    if (!data || typeof data !== 'object' || Array.isArray(data)) { return { ok: false, error: 'WIMS result is not a JSON object' }; }
-    var g = data.grade;
-    if (typeof g !== 'number' || !isFinite(g) || g < 0 || g > 1) { return { ok: false, error: 'WIMS grade missing or outside 0..1' }; }
-    var f = data.feedback == null ? '' : data.feedback;
-    if (typeof f !== 'string') { return { ok: false, error: 'WIMS feedback is not text' }; }
-    return { ok: true, grade: g, feedback: f, via: via };
-  }
-
-  function submit(opts) {
-    var fetchFn = opts.fetch || (typeof fetch !== 'undefined' ? fetch : null);
-    if (!fetchFn) { return Promise.resolve({ ok: false, error: 'fetch unavailable' }); }
-    var body;
-    try { body = buildBody(opts.exercise, opts.base64, opts.maxAnsBytes); } catch (e) { return Promise.resolve({ ok: false, error: e.message }); }
-    var ctl = typeof AbortController !== 'undefined' ? new AbortController() : null;
-    var timer = ctl ? setTimeout(function () { ctl.abort(); }, opts.timeoutMs || DEFAULT_TIMEOUT_MS) : null;
-    return fetchFn(opts.endpoint || DEFAULT_ENDPOINT, {
-      method: 'POST', credentials: 'same-origin', redirect: 'error',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8', 'Accept': opts.htmlAdapter === true ? 'application/json, text/html;q=0.5' : 'application/json' },
-      body: body, signal: ctl ? ctl.signal : undefined
-    }).then(function (r) {
-      return r.text().then(function (t) { return parseResult(r.status, r.headers.get('content-type'), t, opts); });
-    }, function (e) {
-      return { ok: false, error: e && e.name === 'AbortError' ? 'WIMS did not answer in time' : 'network error: ' + (e && e.message) };
-    }).then(function (res) { if (timer) { clearTimeout(timer); } return res; });
-  }
-
-  function render(output, res) {
-    if (!output) { return; }
-    output.textContent = ''; // never innerHTML: feedback comes from the server
-    var line = output.ownerDocument.createElement('div');
-    if (res.ok) {
-      output.className = 'wims-ok';
-      line.textContent = 'Grade recorded by WIMS: ' + Math.round(res.grade * 100) + '%';
-      var fb = output.ownerDocument.createElement('div');
-      fb.className = 'wims-feedback';
-      fb.textContent = 'WIMS feedback (formative): ' + res.feedback;
-      output.appendChild(line); output.appendChild(fb);
-    } else {
-      output.className = 'wims-error';
-      line.textContent = 'WIMS submission failed: ' + res.error;
-      output.appendChild(line);
-    }
-  }
-
-  function attach(o) {
-    if (!o || !o.button) { return; }
-    o.button.disabled = !o.exercise;
-    if (!o.exercise) { render(o.output, { ok: false, error: 'no WIMS exercise configured' }); return; }
-    o.button.addEventListener('click', function () {
-      o.button.disabled = true;
-      var b64 = '';
-      try { b64 = o.api.getBase64(); } catch (e) { b64 = ''; }
-      submit({ endpoint: o.endpoint, exercise: o.exercise, base64: b64, fetch: o.fetch, timeoutMs: o.timeoutMs,
-        maxAnsBytes: o.maxAnsBytes, htmlAdapter: o.htmlAdapter === true })
-        .then(function (res) { render(o.output, res); o.button.disabled = false; });
+  function decodeResponse(response) {
+    return response.arrayBuffer().then(function (buf) {
+      var ct = response.headers && response.headers.get ? (response.headers.get('content-type') || '') : '';
+      var m = /charset\s*=\s*["']?([^;"'\s]+)/i.exec(ct);
+      var charset = m ? m[1].toLowerCase() : 'utf-8';
+      if (charset === 'iso-8859-1') { charset = 'windows-1252'; }
+      try { return new TextDecoder(charset, { fatal: false }).decode(buf); }
+      catch (_) { return new TextDecoder('utf-8', { fatal: false }).decode(buf); }
     });
   }
-
-  return { buildBody: buildBody, parseResult: parseResult, submit: submit, render: render, attach: attach,
-    DEFAULT_ENDPOINT: DEFAULT_ENDPOINT,
-    DEFAULT_MAX_ANS_BYTES: DEFAULT_MAX_ANS_BYTES, DEFAULT_TIMEOUT_MS: DEFAULT_TIMEOUT_MS, extractFromHtml: extractFromHtml };
+  function attr(tag, name) {
+    var re = new RegExp('(?:^|\\s)' + name + '\\s*=\\s*(?:"([^"]*)"|\'([^\']*)\'|([^\\s>]+))', 'i');
+    var m = re.exec(tag); return m ? (m[1] || m[2] || m[3] || '') : null;
+  }
+  function parseNewPage(html) {
+    var session = null, fields = [];
+    var inputs = String(html).match(/<(?:input|select|textarea)\b[^>]*>/gi) || [];
+    inputs.forEach(function (tag) {
+      var name = attr(tag, 'name'), value = attr(tag, 'value');
+      if (name === 'session' && value) { session = value; }
+      if (name && FIELD_RE.test(name) && fields.indexOf(name) < 0) { fields.push(name); }
+    });
+    if (!session) { throw new Error('WIMS cmd=new response has no session field'); }
+    if (!fields.length) { throw new Error('WIMS cmd=new response has no replyN/choiceN fields'); }
+    return { sessionId: session, answerFields: fields };
+  }
+  function validatePayload(data) {
+    if (!data || typeof data !== 'object' || Array.isArray(data)) { throw new Error('hook JSON is not an object'); }
+    if (typeof data.grade !== 'number' || !Number.isFinite(data.grade) || data.grade < 0 || data.grade > 1) {
+      throw new Error('hook grade missing or outside 0..1');
+    }
+    if (!Array.isArray(data.answers)) { throw new Error('hook answers is not an array'); }
+    data.answers.forEach(function (a) {
+      if (!a || typeof a !== 'object' || !FIELD_RE.test(a.id || '') || typeof a.correct !== 'boolean' ||
+          typeof a.score !== 'number' || !Number.isFinite(a.score) || a.score < 0 || a.score > 1) {
+        throw new Error('hook answer has invalid id/correct/score');
+      }
+      ['feedback', 'expected', 'given'].forEach(function (k) {
+        if (a[k] != null && typeof a[k] !== 'string') { throw new Error('hook answer ' + k + ' is not text'); }
+      });
+    });
+    if (data.feedback != null && typeof data.feedback !== 'string') { throw new Error('hook feedback is not text'); }
+    return { ok: true, grade: data.grade, seed: data.seed, answers: data.answers,
+      feedback: data.feedback || '', via: 'wims-hook' };
+  }
+  function parseHookResponse(status, text) {
+    if (status < 200 || status >= 300) { throw new Error('WIMS answered HTTP ' + status); }
+    var m = /ALGOGEBRA_JSON_BEGIN\s*([\s\S]*?)\s*ALGOGEBRA_JSON_END/.exec(String(text || ''));
+    if (!m) { throw new Error('NO_JSON_BLOCK: WIMS reply has no AlgoGebra JSON hook block'); }
+    var data;
+    try { data = JSON.parse(m[1].trim()); }
+    catch (_) { throw new Error('WIMS AlgoGebra JSON block is malformed'); }
+    return validatePayload(data);
+  }
+  function request(endpoint, params, method, opts) {
+    var fetchFn = opts.fetch || (typeof fetch !== 'undefined' ? fetch : null);
+    if (!fetchFn) { return Promise.reject(new Error('fetch unavailable')); }
+    var url = new URL(endpoint || DEFAULT_ENDPOINT, (typeof location !== 'undefined' ? location.href : 'http://localhost/'));
+    var init = { method: method, credentials: 'same-origin', redirect: 'error',
+      headers: { 'Accept': 'text/html' }, signal: opts.signal };
+    if (method === 'GET') {
+      Object.keys(params).forEach(function (k) { url.searchParams.set(k, params[k]); });
+    } else {
+      init.headers['Content-Type'] = 'application/x-www-form-urlencoded;charset=windows-1252';
+      init.body = formEncode(params);
+    }
+    return fetchFn(url.toString(), init).then(function (r) {
+      return decodeResponse(r).then(function (text) {
+        if (r.status < 200 || r.status >= 300) { throw new Error('WIMS answered HTTP ' + r.status); }
+        return text;
+      });
+    });
+  }
+  function withTimeout(opts, fn) {
+    var ctl = typeof AbortController !== 'undefined' ? new AbortController() : null;
+    var timer = ctl ? setTimeout(function () { ctl.abort(); }, opts.timeoutMs || DEFAULT_TIMEOUT_MS) : null;
+    return fn(ctl && ctl.signal).then(function (v) { if (timer) clearTimeout(timer); return v; }, function (e) {
+      if (timer) clearTimeout(timer);
+      if (e && e.name === 'AbortError') { throw new Error('WIMS did not answer in time'); }
+      throw e;
+    });
+  }
+  function createSession(opts) {
+    opts = opts || {};
+    var module = String(opts.module || ''), exo = String(opts.exo || ''), endpoint = opts.endpoint || DEFAULT_ENDPOINT;
+    if (!MODULE_RE.test(module) || module.includes('..')) { return Promise.reject(new Error('WIMS module missing or invalid')); }
+    if (!EXO_RE.test(exo)) { return Promise.reject(new Error('WIMS exercise number missing or invalid')); }
+    return withTimeout(opts, function (signal) {
+      return request(endpoint, { module: module, cmd: 'new', exo: exo, lang: opts.lang || 'en' }, 'GET',
+        Object.assign({}, opts, { signal })).then(function (html) {
+          var parsed = parseNewPage(html);
+          return Object.assign(parsed, { endpoint: endpoint, module: module, exo: exo });
+        });
+    });
+  }
+  function submitAnswers(session, answers, opts) {
+    opts = opts || {}; answers = answers || {};
+    if (!session || !session.sessionId || !session.module || !Array.isArray(session.answerFields)) {
+      return Promise.reject(new Error('WIMS session is invalid'));
+    }
+    var names = Object.keys(answers);
+    if (!names.length) { return Promise.reject(new Error('no WIMS answers supplied')); }
+    var pairs = [['session', session.sessionId], ['module', session.module], ['cmd', 'reply'],
+      ['special_parm', 'algogebra_json']];
+    for (var i = 0; i < names.length; i++) {
+      var name = names[i], values = Array.isArray(answers[name]) ? answers[name] : [answers[name]];
+      if (!FIELD_RE.test(name) || !session.answerFields.includes(name)) {
+        return Promise.reject(new Error('unknown WIMS answer field: ' + name));
+      }
+      if (!values.length) { return Promise.reject(new Error('empty value list for ' + name)); }
+      values.forEach(function (v) { pairs.push([name, String(v)]); });
+    }
+    return withTimeout(opts, function (signal) {
+      return request(session.endpoint || opts.endpoint || DEFAULT_ENDPOINT, pairs, 'POST',
+        Object.assign({}, opts, { signal })).then(function (html) {
+          return parseHookResponse(200, html);
+        });
+    });
+  }
+  function render(output, result) {
+    if (!output) { return; }
+    output.replaceChildren();
+    if (!result.ok) {
+      output.className = 'wims-error';
+      var err = output.ownerDocument.createElement('div'); err.textContent = 'WIMS submission failed: ' + result.error;
+      output.appendChild(err); return;
+    }
+    output.className = 'wims-ok';
+    var overall = output.ownerDocument.createElement('div');
+    overall.textContent = 'WIMS grade: ' + Math.round(result.grade * 100) + '%'; output.appendChild(overall);
+    result.answers.forEach(function (a) {
+      var row = output.ownerDocument.createElement('div');
+      row.textContent = a.id + ': ' + (a.correct ? 'correct' : 'incorrect') + ' (' + a.score + ')' +
+        (a.feedback ? ' — ' + a.feedback : ''); output.appendChild(row);
+    });
+    if (result.feedback) { var fb = output.ownerDocument.createElement('div'); fb.textContent = result.feedback; output.appendChild(fb); }
+  }
+  function attach(o) {
+    if (!o || !o.button) { return; }
+    var provider = o.answerProvider;
+    o.button.disabled = !o.module || !o.exo || typeof provider !== 'function';
+    if (o.button.disabled) {
+      render(o.output, { ok: false, error: !o.module || !o.exo
+        ? 'WIMS module/exercise is not configured' : 'WIMS reply-field mapping is not configured' });
+      return;
+    }
+    o.button.addEventListener('click', function () {
+      o.button.disabled = true;
+      withTimeout(o, function () { return createSession(o); })
+        .then(function (session) { return Promise.resolve(provider(o.api, session)).then(function (answers) {
+          return submitAnswers(session, answers, o);
+        }); })
+        .then(function (result) { render(o.output, result); }, function (e) {
+          render(o.output, { ok: false, error: e.message || String(e) });
+        }).then(function () { o.button.disabled = false; });
+    });
+  }
+  return { createSession: createSession, submitAnswers: submitAnswers, parseNewPage: parseNewPage,
+    parseHookResponse: parseHookResponse, formEncode: formEncode, render: render, attach: attach,
+    DEFAULT_ENDPOINT: DEFAULT_ENDPOINT, DEFAULT_TIMEOUT_MS: DEFAULT_TIMEOUT_MS };
 });
